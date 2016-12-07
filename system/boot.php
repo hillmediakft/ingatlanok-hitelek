@@ -39,7 +39,7 @@ if (isset($_SERVER['SERVER_ADDR']) && ($_SERVER['SERVER_ADDR'] == '127.0.0.1' ||
 	error_reporting(E_ALL);
 	ini_set("display_errors", 1);
 
-    define('BASE_URL', 'http://vframework/'); //Az oldal elérési útjának beállítása
+    define('BASE_URL', 'http://ingatlanok-hitelek/'); //Az oldal elérési útjának beállítása
 	define('BASE_PATH', ''); //A domainnév utáni elérési út beállítása
 	define('ENV', 'development'); //fejlesztői környezet
     
