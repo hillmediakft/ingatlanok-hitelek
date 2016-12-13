@@ -147,6 +147,37 @@ class Application {
 				$router->post('/blog/category_insert_update', 'blog@category_insert_update');
 				$router->post('/blog/category_delete', 'blog@category_delete');
 
+			//datatables
+				$router->get('/datatables/ingatlan_kategoria', 'datatables@ingatlan_kategoria');	
+				$router->get('/datatables/ingatlan_allapot', 'datatables@ingatlan_allapot');	
+				$router->get('/datatables/ingatlan_futes', 'datatables@ingatlan_futes');	
+				$router->get('/datatables/ingatlan_energetika', 'datatables@ingatlan_energetika');	
+				$router->get('/datatables/ingatlan_kert', 'datatables@ingatlan_kert');	
+				$router->get('/datatables/ingatlan_kilatas', 'datatables@ingatlan_kilatas');	
+				$router->get('/datatables/ingatlan_parkolas', 'datatables@ingatlan_parkolas');	
+				$router->get('/datatables/ingatlan_szerkezet', 'datatables@ingatlan_szerkezet');	
+				$router->get('/datatables/ingatlan_komfort', 'datatables@ingatlan_komfort');	
+				$router->get('/datatables/ingatlan_haz_allapot_kivul', 'datatables@ingatlan_haz_allapot_kivul');	
+				$router->get('/datatables/ingatlan_haz_allapot_belul', 'datatables@ingatlan_haz_allapot_belul');	
+				$router->get('/datatables/ingatlan_furdo_wc', 'datatables@ingatlan_furdo_wc');	
+				$router->get('/datatables/ingatlan_fenyviszony', 'datatables@ingatlan_fenyviszony');	
+				$router->post('/datatables/ajax_delete', 'datatables@ajax_delete');	
+				$router->post('/datatables/ajax_update_insert', 'datatables@ajax_update_insert');
+
+			//documents
+				$router->get('/documents', 'documents@index');
+				$router->match('GET|POST', '/documents/insert', 'documents@insert');	
+				$router->match('GET|POST', '/documents/update/:id', 'documents@update', array('id'));	
+				$router->post('/documents/delete_document_AJAX', 'documents@delete_document_AJAX');	
+				$router->post('/documents/insert_update_data_ajax', 'documents@insert_update_data_ajax');	
+				$router->get('/documents/category', 'documents@category');
+				$router->post('/documents/category_insert_update', 'documents@category_insert_update');
+				$router->post('/documents/category_delete', 'documents@category_delete');
+				$router->post('/documents/show_file_list', 'documents@show_file_list');
+				$router->post('/documents/doc_upload_ajax', 'documents@doc_upload_ajax');
+				$router->post('/documents/file_delete', 'documents@file_delete');
+				$router->get('/documents/download/:filename', 'documents@download', array('file'));
+
 			// error	
 				$router->set404('error@index');	
 
