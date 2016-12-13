@@ -97,6 +97,25 @@ $config['blogphoto'] = array(
     'width' => 600,
     'height' => 400,
     'thumb_width' => 150,
-    'upload_path' => UPLOADS . 'blog_photo/',
+    'upload_path' => UPLOADS . 'blog_photo/'
+);
+
+$config['ingatlan_photo'] = array(
+    'width' => 800,
+    'height' => 600, //csak akkor van hatása, ha az y_ratio false
+    'thumb_width' => 80,
+    'small_width' => 400,
+    'y_ratio' => true, // ha true, akkor megtartja az eredeti képarányt, ha false, akkor a height érték lép életbe az átméretezésnél
+    'upload_path' => UPLOADS . 'ingatlan_photo/',
+    //'default_photo' => 'default.jpg',
+    'placeholder' => ADMIN_ASSETS . 'img/placeholder_323x242.jpg'
+);
+
+$config['documents'] = array(
+    'upload_path' => UPLOADS . 'documents/'
+);
+
+$config['ingatlan_doc'] = array(
+    'upload_path' => UPLOADS . 'ingatlan_doc/'
 );
 ?>
