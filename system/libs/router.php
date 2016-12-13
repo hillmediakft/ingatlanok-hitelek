@@ -36,14 +36,15 @@ class Router
         public $shorthand = array(
             ':controller' => '([a-zA-Z_\-][a-zA-Z0-9_\-]+)',
             ':action' => '([a-zA-Z_\-][a-zA-Z0-9_\-]+)',
-            ':any' => '([\w]+)',
+            ':any' => '([\w]+)', //alfanumerikus karakterek és aláhúzás
             ':id' => '(\d+)',
             ':num' => '([\d]+)',
             ':year' => '([12][0-9]{3})',
             ':month' => '(0[1-9]|1[012])',
             ':day' => '(0[1-9]|[12][0-9]|3[01])',
             ':title' => '([a-zA-Z_\-][a-zA-Z0-9_\-]+)',
-            ':hash' => '(.+)'
+            ':hash' => '(.+)',
+            ':filename' => '([a-zA-Z0-9_\-\.]+)'
         );
 
         /**
