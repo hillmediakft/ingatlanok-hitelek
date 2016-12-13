@@ -87,10 +87,17 @@ $link['validation'] = array(
 	)
 );
 
+$link['kartik-bootstrap-fileinput'] = array(
+	'css' => ADMIN_ASSETS . 'plugins/kartik-bootstrap-fileinput/css/fileinput.css',
+	'js' => array(
+		ADMIN_ASSETS . 'plugins/kartik-bootstrap-fileinput/js/fileinput.js',
+		ADMIN_ASSETS . 'plugins/kartik-bootstrap-fileinput/js/fileinput_locale_hu.js'
+	) 
+);
+
 $link['vframework'] = array(
 	'js' => ADMIN_JS . 'vframework_object.js'
 );
-
 
 /*----------------- OLDALSPECIFIKUS LINKEK --------------------*/
 
@@ -145,6 +152,47 @@ $link['photo_category_update'] = array('js' => ADMIN_JS . 'pages/photo_category_
 $link['testimonials'] = array('js' => ADMIN_JS . 'pages/testimonials.js');
 $link['testimonial_insert'] = array('js' => ADMIN_JS . 'pages/testimonial_insert.js');
 $link['testimonial_update'] = array('js' => ADMIN_JS . 'pages/testimonial_update.js');
+
+// property
+$link['property_list'] = array('js' => ADMIN_JS . 'pages/property_list.js');
+$link['property_list_superadmin'] = array('js' => ADMIN_JS . 'pages/property_list_superadmin.js');
+$link['property_details'] = array('js' => ADMIN_JS . 'pages/property_details.js');
+$link['property_insert'] = array('js' => ADMIN_JS . 'pages/property_insert.js');
+$link['property_update'] = array('js' => ADMIN_JS . 'pages/property_update.js');
+
+// datatables
+$link['allapot'] = array('js' => ADMIN_JS . 'pages/allapot.js');
+$link['energetika'] = array('js' => ADMIN_JS . 'pages/energetika.js');
+$link['futes'] = array('js' => ADMIN_JS . 'pages/futes.js');
+$link['kategoria'] = array('js' => ADMIN_JS . 'pages/kategoria.js');
+$link['kert'] = array('js' => ADMIN_JS . 'pages/kert.js');
+$link['kilatas'] = array('js' => ADMIN_JS . 'pages/kilatas.js');
+$link['parkolas'] = array('js' => ADMIN_JS . 'pages/parkolas.js');
+$link['szerkezet'] = array('js' => ADMIN_JS . 'pages/szerkezet.js');
+$link['komfort'] = array('js' => ADMIN_JS . 'pages/komfort.js');
+$link['haz_allapot_kivul'] = array('js' => ADMIN_JS . 'pages/haz_allapot_kivul.js');
+$link['haz_allapot_belul'] = array('js' => ADMIN_JS . 'pages/haz_allapot_belul.js');
+$link['furdo_wc'] = array('js' => ADMIN_JS . 'pages/furdo_wc.js');
+$link['fenyviszony'] = array('js' => ADMIN_JS . 'pages/fenyviszony.js');
+
+// Google Maps
+$link['google-maps'] = array(
+	'js' => array(
+		'https://maps.googleapis.com/maps/api/js?key=AIzaSyDsyHr_ERbn8TBSwHRB1mWk28VDByR-oL0',
+		ADMIN_ASSETS . 'plugins/gmaps/gmaps.min.js'
+	) 
+);
+
+// logs
+$link['logs'] = array('js' => ADMIN_JS . 'pages/logs.js');
+
+// documents
+$link['documents'] = array('js' => ADMIN_JS . 'pages/documents.js');
+$link['document_insert'] = array('js' => ADMIN_JS . 'pages/document_insert.js');
+$link['document_update'] = array('js' => ADMIN_JS . 'pages/document_update.js');
+$link['document_category'] = array('js' => ADMIN_JS . 'pages/document_category.js');
+$link['document_category_insert'] = array('js' => ADMIN_JS . 'pages/document_category_insert.js');
+$link['document_category_update'] = array('js' => ADMIN_JS . 'pages/document_category_update.js');
 
 return $link;
 ?>
