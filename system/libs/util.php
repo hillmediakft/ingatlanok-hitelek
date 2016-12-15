@@ -1,78 +1,8 @@
 <?php
 namespace System\Libs;
+use System\Libs\Session;
 
 class Util {
-
-    /**
-     * Redirects to another page.
-     *
-     * @param string $location The path to redirect to
-     * @param int $status Status code to use
-     * @return bool False if $location is not set
-     */
-    public static function redirect($location, $status = 302)
-    {
-        $request = DI::get('request');
-
-        if ($location == '') {
-            header("Location: " . $request->get_uri('site_url'), true, $status);
-            exit;
-        }
-
-        header("Location: " . $request->get_uri('site_url') . $location, true, $status);
-        exit;
-    }
-
-    /**
-     * 	File törlése
-     *
-     * 	@param	$filename	a törlendő file elérésiútja mappa/filename.ext
-     * 	@return	true|false
-     */
-    public static function del_file($filename)
-    {
-        if (is_file($filename)) {
-            //ha a file megnyitható és írható
-            if (is_writable($filename)) {
-                unlink($filename);
-                return true;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Egy kép elérési útvonalából generál egy elérési útvonalat a bélyegképéhez
-     * Minta: path/to/file/filename.jpg -> path/to/file/filename_thumb.jpg
-     * 
-     * @param   string  $path (a file elérési útja)
-     * @param   bool    $dir (hozzárak az elérési út végéhez egy mappát, amit a $suffix paraméterben kap meg a metódus)
-     * @param   string  $suffix (fájl nevének utótagja)
-     * @return  string  a bélyegkép elérési útvonala
-     */
-    public static function thumb_path($path, $dir = false, $suffix = 'thumb')
-    {
-        $path_parts = pathinfo($path);
-        $dirname = (isset($path_parts['dirname'])) ? $path_parts['dirname'] : '';
-        $filename = (isset($path_parts['filename'])) ? $path_parts['filename'] : '';
-        $extension = (isset($path_parts['extension'])) ? $path_parts['extension'] : '';
-
-        if (!$dir) {
-            if (($dirname == '.') || ($dirname == '\\')) {
-                $new_path = $filename . '_' . $suffix . '.' . $extension;
-            } else {
-                $new_path = $dirname . '/' . $filename . '_' . $suffix . '.' . $extension;
-            }
-        } else {
-            if (($dirname == '.') || ($dirname == '\\')) {
-                $new_path = $suffix . '/' . $filename . '_' . $suffix . '.' . $extension;
-            } else {
-                $new_path = $dirname . '/' . $suffix . '/' . $filename . '_' . $suffix . '.' . $extension;
-            }
-        }
-        return $new_path;
-    }
 
     /**
      * Spamektől védett e-mail linket generál Javascripttel
@@ -166,36 +96,61 @@ class Util {
         return $buffer;
     }
 
-    /**
-     * 	Ékezetes karaktereket és a szóközt cseréli le ékezet nélkülire és alulvonásra
-     * 	minden karaktert kisbetűre cserél
-     */
-    public static function string_to_slug($string) {
-        $accent = array("&", " ", "-", "á", "é", "í", "ó", "ö", "ő", "ú", "ü", "ű", "Á", "É", "Í", "Ó", "Ö", "Ő", "Ú", "Ü", "Ű");
-        $no_accent = array('and', '_', '_', 'a', 'e', 'i', 'o', 'o', 'o', 'u', 'u', 'u', 'A', 'E', 'I', 'O', 'O', 'O', 'U', 'U', 'U');
-        $string = str_replace($accent, $no_accent, $string);
-        $string = strtolower($string);
-        return $string;
-    }
 
     /**
-     * A fájl nevéhez hozzáilleszt egy query stringet (pl: style.css?v=2314564321
-     * A szám a fájl utolsó módosításának timestamp-je
-     *  
-     * @param   string  $uri  a file elérési útvonala pl.: valami,hu/public/site_assets/css/style.css
-     * @return  string  a fájl verzióval ellátott elérési útvonala
+     * Megállapítja, hogy a filter paraméter létezik-e a filter session tömbben
+     * Ha megyegyezik a paraméterként átadott értékkel, akkor true-t ad vissza 
+     * 
+     * @param   string  $filter_name a filter neve (pl: megye
+     * @param   string  $value a filter elem értéke
+     * @return  boolean true, false
      */
-    public static function auto_version($uri) {
-        if (substr($uri, 0, 1) == "/") {
-            // relatív URI
-            $fname = $_SERVER["DOCUMENT_ROOT"] . $uri;
+    public static function in_filter($filter_name, $value) {
+
+        $filter = Session::get('ingatlan_filter');
+
+        //       var_dump($filter);
+        //      die;
+        if (isset($filter)) {
+            if (isset($filter[$filter_name])) {
+                if (is_array($filter[$filter_name])) {
+                    if (in_array($value, $filter[$filter_name])) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    if ($filter[$filter_name] == $value) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
         } else {
-            // abszolút URI
-            $fname = $uri;
+            return false;
         }
-        $ftime = filemtime($fname);
-        return $uri . '?v=' . $ftime;
     }
+
+    public static function nice_number($n)
+    {
+        // first strip any formatting;
+        $n = (0 + str_replace(",", "", $n));
+
+        // is this a number?
+        if (!is_numeric($n))
+            return false;
+
+        if ($n > 1000000)
+            return round(($n / 1000000), 2) . ' M';
+        elseif ($n > 1000)
+            return round(($n / 1000), 0) . ' E';
+
+        return number_format($n);
+    }
+
 
 }
 ?>
