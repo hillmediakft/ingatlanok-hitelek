@@ -4,6 +4,7 @@ namespace System\Core;
 use System\Libs\DI;
 use System\Libs\Message;
 use System\Libs\Auth;
+use System\Libs\EventManager;
 
 class Application {
 	
@@ -22,6 +23,9 @@ class Application {
         
         // Megadjuk az Auth osztály alapbeállításait ('auth.php' config file betöltése)
 		Auth::init('auth');
+
+		// események inicializálása
+		EventManager::init('events');		
 
 		// route-ok megadása, controller file betöltése és a megfelelő action behívása
 		$this->_loadController();
@@ -177,6 +181,27 @@ class Application {
 				$router->post('/documents/doc_upload_ajax', 'documents@doc_upload_ajax');
 				$router->post('/documents/file_delete', 'documents@file_delete');
 				$router->get('/documents/download/:filename', 'documents@download', array('file'));
+
+			// ingatlanok
+				$router->get('/property', 'property@index');
+				$router->get('/property/insert', 'property@insert');
+				$router->get('/property/update/:id', 'property@update', array('id'));
+				$router->get('/property/details/:id', 'property@details', array('id'));
+				$router->post('/property/getpropertylist','property@getpropertylist');
+				$router->post('/property/delete', 'property@delete');
+				$router->post('/property/softdelete', 'property@softdelete');
+				$router->post('/property/county_city_list', 'property@county_city_list');
+				$router->post('/property/kerulet_utca_list', 'property@kerulet_utca_list');
+				$router->post('/property/insert_update', 'property@insert_update');
+				$router->get('/property/street_list', 'property@street_list');
+				$router->post('/property/file_upload_ajax', 'property@file_upload_ajax');
+				$router->post('/property/doc_upload_ajax', 'property@doc_upload_ajax');
+				$router->post('/property/show_file_list', 'property@show_file_list');
+				$router->post('/property/file_delete', 'property@file_delete');
+				$router->post('/property/change_kiemeles', 'property@change_kiemeles');
+				$router->post('/property/change_status', 'property@change_status');
+
+				$router->get('/property/download/:filename', 'property@download', array('file'));
 
 			// error	
 				$router->set404('error@index');	
