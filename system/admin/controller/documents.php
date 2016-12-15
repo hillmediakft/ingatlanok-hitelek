@@ -73,7 +73,7 @@ class Documents extends Admin_controller {
             $data['category_id'] = $this->request->get_post('category_id', 'integer');
 
             $result = $this->document_model->update($id, $data);
-            if ($result) {
+            if ($result !== false) {
                 $this->response->redirect('admin/documents');
             } else {
                 $this->response->redirect('admin/documents/update/' . $id);
@@ -88,7 +88,7 @@ class Documents extends Admin_controller {
         $data['category_list'] = $this->documentcategory_model->selectCategories();
         $data['document'] = $this->document_model->getDocument($id);
         // feltöltött file-ok listája
-        $data['filelist'] = $this->show_file_list_2($id);
+        //$data['filelist'] = $this->show_file_list_2($id);
 
 // $view->debug(true);       
         $view->add_links(array('validation', 'ckeditor', 'vframework', 'kartik-bootstrap-fileinput', 'document_update'));
@@ -468,7 +468,10 @@ class Documents extends Admin_controller {
                 $doc_names[] = $fileobject->getDest('filename');
                     
                 if ($fileobject->checkError()) {
-                    $this->response->json($fileobject->getError());
+                    $this->response->json(array(
+                        'status' => 'error',
+                        'message' => $fileobject->getError()
+                    ));
                 }
             }
             
@@ -525,30 +528,6 @@ class Documents extends Admin_controller {
         } else {
             $this->response->redirect('admin/error');
         }
-    }
-
-    /**
-     * 	(AJAX) File listát jeleníti (frissíti) meg feltöltéskor (képek)
-     */
-    public function show_file_list_2($id)
-    {
-        //file adatok lekérdezése
-        $filenames = $this->document_model->getDocumentFiles($id);
-        // lista HTML generálása
-        $html = '';
-        $counter = 0;
-
-        $file_location = Config::get('documents.upload_path');
-        $url_helper = DI::get('url_helper');
-
-        foreach ($filenames as $key => $filename) {
-            $counter = $key + 1;
-            $file_path = $url_helper->thumbPath($file_location . $filename);
-            $html .= '<li id="doc_' . $counter . '" class="list-group-item"><i class="glyphicon glyphicon-file"> </i>&nbsp;' . $filename . '<button type="button" class="btn btn-xs btn-default" style="position: absolute; top:8px; right:8px;"><i class="glyphicon glyphicon-trash"></i></button></li>' . "\n\r";
-        }
-
-        // lista visszaadása
-        return $html;
     }
 
 
