@@ -99,6 +99,10 @@ $link['vframework'] = array(
 	'js' => ADMIN_JS . 'vframework_object.js'
 );
 
+$link['autocomplete'] = array(
+	'js' => ADMIN_ASSETS . 'plugins/autocomplete/src/jquery.autocomplete.js'
+);
+
 /*----------------- OLDALSPECIFIKUS LINKEK --------------------*/
 
 // blog
