@@ -56,7 +56,63 @@ class Url
         }
         $ftime = filemtime($fname);
         return $uri . '?v=' . $ftime;
-    } 
+    }
+
+    /**
+     * Sorrendbe rendezéshez az aktuális URL-hez adja a rendezési feltételeket
+     *
+     * Hosszú leírás
+     *
+     * @param int       $order      DESC vagy ASC
+     * @param string    $order_by   mi szerint rendezzen
+     * @return string   az új URL rendezés infókkal
+     */
+    public function add_order_to_url($order, $order_by)
+    {
+
+        if ((isset($_GET['order'])) && $_GET['order'] != '') {
+
+            $string = $_SERVER['REQUEST_URI'];
+            $explode_string = explode('?', $string);
+
+            if (strpos($string, '&') === false) {
+                parse_str($explode_string[1], $params);
+
+                if (array_key_exists('order', $params)) {
+                    unset($params['order']);
+                }
+                if (array_key_exists('order_by', $params)) {
+                    unset($params['order_by']);
+                }
+                $url = urldecode(http_build_query($params)) . '?order=' . $order . '&order_by=' . $order_by;
+                return $url;
+            } else {
+                parse_str($_SERVER['QUERY_STRING'], $params);
+                if (array_key_exists('order', $params)) {
+                    unset($params['order']);
+                }
+                if (array_key_exists('order_by', $params)) {
+                    unset($params['order_by']);
+                }
+
+                if (empty($params)) {
+                    $url = $explode_string[0] . '?order=' . $order . '&order_by=' . $order_by;
+                } else {
+                    $url = $explode_string[0] . '?' . urldecode(http_build_query($params)) . '&order=' . $order . '&order_by=' . $order_by;
+                }
+                return $url;
+            }
+        } else {
+            $string = $_SERVER['REQUEST_URI'];
+            if (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != '') {
+                $url_with_order = $string . '&order=' . $order . '&order_by=' . $order_by;
+                return $url_with_order;
+            } else {
+                $url_with_order = $string . '?order=' . $order . '&order_by=' . $order_by;
+                return $url_with_order;
+            }
+        }
+    }
 
 }
 ?>
