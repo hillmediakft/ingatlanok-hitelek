@@ -59,7 +59,17 @@
                 <div class="portlet-body">
                     <h4 class="block">Feltöltött dokumentumok:</h4>
                     <ul id="dokumentumok" class="list-group">
-                    <?php echo $filelist; ?>
+                        <?php
+	                        $result_docs = json_decode($document[0]['file']);
+	                        if (!empty($result_docs)) {
+	                            $counter = 0;
+	                            $file_location = $this->getConfig('documents.upload_path');
+	                            foreach ($result_docs as $key => $value) {
+	                                $counter = $key + 1;
+	                                echo '<li id="doc_' . $counter . '" class="list-group-item"><i class="glyphicon glyphicon-file"> </i>&nbsp;' . $value . '<button type="button" class="btn btn-xs btn-default" style="position: absolute; top:8px; right:8px;"><i class="glyphicon glyphicon-trash"></i></button></li>' . "\n\r";
+	                            }
+	                        }
+                        ?>
                     </ul>											
                 </div>
             </div>
