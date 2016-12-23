@@ -1,0 +1,40 @@
+<!doctype html>  
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Language Switcher</title>
+	<link rel="stylesheet" href="languageswitcher.css">
+</head>
+
+<body>
+
+<header>
+
+<h1>jQuery Language Switcher</h1>
+
+<div id="country-select">
+  <form action="server-side-script.php">
+    <select id="country-options" name="country-options">
+      <option selected="selected" title="http://www.yoursite.com" value="us">United States</option>
+      <option title="http://www.yoursite.co.uk" value="uk">United Kingdom</option>
+      <option title="http://www.yoursite.fr" value="fr">France</option>
+      <option title="http://www.yoursite.de" value="de">Germany</option>
+      <option title="http://www.yoursite.nl" value="nl">Netherlands</option>
+    </select>
+    <input value="Select" type="submit" />
+  </form>
+</div>
+</header>
+
+<section>
+
+<p>For more information, refer to the <a href="/website-language-dropdown-with-jquery">original article</a> on graphicpush.</p>
+
+</section>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script src="languageswitcher.js"></script>
+  
+</body>
+</html>
