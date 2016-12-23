@@ -58,18 +58,18 @@ class Config {
         
 		// megvizsgáljuk, hogy be van-e már töltve a file
 		if(in_array($file_path, self::$is_loaded)){
-			throw new Exception('HIBA: A megadott config file mar be van toltve!');
+			throw new \Exception('HIBA: A megadott config file mar be van toltve!');
 		}
 		
 		if(!file_exists($file_path)){
-			throw new Exception('HIBA: A megadott config file nem toltheto be!');
+			throw new \Exception('HIBA: A megadott config file nem toltheto be!');
 		}
 		
 		// fájl betöltése (a file-nak tartalmaznia kell egy $config tömböt)
 		include($file_path);
 		
 		if (!isset($config) OR !is_array($config)) {
-			throw new Exception('HIBA: A betoltott config file nem megfelelo!');
+			throw new \Exception('HIBA: A betoltott config file nem megfelelo!');
 		}
 				
 		// berakjuk a file nevet a betöltött fájlokhoz
@@ -98,7 +98,7 @@ class Config {
 		} else {
 			// ha megadunk indexet és az már létezik
 			if(array_key_exists($index, self::$config)){
-				//throw new Exception('Ilyen nevu kulcs mar letezik a config elemben!');			
+				//throw new \Exception('Ilyen nevu kulcs mar letezik a config elemben!');			
 				foreach($new_items as $key => $value) {
 					self::$config[$index][$key] = $value;
 				} 
