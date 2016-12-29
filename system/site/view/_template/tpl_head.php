@@ -1,3 +1,4 @@
+<?php use System\Libs\Language as Lang; ?>
 <div class="extra-header">
     <div class="container">
         <div class="left-part">
@@ -32,7 +33,7 @@
                 <div class="country-select">
                     <form action="#">
                         <select class="country-options" name="country-options">
-                            <option selected="selected" value="uk">English</option>
+                            <option  <?php echo ($this->registry->lang == "hu") ? 'selected="selected"' : '';?> value="uk">English</option>
                             <option value="fr">France</option>
                             <option value="de">Germany</option>
                         </select>
@@ -106,7 +107,7 @@
                 <nav class="main-navigation">
                     <ul class="navigation-listing hidden-xs">
                         <li class="navigation-item">
-                            <a href="#">Home</a>
+                            <a href="#"><?php echo Lang::get('menu_home');?></a>
                             <div class="overlay"></div>
                             <ul class="subnav">
                                 <li class="subnav-item">

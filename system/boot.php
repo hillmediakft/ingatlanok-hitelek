@@ -29,6 +29,8 @@ define('ADMIN_CSS', 'public/admin_assets/css/');
 define('ADMIN_JS', 'public/admin_assets/js/');
 define('ADMIN_IMAGE', 'public/admin_assets/img/');
 
+define('MULTILANG_SITE', true);
+
 
 /**
 * LOCAL SERVER és ONLINE SERVER beállítások
@@ -123,6 +125,10 @@ DI::setContainer(new \Pimple\Container());
 	DI::set('auth', function(){
 		return new \System\Libs\Auth();
 	});
+        
+	DI::set('language', function($c){
+		return new \System\Libs\language($c['request']->get_uri('langcode'));
+	});        
 
 // helpers ---------------
 	DI::set('file_helper', function(){
