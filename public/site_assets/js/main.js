@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 	initControls();
 	initRange();
-	languageDropDownInit();
+//	languageDropDownInit();
 	initScrollTop();
 	carouselInit();
 	initContacMap();

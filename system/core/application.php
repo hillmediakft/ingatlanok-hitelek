@@ -45,6 +45,12 @@ class Application {
         if (AREA == 'site') {
 
             $router->get('/', 'home@index');
+            $router->get('/ingatlanok', 'ingatlanok@index');
+            $router->get('/ingatlan-ertekesitoink', 'ingatlan_ertekesitoink@index');
+            $router->get('/rolunk', 'rolunk@index');
+            $router->get('/kapcsolat', 'kapcsolat@index');
+            $router->get('/hitel', 'hitel@index');
+            $router->get('/hirek', 'hirek@index');
 
             $router->mount('/en', function() use ($router) {
                 $router->get('/', 'home@index');

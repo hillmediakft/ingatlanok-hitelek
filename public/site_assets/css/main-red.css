@@ -183,7 +183,7 @@ body, html {
   margin: 0;
 }
 /* line 70, scss/_header.scss */
-.extra-header .extra-item.language .country-select .us a .flag-border span {
+.extra-header .extra-item.language .country-select .hu a .flag-border span {
   background-position: 0 0;
 }
 /* line 73, scss/_header.scss */
@@ -546,7 +546,7 @@ header.header .h-cart-btn:hover {
   text-transform: uppercase;
   text-decoration: none;
   display: block;
-  padding: 0 42px;
+  padding: 0 20px;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   z-index: 99999;
   position: relative;
@@ -20775,4 +20775,15 @@ button:focus {
   left: 50%;
   top: 50%;
   position: absolute;
+}
+
+/* EXTRA */
+.extra-header .extra-item .country-select a {
+  color: #808080;
+}
+.extra-header .extra-item .country-select a img {
+  margin-right: 2px;
+}
+.extra-header .extra-item .country-select a:hover {
+  text-decoration: none;
 }

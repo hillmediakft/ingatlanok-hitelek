@@ -22,7 +22,7 @@ define('UPLOADS', 'uploads/'); //uploads mappa
 define('SITE_ASSETS', 'public/site_assets/' );
 define('SITE_CSS', 'public/site_assets/css/');
 define('SITE_JS', 'public/site_assets/js/');
-define('SITE_IMAGE', 'public/site_assets/image/');
+define('SITE_IMAGE', 'public/site_assets/images/');
 
 define('ADMIN_ASSETS', 'public/admin_assets/');
 define('ADMIN_CSS', 'public/admin_assets/css/');
