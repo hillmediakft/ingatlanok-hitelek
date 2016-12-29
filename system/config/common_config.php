@@ -67,7 +67,7 @@ $config['photogallery'] = array(
 
 $config['hash_cost_factor'] = 10;
 $config['language_default'] = 'hu';
-$config['allowed_languages'] = array('hu', 'en', 'de', 'ru');
+$config['allowed_languages'] = array('hu', 'en');
 $config['reg_email_verify'] = true;
 
 

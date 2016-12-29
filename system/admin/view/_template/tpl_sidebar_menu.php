@@ -314,10 +314,10 @@
         </li>
 
         <!-- NELVEK -->
-        <li class="nav-item <?php $this->menu_active('languages'); ?> ">
-            <a href="admin/languages" class="nav-link ">
+        <li class="nav-item <?php $this->menu_active('translations'); ?> ">
+            <a href="admin/translations" class="nav-link ">
                 <i class="fa fa-globe"></i>
-                <span class="title">Nyelvek</span>
+                <span class="title">Fordítások</span>
             </a>
         </li>
 
