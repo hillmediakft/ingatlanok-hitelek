@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>fonts/font-awesome-4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/jquery-ui-1.11.4/jquery-ui.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/jcarousel/css/jquery.jcarousel.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_CSS; ?>main-red.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->url_helper->autoversion(SITE_CSS . 'main-red.css');?>" />
         <link rel="shortcut icon" href="<?php echo SITE_IMAGE; ?>favicon.ico" />
         <!-- END GLOBAL MANDATORY STYLES -->
 
