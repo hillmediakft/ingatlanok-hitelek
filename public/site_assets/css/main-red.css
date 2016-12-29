@@ -8,7 +8,6 @@
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;
-  unicode-range: U+0020-25CA;
 }
 @font-face {
   font-family: 'Lato-Bold';
@@ -17,7 +16,6 @@
   font-weight: 700;
   font-style: normal;
   font-stretch: normal;
-  unicode-range: U+0020-25CA;
 }
 @font-face {
   font-family: 'Lato-Light';
@@ -26,7 +24,6 @@
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
-  unicode-range: U+0020-25CA;
 }
 @font-face {
   font-family: 'Lato-Italic';
@@ -44,7 +41,6 @@
   font-weight: 300;
   font-style: italic;
   font-stretch: normal;
-  unicode-range: U+0020-25CA;
 }
 @font-face {
   font-family: 'Lato-Medium';
@@ -53,7 +49,6 @@
   font-weight: 500;
   font-style: normal;
   font-stretch: normal;
-  unicode-range: U+0020-25CA;
 }
 @font-face {
   font-family: 'DINCondensed-Bold';
@@ -62,7 +57,6 @@
   font-weight: 700;
   font-style: normal;
   font-stretch: condensed;
-  unicode-range: U+0020-25CA;
 }
 @font-face {
   font-family: 'LeagueGothic-Regular';
@@ -71,7 +65,6 @@
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;
-  unicode-range: U+0020-2212;
 }
 /* line 1, scss/_commons.scss */
 header, footer, article, section, hgroup, nav, figure, aside {
