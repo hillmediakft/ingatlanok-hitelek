@@ -23,6 +23,7 @@ class Home extends Site_controller {
         }
 
         $view = new View();
+        $view->setHelper(array('url_helper'));
 
         //$view->setLazyRender();
 //$this->view->debug(true); 
