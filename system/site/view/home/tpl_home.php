@@ -1,3 +1,118 @@
+<div class="home-banner style-2">
+    <div class="container">
+        <div class="banner-content">
+            <div class="banner-message">
+                <div class="banner-entry">
+                    <span class="entry-title">Invest</span>
+                    <span class="entry-message">In Foreign Real Estate</span>
+                </div>
+            </div>
+            <div class="main-filter hidden-xs">
+                <form class="filter-form">
+                    <div class="filter-column-4">
+                        <span class="item-label">Eladó/kiadó</span>
+                        <div id="select-type-holder" class="ui-front">
+                            <select name="flag-select" class="select filter-select flags-select">
+                                <option selected="selected" value="1">Eladó</option>
+                                <option value="2">Kiadó</option>
+                            </select>
+                        </div>	
+                    </div>
+                    <div class="filter-column-4">
+                        <span class="item-label">City</span>
+                        <div id="select-type-holder1" class="ui-front">
+                            <select name="prop-select" data-icon="false" class="select filter-select">
+                                <option selected="selected">Any</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filter-column-4">
+                        <span class="item-label">Price for SQ FT</span>
+                        <div class="range-wrap">
+                            <div class="range-fields">
+                                <input type="text" id="min-field"/>
+                                <span class="delimiter"></span>
+                                <input type="text" id="max-field"/>
+                            </div>
+                            <div class="slider"></div>
+                            <div class="scale">
+                                <span class="min-value"></span>
+                                <span class="max-value"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-column-4">
+                        <span class="item-label">City</span>
+                        <div id="select-type-holder1" class="ui-front">
+                            <select name="prop-select" data-icon="false" class="select filter-select">
+                                <option selected="selected">Any</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </div>
+                        <div class="double">
+                            <div class="filter-column-6">
+                                <span class="item-label">Number of rooms</span>
+                                <div id="select-type-holder2" class="ui-front">
+                                    <select name="prop-select" data-icon="false" class="select filter-select">
+                                        <option selected="selected">Any</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filter-column-6">
+                                <span class="item-label">Living Space <span class="label-descr">(Sq Ft)</span></span>
+                                <div id="select-type-holder3" class="ui-front">
+                                    <select name="prop-select" data-icon="false" class="select filter-select">
+                                        <option selected="selected">Any</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-column-4">
+                        <span class="item-label">Property Type</span>
+                        <div id="select-type-holder5" class="ui-front">
+                            <select name="prop-select" data-icon="false" class="select filter-select">
+                                <option selected="selected">Any</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </div>
+                        <div class="double">
+                            <div class="filter-column-6">
+                                <span class="item-label">Area <span class="label-descr">(Sq Ft)</span></span>
+                                <div id="select-type-holder4" class="ui-front">
+                                    <select name="prop-select" data-icon="false" class="select filter-select">
+                                        <option selected="selected">Any</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filter-column-6">
+                                <button class="find-now-btn">Find Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <a href="#" class="visible-xs find-now-btn">Find now</a>
+        </div>
+    </div>
+</div>
+
 <div id="content" class="container-fluid">
     <div class="container">
         <div class="row">

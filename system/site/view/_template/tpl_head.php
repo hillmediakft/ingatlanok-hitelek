@@ -1,35 +1,35 @@
-<?php
-
-use System\Libs\Language as Lang; ?>
+<?php use System\Libs\Language as Lang; ?>
 <div class="extra-header">
     <div class="container">
         <div class="left-part">
             <div class="extra-item sociable">
                 <ul class="sociable-listing">
+                    <?php if($settings['facebook']) { ?>
                     <li class="sociable-item">
-                        <a href="#" class="social-icon"><i class="fa fa-facebook"></i></a>
+                        <a href="<?php echo $settings['facebook']; ?>" class="social-icon"><i class="fa fa-facebook"></i></a>
                     </li>
+                    <?php } ?>
+                    <?php if($settings['linkedin']) { ?>
                     <li class="sociable-item">
-                        <a href="#" class="social-icon"><i class="fa fa-linkedin"></i></a>
+                        <a href="<?php echo $settings['linkedin']; ?>" class="social-icon"><i class="fa fa-linkedin"></i></a>
                     </li>
+                    <?php } ?>
+                     <?php if($settings['twitter']) { ?>
                     <li class="sociable-item">
-                        <a href="#" class="social-icon"><i class="fa fa-twitter"></i></a>
+                        <a href="<?php echo $settings['twitter']; ?>" class="social-icon"><i class="fa fa-twitter"></i></a>
                     </li>
+                    <?php } ?>
+                     <?php if($settings['googleplus']) { ?>
                     <li class="sociable-item">
-                        <a href="#" class="social-icon"><i class="fa fa-google-plus"></i></a>
+                        <a href="<?php echo $settings['googleplus']; ?>" class="social-icon"><i class="fa fa-google-plus"></i></a>
                     </li>
-                    <li class="sociable-item">
-                        <a href="#" class="social-icon"><i class="fa fa-vimeo"></i></a>
-                    </li>
-                    <li class="sociable-item">
-                        <a href="#" class="social-icon"><i class="fa fa-pinterest-p"></i></a>
-                    </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
         <div class="right-part">
-            <div class="extra-item event">
-                <span class="event-entry"><i class="fa fa-clock-o"></i>Open House: Mon - Fri - 9:00 - 18:00</span>
+            <div class="extra-item login">
+                <span class="event-entry"><a href="#"><i class="fa fa-heart"></i><?php echo Lang::get('header_top_kedvencek'); ?></a></span>
             </div>
             <div class="extra-item event">
                 <div class="country-select">
@@ -45,7 +45,7 @@ use System\Libs\Language as Lang; ?>
             </div>
 
             <div class="extra-item login">
-                <i class="fa fa-user"></i><a href="#">Login / Register</a>
+                <a href="#"><i class="fa fa-user"></i><?php echo Lang::get('header_top_bejelentkezes'); ?></a>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@ use System\Libs\Language as Lang; ?>
         <div class="row">
             <div class="col-sm-3">
                 <div class="logo">
-                    <a href=""><img src="<?php echo SITE_IMAGE; ?>logo/logo-green-scheme.png" alt=""></a>
+                    <a href="<?php echo $this->request->get_uri('site_url');?>"><img src="<?php echo SITE_IMAGE; ?>logo.png" alt=""></a>
                 </div>
             </div>
             <div class="col-sm-3">
@@ -64,8 +64,9 @@ use System\Libs\Language as Lang; ?>
                         <i class="fa fa-phone"></i>
                     </div>
                     <div class="descr">
-                        <span class="box-title">Call Us:</span>
+                        <span class="box-title"><?php echo Lang::get('header_telefon'); ?>:</span>
                         <span class="box-text"><?php echo $settings['tel']; ?></span>
+                        <span class="box-text"><?php echo $settings['mobil']; ?></span>
                     </div>
                 </div>
             </div>
@@ -75,7 +76,7 @@ use System\Libs\Language as Lang; ?>
                         <i class="fa fa-envelope"></i>
                     </div>
                     <div class="descr">
-                        <span class="box-title">Mail Us:</span>
+                        <span class="box-title">E-mail:</span>
                         <a href="#" class="box-text"><?php echo $settings['email']; ?></a>
                     </div>
                 </div>
@@ -86,7 +87,7 @@ use System\Libs\Language as Lang; ?>
                         <i class="fa fa-map-marker"></i>
                     </div>
                     <div class="descr">
-                        <span class="box-title">Visit Us:</span>
+                        <span class="box-title"><?php echo Lang::get('header_irodank'); ?>:</span>
                         <span class="box-text"><?php echo $settings['cim']; ?></span>
                     </div>
                 </div>

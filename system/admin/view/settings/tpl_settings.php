@@ -43,9 +43,14 @@
                             <label for="cim">Cím</label>	
                             <input type='text' name='cim' class='form-control input-xlarge' value="<?php echo (empty($settings['cim'])) ? "" : $settings['cim']; ?>"/>
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="tel">Telefonszám 1</label>	
+                            <input type='text' name='mobil' class='form-control input-xlarge' value="<?php echo (empty($settings['mobil'])) ? "" : $settings['mobil']; ?>"/>
+                        </div>                        
 
                         <div class="form-group">
-                            <label for="tel">Telefonszám</label>	
+                            <label for="tel">Telefonszám 2</label>	
                             <input type='text' name='tel' class='form-control input-xlarge' value="<?php echo (empty($settings['tel'])) ? "" : $settings['tel']; ?>"/>
                         </div>
 
