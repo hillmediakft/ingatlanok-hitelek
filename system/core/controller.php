@@ -66,6 +66,22 @@ class Controller {
         }
     }
 
+    /**
+     * Template-be kerülő adat tömbhöz hozzáadja a global_data tömb elemeit
+     *
+     * @param array $data
+     * @return array
+     */
+    public function addGlobalData($data = array())
+    {
+        if(empty($data)){
+            return $this->global_data;
+        } else {
+            return array_merge($data, $this->global_data);
+        }
+    }
+
+
 /*
     public function getConfig($key)
     {
