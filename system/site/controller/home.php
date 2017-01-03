@@ -11,16 +11,14 @@ class Home extends Site_controller {
         $this->loadModel('home_model');
     }
 
-    public function index() {
+    public function index()
+    {
         $page_data = $this->home_model->getPageData('kezdo_oldal');
-
+        
+        $data = $this->addGlobalData();
         $data['title'] = $page_data['metatitle'];
         $data['description'] = $page_data['metadescription'];
         $data['keywords'] = $page_data['metakeywords'];
-     
-        foreach ($this->global_data as $key => $value) {
-            $data[$key] = $value;
-        }
 
         $view = new View();
         $view->setHelper(array('url_helper'));
