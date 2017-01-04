@@ -41,10 +41,7 @@ class BlogCategory_model extends Admin_model {
  	public function updateCategory($id, $new_names)
  	{
 		$this->query->set_where('id', '=', $id);
-		return $this->query->update(array(
-			'category_name_hu' => $new_names['hu'],
-			'category_name_en' => $new_names['en']
-		));
+		return $this->query->update($new_names);
  	}
 
  	/**
@@ -52,10 +49,7 @@ class BlogCategory_model extends Admin_model {
  	 */
  	public function insertCategory($new_names)
  	{
-		return $this->query->insert(array(
-			'category_name_hu' => $new_names['hu'],
-			'category_name_en' => $new_names['en']
-		)); 		
+		return $this->query->insert($new_names); 		
  	}	
 
 }
