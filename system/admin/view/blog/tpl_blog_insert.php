@@ -66,25 +66,60 @@
 								<div class="note note-info">
 									Kattintson a kiválasztás gombra! Ha másik képet szeretne kiválasztani, kattintson a módosít gombra! Ha mégsem kívánja a kiválasztott képet feltölteni, kattintson a töröl gombra!
 								</div>
-								
-								<div class="form-group">
-									<label for="blog_title" class="control-label">Cím</label>
-									<input type="text" name="blog_title" id="blog_title" placeholder="" class="form-control input-xlarge" />
-								</div>
-								<div class="form-group">
-									<label for="blog_text" class="control-label">Szöveg</label>
-									<textarea name="blog_body" id="blog_body" placeholder="" class="form-control input-xlarge"></textarea>
-								</div>
-								
+
+<div class="margin-bottom-40"></div>
+
 								<div class="form-group">
 									<label for="blog_category">Kategória</label>
 									<select name="blog_category" class="form-control input-xlarge">
 										<option value="0">Válasszon kategóriát</option>
 									<?php foreach($category_list as $category) { ?>
-										<option value="<?php echo $category['id']?>"><?php echo $category['category_name']?></option>
+										<option value="<?php echo $category['id']?>"><?php echo $category['category_name_hu']?></option>
 									<?php } ?>
 									</select>
 								</div>
+
+<div class="margin-bottom-40"></div>
+
+								<div class="portlet">
+								    <!--<div class="portlet-title"></div>-->
+								    <div class="portlet-body">
+
+								        <ul class="nav nav-tabs">
+								            <li class="active">
+								                <a href="#tab_1_1" data-toggle="tab"> Magyar </a>
+								            </li>
+								            <li>
+								                <a href="#tab_1_2" data-toggle="tab"> Angol </a>
+								            </li>
+
+								        </ul>
+								        <div class="tab-content">
+								            <div class="tab-pane fade active in" id="tab_1_1">
+												<div class="form-group">
+													<label for="blog_title_hu" class="control-label">Cím</label>
+													<input type="text" name="blog_title_hu" id="blog_title_hu" placeholder="" class="form-control input-xlarge" />
+												</div>
+												<div class="form-group">
+													<label for="blog_body_hu" class="control-label">Szöveg</label>
+													<textarea name="blog_body_hu" id="blog_body_hu" placeholder="" class="form-control input-xlarge"></textarea>
+												</div>
+								            </div>
+								            <div class="tab-pane fade" id="tab_1_2">
+												<div class="form-group">
+													<label for="blog_title_en" class="control-label">Cím</label>
+													<input type="text" name="blog_title_en" id="blog_title_en" placeholder="" class="form-control input-xlarge" />
+												</div>
+												<div class="form-group">
+													<label for="blog_body_en" class="control-label">Szöveg</label>
+													<textarea name="blog_body_en" id="blog_body_en" placeholder="" class="form-control input-xlarge"></textarea>
+												</div>
+								            </div>
+								        </div>
+
+								    </div>
+								</div>
+
 
 							</div>
 						</div>	

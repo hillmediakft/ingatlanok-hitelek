@@ -74,9 +74,9 @@
 										<?php } ?>	
 									</td>
 									<!-- <td><img src="<?php //echo Util::thumb_path($blog['picture']);?>" width="60" /></td>-->
-									<td><?php echo $blog['title'];?></td>
+									<td><?php echo $blog['title_hu'];?></td>
 									<td><?php echo $blog['add_date'];?></td>
-									<td><?php echo $blog['category_name'];?></td>
+									<td><?php echo (!empty($blog['category_name_hu'])) ? $blog['category_name_hu'] : '';?></td>
 									<td>									
 										<div class="actions">
 											<div class="btn-group">

@@ -63,7 +63,8 @@
 							<thead>
 								<tr>
 									<th>Név</th>
-									<th>Bejegyzések száma</th>
+									<th>Név Angol</th>
+									<th style="width:0px;">Bejegyzések&nbsp;száma</th>
 									<th style="max-width: 100px"></th>
 									<th style="max-width: 100px"></th>
 								</tr>
@@ -72,13 +73,16 @@
 							<?php foreach($all_blog_category as $category) { ?>
 								<tr data-id="<?php echo $category['id'];?>">
 									
-									<td><?php echo $category['category_name'];?></td>
+									<td><?php echo $category['category_name_hu'];?></td>
+									<td><?php echo $category['category_name_en'];?></td>
 										<?php
 										// megszámoljuk, hogy az éppen aktuális kategóriának mennyi eleme van a blog tábla blog_category oszlopában
 										$counter = 0;
-										foreach($category_counter as $blog) {
-											if($category['id'] == $blog['category_id']) {
-												$counter++;
+										if (!empty($category_counter)) {
+											foreach($category_counter as $blog) {
+												if($category['id'] == $blog['category_id']) {
+													$counter++;
+												}
 											}
 										}
 										?>

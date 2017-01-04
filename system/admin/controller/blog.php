@@ -63,8 +63,10 @@ if($this->request->checkUploadError('upload_blog_picture')){
 
 
 			// az adatbázisba kerülő adatok
-			$data['title'] = $this->request->get_post('blog_title');
-			$data['body'] = $this->request->get_post('blog_body', 'strip_danger_tags');
+			$data['title_hu'] = $this->request->get_post('blog_title_hu');
+			$data['body_hu'] = $this->request->get_post('blog_body_hu', 'strip_danger_tags');
+			$data['title_en'] = $this->request->get_post('blog_title_en');
+			$data['body_en'] = $this->request->get_post('blog_body_en', 'strip_danger_tags');
 			$data['category_id'] = $this->request->get_post('blog_category');
 			$data['picture'] = $dest_image;
 			$data['add_date'] = date('Y-m-d-G:i');
@@ -114,8 +116,10 @@ if($this->request->checkUploadError('upload_blog_picture')){
 			}
 
 		// az adatbázisba kerülő adatok
-			$data['title'] = $this->request->get_post('blog_title');
-			$data['body'] = $this->request->get_post('blog_body', 'strip_danger_tags');
+			$data['title_hu'] = $this->request->get_post('blog_title_hu');
+			$data['body_hu'] = $this->request->get_post('blog_body_hu', 'strip_danger_tags');
+			$data['title_en'] = $this->request->get_post('blog_title_en');
+			$data['body_en'] = $this->request->get_post('blog_body_en', 'strip_danger_tags');
 			
 			// ha van új feltöltött kép
 			if(isset($dest_image)) {
@@ -267,9 +271,9 @@ if($this->request->checkUploadError('upload_blog_picture')){
 		if ($this->request->is_ajax()) {
 			// az id értéke lehet null is!
 			$id = $this->request->get_post('id');
-			$new_name = $this->request->get_post('data');
-			
-			if ($new_name == '') {
+			$new_names = $this->request->get_post('data');
+
+			if ($new_names['hu'] == '' || $new_names['en'] == '') {
 				$this->response->json(array(
 					'status' => 'error',
 					'message' => 'Nem lehet üres a kategória név mező!'
@@ -280,17 +284,17 @@ if($this->request->checkUploadError('upload_blog_picture')){
 			$existing_categorys = $this->blogcategory_model->selectCategory();
 			// bejárjuk a kategória neveket és összehasonlítjuk az új névvel (kisbetűssé alakítjuk, hogy ne számítson a nagybetű-kisbetű eltérés)
 			foreach($existing_categorys as $value) {
-				if(strtolower($new_name) == strtolower($value['category_name'])) {
+				if(strtolower($new_names['hu']) == strtolower($value['category_name_hu'])) {
 					$this->response->json(array(
 						'status' => 'error',
-						'message' => 'Már létezik ' . $value['category_name'] . ' kategória!'
+						'message' => 'Már létezik ' . $value['category_name_hu'] . ' kategória!'
 					));
 				}	
 			} 
 
 		//insert (ha az $id értéke null)
 			if ($id == null) {
-				$result = $this->blogcategory_model->insertCategory($new_name);
+				$result = $this->blogcategory_model->insertCategory($new_names);
 				
 				if ($result) {
 					$this->response->json(array(
@@ -308,7 +312,7 @@ if($this->request->checkUploadError('upload_blog_picture')){
 			}
 		// update
 			else {
-				$result = $this->blogcategory_model->updateCategory((int)$id, $new_name);
+				$result = $this->blogcategory_model->updateCategory((int)$id, $new_names);
 
 				if ($result !== false) {
 					$this->response->json(array(
