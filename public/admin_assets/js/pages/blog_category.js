@@ -297,8 +297,7 @@ var Blog_category = function () {
                             type: "POST",
                             data: {
                                 id: id,
-                                data: {"hu": data[0], "en": data[1]}
-                                //data: data
+                                data: {"category_name_hu": data[0], "category_name_en": data[1]}
                             },
                             url: "admin/blog/category_insert_update",
                             dataType: "json",
