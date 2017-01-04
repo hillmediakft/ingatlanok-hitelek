@@ -273,10 +273,10 @@ if($this->request->checkUploadError('upload_blog_picture')){
 			$id = $this->request->get_post('id');
 			$new_names = $this->request->get_post('data');
 
-			if ($new_names['hu'] == '' || $new_names['en'] == '') {
+			if ($new_names['category_name_hu'] == '' || $new_names['category_name_en'] == '') {
 				$this->response->json(array(
 					'status' => 'error',
-					'message' => 'Nem lehet üres a kategória név mező!'
+					'message' => 'Nem lehet üres kategória név mező!'
 				));
 			}	
 
@@ -284,7 +284,10 @@ if($this->request->checkUploadError('upload_blog_picture')){
 			$existing_categorys = $this->blogcategory_model->selectCategory();
 			// bejárjuk a kategória neveket és összehasonlítjuk az új névvel (kisbetűssé alakítjuk, hogy ne számítson a nagybetű-kisbetű eltérés)
 			foreach($existing_categorys as $value) {
-				if(strtolower($new_names['hu']) == strtolower($value['category_name_hu'])) {
+				if (  
+					(is_null($id) && strtolower($new_names['category_name_hu']) == strtolower($value['category_name_hu'])) ||
+					(!is_null($id) && $id != $value['id'] && strtolower($new_names['category_name_hu']) == strtolower($value['category_name_hu']))
+				) {
 					$this->response->json(array(
 						'status' => 'error',
 						'message' => 'Már létezik ' . $value['category_name_hu'] . ' kategória!'
