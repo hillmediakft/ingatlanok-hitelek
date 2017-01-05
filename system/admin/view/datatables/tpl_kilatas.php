@@ -46,7 +46,10 @@
                                     #id
                                 </th>
                                 <th>
-                                    Kilátás kategória megnevezése
+                                    Kilátás kategória megnevezése magyar
+                                </th>
+                                <th>
+                                    Kilátás kategória megnevezése angol
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -60,7 +63,10 @@
                                     <?php echo $value['kilatas_id'];?>
                                 </td>
                                 <td>
-                                    <?php echo $value['kilatas_leiras'];?>
+                                    <?php echo $value['kilatas_leiras_hu'];?>
+                                </td>
+                                <td>
+                                    <?php echo $value['kilatas_leiras_en'];?>
                                 </td>
                                 <td>
                                     <a class="edit" href="javascript:;">

@@ -48,7 +48,10 @@
                                     #id
                                 </th>
                                 <th>
-                                    fényviszony kategória megnevezése
+                                    fényviszony kategória megnevezése magyar
+                                </th>
+                                <th>
+                                    fényviszony kategória megnevezése angol
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -62,7 +65,10 @@
                                     <?php echo $value['fenyviszony_id'];?>
                                 </td>
                                 <td>
-                                    <?php echo $value['fenyviszony_leiras'];?>
+                                    <?php echo $value['fenyviszony_leiras_hu'];?>
+                                </td>
+                                <td>
+                                    <?php echo $value['fenyviszony_leiras_en'];?>
                                 </td>
                                 <td>
                                     <a class="edit" href="javascript:;">

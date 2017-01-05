@@ -48,7 +48,10 @@
                                     #id
                                 </th>
                                 <th>
-                                    Szerkezet megnevezése
+                                    Szerkezet megnevezése magyar
+                                </th>
+                                <th>
+                                    Szerkezet megnevezése angol
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -62,7 +65,10 @@
                                     <?php echo $value['szerkezet_id'];?>
                                 </td>
                                 <td>
-                                    <?php echo $value['szerkezet_leiras'];?>
+                                    <?php echo $value['szerkezet_leiras_hu'];?>
+                                </td>
+                                <td>
+                                    <?php echo $value['szerkezet_leiras_en'];?>
                                 </td>
                                 <td>
                                     <a class="edit" href="javascript:;">

@@ -46,7 +46,10 @@
                                     #id
                                 </th>
                                 <th>
-                                    Kert kategória megnevezése
+                                    Kert kategória megnevezése magyar
+                                </th>
+                                <th>
+                                    Kert kategória megnevezése angol
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -60,7 +63,10 @@
                                     <?php echo $value['kert_id'];?>
                                 </td>
                                 <td>
-                                    <?php echo $value['kert_leiras'];?>
+                                    <?php echo $value['kert_leiras_hu'];?>
+                                </td>
+                                <td>
+                                    <?php echo $value['kert_leiras_en'];?>
                                 </td>
                                 <td>
                                     <a class="edit" href="javascript:;">

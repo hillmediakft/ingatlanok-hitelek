@@ -48,7 +48,10 @@
                                     #id
                                 </th>
                                 <th>
-                                    Komfort megnevezése
+                                    Komfort megnevezése magyar
+                                </th>
+                                <th>
+                                    Komfort megnevezése angol
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -62,7 +65,10 @@
                                     <?php echo $value['komfort_id'];?>
                                 </td>
                                 <td>
-                                    <?php echo $value['komfort_leiras'];?>
+                                    <?php echo $value['komfort_leiras_hu'];?>
+                                </td>
+                                <td>
+                                    <?php echo $value['komfort_leiras_en'];?>
                                 </td>
                                 <td>
                                     <a class="edit" href="javascript:;">

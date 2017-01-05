@@ -48,7 +48,10 @@
                                     #id
                                 </th>
                                 <th>
-                                    ház állapota belül kategória megnevezése
+                                    ház állapota belül kategória megnevezése magyar
+                                </th>
+                                <th>
+                                    ház állapota belül kategória megnevezése angol
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -62,7 +65,10 @@
                                     <?php echo $value['haz_allapot_belul_id'];?>
                                 </td>
                                 <td>
-                                    <?php echo $value['haz_allapot_belul_leiras'];?>
+                                    <?php echo $value['haz_allapot_belul_leiras_hu'];?>
+                                </td>
+                                <td>
+                                    <?php echo $value['haz_allapot_belul_leiras_en'];?>
                                 </td>
                                 <td>
                                     <a class="edit" href="javascript:;">

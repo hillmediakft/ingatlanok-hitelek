@@ -48,7 +48,10 @@
                                     #id
                                 </th>
                                 <th>
-                                    fürdőszoba - WC kategória megnevezése
+                                    fürdőszoba - WC kategória megnevezése magyar
+                                </th>
+                                <th>
+                                    fürdőszoba - WC kategória megnevezése angol
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -62,7 +65,10 @@
                                     <?php echo $value['furdo_wc_id'];?>
                                 </td>
                                 <td>
-                                    <?php echo $value['furdo_wc_leiras'];?>
+                                    <?php echo $value['furdo_wc_leiras_hu'];?>
+                                </td>
+                                <td>
+                                    <?php echo $value['furdo_wc_leiras_en'];?>
                                 </td>
                                 <td>
                                     <a class="edit" href="javascript:;">

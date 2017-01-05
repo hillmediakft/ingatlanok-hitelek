@@ -48,7 +48,10 @@
                                     #id
                                 </th>
                                 <th>
-                                    Állapot megnevezése
+                                    Állapot megnevezése magyar
+                                </th>
+                                <th>
+                                    Állapot megnevezése angol
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -62,7 +65,10 @@
                                     <?php echo $value['all_id'];?>
                                 </td>
                                 <td>
-                                    <?php echo $value['all_leiras'];?>
+                                    <?php echo $value['all_leiras_hu'];?>
+                                </td>
+                                <td>
+                                    <?php echo $value['all_leiras_en'];?>
                                 </td>
                                 <td>
                                     <a class="edit" href="javascript:;">

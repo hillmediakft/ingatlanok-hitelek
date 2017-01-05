@@ -42,12 +42,9 @@
                     <table class="table table-striped table-hover table-bordered" id="kategoria">
                         <thead>
                             <tr class="heading">
-                                <th>
-                                    #id
-                                </th>
-                                <th>
-                                    Kategória megnevezése
-                                </th>
+                                <th>#id</th>
+                                <th>Kategória megnevezés magyar</th>
+                                <th>Kategória megnevezés angol</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -58,9 +55,12 @@
                             <tr>
                                 <td>
                                     <?php echo $kategoria['kat_id'];?>
+                                </td>                            
+                                <td>
+                                    <?php echo $kategoria['kat_nev_hu'];?>
                                 </td>
                                 <td>
-                                    <?php echo $kategoria['kat_nev'];?>
+                                    <?php echo $kategoria['kat_nev_en'];?>
                                 </td>
                                 <td>
                                     <a class="edit" href="javascript:;">

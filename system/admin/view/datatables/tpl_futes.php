@@ -46,7 +46,10 @@
                                     #id
                                 </th>
                                 <th>
-                                    Fűtés kategória megnevezése
+                                    Fűtés kategória megnevezése magyar
+                                </th>
+                                <th>
+                                    Fűtés kategória megnevezése angol
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -60,7 +63,10 @@
                                     <?php echo $value['futes_id'];?>
                                 </td>
                                 <td>
-                                    <?php echo $value['futes_leiras'];?>
+                                    <?php echo $value['futes_leiras_hu'];?>
+                                </td>
+                                <td>
+                                    <?php echo $value['futes_leiras_en'];?>
                                 </td>
                                 <td>
                                     <a class="edit" href="javascript:;">

@@ -16,10 +16,10 @@ var Kategoria = function () {
         function editRow(oTable, nRow) {
             var aData = oTable.fnGetData(nRow);
             var jqTds = $('>td', nRow);
-//            jqTds[0].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[0] + '">';
             jqTds[1].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[1] + '">';
-            jqTds[2].innerHTML = '<a class="edit" href=""><i class="fa fa-check"></i> Mentés</a>';
-            jqTds[3].innerHTML = '<a class="cancel" href=""><i class="fa fa-close"></i> Mégse</a>';
+            jqTds[2].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[2] + '">';
+            jqTds[3].innerHTML = '<a class="edit" href=""><i class="fa fa-check"></i> Mentés</a>';
+            jqTds[4].innerHTML = '<a class="cancel" href=""><i class="fa fa-close"></i> Mégse</a>';
         }
 
         function saveRow(oTable, nRow, lastInsertId) {
@@ -27,18 +27,19 @@ var Kategoria = function () {
             if (lastInsertId > 0 && lastInsertId != true) {
                 oTable.fnUpdate(lastInsertId, nRow, 0, false);
             }
-
+            
             oTable.fnUpdate(jqInputs[0].value, nRow, 1, false);
-            oTable.fnUpdate('<a class="edit" href=""><i class="fa fa-edit"></i> Szerkeszt</a>', nRow, 2, false);
-            oTable.fnUpdate('<a class="delete" href=""><i class="fa fa-trash"></i> Töröl</a>', nRow, 3, false);
+            oTable.fnUpdate(jqInputs[1].value, nRow, 2, false);
+            oTable.fnUpdate('<a class="edit" href=""><i class="fa fa-edit"></i> Szerkeszt</a>', nRow, 3, false);
+            oTable.fnUpdate('<a class="delete" href=""><i class="fa fa-trash"></i> Töröl</a>', nRow, 4, false);
             oTable.fnDraw();
         }
 
         function cancelEditRow(oTable, nRow) {
             var jqInputs = $('input', nRow);
-//            oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[0].value, nRow, 1, false);
-            oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 2, false);
+            oTable.fnUpdate(jqInputs[1].value, nRow, 2, false);
+            oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 3, false);
             oTable.fnDraw();
         }
 
@@ -50,15 +51,6 @@ var Kategoria = function () {
             // So when dropdowns used the scrollable div should be removed. 
             //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
 
-            "columns": [{
-                    "orderable": true
-                }, {
-                    "orderable": true
-                }, {
-                    "orderable": false
-                }, {
-                    "orderable": false
-                }],
             "lengthMenu": [
                 [5, 15, 20, -1],
                 [5, 15, 20, "Összes"] // change per page values here
@@ -95,13 +87,13 @@ var Kategoria = function () {
                     "sortDescending": ": aktiválja a csökkenő rendezéshez"
                 }
             },
-            "columnDefs": [{// set default column settings
-                    'orderable': true,
-                    'targets': [0]
-                }, {
-                    "searchable": true,
-                    "targets": [0]
-                }],
+            "columnDefs": [
+                {"orderable": true, "searchable": true, "targets": 0},
+                {"orderable": true, "searchable": true, "targets": 1},
+                {"orderable": true, "searchable": true, "targets": 2},
+                {"orderable": false, "searchable": false, "targets": 3},
+                {"orderable": false, "searchable": false, "targets": 4}
+            ],
             "order": [
                 [0, "asc"]
             ] // set first column as a default sort by asc
@@ -130,7 +122,7 @@ var Kategoria = function () {
                 });
 
             } else {
-                var aiNew = oTable.fnAddData(['', '', '', '']);
+                var aiNew = oTable.fnAddData(['', '', '', '', '']);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
                 editRow(oTable, nRow);
                 nEditing = nRow;
@@ -255,10 +247,17 @@ var Kategoria = function () {
                     if (result) {
 
                         var ajax_message = $('#ajax_message');
+                        
                         var kategoriaId = $(reference.closest('tr')).find('td:first').html();
                         kategoriaId = $.trim(kategoriaId);
-                        var data = $(reference.closest('tr')).find('input').val();
                         
+                        // ha több input mező van, akkor tömböt kell küldeni a php-nak
+                        var data = new Array();
+                        // bejárjuk az input elemeket, és az value attribútum értékét berakjuk a data tömbbe
+                        $.each(reference.closest('tr').find('input'), function(index, val) {
+                            data.push($(this).val());
+                        });
+
                         $.ajax({
                             type: "POST",
                             data: {
@@ -267,7 +266,7 @@ var Kategoria = function () {
                                 table: 'ingatlan_kategoria',
                                 id_name: 'kat_id',
                                 leiras_name: 'kat_nev',
-                                data: data
+                                data: {"kat_nev_hu": data[0], "kat_nev_en": data[1]}
                             },
                             url: "admin/datatables/ajax_update_insert",
                             dataType: "json",
