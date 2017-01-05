@@ -4059,9 +4059,11 @@ footer.footer .bottom-footer .copy {
 .interesting-offer .carousel .item .preview .like,
 .featured-products .carousel .item .preview .like {
   position: absolute;
-  top: 5px;
-  right: 9px;
-  color: #353f45;
+  background: rgba(0,0,0,0.4);
+  top: 0px;
+  right: 0px;
+  padding: 5px 7px;
+  color: #eee;
   font-size: 16px;
   -webkit-transition: 0.3s linear;
   -moz-transition: 0.3s linear;
@@ -4224,7 +4226,7 @@ footer.footer .bottom-footer .copy {
 .featured-products .carousel .item .item-entry {
   background-color: #f8f8f8;
   padding: 15px 18px 0px;
-  border-bottom: 2px solid #c44a35;
+  border-bottom: none;
 }
 /* line 2083, scss/_slider.scss */
 .object-slider .carousel .item .item-entry .item-title,
@@ -20793,4 +20795,26 @@ footer.footer .widget ul.property-listing {
 footer.footer .widget .property-listing li {
     margin-bottom: 5px;
     list-style: none;
+}
+
+/* ************ form elements * */
+.form-control {
+    border-radius: 0;
+    height: 40px;
+}
+.form-control:focus {
+    border-color: #999;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(196,74,53, 0.3);
+    outline: 0 none;
+}
+
+.object-slider .carousel .item .preview .price-box, .best-agents .carousel .item .preview .price-box, .partners-holder .carousel .item .preview .price-box, .testimonials-holder .carousel .item .preview .price-box, .country-holder .carousel .item .preview .price-box, .blog-posts-holder .carousel .item .preview .price-box, .interesting-offer .carousel .item .preview .price-box, .featured-products .carousel .item .preview .price-box {
+    color: #fff;
+	background: #c44a35;
+    font-size: 16px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    transition: all 0.3s linear 0s;
+	padding: 5px 10px;
 }

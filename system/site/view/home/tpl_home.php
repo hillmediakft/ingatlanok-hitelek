@@ -1,114 +1,93 @@
+<?php
+
+use System\Libs\Config ?>
 <div class="home-banner style-2">
     <div class="container">
         <div class="banner-content">
             <div class="banner-message">
                 <div class="banner-entry">
-                    <span class="entry-title">Invest</span>
-                    <span class="entry-message">In Foreign Real Estate</span>
+                    <span class="entry-title">Lorem ipsum</span>
+                    <span class="entry-message">Dolem dolores ipsum</span>
                 </div>
             </div>
             <div class="main-filter hidden-xs">
-                <form class="filter-form">
-                    <div class="filter-column-4">
-                        <span class="item-label">Eladó/kiadó</span>
-                        <div id="select-type-holder" class="ui-front">
-                            <select name="flag-select" class="select filter-select flags-select">
-                                <option selected="selected" value="1">Eladó</option>
-                                <option value="2">Kiadó</option>
-                            </select>
-                        </div>	
-                    </div>
-                    <div class="filter-column-4">
-                        <span class="item-label">City</span>
-                        <div id="select-type-holder1" class="ui-front">
-                            <select name="prop-select" data-icon="false" class="select filter-select">
-                                <option selected="selected">Any</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
+                <form class="filter-form" action="ingatlanok">
+                    <div class="row">
+                        <div class="filter-column-3">
+                            <span class="item-label">Eladó/kiadó</span>
+                            <div class="form-group">
+                                <select name="tipus" class="form-control">
+                                    <option selected="selected" value="1">Eladó</option>
+                                    <option value="2">Kiadó</option>
+                                </select>
+                            </div>	
                         </div>
-                    </div>
-                    <div class="filter-column-4">
-                        <span class="item-label">Price for SQ FT</span>
-                        <div class="range-wrap">
-                            <div class="range-fields">
-                                <input type="text" id="min-field"/>
-                                <span class="delimiter"></span>
-                                <input type="text" id="max-field"/>
-                            </div>
-                            <div class="slider"></div>
-                            <div class="scale">
-                                <span class="min-value"></span>
-                                <span class="max-value"></span>
+                        <div class="filter-column-3">
+                            <span class="item-label">Város</span>
+                            <div class="form-group">
+                                <select name="varos" id="varos" class="form-control" >
+                                    <?php echo $city_list; ?>
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="filter-column-4">
-                        <span class="item-label">City</span>
-                        <div id="select-type-holder1" class="ui-front">
-                            <select name="prop-select" data-icon="false" class="select filter-select">
-                                <option selected="selected">Any</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
+                        <div class="filter-column-3">
+                            <span class="item-label">Kerület</span>
+                            <div class="form-group">
+                                <select disabled="disabled" id="district" name="kerulet" class="form-control" >
+                                    <?php echo $district_list; ?>
+                                </select>
+                            </div>
+                        </div>                    
+                        <div class="filter-column-3">
+                            <span class="item-label">Kategoria</span>
+                            <div class="form-group">
+                                <select name="kategoria" class="form-control">
+                                    <option value="">-- mindegy --</option>
+                                    <?php foreach ($category_list as $value) : ?>
+                                        <option value="<?php echo $value['kat_id']; ?>"><?php echo $value['kat_nev']; ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
                         </div>
-                        <div class="double">
-                            <div class="filter-column-6">
-                                <span class="item-label">Number of rooms</span>
-                                <div id="select-type-holder2" class="ui-front">
-                                    <select name="prop-select" data-icon="false" class="select filter-select">
-                                        <option selected="selected">Any</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
+                    </div>
+                    <div class="row">
+
+                        <div class="filter-column-3">
+                            <span class="item-label">Minimum ár</span>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input name="min_ar" type="text" class="form-control">
+                                    <div class="input-group-addon">Ft</div>
                                 </div>
                             </div>
-                            <div class="filter-column-6">
-                                <span class="item-label">Living Space <span class="label-descr">(Sq Ft)</span></span>
-                                <div id="select-type-holder3" class="ui-front">
-                                    <select name="prop-select" data-icon="false" class="select filter-select">
-                                        <option selected="selected">Any</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
+                        </div> 
+                        <div class="filter-column-3">
+                            <span class="item-label">Maximum ár</span>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input name="max_ar" type="text" class="form-control">
+                                    <div class="input-group-addon">Ft</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="filter-column-4">
-                        <span class="item-label">Property Type</span>
-                        <div id="select-type-holder5" class="ui-front">
-                            <select name="prop-select" data-icon="false" class="select filter-select">
-                                <option selected="selected">Any</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                        </div>
-                        <div class="double">
-                            <div class="filter-column-6">
-                                <span class="item-label">Area <span class="label-descr">(Sq Ft)</span></span>
-                                <div id="select-type-holder4" class="ui-front">
-                                    <select name="prop-select" data-icon="false" class="select filter-select">
-                                        <option selected="selected">Any</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="filter-column-6">
-                                <button class="find-now-btn">Find Now</button>
+
+
+                        <div class="filter-column-3">
+                            <span class="item-label">Alapterület</span>
+                            <div class="form-group">
+                                <input name="min_terulet" type="text" class="form-control">
                             </div>
                         </div>
+
+                        <div class="filter-column-3">
+                            <button class="find-now-btn">Keresés</button>
+                        </div>
+
+
                     </div>
                 </form>
             </div>
-            <a href="#" class="visible-xs find-now-btn">Find now</a>
+            <a href="#" class="visible-xs find-now-btn">Keresés</a>
         </div>
     </div>
 </div>
@@ -126,191 +105,50 @@
                     </div>
                     <div class="obj-carousel carousel">
                         <ul>
-                            <li>
-                                <div class="item">
-                                    <div class="preview">
-                                        <img src="media/images/object-slider/1.jpg" alt="">
-                                        <span class="like">
-                                            <i class="fa fa-heart"></i>
-                                        </span>
-                                    </div>
-                                    <div class="item-thumbnail">
-                                        <div class="single-thumbnail">
-                                            <i class="icon bath"></i>
-                                            <span class="value">3</span>
+                            <?php foreach ($all_properties as $value) { ?>
+                                <?php $photo_array = json_decode($value['kepek']); ?>
+                                <li>
+                                    <div class="item">
+                                        <div class="preview">
+                                            <?php if ($value['kepek']) { ?>
+                                                <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev']; ?>">
+                                            <?php } ?>
+                                            <?php if ($value['kepek'] == null) { ?>
+                                                <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev']; ?>">
+                                            <?php } ?>
+                                            <span class="like">
+                                                <i class="fa fa-heart"></i>
+                                            </span>
+                                            <span class="price-box">
+                                                <?php echo ($value['tipus'] == 1) ? number_format($value['ar_elado'], 0, ',', '.') : number_format($value['ar_kiado'], 0, ',', '.') ?> Ft
+                                            </span>
                                         </div>
-                                        <div class="single-thumbnail">
-                                            <i class="icon sleep"></i>
-                                            <span class="value">2</span>
+                                        <div class="item-thumbnail">
+                                            <div class="single-thumbnail">
+                                                <span class="value"><?php echo $value['kat_nev'];?></span>
+                                            </div>
+                                            <div class="single-thumbnail">
+                                               
+                                                <span class="value"><?php echo $value['szobaszam'];?> szoba</span>
+                                            </div>
+                                            <div class="single-thumbnail">
+                                                <span class="value"><?php echo $value['alapterulet'];?> m<sup>2</sup></span>
+                                            </div>
                                         </div>
-                                        <div class="single-thumbnail">
-                                            <i class="icon corner"></i>
-                                            <span class="value">190 ft²</span>
-                                        </div>
-                                    </div>
-                                    <div class="item-entry">
-                                        <span class="item-title"><a href="#">Retail Space In West Side</a></span>
-                                        <p class="item-text">Phasellus vestibulum mauris leo, et ultricies sem ultrices nec. Nunc volpat tortor vitae...</p>
-                                        <div class="item-info">
-                                            <span class="price">USD 999,00</span>
-                                            <div class="pull-right buttons">
-                                                <a href="#" class="share"><i class="fa fa-share-alt"></i></a>
-                                                <a href="#" class="favourite">
-                                                    <i class="fa fa-star-o"></i>
-                                                </a>
+                                        <div class="item-entry">
+                                            <span class="item-title"><a href="ingatlanok/adatlap/<?php echo $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev']); ?>"><?php echo $value['ingatlan_nev']; ?></a></span>
+                                            <p><?php
+                                                echo $value['city_name'];
+                                                echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . ' kerület' : '';
+                                                ?></p>
+                                            
+                                            <div class="item-info">
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <div class="preview">
-                                        <img src="media/images/object-slider/2.jpg" alt="">
-                                        <span class="like">
-                                            <i class="fa fa-heart"></i>
-                                        </span>
-                                    </div>
-                                    <div class="item-thumbnail">
-                                        <div class="single-thumbnail">
-                                            <i class="icon bath"></i>
-                                            <span class="value">3</span>
-                                        </div>
-                                        <div class="single-thumbnail">
-                                            <i class="icon sleep"></i>
-                                            <span class="value">2</span>
-                                        </div>
-                                        <div class="single-thumbnail">
-                                            <i class="icon corner"></i>
-                                            <span class="value">190 ft²</span>
-                                        </div>
-                                    </div>
-                                    <div class="item-entry">
-                                        <span class="item-title"><a href="#">Family House In Hudson</a></span>
-                                        <p class="item-text">Phasellus vestibulum mauris leo, et ultricies sem ultrices nec. Nunc volpat tortor vitae...</p>
-                                        <div class="item-info">
-                                            <span class="price">USD 746,00</span>
-                                            <div class="pull-right buttons">
-                                                <a href="#" class="share"><i class="fa fa-share-alt"></i></a>
-                                                <a href="#" class="favourite">
-                                                    <i class="fa fa-star-o"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <div class="preview">
-                                        <img src="media/images/object-slider/3.jpg" alt="">
-                                        <span class="like">
-                                            <i class="fa fa-heart"></i>
-                                        </span>
-                                    </div>	
-                                    <div class="item-thumbnail">
-                                        <div class="single-thumbnail">
-                                            <i class="icon bath"></i>
-                                            <span class="value">3</span>
-                                        </div>
-                                        <div class="single-thumbnail">
-                                            <i class="icon sleep"></i>
-                                            <span class="value">2</span>
-                                        </div>
-                                        <div class="single-thumbnail">
-                                            <i class="icon corner"></i>
-                                            <span class="value">190 ft²</span>
-                                        </div>
-                                    </div>
-                                    <div class="item-entry">
-                                        <span class="item-title"><a href="#">Lake View In Manhattan</a></span>
-                                        <p class="item-text">Phasellus vestibulum mauris leo, et ultricies sem ultrices nec. Nunc volpat tortor vitae...</p>
-                                        <div class="item-info">
-                                            <span class="price">USD 234,00</span>
-                                            <div class="pull-right buttons">
-                                                <a href="#" class="share"><i class="fa fa-share-alt"></i></a>
-                                                <a href="#" class="favourite">
-                                                    <i class="fa fa-star-o"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <div class="preview">
-                                        <img src="media/images/object-slider/4.jpg" alt="">
-                                        <span class="like">
-                                            <i class="fa fa-heart"></i>
-                                        </span>
-                                    </div>
-                                    <div class="item-thumbnail">
-                                        <div class="single-thumbnail">
-                                            <i class="icon bath"></i>
-                                            <span class="value">3</span>
-                                        </div>
-                                        <div class="single-thumbnail">
-                                            <i class="icon sleep"></i>
-                                            <span class="value">2</span>
-                                        </div>
-                                        <div class="single-thumbnail">
-                                            <i class="icon corner"></i>
-                                            <span class="value">190 ft²</span>
-                                        </div>
-                                    </div>
-                                    <div class="item-entry">
-                                        <span class="item-title"><a href="#">Open House South</a></span>
-                                        <p class="item-text">Phasellus vestibulum mauris leo, et ultricies sem ultrices nec. Nunc volpat tortor vitae...</p>
-                                        <div class="item-info">
-                                            <span class="price">USD 536,00</span>
-                                            <div class="pull-right buttons">
-                                                <a href="#" class="share"><i class="fa fa-share-alt"></i></a>
-                                                <a href="#" class="favourite">
-                                                    <i class="fa fa-star-o"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <div class="preview">
-                                        <img src="media/images/object-slider/1.jpg" alt="">
-                                        <span class="like">
-                                            <i class="fa fa-heart"></i>
-                                        </span>
-                                    </div>
-                                    <div class="item-thumbnail">
-                                        <div class="single-thumbnail">
-                                            <i class="icon bath"></i>
-                                            <span class="value">3</span>
-                                        </div>
-                                        <div class="single-thumbnail">
-                                            <i class="icon sleep"></i>
-                                            <span class="value">2</span>
-                                        </div>
-                                        <div class="single-thumbnail">
-                                            <i class="icon corner"></i>
-                                            <span class="value">190 ft²</span>
-                                        </div>
-                                    </div>
-                                    <div class="item-entry">
-                                        <span class="item-title"><a href="#">Retail Space In West Side</a></span>
-                                        <p class="item-text">Phasellus vestibulum mauris leo, et ultricies sem ultrices nec. Nunc volpat tortor vitae...</p>
-                                        <div class="item-info">
-                                            <span class="price">USD 999,00</span>
-                                            <div class="pull-right buttons">
-                                                <a href="#" class="share"><i class="fa fa-share-alt"></i></a>
-                                                <a href="#" class="favourite">
-                                                    <i class="fa fa-star-o"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+<?php } ?>
+
                         </ul>
                     </div>
                     <p class="jcarousel-pagination"></p>
