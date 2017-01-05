@@ -64,13 +64,14 @@ class Datatables_model extends Admin_model {
     /**
      * Kategóriák lekérdezése (annak ellenőrzéséhez, hogy már létezik-e ilyen kategória)
      * @param string tábla neve
+     * @param string id oszlop neve
      * @param string oszlop neve
      * @return array
      */
-    public function existingCategorys($table, $leiras_name)
+    public function existingCategorys($table, $id_name, $leiras_name)
     {
         $this->query->set_table(array($table));
-        $this->query->set_columns(array($leiras_name));
+        $this->query->set_columns(array($id_name, $leiras_name));
         return $this->query->select();         
     }
 
@@ -86,7 +87,7 @@ class Datatables_model extends Admin_model {
      */
     public function update_insert($id, $table, $id_name, $leiras_name, $data)
     {
-        $data = array($leiras_name => $data);
+        //$data = array($leiras_name => $data);
 
         if (is_null($id)) {
             // insert

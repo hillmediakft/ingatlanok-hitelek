@@ -50,6 +50,7 @@ class Datatables extends Admin_controller {
         $data['title'] = 'kategória oldal';
         $data['description'] = 'Kategória oldal description';
         $data['kategoriak'] = $this->datatables_model->get_jellemzo_list('ingatlan_kategoria');
+        
         $view->add_links(array('datatable', 'bootbox', 'kategoria'));
         $view->render('datatables/tpl_kategoria', $data);
     }
@@ -276,27 +277,41 @@ class Datatables extends Admin_controller {
                 $id = $this->request->get_post('id', 'integer');
                 $table = $this->request->get_post('table');
                 $id_name = $this->request->get_post('id_name');
-                $leiras_name = $this->request->get_post('leiras_name');
+                // magyar nyelvű oszlop neve
+                $leiras_name = $this->request->get_post('leiras_name') . '_hu';
+                // asszociatív tömb amelyben a kulcs a nyelvi kód
                 $data = $this->request->get_post('data');
 
-                // ha üres string volt elküldve
-                if($data == '') {
-                    $this->response->json(array(
-                        'status' => 'error',
-                        'message' => 'Nem lehet üres ez a mező!'
-                    ));
-                } 
-
-                // Kategóriák lekérdezése annak ellenőrzéséhez, hogy már létezik-e ilyen kategória
-                $existing_categorys = $this->datatables_model->existingCategorys($table, $leiras_name);
-                // bejárjuk a kategória neveket és összehasonlítjuk az új névvel (kisbetűssé alakítjuk, hogy ne számítson a nagybetű-kisbetű eltérés)
-                foreach($existing_categorys as $value) {
-                    if(strtolower($data) == strtolower($value[$leiras_name])) {
+                // ha üres string volt elküldve valamelyik nyelvnél
+                foreach ($data as $value) {
+                    if ($value == '') {
                         $this->response->json(array(
                             'status' => 'error',
-                            'message' => 'Már létezik ' . $value[$leiras_name] . ' kategória!'
+                            'message' => 'Nem lehet üres mező!'
                         ));
-                    }   
+                        exit;
+                    }
+                }
+
+                // Kategóriák lekérdezése annak ellenőrzéséhez, hogy már létezik-e ilyen kategória (az id és magyar nyelvű oszlopot kérdezi le)
+                $existing_categorys = $this->datatables_model->existingCategorys($table, $id_name, $leiras_name);
+              
+                // bejárjuk a kategória neveket és összehasonlítjuk az új névvel (kisbetűssé alakítjuk, hogy ne számítson a nagybetű-kisbetű eltérés)
+                foreach($existing_categorys as $value) {
+
+                    if (
+                        //insert-nél ez teljesülhet
+                        ( is_null($id) && strtolower($data[$leiras_name]) == strtolower($value[$leiras_name]) ) || 
+                        //update-nél ez teljesülhet
+                        ( !is_null($id) && $id != $value[$id_name] && strtolower($data[$leiras_name]) == strtolower($value[$leiras_name]) )
+                    ) {
+                            $this->response->json(array(
+                                'status' => 'error',
+                                'message' => 'Már létezik ' . $value[$leiras_name] . ' kategória!'
+                            ));
+                            exit;
+                    }
+
                 }
 
                 $result = $this->datatables_model->update_insert($id, $table, $id_name, $leiras_name, $data);
