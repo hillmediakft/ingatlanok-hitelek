@@ -16,8 +16,8 @@ $(document).ready(function(){
 //	languageDropDownInit();
 	initScrollTop();
 	carouselInit();
-	initContacMap();
-	initBannerMap1();
+//	initContacMap();
+//	initBannerMap1();
 	galleryInit();
 	initAudio();
 	initMasonryPosts();
