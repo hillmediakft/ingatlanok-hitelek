@@ -1,5 +1,4 @@
 <?php
-
 use System\Libs\Language as Lang;
 use System\Libs\Config;
 ?>

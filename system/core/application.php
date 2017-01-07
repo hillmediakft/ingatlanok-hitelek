@@ -51,10 +51,15 @@ class Application {
             $router->get('/kapcsolat', 'kapcsolat@index');
             $router->get('/hitel', 'hitel@index');
             $router->get('/hirek', 'hirek@index');
+            $router->get('/hirek/kategoria/:id', 'hirek@kategoria', array('id'));
+            $router->get('/hirek/:title/:id', 'hirek@reszletek', array('title', 'id'));
+            
 
             $router->mount('/en', function() use ($router) {
                 $router->get('/', 'home@index');
                 $router->get('/hirek', 'hirek@index');
+                $router->get('/hirek/kategoria/:id', 'hirek@kategoria', array('id'));
+                $router->get('/hirek/:title/:id', 'hirek@reszletek', array('title', 'id'));
             });
 
             $router->set404('error@index');

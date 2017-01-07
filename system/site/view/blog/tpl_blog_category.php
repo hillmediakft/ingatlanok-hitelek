@@ -1,57 +1,74 @@
-<div class="center">
+<?php
+use System\Libs\Language as Lang;
+use System\Libs\Config;
+?>
+
+<div id="content" class="container-fluid">
     <div class="container">
         <div class="row">
-            <!-- BEGIN LISTING-->
-            <div class="listing listing--properties-list">
-                <header class="listing__header">
-                    <h1 class="listing__title">Hírek</h1>
-                    <h5 class="listing__headline"><em><?php echo $this->category_name; ?></em> - kategória</h5>
-                </header>
-
-
-                <div class="listing__main">
-                    <div class="article article--details article--page">
-
-                        <?php if (count($this->blog_list) > 0): ?> 
-                            <?php foreach ($this->blog_list as $value) : ?>  
-
-                                <article class="article__item">
-
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <img src="<?php echo Config::get('blogphoto.upload_path') . $value['blog_picture']; ?>" class="img-responsive img-thumbnail" alt="<?php echo $value['blog_title']; ?>">
+            <div class="col-sm-12">
+                <div class="breadcrumbs">
+                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>"><?php echo Lang::get('menu_home'); ?></a></span>
+                    <span class="delimiter">/</span>
+                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>hirek"><?php echo Lang::get('menu_hirek'); ?></a></span>
+                    <span class="delimiter">/</span>
+                    <span class="active-page"><?php echo Lang::get('hirek_kategoria') . ': ' . $category_name; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+                <div class="blog-content column-2">
+                    <div class="row">
+                        <div id="equalheight">
+                            <?php foreach ($blogs as $value) { ?>
+                                <div class="col-sm-6">
+                                    <div class="single-blog-item">
+                                        <div class="preview">
+                                            <a href="<?php echo $this->request->get_uri('site_url') . 'hirek/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>" class="link">
+                                                <img alt="<?php echo $value['title_' . LANG]; ?>" src="<?php echo Config::get('blogphoto.upload_path') . $value['picture']; ?>" data-original="<?php echo Config::get('blogphoto.upload_path') . $value['picture']; ?>">
+                                            </a>
                                         </div>
-                                        <div class="col-md-9">
-                                            <a class="article__comment" href="<?php echo $this->registry->site_url . 'hirek/' . $value['blog_slug'] . '/' . $value['blog_id']; ?>"><i class="fa fa-calendar"></i><?php echo $value['blog_add_date']; ?></a>
-
-                                            <h3 class="article__item-title"><a href="<?php echo $this->registry->site_url . 'hirek/' . $value['blog_slug'] . '/' . $value['blog_id']; ?>"><?php echo $value['blog_title']; ?></a></h3>
-                                            <div class="article__tags">Kategória:<a href="<?php echo $this->registry->site_url . 'hirek/kategoria/' . $value['blog_category']; ?>"><?php echo $value['category_name']; ?></a>
+                                        <div class="descr">
+                                            <div class="item-thumbnail">
+                                                <div class="single-item date">
+                                                    <i class="fa fa-calendar"></i>
+                                                    <?php echo date('Y-m-d', strtotime($value['add_date'])); ?>
+                                                </div>
+                                                <div class="single-item views">
+                                                    <i class="fa fa-archive"></i>
+                                                    <?php echo Lang::get('hirek_kategoria'); ?>: <a class="value" href="<?php echo $this->request->get_uri('site_url') . 'hirek/kategoria/' . $value['category_id']; ?>"><?php echo $value['category_name_' . LANG]; ?></a>
+                                                </div>
                                             </div>
-                                            <div class="clearfix"></div>
-                                            <div class="article__intro">
-                                                <p><?php echo Util::sentence_trim($value['blog_body'], 3); ?><a href="<?php echo $this->registry->site_url . 'hirek/' . $value['blog_slug'] . '/' . $value['blog_id']; ?>"> [tovább...]</a></p>
-                                            </div>
+                                            <span class="title"><a href="<?php echo $this->request->get_uri('site_url') . 'hirek/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"><?php echo $value['title_' . LANG]; ?></a></span>
+                                            <p>
+                                                <?php echo $this->str_helper->sentenceTrim($value['body_' . LANG], 3); ?> <a href="<?php echo $this->request->get_uri('site_url') . 'hirek/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"> 
+                                                    [...] 
+                                                </a>
+                                            </p>
                                         </div>
                                     </div>
-                                </article> 
-                                <hr>
-
-                            <?php endforeach ?>
-                        <?php endif ?>
-                        <?php if (count($this->blog_list) == 0): ?>
-                            <div class="alert alert-info"><p><i class="fa fa-exclamation-triangle"></i> Nincs bejegyzés a kategóriában!</p></div>
-                        <?php endif ?>
+                                </div>
+                            <?php } ?>
+                        </div>
                     </div>
-                </div>                
-                <?php echo $this->pagine_links; ?>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="objects-pagination">                           
+                            <?php echo $pagine_links; ?>
+                        </div>
+                    </div>
+                </div>                 
 
             </div>
-            <!-- END LISTING-->
-            <!-- SIDEBAR -->
-            <?php include SITE . '/view/_template/tpl_sidebar.php'; ?>
-            <!-- END SIDEBAR-->
-            <div class="clearfix"></div>
+
+            <?php require('system/site/view/_template/tpl_sidebar_blog.php'); ?>   
+
         </div>
     </div>
 </div>
-<!-- END CENTER SECTION-->

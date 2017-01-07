@@ -1,9 +1,10 @@
 var Hirek = function () {
 
     var equalHeights = function () {
-        $('#equalheight div.descr').equalHeights();
+        setTimeout(function () {
+            $('#equalheight div.descr').equalHeights();
+        }, 200);
     }
-
 
     return {
         //main function to initiate the module
@@ -11,10 +12,7 @@ var Hirek = function () {
             equalHeights();
         }
     };
-
-
 }();
-
 
 jQuery(document).ready(function ($) {
     Hirek.init();

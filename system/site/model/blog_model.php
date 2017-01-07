@@ -20,11 +20,16 @@ class Blog_model extends Site_model {
         $this->query->set_columns('*');
         if (!is_null($id)) {
             $id = (int) $id;
-            $this->query->set_where('id', '=', $id);
+            $this->query->set_where('blog.id', '=', $id);
         }
         $this->query->set_join('left', 'blog_category', 'blog.category_id', '=', 'blog_category.id');
         $this->query->set_orderby(array('blog.add_date'), 'DESC');
-        return $this->query->select();
+        $result = $this->query->select();
+         if(count($result) == 1) {
+             return $result[0];
+         } else {
+             return $result;
+         }
     }
 
     /**
@@ -38,8 +43,7 @@ class Blog_model extends Site_model {
         $this->query->reset();
         $this->query->debug(false);
         $this->query->set_table(array('blog'));
-        $this->query->set_columns('SQL_CALC_FOUND_ROWS *'
-        );
+        $this->query->set_columns('SQL_CALC_FOUND_ROWS *');
         if (!is_null($limit)) {
             $this->query->set_limit($limit);
         }
@@ -65,13 +69,13 @@ class Blog_model extends Site_model {
      *
      * 	@return array az adott kategóriájú blog bejegyzések tömbje  
      */
-    public function blog_query_by_category($category) {
+    public function getBlogPostsByCategory($category) {
         $this->query->reset();
         $this->query->set_table(array('blog'));
-        $this->query->set_columns(array('blog_id', 'blog_slug', 'blog_title', 'blog_body', 'blog_picture', 'blog_category', 'blog_add_date', 'blog_category.category_name'));
-        $this->query->set_where('blog_category', '=', $category);
-        $this->query->set_join('left', 'blog_category', 'blog.blog_category', '=', 'blog_category.category_id');
-        $this->query->set_orderby(array('blog.blog_add_date'), 'DESC');
+        $this->query->set_columns('*');
+        $this->query->set_where('category_id', '=', $category);
+        $this->query->set_join('left', 'blog_category', 'blog.category_id', '=', 'blog_category.id');
+        $this->query->set_orderby(array('blog.add_date'), 'DESC');
         return $this->query->select();
     }
 
@@ -100,7 +104,7 @@ class Blog_model extends Site_model {
         $this->query->set_columns('*');
         if (!is_null($id)) {
             $id = (int) $id;
-            $this->query->set_where('category_id', '=', $id);
+            $this->query->set_where('id', '=', $id);
         }
         $result = $this->query->select();
 
@@ -118,9 +122,9 @@ class Blog_model extends Site_model {
         $this->query->reset();
         $this->query->debug(false);
         $this->query->set_table(array('blog'));
-        $this->query->set_columns('SQL_CALC_FOUND_ROWS blog_id, blog_slug, blog_title, blog_body, blog_picture, blog_category, blog_add_date, blog_category.category_name');
-        $this->query->set_where('blog_category', '=', $id);
-        $this->query->set_join('left', 'blog_category', 'blog.blog_category', '=', 'blog_category.category_id');
+        $this->query->set_columns('SQL_CALC_FOUND_ROWS *');
+        $this->query->set_where('blog.category_id', '=', $id);
+       $this->query->set_join('left', 'blog_category', 'blog.category_id', '=', 'blog_category.id');
 
         if (!is_null($limit)) {
             $this->query->set_limit($limit);
@@ -128,7 +132,7 @@ class Blog_model extends Site_model {
         if (!is_null($offset)) {
             $this->query->set_offset($offset);
         }
-        $this->query->set_orderby(array('blog.blog_add_date'), 'DESC');
+        $this->query->set_orderby(array('blog.add_date'), 'DESC');
         return $this->query->select();
     }
 

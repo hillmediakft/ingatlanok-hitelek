@@ -10449,7 +10449,7 @@ a.simple-btn.outlined.orange:hover {
 }
 /* line 2524, scss/_shortcodes.scss */
 .main-sidebar .widget .heading .widget-title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Lato-Regular', Arial, sans-serif;
   font-size: 22px;
   color: #000;
 }
@@ -15107,8 +15107,8 @@ a.simple-btn.outlined.orange:hover {
 }
 /* line 6270, scss/_shortcodes.scss */
 .blog-content.column-1 .single-blog-item .descr .title, .blog-content.column-2 .single-blog-item .descr .title, .blog-content.column-3 .single-blog-item .descr .title, .blog-content.full-width .single-blog-item .descr .title, .blog-content.masonry-posts .single-blog-item .descr .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
-  font-size: 16px;
+  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-size: 18px;
   margin-bottom: 12px;
   display: block;
 }
@@ -15921,12 +15921,13 @@ a.simple-btn.outlined.orange:hover {
 }
 /* line 6998, scss/_shortcodes.scss */
 .blog-single-post .blog-post-entry .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
-  font-size: 16px;
+  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-size: 30px;
   margin-bottom: 12px;
   display: block;
-  color: #000;
+  color: #555;
   text-decoration: none;
+  margin-top: 0px;
 }
 /* line 7006, scss/_shortcodes.scss */
 .blog-single-post .blog-post-entry .item-thumbnail {
@@ -15956,6 +15957,9 @@ a.simple-btn.outlined.orange:hover {
 /* line 7024, scss/_shortcodes.scss */
 .blog-single-post .blog-post-entry .item-thumbnail .single-item.date {
   margin-bottom: 0;
+}
+.blog-single-post .blog-post-entry .item-thumbnail .single-item.date a {
+  color: #808080;
 }
 /* line 7029, scss/_shortcodes.scss */
 .blog-single-post .blog-post-entry blockquote {
@@ -17078,7 +17082,7 @@ span.sub-title.left {
 
 /* line 217, scss/_tipography.scss */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Lato-Regular', Arial, sans-serif;
   color: #000;
   margin-bottom: 32px;
   margin-top: 24px;
@@ -17086,7 +17090,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 223, scss/_tipography.scss */
 h1 {
-  font-size: 50px;
+  font-size: 30px;
 }
 
 /* line 226, scss/_tipography.scss */

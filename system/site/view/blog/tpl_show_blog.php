@@ -1,46 +1,49 @@
-<div class="center">
+<?php
+
+use System\Libs\Language as Lang;
+use System\Libs\Config;
+?>
+
+<div id="content" class="container-fluid">
     <div class="container">
         <div class="row">
-            <!-- BEGIN LISTING-->
-            <div class="listing listing--properties-list">
-                <header class="listing__header">
-                    <h1 class="listing__title">Hírek</h1>
-                    <h5 class="listing__headline">Friss hírek, információk</h5>
-                </header>
+            <div class="col-sm-12">
+                <div class="breadcrumbs">
+                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>"><?php echo Lang::get('menu_home'); ?></a></span>
+                    <span class="delimiter">/</span>
+                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>hirek"><?php echo Lang::get('menu_hirek'); ?></a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+                <div class="blog-single-post">
+                    <div class="row">
+                        <div class="blog-post-entry">
 
-                <div class="listing__main">
-                    <div class="article article--details article--page">
-                        <article class="article__item">
-
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <img src="<?php echo Config::get('blogphoto.upload_path') . $this->blog['blog_picture']; ?>" class="img-responsive img-thumbnail" alt="<?php echo $this->blog['blog_title']; ?>">
-                                </div>
-                                <div class="col-md-9">
-                                    <h3 class="article__item-title"><a href="blog_details.html"><?php echo $this->blog['blog_title']; ?></a></h3>
-                                    <div class="article__tags"><i class="fa fa-folder-open-o"></i> Kategória:<a href="<?php echo $this->registry->site_url . 'hirek/kategoria/' . $this->blog['blog_category']; ?>"><?php echo $this->blog['category_name']; ?></a> | <i class="fa fa-calendar"></i> <?php echo $this->blog['blog_add_date']; ?>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="article__intro">
-                                        <p><?php echo $this->blog['blog_body']; ?></p>
-                                    </div>
-                                </div>
+                            <div class="col-md-3">
+                                <img src="<?php echo Config::get('blogphoto.upload_path') . $blog['picture']; ?>" class="img-responsive img-thumbnail" alt="<?php echo $blog['title_' . LANG]; ?>">
                             </div>
-                        </article> 
-                        <hr>
+                            <div class="col-md-9">
+                                <h1 class="title"><?php echo $title; ?></h1>
 
+                                <div class="item-thumbnail">
+                                    <div class="single-item date"><i class="fa fa-folder-open-o"></i> Kategória: <a href="<?php echo $this->request->get_uri('site_url') . 'hirek/kategoria/' . $blog['category_id']; ?>"><?php echo $blog['category_name_' . LANG]; ?></a> | <i class="fa fa-calendar"></i> <?php echo date('Y-m-d', strtotime($blog['add_date'])); ?>
+                                    </div>
+                                </div>
 
-                    </div>
-                </div>                
+                                <p><?php echo $blog['body_' . LANG]; ?></p>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
 
             </div>
-            <!-- END LISTING-->
-            <!-- SIDEBAR -->
-            <?php include SITE . '/view/_template/tpl_sidebar.php'; ?>
-            <!-- END SIDEBAR-->
-            <div class="clearfix"></div>
+       
+
+        <?php require('system/site/view/_template/tpl_sidebar_blog.php'); ?>   
         </div>
     </div>
 </div>
-<!-- END CENTER SECTION-->
-
