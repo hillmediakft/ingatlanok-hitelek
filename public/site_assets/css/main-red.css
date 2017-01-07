@@ -949,6 +949,7 @@ footer.footer {
   height: auto;
   background: #444;
   padding-top: 50px;
+  margin-top: 50px;
 }
 /* line 8, scss/_footer.scss */
 footer.footer .widget .widget-title {
@@ -14793,7 +14794,7 @@ a.simple-btn.outlined.orange:hover {
   color: #fff;
 }
 /* line 6030, scss/_shortcodes.scss */
-.objects-block .objects-pagination {
+.objects-block .objects-pagination, .objects-pagination {
   margin-top: 10px;
   text-align: center;
 }
@@ -14832,35 +14833,37 @@ a.simple-btn.outlined.orange:hover {
   margin-left: 16px;
 }
 /* line 6058, scss/_shortcodes.scss */
-.objects-block .objects-pagination .pages-listing {
+.objects-block .objects-pagination .pages-listing, .objects-pagination .pages-listing {
   padding: 0;
   list-style: none;
   margin: 0;
   display: inline-block;
 }
 /* line 6063, scss/_shortcodes.scss */
-.objects-block .objects-pagination .pages-listing li {
+.objects-block .objects-pagination .pages-listing li, .objects-pagination .pages-listing li {
   display: inline-block;
 }
 /* line 6065, scss/_shortcodes.scss */
-.objects-block .objects-pagination .pages-listing li a {
+.objects-block .objects-pagination .pages-listing li a, .objects-pagination .pages-listing li a {
   -webkit-transition: 0.2s linear;
   -moz-transition: 0.2s linear;
   -ms-transition: 0.2s linear;
   -o-transition: 0.2s linear;
   transition: 0.2s linear;
   display: block;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border: 1px dotted #e7e4e4;
   text-align: center;
-  line-height: 28px;
+  line-height: 33px;
   color: #808080;
   text-decoration: none;
   font-size: 14px;
+  margin-right: 5px;
+  background: #eee;
 }
 /* line 6076, scss/_shortcodes.scss */
-.objects-block .objects-pagination .pages-listing li a:hover, .objects-block .objects-pagination .pages-listing li a.active {
+.objects-block .objects-pagination .pages-listing li a:hover, .objects-block .objects-pagination .pages-listing li a.active, .objects-pagination .pages-listing li a:hover, .objects-pagination .pages-listing li a.active {
   background-color: #c44a35;
   border-color: #c44a35;
   border-style: solid;
@@ -15008,6 +15011,7 @@ a.simple-btn.outlined.orange:hover {
 /* line 6196, scss/_shortcodes.scss */
 .blog-content.column-1 .single-blog-item, .blog-content.column-2 .single-blog-item, .blog-content.column-3 .single-blog-item, .blog-content.full-width .single-blog-item, .blog-content.masonry-posts .single-blog-item {
   margin-bottom: 30px;
+  border: 1px solid #e7e4e4; 
 }
 /* line 6198, scss/_shortcodes.scss */
 .blog-content.column-1 .single-blog-item .preview, .blog-content.column-2 .single-blog-item .preview, .blog-content.column-3 .single-blog-item .preview, .blog-content.full-width .single-blog-item .preview, .blog-content.masonry-posts .single-blog-item .preview {
@@ -15099,7 +15103,6 @@ a.simple-btn.outlined.orange:hover {
 }
 /* line 6267, scss/_shortcodes.scss */
 .blog-content.column-1 .single-blog-item .descr, .blog-content.column-2 .single-blog-item .descr, .blog-content.column-3 .single-blog-item .descr, .blog-content.full-width .single-blog-item .descr, .blog-content.masonry-posts .single-blog-item .descr {
-  border: 1px solid #e7e4e4;
   padding: 16px 20px;
 }
 /* line 6270, scss/_shortcodes.scss */

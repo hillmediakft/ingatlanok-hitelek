@@ -54,6 +54,7 @@ class Application {
 
             $router->mount('/en', function() use ($router) {
                 $router->get('/', 'home@index');
+                $router->get('/hirek', 'hirek@index');
             });
 
             $router->set404('error@index');
