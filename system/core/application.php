@@ -39,9 +39,9 @@ class Application {
     private function _loadController() {
         $router = DI::get('router');
 
-        /* *************************************************** */
-        /* ************** SITE ******************************* */
-        /* *************************************************** */
+        /*         * ************************************************** */
+        /*         * ************* SITE ******************************* */
+        /*         * ************************************************** */
         if (AREA == 'site') {
 
             $router->get('/', 'home@index');
@@ -50,24 +50,31 @@ class Application {
             $router->get('/rolunk', 'rolunk@index');
             $router->get('/kapcsolat', 'kapcsolat@index');
             $router->get('/hitel', 'hitel@index');
+            $router->get('/allas', 'allas@index');
             $router->get('/hirek', 'hirek@index');
             $router->get('/hirek/kategoria/:id', 'hirek@kategoria', array('id'));
             $router->get('/hirek/:title/:id', 'hirek@reszletek', array('title', 'id'));
-            
+            $router->get('/kereses', 'kereses@index');
+            $router->set404('error@index');
 
             $router->mount('/en', function() use ($router) {
                 $router->get('/', 'home@index');
+                $router->get('/ingatlanok', 'ingatlanok@index');
+                $router->get('/ingatlan-ertekesitoink', 'ingatlan_ertekesitoink@index');
+                $router->get('/rolunk', 'rolunk@index');
+                $router->get('/kapcsolat', 'kapcsolat@index');
+                $router->get('/hitel', 'hitel@index');
+                $router->get('/allas', 'allas@index');
                 $router->get('/hirek', 'hirek@index');
-                $router->get('/hirek/kategoria/:id', 'hirek@kategoria', array('id'));
+                $router->get('/hirek/category/:id', 'hirek@kategoria', array('id'));
                 $router->get('/hirek/:title/:id', 'hirek@reszletek', array('title', 'id'));
             });
 
-            $router->set404('error@index');
+            
         }
-        /* *************************************************** */
-        /* ***************** ADMIN *************************** */
-        /* *************************************************** */ 
-        elseif (AREA == 'admin') {
+        /*         * ************************************************** */
+        /*         * **************** ADMIN *************************** */
+        /*         * ************************************************** */ elseif (AREA == 'admin') {
 
             $router->mount('/admin', function() use ($router) {
 
