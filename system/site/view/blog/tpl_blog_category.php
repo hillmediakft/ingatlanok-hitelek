@@ -10,7 +10,7 @@ use System\Libs\Config;
                 <div class="breadcrumbs">
                     <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>"><?php echo Lang::get('menu_home'); ?></a></span>
                     <span class="delimiter">/</span>
-                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>hirek"><?php echo Lang::get('menu_hirek'); ?></a></span>
+                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.' . LANG);?>"><?php echo Lang::get('menu_hirek'); ?></a></span>
                     <span class="delimiter">/</span>
                     <span class="active-page"><?php echo Lang::get('hirek_kategoria') . ': ' . $category_name; ?></span>
                 </div>
@@ -27,7 +27,7 @@ use System\Libs\Config;
                                 <div class="col-sm-6">
                                     <div class="single-blog-item">
                                         <div class="preview">
-                                            <a href="<?php echo $this->request->get_uri('site_url') . 'hirek/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>" class="link">
+                                            <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.' . LANG) . '/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>" class="link">
                                                 <img alt="<?php echo $value['title_' . LANG]; ?>" src="<?php echo Config::get('blogphoto.upload_path') . $value['picture']; ?>" data-original="<?php echo Config::get('blogphoto.upload_path') . $value['picture']; ?>">
                                             </a>
                                         </div>
@@ -39,12 +39,12 @@ use System\Libs\Config;
                                                 </div>
                                                 <div class="single-item views">
                                                     <i class="fa fa-archive"></i>
-                                                    <?php echo Lang::get('hirek_kategoria'); ?>: <a class="value" href="<?php echo $this->request->get_uri('site_url') . 'hirek/kategoria/' . $value['category_id']; ?>"><?php echo $value['category_name_' . LANG]; ?></a>
+                                                    <?php echo Lang::get('hirek_kategoria'); ?>: <a class="value" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.' . LANG) . '/' . Config::get('url.kategoria.' . LANG) . '/' . $value['category_id']; ?>"><?php echo $value['category_name_' . LANG]; ?></a>
                                                 </div>
                                             </div>
-                                            <span class="title"><a href="<?php echo $this->request->get_uri('site_url') . 'hirek/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"><?php echo $value['title_' . LANG]; ?></a></span>
+                                            <span class="title"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.' . LANG) . '/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"><?php echo $value['title_' . LANG]; ?></a></span>
                                             <p>
-                                                <?php echo $this->str_helper->sentenceTrim($value['body_' . LANG], 3); ?> <a href="<?php echo $this->request->get_uri('site_url') . 'hirek/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"> 
+                                                <?php echo $this->str_helper->sentenceTrim($value['body_' . LANG], 3); ?> <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.' . LANG) . '/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"> 
                                                     [...] 
                                                 </a>
                                             </p>

@@ -11,7 +11,7 @@ use System\Libs\Config;
             <div class="widget-entry">
                 <ul class="categories-listing">
                      <?php foreach ($blog_categories as $value) { ?>
-                    <li class="category-item"><a href="<?php echo $this->request->get_uri('site_url') . 'hirek/kategoria/' . $value['id']; ?>"><?php echo $value['category_name_' . LANG]; ?></a></li>
+                    <li class="category-item"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.' . LANG) . '/' . Config::get('url.kategoria.' . LANG) . '/' . $value['id']; ?>"><?php echo $value['category_name_' . LANG]; ?></a></li>
                      <?php } ?>
                 </ul>
             </div>
@@ -28,16 +28,6 @@ use System\Libs\Config;
                         </div>
                         <div class="descr">
                             <span class="title"><a href="#">Etiam Pharetraluct felis sed rhoncus</a></span>
-                            <div class="item-thumbnail">
-                                <div class="single-item date">
-                                    <i class="fa fa-calendar"></i>
-                                    <a class="value" href="">12 Oct, 06:45</a>
-                                </div>
-                                <div class="single-item comment">
-                                    <i class="fa fa-comments"></i>
-                                    <a class="value" href="#">13</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="single-widget-post">
@@ -46,16 +36,6 @@ use System\Libs\Config;
                         </div>
                         <div class="descr">
                             <span class="title"><a href="#">Etiam Pharetraluct felis sed rhoncus</a></span>
-                            <div class="item-thumbnail">
-                                <div class="single-item date">
-                                    <i class="fa fa-calendar"></i>
-                                    <a class="value" href="">12 Oct, 06:45</a>
-                                </div>
-                                <div class="single-item comment">
-                                    <i class="fa fa-comments"></i>
-                                    <a class="value" href="#">13</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="single-widget-post">
@@ -64,21 +44,11 @@ use System\Libs\Config;
                         </div>
                         <div class="descr">
                             <span class="title"><a href="#">Etiam Pharetraluct felis sed rhoncus</a></span>
-                            <div class="item-thumbnail">
-                                <div class="single-item date">
-                                    <i class="fa fa-calendar"></i>
-                                    <a class="value" href="">12 Oct, 06:45</a>
-                                </div>
-                                <div class="single-item comment">
-                                    <i class="fa fa-comments"></i>
-                                    <a class="value" href="#">13</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <nav class="rotate_btn">
-                    <a href="#" class="all-posts-btn">All Posts</a>
+                    <a href="#" class="all-posts-btn">Összes</a>
                 </nav>
             </div>
         </div>

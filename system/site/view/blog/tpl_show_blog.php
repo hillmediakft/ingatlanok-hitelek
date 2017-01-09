@@ -11,7 +11,7 @@ use System\Libs\Config;
                 <div class="breadcrumbs">
                     <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>"><?php echo Lang::get('menu_home'); ?></a></span>
                     <span class="delimiter">/</span>
-                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>hirek"><?php echo Lang::get('menu_hirek'); ?></a></span>
+                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.' . LANG); ?>"><?php echo Lang::get('menu_hirek'); ?></a></span>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@ use System\Libs\Config;
                                 <h1 class="title"><?php echo $title; ?></h1>
 
                                 <div class="item-thumbnail">
-                                    <div class="single-item date"><i class="fa fa-folder-open-o"></i> Kategória: <a href="<?php echo $this->request->get_uri('site_url') . 'hirek/kategoria/' . $blog['category_id']; ?>"><?php echo $blog['category_name_' . LANG]; ?></a> | <i class="fa fa-calendar"></i> <?php echo date('Y-m-d', strtotime($blog['add_date'])); ?>
+                                    <div class="single-item date"><i class="fa fa-folder-open-o"></i> Kategória: <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.' . LANG) . '/' . Config::get('url.kategoria.' . LANG) . '/' . $blog['category_id']; ?>"><?php echo $blog['category_name_' . LANG]; ?></a> | <i class="fa fa-calendar"></i> <?php echo date('Y-m-d', strtotime($blog['add_date'])); ?>
                                     </div>
                                 </div>
 

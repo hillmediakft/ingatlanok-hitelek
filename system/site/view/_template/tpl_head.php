@@ -1,4 +1,7 @@
-<?php use System\Libs\Language as Lang; ?>
+<?php 
+use System\Libs\Config;
+use System\Libs\Language as Lang; 
+?>
 <div class="extra-header">
     <div class="container">
         <div class="left-part">
@@ -115,7 +118,7 @@
                             <div class="overlay"></div>
                             <ul class="subnav">
                                 <li class="subnav-item">
-                                    <a href="#"><?php echo Lang::get('menu_rolunk'); ?></a>
+                                    <a href="<?php echo Config::get('url.rolunk.' . LANG);?>"><?php echo Lang::get('menu_rolunk'); ?></a>
                                     <div class="overlay"></div>
                                 </li>
                                 <li class="subnav-item">
