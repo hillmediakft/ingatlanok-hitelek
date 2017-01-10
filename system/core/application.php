@@ -4,6 +4,7 @@ namespace System\Core;
 
 use System\Libs\DI;
 use System\Libs\Message;
+use System\Libs\Language;
 use System\Libs\Auth;
 use System\Libs\EventManager;
 use System\Libs\Config;
@@ -24,7 +25,7 @@ class Application {
 
         if (AREA == 'site' && MULTILANG_SITE == true) {
             // nyelvi fájl betöltése
-            $language = DI::get('language');
+            Language::init(LANG, DI::get('connect'));
         }
         // Megadjuk az Auth osztály alapbeállításait ('auth.php' config file betöltése)
         Auth::init('auth');
