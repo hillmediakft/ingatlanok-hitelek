@@ -16,9 +16,9 @@ class Ingatlanok_model extends Site_model {
      * 	
      * 	@param array 
      */
-    public function kiemelt_properties_query($limit) {
-        $this->query->reset();
-//        $this->query->debug(true);
+    public function kiemelt_properties_query($limit = null)
+    {
+// $this->query->debug(true);
         $this->query->set_table(array('ingatlanok'));
         $this->query->set_columns(array(
             'ingatlanok.id',
@@ -32,13 +32,13 @@ class Ingatlanok_model extends Site_model {
             'ingatlanok.szobaszam',
             'ingatlanok.kepek',
             'ingatlanok.varos',
-            'ingatlan_kategoria.kat_nev',
+            'ingatlan_kategoria.*',
             'city_list.city_name'
         ));
 
         $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
         $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
-        $this->query->set_where('ingatlanok.kiemeles', '=', '1');
+        $this->query->set_where('ingatlanok.kiemeles', '=', 1);
         $this->query->set_where('status', '=', 1);
         if (!is_null($limit)) {
             $this->query->set_limit($limit);
@@ -53,8 +53,9 @@ class Ingatlanok_model extends Site_model {
      * 	
      * 	@param array 
      */
-    public function get_favourite_properties_data($id_array) {
-//        $this->query->debug(true);
+    public function get_favourite_properties_data($id_array)
+    {
+// $this->query->debug(true);
         $this->query->set_columns(array(
             'ingatlanok.id',
             'ingatlanok.ingatlan_nev',
@@ -67,7 +68,7 @@ class Ingatlanok_model extends Site_model {
             'ingatlanok.szobaszam',
             'ingatlanok.kepek',
             'ingatlanok.varos',
-            'ingatlan_kategoria.kat_nev',
+            'ingatlan_kategoria.*',
             'district_list.district_name',
             'city_list.city_name'
         ));
@@ -93,7 +94,8 @@ class Ingatlanok_model extends Site_model {
      * 	
      * 	@param array 
      */
-    public function get_property_query($id) {
+    public function get_property_query($id)
+    {
 //        $this->query->debug(true);
         $this->query->set_columns(array(
             'ingatlanok.id',
@@ -142,16 +144,16 @@ class Ingatlanok_model extends Site_model {
             'ingatlanok.konditerem',
             'ingatlanok.latitude',
             'ingatlanok.longitude',
-            'ingatlan_kategoria.kat_nev',
+            'ingatlan_kategoria.*',
             'district_list.district_name',
             'city_list.city_name',
-            'ingatlan_allapot.all_leiras',
-            'ingatlan_futes.futes_leiras',
-            'ingatlan_parkolas.parkolas_leiras',
-            'ingatlan_kilatas.kilatas_leiras',
-            'ingatlan_energetika.energetika_leiras',
-            'ingatlan_kert.kert_leiras',
-            'ingatlan_szerkezet.szerkezet_leiras'
+            'ingatlan_allapot.*',
+            'ingatlan_futes.*',
+            'ingatlan_parkolas.*',
+            'ingatlan_kilatas.*',
+            'ingatlan_energetika.*',
+            'ingatlan_kert.*',
+            'ingatlan_szerkezet.*'
         ));
 
         $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
@@ -165,21 +167,23 @@ class Ingatlanok_model extends Site_model {
         $this->query->set_join('left', 'ingatlan_energetika', 'ingatlanok.energetika', '=', 'ingatlan_energetika.energetika_id');
         $this->query->set_join('left', 'ingatlan_kert', 'ingatlanok.kert', '=', 'ingatlan_kert.kert_id');
 
-
         $this->query->set_where('id', '=', $id);
-
         $this->query->set_where('status', '=', 1);
 
         return $this->query->select();
     }
 
     /**
-     * 	Munkák lekéderzése szűrési feltételekkel
+     * 	Ingatlanok lekéderzése szűrési feltételekkel
      *
+     * @param integer $limit
+     * @param integer $offset
+     * @param array $params - a lekérdezéshez szükséges paramétereket tartalmazza
      */
-    public function properties_filter_query($limit = null, $offset = null) {
-
-        $params = $this->request->get_query();
+    public function properties_filter_query($limit = null, $offset = null, $params)
+    {
+        //$params = $this->request->get_query();
+        
         if (isset($params['range_price'])) {
             $arr = explode(';', $params['range_price']);
             $params['min_ar'] = $arr[0];
@@ -196,12 +200,11 @@ class Ingatlanok_model extends Site_model {
             $params['max_szobaszam'] = $arr[1];
         }
 
+
         Session::set('ingatlan_filter', $params);
 
 
-        //     var_dump($params);
-        //     die;
-        $this->query->debug(false);
+//$this->query->debug(false);
         $this->query->set_columns('SQL_CALC_FOUND_ROWS 
           `ingatlanok`.`id`,
           `ingatlanok`.`ingatlan_nev`,
@@ -214,7 +217,7 @@ class Ingatlanok_model extends Site_model {
           `ingatlanok`.`szobaszam`,
           `ingatlanok`.`kepek`,
           `ingatlanok`.`varos`,
-          `ingatlan_kategoria`.`kat_nev`,
+          `ingatlan_kategoria`.*,
           `district_list`.`district_name`,
           `city_list`.`city_name`'
         );
@@ -382,10 +385,10 @@ class Ingatlanok_model extends Site_model {
     }
 
     /**
-     * 	A jobs_filter_query() metódus után kell meghívni,
      *  és visszaadja a limittel lekérdezett de a szűrésnek megfelelő összes sor számát
      */
-    public function properties_filter_count_query() {
+    public function properties_filter_count_query()
+    {
         return $this->query->found_rows();
     }
 
@@ -393,10 +396,10 @@ class Ingatlanok_model extends Site_model {
      * 	Az ingatlanok táblában szereplő aktív ingatlanok számát adja vissza
      *  @return integer
      */
-    public function get_count() {
-        // $this->query->debug(true);
+    public function get_count()
+    {
         $this->query->set_columns('id');
-        $this->query->set_where('status', '=', '1');
+        $this->query->set_where('status', '=', 1);
         $result = $this->query->select();
         return count($result);
     }
@@ -407,8 +410,8 @@ class Ingatlanok_model extends Site_model {
      * 	@param	string	$table 		(tábla neve)
      * 	@return	array
      */
-    public function list_query($table) {
-        $this->query->reset();
+    public function list_query($table)
+    {
         $this->query->set_table(array($table));
         $this->query->set_columns('*');
         return $this->query->select();
@@ -447,19 +450,17 @@ class Ingatlanok_model extends Site_model {
      *
      * @return string 	 a városok listája html-ben, option listaként
      */
-    public function county_list_query_with_prop_no() {
+    public function county_list_query_with_prop_no()
+    {
         $megye_lista = '';
         $filter = Session::get('filter');
 
-
-        $this->query->reset();
         $this->query->set_table(array('county_list'));
         $this->query->set_columns(array('county_id', 'county_name'));
         $result = $this->query->select();
 
 
         foreach ($result as $key => $value) {
-            $this->query->reset();
             $this->query->set_table(array('ingatlanok'));
             $this->query->set_columns(array('id'));
             $this->query->set_where('megye', '=', $result[$key]['county_id']);
@@ -551,143 +552,142 @@ class Ingatlanok_model extends Site_model {
     /**
      * 	Lekérdez miden elemet az ingatlan állapot táblából (az option listához)
      */
-    public function allapot_list_query() {
-        $this->query->reset();
+    public function allapot_list_query()
+    {
         $this->query->set_table(array('ingatlan_allapot'));
-        $this->query->set_columns(array('all_id', 'all_leiras'));
-
+        $this->query->set_columns('*');
         return $this->query->select();
     }
 
     /**
      * 	Lekérdez miden elemet az ingatlan fűtés táblából (az option listához)
      */
-    public function futes_list_query() {
-        $this->query->reset();
+    public function futes_list_query()
+    {
         $this->query->set_table(array('ingatlan_futes'));
-        $this->query->set_columns(array('futes_id', 'futes_leiras'));
-
+        $this->query->set_columns('*');
         return $this->query->select();
     }
 
     /**
      * 	Lekérdez miden elemet az ingatlan ingatlan_energetika táblából (az option listához)
      */
-    public function energetika_list_query() {
-        $this->query->reset();
+    public function energetika_list_query()
+    {
         $this->query->set_table(array('ingatlan_energetika'));
-        $this->query->set_columns(array('energetika_id', 'energetika_leiras'));
-
+        $this->query->set_columns('*');
         return $this->query->select();
     }
 
-    /**
-     * 	Frissíti a cookie-t a kedvencekhez
-     */
-    public function refresh_kedvencek_cookie($id) {
-        $kedvencek_array = json_decode(Cookie::get('kedvencek'));
+            /**
+             * 	Frissíti a cookie-t a kedvencekhez
+             */
+            public function refresh_kedvencek_cookie($id)
+            {
+                $kedvencek_array = json_decode(Cookie::get('kedvencek'));
 
-        if (is_array($kedvencek_array) && !in_array($id, $kedvencek_array)) {
-            $kedvencek_array[] = $id;
-            $kedvencek_json = json_encode($kedvencek_array);
-            Cookie::set('kedvencek', $kedvencek_json);
+                if (is_array($kedvencek_array) && !in_array($id, $kedvencek_array)) {
+                    $kedvencek_array[] = $id;
+                    $kedvencek_json = json_encode($kedvencek_array);
+                    Cookie::set('kedvencek', $kedvencek_json);
 
-            echo $this->favourite_property_html($id);
-        } elseif ($kedvencek_array == null) {
-            $kedvencek_array[] = $id;
-            $kedvencek_json = json_encode($kedvencek_array);
-            Cookie::set('kedvencek', $kedvencek_json);
+                    echo $this->favourite_property_html($id);
+                } elseif ($kedvencek_array == null) {
+                    $kedvencek_array[] = $id;
+                    $kedvencek_json = json_encode($kedvencek_array);
+                    Cookie::set('kedvencek', $kedvencek_json);
 
-            echo $this->favourite_property_html($id);
-        } else {
-            return;
-        }
-    }
-
-    /**
-     * 	törli az id-t a kedvencek cookie-ból
-     */
-    public function delete_property_from_cookie($id) {
-        $kedvencek_array = json_decode(Cookie::get('kedvencek'));
-
-        foreach ($kedvencek_array as $key => $value) {
-            if ($value == $id) {
-                unset($kedvencek_array[$key]);
+                    echo $this->favourite_property_html($id);
+                } else {
+                    return;
+                }
             }
-        }
 
-        $kedvencek_array = array_values($kedvencek_array);
+            /**
+             * 	törli az id-t a kedvencek cookie-ból
+             */
+            public function delete_property_from_cookie($id)
+            {
+                $kedvencek_array = json_decode(Cookie::get('kedvencek'));
 
-        $kedvencek_json = json_encode($kedvencek_array);
-        Cookie::set('kedvencek', $kedvencek_json);
-    }
+                foreach ($kedvencek_array as $key => $value) {
+                    if ($value == $id) {
+                        unset($kedvencek_array[$key]);
+                    }
+                }
 
-    /**
-     * 	A kedvencekhez hozzáadott ingatlan html kódját generálja a kedvencek dobozba
-     */
-    public function favourite_property_html($id) {
-        $property_data = $this->get_favourite_properties_data($id);
-        $property_data = $property_data[0];
+                $kedvencek_array = array_values($kedvencek_array);
 
+                $kedvencek_json = json_encode($kedvencek_array);
+                Cookie::set('kedvencek', $kedvencek_json);
+            }
 
-        $photo_array = json_decode($property_data['kepek']);
-
-        $string = '';
-        $string .= '<article class="property-item" id="favourite_property_' . $property_data['id'] . '">';
-        $string .= '<div class="row">';
-        $string .= '<div class="col-md-5">';
-        $string .= '<div class="properties__thumb">';
-        $string .= '<img src="' . Util::thumb_path(Config::get('ingatlan_photo.upload_path') . $photo_array[0]) . '" alt="' . $property_data['ingatlan_nev'] . '" title="' . $property_data['ingatlan_nev'] . '" />';
-        $string .= '<div id="delete_kedvenc_' . $property_data['id'] . '" data-id="' . $property_data['id'] . '" class="favourite-delete"><i class="fa fa-trash"></i></div>';
-        $string .= '</div>';
-        $string .= '</div>'; // col-md-5
-        $string .= '<div class="col-md-7">';
-        $string .= '<div class="property-attribute">';
-        if (isset($property_data['kerulet'])) {
-            $string .= $property_data['city_name'] . ', ' . $property_data['district_name'];
-        } else {
-            $string .= $property_data['city_name'];
-        }
-        $string .= '<div class="price">';
-        if ($property_data['tipus'] == 1) {
-            $string .= '<span class="attr-pricing">' . number_format($property_data['ar_elado'], 0, ',', '.') . ' Ft</span>';
-        } elseif ($property_data['tipus'] == 2) {
-            $string .= '<span class="attr-pricing">' . number_format($property_data['ar_kiado'], 0, ',', '.') . ' Ft</span>';
-        }
-        $string .= '</div>';
-        $string .= '</div>';
-        $string .= '</div>';
-        $string .= '<div class="col-md-12">';
-        $string .= '<a href="ingatlanok/adatlap/' . $property_data['id'] . '/' . Replacer::filterName($property_data['ingatlan_nev']) . '" title="' . $property_data['ingatlan_nev'] . '" ><h5>' . $property_data['ingatlan_nev'];
-        $string .= '</h5></a>';
-        $string .= '</div>';
+            /**
+             * 	A kedvencekhez hozzáadott ingatlan html kódját generálja a kedvencek dobozba
+             */
+            public function favourite_property_html($id)
+            {
+                $property_data = $this->get_favourite_properties_data($id);
+                $property_data = $property_data[0];
 
 
-        $string .= '</div>'; //row
-        $string .= '</article>';
-        return $string;
-    }
+                $photo_array = json_decode($property_data['kepek']);
+
+                $string = '';
+                $string .= '<article class="property-item" id="favourite_property_' . $property_data['id'] . '">';
+                $string .= '<div class="row">';
+                $string .= '<div class="col-md-5">';
+                $string .= '<div class="properties__thumb">';
+                $string .= '<img src="' . Util::thumb_path(Config::get('ingatlan_photo.upload_path') . $photo_array[0]) . '" alt="' . $property_data['ingatlan_nev'] . '" title="' . $property_data['ingatlan_nev'] . '" />';
+                $string .= '<div id="delete_kedvenc_' . $property_data['id'] . '" data-id="' . $property_data['id'] . '" class="favourite-delete"><i class="fa fa-trash"></i></div>';
+                $string .= '</div>';
+                $string .= '</div>'; // col-md-5
+                $string .= '<div class="col-md-7">';
+                $string .= '<div class="property-attribute">';
+                if (isset($property_data['kerulet'])) {
+                    $string .= $property_data['city_name'] . ', ' . $property_data['district_name'];
+                } else {
+                    $string .= $property_data['city_name'];
+                }
+                $string .= '<div class="price">';
+                if ($property_data['tipus'] == 1) {
+                    $string .= '<span class="attr-pricing">' . number_format($property_data['ar_elado'], 0, ',', '.') . ' Ft</span>';
+                } elseif ($property_data['tipus'] == 2) {
+                    $string .= '<span class="attr-pricing">' . number_format($property_data['ar_kiado'], 0, ',', '.') . ' Ft</span>';
+                }
+                $string .= '</div>';
+                $string .= '</div>';
+                $string .= '</div>';
+                $string .= '<div class="col-md-12">';
+                $string .= '<a href="ingatlanok/adatlap/' . $property_data['id'] . '/' . Replacer::filterName($property_data['ingatlan_nev']) . '" title="' . $property_data['ingatlan_nev'] . '" ><h5>' . $property_data['ingatlan_nev'];
+                $string .= '</h5></a>';
+                $string .= '</div>';
+
+
+                $string .= '</div>'; //row
+                $string .= '</article>';
+                return $string;
+            }
 
     /**
      * 	Lekérdezi az ingatlanok referens adatokat
      * 	
      * 	@param array 
      */
-    public function get_agent($id) {
-        $this->query->reset();
-//        $this->query->debug(true);
+    public function get_agent($id)
+    {
         $this->query->set_table(array('users'));
         $this->query->set_columns(array(
-            'users.user_id',
-            'users.user_first_name',
-            'users.user_last_name',
-            'users.user_phone',
-            'users.user_email',
-            'users.user_photo'
+            'users.id',
+            'users.first_name',
+            'users.last_name',
+            'users.phone',
+            'users.email',
+            'users.photo'
         ));
 
-        $this->query->set_where('user_id', '=', $id);
-        $this->query->set_where('user_active', '=', 1);
+        $this->query->set_where('id', '=', $id);
+        $this->query->set_where('active', '=', 1);
 
         $result = $this->query->select();
         return $result[0];
@@ -702,12 +702,11 @@ class Ingatlanok_model extends Site_model {
      * @param string 	$var2	leírás
      * @return array, boolean 
      */
-    public function hasonlo_ingatlanok($ingatlan_id, $ingatlan_tipus, $kategoria, $varos, $ar) {
+    public function hasonlo_ingatlanok($ingatlan_id, $ingatlan_tipus, $kategoria, $varos, $ar)
+    {
         $min_ar = $ar - ($ar * 0.1);
         $max_ar = $ar + ($ar * 0.1);
         $price_string = ($ingatlan_tipus == 1) ? 'ar_elado' : 'ar_kiado';
-
-// ------------NEW
 
         $data = array(
             ':ingatlan_tipus' => $ingatlan_tipus,
@@ -719,10 +718,31 @@ class Ingatlanok_model extends Site_model {
             ':ingatlan_id' => $ingatlan_id
         );
 
+/*
         $sql = "SELECT id, ingatlan_nev, tipus, ar_elado, ar_kiado, varos, kategoria, szobaszam, alapterulet, kepek, ingatlan_kategoria.kat_nev, city_list.city_name FROM ingatlanok "
                 . "LEFT JOIN ingatlan_kategoria ON ingatlanok.kategoria=ingatlan_kategoria.kat_id "
                 . "LEFT JOIN city_list ON ingatlanok.varos=city_list.city_id "
                 . "WHERE status = 1 AND tipus = :ingatlan_tipus AND kategoria = :kategoria AND varos = :varos AND (:price_string BETWEEN :min_ar AND :max_ar) AND id != :ingatlan_id ORDER BY id DESC LIMIT 4";
+*/
+
+        $sql = "SELECT
+                 ingatlanok.id,
+                 ingatlanok.ingatlan_nev,
+                 ingatlanok.tipus,
+                 ingatlanok.ar_elado,
+                 ingatlanok.ar_kiado,
+                 ingatlanok.varos,
+                 ingatlanok.kategoria,
+                 ingatlanok.szobaszam,
+                 ingatlanok.alapterulet,
+                 ingatlanok.kepek,
+                 ingatlan_kategoria.*,
+                 city_list.city_name
+                 FROM ingatlanok 
+                 LEFT JOIN ingatlan_kategoria ON ingatlanok.kategoria = ingatlan_kategoria.kat_id 
+                 LEFT JOIN city_list ON ingatlanok.varos = city_list.city_id 
+                 WHERE status = 1 AND tipus = :ingatlan_tipus AND kategoria = :kategoria AND varos = :varos AND (:price_string BETWEEN :min_ar AND :max_ar) AND id != :ingatlan_id ORDER BY id DESC LIMIT 4
+               ";
 
         $sth = $this->connect->prepare($sql);
         $result = $sth->execute($data);
@@ -733,26 +753,6 @@ class Ingatlanok_model extends Site_model {
             return $sth->fetchAll(PDO::FETCH_ASSOC);
         }
 
-//---------END NEW
-//--------OLD
-        /*
-          $sql = "SELECT id, ingatlan_nev, tipus, ar_elado, ar_kiado, varos, kategoria, szobaszam, alapterulet, kepek, ingatlan_kategoria.kat_nev, city_list.city_name FROM ingatlanok "
-          . "LEFT JOIN ingatlan_kategoria ON ingatlanok.kategoria=ingatlan_kategoria.kat_id "
-          . "LEFT JOIN city_list ON ingatlanok.varos=city_list.city_id "
-          . "WHERE status = 1 AND tipus = '$ingatlan_tipus' AND kategoria = '$kategoria' AND varos = '$varos' AND ($price_string BETWEEN '$min_ar' AND '$max_ar') AND id != '$ingatlan_id' ORDER BY id DESC LIMIT 4";
-
-
-          $this->query->reset();
-          //        $this->query->debug(true);
-          $result = $this->query->query_sql($sql);
-
-          if ($result == false) {
-          return false;
-          } else {
-          return $result;
-          }
-         */
-//-------END OLD
     }
 
     /**
@@ -761,322 +761,331 @@ class Ingatlanok_model extends Site_model {
      * @param $id array    ingatlan id
      * @return void 
      */
-    public function increase_no_of_clicks($id) {
+    public function increase_no_of_clicks($id)
+    {
         $increase = array('megtekintes' => 'megtekintes+1');
 
-        $this->query->reset();
-//        $this->query->debug(true);
         $this->query->set_table(array('ingatlanok'));
         $this->query->set_columns(array('id', 'megtekintes'));
         $this->query->set_where('id', '=', $id);
         $this->query->update(array(), $increase);
     }
 
-    /**
-     * Ingatlan adatlap pdf generálása és küldése a böngészőnek
-     * 	
-     * @param $id integer   ingatlan id
-     * @return void 
-     */
-    public function generate_pdf($id, $settings) {
-        $row = $this->get_property_query($id);
-        $row = $row[0];
-
-        $photos = json_decode($row['kepek']);
-        $photos = array_slice($photos, 0, 3);
-
-        $row['leiras'] = strip_tags($row['leiras']);
-
-        if ($row['tipus'] == 1) {
-            $elado = 'Eladó';
-        } else {
-            $elado = 'Kiadó';
-        }
-
-        if ($row['kerulet'] == NULL) {
-            $kerulet = '';
-        } else {
-            $kerulet = $row['kerulet'];
-        }
-
-        if ($row['utca_megjelenites'] == 0) {
-            $utca = '';
-        } else {
-            $utca = $row['utca'];
-        }
-
-        if ($row['lift'] == 0) {
-            $lift = 'nincs';
-        } else {
-            $lift = 'van';
-        }
-
-        if ($row['butor'] == 0) {
-            $butor = 'igen';
-        } else {
-            $butor = 'nem';
-        }
-
-        if ($row['allapot']) {
-            $allapot = $row['all_leiras'];
-        } else {
-            $allapot = 'n.a.';
-        }
-
-        if ($row['kilatas']) {
-            $kilatas = $row['kilatas_leiras'];
-        } else {
-            $kilatas = 'n.a.';
-        }
-
-        if ($row['futes']) {
-            $futes = $row['futes_leiras'];
-        } else {
-            $futes = 'n.a.';
-        }
-
-        if ($row['parkolas']) {
-            $parkolas = $row['parkolas_leiras'];
-        } else {
-            $parkolas = 'n.a.';
-        }
-
-        if ($row['energetika']) {
-            $energetika = $row['energetika_leiras'];
-        } else {
-            $energetika = 'n.a.';
-        }
-
-        if ($row['kert']) {
-            $kert = $row['kert_leiras'];
-        } else {
-            $kert = 'n.a.';
-        }
-
-        $extrak = '';
-
-        if ($row['erkely']) {
-            $extrak .= 'erkély, ';
-        }
-
-        if ($row['terasz']) {
-            $extrak .= 'terasz, ';
-        }
-
-        if ($row['medence']) {
-            $extrak .= 'medence, ';
-        }
-
-        if ($row['szauna']) {
-            $extrak .= 'szauna, ';
-        }
-
-        if ($row['jacuzzi']) {
-            $extrak .= 'jacuzzi, ';
-        }
 
-        if ($row['kandallo']) {
-            $extrak .= 'kandalló, ';
-        }
 
-        if ($row['riaszto']) {
-            $extrak .= 'riasztó, ';
-        }
 
-        if ($row['klima']) {
-            $extrak .= 'klíma, ';
-        }
+                /**
+                 * Ingatlan adatlap pdf generálása és küldése a böngészőnek
+                 * 	
+                 * @param $id integer   ingatlan id
+                 * @return void 
+                 */
+                public function generate_pdf($id, $settings)
+                {
+                    $row = $this->get_property_query($id);
+                    $row = $row[0];
+
+                    $photos = json_decode($row['kepek']);
+                    $photos = array_slice($photos, 0, 3);
+
+                    $row['leiras'] = strip_tags($row['leiras']);
+
+                    if ($row['tipus'] == 1) {
+                        $elado = 'Eladó';
+                    } else {
+                        $elado = 'Kiadó';
+                    }
+
+                    if ($row['kerulet'] == NULL) {
+                        $kerulet = '';
+                    } else {
+                        $kerulet = $row['kerulet'];
+                    }
+
+                    if ($row['utca_megjelenites'] == 0) {
+                        $utca = '';
+                    } else {
+                        $utca = $row['utca'];
+                    }
+
+                    if ($row['lift'] == 0) {
+                        $lift = 'nincs';
+                    } else {
+                        $lift = 'van';
+                    }
+
+                    if ($row['butor'] == 0) {
+                        $butor = 'igen';
+                    } else {
+                        $butor = 'nem';
+                    }
+
+                    if ($row['allapot']) {
+                        $allapot = $row['all_leiras'];
+                    } else {
+                        $allapot = 'n.a.';
+                    }
+
+                    if ($row['kilatas']) {
+                        $kilatas = $row['kilatas_leiras'];
+                    } else {
+                        $kilatas = 'n.a.';
+                    }
+
+                    if ($row['futes']) {
+                        $futes = $row['futes_leiras'];
+                    } else {
+                        $futes = 'n.a.';
+                    }
+
+                    if ($row['parkolas']) {
+                        $parkolas = $row['parkolas_leiras'];
+                    } else {
+                        $parkolas = 'n.a.';
+                    }
 
-        if ($row['ontozorendszer']) {
-            $extrak .= 'öntözőrendszer, ';
-        }
+                    if ($row['energetika']) {
+                        $energetika = $row['energetika_leiras'];
+                    } else {
+                        $energetika = 'n.a.';
+                    }
+
+                    if ($row['kert']) {
+                        $kert = $row['kert_leiras'];
+                    } else {
+                        $kert = 'n.a.';
+                    }
+
+                    $extrak = '';
+
+                    if ($row['erkely']) {
+                        $extrak .= 'erkély, ';
+                    }
+
+                    if ($row['terasz']) {
+                        $extrak .= 'terasz, ';
+                    }
+
+                    if ($row['medence']) {
+                        $extrak .= 'medence, ';
+                    }
+
+                    if ($row['szauna']) {
+                        $extrak .= 'szauna, ';
+                    }
 
-        if ($row['elektromos_redony']) {
-            $extrak .= 'elektromos redőny, ';
-        }
+                    if ($row['jacuzzi']) {
+                        $extrak .= 'jacuzzi, ';
+                    }
 
-        if ($row['konditerem']) {
-            $extrak .= 'konditerem, ';
-        }
+                    if ($row['kandallo']) {
+                        $extrak .= 'kandalló, ';
+                    }
 
-        $extrak = rtrim($extrak, ", ");
+                    if ($row['riaszto']) {
+                        $extrak .= 'riasztó, ';
+                    }
 
+                    if ($row['klima']) {
+                        $extrak .= 'klíma, ';
+                    }
 
-//		define('FPDF_FONTPATH','/home/www/font');
-        require(LIBS . '/fpdf.php');
-        require(LIBS . '/pdf.php');
+                    if ($row['ontozorendszer']) {
+                        $extrak .= 'öntözőrendszer, ';
+                    }
 
-        //Instanciation of inherited class
-        $pdf = new PDF($settings);
-        $pdf->AliasNbPages();
-        $pdf->AddPage();
-        $pdf->AddFont('arial', '');
-        $pdf->AddFont('arialb', '');
-        $pdf->SetFont('arialb', '', 12);
-        $pdf->SetXY(50, 20);
-        $pdf->SetDrawColor(200, 200, 200);
+                    if ($row['elektromos_redony']) {
+                        $extrak .= 'elektromos redőny, ';
+                    }
 
-        // Cell(szélesség, magasság, "szöveg", border (0-L-T-R-B), új pozíció 1- új sor, align, háttérszín, link  )
-        $pdf->Cell(120, 10, $this->utf8_to_latin2_hun('Ingatlan nyilvántartási szám: ') . $row['id'], 1, 0, 'C', 0);
+                    if ($row['konditerem']) {
+                        $extrak .= 'konditerem, ';
+                    }
 
+                    $extrak = rtrim($extrak, ", ");
 
 
-        //Set x and y position for the main text, reduce font size and write content
-        $pdf->SetXY(10, 35);
-        $pdf->SetFont('arial', '', 10);
+            //		define('FPDF_FONTPATH','/home/www/font');
+                    require(LIBS . '/fpdf.php');
+                    require(LIBS . '/pdf.php');
 
+                    //Instanciation of inherited class
+                    $pdf = new PDF($settings);
+                    $pdf->AliasNbPages();
+                    $pdf->AddPage();
+                    $pdf->AddFont('arial', '');
+                    $pdf->AddFont('arialb', '');
+                    $pdf->SetFont('arialb', '', 12);
+                    $pdf->SetXY(50, 20);
+                    $pdf->SetDrawColor(200, 200, 200);
 
+                    // Cell(szélesség, magasság, "szöveg", border (0-L-T-R-B), új pozíció 1- új sor, align, háttérszín, link  )
+                    $pdf->Cell(120, 10, $this->utf8_to_latin2_hun('Ingatlan nyilvántartási szám: ') . $row['id'], 1, 0, 'C', 0);
 
-        $pdf->SetFillColor(230, 230, 230);
-        $pdf->Cell(0, 1, '', 0, 0, 'L', 1);
-        $pdf->Ln(5);
 
-        $pdf->SetFont('arialb', '', 13);
-        $pdf->MultiCell(0, 8, $this->utf8_to_latin2_hun($row['ingatlan_nev']), 0, 'L', 0);
 
-        $pdf->Ln(5);
-        $pdf->SetFont('arial', '', 9);
-        $pdf->MultiCell(90, 6, $this->utf8_to_latin2_hun($row['leiras']), 0, 'J', 0);
+                    //Set x and y position for the main text, reduce font size and write content
+                    $pdf->SetXY(10, 35);
+                    $pdf->SetFont('arial', '', 10);
 
-        $pdf->Ln(5);
 
-        $pdf->SetFont('arial', 'B', 9);
-        $pdf->Cell(0, 6, utf8_decode('Adatok:'), 0, 1, 'L', 0);
-        $pdf->SetFont('arial', '', 9);
-        $pdf->Cell(30, 5, utf8_decode('Elhelyezkedés:'), 0, 0, 'L', 0);
 
-        if (isset($row['kerulet']) && ($row['utca_megjelenites'] == 1)) {
-            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($row['city_name']) . ' ' . $kerulet . '. kerület ' . $this->utf8_to_latin2_hun($utca)), 0, 1, 'L', 0);
-        } elseif (isset($row['kerulet']) && $row['utca_megjelenites'] == null) {
-            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($row['city_name'])) . ' ' . $kerulet . '. kerület ', 0, 1, 'L', 0);
-        } elseif (!isset($row['kerulet']) && ($row['utca_megjelenites'] == 1)) {
-            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($row['city_name']) . ', ' . $this->utf8_to_latin2_hun($utca)), 0, 1, 'L', 0);
-        } elseif (!isset($row['kerulet']) && !isset($row['utca_megjelenites'])) {
-            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($row['city_name'])), 0, 1, 'L', 0);
-        } else {
-            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($row['city_name'])), 0, 1, 'L', 0);
-        }
+                    $pdf->SetFillColor(230, 230, 230);
+                    $pdf->Cell(0, 1, '', 0, 0, 'L', 1);
+                    $pdf->Ln(5);
 
-        $pdf->Cell(30, 5, utf8_decode('Megbízás típusa:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($elado), 0, 1, 'L', 0);
-        $pdf->Cell(30, 5, utf8_decode('Ingatlan típusa:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($row['kat_nev']), 0, 1, 'L', 0);
+                    $pdf->SetFont('arialb', '', 13);
+                    $pdf->MultiCell(0, 8, $this->utf8_to_latin2_hun($row['ingatlan_nev']), 0, 'L', 0);
 
-        $pdf->Cell(30, 5, utf8_decode('Állapot:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($row['all_leiras']), 0, 1, 'L', 0);
+                    $pdf->Ln(5);
+                    $pdf->SetFont('arial', '', 9);
+                    $pdf->MultiCell(90, 6, $this->utf8_to_latin2_hun($row['leiras']), 0, 'J', 0);
 
-        $pdf->Cell(30, 5, utf8_decode('Terület:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($row['alapterulet']) . ' nm', 0, 1, 'L', 0);
+                    $pdf->Ln(5);
 
+                    $pdf->SetFont('arial', 'B', 9);
+                    $pdf->Cell(0, 6, utf8_decode('Adatok:'), 0, 1, 'L', 0);
+                    $pdf->SetFont('arial', '', 9);
+                    $pdf->Cell(30, 5, utf8_decode('Elhelyezkedés:'), 0, 0, 'L', 0);
 
+                    if (isset($row['kerulet']) && ($row['utca_megjelenites'] == 1)) {
+                        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($row['city_name']) . ' ' . $kerulet . '. kerület ' . $this->utf8_to_latin2_hun($utca)), 0, 1, 'L', 0);
+                    } elseif (isset($row['kerulet']) && $row['utca_megjelenites'] == null) {
+                        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($row['city_name'])) . ' ' . $kerulet . '. kerület ', 0, 1, 'L', 0);
+                    } elseif (!isset($row['kerulet']) && ($row['utca_megjelenites'] == 1)) {
+                        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($row['city_name']) . ', ' . $this->utf8_to_latin2_hun($utca)), 0, 1, 'L', 0);
+                    } elseif (!isset($row['kerulet']) && !isset($row['utca_megjelenites'])) {
+                        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($row['city_name'])), 0, 1, 'L', 0);
+                    } else {
+                        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($row['city_name'])), 0, 1, 'L', 0);
+                    }
 
-        $pdf->Cell(30, 5, utf8_decode('Szobák száma:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($row['szobaszam']), 0, 1, 'L', 0);
-        if (isset($row['emelet'])) {
-            $pdf->Cell(30, 5, utf8_decode('Emelet:'), 0, 0, 'L', 0);
-            $pdf->Cell(0, 5, $row['emelet'], 0, 1, 'L', 0);
-            $pdf->Cell(30, 5, utf8_decode('Épület szintjei:'), 0, 0, 'L', 0);
-            $pdf->Cell(0, 5, $row['epulet_szintjei'], 0, 1, 'L', 0);
-        }
+                    $pdf->Cell(30, 5, utf8_decode('Megbízás típusa:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($elado), 0, 1, 'L', 0);
+                    $pdf->Cell(30, 5, utf8_decode('Ingatlan típusa:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($row['kat_nev']), 0, 1, 'L', 0);
 
-        if (isset($row['ar_elado'])) {
-            $pdf->Cell(30, 5, utf8_decode('Ár:'), 0, 0, 'L', 0);
-            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun(number_format($row['ar_elado'], 0, ',', '.')) . ' Ft', 0, 1, 'L', 0);
-        } elseif (isset($row['ar_kiado'])) {
-            $pdf->Cell(30, 5, utf8_decode('Bérleti díj:'), 0, 0, 'L', 0);
-            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun(number_format($row['ar_kiado'], 0, ',', '.')) . ' Ft', 0, 1, 'L', 0);
-        }
+                    $pdf->Cell(30, 5, utf8_decode('Állapot:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($row['all_leiras']), 0, 1, 'L', 0);
 
+                    $pdf->Cell(30, 5, utf8_decode('Terület:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($row['alapterulet']) . ' nm', 0, 1, 'L', 0);
 
-        $pdf->Ln(5);
 
 
-        $pdf->SetFont('arialb', '', 9);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun('Jellemzők:'), 0, 1, 'L', 0);
-        $pdf->SetFont('arial', '', 9);
+                    $pdf->Cell(30, 5, utf8_decode('Szobák száma:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($row['szobaszam']), 0, 1, 'L', 0);
+                    if (isset($row['emelet'])) {
+                        $pdf->Cell(30, 5, utf8_decode('Emelet:'), 0, 0, 'L', 0);
+                        $pdf->Cell(0, 5, $row['emelet'], 0, 1, 'L', 0);
+                        $pdf->Cell(30, 5, utf8_decode('Épület szintjei:'), 0, 0, 'L', 0);
+                        $pdf->Cell(0, 5, $row['epulet_szintjei'], 0, 1, 'L', 0);
+                    }
 
-        /*         * ************ JELLEMZŐK ************** */
-        $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Fűtés:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($futes), 0, 1, 'L', 0);
+                    if (isset($row['ar_elado'])) {
+                        $pdf->Cell(30, 5, utf8_decode('Ár:'), 0, 0, 'L', 0);
+                        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun(number_format($row['ar_elado'], 0, ',', '.')) . ' Ft', 0, 1, 'L', 0);
+                    } elseif (isset($row['ar_kiado'])) {
+                        $pdf->Cell(30, 5, utf8_decode('Bérleti díj:'), 0, 0, 'L', 0);
+                        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun(number_format($row['ar_kiado'], 0, ',', '.')) . ' Ft', 0, 1, 'L', 0);
+                    }
 
-        $pdf->Cell(30, 5, utf8_decode('Kilátás:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($kilatas), 0, 1, 'L', 0);
 
-        $pdf->Cell(30, 5, utf8_decode('Bútorozott:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($butor), 0, 1, 'L', 0);
+                    $pdf->Ln(5);
 
-        $pdf->Cell(30, 5, utf8_decode('Parkolás:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($parkolas), 0, 1, 'L', 0);
 
+                    $pdf->SetFont('arialb', '', 9);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun('Jellemzők:'), 0, 1, 'L', 0);
+                    $pdf->SetFont('arial', '', 9);
 
-        $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Lift:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($lift), 0, 1, 'L', 0);
+                    /*         * ************ JELLEMZŐK ************** */
+                    $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Fűtés:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($futes), 0, 1, 'L', 0);
 
-        $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Energetikai tan.:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($energetika), 0, 1, 'L', 0);
+                    $pdf->Cell(30, 5, utf8_decode('Kilátás:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($kilatas), 0, 1, 'L', 0);
 
-        $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Kert:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($kert), 0, 1, 'L', 0);
+                    $pdf->Cell(30, 5, utf8_decode('Bútorozott:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($butor), 0, 1, 'L', 0);
 
-        $pdf->Ln(5);
+                    $pdf->Cell(30, 5, utf8_decode('Parkolás:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($parkolas), 0, 1, 'L', 0);
 
 
-        $pdf->SetFont('arialb', '', 9);
+                    $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Lift:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($lift), 0, 1, 'L', 0);
 
+                    $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Energetikai tan.:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($energetika), 0, 1, 'L', 0);
 
+                    $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Kert:'), 0, 0, 'L', 0);
+                    $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($kert), 0, 1, 'L', 0);
 
+                    $pdf->Ln(5);
 
-        $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('Extrák:'), 0, 'L', 0);
-        $pdf->SetFont('arial', '', 9);
-        $pdf->MultiCell(100, 5, $this->utf8_to_latin2_hun($extrak), 0, 'L', 0);
 
+                    $pdf->SetFont('arialb', '', 9);
 
 
 
-        $agent = $this->get_agent($row['ref_id']);
 
-        $pdf->Ln(5);
+                    $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('Extrák:'), 0, 'L', 0);
+                    $pdf->SetFont('arial', '', 9);
+                    $pdf->MultiCell(100, 5, $this->utf8_to_latin2_hun($extrak), 0, 'L', 0);
 
 
-        $pdf->SetFont('arialb', '', 9);
-        $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('További információért keresse ingatlan referensünket:'), 0, 'L', 0);
-        $pdf->SetFont('arial', '', 9);
-        $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun($agent['user_first_name']) . ' ' . $this->utf8_to_latin2_hun($agent['user_last_name']) . $this->utf8_to_latin2_hun(' | Tel: ') . $this->utf8_to_latin2_hun($agent['user_phone']), 0, 'L', 0);
-        $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('E-mail: ' . $this->utf8_to_latin2_hun($agent['user_email'])), 0, 'L', 0);
 
 
+                    $agent = $this->get_agent($row['ref_id']);
 
+                    $pdf->Ln(5);
 
-//		$pdf->Image(UPLOADS_PATH . $row['kezdo_kep'],120,55,80);
 
+                    $pdf->SetFont('arialb', '', 9);
+                    $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('További információért keresse ingatlan referensünket:'), 0, 'L', 0);
+                    $pdf->SetFont('arial', '', 9);
+                    $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun($agent['user_first_name']) . ' ' . $this->utf8_to_latin2_hun($agent['user_last_name']) . $this->utf8_to_latin2_hun(' | Tel: ') . $this->utf8_to_latin2_hun($agent['user_phone']), 0, 'L', 0);
+                    $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('E-mail: ' . $this->utf8_to_latin2_hun($agent['user_email'])), 0, 'L', 0);
 
-        $i = 55;
 
-        foreach ($photos as $value) {
 
-            $pdf->Image(Config::get('ingatlan_photo.upload_path') . '/' . $value, 120, $i, 80);
-            $i = $i + 65;
-        }
 
+            //		$pdf->Image(UPLOADS_PATH . $row['kezdo_kep'],120,55,80);
 
 
+                    $i = 55;
 
+                    foreach ($photos as $value) {
 
+                        $pdf->Image(Config::get('ingatlan_photo.upload_path') . '/' . $value, 120, $i, 80);
+                        $i = $i + 65;
+                    }
 
-        $pdf->Output('adatlap_' . $id . '.pdf', 'D');
-    }
 
-    public function utf8_to_latin2_hun($str) {
-        return str_replace(
-                array("\xc3\xb6", "\xc3\xbc", "\xc3\xb3", "\xc5\x91", "\xc3\xba", "\xc3\xa9", "\xc3\xa1", "\xc5\xb1", "\xc3\xad", "\xc3\x96", "\xc3\x9c", "\xc3\x93", "\xc5\x90", "\xc3\x9a", "\xc3\x89", "\xc3\x81", "\xc5\xb0", "\xc3\x8d"), array("\xf6", "\xfc", "\xf3", "\xf5", "\xfa", "\xe9", "\xe1", "\xfb", "\xed", "\xd6", "\xdc", "\xd3", "\xd5", "\xda", "\xc9", "\xc1", "\xdb", "\xcd"), $str);
-    }
+
+
+
+
+                    $pdf->Output('adatlap_' . $id . '.pdf', 'D');
+                }
+
+
+
+                public function utf8_to_latin2_hun($str)
+                {
+                    return str_replace( array("\xc3\xb6", "\xc3\xbc", "\xc3\xb3", "\xc5\x91", "\xc3\xba", "\xc3\xa9", "\xc3\xa1", "\xc5\xb1", "\xc3\xad", "\xc3\x96", "\xc3\x9c", "\xc3\x93", "\xc5\x90", "\xc3\x9a", "\xc3\x89", "\xc3\x81", "\xc5\xb0", "\xc3\x8d"), array("\xf6", "\xfc", "\xf3", "\xf5", "\xfa", "\xe9", "\xe1", "\xfb", "\xed", "\xd6", "\xdc", "\xd3", "\xd5", "\xda", "\xc9", "\xc1", "\xdb", "\xcd"), $str );
+                }
+
+
+
 
     /**
      * 	Lekérdezi a városok nevét és id-jét a city_list táblából (az option listához)
      * 	A paraméter megadja, hogy melyik megyében lévő városokat adja vissza 		
      * 	@param integer	$id 	egy megye id-je (county_id)
      */
-    public function city_list_grouped_by_county() {
+    public function city_list_grouped_by_county()
+    {
         $this->query->set_table(array('city_list'));
         $this->query->set_columns('*');
 
@@ -1098,10 +1107,9 @@ class Ingatlanok_model extends Site_model {
      * 	A paraméter megadja, hogy melyik megyében lévő városokat adja vissza 		
      * 	@param integer	$id 	egy megye id-je (county_id)
      */
-    public function get_filter_params($filter) {
-
+    public function get_filter_params($filter)
+    {
         $filter_with_names = array();
-
 
         if (isset($filter['tipus']) && $filter['tipus'] == 1) {
             $filter_with_names['tipus'] = 'Eladó';
@@ -1154,7 +1162,11 @@ class Ingatlanok_model extends Site_model {
         return $filter_with_names;
     }
 
-    public function getCityNameById($id) {
+    /**
+     * 
+     */
+    public function getCityNameById($id)
+    {
         $this->query->set_table(array('city_list'));
         $this->query->set_columns('city_name');
         $this->query->set_where('city_id', '=', $id);
@@ -1162,12 +1174,17 @@ class Ingatlanok_model extends Site_model {
         return $result[0]['city_name'];
     }
 
-    public function getCategoryNameById($id) {
+    /**
+     * ingatlan_kategoria tablabol kérdez le egy rekordot id-alapján
+     * @param integer $id
+     */
+    public function getCategoryNameById($id)
+    {
         $this->query->set_table(array('ingatlan_kategoria'));
-        $this->query->set_columns('kat_nev');
+        $this->query->set_columns('*');
         $this->query->set_where('kat_id', '=', $id);
         $result = $this->query->select();
-        return $result[0]['kat_nev'];
+        return $result[0];
     }
     
     /**
@@ -1178,8 +1195,8 @@ class Ingatlanok_model extends Site_model {
      * @param	string	$value a filter elem értéke
      * @return	boolean	true, false
      */
-    public static function in_filter($filter_name, $value) {
-
+    public static function in_filter($filter_name, $value)
+    {
         $filter = Session::get('ingatlan_filter');
 
         //       var_dump($filter);
@@ -1208,5 +1225,4 @@ class Ingatlanok_model extends Site_model {
     }    
 
 }
-
 ?>
