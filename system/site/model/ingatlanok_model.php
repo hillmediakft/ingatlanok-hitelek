@@ -6,6 +6,7 @@ use System\Libs\Session;
 class Ingatlanok_model extends Site_model {
 
     protected $table = 'ingatlanok';
+    protected $lang = LANG;
 
     function __construct() {
         parent::__construct();
@@ -22,7 +23,7 @@ class Ingatlanok_model extends Site_model {
         $this->query->set_table(array('ingatlanok'));
         $this->query->set_columns(array(
             'ingatlanok.id',
-            'ingatlanok.ingatlan_nev',
+            'ingatlanok.ingatlan_nev_' . $this->lang,
             'ingatlanok.status',
             'ingatlanok.tipus',
             'ingatlanok.kerulet',
@@ -58,7 +59,7 @@ class Ingatlanok_model extends Site_model {
 // $this->query->debug(true);
         $this->query->set_columns(array(
             'ingatlanok.id',
-            'ingatlanok.ingatlan_nev',
+            'ingatlanok.ingatlan_nev_' . $this->lang,
             'ingatlanok.status',
             'ingatlanok.tipus',
             'ingatlanok.kerulet',
@@ -100,8 +101,8 @@ class Ingatlanok_model extends Site_model {
         $this->query->set_columns(array(
             'ingatlanok.id',
             'ingatlanok.ref_id',
-            'ingatlanok.ingatlan_nev',
-            'ingatlanok.leiras',
+            'ingatlanok.ingatlan_nev_' . $this->lang,
+            'ingatlanok.leiras_' . $this->lang,
             'ingatlanok.status',
             'ingatlanok.tipus',
             'ingatlanok.kategoria',
@@ -205,9 +206,9 @@ class Ingatlanok_model extends Site_model {
 
 
 //$this->query->debug(false);
-        $this->query->set_columns('SQL_CALC_FOUND_ROWS 
+        $this->query->set_columns("SQL_CALC_FOUND_ROWS 
           `ingatlanok`.`id`,
-          `ingatlanok`.`ingatlan_nev`,
+          `ingatlanok`.`ingatlan_nev_" . $this->lang . "`,
           `ingatlanok`.`status`,
           `ingatlanok`.`tipus`,
           `ingatlanok`.`kerulet`,
@@ -219,7 +220,7 @@ class Ingatlanok_model extends Site_model {
           `ingatlanok`.`varos`,
           `ingatlan_kategoria`.*,
           `district_list`.`district_name`,
-          `city_list`.`city_name`'
+          `city_list`.`city_name`"
         );
 
         if (!is_null($limit)) {
@@ -727,7 +728,7 @@ class Ingatlanok_model extends Site_model {
 
         $sql = "SELECT
                  ingatlanok.id,
-                 ingatlanok.ingatlan_nev,
+                 ingatlanok.ingatlan_nev_$this->lang,
                  ingatlanok.tipus,
                  ingatlanok.ar_elado,
                  ingatlanok.ar_kiado,
