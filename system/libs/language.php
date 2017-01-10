@@ -1,48 +1,32 @@
 <?php
-
 namespace System\Libs;
-
-use System\Libs\DI;
-use System\Libs\Query;
+use \PDO;
 
 class Language {
-
-    public $connect; //adatbazis csatlakozas objektuma
-    public $query; //adatbaziskezelő objektumot rendeljük hozzá 
-    public static $translations; //a fordítások tömbje
-
-    /**
-     * Constructor
-     *
-     * @access	public
-     */
-
-    function __construct($lang_code) {
-
-        $this->connect = DI::get('connect');
-        $this->query = new Query($this->connect);
-        Self::$translations = $this->load($lang_code);
-    }
+    
+    private static $translations = array(); //a fordítások tömbje
 
     /**
      * Language fájl betöltése az adatbázisból
      *
      * @param   string  $lang_code az aktuális nyelvi kód
-     * @return  array   nyelvi tömb
+     * @param   object  db kapcsolat objektum
+     * @return  void
      */
-    public function load($lang_code) {
-
-        $lang = array();
-
-        $this->query->reset();
-        //       $this->query->debug(true);
-        $this->query->set_table('translations');
-        $this->query->set_columns(array('code', $lang_code));
-        $result = $this->query->select();
+    public static function init($lang_code, $connect)
+    {
+        //$connect = DI::get('connect');
+        $sth = $connect->query("SELECT `code`,`" . $lang_code . "` FROM `translations`");
+        $sth->execute();
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
-            $lang[$row["code"]] = $row["{$lang_code}"];
+            self::$translations[$row['code']] = $row[$lang_code];
         }
-        return $lang;
+/*
+        while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+            self::$translations[$row['code']] = $row[$lang_code];
+        }
+*/
     }
 
     /**
@@ -51,10 +35,10 @@ class Language {
      * @param   string  $code a szöveg elem kódja
      * @return  string   fordítás
      */
-    public static function get($code) {
-        return Self::$translations[$code];
+    public static function get($code)
+    {
+        return self::$translations[$code];
     }
 
 }
-
 ?>
