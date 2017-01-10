@@ -2,6 +2,7 @@
 namespace System\Site\Model;
 use System\Core\Site_model;
 use System\Libs\Session;
+use \PDO;
 
 class Ingatlanok_model extends Site_model {
 
@@ -728,7 +729,7 @@ class Ingatlanok_model extends Site_model {
 
         $sql = "SELECT
                  ingatlanok.id,
-                 ingatlanok.ingatlan_nev_$this->lang,
+                 ingatlanok.ingatlan_nev_" . $this->lang . ",
                  ingatlanok.tipus,
                  ingatlanok.ar_elado,
                  ingatlanok.ar_kiado,
