@@ -201,7 +201,7 @@ class Property extends Admin_controller {
                 $temp['ref_id'] = $value['first_name'] . '<br>' . $value['last_name'];
                 $temp['tipus'] = ($value['tipus'] == 1) ? 'eladó' : 'kiadó';
 
-                $temp['kategoria'] = $value['kat_nev'];
+                $temp['kategoria'] = $value['kat_nev_hu'];
                 $kerulet = !empty($value['kerulet']) ? '<br>' . $value['kerulet'] . '. kerület' : '';
                 $temp['varos'] = $value['city_name'] . $kerulet . '<br>' . $value['utca'];
 

@@ -61,7 +61,7 @@ class Property_model extends Admin_model {
             'ingatlanok.ar_kiado',
             'ingatlanok.alapterulet',
             'ingatlanok.szobaszam',
-            'ingatlan_kategoria.kat_nev',
+            'ingatlan_kategoria.kat_nev_hu',
             'ingatlanok.megtekintes',
             'users.first_name',
             'users.last_name',
@@ -89,7 +89,7 @@ class Property_model extends Admin_model {
         $this->query->set_columns(array(
             'ingatlanok.id',
             'ingatlanok.ref_id',
-            'ingatlanok.ingatlan_nev',
+            'ingatlanok.ingatlan_nev_hu',
             'ingatlanok.leiras',
             'ingatlanok.status',
             'ingatlanok.kiemeles',
@@ -154,7 +154,7 @@ class Property_model extends Admin_model {
             'ingatlanok.tulaj_tel',
             'ingatlanok.tulaj_email',
             'ingatlanok.tulaj_notes',
-            'ingatlan_kategoria.kat_nev',
+            'ingatlan_kategoria.kat_nev_hu',
             'district_list.district_name',
             'city_list.city_name',
             'county_list.county_name',
@@ -378,7 +378,7 @@ class Property_model extends Admin_model {
             `ingatlanok`.`kerulet`,
             `ingatlanok`.`utca`,
             `ingatlanok`.`megtekintes`,
-            `ingatlan_kategoria`.`kat_nev`,
+            `ingatlan_kategoria`.`kat_nev_hu`,
             `users`.`first_name`,
             `users`.`last_name`,
             `district_list`.`district_name`,
@@ -498,7 +498,7 @@ class Property_model extends Admin_model {
                 $order = 'user_last_name';
             }
             if ($order == "kategoria") {
-                $order = 'kat_nev';
+                $order = 'kat_nev_hu';
             }
             if ($order == "varos") {
                 $order = 'city_name';
