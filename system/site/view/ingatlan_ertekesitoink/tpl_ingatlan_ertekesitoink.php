@@ -6,7 +6,7 @@
                 <div class="breadcrumbs">
                     <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url');?>"><?php echo Lang::get('menu_home'); ?></a></span>
                     <span class="delimiter">/</span>
-                    <span class="active-page"><?php echo Lang::get('menu_rolunk'); ?></span>
+                    <span class="active-page"><?php echo Lang::get('menu_ertekesitoink'); ?></span>
                 </div>
             </div>
         </div>
@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Rólunk</h1>
+                <h1>Ingatlan értékesítőink</h1>
             </div>
         </div>
     </div>

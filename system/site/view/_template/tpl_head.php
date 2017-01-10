@@ -122,7 +122,7 @@ use System\Libs\Language as Lang;
                                     <div class="overlay"></div>
                                 </li>
                                 <li class="subnav-item">
-                                    <a href="#"><?php echo Lang::get('menu_ertekesitoink'); ?></a>
+                                    <a href="<?php echo Config::get('url.ingatlan-ertekesitoink.' . LANG);?>"><?php echo Lang::get('menu_ertekesitoink'); ?></a>
                                     <div class="overlay"></div>
                                 </li>
 
