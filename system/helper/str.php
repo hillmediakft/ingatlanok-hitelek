@@ -57,6 +57,16 @@ class Str
 
         $stopAt += ($sentencesToDisplay * 2);
         return trim(substr($nakedBody, 0, $stopAt));
-    }    
+    }
+
+    /**
+     * utf-8 karaktereket latin2-re cserél
+     * @param string $str
+     */
+    public function utf8ToLatin2Hun($str)
+    {
+        return str_replace( array("\xc3\xb6", "\xc3\xbc", "\xc3\xb3", "\xc5\x91", "\xc3\xba", "\xc3\xa9", "\xc3\xa1", "\xc5\xb1", "\xc3\xad", "\xc3\x96", "\xc3\x9c", "\xc3\x93", "\xc5\x90", "\xc3\x9a", "\xc3\x89", "\xc3\x81", "\xc5\xb0", "\xc3\x8d"), array("\xf6", "\xfc", "\xf3", "\xf5", "\xfa", "\xe9", "\xe1", "\xfb", "\xed", "\xd6", "\xdc", "\xd3", "\xd5", "\xda", "\xc9", "\xc1", "\xdb", "\xcd"), $str );
+    }
+
 }
 ?>
