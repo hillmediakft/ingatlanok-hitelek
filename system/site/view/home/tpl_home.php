@@ -1,6 +1,4 @@
-<?php
-
-use System\Libs\Config ?>
+<?php use System\Libs\Config;?>
 <div class="home-banner style-2">
     <div class="container">
         <div class="banner-content">
@@ -44,7 +42,7 @@ use System\Libs\Config ?>
                                 <select name="kategoria" class="form-control">
                                     <option value="">-- mindegy --</option>
                                     <?php foreach ($category_list as $value) : ?>
-                                        <option value="<?php echo $value['kat_id']; ?>"><?php echo $value['kat_nev']; ?></option>
+                                        <option value="<?php echo $value['kat_id']; ?>"><?php echo $value['kat_nev_' . LANG]; ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
@@ -125,7 +123,7 @@ use System\Libs\Config ?>
                                         </div>
                                         <div class="item-thumbnail">
                                             <div class="single-thumbnail">
-                                                <span class="value"><?php echo $value['kat_nev'];?></span>
+                                                <span class="value"><?php echo $value['kat_nev_' . LANG];?></span>
                                             </div>
                                             <div class="single-thumbnail">
                                                

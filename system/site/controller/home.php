@@ -26,12 +26,12 @@ class Home extends Site_controller {
         $data['city_list'] = $this->ingatlanok_model->city_list_query_with_prop_no();
         $data['category_list'] = $this->ingatlanok_model->list_query('ingatlan_kategoria');
         $data['district_list'] = $this->ingatlanok_model->district_list_query_with_prop_no();
+        
         // kiemelt ingatlanok
         $data['all_properties'] = $this->ingatlanok_model->kiemelt_properties_query(10);
 
         $view = new View();
-        $view->setHelper(array('url_helper'));
-        $view->setHelper(array('str_helper'));
+        $view->setHelper(array('url_helper', 'str_helper'));
 
         //$view->setLazyRender();
 //$this->view->debug(true); 
