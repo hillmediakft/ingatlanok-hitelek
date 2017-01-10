@@ -1,13 +1,12 @@
-<?php 
+<?php
+
 namespace System;
 
 use System\Libs\Config;
 use System\Core\Application;
 use System\libs\DI;
 
-
 //MAPPA beállítások
-
 //define('BASE', dirname(__file__));
 define('APP_DIR', 'system'); //Rendszer mappa
 define('CORE', APP_DIR . '/core'); //core mappa
@@ -19,7 +18,7 @@ define('SITE', APP_DIR . '/site'); //site mappa
 //define('UPLOADS', 'uploads' . DS); //uploads mappa
 define('UPLOADS', 'uploads/'); //uploads mappa
 
-define('SITE_ASSETS', 'public/site_assets/' );
+define('SITE_ASSETS', 'public/site_assets/');
 define('SITE_CSS', 'public/site_assets/css/');
 define('SITE_JS', 'public/site_assets/js/');
 define('SITE_IMAGE', 'public/site_assets/images/');
@@ -33,43 +32,41 @@ define('MULTILANG_SITE', true);
 
 
 /**
-* LOCAL SERVER és ONLINE SERVER beállítások
-*/
-if (isset($_SERVER['SERVER_ADDR']) && ($_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '::1'))
-{
-	//LOCAL
-	error_reporting(E_ALL);
-	ini_set("display_errors", 1);
+ * LOCAL SERVER és ONLINE SERVER beállítások
+ */
+if (isset($_SERVER['SERVER_ADDR']) && ($_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '::1')) {
+    //LOCAL
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
 
     define('BASE_URL', 'http://ingatlanok-hitelek/'); //Az oldal elérési útjának beállítása
-	define('BASE_PATH', ''); //A domainnév utáni elérési út beállítása
-	define('ENV', 'development'); //fejlesztői környezet
-    
-	//db adatok
+    define('BASE_PATH', ''); //A domainnév utáni elérési út beállítása
+    define('ENV', 'development'); //fejlesztői környezet
+    //db adatok
     Config::load('db_local');
     // alap config tömb betöltése a configba
     Config::load('common_config');
-	// érzékeny email adatok betöltése
-	Config::load('email', 'email');
-	
-}
-else {
+    // érzékeny email adatok betöltése
+    Config::load('email', 'email');
+    // url fordítások betöltése
+    Config::load('url_translation');
+} else {
     //ONLINE
-	// error_reporting(0);
-	error_reporting(E_ALL);
-	ini_set("display_errors", 1);
-	
-	define('BASE_URL', 'http://xxx/'); //Az oldal elérési útjának beállítása
-	define('BASE_PATH', ''); //A domainnév utáni elérési út beállítása
-	define('ENV', 'production'); //online éles környezet
+    // error_reporting(0);
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
 
-	//db adatok	
+    define('BASE_URL', 'http://xxx/'); //Az oldal elérési útjának beállítása
+    define('BASE_PATH', ''); //A domainnév utáni elérési út beállítása
+    define('ENV', 'production'); //online éles környezet
+    //db adatok	
     Config::load('db_online');
     // alap config tömb betöltése a configba
     Config::load('common_config');
-	// érzékeny email adatok betöltése
-	Config::load('email', 'email');  
-    
+    // érzékeny email adatok betöltése
+    Config::load('email', 'email');
+    // url fordítások betöltése
+    Config::load('url_translation');
 }
 
 //---!! DIC !!---------------------
@@ -77,80 +74,79 @@ else {
 DI::setContainer(new \Pimple\Container());
 
 /*
-	DI::set('connect_old', function() {
-		return \System\Libs\DB::get_connect();
-	});
-*/
+  DI::set('connect_old', function() {
+  return \System\Libs\DB::get_connect();
+  });
+ */
 
-	DI::set('connect', function() {
-		$settings = Config::get('db');
-		$db = new \System\Libs\DB($settings['host'], $settings['name'], $settings['user'], $settings['pass']);
-		return $db->create();
-	});
+DI::set('connect', function() {
+    $settings = Config::get('db');
+    $db = new \System\Libs\DB($settings['host'], $settings['name'], $settings['user'], $settings['pass']);
+    return $db->create();
+});
 /*
-		DI::set('connect2', function() {
-			$settings = Config::get('db');
-			try {
-				$connect = new \PDO('mysql:host=' . $settings['host'] . ';dbname=' . $settings['name'] . ';charset=utf8', $settings['user'], $settings['pass']);
-				if(ENV == 'development'){
-					$connect->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-				}
-			}
-			catch(\PDOException $e) {
-				die('Database error: ' . $e->getMessage());
-			}
+  DI::set('connect2', function() {
+  $settings = Config::get('db');
+  try {
+  $connect = new \PDO('mysql:host=' . $settings['host'] . ';dbname=' . $settings['name'] . ';charset=utf8', $settings['user'], $settings['pass']);
+  if(ENV == 'development'){
+  $connect->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+  }
+  }
+  catch(\PDOException $e) {
+  die('Database error: ' . $e->getMessage());
+  }
 
-			return $connect;
-		});
-*/		
+  return $connect;
+  });
+ */
 
 
 
-	DI::set('uri', function() {
-		return new \System\Libs\Uri(Config::get('language_default'), Config::get('allowed_languages'));
-	});
+DI::set('uri', function() {
+    return new \System\Libs\Uri(Config::get('language_default'), Config::get('allowed_languages'));
+});
 
-	DI::set('router', function() {
-		return new \System\Libs\Router();
-	});
+DI::set('router', function() {
+    return new \System\Libs\Router();
+});
 
-	DI::set('request', function($c){
-		return new \System\Libs\Request($c['uri'], $c['router']);
-	});
+DI::set('request', function($c) {
+    return new \System\Libs\Request($c['uri'], $c['router']);
+});
 
-	DI::set('response', function(){
-		return new \System\Libs\Response();
-	});
+DI::set('response', function() {
+    return new \System\Libs\Response();
+});
 
-	DI::set('auth', function(){
-		return new \System\Libs\Auth();
-	});
-        
-	DI::set('language', function($c){
-		return new \System\Libs\language($c['request']->get_uri('langcode'));
-	});        
+DI::set('auth', function() {
+    return new \System\Libs\Auth();
+});
+
+DI::set('language', function($c) {
+    return new \System\Libs\language($c['request']->get_uri('langcode'));
+});
 
 // helpers ---------------
-	DI::set('file_helper', function(){
-		return new \System\Helper\File();
-	});
-	DI::set('str_helper', function(){
-		return new \System\Helper\Str();
-	});
-	DI::set('url_helper', function(){
-		return new \System\Helper\Url();
-	});
-	DI::set('arr_helper', function(){
-		return new \System\Helper\Arr();
-	});
+DI::set('file_helper', function() {
+    return new \System\Helper\File();
+});
+DI::set('str_helper', function() {
+    return new \System\Helper\Str();
+});
+DI::set('url_helper', function() {
+    return new \System\Helper\Url();
+});
+DI::set('arr_helper', function() {
+    return new \System\Helper\Arr();
+});
 
 /*
-	DI::factory('query', function($c){
-		return new \System\Libs\Query($c['connect']);
-	});
-*/
+  DI::factory('query', function($c){
+  return new \System\Libs\Query($c['connect']);
+  });
+ */
 
-	// application objektum példányosítása	
-	$application = new Application();
-
+// application objektum példányosítása	
+$application = new Application();
 ?>

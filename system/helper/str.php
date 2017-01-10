@@ -12,8 +12,8 @@ class Str
      */
     public function stringToSlug($string)
     {
-        $accent = array("&", " ", "-", "á", "é", "í", "ó", "ö", "ő", "ú", "ü", "ű", "Á", "É", "Í", "Ó", "Ö", "Ő", "Ú", "Ü", "Ű");
-        $no_accent = array('and', '_', '_', 'a', 'e', 'i', 'o', 'o', 'o', 'u', 'u', 'u', 'A', 'E', 'I', 'O', 'O', 'O', 'U', 'U', 'U');
+        $accent = array("?", "!", ".", ":", "&", " ", "_", "á", "é", "í", "ó", "ö", "ő", "ú", "ü", "ű", "Á", "É", "Í", "Ó", "Ö", "Ő", "Ú", "Ü", "Ű");
+        $no_accent = array('', '', '', '', '-', '-', '-', 'a', 'e', 'i', 'o', 'o', 'o', 'u', 'u', 'u', 'A', 'E', 'I', 'O', 'O', 'O', 'U', 'U', 'U');
         $string = str_replace($accent, $no_accent, $string);
         $string = strtolower($string);
         return $string;
@@ -26,7 +26,7 @@ class Str
      * @param   int  $char  karakterek száma
      * @return  string  a levágott szöveg
      */
-    public function substr_word($string, $char)
+    public function substrWord($string, $char)
     {
         $s = mb_substr($string, 0, $char, 'UTF-8');
         return substr($s, 0, strrpos($s, ' '));
@@ -39,7 +39,7 @@ class Str
      * @param   int  $sentencesToDisplay  a mondatk száma
      * @return  string  a levágott szöveg
      */
-    public function sentence_trim($body, $sentencesToDisplay = 1)
+    public function sentenceTrim($body, $sentencesToDisplay = 1)
     {
         $nakedBody = preg_replace('/\s+/', ' ', strip_tags($body));
         $sentences = preg_split('/(\.|\?|\!)(\s)/', $nakedBody);

@@ -48,6 +48,7 @@
 	<script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/languageswitcher/languageswitcher.js"></script>
 	<script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jcarousel/js/jquery.jcarousel.min.js"></script>
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/equalheights/jquery.equalheights.min.js"></script>
 	
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <?php $this->get_js_link(); ?>
