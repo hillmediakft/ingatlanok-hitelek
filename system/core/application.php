@@ -60,15 +60,15 @@ class Application {
 
             $router->mount('/en', function() use ($router) {
                 $router->get('/', 'home@index');
-                $router->get('/ingatlanok', 'ingatlanok@index');
-                $router->get('/ingatlan-ertekesitoink', 'ingatlan_ertekesitoink@index');
-                $router->get('/rolunk', 'rolunk@index');
-                $router->get('/kapcsolat', 'kapcsolat@index');
-                $router->get('/hitel', 'hitel@index');
-                $router->get('/allas', 'allas@index');
-                $router->get('/hirek', 'hirek@index');
-                $router->get('/hirek/category/:id', 'hirek@kategoria', array('id'));
-                $router->get('/hirek/:title/:id', 'hirek@reszletek', array('title', 'id'));
+                $router->get('/real-estates', 'ingatlanok@index');
+                $router->get('/agents', 'ingatlan_ertekesitoink@index');
+                $router->get('/about-us', 'rolunk@index');
+                $router->get('/contact', 'kapcsolat@index');
+                $router->get('/credit', 'hitel@index');
+                $router->get('/jobs', 'allas@index');
+                $router->get('/news', 'hirek@index');
+                $router->get('/news/category/:id', 'hirek@kategoria', array('id'));
+                $router->get('/news/:title/:id', 'hirek@reszletek', array('title', 'id'));
             });
 
             
