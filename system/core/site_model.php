@@ -16,15 +16,14 @@ class Site_model extends Model {
      * 	@param	string	$page_name (az oldal friendlyurl-je a pages táblában)
      * 	@return array
      */
-    public function getPageData($page_name) {
-        $this->query->reset();
+    public function getPageData($page_name)
+    {
         $this->query->set_table(array('pages'));
         $this->query->set_columns('*');
         $this->query->set_where('friendlyurl', '=', $page_name);
         $result = $this->query->select();
-        return $result[0];
+        return (isset($result[0])) ? $result[0] : null;
     }
 
 }
-
 ?>
