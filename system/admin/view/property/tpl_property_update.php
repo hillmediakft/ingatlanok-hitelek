@@ -127,7 +127,7 @@
                                             <select name="kategoria" id="kategoria" class="form-control">
                                                 <option value="">Válasszon</option>
                                                 <?php foreach ($ingatlan_kat_list as $value) { ?>
-                                                    <option value="<?php echo $value['kat_id']; ?>" <?php echo ($value['kat_id'] == $content['kategoria']) ? 'selected' : ''; ?>><?php echo $value['kat_nev']; ?></option>
+                                                    <option value="<?php echo $value['kat_id']; ?>" <?php echo ($value['kat_id'] == $content['kategoria']) ? 'selected' : ''; ?>><?php echo $value['kat_nev_hu']; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -425,12 +425,12 @@
                                 <div class="portlet-body">	
                                     <div class="form-group">
                                         <label for="ingatlan_nev" class="control-label">Ingatlan név</label>
-                                        <input value="<?php echo $content['ingatlan_nev']; ?>" type="text" name="ingatlan_nev" id="ingatlan_nev" placeholder="" class="form-control input-xlarge" />
+                                        <input value="<?php echo $content['ingatlan_nev_hu']; ?>" type="text" name="ingatlan_nev" id="ingatlan_nev" placeholder="" class="form-control input-xlarge" />
                                     </div>
                                     <!-- LAKÁS LEIRAS -->	
                                     <div class="form-group">
                                         <label for="leiras" class="control-label">Leírás</label>
-                                        <textarea name="leiras" id="leiras" placeholder="" class="form-control input-xlarge" rows="10"><?php echo $content['leiras']; ?></textarea>
+                                        <textarea name="leiras" id="leiras" placeholder="" class="form-control input-xlarge" rows="10"><?php echo $content['leiras_hu']; ?></textarea>
                                     </div>	
                                 </div>
 
@@ -453,7 +453,7 @@
                                                 <select name="allapot" id="allapot" class="form-control">
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_allapot_list as $value) { ?>
-                                                        <option value="<?php echo $value['all_id']; ?>" <?php echo ($value['all_id'] == $content['allapot']) ? 'selected' : ''; ?>><?php echo $value['all_leiras']; ?></option>
+                                                        <option value="<?php echo $value['all_id']; ?>" <?php echo ($value['all_id'] == $content['allapot']) ? 'selected' : ''; ?>><?php echo $value['all_leiras_hu']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div> 
@@ -465,7 +465,7 @@
                                                 <select name="haz_allapot_kivul" id="haz_allapot_kivul" class="form-control">
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_haz_allapot_kivul_list as $value) { ?>
-                                                        <option value="<?php echo $value['haz_allapot_kivul_id']; ?>" <?php echo ($value['haz_allapot_kivul_id'] == $content['haz_allapot_kivul']) ? 'selected' : ''; ?>><?php echo $value['haz_allapot_kivul_leiras']; ?></option>
+                                                        <option value="<?php echo $value['haz_allapot_kivul_id']; ?>" <?php echo ($value['haz_allapot_kivul_id'] == $content['haz_allapot_kivul']) ? 'selected' : ''; ?>><?php echo $value['haz_allapot_kivul_leiras_hu']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -477,7 +477,7 @@
                                                 <select name="haz_allapot_belul" id="haz_allapot_belul" class="form-control">
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_haz_allapot_belul_list as $value) { ?>
-                                                        <option value="<?php echo $value['haz_allapot_belul_id']; ?>" <?php echo ($value['haz_allapot_belul_id'] == $content['haz_allapot_belul']) ? 'selected' : ''; ?>><?php echo $value['haz_allapot_belul_leiras']; ?></option>
+                                                        <option value="<?php echo $value['haz_allapot_belul_id']; ?>" <?php echo ($value['haz_allapot_belul_id'] == $content['haz_allapot_belul']) ? 'selected' : ''; ?>><?php echo $value['haz_allapot_belul_leiras_hu']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -489,7 +489,7 @@
                                                 <select name="furdo_wc" id="furdo_wc" class="form-control">
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_furdo_wc_list as $value) { ?>
-                                                        <option value="<?php echo $value['furdo_wc_id']; ?>" <?php echo ($value['furdo_wc_id'] == $content['furdo_wc']) ? 'selected' : ''; ?>><?php echo $value['furdo_wc_leiras']; ?></option>
+                                                        <option value="<?php echo $value['furdo_wc_id']; ?>" <?php echo ($value['furdo_wc_id'] == $content['furdo_wc']) ? 'selected' : ''; ?>><?php echo $value['furdo_wc_leiras_hu']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -501,7 +501,7 @@
                                                 <select name="fenyviszony" id="fenyviszony" class="form-control">
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_fenyviszony_list as $value) { ?>
-                                                        <option value="<?php echo $value['fenyviszony_id']; ?>" <?php echo ($value['fenyviszony_id'] == $content['fenyviszony']) ? 'selected' : ''; ?>><?php echo $value['fenyviszony_leiras']; ?></option>
+                                                        <option value="<?php echo $value['fenyviszony_id']; ?>" <?php echo ($value['fenyviszony_id'] == $content['fenyviszony']) ? 'selected' : ''; ?>><?php echo $value['fenyviszony_leiras_hu']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -512,7 +512,7 @@
                                                 <select class="form-control" name='futes' id='futes'>
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_futes_list as $value) { ?>
-                                                        <option value="<?php echo $value['futes_id']; ?>" <?php echo ($value['futes_id'] == $content['futes']) ? 'selected' : ''; ?>><?php echo $value['futes_leiras']; ?></option>
+                                                        <option value="<?php echo $value['futes_id']; ?>" <?php echo ($value['futes_id'] == $content['futes']) ? 'selected' : ''; ?>><?php echo $value['futes_leiras_hu']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -523,7 +523,7 @@
                                                 <select class="form-control" name='parkolas' id='parkolas'>
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_parkolas_list as $value) { ?>
-                                                        <option value="<?php echo $value['parkolas_id']; ?>" <?php echo ($value['parkolas_id'] == $content['parkolas']) ? 'selected' : ''; ?>><?php echo $value['parkolas_leiras']; ?></option>
+                                                        <option value="<?php echo $value['parkolas_id']; ?>" <?php echo ($value['parkolas_id'] == $content['parkolas']) ? 'selected' : ''; ?>><?php echo $value['parkolas_leiras_hu']; ?></option>
                                                     <?php } ?>
 
                                                 </select>
@@ -536,7 +536,7 @@
                                                 <select class="form-control" name='kilatas' id='kilatas'>
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_kilatas_list as $value) { ?>
-                                                        <option value="<?php echo $value['kilatas_id']; ?>" <?php echo ($value['kilatas_id'] == $content['kilatas']) ? 'selected' : ''; ?>><?php echo $value['kilatas_leiras']; ?></option>
+                                                        <option value="<?php echo $value['kilatas_id']; ?>" <?php echo ($value['kilatas_id'] == $content['kilatas']) ? 'selected' : ''; ?>><?php echo $value['kilatas_leiras_hu']; ?></option>
                                                     <?php } ?> 
 
                                                 </select>
@@ -559,7 +559,7 @@
                                                 <select class="form-control" name="szerkezet" id="szerkezet">
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_szerkezet_list as $value) { ?>
-                                                        <option value="<?php echo $value['szerkezet_id']; ?>" <?php echo ($value['szerkezet_id'] == $content['szerkezet']) ? 'selected' : ''; ?>><?php echo $value['szerkezet_leiras']; ?></option>
+                                                        <option value="<?php echo $value['szerkezet_id']; ?>" <?php echo ($value['szerkezet_id'] == $content['szerkezet']) ? 'selected' : ''; ?>><?php echo $value['szerkezet_leiras_hu']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -571,7 +571,7 @@
                                                 <select class="form-control" name="komfort" id="komfort">
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_komfort_list as $value) { ?>
-                                                        <option value="<?php echo $value['komfort_id']; ?>"><?php echo $value['komfort_leiras']; ?></option>
+                                                        <option value="<?php echo $value['komfort_id']; ?>"><?php echo $value['komfort_leiras_hu']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -583,7 +583,7 @@
                                                 <select class="form-control" name='energetika' id='energetika'>
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_energetika_list as $value) { ?>
-                                                        <option value="<?php echo $value['energetika_id']; ?>" <?php echo ($value['energetika_id'] == $content['energetika']) ? 'selected' : ''; ?>><?php echo $value['energetika_leiras']; ?></option>
+                                                        <option value="<?php echo $value['energetika_id']; ?>" <?php echo ($value['energetika_id'] == $content['energetika']) ? 'selected' : ''; ?>><?php echo $value['energetika_leiras_hu']; ?></option>
                                                     <?php } ?> 
                                                 </select>
                                             </div>
@@ -595,7 +595,7 @@
                                                 <select class="form-control" name='kert' id='kert'>
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_kert_list as $value) { ?>
-                                                        <option value="<?php echo $value['kert_id']; ?>" <?php echo ($value['kert_id'] == $content['kert']) ? 'selected' : ''; ?>><?php echo $value['kert_leiras']; ?></option>
+                                                        <option value="<?php echo $value['kert_id']; ?>" <?php echo ($value['kert_id'] == $content['kert']) ? 'selected' : ''; ?>><?php echo $value['kert_leiras_hu']; ?></option>
                                                     <?php } ?>
 
                                                 </select>

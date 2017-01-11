@@ -26,7 +26,7 @@
                             <p class="well well-sm">Ingatlan adatok</p>
 
                             <div class="span12">
-                                <h4><?php echo $property_data['ingatlan_nev']; ?></h4>
+                                <h4><?php echo $property_data['ingatlan_nev_hu']; ?></h4>
                             </div>
                             <table class="table table-striped table-bordered table-condensed table-hover ">
 
@@ -62,7 +62,7 @@
                                     </tr>
                                     <tr>
                                         <td>Kategória:</td>
-                                        <td><?php echo $property_data['kat_nev']; ?></td>
+                                        <td><?php echo $property_data['kat_nev_hu']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Kiemelt ajánlat:</td>
@@ -152,11 +152,11 @@
                                 <tbody>
                                     <tr>
                                         <td>Megnevezés:</td>
-                                        <td><?php echo $property_data['ingatlan_nev']; ?></td>
+                                        <td><?php echo $property_data['ingatlan_nev_hu']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Leírás:</td>
-                                        <td><?php echo $property_data['leiras']; ?></td>
+                                        <td><?php echo $property_data['leiras_hu']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -185,7 +185,7 @@
                                     </tr>
                                     <tr>
                                         <td>Ingatlan állapota:</td>
-                                        <td><?php echo $property_data['all_leiras']; ?></td>
+                                        <td><?php echo $property_data['all_leiras_hu']; ?></td>
                                     </tr>
                                     <tr> 
                                         <td>Közös költség:</td>
@@ -233,32 +233,32 @@
 
                                     <tr>
                                         <td>Állapot:</td>
-                                        <td><?php echo ($property_data['all_leiras']) ? $property_data['all_leiras'] : 'n.a.'; ?></td>
+                                        <td><?php echo ($property_data['all_leiras_hu']) ? $property_data['all_leiras_hu'] : 'n.a.'; ?></td>
                                     </tr>                                        
 
                                     <tr>
                                         <td>Fűtés:</td>
-                                        <td><?php echo ($property_data['futes_leiras']) ? $property_data['futes_leiras'] : 'n.a.'; ?></td>
+                                        <td><?php echo ($property_data['futes_leiras_hu']) ? $property_data['futes_leiras_hu'] : 'n.a.'; ?></td>
                                     </tr>
 
                                     <tr>
                                         <td>Parkolás:</td>
-                                        <td><?php echo ($property_data['parkolas_leiras']) ? $property_data['parkolas_leiras'] : 'n.a.'; ?></td>
+                                        <td><?php echo ($property_data['parkolas_leiras_hu']) ? $property_data['parkolas_leiras_hu'] : 'n.a.'; ?></td>
                                     </tr>
 
                                     <tr>
                                         <td>Kilátás:</td>
-                                        <td><?php echo ($property_data['kilatas_leiras']) ? $property_data['kilatas_leiras'] : 'n.a.'; ?></td>
+                                        <td><?php echo ($property_data['kilatas_leiras_hu']) ? $property_data['kilatas_leiras_hu'] : 'n.a.'; ?></td>
                                     </tr>
 
                                     <tr>
                                         <td>Energetika:</td>
-                                        <td><?php echo ($property_data['energetika_leiras']) ? $property_data['energetika_leiras'] : 'n.a.'; ?></td>
+                                        <td><?php echo ($property_data['energetika_leiras_hu']) ? $property_data['energetika_leiras_hu'] : 'n.a.'; ?></td>
                                     </tr>
 
                                     <tr>
                                         <td>Kert:</td>
-                                        <td><?php echo ($property_data['kert_leiras']) ? $property_data['kert_leiras'] : 'n.a.'; ?></td>
+                                        <td><?php echo ($property_data['kert_leiras_hu']) ? $property_data['kert_leiras_hu'] : 'n.a.'; ?></td>
                                     </tr>                                        
 
                                     <tr>
