@@ -22,7 +22,8 @@ class Site_model extends Model {
         $this->query->set_columns('*');
         $this->query->set_where('friendlyurl', '=', $page_name);
         $result = $this->query->select();
-        return (isset($result[0])) ? $result[0] : null;
+        //return (isset($result[0])) ? $result[0] : null;
+        return $result[0];
     }
 
 }
