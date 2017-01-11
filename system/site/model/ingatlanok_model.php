@@ -493,7 +493,7 @@ class Ingatlanok_model extends Site_model {
      */
     public function city_list_query_with_prop_no() {
         
-        $varos_lista = '<option value="">-- mindegy --</option>';
+        $varos_lista = '';
 
         $result = $this->city_list_query();
 
@@ -525,7 +525,7 @@ class Ingatlanok_model extends Site_model {
      * @return string 	 a városok listája html-ben, option listaként
      */
     public function district_list_query_with_prop_no() {
-        $kerulet_lista = '<option value="">-- mindegy --</option>';
+        $kerulet_lista = '';
 
         $result = $this->list_query('district_list');
 
