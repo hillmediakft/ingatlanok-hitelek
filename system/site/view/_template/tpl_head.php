@@ -106,11 +106,11 @@ use System\Libs\Language as Lang;
                 <nav class="main-navigation">
                     <ul class="navigation-listing hidden-xs">
                         <li class="navigation-item">
-                            <a href=""><i class="fa fa-home"></i></a>
+                            <a href="<?php echo $this->request->get_uri('site_url');?>"><i class="fa fa-home"></i></a>
                             <div class="overlay"></div>
                         </li>
                         <li class="navigation-item">
-                            <a href="javascript:void(0)"><?php echo Lang::get('menu_ingatlanok'); ?></a>
+                            <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.ingatlanok.' . LANG);?>"><?php echo Lang::get('menu_ingatlanok'); ?></a>
                             <div class="overlay"></div>
                         </li>
                         <li class="navigation-item">
@@ -118,30 +118,30 @@ use System\Libs\Language as Lang;
                             <div class="overlay"></div>
                             <ul class="subnav">
                                 <li class="subnav-item">
-                                    <a href="<?php echo Config::get('url.rolunk.' . LANG);?>"><?php echo Lang::get('menu_rolunk'); ?></a>
+                                    <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.rolunk.' . LANG);?>"><?php echo Lang::get('menu_rolunk'); ?></a>
                                     <div class="overlay"></div>
                                 </li>
                                 <li class="subnav-item">
-                                    <a href="<?php echo Config::get('url.ingatlan-ertekesitoink.' . LANG);?>"><?php echo Lang::get('menu_ertekesitoink'); ?></a>
+                                    <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.ingatlan-ertekesitoink.' . LANG);?>"><?php echo Lang::get('menu_ertekesitoink'); ?></a>
                                     <div class="overlay"></div>
                                 </li>
 
                             </ul>
                         </li>
                         <li class="navigation-item">
-                            <a href="kapcsolat"><?php echo Lang::get('menu_kapcsolat'); ?></a>
+                            <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.kapcsolat.' . LANG);?>"><?php echo Lang::get('menu_kapcsolat'); ?></a>
                             <div class="overlay"></div>
                         </li>
                         <li class="navigation-item">
-                            <a href="hitel"><?php echo Lang::get('menu_hitel'); ?></a>
+                            <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.hitel.' . LANG);?>"><?php echo Lang::get('menu_hitel'); ?></a>
                             <div class="overlay"></div>
                         </li>
                         <li class="navigation-item">
-                            <a href="allas"><?php echo Lang::get('menu_allas'); ?></a>
+                            <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.allas.' . LANG);?>"><?php echo Lang::get('menu_allas'); ?></a>
                             <div class="overlay"></div>
                         </li>
                         <li class="navigation-item">
-                            <a href="hirek"><?php echo Lang::get('menu_hirek'); ?></a>
+                            <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.hirek.' . LANG);?>"><?php echo Lang::get('menu_hirek'); ?></a>
                             <div class="overlay"></div>
                         </li>                        
 
