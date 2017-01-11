@@ -3965,11 +3965,11 @@ footer.footer .bottom-footer .copy {
   height: 32px;
   width: 32px;
   line-height: 30px;
-  background-color: #c44a35;
-  color: #fff;
-  border-radius: 100%;
-  -webkit-border-radius: 100%;
-  -moz-border-radius: 100%;
+  background-color: #eee;
+  color: #3a383b;
+  border-radius: 0px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
 }
 /* line 1999, scss/_slider.scss */
 .object-slider .jcarousel-arrows a.next-slide i,
