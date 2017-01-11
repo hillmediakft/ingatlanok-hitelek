@@ -35,9 +35,9 @@
     <!-- END HEAD -->
 
     <body>
-       	<div class="loader">
+    <!--   	<div class="loader">
 		<div class="loader_inner"></div>
-	</div> 
+	</div>  -->
             <?php include($this->path('tpl_head')); ?>
              <?php include($this->path('content')); ?>
              <?php include($this->path('tpl_foot')); ?>
