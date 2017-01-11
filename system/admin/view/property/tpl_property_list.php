@@ -155,7 +155,7 @@
                                                                 <select class="form-control form-filter input-sm" name="kategoria" id="kategoria">
                                                                     <option value="">-- mindegy --</option>
                                                                     <?php foreach ($ingatlan_kat_list as $kategoria) { ?>
-                                                                        <option value="<?php echo $kategoria['kat_id']; ?>"><?php echo $kategoria['kat_nev']; ?></option>
+                                                                        <option value="<?php echo $kategoria['kat_id']; ?>"><?php echo $kategoria['kat_nev_hu']; ?></option>
                                                                     <?php } ?>
                                                                 </select>                              
                                                             </div>
