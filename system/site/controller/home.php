@@ -17,9 +17,9 @@ class Home extends Site_controller {
         $page_data = $this->home_model->getPageData('kezdo_oldal');
         
         $data = $this->addGlobalData();
-        $data['title'] = $page_data['metatitle'];
-        $data['description'] = $page_data['metadescription'];
-        $data['keywords'] = $page_data['metakeywords'];
+        $data['title'] = $page_data['metatitle_' . $this->lang];
+        $data['description'] = $page_data['metadescription_' . $this->lang];
+        $data['keywords'] = $page_data['metakeywords_' . $this->lang];
         
         
         // a keresőhöz szükséges listák alőállítása

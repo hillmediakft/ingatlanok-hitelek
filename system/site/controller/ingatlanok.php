@@ -6,7 +6,8 @@ use System\Core\View;
 
 class Ingatlanok extends Site_controller {
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->loadModel('ingatlanok_model');
     }
@@ -16,9 +17,9 @@ class Ingatlanok extends Site_controller {
         $page_data = $this->ingatlanok_model->getPageData('ingatlanok');
         
         $data = $this->addGlobalData();
-        $data['title'] = $page_data['metatitle'];
-        $data['description'] = $page_data['metadescription'];
-        $data['keywords'] = $page_data['metakeywords'];
+        $data['title'] = $page_data['metatitle_' . $this->lang];
+        $data['description'] = $page_data['metadescription_' . $this->lang];
+        $data['keywords'] = $page_data['metakeywords_' . $this->lang];
         
         
         // a keresőhöz szükséges listák alőállítása

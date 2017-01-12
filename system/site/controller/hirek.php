@@ -7,21 +7,22 @@ use System\Libs\Language as Lang;
 
 class Hirek extends Site_controller {
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->loadModel('blog_model');
         $this->loadModel('ingatlanok_model');
     }
 
-    public function index() {
-
+    public function index()
+    {
         $page_data = $this->blog_model->getPageData('hirek');
 
         $data = $this->addGlobalData();
-        $data['title'] = $page_data['metatitle'];
-        $data['description'] = $page_data['metadescription'];
-        $data['keywords'] = $page_data['metakeywords'];
-        $data['content'] = $page_data['body'];
+        $data['title'] = $page_data['metatitle_' . $this->lang];
+        $data['description'] = $page_data['metadescription_' . $this->lang];
+        $data['keywords'] = $page_data['metakeywords_' . $this->lang];
+        $data['content'] = $page_data['body_' . $this->lang];
 
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper'));
@@ -51,9 +52,8 @@ class Hirek extends Site_controller {
         $view->render('blog/tpl_blog', $data);
     }
 
-    public function reszletek($title, $id) {
-  
-// $id = (int)$this->request->get_params('id');
+    public function reszletek($title, $id)
+    {
         $id = (int)$id;	
 
         $data = $this->addGlobalData();
@@ -72,15 +72,16 @@ class Hirek extends Site_controller {
             $this->response->redirect($this->request->get_uri('site_url') . 'error');
         }
         // meta adatok
-        $data['title'] = $content['title_' . LANG];
-        $data['description'] = $view->str_helper->sentenceTrim($content['body_' . LANG], 1);
+        $data['title'] = $content['title_' . $this->lang];
+        $data['description'] = $view->str_helper->sentenceTrim($content['body_' . $this->lang], 1);
         $data['keywords'] = "";
         $data['blog'] = $content;
 
         $view->render('blog/tpl_show_blog', $data);
     }
 
-    public function kategoria($id) {
+    public function kategoria($id)
+    {
 
         $id = (int)$id;
         
@@ -96,7 +97,7 @@ class Hirek extends Site_controller {
         // blog kategóriák
         $data['blog_categories'] = $this->blog_model->get_blog_categories();
         $category_data = $this->blog_model->blog_category_query($id);
-        $data['category_name'] = $category_data['category_name_' . LANG];
+        $data['category_name'] = $category_data['category_name_' . $this->lang];
         
         //      $data['kedvencek'] = $this->kedvencek_list;
         $pagine = new Paginator(Lang::get('lapozas'), $data['settings']['pagination']);

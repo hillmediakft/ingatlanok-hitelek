@@ -17,9 +17,9 @@ class Error extends Site_controller {
         $page_data = $this->error_model->getPageData('error');
         
         $data = $this->addGlobalData();
-        $data['title'] = $page_data['metatitle'];
-        $data['description'] = $page_data['metadescription'];
-        $data['keywords'] = $page_data['metakeywords'];
+        $data['title'] = $page_data['metatitle_' . $this->lang];
+        $data['description'] = $page_data['metadescription_' . $this->lang];
+        $data['keywords'] = $page_data['metakeywords_' . $this->lang];
         
         $view = new View();
         $view->setHelper(array('url_helper'));
