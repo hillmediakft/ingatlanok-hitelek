@@ -7,7 +7,6 @@ use \PDO;
 class Ingatlanok_model extends Site_model {
 
     protected $table = 'ingatlanok';
-    protected $lang = LANG;
 
     function __construct() {
         parent::__construct();
