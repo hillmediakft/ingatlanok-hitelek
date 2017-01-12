@@ -6,6 +6,11 @@ namespace System\Core;
 
 class Site_model extends Model {
 
+    /**
+     * Minden site modelben elérhető, és a nyelvi kódot tartalmazza
+     */
+    protected $lang = LANG;
+
     function __construct() {
         parent::__construct();
     }
