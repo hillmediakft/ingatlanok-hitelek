@@ -118,7 +118,7 @@ use System\Libs\Language as Lang;
                                                 <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
                                             <?php } ?>
                                             <?php if ($value['kepek'] == null) { ?>
-                                                <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev']; ?>">
+                                                <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
     <?php } ?>
                                             <span class="like">
                                                 <i class="fa fa-heart"></i>
