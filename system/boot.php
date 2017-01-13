@@ -1,5 +1,4 @@
 <?php
-
 namespace System;
 
 use System\Libs\Config;
@@ -9,12 +8,12 @@ use System\libs\DI;
 //MAPPA beállítások
 //define('BASE', dirname(__file__));
 define('APP_DIR', 'system'); //Rendszer mappa
-define('CORE', APP_DIR . '/core'); //core mappa
-define('LIBS', APP_DIR . '/libs'); //libs mappa
+define('CORE', APP_DIR . '/Core'); //core mappa
+define('LIBS', APP_DIR . '/Libs'); //libs mappa
 define('CONFIG', APP_DIR . '/config'); //config mappa
 define('MESSAGE', APP_DIR . '/message'); //message mappa
-define('ADMIN', APP_DIR . '/admin'); //admin mappa
-define('SITE', APP_DIR . '/site'); //site mappa
+define('ADMIN', APP_DIR . '/Admin'); //admin mappa
+define('SITE', APP_DIR . '/Site'); //site mappa
 //define('UPLOADS', 'uploads' . DS); //uploads mappa
 define('UPLOADS', 'uploads/'); //uploads mappa
 
