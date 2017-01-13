@@ -3,7 +3,7 @@ namespace System;
 
 use System\Libs\Config;
 use System\Core\Application;
-use System\libs\DI;
+use System\Libs\DI;
 
 //MAPPA beállítások
 //define('BASE', dirname(__file__));
