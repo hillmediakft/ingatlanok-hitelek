@@ -161,11 +161,11 @@ HTML;
 			// Elérési út megadása sima Include-hoz
 	    	try{
 
-				if (file_exists('system/' . $this->area . '/view/' . $this->dirname . '/' . $filename . '.php')) {
-					$file_path = 'system/' . $this->area . '/view/' . $this->dirname . '/' . $filename . '.php';
+				if (file_exists('system/' . ucfirst($this->area) . '/view/' . $this->dirname . '/' . $filename . '.php')) {
+					$file_path = 'system/' . ucfirst($this->area) . '/view/' . $this->dirname . '/' . $filename . '.php';
 				}
-				elseif (file_exists('system/' . $this->area . '/view/_template/' . $filename . '.php')) {
-					$file_path = 'system/' . $this->area . '/view/_template/' . $filename . '.php';
+				elseif (file_exists('system/' . ucfirst($this->area) . '/view/_template/' . $filename . '.php')) {
+					$file_path = 'system/' . ucfirst($this->area) . '/view/_template/' . $filename . '.php';
 				}
 				else {
 					throw new \Exception('A ' . $filename . '.php template file nem toltheto be!');
@@ -268,13 +268,13 @@ HTML;
 		// INCLUDE - ha be van állítva layout template
 		if(!is_null($this->layout)) {
 	        try{
-				if (file_exists('system/' . $this->area . '/view/' . $this->dirname . '/' . $this->layout . '.php')) {
+				if (file_exists('system/' . ucfirst($this->area) . '/view/' . $this->dirname . '/' . $this->layout . '.php')) {
 					// ha van helyi layout
-					include('system/' . $this->area . '/view/' . $this->dirname . '/' . $this->layout . '.php');
+					include('system/' . ucfirst($this->area) . '/view/' . $this->dirname . '/' . $this->layout . '.php');
 				}
-				else if (file_exists('system/' . $this->area . '/view/_template/' . $this->layout . '.php')) {
+				else if (file_exists('system/' . ucfirst($this->area) . '/view/_template/' . $this->layout . '.php')) {
 					// template layout
-					include('system/' . $this->area . '/view/_template/' . $this->layout . '.php');
+					include('system/' . ucfirst($this->area) . '/view/_template/' . $this->layout . '.php');
 				}
 				else {
 					throw new \Exception('A ' . $this->layout . '.php template file nem toltheto be!');
@@ -287,11 +287,11 @@ HTML;
 		// INCLUDE - ha nincs beállítva layout template
 		else {
 			try{
-				if (file_exists('system/' . $this->area . '/view/' . $this->dirname . '/' . $this->filename . '.php')) {
-					include('system/' . $this->area . '/view/' . $this->dirname . '/' . $this->filename . '.php');
+				if (file_exists('system/' . ucfirst($this->area) . '/view/' . $this->dirname . '/' . $this->filename . '.php')) {
+					include('system/' . ucfirst($this->area) . '/view/' . $this->dirname . '/' . $this->filename . '.php');
 				}
-				elseif (file_exists('system/' . $this->area . '/view/_template/' . $this->filename . '.php')) {
-					include('system/' . $this->area . '/view/_template/' . $this->filename . '.php');
+				elseif (file_exists('system/' . ucfirst($this->area) . '/view/_template/' . $this->filename . '.php')) {
+					include('system/' . ucfirst($this->area) . '/view/_template/' . $this->filename . '.php');
 				}
 				else {
 					throw new \Exception('A ' . $this->filename . '.php template file nem toltheto be!');
@@ -312,7 +312,7 @@ HTML;
     public function renderFeedbackMessages()
     {
 		// echo out the feedback messages
-		require 'system/' . $this->area . '/view/_template/feedback.php';
+		require 'system/' . ucfirst($this->area) . '/view/_template/feedback.php';
 	}
 
 	/**
