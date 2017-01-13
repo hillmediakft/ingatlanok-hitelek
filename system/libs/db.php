@@ -1,7 +1,7 @@
 <?php
 namespace System\Libs;
 
-use PDO, PDOException;
+use \PDO, \PDOException;
 
 class DB {
 
@@ -13,10 +13,10 @@ class DB {
 	/**
 	 * Kapcsolat adatainak megadása
 	 */
-	public function __construct($host, $db_name, $user, $password)
+	public function __construct($db_name, $host, $user, $password)
 	{
-		$this->host = $host;
 		$this->db_name = $db_name;
+		$this->host = $host;
 		$this->user = $user;
 		$this->password = $password;
 	}
@@ -31,14 +31,14 @@ class DB {
 	public function create()
 	{
 		try {
-			$connect = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name . ';charset=utf8', $this->user, $this->password);
+			$connect = new PDO('mysql:dbname=' . $this->db_name . ';host=' . $this->host . ';charset=utf8', $this->user, $this->password);
 			// hiba visszaadás beállítása a PDO objektumban a fejlesztői környezet alapján
 			if(ENV == 'development'){
 				$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			}
 		}
 		catch(PDOException $e) {
-			die('Database error: ' . $e->getMessage());
+			die('<strong>Database error:</strong> ' . $e->getMessage());
 		}
 
 		return $connect;

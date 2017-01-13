@@ -81,7 +81,7 @@ DI::setContainer(new \Pimple\Container());
 
 DI::set('connect', function() {
     $settings = Config::get('db');
-    $db = new \System\Libs\DB($settings['host'], $settings['name'], $settings['user'], $settings['pass']);
+    $db = new \System\Libs\DB($settings['name'], $settings['host'], $settings['user'], $settings['pass']);
     return $db->create();
 });
 /*
