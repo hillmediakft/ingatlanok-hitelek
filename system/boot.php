@@ -29,7 +29,6 @@ define('ADMIN_IMAGE', 'public/admin_assets/img/');
 
 define('MULTILANG_SITE', true);
 
-
 /**
  * LOCAL SERVER és ONLINE SERVER beállítások
  */
@@ -55,7 +54,7 @@ if (isset($_SERVER['SERVER_ADDR']) && ($_SERVER['SERVER_ADDR'] == '127.0.0.1' ||
     error_reporting(E_ALL);
     ini_set("display_errors", 1);
 
-    define('BASE_URL', 'http://xxx/'); //Az oldal elérési útjának beállítása
+    define('BASE_URL', 'http://ingatlanok-hitelek.onlinemarketingguru.hu/'); //Az oldal elérési útjának beállítása
     define('BASE_PATH', ''); //A domainnév utáni elérési út beállítása
     define('ENV', 'production'); //online éles környezet
     //db adatok	
