@@ -72,35 +72,11 @@ if (isset($_SERVER['SERVER_ADDR']) && ($_SERVER['SERVER_ADDR'] == '127.0.0.1' ||
 
 DI::setContainer(new \Pimple\Container());
 
-/*
-  DI::set('connect_old', function() {
-  return \System\Libs\DB::get_connect();
-  });
- */
-
 DI::set('connect', function() {
     $settings = Config::get('db');
     $db = new \System\Libs\DB($settings['name'], $settings['host'], $settings['user'], $settings['pass']);
     return $db->create();
 });
-/*
-  DI::set('connect2', function() {
-  $settings = Config::get('db');
-  try {
-  $connect = new \PDO('mysql:host=' . $settings['host'] . ';dbname=' . $settings['name'] . ';charset=utf8', $settings['user'], $settings['pass']);
-  if(ENV == 'development'){
-  $connect->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-  }
-  }
-  catch(\PDOException $e) {
-  die('Database error: ' . $e->getMessage());
-  }
-
-  return $connect;
-  });
- */
-
-
 
 DI::set('uri', function() {
     return new \System\Libs\Uri(Config::get('language_default'), Config::get('allowed_languages'));
