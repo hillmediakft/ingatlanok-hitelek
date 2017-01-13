@@ -40,7 +40,7 @@ use PDO;
 */
 class Auth {
     
-    // Az auth objektumot tárolja
+    // Az auth objektumot tárolja_
     private static $_instance = null;
 
     // PDO kapcsolat objektum
