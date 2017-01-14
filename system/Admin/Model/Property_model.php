@@ -1,10 +1,10 @@
 <?php
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 use \PDO;
 use System\Libs\Session;
 
-class Property_model extends Admin_model {
+class Property_model extends AdminModel {
 
     protected $table = 'ingatlanok';
 
