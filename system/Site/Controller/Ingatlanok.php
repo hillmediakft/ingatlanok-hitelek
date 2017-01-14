@@ -55,8 +55,8 @@ class Ingatlanok extends SiteController {
             // kiemelt ingatlanok
             $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
 
-
-//var_dump($data);die;
+            $data['agents'] = $this->ingatlanok_model->get_agent();
+// var_dump($data);die;
 
 
 
