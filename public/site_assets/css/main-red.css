@@ -14414,6 +14414,7 @@ a.simple-btn.outlined.orange:hover {
   border: 1px solid #e7e4e4;
   padding: 1px;
   margin-bottom: 30px;
+  background: #eee;
 }
 /* line 5769, scss/_shortcodes.scss */
 .objects-block .item:hover .preview .like,
@@ -14676,7 +14677,7 @@ a.simple-btn.outlined.orange:hover {
 /* line 5932, scss/_shortcodes.scss */
 .objects-block .item .item-entry,
 .objects-block .shop-item .item-entry {
-  background-color: #f8f8f8;
+  background-color: #eee;
   padding: 15px 18px 0px;
   border-bottom: none;
 }
