@@ -1,8 +1,8 @@
 <?php 
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 
-class File_manager_model extends Admin_model {
+class File_manager_model extends AdminModel {
 
 	function __construct()
 	{

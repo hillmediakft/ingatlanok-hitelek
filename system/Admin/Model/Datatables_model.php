@@ -1,8 +1,8 @@
 <?php
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 
-class Datatables_model extends Admin_model {
+class Datatables_model extends AdminModel {
 
     /**
      * A tábla nevek és az ingatlanok táblában az oszlop nevek párosításai

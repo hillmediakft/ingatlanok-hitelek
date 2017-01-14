@@ -1,9 +1,9 @@
 <?php 
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 use System\Libs\Config;
 
-class PhotoCategory_model extends Admin_model {
+class PhotoCategory_model extends AdminModel {
 
 	protected $table = 'photo_category';
 	protected $id = 'category_id';

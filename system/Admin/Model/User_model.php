@@ -1,9 +1,9 @@
 <?php
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 use System\Libs\Config;
 
-class User_model extends Admin_model {
+class User_model extends AdminModel {
 
     /**
      * 	Legyen-e email visszaigazolós regisztráció

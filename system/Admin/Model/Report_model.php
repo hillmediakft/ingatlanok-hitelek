@@ -1,12 +1,12 @@
 <?php
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 use System\Libs\Session;
 
 /**
  * Report model
  */
-class Report_model extends Admin_model {
+class Report_model extends AdminModel {
 
     function __construct() {
         parent::__construct();

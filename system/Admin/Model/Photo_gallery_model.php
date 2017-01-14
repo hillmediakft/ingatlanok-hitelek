@@ -1,8 +1,8 @@
 <?php 
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 
-class Photo_gallery_model extends Admin_model {
+class Photo_gallery_model extends AdminModel {
 
 	protected $table = 'photo_gallery';
 	protected $id = 'photo_id';

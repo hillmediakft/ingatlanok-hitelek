@@ -1,8 +1,8 @@
 <?php
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 
-class Content_model extends Admin_model {
+class Content_model extends AdminModel {
 
 	protected $table = 'content';
 

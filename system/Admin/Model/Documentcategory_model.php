@@ -1,8 +1,8 @@
 <?php
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 
-class DocumentCategory_model extends Admin_model {
+class DocumentCategory_model extends AdminModel {
 
     protected $table = 'document_category';
 

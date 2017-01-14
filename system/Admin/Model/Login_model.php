@@ -1,13 +1,13 @@
 <?php
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 
 /**
  * LoginModel
  *
  * Handles the user's login / logout / registration stuff
  */
-class Login_model extends Admin_model
+class Login_model extends AdminModel
 {
     /**
      * Constructor, létrehozza az adatbáziskapcsolatot

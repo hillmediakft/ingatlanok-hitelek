@@ -1,8 +1,8 @@
 <?php 
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 
-class Newsletter_model extends Admin_model {
+class Newsletter_model extends AdminModel {
 
 	protected $table = 'newsletters';
 	protected $id = 'newsletter_id';

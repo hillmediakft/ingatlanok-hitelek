@@ -1,8 +1,8 @@
 <?php
 namespace System\Admin\Model;
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 
-class Settings_model extends Admin_model {
+class Settings_model extends AdminModel {
 
 	protected $table = 'settings';
 

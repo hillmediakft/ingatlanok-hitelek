@@ -1,9 +1,9 @@
 <?php
 namespace System\Admin\Model;
 
-use System\Core\Admin_model;
+use System\Core\AdminModel;
 
-class Blog_model extends Admin_model {
+class Blog_model extends AdminModel {
 
 	protected $table = 'blog';	
 
