@@ -66,6 +66,12 @@ console.log(option_value);
 
         })
     }
+	
+    var equalHeights = function () {
+        setTimeout(function () {
+            $('.object-slider.latest-properties div.item').equalHeights();
+        }, 200);
+    }	
 
 
     return {
@@ -73,7 +79,7 @@ console.log(option_value);
         init: function () {
             enableDistrict();
             locationsInput();
-            console.log('init');
+			equalHeights();
         }
     };
 

@@ -4027,6 +4027,7 @@ footer.footer .bottom-footer .copy {
   border: 1px solid #e7e4e4;
   padding: 1px;
   margin-bottom: 20px;
+  background: #eee;
 }
 /* line 2018, scss/_slider.scss */
 .object-slider .carousel .item .preview,
@@ -4225,7 +4226,7 @@ footer.footer .bottom-footer .copy {
 .blog-posts-holder .carousel .item .item-entry,
 .interesting-offer .carousel .item .item-entry,
 .featured-products .carousel .item .item-entry {
-  background-color: #f8f8f8;
+  background-color: #eee;
   padding: 15px 18px 0px;
   border-bottom: none;
 }
@@ -4238,7 +4239,7 @@ footer.footer .bottom-footer .copy {
 .blog-posts-holder .carousel .item .item-entry .item-title,
 .interesting-offer .carousel .item .item-entry .item-title,
 .featured-products .carousel .item .item-entry .item-title {
-  text-transform: uppercase;
+  text-transform: none;
   font-family: 'Lato-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
@@ -14684,7 +14685,7 @@ a.simple-btn.outlined.orange:hover {
 /* line 5936, scss/_shortcodes.scss */
 .objects-block .item .item-entry .item-title,
 .objects-block .shop-item .item-entry .item-title {
-  text-transform: uppercase;
+  text-transform: none;
   font-family: 'Lato-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
