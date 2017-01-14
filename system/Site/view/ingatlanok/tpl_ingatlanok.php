@@ -1,6 +1,4 @@
-<?php 
-use System\Libs\Config;
-?>
+<?php use System\Libs\Config; ?>
 <div id="content" class="container-fluid">
         <div class="container">
             <div class="row">
@@ -21,42 +19,21 @@ use System\Libs\Config;
                             <div class="col-sm-12">
                                 <div class="sort-block extended gray-bg">
                                     <div class="left">
-                                        <span class="founded"><span class="value"><?php echo $filtered_count; ?></span>Properties founded</span>
+                                        <span class="founded">Találatok száma: <span class="value"><?php echo $filtered_count; ?></span></span>
                                     </div>
                                     <div class="right">
                                         <div class="sort-item order">
-                                            <span class="sort-label">Order:</span>
+                                            <span class="sort-label">Sorrend:</span>
                                             <div class="select-container">
-                                                <div id="select-type-holder1" class="ui-front">
-                                                    <select name="prop-select" data-icon="false" class="select filter-select">
-                                                        <option selected="selected">Ascending</option>
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
+                                                <div id="sorrend_div" class="ui-front">
+                                                    <select name="sorrend_select" data-icon="false" class="select filter-select">
+                                                        <option value="1">Legfrissebb elöl</option>
+                                                        <option value="2">Legrégebbi elöl</option>
+                                                        <option value="3">Legdrágább elöl</option>
+                                                        <option value="4">Legolcsóbb elöl</option>
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="sort-item sort">
-                                            <span class="sort-label">Sort by:</span>
-                                            <div class="select-container">
-                                                <div id="select-type-holder2" class="ui-front">
-                                                    <select name="prop-select" data-icon="false" class="select filter-select">
-                                                        <option selected="selected">Date</option>
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sort-item view-block">
-                                            <a href="#" class="grid active">
-                                                <i class="menu fa fa-th"></i>
-                                            </a>
-                                            <a href="#" class="list">
-                                                <i class="fa fa-bars"></i>
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -139,73 +116,16 @@ use System\Libs\Config;
                 <!-- SIDEBAR -->
                 <div class="col-md-3 col-sm-4">
                     <aside class="sidebar main-sidebar">
-
                         <!-- KERESŐ DOBOZ -->
                         <?php include($this->path('tpl_ingatlanok_filter')); ?>
                         <!-- REFERENSEK DOBOZ -->
-                        <?php include($this->path('tpl_referens_contact_box')); ?>
-
-
-                        <div class="widget featured-properties">
-                            <div class="heading">
-                                <span class="widget-title">Featured Properties</span>
-                            </div>
-                            <div class="widget-entry">
-                                <div class="single-prop">
-                                    <div class="preview">
-                                        <img alt="" src="media/images/latest-blog-posts/5.1.jpg">
-                                    </div>
-                                    <div class="descr">
-                                        <span class="title"><a href="#">Etiam pharetra luct felis sed rhoncus</a></span>
-                                        <span class="price">USD <span class="value">999,000</span></span>
-                                    </div>
-                                </div>
-                                <div class="single-prop">
-                                    <div class="preview">
-                                        <img alt="" src="media/images/latest-blog-posts/5.2.jpg">
-                                    </div>
-                                    <div class="descr">
-                                        <span class="title"><a href="#">Aliquam maga tortor, volupat vitae</a></span>
-                                        <span class="price">USD <span class="value">999,000</span></span>
-                                    </div>
-                                </div>
-                                <div class="single-prop">
-                                    <div class="preview">
-                                        <img alt="" src="media/images/latest-blog-posts/5.3.jpg">
-                                    </div>
-                                    <div class="descr">
-                                        <span class="title"><a href="#">Nam faucibus iaculis pulvinar</a></span>
-                                        <span class="price">USD <span class="value">999,000</span></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        
-
-
-                        
-                        <div class="widget banner">
-                            <div class="banner-label-bg">
-                                <div class="banner-label">
-                                    <img src="images/logo/banner-white-logo.png" alt="">
-                                </div>
-                            </div>
-                            <div class="banner-img">
-                                <img src="images/banners/sidebar-banner.jpg" alt="">
-                            </div>
-                            <div class="banner-entry">
-                                <span class="banner-title">Your Message</span>
-                                <span class="banner-sub">Goes Here</span>
-                                <a href="#" class="learn-more">Learn More</a>
-                            </div>
-                        </div>
-
-
+                        <?php include($this->path('tpl_modul_referenscontact')); ?>
+                        <!-- KIEMELT INGATLANOK DOBOZ -->
+                        <?php include($this->path('tpl_modul_kiemeltingatlanok')); ?>
+                        <!-- KIEMELT INGATLANOK DOBOZ -->
+                        <?php include($this->path('tpl_modul_banner')); ?>
                     </aside>        
                 </div> <!-- SIDEBAR END -->
-
 
             </div>
         </div>
