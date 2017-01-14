@@ -694,10 +694,30 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_where('active', '=', 1);
         $agents = $this->query->select();
 
+        // ügynökhöz tartozó ingatlanok egy lekérdezéssel (ez gyorsabb!)
+        $this->query->set_columns('ref_id');
+        $ref_id_arr = $this->query->select();
+        $temp_arr = array();
+        // temp_arr tomb feltöltése: kulcs a ref_id, érték az ügynökhöz tartozó ingatlanok száma
+        foreach ($ref_id_arr as $value) {
+            if (isset($temp_arr[$value['ref_id']])) {
+                $temp_arr[$value['ref_id']]++;
+            } else {
+                $temp_arr[$value['ref_id']] = 1;
+            }
+        }
+        // a visszaadandó tömbbe belerakjuk a property elemet
+        foreach ($agents as $key => &$agent) {
+            $agent['property'] = $temp_arr[$agent['id']];
+        }
+
+/*
+        // ügynökhöz tartozó ingatlanok ciklusban több lekérdezéssel (ez lassabb!)
         foreach ($agents as $key => &$agent) {
             $num = $this->belongToAgent($agent['id']);
             $agent['property'] = $num;
         }
+*/
 
         return (!is_null($id)) ? $agents[0] : $agents;
     }
