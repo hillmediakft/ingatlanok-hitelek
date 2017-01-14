@@ -454,12 +454,11 @@ class Ingatlanok_model extends SiteModel {
     public function county_list_query_with_prop_no()
     {
         $megye_lista = '';
-        $filter = Session::get('filter');
+        //$filter = Session::get('filter');
 
         $this->query->set_table(array('county_list'));
         $this->query->set_columns(array('county_id', 'county_name'));
         $result = $this->query->select();
-
 
         foreach ($result as $key => $value) {
             $this->query->set_table(array('ingatlanok'));
@@ -672,10 +671,12 @@ class Ingatlanok_model extends SiteModel {
 
     /**
      * 	Lekérdezi az ingatlanok referens adatokat
+     *  Hozzáadja az ügynök adataihoza a hozzá tartozó ingatlanok számát
      * 	
-     * 	@param array 
+     *  @param integer 
+     * 	@return array 
      */
-    public function get_agent($id)
+    public function get_agent($id = null)
     {
         $this->query->set_table(array('users'));
         $this->query->set_columns(array(
@@ -687,11 +688,31 @@ class Ingatlanok_model extends SiteModel {
             'users.photo'
         ));
 
-        $this->query->set_where('id', '=', $id);
+        if (!is_null($id)){
+            $this->query->set_where('id', '=', $id);
+        }
         $this->query->set_where('active', '=', 1);
+        $agents = $this->query->select();
 
+        foreach ($agents as $key => &$agent) {
+            $num = $this->belongToAgent($agent['id']);
+            $agent['property'] = $num;
+        }
+
+        return (!is_null($id)) ? $agents[0] : $agents;
+    }
+
+    /**
+     * Megadott ügynökhöz tartozó ingatlanok számát kérdezi le
+     * @param integer $id
+     * @return integer
+     */
+    public function belongToAgent($id)
+    {
+        $this->query->set_columns('COUNT(*)');
+        $this->query->set_where('ref_id', '=', $id);
         $result = $this->query->select();
-        return $result[0];
+        return (int)$result[0]['COUNT(*)'];
     }
 
     /**
