@@ -4058,7 +4058,7 @@ footer.footer .bottom-footer .copy {
 .country-holder .carousel .item .preview .like,
 .blog-posts-holder .carousel .item .preview .like,
 .interesting-offer .carousel .item .preview .like,
-.featured-products .carousel .item .preview .like {
+.featured-products .carousel .item .preview .like, .property-list .item .preview .like {
   position: absolute;
   background: rgba(0,0,0,0.4);
   top: 0px;
@@ -14678,7 +14678,7 @@ a.simple-btn.outlined.orange:hover {
 .objects-block .shop-item .item-entry {
   background-color: #f8f8f8;
   padding: 15px 18px 0px;
-  border-bottom: 2px solid #c44a35;
+  border-bottom: none;
 }
 /* line 5936, scss/_shortcodes.scss */
 .objects-block .item .item-entry .item-title,
@@ -20815,7 +20815,7 @@ footer.footer .widget .property-listing li {
     outline: 0 none;
 }
 
-.object-slider .carousel .item .preview .price-box, .best-agents .carousel .item .preview .price-box, .partners-holder .carousel .item .preview .price-box, .testimonials-holder .carousel .item .preview .price-box, .country-holder .carousel .item .preview .price-box, .blog-posts-holder .carousel .item .preview .price-box, .interesting-offer .carousel .item .preview .price-box, .featured-products .carousel .item .preview .price-box {
+.object-slider .carousel .item .preview .price-box, .best-agents .carousel .item .preview .price-box, .partners-holder .carousel .item .preview .price-box, .testimonials-holder .carousel .item .preview .price-box, .country-holder .carousel .item .preview .price-box, .blog-posts-holder .carousel .item .preview .price-box, .interesting-offer .carousel .item .preview .price-box, .featured-products .carousel .item .preview .price-box, .property-list .item .preview .price-box {
     color: #fff;
 	background: #c44a35;
     font-size: 16px;
