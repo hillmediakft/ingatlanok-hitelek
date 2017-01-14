@@ -67,7 +67,7 @@ class Ingatlanok extends SiteController {
 
         //$view->setLazyRender();
 //$this->view->debug(true); 
-        $view->add_link('js', SITE_ASSETS . 'pages/ingatlanok.js');
+        $view->add_link('js', SITE_JS . 'pages/ingatlanok.js');
         $view->render('ingatlanok/tpl_ingatlanok', $data);
     }
 }

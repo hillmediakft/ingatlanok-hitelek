@@ -69,6 +69,7 @@ use System\Libs\Config;
                         </div>
 
                         <!-- INGATALANOK LISTÁJA -->
+						<div class="property-list" id="equalheight-property-list">
                         <div class="row">
                             <?php
                                 foreach ($properties as $value) {
@@ -116,6 +117,7 @@ use System\Libs\Config;
                             </div>
                             <?php } ?>
                         </div>
+						</div>
 
                         <!-- LAPOZÓ -->
                         <div class="row">
