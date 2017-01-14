@@ -3,6 +3,7 @@ namespace System\Site\Controller;
 
 use System\Core\SiteController;
 use System\Core\View;
+use System\Libs\Session;
 use System\Libs\Paginator;
 
 class Ingatlanok extends SiteController {
@@ -35,8 +36,8 @@ class Ingatlanok extends SiteController {
 
 
             // paginátor objektum létrehozása
-                    $pagine = new Paginator('oldal', $data['settings']['pagination']);
-            // limit-el lekérdezett adatok
+                    $pagine = new Paginator('p', $data['settings']['pagination']);
+            // limit-el lekérdezett adatok szűréssel (paraméterek bekerülnek a 'ingatlan_filter' session elembe)
                     $data['properties'] = $this->ingatlanok_model->properties_filter_query($pagine->get_limit(), $pagine->get_offset(), $this->request->get_query());
             // összes elem, ami a szűrési feltételnek megfelel (vagy a tábla összes rekordja, ha nincs szűrés)
                     $data['filtered_count'] = $this->ingatlanok_model->properties_filter_count_query();
@@ -46,15 +47,16 @@ class Ingatlanok extends SiteController {
                     $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path'));
 
 
-// var_dump($data['propertys']);die;
 
-    // összes ingatlan száma a táblában
-    //$data['no_of_properties'] = $this->ingatlanok_model->get_count();
+            // összes ingatlan száma a táblában
+            $data['no_of_properties'] = $this->ingatlanok_model->get_count();
+            // szűrési paramétereket tartalmazó tömb
+            $data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
+            // kiemelt ingatlanok
+            $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
 
 
-
-
-
+//var_dump($data);die;
 
 
 
