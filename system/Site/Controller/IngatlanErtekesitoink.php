@@ -4,7 +4,7 @@ namespace System\Site\Controller;
 use System\Core\SiteController;
 use System\Core\View;
 
-class Ingatlan_ertekesitoink extends SiteController {
+class IngatlanErtekesitoink extends SiteController {
 
     function __construct()
     {
