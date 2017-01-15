@@ -9,5 +9,6 @@ class Home_model extends SiteModel {
 		parent::__construct();
 	}
 
+
 }
 ?>

@@ -96,8 +96,78 @@ use System\Libs\Language as Lang;
     </div>
 </div>
 
+
+
+
 <div id="content" class="container-fluid">
-    <div class="container">
+    
+	
+<div class="row">
+			<div class="our-features-banner gray-bg light">
+				<div class="container">
+					<h2 class="block-title"><?php echo Lang::get('home_szolgaltatasok_cim'); ?></h2>
+					<span class="sub-title"><?php echo Lang::get('home_szolgaltatasok_szoveg'); ?></span>
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="single-feature">
+								<div class="icon-container">
+									<div class="icon-border">
+									<a href="#">
+										<img src="<?php echo SITE_IMAGE;?>mennyit-er-az-ingatlanom.png">
+									</a>	
+									</div>
+								</div>
+								<span class="main-title"><?php echo Lang::get('home_szolgaltatasok_1_cim'); ?></span>
+								<span class="featured-sub-title colored"><?php echo Lang::get('home_szolgaltatasok_1_szoveg'); ?></span>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="single-feature">
+								<div class="icon-container">
+									<div class="icon-border">
+									<a href="#">
+										<img src="<?php echo SITE_IMAGE;?>befektetoknek.png">
+									</a>	
+									</div>
+								</div>
+								<span class="main-title"><?php echo Lang::get('home_szolgaltatasok_2_cim'); ?></span>
+								<span class="featured-sub-title colored"><?php echo Lang::get('home_szolgaltatasok_2_szoveg'); ?></span>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="single-feature">
+								<div class="icon-container">
+									<div class="icon-border">
+									<a href="#">
+										<img src="<?php echo SITE_IMAGE;?>berbeadoknak.png">
+									</a>	
+									</div>
+								</div>
+								<span class="main-title"><?php echo Lang::get('home_szolgaltatasok_3_cim'); ?></span>
+								<span class="featured-sub-title colored"><?php echo Lang::get('home_szolgaltatasok_3_szoveg'); ?></span>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="single-feature">
+								<div class="icon-container">
+									<div class="icon-border">
+									<a href="#">
+										<img src="<?php echo SITE_IMAGE;?>mennyit-er-az-ingatlanom.png">
+									</a>
+									</div>
+								</div>
+								<span class="main-title"><?php echo Lang::get('home_szolgaltatasok_4_cim'); ?></span>
+								<span class="featured-sub-title colored"><?php echo Lang::get('home_szolgaltatasok_4_szoveg'); ?></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	
+	
+	
+	<div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="block-title"><?php echo Lang::get('home_kiemelt_ingatlanok'); ?></h2>
@@ -162,56 +232,7 @@ use System\Libs\Language as Lang;
     </div>
 
 
-    <div class="row">
-        <div class="container">
-            <div class="col-sm-12">
-                <div class="features-gallery">
-                    <div class="feauture-gallery-container">
 
-                        <div class="small-feature-item">
-                            <div class="preview">
-                                <a href="#">
-                                    <div class="icon-container">
-                                        <i class="icon pappers"></i>
-                                    </div>
-                                    <div class="title-box">
-                                        <span class="top-title">Hottest</span>
-                                        <span class="bottom-title">Listings</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="small-feature-item">
-                            <div class="preview">
-                                <a href="#">
-                                    <div class="icon-container">
-                                        <i class="icon home"></i>
-                                    </div>
-                                    <div class="title-box">
-                                        <span class="top-title">Exclusive</span>
-                                        <span class="bottom-title">Offers</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="small-feature-item">
-                            <div class="preview">
-                                <a href="#">
-                                    <div class="icon-container">
-                                        <i class="icon human"></i>
-                                    </div>
-                                    <div class="title-box">
-                                        <span class="top-title">Exclusive</span>
-                                        <span class="bottom-title">Offers</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <div class="row">
@@ -226,136 +247,34 @@ use System\Libs\Language as Lang;
                     </div>
                     <div class="ag-carousel carousel">
                         <ul>
+						<?php foreach($agents as $value) : ?>
                             <li>
                                 <div class="item">
                                     <div class="preview">
-                                        <img src="<?php echo SITE_IMAGE; ?>agency/1.png" alt="">
+                                        <img src="<?php echo Config::get('user.upload_path') . $value['photo'];?>" alt="<?php echo $value['last_name'] . $value['first_name'];?>">
                                         <div class="overlay">
                                             <a href="agent-single_agent.html"><i class="fa fa-search-plus"></i></a>
                                         </div>
                                     </div>
-                                    <span class="name">Djohn Kollings</span>
-                                    <span class="properties">5 properties</span>
+                                    <span class="name"><?php echo $value['first_name'] . ' ' . $value['last_name'];?></span>
+                                    <span class="properties"><a href="#" class="simple-btn sm-button outlined red"><?php echo $value['property'];?> ingatlan</a></span>
                                     <ul class="contact-listing">
                                         <li>
                                             <span class="icon"><i class="fa fa-phone"></i></span>
-                                            <span class="phone">+234-754-596</span>
+                                            <span class="phone"><?php echo $value['phone'];?></span>
                                         </li>
                                         <li>
                                             <span class="icon"><i class="fa fa-envelope"></i></span>
-                                            <a href="#" class="mail">info@example.com</a>
-                                        </li>
-                                        <li>
-                                            <span class="icon"><i class="fa fa-globe"></i></span>
-                                            <a href="#" class="site">infoexample.com</a>
+                                            <a href="#" class="mail"><?php echo $value['email'];?></a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
-                            <li>
-                                <div class="item">
-                                    <div class="preview">
-                                        <img src="<?php echo SITE_IMAGE; ?>agency/2.png" alt="">
-                                        <div class="overlay">
-                                            <a href="agent-single_agent.html"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                    <span class="name">Eline Dorther</span>
-                                    <span class="properties">3 properties</span>
-                                    <ul class="contact-listing">
-                                        <li>
-                                            <span class="icon"><i class="fa fa-phone"></i></span>
-                                            <span class="phone">+234-754-596</span>
-                                        </li>
-                                        <li>
-                                            <span class="icon"><i class="fa fa-envelope"></i></span>
-                                            <a href="#" class="mail">info@example.com</a>
-                                        </li>
-                                        <li>
-                                            <span class="icon"><i class="fa fa-globe"></i></span>
-                                            <a href="#" class="site">infoexample.com</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <div class="preview">
-                                        <img src="<?php echo SITE_IMAGE; ?>agency/3.png" alt="">
-                                        <div class="overlay">
-                                            <a href="agent-single_agent.html"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                    <span class="name">Erik Braun</span>
-                                    <span class="properties">8 properties</span>
-                                    <ul class="contact-listing">
-                                        <li>
-                                            <span class="icon"><i class="fa fa-phone"></i></span>
-                                            <span class="phone">+234-754-596</span>
-                                        </li>
-                                        <li>
-                                            <span class="icon"><i class="fa fa-envelope"></i></span>
-                                            <a href="#" class="mail">info@example.com</a>
-                                        </li>
-                                        <li>
-                                            <span class="icon"><i class="fa fa-globe"></i></span>
-                                            <a href="#" class="site">infoexample.com</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <div class="preview">
-                                        <img src="<?php echo SITE_IMAGE; ?>agency/4.png" alt="">
-                                        <div class="overlay">
-                                            <a href="agent-single_agent.html"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                    <span class="name">Djoanna Holl</span>
-                                    <span class="properties">5 properties</span>
-                                    <ul class="contact-listing">
-                                        <li>
-                                            <span class="icon"><i class="fa fa-phone"></i></span>
-                                            <span class="phone">+234-754-596</span>
-                                        </li>
-                                        <li>
-                                            <span class="icon"><i class="fa fa-envelope"></i></span>
-                                            <a href="#" class="mail">info@example.com</a>
-                                        </li>
-                                        <li>
-                                            <span class="icon"><i class="fa fa-globe"></i></span>
-                                            <a href="#" class="site">infoexample.com</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <div class="preview">
-                                        <img src="<?php echo SITE_IMAGE; ?>agency/1.png" alt="">
-                                        <div class="overlay">
-                                            <a href="agent-single_agent.html"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                    <span class="name">Djohn Kollings</span>
-                                    <span class="properties">5 properties</span>
-                                    <ul class="contact-listing">
-                                        <li>
-                                            <span class="icon"><i class="fa fa-phone"></i></span>
-                                            <span class="phone">+234-754-596</span>
-                                        </li>
-                                        <li>
-                                            <span class="icon"><i class="fa fa-envelope"></i></span>
-                                            <a href="#" class="mail">info@example.com</a>
-                                        </li>
-                                        <li>
-                                            <span class="icon"><i class="fa fa-globe"></i></span>
-                                            <a href="#" class="site">infoexample.com</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+							<?php endforeach;?>
+
+                           
+                            
+                           
                         </ul>
                     </div>
                     <p class="jcarousel-pagination"></p>
@@ -364,9 +283,21 @@ use System\Libs\Language as Lang;
         </div>
     </div>
 
-
-
-
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="subscribe-banner">
+								<div class="banner-text-block">
+									<span class="banner-title inversed">Call to action cím</span>
+									<p class="banner-text">Call to action szöveg .Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis iaculis mi...</p>
+								</div>
+								<div class="subscribe-block">
+									<a href="#" class="subscribe-btn">Tovább</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 
 </div>
