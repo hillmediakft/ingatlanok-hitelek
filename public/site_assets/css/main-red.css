@@ -10959,12 +10959,9 @@ a.simple-btn.outlined.red:hover {
   height: 23px;
   width: 23px;
   line-height: 20px;
-  background-color: #c44a35;
-  color: #fff;
+  background-color: #eee;
+  color: #3a383b;
   text-align: center;
-  border-radius: 100%;
-  -webkit-border-radius: 100%;
-  -moz-border-radius: 100%;
 }
 /* line 2915, scss/_shortcodes.scss */
 .main-sidebar .widget.agents .jcarousel-arrows a.next-slide i {
@@ -10978,7 +10975,8 @@ a.simple-btn.outlined.red:hover {
 }
 /* line 2923, scss/_shortcodes.scss */
 .main-sidebar .widget.agents .jcarousel-arrows a:hover {
-  background-color: #3a383b;
+  background-color: #c44a35;
+  color: #fff;
 }
 /* line 2928, scss/_shortcodes.scss */
 .main-sidebar .widget.agents .widget-entry {
@@ -11463,7 +11461,7 @@ a.simple-btn.outlined.red:hover {
 }
 /* line 3328, scss/_shortcodes.scss */
 .main-sidebar .widget.banner .banner-entry {
-  background: #3a383b;
+  background: #666;
   width: 100%;
   text-align: center;
   padding: 15px 20px;
@@ -11482,7 +11480,7 @@ a.simple-btn.outlined.red:hover {
 .main-sidebar .widget.banner .banner-entry .banner-sub {
   font-family: 'Lato-Bold', Arial, sans-serif;
   font-size: 16px;
-  color: #c44a35;
+  color: #eee;
   display: block;
   margin-bottom: 17px;
 }
@@ -14144,15 +14142,12 @@ a.simple-btn.outlined.red:hover {
 .contacts-listing .contact-item .icon {
   height: 60px;
   width: 60px;
-  line-height: 54px;
+  line-height: 58px;
   margin: 0 auto;
   margin-bottom: 18px;
-  border: 3px solid #c44a35;
   text-align: center;
   color: #3a383b;
-  border-radius: 100%;
-  -webkit-border-radius: 100%;
-  -moz-border-radius: 100%;
+  background: #eee;
 }
 /* line 5537, scss/_shortcodes.scss */
 .contacts-listing .contact-item .icon .fa {
@@ -16147,7 +16142,7 @@ a.simple-btn.outlined.red:hover {
   border: 1px solid #e7e4e4;
   position: relative;
   padding: 0 29px;
-  padding-top: 69px;
+  padding-top: 20px;
   padding-bottom: 15px;
   margin-bottom: 30px;
 }
@@ -16187,7 +16182,7 @@ a.simple-btn.outlined.red:hover {
   border-radius: 100%;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 /* line 7194, scss/_shortcodes.scss */
 .agency-container .agent-item .preview .overlay-holder {
@@ -16262,7 +16257,7 @@ a.simple-btn.outlined.red:hover {
   font-size: 20px;
   display: block;
   color: #000;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
   text-align: center;
 }
 /* line 7249, scss/_shortcodes.scss */
