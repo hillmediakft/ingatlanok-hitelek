@@ -27,9 +27,10 @@ class Ingatlan_ertekesitoink extends SiteController {
         $data['city_list'] = $this->ingatlanok_model->city_list_query_with_prop_no();
  //       $data['category_list'] = $this->ingatlanok_model->list_query('ingatlan_kategoria');
         $data['district_list'] = $this->ingatlanok_model->district_list_query_with_prop_no();
-        // kiemelt ingatlanok
- //       $data['all_properties'] = $this->ingatlanok_model->kiemelt_properties_query(10);
-
+// kiemelt ingatlanok
+            $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
+		// ingatlan értékesítők
+        $data['agents'] = $this->ingatlanok_model->get_agent();
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper'));
 
