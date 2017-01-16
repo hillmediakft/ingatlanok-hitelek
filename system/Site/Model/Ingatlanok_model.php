@@ -201,9 +201,7 @@ class Ingatlanok_model extends SiteModel {
             $params['max_szobaszam'] = $arr[1];
         }
 
-
         Session::set('ingatlan_filter', $params);
-
 
 //$this->query->debug(false);
         $this->query->set_columns("SQL_CALC_FOUND_ROWS 
@@ -454,7 +452,6 @@ class Ingatlanok_model extends SiteModel {
     public function county_list_query_with_prop_no()
     {
         $megye_lista = '';
-        //$filter = Session::get('filter');
 
         $this->query->set_table(array('county_list'));
         $this->query->set_columns(array('county_id', 'county_name'));
@@ -471,7 +468,7 @@ class Ingatlanok_model extends SiteModel {
 
 
 
-            $search_filter = ($this->in_filter('megye', $county_id)) ? "selected" : "";
+            $search_filter = (self::in_filter('megye', $county_id)) ? "selected" : "";
 
 
             $number = count($result2);
@@ -505,7 +502,7 @@ class Ingatlanok_model extends SiteModel {
             $city_id = $result[$key]['city_id'];
             $city_name = $result[$key]['city_name'];
 
-            $search_filter = ($this->in_filter('varos', $city_id)) ? "selected" : "";
+            $search_filter = (self::in_filter('varos', $city_id)) ? "selected" : "";
 
             $number = count($result2);
             if ($number > 0) {
@@ -538,7 +535,7 @@ class Ingatlanok_model extends SiteModel {
             $district_id = $result[$key]['district_id'];
             $district_name = $result[$key]['district_name'];
 
-            $search_filter = ($this->in_filter('kerulet', $district_id)) ? "selected" : "";
+            $search_filter = (self::in_filter('kerulet', $district_id)) ? "selected" : "";
 
             $number = count($result2);
             if ($number > 0) {
@@ -1159,22 +1156,31 @@ class Ingatlanok_model extends SiteModel {
         if (isset($filter['tipus']) && $filter['tipus'] == 2) {
             $filter_with_names['tipus'] = 'Kiadó';
         }
-        if (isset($filter['kerulet'])) {
+        if (isset($filter['kerulet']) && $filter['kerulet'] !== '') {
+            /*
             foreach ($filter['kerulet'] as $value) {
                 $filter_with_names['kerulet'][] = 'Budapest, ' . $value . '. kerület';
             }
+            */
+            $filter_with_names['kerulet'][] = 'Budapest, ' . $filter['kerulet'] . '. kerület';
         }
 
-        if (isset($filter['varos'])) {
+        if (isset($filter['varos']) && $filter['varos'] !== '') {
+            /*
             foreach ($filter['varos'] as $value) {
                 $filter_with_names['varos'][] = $this->getCityNameById($value);
             }
+            */
+            $filter_with_names['varos'][] = $this->getCityNameById($filter['varos']);
         }
 
-        if (isset($filter['kategoria'])) {
+        if (isset($filter['kategoria']) && $filter['kategoria'] !== '') {
+            /*
             foreach ($filter['kategoria'] as $value) {
                 $filter_with_names['kategoria'][] = $this->getCategoryNameById($value);
             }
+            */
+            $filter_with_names['kategoria'][] = $this->getCategoryNameById($filter['kategoria']);
         }
 
         if (isset($filter['min_ar'])) {
@@ -1223,7 +1229,6 @@ class Ingatlanok_model extends SiteModel {
     public function getCategoryNameById($id)
     {
         $this->query->set_table(array('ingatlan_kategoria'));
-        $this->query->set_columns('*');
         $this->query->set_where('kat_id', '=', $id);
         $result = $this->query->select();
         return $result[0];
@@ -1241,8 +1246,6 @@ class Ingatlanok_model extends SiteModel {
     {
         $filter = Session::get('ingatlan_filter');
 
-        //       var_dump($filter);
-        //      die;
         if (isset($filter)) {
             if (isset($filter[$filter_name])) {
                 if (is_array($filter[$filter_name])) {
