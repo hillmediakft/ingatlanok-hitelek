@@ -23,17 +23,17 @@
                                     </div>
                                     <div class="right">
                                         <div class="sort-item order">
-                                            <span class="sort-label">Sorrend:</span>
-                                            <div class="select-container">
-                                                <div id="sorrend_div" class="ui-front">
-                                                    <select name="sorrend_select" data-icon="false" class="select filter-select">
-                                                        <option value="1">Legfrissebb elöl</option>
-                                                        <option value="2">Legrégebbi elöl</option>
-                                                        <option value="3">Legdrágább elöl</option>
-                                                        <option value="4">Legolcsóbb elöl</option>
-                                                    </select>
-                                                </div>
+
+                                            <div class="form-group">
+                                                <span class="sort-label">Sorrend:</span>
+                                                <select id="sorrend_select" name="sorrend_select" class="form-control">
+                                                    <option value="<?php echo $this->url_helper->add_order_to_url('desc', 'ar'); ?>">Legfrissebb elöl</option>
+                                                    <option value="<?php echo $this->url_helper->add_order_to_url('asc', 'ar'); ?>">Legrégebbi elöl</option>
+                                                    <option value="<?php echo $this->url_helper->add_order_to_url('desc', 'ar'); ?>">Legdrágább elöl</option>
+                                                    <option value="<?php echo $this->url_helper->add_order_to_url('asc', 'ar'); ?>">Legolcsóbb elöl</option>
+                                                </select>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
