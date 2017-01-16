@@ -4,7 +4,7 @@
         <div class="filter-label-block">
             <span class="filter-label">Find Your Home</span>
         </div>
-        <form action="#" class="filter-form">
+        <form action="ingatlanok" class="filter-form">
             <div class="row">
                 <div class="col-sm-12">
                     
