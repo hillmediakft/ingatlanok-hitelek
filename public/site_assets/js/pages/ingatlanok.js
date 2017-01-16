@@ -6,17 +6,21 @@ var Ingatlanok = function () {
         }, 200);
     };
 
-    /* ********************** Listázási sorrend módosítása ************************* */
-    /*
-    var setOrder = function () {
-        $('#sorrend_div').on('change', '#ui-id-1', function () {
-            url = $("#ui-id-1 option:selected").val();
-            //window.location.href = location.protocol + "//" + location.host + url;
 
-            console.log(url);
+    /* ********************** Listázási sorrend módosítása ************************* */
+    var setOrder = function () {
+        $('#sorrend_select').on('change', function () {
+            url = $("#sorrend_select option:selected").val();
+            window.location.href = location.protocol + "//" + location.host + url;
         });
     };
-    */
+
+        /* ********************** Reset filter ************************* */
+        var resetFilter = function () {
+            $('#reset-filter').on('click', function () {
+                window.location.href = location.protocol + "//" + location.host + '/ingatlanok';
+            });
+        };
 
 
     return {
