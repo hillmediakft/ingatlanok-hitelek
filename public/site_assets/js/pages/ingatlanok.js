@@ -6,6 +6,29 @@ var Ingatlanok = function () {
         }, 200);
     };
 
+    /**
+     * Kerület lista kezelése
+     */
+    var enableDistrict = function () {
+
+        //kerület és városrész option lista megjelenítése, ha a kiválasztott megye Budapest
+        $("#varos").change(function () {
+            
+            //option listaelem tartalom
+            //var str = $("select#varos option:selected").text();
+            // option listaelem value
+            var option_value = $("select#varos option:selected").val();
+            // az érték üres lesz, ha a válassz elemet választjuk ki az option listából
+            if (option_value == '88') {
+                $('#district').prop("disabled", false);
+
+            } else {
+                $('#district option[value=""]').prop('selected', true);
+                $('#district').prop("disabled", true);
+            }
+        })
+    };
+
 
     /* ********************** Listázási sorrend módosítása ************************* */
     var setOrder = function () {
@@ -26,6 +49,7 @@ var Ingatlanok = function () {
     return {
         //main function to initiate the module
         init: function () {
+            enableDistrict();
             equalHeights();
             setOrder();
         }
