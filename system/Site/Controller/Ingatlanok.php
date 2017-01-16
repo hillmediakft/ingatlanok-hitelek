@@ -23,39 +23,33 @@ class Ingatlanok extends SiteController {
         $data['description'] = $page_data['metadescription_' . $this->lang];
         $data['keywords'] = $page_data['metakeywords_' . $this->lang];
         
-        
+
+// paginátor objektum létrehozása
+        $pagine = new Paginator('p', $data['settings']['pagination']);
+// limit-el lekérdezett adatok szűréssel (paraméterek bekerülnek a 'ingatlan_filter' session elembe)
+        $data['properties'] = $this->ingatlanok_model->properties_filter_query($pagine->get_limit(), $pagine->get_offset(), $this->request->get_query());
+// összes elem, ami a szűrési feltételnek megfelel (vagy a tábla összes rekordja, ha nincs szűrés)
+        $data['filtered_count'] = $this->ingatlanok_model->properties_filter_count_query();
+// összes elem megadása a paginátor objektumnak
+        $pagine->set_total($data['filtered_count']);
+// lapozó linkek visszadása (paraméter az uri path)
+        $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path'));
+
+
         // a keresőhöz szükséges listák alőállítása
         $data['city_list'] = $this->ingatlanok_model->city_list_query_with_prop_no();
+        $data['district_list'] = $this->ingatlanok_model->district_list_query_with_prop_no();
         $data['category_list'] = $this->ingatlanok_model->list_query('ingatlan_kategoria');
 
 
+        // összes ingatlan száma a táblában
+        $data['no_of_properties'] = $this->ingatlanok_model->get_count();
+        // szűrési paramétereket tartalmazó tömb
+        $data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
+        // kiemelt ingatlanok
+        $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
 
-
-
-
-
-
-            // paginátor objektum létrehozása
-                    $pagine = new Paginator('p', $data['settings']['pagination']);
-            // limit-el lekérdezett adatok szűréssel (paraméterek bekerülnek a 'ingatlan_filter' session elembe)
-                    $data['properties'] = $this->ingatlanok_model->properties_filter_query($pagine->get_limit(), $pagine->get_offset(), $this->request->get_query());
-            // összes elem, ami a szűrési feltételnek megfelel (vagy a tábla összes rekordja, ha nincs szűrés)
-                    $data['filtered_count'] = $this->ingatlanok_model->properties_filter_count_query();
-            // összes elem megadása a paginátor objektumnak
-                    $pagine->set_total($data['filtered_count']);
-            // lapozó linkek visszadása (paraméter az uri path)
-                    $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path'));
-
-
-
-            // összes ingatlan száma a táblában
-            $data['no_of_properties'] = $this->ingatlanok_model->get_count();
-            // szűrési paramétereket tartalmazó tömb
-            $data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
-            // kiemelt ingatlanok
-            $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
-
-            $data['agents'] = $this->ingatlanok_model->get_agent();
+        $data['agents'] = $this->ingatlanok_model->get_agent();
 // var_dump($data);die;
 
 
