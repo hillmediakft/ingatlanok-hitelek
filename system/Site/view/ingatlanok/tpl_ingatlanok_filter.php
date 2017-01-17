@@ -8,11 +8,19 @@
             <div class="row">
                 <div class="col-sm-12">
                     
+                    <?php 
+                        $selected_elado = 'selected';
+                        $selected_kiado = '';
+                        if ($this->request->has_query('tipus')) {
+                            $selected_elado = ($this->request->get_query('tipus') == 1) ? 'selected' : '';
+                            $selected_kiado = ($this->request->get_query('tipus') == 2) ? 'selected' : '';
+                        }
+                    ?>
                     <span class="item-label"><?php echo Lang::get('kereso_elado'); ?>/<?php echo Lang::get('kereso_kiado'); ?></span>
                     <div class="form-group">
                         <select name="tipus" class="form-control">
-                            <option selected="selected" value="1"><?php echo Lang::get('kereso_elado'); ?></option>
-                            <option value="2"><?php echo Lang::get('kereso_kiado'); ?></option>
+                            <option <?php echo $selected_elado; ?> value="1"><?php echo Lang::get('kereso_elado'); ?></option>
+                            <option <?php echo $selected_kiado; ?> value="2"><?php echo Lang::get('kereso_kiado'); ?></option>
                         </select>
                     </div> 
 
@@ -49,7 +57,7 @@
 
                     <span class="item-label"><?php echo Lang::get('kereso_kategoria'); ?></span>
                     <div class="form-group">
-                        <select name="kategoria" class="form-control">
+                        <select id="category_select" name="kategoria" class="form-control">
                             <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                             <?php foreach ($category_list as $value) : ?>
                                 <option value="<?php echo $value['kat_id']; ?>"><?php echo $value['kat_nev_' . LANG]; ?></option>
