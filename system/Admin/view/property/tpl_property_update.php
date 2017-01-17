@@ -422,18 +422,48 @@
                                     </div>
 
                                 </div>
-                                <div class="portlet-body">	
-                                    <div class="form-group">
-                                        <label for="ingatlan_nev" class="control-label">Ingatlan név</label>
-                                        <input value="<?php echo $content['ingatlan_nev_hu']; ?>" type="text" name="ingatlan_nev" id="ingatlan_nev" placeholder="" class="form-control input-xlarge" />
-                                    </div>
-                                    <!-- LAKÁS LEIRAS -->	
-                                    <div class="form-group">
-                                        <label for="leiras" class="control-label">Leírás</label>
-                                        <textarea name="leiras" id="leiras" placeholder="" class="form-control input-xlarge" rows="10"><?php echo $content['leiras_hu']; ?></textarea>
-                                    </div>	
-                                </div>
+                                <div class="portlet-body">
 
+                                <!-- INGATLAN NÉV ÉS LEÍRÁS MAGYAR ANGOL-->
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#tab_1_1" data-toggle="tab"> Magyar </a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab_1_2" data-toggle="tab"> Angol </a>
+                                        </li>
+
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade active in" id="tab_1_1">
+
+                                            <div class="form-group">
+                                                <label for="ingatlan_nev_hu" class="control-label">Ingatlan név magyar</label>
+                                                <input value="<?php echo $content['ingatlan_nev_hu']; ?>" type="text" name="ingatlan_nev_hu" id="ingatlan_nev_hu" placeholder="" class="form-control input-xlarge" />
+                                            </div>
+                                            <!-- LAKÁS LEIRAS -->   
+                                            <div class="form-group">
+                                                <label for="leiras_hu" class="control-label">Leírás magyar</label>
+                                                <textarea name="leiras_hu" id="leiras_hu" placeholder="" class="form-control input-xlarge" rows="10"><?php echo $content['leiras_hu']; ?></textarea>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane fade" id="tab_1_2">
+
+                                            <div class="form-group">
+                                                <label for="ingatlan_nev_en" class="control-label">Ingatlan név angol</label>
+                                                <input value="<?php echo $content['ingatlan_nev_en']; ?>" type="text" name="ingatlan_nev_en" id="ingatlan_nev" placeholder="" class="form-control input-xlarge" />
+                                            </div>
+                                            <!-- LAKÁS LEIRAS -->   
+                                            <div class="form-group">
+                                                <label for="leiras_en" class="control-label">Leírás angol</label>
+                                                <textarea name="leiras_en" id="leiras_en" placeholder="" class="form-control input-xlarge" rows="10"><?php echo $content['leiras_en']; ?></textarea>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
 
                             </div>
 
