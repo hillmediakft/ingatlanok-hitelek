@@ -183,8 +183,7 @@ class Ingatlanok_model extends SiteModel {
      */
     public function properties_filter_query($limit = null, $offset = null, $params)
     {
-        //$params = $this->request->get_query();
-        
+/*        
         if (isset($params['range_price'])) {
             $arr = explode(';', $params['range_price']);
             $params['min_ar'] = $arr[0];
@@ -200,6 +199,7 @@ class Ingatlanok_model extends SiteModel {
             $params['min_szobaszam'] = $arr[0];
             $params['max_szobaszam'] = $arr[1];
         }
+*/
 
         Session::set('ingatlan_filter', $params);
 
@@ -368,15 +368,22 @@ class Ingatlanok_model extends SiteModel {
         }
 
         // sorrend
+        // ár szerint
         if (isset($params['order']) && !empty($params['order']) && isset($params['order_by']) && $params['order_by'] == 'ar') {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
-                $this->query->set_orderby(array('ar_elado'), $params['order']);
+                $this->query->set_orderby('ar_elado', $params['order']);
             } elseif (isset($params['tipus']) && $params['tipus'] == 2) {
-                $this->query->set_orderby(array('ar_kiado'), $params['order']);
+                $this->query->set_orderby('ar_kiado', $params['order']);
             } else {
-                $this->query->set_orderby(array('ar_elado'), $params['order']);
+                $this->query->set_orderby('ar_elado', $params['order']);
             }
-        } else {
+        }
+        // dátum szerint
+        elseif (isset($params['order']) && !empty($params['order']) && isset($params['order_by']) && $params['order_by'] == 'datum') {
+            $this->query->set_orderby('hozzaadas_datum', $params['order']);
+        }
+        // id szerint
+        else {
             $this->query->set_orderby('id', 'DESC');
         }
 
@@ -421,8 +428,8 @@ class Ingatlanok_model extends SiteModel {
      * 	A paraméter megadja, hogy melyik megyében lévő városokat adja vissza 		
      * 	@param integer	$id 	egy megye id-je (county_id)
      */
-    public function city_list_query($id = null) {
-        $this->query->reset();
+    public function city_list_query($id = null)
+    {
         $this->query->set_table(array('city_list'));
         $this->query->set_columns(array('city_id', 'city_name'));
         if (!is_null($id)) {
@@ -486,14 +493,53 @@ class Ingatlanok_model extends SiteModel {
      *
      * @return string 	 a városok listája html-ben, option listaként
      */
-    public function city_list_query_with_prop_no() {
-        
+    public function city_list_query_with_prop_no()
+    {
         $varos_lista = '';
 
+        // Egy lekérdezéses verzió - Time: 0.00065302848815918 seconds
+
+            $this->query->set_table(array('ingatlanok'));
+            $this->query->set_columns(array('ingatlanok.id', 'city_list.city_id', 'city_list.city_name'));
+            $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
+
+    /*
+        // eladó, vagy kiadó        
+            if ($this->request->has_query('tipus')) {
+                $tipus = $this->request->get_query('tipus');
+            } else {
+                $tipus = 1;
+            }
+            $this->query->set_where('ingatlanok.tipus', '=', $tipus);
+    */
+
+            $result = $this->query->select();
+
+            $temp = array();
+            // temp tomb feltöltése: kulcs a city_name, érték egy tömb; number: a városhoz tartozó ingatlanok száma, id: varos id-je
+            foreach ($result as $value) {
+                if (isset($temp[$value['city_name']])) {
+                    $temp[$value['city_name']]['number']++;
+                } else {
+                    $temp[$value['city_name']]['number'] = 1;
+                    $temp[$value['city_name']]['id'] = $value['city_id'];
+                }
+            }
+
+            // option lista előállítása a temp tömb felhasználásával
+            foreach ($temp as $city_name => $value) {
+                $search_filter = (self::in_filter('varos', $value['id'])) ? "selected" : "";
+                $varos_lista .= '<option value="' . $value['id'] . '" ' . $search_filter . '>' . $city_name . ' (' . $value['number'] . ')</option>' . "\r\n";
+            }
+
+
+/*
+    // Sok lekérdezéses verzió - Time: 0.12254405021667 seconds 
+
+        // összes város lekérdezése
         $result = $this->city_list_query();
 
         foreach ($result as $key => $value) {
-            $this->query->reset();
             $this->query->set_table(array('ingatlanok'));
             $this->query->set_columns(array('id'));
             $this->query->set_where('varos', '=', $result[$key]['city_id']);
@@ -509,6 +555,7 @@ class Ingatlanok_model extends SiteModel {
                 $varos_lista .= '<option value="' . $city_id . '" ' . $search_filter . '>' . $city_name . ' (' . $number . ')</option>';
             }
         }
+*/
 
         return $varos_lista;
     }
