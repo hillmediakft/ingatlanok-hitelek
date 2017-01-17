@@ -25,12 +25,16 @@
                                         <div class="sort-item order">
 
                                             <div class="form-group">
-                                                <span class="sort-label">Sorrend:</span>
+                                                <span style="display: block; float: left;" class="sort-label">Sorrend:</span>
+                                                <?php
+                                                    $order = ($this->request->has_query('order')) ? $this->request->get_query('order') : false;
+                                                    $order_by = ($this->request->has_query('order_by')) ? $this->request->get_query('order_by') : false;
+                                                ?>
                                                 <select id="sorrend_select" name="sorrend_select" class="form-control">
-                                                    <option value="<?php echo $this->url_helper->add_order_to_url('desc', 'ar'); ?>">Legfrissebb elöl</option>
-                                                    <option value="<?php echo $this->url_helper->add_order_to_url('asc', 'ar'); ?>">Legrégebbi elöl</option>
-                                                    <option value="<?php echo $this->url_helper->add_order_to_url('desc', 'ar'); ?>">Legdrágább elöl</option>
-                                                    <option value="<?php echo $this->url_helper->add_order_to_url('asc', 'ar'); ?>">Legolcsóbb elöl</option>
+                                                    <option <?php echo ($order_by == 'datum' && $order == 'desc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('desc', 'datum'); ?>">Legfrissebb elöl</option>
+                                                    <option <?php echo ($order_by == 'datum' && $order == 'asc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('asc', 'datum'); ?>">Legrégebbi elöl</option>
+                                                    <option <?php echo ($order_by == 'ar' && $order == 'desc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('desc', 'ar'); ?>">Legdrágább elöl</option>
+                                                    <option <?php echo ($order_by == 'ar' && $order == 'asc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('asc', 'ar'); ?>">Legolcsóbb elöl</option>
                                                 </select>
                                             </div>
 
