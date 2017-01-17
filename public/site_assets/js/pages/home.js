@@ -37,22 +37,24 @@ var Home = function () {
                 });
 
             }
-
-
         })
-    }
+    };
 
     var enableDistrict = function () {
 
+        var option_value = $("select#varos option:selected").val();
+        // az érték üres lesz, ha a válassz elemet választjuk ki az option listából
+        if (option_value == '88') {
+            $('#district').prop("disabled", false);
+        }
+
         //kerület és városrész option lista megjelenítése, ha a kiválasztott megye Budapest
         $("#varos").change(function () {
-            var str = "";
+
             //option listaelem tartalom
-            str = $("select#varos option:selected").text();
-            
+            var str = $("select#varos option:selected").text();
             // option listaelem value
             option_value = $("select#varos option:selected").val();
-console.log(option_value);
             // az érték üres lesz, ha a válassz elemet választjuk ki az option listából
             if (option_value == '88') {
                 $('#district').prop("disabled", false);
@@ -62,17 +64,14 @@ console.log(option_value);
                 $('#district').prop("disabled", true);
                  
             }
-
-
         })
-    }
+    };
 	
     var equalHeights = function () {
         setTimeout(function () {
             $('.object-slider.latest-properties div.item').equalHeights();
         }, 200);
-    }	
-
+    };	
 
     return {
         //main function to initiate the module
