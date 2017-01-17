@@ -456,16 +456,46 @@
 
                                 </div>
                                 <div class="portlet-body">
-                                    <!-- INGATLAN NEV -->
-                                    <div class="form-group">
-                                        <label for="ingatlan_nev" class="control-label">Ingatlan megnevezés <small>(címként szereplő rövid leírás)</small></label>
-                                        <input type="text" name="ingatlan_nev" id="ingatlan_nev" placeholder="" class="form-control" />
+
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#tab_1_1" data-toggle="tab"> Magyar </a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab_1_2" data-toggle="tab"> Angol </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade active in" id="tab_1_1">
+
+                                            <!-- INGATLAN NEV -->
+                                            <div class="form-group">
+                                                <label for="ingatlan_nev_hu" class="control-label">Ingatlan megnevezés <small>(címként szereplő rövid leírás)</small></label>
+                                                <input type="text" name="ingatlan_nev_hu" id="ingatlan_nev_hu" placeholder="" class="form-control" />
+                                            </div>
+                                            <!-- LAKÁS LEIRAS -->
+                                            <div class="form-group">
+                                                <label for="leiras_hu" class="control-label">Leírás</label>
+                                                <textarea name="leiras_hu" id="leiras_hu" placeholder="" class="form-control input-xlarge" rows="10"></textarea>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane fade" id="tab_1_2">
+
+                                            <!-- INGATLAN NEV -->
+                                            <div class="form-group">
+                                                <label for="ingatlan_nev_en" class="control-label">Ingatlan megnevezés <small>(címként szereplő rövid leírás)</small></label>
+                                                <input type="text" name="ingatlan_nev_en" id="ingatlan_nev_en" placeholder="" class="form-control" />
+                                            </div>
+                                            <!-- LAKÁS LEIRAS -->
+                                            <div class="form-group">
+                                                <label for="leiras_en" class="control-label">Leírás</label>
+                                                <textarea name="leiras_en" id="leiras_en" placeholder="" class="form-control input-xlarge" rows="10"></textarea>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                    <!-- LAKÁS LEIRAS -->
-                                    <div class="form-group">
-                                        <label for="leiras" class="control-label">Leírás</label>
-                                        <textarea name="leiras" id="leiras" placeholder="" class="form-control input-xlarge" rows="10"></textarea>
-                                    </div>
+
                                 </div>
                             </div>
 
