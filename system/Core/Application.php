@@ -47,7 +47,7 @@ class Application {
 
             $router->get('/', 'home@index');
             $router->get('/ingatlanok', 'ingatlanok@index');
-            $router->get('/ingatlan-ertekesitoink', 'ingatlan_ertekesitoink@index');
+            $router->get('/ingatlan-ertekesitoink', 'ingatlanertekesitoink@index');
             $router->get('/rolunk', 'rolunk@index');
             $router->get('/kapcsolat', 'kapcsolat@index');
             $router->get('/hitel', 'hitel@index');

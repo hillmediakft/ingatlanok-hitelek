@@ -4,18 +4,18 @@ namespace System\Site\Controller;
 use System\Core\SiteController;
 use System\Core\View;
 
-class IngatlanErtekesitoink extends SiteController {
+class Kapcsolat extends SiteController {
 
     function __construct()
     {
         parent::__construct();
-        $this->loadModel('ingatlan_ertekesitoink_model');
+        $this->loadModel('kapcsolat_model');
         $this->loadModel('ingatlanok_model');
     }
 
     public function index()
     {
-        $page_data = $this->ingatlan_ertekesitoink_model->getPageData('ingatlan-ertekesitoink');
+        $page_data = $this->kapcsolat_model->getPageData('kapcsolat');
         
         $data = $this->addGlobalData();
         $data['title'] = $page_data['metatitle_' . $this->lang];
@@ -31,13 +31,14 @@ class IngatlanErtekesitoink extends SiteController {
             $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
 		// ingatlan értékesítők
         $data['agents'] = $this->ingatlanok_model->get_agent();
+
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper'));
 
         //$view->setLazyRender();
 //$this->view->debug(true); 
- //       $view->add_link('js', SITE_JS . 'pages/ingatlan_ertekesitoink.js');
-        $view->render('ingatlan_ertekesitoink/tpl_ingatlan_ertekesitoink', $data);
+        $view->add_link('js', SITE_JS . 'pages/kapcsolat.js');
+        $view->render('kapcsolat/tpl_kapcsolat', $data);
     }
 }
 ?>
