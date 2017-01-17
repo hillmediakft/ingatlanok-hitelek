@@ -25,7 +25,7 @@
                                         <div class="sort-item order">
 
                                             <div class="form-group">
-                                                <span style="display: block; float: left;" class="sort-label">Sorrend:</span>
+                                                <span class="sort-label">Sorrend:</span>
                                                 <?php
                                                     $order = ($this->request->has_query('order')) ? $this->request->get_query('order') : false;
                                                     $order_by = ($this->request->has_query('order_by')) ? $this->request->get_query('order_by') : false;

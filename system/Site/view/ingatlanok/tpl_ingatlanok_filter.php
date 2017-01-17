@@ -32,7 +32,7 @@
                     <span class="item-label"><?php echo Lang::get('kereso_varos'); ?></span>
                     <div class="form-group">
                         <select name="varos" id="varos" class="form-control" >
-                            <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>;
+                            <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                             <?php echo $city_list; ?>
                         </select>
                     </div>
