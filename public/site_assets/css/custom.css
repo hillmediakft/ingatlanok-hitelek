@@ -1,0 +1,45 @@
+
+
+
+/* line 2802, scss/_slider.scss */
+.item .preview .features-label {
+  position: absolute;
+  text-transform: uppercase;
+  color: #fff;
+  /*
+  top: 10px;
+  left: 10px;
+  */		
+  padding: 6px 10px; 
+}
+/* line 2809, scss/_slider.scss */
+.item .preview .features-label.best {
+  background-color: #2dd1cf;
+}
+/* line 2812, scss/_slider.scss */
+.item .preview .features-label.new {
+  background-color: #b2d12d;
+}
+/* line 2815, scss/_slider.scss */
+.item .preview .features-label.hot {
+  background-color: #d12d2d;
+}
+/* line 2818, scss/_slider.scss */
+.item .preview .features-label.sale {
+  background-color: #d1cb2d;
+}
+
+
+.register-block {
+    border: 1px solid #e7e4e4;
+    padding: 19px;
+}
+
+.register-form input[type="text"], .register-form input[type="email"], .register-form input[type="tel"] {
+    border: 1px solid #e7e4e4;
+    font-size: 16px;
+    height: 46px;
+    margin-bottom: 15px;
+    padding-left: 16px;
+    width: 100%;
+}
