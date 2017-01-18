@@ -65,7 +65,7 @@ $logged_in = Session::get('user_logged_in');
 
             <?php if ($logged_in === true) { ?>
             <div class="extra-item login">
-                <a href="#"><i class="fa fa-user"></i>Bejelentkezve <?php echo Session::get('user_site_name'); ?></a>
+                <span style="color: #ffffff;">Bejelentkezve <?php echo Session::get('user_data.name'); ?>&nbsp; &raquo; &nbsp;</span><a href="felhasznalo/kijelentkezes">Kijelentkezés</a>
             </div>
             <?php } else { ?>
             <div class="extra-item login">
