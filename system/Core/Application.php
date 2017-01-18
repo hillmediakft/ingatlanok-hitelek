@@ -56,6 +56,17 @@ class Application {
             $router->get('/hirek/kategoria/:id', 'hirek@kategoria', array('id'));
             $router->get('/hirek/:title/:id', 'hirek@reszletek', array('title', 'id'));
             $router->get('/kereses', 'kereses@index');
+            
+
+            $router->post('/felhasznalo/bejelentkezes', 'user@login'); // ajax
+            $router->get('/felhasznalo/kijelentkezes', 'user@logout');
+            $router->post('/felhasznalo/regisztracio', 'user@register'); // ajax
+            $router->post('/felhasznalo/forgottpw', 'user@forgottpw'); // ajax
+            
+
+
+
+
             $router->set404('error@index');
 
             $router->mount('/en', function() use ($router) {
