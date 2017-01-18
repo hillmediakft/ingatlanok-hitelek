@@ -15,7 +15,7 @@
 							<?php if ($ingatlan['kepek']) { ?>
 							    <img style="height:85px; width:auto;" src="<?php echo $this->url_helper->thumbPath($this->getConfig('ingatlan_photo.upload_path') . $photo_array[0], null, 'small'); ?>" alt="<?php echo $ingatlan['ingatlan_nev_' . LANG]; ?>">
 							<?php } else { ?>
-							    <img style="height:85px; width:auto;" src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $ingatlan['ingatlan_nev']; ?>">
+							    <img style="height:85px; width:auto;" src="<?php echo $this->getConfig('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $ingatlan['ingatlan_nev_' . LANG]; ?>">
 							<?php } ?>
 						</div>
 					</div>
