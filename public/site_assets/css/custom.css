@@ -1,4 +1,6 @@
-
+.modal {
+  z-index: 9900;
+}
 
 
 /* line 2802, scss/_slider.scss */
