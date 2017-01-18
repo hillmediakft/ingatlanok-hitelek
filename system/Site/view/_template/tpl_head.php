@@ -1,7 +1,22 @@
 <?php 
 use System\Libs\Config;
-use System\Libs\Language as Lang; 
+use System\Libs\Session;
+use System\Libs\Language as Lang;
+
+$logged_in = Session::get('user_logged_in');
 ?>
+
+<div>
+<?php 
+    include($this->path('tpl_login_modal'));
+    include($this->path('tpl_register_modal'));
+    include($this->path('tpl_forgottenpw_modal'));
+?>
+</div>
+
+
+
+
 <div class="extra-header">
     <div class="container">
         <div class="left-part">
@@ -47,9 +62,29 @@ use System\Libs\Language as Lang;
                 </div>
             </div>
 
+
+            <?php if ($logged_in === true) { ?>
             <div class="extra-item login">
-                <a href="#"><i class="fa fa-user"></i><?php echo Lang::get('header_top_bejelentkezes'); ?></a>
+                <a href="#"><i class="fa fa-user"></i>Bejelentkezve <?php echo Session::get('user_site_name'); ?></a>
             </div>
+            <?php } else { ?>
+            <div class="extra-item login">
+                <a data-toggle="modal" data-target="#modal_login" href="#"><i class="fa fa-user"></i><?php echo Lang::get('header_top_bejelentkezes'); ?></a>
+            </div>        
+            <?php } ?>
+            
+            <?php if (!isset($logged_in) || $logged_in === false) { ?>
+            <div class="extra-item login">
+                <a data-toggle="modal" data-target="#modal_register" href="#"><i class="fa fa-user"></i>Regisztráció</a>
+            </div>
+            <?php } ?>
+
+
+
+
+
+
+
         </div>
     </div>
 </div>
