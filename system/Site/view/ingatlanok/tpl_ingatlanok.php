@@ -1,4 +1,7 @@
-<?php use System\Libs\Config; ?>
+<?php 
+use System\Libs\Config;
+use System\Libs\Language as Lang;
+?>
 <div id="content" class="container-fluid">
         <div class="container">
             <div class="row">
@@ -59,6 +62,19 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="item">
                                     <div class="preview">
+
+                                            <!-- eladó/kiadó cimke-->                                        
+                                            <?php
+                                                if ($value['tipus'] == 1) {
+                                                    $label = Lang::get('kereso_elado');
+                                                    $css_class = 'hot';
+                                                } else {
+                                                    $label = Lang::get('kereso_kiado');
+                                                    $css_class = 'best';
+                                                }
+                                            ?>
+                                            <span class="features-label <?php echo $css_class; ?>"><?php echo $label; ?></span>
+                                            
                                         <?php if ($value['kepek']) { ?>
                                             <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
                                         <?php } ?>
