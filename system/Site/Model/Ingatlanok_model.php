@@ -200,9 +200,19 @@ class Ingatlanok_model extends SiteModel {
             $params['max_szobaszam'] = $arr[1];
         }
 
+
         Session::set('ingatlan_filter', $params);
 
-//$this->query->debug(true);
+
+// üres stringet tartalamzó paraméterek eltávolítása
+/*        
+foreach ($params as $key => $value) {
+    if ($value === '') {
+        unset($params[$key]);
+    }
+}
+*/
+
 
         $this->query->set_columns("SQL_CALC_FOUND_ROWS 
           `ingatlanok`.`id`,
@@ -227,7 +237,6 @@ class Ingatlanok_model extends SiteModel {
         if (!is_null($offset)) {
             $this->query->set_offset($offset);
         }
-
 
         $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
         $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
@@ -261,16 +270,16 @@ class Ingatlanok_model extends SiteModel {
                 $this->query->set_where('varos', '=', $params['varos']);
             }
             if (is_array($params['kerulet'])) {
-                $this->query->set_where('kerulet', 'in', $params['kerulet'], 'or');
+                $this->query->set_where('kerulet', 'in', $params['kerulet'], 'and');
                 $this->query->set_where(')');
             } else {
-                $this->query->set_where('kerulet', '=', $params['kerulet'], 'or');
+                $this->query->set_where('kerulet', '=', $params['kerulet'], 'and');
                 $this->query->set_where(')');
             }
         }
 
         // ha van város, de nincs kerület
-        if ((isset($params['varos']) && !empty($params['varos'])) && (isset($params['kerulet']) && empty($params['kerulet']))) {
+        if ( (isset($params['varos']) && !empty($params['varos'])) &&  ( !isset($params['kerulet']) || (isset($params['kerulet']) && empty($params['kerulet'])) ) ) {
             if (is_array($params['varos'])) {
                 $this->query->set_where('varos', 'in', $params['varos']);
             } else {
@@ -278,54 +287,56 @@ class Ingatlanok_model extends SiteModel {
             }
         }
 
-        // ha létezik város, de nem létezik kerület
-        if ((isset($params['varos']) && !empty($params['varos'])) && !isset($params['kerulet'])) {
-            if (is_array($params['varos'])) {
-                $this->query->set_where('varos', 'in', $params['varos']);
-            } else {
-                $this->query->set_where('varos', '=', $params['varos']);
-            }
-        }
 
+        // ha nincs város, de van kerület
+/*        
         if (isset($params['kerulet']) && !isset($params['varos'])) {
             if (is_array($params['kerulet'])) {
                 $this->query->set_where('kerulet', 'in', $params['kerulet']);
             } else {
                 $this->query->set_where('kerulet', '=', $params['kerulet']);
             }
+            var_dump('van kerulet nincs varos');
+        }
+*/
+
+
+    // ************************* ÁR ALAPJÁN KERESÉS **************************** 
+
+        // csak minimum ár van megadva
+        if ((isset($params['min_ar']) && !empty($params['min_ar'])) AND ( $params['min_ar'] >= 0) AND ( isset($params['max_ar']) AND $params['max_ar'] == '')) {
+            if (isset($params['tipus']) && $params['tipus'] == 1) {
+                $this->query->set_where('ar_elado', '>=', $params['min_ar']);
+            }
+            elseif (isset($params['tipus']) && $params['tipus'] == 2) {
+                $this->query->set_where('ar_kiado', '>=', $params['min_ar']);
+            }
         }
 
-        /*         * ************************* ÁR ALAPJÁN KERESÉS **************************** 
-
-          // csak minimum ár van megadva
-          if ((isset($params['min_ar']) && !empty($params['min_ar'])) AND ( $params['min_ar'] >= 0) AND ( isset($params['max_ar']) AND $params['max_ar'] == '')) {
-          if (isset($params['tipus']) && $params['tipus'] == 1) {
-          $this->query->set_where('ar_elado', '>=', $params['min_ar']);
-          } elseif (isset($params['tipus']) && $params['tipus'] == 2) {
-          $this->query->set_where('ar_kiado', '>=', $params['min_ar']);
-          }
-          }
-
-          // csak maximum ár van megadva
-          if ((isset($params['max_ar']) && !empty($params['max_ar'])) AND ( $params['max_ar'] >= 0) AND ( isset($params['min_ar']) AND $params['min_ar'] == '')) {
-          if (isset($params['tipus']) && $params['tipus'] == 1) {
-          $this->query->set_where('ar_elado', '<=', $params['max_ar']);
-          } elseif (isset($params['tipus']) && $params['tipus'] == 2) {
-          $this->query->set_where('ar_kiado', '<=', $params['max_ar']);
-          }
-          }
-          // minimum és maximum ár is meg van adva
-          if ((isset($params['min_ar']) && !empty($params['min_ar'])) AND ( $params['min_ar'] >= 0) AND ( isset($params['max_ar']) && !empty($params['max_ar'])) AND ( $params['max_ar'] > 0)) {
-          if (isset($params['tipus']) && $params['tipus'] == 1) {
-          $this->query->set_where('ar_elado', '>=', $params['min_ar']);
-          $this->query->set_where('ar_elado', '<=', $params['max_ar']);
-          } elseif (isset($params['tipus']) && $params['tipus'] == 2) {
-          $this->query->set_where('ar_kiado', '>=', $params['min_ar']);
-          $this->query->set_where('ar_kiado', '<=', $params['max_ar']);
-          }
-          }
-         */
-
+        // csak maximum ár van megadva
+        if ((isset($params['max_ar']) && !empty($params['max_ar'])) AND ( $params['max_ar'] >= 0) AND ( isset($params['min_ar']) AND $params['min_ar'] == '')) {
+            if (isset($params['tipus']) && $params['tipus'] == 1) {
+                $this->query->set_where('ar_elado', '<=', $params['max_ar']);
+            }
+            elseif (isset($params['tipus']) && $params['tipus'] == 2) {
+                $this->query->set_where('ar_kiado', '<=', $params['max_ar']);
+            }
+        }
+        // minimum és maximum ár is meg van adva
+        if ((isset($params['min_ar']) && !empty($params['min_ar'])) AND ( $params['min_ar'] >= 0) AND ( isset($params['max_ar']) && !empty($params['max_ar'])) AND ( $params['max_ar'] > 0)) {
+            if (isset($params['tipus']) && $params['tipus'] == 1) {
+                $this->query->set_where('ar_elado', 'between', array($params['min_ar'], $params['max_ar']));
+                //$this->query->set_where('ar_elado', '>=', $params['min_ar']);
+                //$this->query->set_where('ar_elado', '<=', $params['max_ar']);
+            }
+            elseif (isset($params['tipus']) && $params['tipus'] == 2) {
+                $this->query->set_where('ar_kiado', 'between', array($params['min_ar'], $params['max_ar']));
+                // $this->query->set_where('ar_kiado', '>=', $params['min_ar']);
+                // $this->query->set_where('ar_kiado', '<=', $params['max_ar']);
+            }
+        }
+        
+/*
         // minimum és maximum ár is meg van adva
         if (isset($params['min_ar']) && isset($params['max_ar'])) {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
@@ -342,9 +353,9 @@ class Ingatlanok_model extends SiteModel {
                 }
             }
         }
+*/
 
-
-        /*         * ************************* TERÜLET ALAPJÁN KERESÉS **************************** */
+    /* ************************* TERÜLET ALAPJÁN KERESÉS **************************** */
 
         // csak minimum terület van megadva
         if ((isset($params['min_alapterulet']) && !empty($params['min_alapterulet'])) AND ( $params['min_alapterulet'] > 0) AND ( isset($params['max_alapterulet']) AND $params['max_alapterulet'] == '')) {
@@ -360,7 +371,7 @@ class Ingatlanok_model extends SiteModel {
             $this->query->set_where('alapterulet', 'between', array($params['min_alapterulet'], $params['max_alapterulet']));
         }
 
-        /*         * ************************* SZOBASZÁM ALAPJÁN KERESÉS **************************** */
+    /* ************************* SZOBASZÁM ALAPJÁN KERESÉS **************************** */
 
         // csak minimum terület van megadva
         if ((isset($params['min_szobaszam']) && !empty($params['min_szobaszam'])) AND ( $params['min_szobaszam'] > 0) AND ( isset($params['max_szobaszam']) AND $params['max_szobaszam'] == 0)) {
@@ -386,7 +397,7 @@ class Ingatlanok_model extends SiteModel {
             $this->query->set_where('futes', '=', $params['futes']);
         }
 
-        // sorrend
+        // ****** sorrend **************************************************
         // ár szerint
         if (isset($params['order']) && !empty($params['order']) && isset($params['order_by']) && $params['order_by'] == 'ar') {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
@@ -405,6 +416,9 @@ class Ingatlanok_model extends SiteModel {
         else {
             $this->query->set_orderby('id', 'DESC');
         }
+
+// $this->query->debug(true);        
+//var_dump($params);
 
         return $this->query->select(); 
     }
@@ -585,11 +599,15 @@ class Ingatlanok_model extends SiteModel {
      *
      * @return string 	 a városok listája html-ben, option listaként
      */
-    public function district_list_query_with_prop_no() {
+    public function district_list_query_with_prop_no()
+    {
         $kerulet_lista = '';
 
-        $result = $this->list_query('district_list');
 
+
+// sok lekérdezéses
+/*
+        $result = $this->list_query('district_list');
 
         foreach ($result as $key => $value) {
             $this->query->reset();
@@ -608,6 +626,8 @@ class Ingatlanok_model extends SiteModel {
                 $kerulet_lista .= '<option value="' . $district_id . '" ' . $search_filter . '>' . $district_name . ' (' . $number . ')</option>';
             }
         }
+*/
+
 
         return $kerulet_lista;
     }
