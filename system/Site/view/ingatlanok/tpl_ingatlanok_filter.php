@@ -7,7 +7,6 @@
         <form action="ingatlanok" class="filter-form">
             <div class="row">
                 <div class="col-sm-12">
-                    
                     <?php 
                         $selected_elado = 'selected';
                         $selected_kiado = '';
@@ -98,7 +97,10 @@
                     
                     <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
                     <div class="form-group">
-                        <input name="min_terulet" type="text" class="form-control">
+                        <div class="input-group">
+                            <input name="min_terulet" type="text" class="form-control">
+                            <div class="input-group-addon">m<sup>2</sup></div>
+                        </div>
                     </div>
 
                 </div>
