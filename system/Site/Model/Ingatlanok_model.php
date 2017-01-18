@@ -606,7 +606,7 @@ foreach ($params as $key => $value) {
 
 
 // sok lekérdezéses
-/*
+
         $result = $this->list_query('district_list');
 
         foreach ($result as $key => $value) {
@@ -626,7 +626,7 @@ foreach ($params as $key => $value) {
                 $kerulet_lista .= '<option value="' . $district_id . '" ' . $search_filter . '>' . $district_name . ' (' . $number . ')</option>';
             }
         }
-*/
+
 
 
         return $kerulet_lista;
