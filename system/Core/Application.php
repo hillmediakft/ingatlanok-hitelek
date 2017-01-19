@@ -58,9 +58,9 @@ class Application {
             $router->get('/kereses', 'kereses@index');
             
 
-            $router->post('/felhasznalo/bejelentkezes', 'user@login'); // ajax
+            $router->post('/user/login', 'user@login'); // ajax
             $router->get('/felhasznalo/kijelentkezes', 'user@logout');
-            $router->post('/felhasznalo/regisztracio', 'user@register'); // ajax
+            $router->post('/user/register', 'user@register'); // ajax
             $router->post('/felhasznalo/forgottpw', 'user@forgottpw'); // ajax
             
 
