@@ -72,15 +72,15 @@ var modalHandler = function () {
                     console.log(errors + ' hiba a formban');    
                 },
                 highlight: function (element) { // hightlight error inputs
-                    $(element).closest('.control-group').addClass('error'); // set error class to the control group                   
+                    $(element).closest('.form-group').addClass('has-error'); // set error class to the control group                   
                 },
 
                 unhighlight: function (element) { // revert the change done by hightlight
-                    $(element).closest('.control-group').removeClass('error'); // set error class to the control group                   
+                    $(element).closest('.form-group').removeClass('has-error'); // set error class to the control group                   
                 },
                 success: function (label) {
                     //label.closest('.form-group').removeClass('has-error').addClass("has-success"); // set success class to the control group
-                    label.closest('.control-group').removeClass('error'); // set success class to the control group
+                    label.closest('.form-group').removeClass('has-error'); // set success class to the control group
                 },
                 submitHandler: function (form) {
                     console.log('form küldése!');	
@@ -178,15 +178,15 @@ var modalHandler = function () {
                     var errors = validator.numberOfInvalids();
                 },
                 highlight: function (element) { // hightlight error inputs
-                    $(element).closest('.control-group').addClass('error'); // set error class to the control group                   
+                    $(element).closest('.form-group').addClass('has-error'); // set error class to the control group                   
                 },
 
                 unhighlight: function (element) { // revert the change done by hightlight
-                    $(element).closest('.control-group').removeClass('error'); // set error class to the control group                   
+                    $(element).closest('.form-group').removeClass('has-error'); // set error class to the control group                   
                 },
                 success: function (label) {
                     //label.closest('.form-group').removeClass('has-error').addClass("has-success"); // set success class to the control group
-                    label.closest('.control-group').removeClass('error'); // set success class to the control group
+                    label.closest('.form-group').removeClass('has-error'); // set success class to the control group
                 },
                 submitHandler: function (form) {
                     send_forgottenpw_data();
@@ -310,15 +310,15 @@ var modalHandler = function () {
                     console.log(errors + ' hiba a formban');    
                 },
                 highlight: function (element) { // hightlight error inputs
-                    $(element).closest('.control-group').addClass('error'); // set error class to the control group                   
+                    $(element).closest('.form-group').addClass('has-error'); // set error class to the control group                   
                 },
 
                 unhighlight: function (element) { // revert the change done by hightlight
-                    $(element).closest('.control-group').removeClass('error'); // set error class to the control group                   
+                    $(element).closest('.form-group').removeClass('has-error'); // set error class to the control group                   
                 },
                 success: function (label) {
                     //label.closest('.form-group').removeClass('has-error').addClass("has-success"); // set success class to the control group
-                    label.closest('.control-group').removeClass('error'); // set success class to the control group
+                    label.closest('.form-group').removeClass('has-error'); // set success class to the control group
                 },
                 submitHandler: function (form) {
                     console.log('form küldése!');	
