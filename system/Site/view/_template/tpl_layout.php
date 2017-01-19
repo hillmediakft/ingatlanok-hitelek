@@ -13,7 +13,8 @@
         <base href="<?php echo BASE_URL; ?>">
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" /> -->
-                  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/bootstrap/css/bootstrap.min.css">
+        <!-- BOOTSTRAP CSS v3.3.5 -->
+        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_CSS; ?>bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>fonts/font-awesome-4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/jquery-ui-1.11.4/jquery-ui.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/jcarousel/css/jquery.jcarousel.css">
@@ -45,15 +46,15 @@
        
         
         <script type="text/javascript" src="<?php echo SITE_JS; ?>jquery.min.js"></script>
-    	<script type="text/javascript" src="<?php echo SITE_JS; ?>main.js"></script>
-    	<script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-    	<script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/languageswitcher/languageswitcher.js"></script>
-    	<script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jcarousel/js/jquery.jcarousel.min.js"></script>
+        <script type="text/javascript" src="<?php echo SITE_JS; ?>main.js"></script>
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/languageswitcher/languageswitcher.js"></script>
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jcarousel/js/jquery.jcarousel.min.js"></script>
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/equalheights/jquery.equalheights.min.js"></script>
         
     <!-- Minden oldalon szükséges elemek -->
-        <!-- BOOTSTRAP JS -->
-                <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/bootstrap/js/bootstrap.min.js"></script>
+        <!-- BOOTSTRAP JS v3.3.5 -->
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/bootstrap/js/bootstrap.min.js"></script>
         <!-- MODAL handler -->
         <script type="text/javascript" src="<?php echo SITE_JS; ?>pages/modal_handler.js"></script>
         <!-- Form validátor -->
