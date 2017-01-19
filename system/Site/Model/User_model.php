@@ -156,47 +156,7 @@ class User_model extends SiteModel {
     }
 
 
-                /**
-                 * sends an email to the provided email address
-                 *
-                 * @param string    $user_name                  felhasznalo neve
-                 * @param int       $user_id                    user's id
-                 * @param string    $user_email                 user's email
-                 * @param string    $user_activation_hash       user's mail verification hash string
 
-                 * @return boolean
-                 */
-                private function _sendVerificationEmail($user_name, $user_id, $user_email, $user_activation_hash)
-                {
-                    // Email kezelő osztály behívása
-                    include(LIBS . '/simple_mail_class.php');
-
-                    $subject = Config::get('email.verification.subject');
-                    $link = Config::get('email.verification.link');
-                    $html = '<html><body><h3>Kedves ' . $user_name . '!</h3><p>A ' . $user_email . ' e-mail címmel regisztráltál a ---. Regisztrációd megtörtént, de jelenleg passzív.</p><a href="' . BASE_URL . 'regisztracio/' . $user_id . '/' . $user_activation_hash . '">' . $link . '</a><p>Az aktiválást követően a ----- oldalára jutsz, ahol bejelentkezhetsz a felhasználó neveddel és jelszavaddal. Annak érdekében, hogy segíthessünk a számodra leginkább megfelelő munka megtalálásában, töltsd ki a felhasználói profilodat. </p><p>Üdvözlettel:<br>A Multijob Diákszövetkezet csapata</p></body></html>';
-                    
-                    $from_email = Config::get('email.from_email');
-                    $from_name = Config::get('email.from_name');
-                    
-                    // Létrehozzuk a SimpleMail objektumot
-                    $mail = new \System\Libs\SimpleMail();
-                    $mail->setTo($user_email, $user_name)
-                         ->setSubject($subject)
-                         ->setFrom($from_email, $from_name)
-                         ->addMailHeader('Reply-To', 'info@gmail.com', 'Mail Bot')
-                         ->addGenericHeader('MIME-Version', '1.0')
-                         ->addGenericHeader('Content-Type', 'text/html; charset="utf-8"')
-                         ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
-                         ->setMessage($html)
-                         ->setWrap(78);
-              
-                    // final sending and check
-                    if($mail->send()) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
 
                 /**
                  * checks the email/verification code combination and set the user's activation status to true in the database
