@@ -1,8 +1,9 @@
 <?php
 namespace System\Libs;
+use System\Libs\Config;
 
 /**
- * 	Emailer class v1.0
+ * 	Emailer class v1.1
  *
  * 	Használat (példa):
  * 		 
@@ -110,7 +111,7 @@ class Emailer {
     /**
      * e-mail küldése SMTP-vel
      *
-     * @return 
+     * @return bool
      */
     public function send()
     {
