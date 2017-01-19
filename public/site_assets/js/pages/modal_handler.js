@@ -121,7 +121,7 @@ var modalHandler = function () {
         var $data = $("#forgottenpw_form").serialize();
 				
         $.ajax({
-            url: "users/ajax_forgottenpw",
+            url: "user/forgottenpw",
             data: $data,
             type: "POST",
             dataType: "json",
