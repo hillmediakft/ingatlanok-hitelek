@@ -86,7 +86,8 @@ use System\Libs\Language as Lang; ?>
                     <span class="widget-title"><?php echo Lang::get('footer_regisztracio'); ?></span>
                     <p><?php echo Lang::get('footer_regisztracio_szoveg'); ?></p>
                     <div class="newsletter">
-                        <a class="simple-btn sm-button filled red" href="<?php echo $this->request->get_uri('site_url');?>regisztracio"><?php echo Lang::get('footer_regisztracio_gomb'); ?></a>
+                        <!-- <a class="simple-btn sm-button filled red" href="<?php echo $this->request->get_uri('site_url');?>regisztracio"><?php echo Lang::get('footer_regisztracio_gomb'); ?></a> -->
+                        <a class="simple-btn sm-button filled red" data-toggle="modal" data-target="#modal_register" href="#"><?php echo Lang::get('footer_regisztracio_gomb'); ?></a>
                     </div>
                 </div>
             </div>
