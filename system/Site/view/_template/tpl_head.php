@@ -1,22 +1,16 @@
 <?php 
 use System\Libs\Config;
-use System\Libs\Session;
+use System\Libs\Auth;
 use System\Libs\Language as Lang;
 
-$logged_in = Session::get('user_logged_in');
+// ellenőrizzük, hogy be van-e jelentkezve a felhasználó (true vagy false)
+$logged_in = Auth::check();
+
+// login, register, forgottenpw modal
+include($this->path('tpl_login_modal'));
+include($this->path('tpl_register_modal'));
+include($this->path('tpl_forgottenpw_modal'));
 ?>
-
-<div>
-<?php 
-    include($this->path('tpl_login_modal'));
-    include($this->path('tpl_register_modal'));
-    include($this->path('tpl_forgottenpw_modal'));
-?>
-</div>
-
-
-
-
 <div class="extra-header">
     <div class="container">
         <div class="left-part">
@@ -65,7 +59,7 @@ $logged_in = Session::get('user_logged_in');
 
             <?php if ($logged_in === true) { ?>
             <div class="extra-item login">
-                <span style="color: #ffffff;">Bejelentkezve <?php echo Session::get('user_data.name'); ?>&nbsp; &raquo; &nbsp;</span><a href="felhasznalo/kijelentkezes">Kijelentkezés</a>
+                <span style="color: #ffffff;">Bejelentkezve <?php echo Auth::getUser('name'); ?>&nbsp; &raquo; &nbsp;</span><a href="felhasznalo/kijelentkezes">Kijelentkezés</a>
             </div>
             <?php } else { ?>
             <div class="extra-item login">
@@ -75,7 +69,7 @@ $logged_in = Session::get('user_logged_in');
             
             <?php if (!isset($logged_in) || $logged_in === false) { ?>
             <div class="extra-item login">
-                <a data-toggle="modal" data-target="#modal_register" href="#"><i class="fa fa-user"></i>Regisztráció</a>
+                <a data-toggle="modal" data-target="#modal_register" href="#"><?php echo Lang::get('footer_regisztracio'); ?></a>
             </div>
             <?php } ?>
 
