@@ -8,7 +8,7 @@ var modalHandler = function () {
         var $data = $("#login_form").serialize();
 
         $.ajax({
-            url: "felhasznalo/bejelentkezes",
+            url: "user/login",
             data: $data,
             type: "POST",
             dataType: "json",
@@ -108,7 +108,12 @@ var modalHandler = function () {
 		$("#new_pw_button").on('click', function(e){
 			e.preventDefault();
 			$("#modal_login").modal('hide');
-            handle_forgottenpw_modal();
+            
+            // az elfelejtett jelszó modal megjelenését várakoztatni kell, hogy befejeződjön a login modal eltűnése, mert hibát okoz
+            setTimeout(function() {
+                handle_forgottenpw_modal();
+            }, 500);
+
 		});
 	};
 	
@@ -226,7 +231,7 @@ var modalHandler = function () {
         var $data = $("#register_form").serialize();
 				
         $.ajax({
-            url: "felhasznaalo/regisztracio",
+            url: "user/register",
             data: $data,
             type: "POST",
             dataType: "json",
