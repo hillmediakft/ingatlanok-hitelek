@@ -12,12 +12,12 @@
 			<div id="message_login"></div>
 			
 			<form action="" method="POST" id="login_form" name="login_form">	
-				<div class="control-group">
+				<div class="form-group">
 					<label for="user_name" class="control-label">Felhasználó név vagy E-mail cím</label>
 					<input type="text" name="user_name" class="form-control input-xlarge" />
 				</div>
 
-				<div class="control-group">
+				<div class="form-group">
 					<label for="user_password" class="control-label">Jelszó</label>
 					<input type="password" name="user_password" class="form-control input-xlarge" />
 				</div>	

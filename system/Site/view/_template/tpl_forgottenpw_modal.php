@@ -16,7 +16,7 @@
 			<div id="message_forgottenpw"></div>
 			
 			<form action="" method="POST" id="forgottenpw_form" name="forgottenpw_form">	
-				<div class="control-group">
+				<div class="form-group">
 					<label for="user_email" class="control-label">E-mail cím</label>
 					<input type="text" name="user_email" class="form-control input-xlarge" />
 				</div>

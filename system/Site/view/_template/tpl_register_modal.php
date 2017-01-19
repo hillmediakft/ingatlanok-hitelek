@@ -14,32 +14,34 @@
 			<div id="message_register"></div>
 
 			<form action="" method="POST" id="register_form" name="register_form">	
-				<div class="control-group">
+				<div class="form-group">
 					<label for="user_name" class="control-label">Felhasználó név</label>
 					<input type="text" name="user_name" placeholder="minimum hat karakter, ékezetek nélkül" class="form-control input-xlarge" />
 				</div>
-				<div class="control-group">
+				<div class="form-group">
 					<label for="user_email" class="control-label">E-mail cím</label>
 					<input type="text" placeholder="" name="user_email" class="form-control input-xlarge" />
 				</div>
-				<div class="control-group">
+				<div class="form-group">
 					<label for="password" class="control-label">Jelszó</label>
 					<input type="password" id="register_password" name="password" class="form-control input-xlarge"/>
 				</div>	
-				<div class="control-group">
+				<div class="form-group">
 					<label for="password_again" class="control-label">Jelszó ismétlése</label>
 					<input type="password" name="password_again" class="form-control input-xlarge" />
 				</div>
-				<div>
-					<label>	
-						<input type="checkbox" value="1" name="user_newsletter" id="user_newsletter">
-						Kérek hírlevelet
-					</label>
-				</div>
+	<!-- 
+	<div>
+		<label>	
+			<input type="checkbox" value="1" name="user_newsletter" id="user_newsletter">
+			Kérek hírlevelet
+		</label>
+	</div>
+	 -->
 				<!-- Ezt majd css-ben kell eltüntetni!! -->
 				<!-- <input type="hidden"  name="security_name" />-->
 			</form>	
-                        <p> Lorem ipsum dolor sit amet!</p> 
+    <!-- <p> Lorem ipsum dolor sit amet!</p>  -->
 		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-primary" id="register_submit">Regisztrálok</button>
