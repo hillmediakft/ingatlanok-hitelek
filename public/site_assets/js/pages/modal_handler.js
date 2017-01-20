@@ -296,7 +296,7 @@ var modalHandler = function () {
                 rules: {
                     user_name: {
                         required: true,
-                        minlength: 6
+                        minlength: 3
                     },
                     user_email: {
                         required: true,
