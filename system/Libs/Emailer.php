@@ -116,7 +116,7 @@ class Emailer {
     public function send()
     {
         //include(LIBS . '/PHPMailer/PHPMailerAutoload.php');
-        $mail = new PHPMailer;
+        $mail = new \PHPMailer;
 
         if ($this->use_smtp) {
             //Set PHPMailer to use SMTP.
