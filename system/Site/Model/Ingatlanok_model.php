@@ -775,6 +775,9 @@ foreach ($params as $key => $value) {
             $this->query->set_where('id', '=', $id);
         }
         $this->query->set_where('active', '=', 1);
+        // csak admin felhasználók!!
+        $this->query->set_where('provider_type', '=', 'admin');
+        
         $agents = $this->query->select();
 
         // ügynökhöz tartozó ingatlanok egy lekérdezéssel (ez gyorsabb!)
