@@ -228,14 +228,14 @@ class User extends SiteController {
 	                if ($this->_sendVerificationEmail($last_inserted_id, $user['name'], $user['email'], $user['activation_hash'])) {
 		                $this->response->json(array(
 		                	'status' => 'success',
-		                	'message' => array( Message::show('verification_mail_sending_successful') )
+		                	'message' => array(Message::show('verification_mail_sending_successful') )
 		                ));	
 
 	                } else {
 	                    $this->user_model->delete($last_inserted_id);
 	                    $this->response->json(array(
 	                    	'status' => 'error',
-	                    	'message' => array( Message::show('verification_mail_sending_failed') )
+	                    	'message' => array(Message::show('verification_mail_sending_failed'))
 	                    ));
 	                }
 	            }
@@ -243,7 +243,7 @@ class User extends SiteController {
 	            // ha nincs email ellenőrzés, és minden ellenőrzés sikeres
                 $this->response->json(array(
                 	'status' => 'success',
-                	'message' => Message::show('user_successfully_created')
+                	'message' => array(Message::show('user_successfully_created'))
                 ));	
 	        }
 		}
