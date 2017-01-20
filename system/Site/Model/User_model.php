@@ -155,41 +155,41 @@ class User_model extends SiteModel {
         return $result[0]['photo'];
     }
 
+    /**
+     * Megvizsgálja, hogy a megadott id-jű felhasználó már aktiválva van-e.
+     * Ha aktiválva van, akkor true-val tér vissza a metódus.
+     * Ha még nincs aktiválva, akkor az $id és az $activation_hash alapján aktiválja a felhasználót 
+     *
+     * @param int $id
+     * @param string $activation_hash
+     * @return bool
+     */
+    public function verifyNewUser($id, $activation_hash)
+    {
+        // megnézzük, hogy már sikerült-e a regisztráció (ha frissíti az oldalt)
+        $this->query->set_columns(array('id'));
+        $this->query->set_where('id', '=', $id);
+        $this->query->set_where('active', '=', 1);
+        $this->query->set_where('activation_hash', '=', null, 'and');
+        $result = $this->query->select();
 
-
-
-                /**
-                 * checks the email/verification code combination and set the user's activation status to true in the database
-                 * @param int $user_id user id
-                 * @param string $user_activation_verification_code verification token
-                 * @return bool success status
-                 */
-                public function verifyNewUser($user_id, $user_activation_verification_code)
-                {
-                    // megnézzük, hogy már sikerült-e a regisztráció (ha frissíti az oldalt)
-                    $this->query->set_columns(array('id'));
-                    $this->query->set_where('id', '=', $user_id);
-                    $this->query->set_where('active', '=', 1);
-                    $this->query->set_where('activation_hash', '=', null, 'and');
-                    $result = $this->query->select();
-
-                    if($result){
-                        return true;
-                    }
-                            
-                    $data['active'] = 1;
-                    $data['activation_hash'] = null;
-                    
-                    $this->query->set_where('id', '=', $user_id);
-                    $this->query->set_where('activation_hash', '=', $user_activation_verification_code, 'and');
-                    $result = $this->query->update($data);
-                    
-                    if ($result == 1) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
+        if($result){
+            return true;
+        }
+                
+        $data['active'] = 1;
+        $data['activation_hash'] = null;
+        
+        $this->query->set_where('id', '=', $id);
+        $this->query->set_where('activation_hash', '=', $activation_hash, 'and');
+        $result = $this->query->update($data);
+        
+        if ($result == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
     /**
@@ -227,9 +227,6 @@ class User_model extends SiteModel {
         $this->query->set_columns('role_id');
         return $this->query->select();
     }
-
-
-
 
     /*
      * Lekérdezzük egy bizonyos e-mail címmel rendelkező user nevét és password-ját (elfelejtett jelszó esetén)
