@@ -26,16 +26,17 @@ $msg['userfirstname_does_not_fit_pattern'] = 'User firstname does not fit the na
 $msg['userlastname_does_not_fit_pattern'] = 'User lastname does not fit the name scheme: only a-Z and numbers are allowed, 2 to 64 characters.';
 $msg['userphone_does_not_fit_pattern'] = 'User phone number does not fit the name scheme: only 11-22-333-444 or 11 22 333 444 or 1122333444 .';
 
-$msg['email_does_not_fit_pattern'] = 'Sorry, your chosen email does not fit into the email naming pattern.';
+$msg['email_does_not_fit_pattern'] = 'Az e-mail cím formátuma nem megfelelő.';
 $msg['email_same_as_old_one'] = 'Sorry, that email address is the same as your current one. Please choose another one.';
 $msg['email_change_successful'] = 'Your email address has been changed successfully.';
 $msg['captcha_wrong'] = 'The entered captcha security characters were wrong.';
-$msg['password_repeat_wrong'] = 'Password and password repeat are not the same.';
-$msg['password_too_short'] = 'Password has a minimum length of 6 characters.';
+$msg['password_repeat_wrong'] = 'A jelszó és a jelszó ismétlése nem egyezik meg.';
+$msg['password_too_short'] = 'A jelszónak legalább 6 karakternek kell lennie.';
 
-$msg['username_too_short_or_too_long'] = 'Username cannot be shorter than 2 or longer than 64 characters.';
-$msg['userfirstname_too_short_or_too_long'] = 'User firstname cannot be shorter than 2 or longer than 64 characters.';
-$msg['userlastname_too_short_or_too_long'] = 'User lastname cannot be shorter than 2 or longer than 64 characters.';
+$msg['username_too_short'] = 'A felhasználói névnek legalább 3 karakternek kell lennie.';
+$msg['username_too_short_or_too_long'] = 'Username cannot be shorter than 3 or longer than 64 characters.';
+$msg['userfirstname_too_short_or_too_long'] = 'User firstname cannot be shorter than 3 or longer than 64 characters.';
+$msg['userlastname_too_short_or_too_long'] = 'User lastname cannot be shorter than 3 or longer than 64 characters.';
 
 $msg['email_too_long'] = 'Az e-mail cím nem lehet hosszabb 64 karakternél.';
 $msg['account_successfully_created'] = 'A felhasználói fiók sikeresen létrehozva';

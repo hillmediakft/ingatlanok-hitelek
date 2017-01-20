@@ -33,9 +33,10 @@ $msg['captcha_wrong'] = 'The entered captcha security characters were wrong.';
 $msg['password_repeat_wrong'] = 'Password and password repeat are not the same.';
 $msg['password_too_short'] = 'Password has a minimum length of 6 characters.';
 
-$msg['username_too_short_or_too_long'] = 'Username cannot be shorter than 2 or longer than 64 characters.';
-$msg['userfirstname_too_short_or_too_long'] = 'User firstname cannot be shorter than 2 or longer than 64 characters.';
-$msg['userlastname_too_short_or_too_long'] = 'User lastname cannot be shorter than 2 or longer than 64 characters.';
+$msg['username_too_short'] = 'Username has a minimum length of 3 characters.';
+$msg['username_too_short_or_too_long'] = 'Username cannot be shorter than 3 or longer than 64 characters.';
+$msg['userfirstname_too_short_or_too_long'] = 'User firstname cannot be shorter than 3 or longer than 64 characters.';
+$msg['userlastname_too_short_or_too_long'] = 'User lastname cannot be shorter than 3 or longer than 64 characters.';
 
 $msg['email_too_long'] = 'Az e-mail cím nem lehet hosszabb 64 karakternél.';
 $msg['account_successfully_created'] = 'A felhasználói fiók sikeresen létrehozva';
