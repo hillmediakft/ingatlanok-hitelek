@@ -61,7 +61,8 @@ class Application {
             $router->post('/user/login', 'user@login'); // ajax
             $router->get('/felhasznalo/kijelentkezes', 'user@logout');
             $router->post('/user/register', 'user@register'); // ajax
-            $router->post('/felhasznalo/forgottpw', 'user@forgottpw'); // ajax
+            $router->post('/user/forgottpw', 'user@forgottpw'); // ajax
+            $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
             
 
 
