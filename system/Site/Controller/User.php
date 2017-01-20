@@ -9,6 +9,7 @@ use System\Libs\Auth;
 use System\Libs\DI;
 use System\Libs\Validate;
 use System\Libs\Session;
+use System\Libs\Emailer;
 
 class User extends SiteController {
 
@@ -25,7 +26,7 @@ class User extends SiteController {
 	 */
 	public function index()
 	{
-		$this->response->redirect('site/error');
+		$this->response->redirect('error');
 	}
 
 	/**
@@ -37,7 +38,6 @@ class User extends SiteController {
 
 	        // ha elküldték a POST adatokat
 	        if($this->request->has_post()) {
-//echo "Siker teaszt";die;
 	            
 	            $username = $this->request->get_post('user_name');
 	            $password = $this->request->get_post('user_password');
@@ -53,7 +53,7 @@ class User extends SiteController {
 					$this->response->json(array(
 						'status' => 'logged_in'
 					));
-	                //$this->response->redirect('site');
+	                //$this->response->redirect();
 	            }
 	            // Sikertelen bejelentkezés
 	            else {
@@ -67,7 +67,7 @@ class User extends SiteController {
 						'status' => 'error',
 						'message' => $error_messages
 					));
-	                //$this->response->redirect('site');
+	                //$this->response->redirect();
 				}			
 			}
 
@@ -76,7 +76,7 @@ class User extends SiteController {
 	            $auth = DI::get('auth');
 	            $login_status = $auth->loginWithCookie();
 	            if ($login_status) {
-	                $this->response->redirect('site');
+	                $this->response->redirect();
 	            } else {
 	                foreach ($auth->getError() as $value) {
 	                   Message::set('error', $value);
@@ -88,7 +88,7 @@ class User extends SiteController {
 
 
 		} else {
-			$this->response->redirect('site/error');
+			$this->response->redirect('error');
 		}
 	}
     
@@ -107,21 +107,6 @@ class User extends SiteController {
 	 */
 	public function register()
 	{
-
-		echo "itt na a register controller<br>";
-
-		var_dump($this->request->get_post());
-
-/*
-  'user_name' => string 'aaaaaaa' (length=7)
-  'user_email' => string 'email@valmai.hu' (length=15)
-  'password' => string 'password' (length=8)
-  'password_again' => string 'password' (length=8)
-*/
-		die;
-
-
-
 		if($this->request->has_post()) {
 
 	        // adatok a $_POST tömbből
@@ -174,7 +159,7 @@ class User extends SiteController {
 	        // végrehajtás, ha nincs hiba 
 	            $user = array();
 	            $user['name'] = $this->request->get_post('user_name');
-	            $user['email'] = $this->request->get_post('email');
+	            $user['email'] = $this->request->get_post('user_email');
 
 	            $user['role_id'] = 3;
 	            $user['provider_type'] = NULL;
@@ -191,7 +176,7 @@ class User extends SiteController {
 
 	                // ellenőrzés, hogy létezik-e már ilyen felhasználói név az adatbázisban
 	                if ($this->user_model->checkUsername($user['name'])) {
-	                    $this->respone->json(array(
+	                    $this->response->json(array(
 	                    	'status' => 'error',
 	                    	'message' => Message::show('username_already_taken')
 	                    ));
@@ -199,7 +184,7 @@ class User extends SiteController {
 
 			         // ellenőrzés, hogy létezik-e már ilyen email cím az adatbázisban
 	                if ($this->user_model->checkEmail($user['email'])) {
-	                    $this->respone->json(array(
+	                    $this->response->json(array(
 	                    	'status' => 'error',
 	                    	'message' => Message::show('user_email_already_taken')
 	                    ));		                    
@@ -221,7 +206,7 @@ class User extends SiteController {
 	            // Új felhasználó adatainak beírása az adatbázisba
 	            $last_inserted_id = $this->user_model->insert($user);
 	            if (!$last_inserted_id) {
-                    $this->respone->json(array(
+                    $this->response->json(array(
                     	'status' => 'error',
                     	'message' => Message::show('account_creation_failed')
                     ));	
@@ -232,14 +217,14 @@ class User extends SiteController {
 	            if ($this->email_verify === true) {
 	                // ellenőrző email küldése, ha az ellenőrző email küldése sikertelen: felhasználó törlése az databázisból
 	                if ($this->_sendVerificationEmail($last_inserted_id, $user['name'], $user['email'], $user['activation_hash'])) {
-		                $this->respone->json(array(
+		                $this->response->json(array(
 		                	'status' => 'success',
 		                	'message' => array( Message::show('verification_mail_sending_successful') )
 		                ));	
 
 	                } else {
 	                    $this->user_model->delete($last_inserted_id);
-	                    $this->respone->json(array(
+	                    $this->response->json(array(
 	                    	'status' => 'error',
 	                    	'message' => array( Message::show('verification_mail_sending_failed') )
 	                    ));
@@ -247,7 +232,7 @@ class User extends SiteController {
 	            }
 
 	            // ha nincs email ellenőrzés, és minden ellenőrzés sikeres
-                $this->respone->json(array(
+                $this->response->json(array(
                 	'status' => 'success',
                 	'message' => Message::show('user_successfully_created')
                 ));	
@@ -273,12 +258,12 @@ class User extends SiteController {
     	$to_name = $user_name;
     	$subject = 'Subject helye...'; // adatbázisból!
     	$template_data = array(
-			'title' = 'Verify registration teszt',
-			'user_name' = $user_name,
-			'user_email' = $user_email,
-			'user_id' = $user_id,
-			'user_activation_hash' = $user_activation_hash,
-			'from_email' => 'valami@sdfgsdf.hu'
+			'base_url' => BASE_URL,
+			'title' => 'Verify registration teszt',
+			'user_name' => $user_name,
+			'user_email' => $user_email,
+			'user_id' => $user_id,
+			'user_activation_hash' => $user_activation_hash
     	);
     	$template_name = 'user_register_verification';
 
@@ -290,131 +275,123 @@ class User extends SiteController {
     	return $emailer->send();
     }
 
-				/**
-				 *	Új jelszó küldése a felhasználónak (elfelejtett jelszó esetén)
-			     *  - lekérdezi, hogy van-e a $_POST-ban kapott email címmel rendelkező felhasználó
-			     *  - generál egy 8 karakter hosszú jelszót és egy new_password_hash-t
-			     *  - az új password hash-t az adatbázisba írja
-			     *  - elküldi email-ben az új jelszót a felhasználónak
-			     *  - ha az email küldése sikertelen, visszaírja az adatbázisba a régi password hash-t
-				 */
-				public function forgottenpw()
-				{
-					if($this->request->is_ajax()){
-			            
-			            // a felhasználó email címe, amire küldjük az új jelszót
-			            $to_email = $this->request->get_post('user_email');
-			            
-			            // lekérdezzük, hogy ehhez az email címhez tartozik-e user (lekérdezzük a nevet, és a password hash-t)
-			            $result = $this->user_model->getPasswordHash($to_email);
-			                // ha nincsen ilyen e-mail címmel regisztrált felhasználó 
-			                if(empty($result)){
-			                    $message = array(
-			                      'status' => 'error',
-			                      'message' => 'Nincsen ilyen e-mail címmel regisztrált felhasználó!'
-			                    );
-			                    $this->response->json($message);
-			                }
-			            
-			            $to_name = $result[0]['name'];
-			            $old_pw = $result[0]['password_hash'];
-			                  
-			                // 8 karakter hosszú új jelszó generálása (str_shuffle összekeveri a stringet, substr levágja az első 8 karaktert)
-			                $new_password = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 8);
-			                $hash_cost_factor = (Config::get('hash_cost_factor') !== null) ? Config::get('hash_cost_factor') : null;
-			                $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT, array('cost' => $hash_cost_factor));            
-			            
-			            // új jelszó hash beírása az adatbázisba
-			            $result = $this->user_model->setNewPassword($to_email, $new_password_hash);
-			                // ha hiba történt a adatbázisba íráskor
-			                if($result === false){
-			                    $message = array(
-			                        'status' => 'error',
-			                        'message' => 'Adatbázis hiba!'
-			                    );
-			                    $this->response->json($message);
-			                }
-			            
-			            
-			                // ellenőrző email küldése, ha az ellenőrző email küldése sikertelen: felhasználó törlése az databázisból
-			                if ($this->_sendForgottenPwEmail($last_inserted_id, $user['name'], $user['email'], $user['activation_hash'])) {
-				                $this->respone->json(array(
-				                	'status' => 'success',
-				                	'message' => array( Message::show('verification_mail_sending_successful') )
-				                ));	
+    /**
+     * Fogadja a regisztráció hitelesítő email linkjéről érkező kérést
+     *
+     * @param integer $id
+     * @param string $activation_hash
+     */
+    public function verify($id, $activation_hash)
+    {
+		// új regisztráció ellenőrzése
+		$result = $this->user_model->verifyNewUser((int)$id, $activation_hash);
 
-			                } else {
-			                    $this->user_model->delete($last_inserted_id);
-			                    $this->respone->json(array(
-			                    	'status' => 'error',
-			                    	'message' => array( Message::show('verification_mail_sending_failed') )
-			                    ));
-			                }
+		if($result) {
+			Message::set('success', 'account_activation_successful');
+		} else {
+			Message::set('error', 'account_activation_failed');
+		}
 
+		$this->response->redirect();
+    }
 
+	/**
+	 *	Új jelszó küldése a felhasználónak (elfelejtett jelszó esetén)
+     *  - lekérdezi, hogy van-e a $_POST-ban kapott email címmel rendelkező felhasználó
+     *  - generál egy 8 karakter hosszú jelszót és egy new_password_hash-t
+     *  - az új password hash-t az adatbázisba írja
+     *  - elküldi email-ben az új jelszót a felhasználónak
+     *  - ha az email küldése sikertelen, visszaírja az adatbázisba a régi password hash-t
+	 */
+	public function forgottpw()
+	{
+		if($this->request->is_ajax()){
+            
+            // a felhasználó email címe, amire küldjük az új jelszót
+            $user_email = $this->request->get_post('user_email');
+            
+            // lekérdezzük, hogy ehhez az email címhez tartozik-e user (lekérdezzük a nevet, és a password hash-t)
+            $result = $this->user_model->getPasswordHash($user_email);
+            // ha nincsen ilyen e-mail címmel regisztrált felhasználó 
+            if(empty($result)){
+                $this->response->json(array(
+                  'status' => 'error',
+                  'message' => 'Nincsen ilyen e-mail címmel regisztrált felhasználó!'
+                ));
+            }
+            
+            // a felhasználó neve
+            $user_name = $result[0]['name'];
+            // a felhasználó régi titkosított jelszava
+            $old_password_hash = $result[0]['password_hash'];
+                  
+            // 8 karakter hosszú új jelszó generálása (str_shuffle összekeveri a stringet, substr levágja az első 8 karaktert)
+            $new_password = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 8);
+            $hash_cost_factor = (Config::get('hash_cost_factor') !== null) ? Config::get('hash_cost_factor') : null;
+            $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT, array('cost' => $hash_cost_factor));            
+        
+            // új jelszó hash beírása az adatbázisba
+            $result = $this->user_model->setNewPassword($user_email, $new_password_hash);
+            // ha hiba történt az adatbázisba íráskor
+            if($result === false){
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Adatbázis hiba!'
+                ));
+            }
+            
+            // új jelszót tartalmazó email küldése
+            if ($this->_sendForgottenPwEmail($user_email, $user_name, $new_password)) {
+                $this->response->json(array(
+                	'status' => 'success',
+                	'message' => Message::show('Az új jelszót elküldtük az email címére.')
+                ));	
 
-			            if ($result) {
-			                $message = array(
-			                  'status' => 'success',
-			                  'message' => 'Új jelszó elküldve!'
-			                );
-			                $this->response->json($message);
-			                
-			            } else {
-			                // régi password hash visszaírása az adatbázisba
-			                $this->user_model->setNewPassword($to_email, $old_pw);
-			                
-			                $message = array(
-			                  'status' => 'error',
-			                  'message' => 'Az új jelszó küldése sikertelen!'
-			                );
-			                $this->response->json($message);
-			                
-			            }
+            } else {
+                // régi password hash visszaírása az adatbázisba
+                $this->user_model->setNewPassword($user_email, $old_password_hash);
+                $this->response->json(array(
+                  'status' => 'error',
+                  'message' => Message::show('Új jelszó küldése sikertelen.')
+                ));
+            }
 
-					} else {
-						$this->response->redirect('admin/error');	
-					}
-					
-				}   
+		} else {
+			$this->response->redirect('error');
+		}
+		
+	}   
 
-			    /**
-			     * sends an email to the provided email address
-			     *
-			     * @param int       $user_id                    user's id
-			     * @param string    $user_name                  felhasznalo neve
-			     * @param string    $user_email                 user's email
-			     * @param string    $user_activation_hash       user's mail verification hash string
+    /**
+     * Új jelszót tartalmazó emailt küld a felhasználónak
+     *
+     * @param string    $user_email
+     * @param string    $user_name
+     * @param string    $new_password
+     * @return boolean
+     */
+    private function _sendForgottenPwEmail($user_email, $user_name, $new_password)
+    {
+    	$from_email = 'info_ka@example.com'; // adatbázisból! 
+    	$from_name = 'ingatlanok-hitelek'; // adatbázisból!
+    	$to_email = $user_email;
+    	$to_name = $user_name;
+    	$subject = 'Subject helye...'; // adatbázisból!
+    	$template_data = array(
+			'base_url' => BASE_URL,
+			'title' => 'Elfelejtett jelszó teszt',
+			'user_name' => $user_name,
+			'new_password' => $new_password
+    	);
+    	$template_name = 'forgotten_password';
 
-			     * @return boolean
-			     */
-			    private function _sendForgottenPwEmail($user_id, $user_name, $user_email, $user_activation_hash)
-			    {
-			    	$from_email = 'info_ka@example.com'; // adatbázisból! 
-			    	$from_name = 'teszt name 44'; // adatbázisból!
-			    	$to_email = $user_email;
-			    	$to_name = $user_name;
-			    	$subject = 'Subject helye...'; // adatbázisból!
-			    	$template_data = array(
-						'title' = 'Verify registration teszt',
-						'user_name' = $user_name,
-						'user_email' = $user_email,
-						'user_id' = $user_id,
-						'user_activation_hash' = $user_activation_hash,
-						'from_email' => 'valami@sdfgsdf.hu'
-			    	);
-			    	$template_name = 'user_register_verification';
+    	$emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template_name);
+    	
+    	// küldés smtp-vel
+    	//$emailer->setSmtp();
 
-			    	$emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template_name);
-			    	
-			    	// küldés smtp-vel
-			    	//$emailer->setSmtp();
-
-			    	return $emailer->send();
-			    }
-
-
-
+    	return $emailer->send();
+    }
 
 }
 ?>
