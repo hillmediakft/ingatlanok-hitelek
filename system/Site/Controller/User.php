@@ -104,6 +104,8 @@ class User extends SiteController {
 	
 	/**
 	 *	Új felhasználó regisztrációja
+	 *	Ha valamilyen hiba történik a regisztráció során, akkor a visszaadott json message elemének tömbnek kell lennie (mert lehet több hiba is egyszerre)
+	 *
 	 */
 	public function register()
 	{
@@ -118,7 +120,7 @@ class User extends SiteController {
 	        // szabályok megadása az egyes mezőkhöz (mező neve, label, szabály)
 	        $validate->add_rule('user_name', 'username', array(
 	            'required' => true,
-	            'min' => 2
+	            'min' => 3
 	        ));
 	        $validate->add_rule('user_email', 'email', array(
 	            'required' => true,
@@ -129,7 +131,7 @@ class User extends SiteController {
 	            'required' => true,
 	            'min' => 6
 	        ));
-	        $validate->add_rule('password_again', 'password_again', array(
+	        $validate->add_rule('password_again', 'password', array(
 	            'required' => true,
 	            'matches' => 'password'
 	        ));
@@ -144,16 +146,20 @@ class User extends SiteController {
 	        // mezők validálása
 	        $validate->check($post_data);
 
+	        // a hibaüzenetek ebbe a tömbbe kerülnek
+	        $error_messages = array();
+
 	        // HIBAELLENŐRZÉS - ha valamilyen hiba van a form adataiban
 	        if(!$validate->passed()){
 	            foreach ($validate->get_error() as $error_msg) {
-	                //Message::set('error', $error_msg);
 	            	// egy tömbbe kell rakni a javascriptnek küldendő hibaüzeneteket
-	                $error_messages[] = $error_msg;
+	                $error_messages[] = Message::show($error_msg);
 	            }
 
-	            //$this->response->redirect('admin/user/insert');
-	            $this->response->json($error_messages);
+	            $this->response->json(array(
+	            	'status' => 'error',
+	            	'message' => $error_messages
+	            ));
 	        }
 	        else {
 	        // végrehajtás, ha nincs hiba 
@@ -174,22 +180,25 @@ class User extends SiteController {
 
 	            $user['password_hash'] = password_hash($this->request->get_post('password'), PASSWORD_DEFAULT, array('cost' => $hash_cost_factor));
 
+
 	                // ellenőrzés, hogy létezik-e már ilyen felhasználói név az adatbázisban
 	                if ($this->user_model->checkUsername($user['name'])) {
-	                    $this->response->json(array(
-	                    	'status' => 'error',
-	                    	'message' => Message::show('username_already_taken')
-	                    ));
+	                	$error_messages[] = Message::show('username_already_taken');
 	                }
-
-			         // ellenőrzés, hogy létezik-e már ilyen email cím az adatbázisban
+					// ellenőrzés, hogy létezik-e már ilyen email cím az adatbázisban
 	                if ($this->user_model->checkEmail($user['email'])) {
+	                	$error_messages[] = Message::show('user_email_already_taken');
+	                }
+	                // ha a felhasználói név, vagy az email cím már létezik
+	                if (!empty($error_messages)) {
 	                    $this->response->json(array(
 	                    	'status' => 'error',
-	                    	'message' => Message::show('user_email_already_taken')
-	                    ));		                    
+	                    	'message' => $error_messages
+	                    ));	
 	                }
 
+
+	             
 	            // ha be van állítva e-mail ellenőrzéses regisztráció
 	            if ($this->email_verify === true) {
 	                // generate random hash for email verification (40 char string)
@@ -208,7 +217,7 @@ class User extends SiteController {
 	            if (!$last_inserted_id) {
                     $this->response->json(array(
                     	'status' => 'error',
-                    	'message' => Message::show('account_creation_failed')
+                    	'message' => array(Message::show('account_creation_failed'))
                     ));	
 	            }
 
