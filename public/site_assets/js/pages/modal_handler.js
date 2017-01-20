@@ -126,7 +126,7 @@ var modalHandler = function () {
         var $data = $("#forgottenpw_form").serialize();
 				
         $.ajax({
-            url: "user/forgottenpw",
+            url: "user/forgottpw",
             data: $data,
             type: "POST",
             dataType: "json",
@@ -134,7 +134,7 @@ var modalHandler = function () {
                 $.blockUI({
                     boxed: true,
                     message: '<h3>Feldolgozás...</h3>',
-                    baseZ: 5000
+                    baseZ: 9999
                 }); 
             },
             complete: function(){
@@ -239,7 +239,7 @@ var modalHandler = function () {
                 $.blockUI({
                     boxed: true,
                     message: '<h3>Feldolgozás...</h3>',
-                    baseZ: 5000
+                    baseZ: 9999
                 }); 
             },
             complete: function(){
