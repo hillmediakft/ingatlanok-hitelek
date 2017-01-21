@@ -71,18 +71,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="slider_title" class="control-label">Slide cím</label>
-                                    <input type="text" name="slider_title" id="slider_title" placeholder="A slide címe" class="form-control input-xlarge" value="<?php echo $slider['title']; ?>"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="slider_text" class="control-label">Slide szöveg</label>
-                                    <input type="text" name="slider_text" id="slider_text" placeholder="A slide szövege" class="form-control input-xlarge" value="<?php echo $slider['text']; ?>"/>
-                                </div>
-
-                                <div class="form-group">
                                     <label for="slider_link" class="control-label">Slide link</label>
                                     <input type="text" name="slider_link" id="slider_link" placeholder="A slide linkje" class="form-control input-xlarge" value="<?php echo $slider['target_url']; ?>"/>
-                                </div>											
+                                </div>                                          
 
                                 <!--Státusz beállítása-->
                                 <div class="form-group">
@@ -91,6 +82,42 @@
                                         <option value="1" <?php echo ($slider['active'] == 1) ? 'selected' : ''; ?>>Aktív</option>
                                         <option value="0" <?php echo ($slider['active'] == 0) ? 'selected' : ''; ?>>Inaktív</option>
                                     </select>
+                                </div>
+
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#tab_1_1" data-toggle="tab"> Magyar </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_1_2" data-toggle="tab"> Angol </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="tab_1_1">
+
+                                        <div class="form-group">
+                                            <label for="slider_title_hu" class="control-label">Slide cím</label>
+                                            <input type="text" name="slider_title_hu" id="slider_title_hu" placeholder="A slide címe" class="form-control input-xlarge" value="<?php echo $slider['title_hu']; ?>"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="slider_text_hu" class="control-label">Slide szöveg</label>
+                                            <input type="text" name="slider_text_hu" id="slider_text_hu" placeholder="A slide szövege" class="form-control input-xlarge" value="<?php echo $slider['text_hu']; ?>"/>
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_1_2">
+
+                                        <div class="form-group">
+                                            <label for="slider_title_en" class="control-label">Slide cím</label>
+                                            <input type="text" name="slider_title_en" id="slider_title_en" placeholder="A slide címe" class="form-control input-xlarge" value="<?php echo $slider['title_en']; ?>"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="slider_text_en" class="control-label">Slide szöveg</label>
+                                            <input type="text" name="slider_text_en" id="slider_text_en" placeholder="A slide szövege" class="form-control input-xlarge" value="<?php echo $slider['text_en']; ?>"/>
+                                        </div>
+
+                                    </div>
                                 </div>
 
                                 <!-- régi kép elérési útja-->

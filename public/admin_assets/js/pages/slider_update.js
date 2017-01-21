@@ -26,7 +26,8 @@ var Slider_update = function () {
     };
 
     var ckeditorInit = function () {
-        CKEDITOR.replace('slider_text', {customConfig: 'config_minimal1.js'});
+        CKEDITOR.replace('slider_text_hu', {customConfig: 'config_minimal1.js'});
+        CKEDITOR.replace('slider_text_en', {customConfig: 'config_minimal1.js'});
     };
 
     return {

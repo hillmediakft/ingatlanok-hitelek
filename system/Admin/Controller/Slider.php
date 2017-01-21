@@ -58,8 +58,10 @@ class Slider extends AdminController {
                 $data['slider_order'] = ($this->slider_model->slide_highest_order_number()) + 1;
                 $data['picture'] = $dest_image_name;
                 //$data['target_url'] = "";
-                $data['text'] = $this->request->get_post('slider_text');
-                $data['title'] = $this->request->get_post('slider_title');
+                $data['text_hu'] = $this->request->get_post('slider_text_hu');
+                $data['text_en'] = $this->request->get_post('slider_text_en');
+                $data['title_hu'] = $this->request->get_post('slider_title_hu');
+                $data['title_en'] = $this->request->get_post('slider_title_en');
                 $data['target_url'] = $this->request->get_post('slider_link');
 
                 // adatbázis lekérdezés 
@@ -120,8 +122,10 @@ class Slider extends AdminController {
                     $old_thumb_path = DI::get('url_helper')->thumbPath($old_img_path);
                 }
 
-                $data['text'] = $this->request->get_post('slider_text');
-                $data['title'] = $this->request->get_post('slider_title');
+                $data['text_hu'] = $this->request->get_post('slider_text_hu');
+                $data['text_en'] = $this->request->get_post('slider_text_en');
+                $data['title_hu'] = $this->request->get_post('slider_title_hu');
+                $data['title_en'] = $this->request->get_post('slider_title_en');
                 $data['target_url'] = $this->request->get_post('slider_link');
 
                 // új adatok beírása az adatbázisba (update) a $data tömb tartalmazza a frissítendő adatokat 

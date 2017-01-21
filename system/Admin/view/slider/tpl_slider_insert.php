@@ -69,15 +69,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="slider_title" class="control-label">Slide cím</label>
-                                    <input type="text" name="slider_title" id="slider_title" placeholder="" class="form-control input-xlarge" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="slider_text" class="control-label">Slide szöveg</label>
-                                    <textarea name="slider_text" id="slider_text" placeholder="" class="form-control input-xlarge"></textarea>
-                                </div>
-
-                                <div class="form-group">
                                     <label for="slider_link" class="control-label">Slide link</label>
                                     <input type="text" name="slider_link" id="slider_link" placeholder="" class="form-control input-xlarge" />
                                 </div>
@@ -87,6 +78,42 @@
                                         <option value="0">Inaktív</option>
                                         <option value="1">Aktív</option>
                                     </select>
+                                </div>
+
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#tab_1_1" data-toggle="tab"> Magyar </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_1_2" data-toggle="tab"> Angol </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="tab_1_1">
+
+                                        <div class="form-group">
+                                            <label for="slider_title_hu" class="control-label">Slide cím</label>
+                                            <input type="text" name="slider_title_hu" id="slider_title_hu" placeholder="" class="form-control input-xlarge" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="slider_text_hu" class="control-label">Slide szöveg</label>
+                                            <textarea name="slider_text_hu" id="slider_text_hu" placeholder="" class="form-control input-xlarge"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_1_2">
+
+                                        <div class="form-group">
+                                            <label for="slider_title_en" class="control-label">Slide cím</label>
+                                            <input type="text" name="slider_title_en" id="slider_title_en" placeholder="" class="form-control input-xlarge" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="slider_text_en" class="control-label">Slide szöveg</label>
+                                            <textarea name="slider_text_en" id="slider_text_en" placeholder="" class="form-control input-xlarge"></textarea>
+                                        </div>
+
+                                    </div>
                                 </div>
 
                             </div>

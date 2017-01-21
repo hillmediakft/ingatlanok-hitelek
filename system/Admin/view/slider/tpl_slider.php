@@ -63,8 +63,8 @@
                                     <td class="sortable_mover"><i class="fa fa-arrows"></i></td>
 
                                     <td><img src="<?php echo $this->getConfig('slider.upload_path') . $this->url_helper->thumbPath($slider['picture']); ?>"></td>
-                                    <td><?php echo $slider['title']; ?></td>
-                                    <td><?php echo $slider['text']; ?></td>
+                                    <td><?php echo $slider['title_hu']; ?></td>
+                                    <td><?php echo $slider['text_hu']; ?></td>
 
                                     <?php if ($slider['active'] == 1) { ?>
                                         <td><span class="label label-sm label-success"><?php echo 'Aktív'; ?></span></td>

@@ -33,7 +33,6 @@ class Slider_model extends AdminModel {
      */
     public function oneSlide($id)
     {
-        $this->query->set_columns(array('id', 'active', 'picture', 'target_url', 'title', 'text'));
         $this->query->set_where('id', '=', $id);
         $result = $this->query->select();
         return $result[0];
