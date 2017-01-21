@@ -24,8 +24,9 @@
 			
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-primary" id="forgottenpw_submit">Új jelszó</button>
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button>
+			<button type="button" class="send-btn" id="forgottenpw_submit">Új jelszó</button>
+			<!-- <button type="button" class="btn btn-primary" id="forgottenpw_submit">Új jelszó</button> -->
+			<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button> -->
 		</div>
 			
 	</div>
