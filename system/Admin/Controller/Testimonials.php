@@ -38,8 +38,10 @@ class Testimonials extends AdminController {
 			if($this->request->has_post()) {
 
 				$data['name'] = $this->request->get_post('testimonial_name');
-				$data['title'] = $this->request->get_post('testimonial_title');
-				$data['text'] = $this->request->get_post('testimonial_text');
+				$data['title_hu'] = $this->request->get_post('testimonial_title_hu');
+				$data['title_en'] = $this->request->get_post('testimonial_title_en');
+				$data['text_hu'] = $this->request->get_post('testimonial_text_hu');
+				$data['text_en'] = $this->request->get_post('testimonial_text_en');
 
 				// input adatok tárolása session-ben
 				Session::set('testimonial_input', $data);
@@ -52,10 +54,10 @@ class Testimonials extends AdminController {
 		            'required' => true,
 		            'min' => 2
 		        ));
-		        $validate->add_rule('title', 'beosztás', array(
+		        $validate->add_rule('title_hu', 'beosztás', array(
 		            'required' => true
 		        ));
-		        $validate->add_rule('text', 'vélemény', array(
+		        $validate->add_rule('text_hu', 'vélemény', array(
 		            'required' => true
 		        ));
 
@@ -110,8 +112,10 @@ class Testimonials extends AdminController {
 			if($this->request->has_post()) {
 
 				$data['name'] = $this->request->get_post('testimonial_name');
-				$data['title'] = $this->request->get_post('testimonial_title');
-				$data['text'] = $this->request->get_post('testimonial_text');
+				$data['title_hu'] = $this->request->get_post('testimonial_title_hu');
+				$data['title_en'] = $this->request->get_post('testimonial_title_en');
+				$data['text_hu'] = $this->request->get_post('testimonial_text_hu');
+				$data['text_en'] = $this->request->get_post('testimonial_text_en');
 
 				$result = $this->testimonials_model->update($id, $data);
 

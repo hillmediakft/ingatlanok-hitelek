@@ -50,9 +50,9 @@
                             <?php foreach ($all_testimonials as $testimonial) { ?>
                                 <tr class="odd gradeX">
                                     <td><?php echo $testimonial['id']; ?></td>
-                                    <td><?php echo $testimonial['text']; ?></td>
+                                    <td><?php echo $testimonial['text_hu']; ?></td>
                                     <td><?php echo $testimonial['name']; ?></td>
-                                    <td><?php echo $testimonial['title']; ?></td>
+                                    <td><?php echo $testimonial['title_hu']; ?></td>
 
                                     <td>
                                         <div class="actions">

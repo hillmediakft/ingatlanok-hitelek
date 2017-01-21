@@ -41,15 +41,43 @@
 							<input type="text" name="testimonial_name" class="form-control input-large" value="<?php echo $data_arr[0]['name'];?>"/>
 						</div>
 
-						<div class="form-group">
-							<label for="testimonial_title">Beosztás</label>	
-							<input type='text' name='testimonial_title' class='form-control input-large' value="<?php echo $data_arr[0]['title'];?>"/>
-						</div>
+				        <ul class="nav nav-tabs">
+				            <li class="active">
+				                <a href="#tab_1_1" data-toggle="tab"> Magyar </a>
+				            </li>
+				            <li>
+				                <a href="#tab_1_2" data-toggle="tab"> Angol </a>
+				            </li>
 
-						<div class="form-group">
-							<label for="testimonial_text">Vélemény</label>
-							<textarea type='text' name='testimonial_text' class='form-control'><?php echo $data_arr[0]['text'] ?></textarea>
-						</div>
+				        </ul>
+				        <div class="tab-content">
+				            <div class="tab-pane fade active in" id="tab_1_1">
+
+								<div class="form-group">
+									<label for="testimonial_title_hu">Beosztás</label>	
+									<input type='text' name='testimonial_title_hu' class='form-control input-large' value="<?php echo $data_arr[0]['title_hu'];?>"/>
+								</div>
+
+								<div class="form-group">
+									<label for="testimonial_text_hu">Vélemény</label>
+									<textarea type='text' name='testimonial_text_hu' class='form-control'><?php echo $data_arr[0]['text_hu'] ?></textarea>
+								</div>
+
+				            </div>
+				            <div class="tab-pane fade" id="tab_1_2">
+
+								<div class="form-group">
+									<label for="testimonial_title_en">Beosztás</label>	
+									<input type='text' name='testimonial_title_en' class='form-control input-large' value="<?php echo $data_arr[0]['title_en'];?>"/>
+								</div>
+
+								<div class="form-group">
+									<label for="testimonial_text_en">Vélemény</label>
+									<textarea type='text' name='testimonial_text_en' class='form-control'><?php echo $data_arr[0]['text_en'] ?></textarea>
+								</div>
+
+				            </div>
+				        </div>
 
 					</div> <!-- END USER GROUPS PORTLET BODY-->
 				</div> <!-- END USER GROUPS PORTLET-->
