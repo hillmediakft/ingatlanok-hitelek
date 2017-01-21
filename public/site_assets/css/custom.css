@@ -87,3 +87,24 @@
     width: 100%;
 }
 */
+
+.modal-content .send-btn {
+    background-color: #c44a35;
+    border: medium none;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    height: 42px;
+    line-height: 42px;
+    padding: 0;
+    text-shadow: none;
+    text-transform: uppercase;
+    transition: all 0.2s linear 0s;
+    width: 50%;
+    margin: auto;
+}
+
+.modal-content .send-btn:hover {
+    opacity: 0.8;
+    transform: scale(0.95);
+}
