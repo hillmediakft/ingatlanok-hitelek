@@ -67,13 +67,15 @@ use System\Libs\Language as Lang;
                                             <?php
                                                 if ($value['tipus'] == 1) {
                                                     $label = Lang::get('kereso_elado');
-                                                    $css_class = 'hot';
+                                                    $css_class = 'sale';
                                                 } else {
                                                     $label = Lang::get('kereso_kiado');
-                                                    $css_class = 'best';
+                                                    $css_class = 'rest';
                                                 }
                                             ?>
-                                            <span class="features-label <?php echo $css_class; ?>"><?php echo $label; ?></span>
+                                            <!-- <span class="features-label <?php echo $css_class; ?>"><?php echo $label; ?></span> -->
+                                            <span class="item-label <?php echo $css_class; ?>"><?php echo $label; ?></span>
+
                                             
                                         <?php if ($value['kepek']) { ?>
                                             <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
