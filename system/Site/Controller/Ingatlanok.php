@@ -66,5 +66,37 @@ class Ingatlanok extends SiteController {
         $view->add_link('js', SITE_JS . 'pages/ingatlanok.js');
         $view->render('ingatlanok/tpl_ingatlanok', $data);
     }
+
+    /**
+     * Ingatlan adatlap
+     * @param integer $id
+     */
+    public function adatlap($id)
+    {
+        $page_data = $this->ingatlanok_model->getPageData('ingatlanok');
+        
+        $data = $this->addGlobalData();
+        $data['title'] = $page_data['metatitle_' . $this->lang];
+        $data['description'] = $page_data['metadescription_' . $this->lang];
+        $data['keywords'] = $page_data['metakeywords_' . $this->lang];
+
+        // ingatlani adatainak lekérdezése
+        $data['ingatlan'] = $this->ingatlanok_model->getProperty((int)$id);
+        // ingatlanhoz tartozó képek
+        $data['pictures'] = json_decode($data['ingatlan']['kepek']);
+
+        // ar változó a hasonló ingatlanok lekérdezéshez
+        $ar = ($data['ingatlan']['tipus'] = 1) ? $data['ingatlan']['ar_elado'] : $data['ingatlan']['ar_kiado'];
+        // hasonló ingatlanok
+        $data['hasonlo_ingatlan'] = $this->ingatlanok_model->hasonloIngatlanok($id, $data['ingatlan']['tipus'], $data['ingatlan']['kategoria'], $data['ingatlan']['varos'], $ar);
+
+
+        $view = new View();
+        $view->setHelper(array('url_helper', 'str_helper'));
+//$this->view->debug(true); 
+        // $view->add_link('js', SITE_JS . 'pages/adatlap.js');
+        $view->render('ingatlanok/tpl_adatlap', $data);
+    }
+
 }
 ?>
