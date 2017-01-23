@@ -1,9 +1,4 @@
 /* modal beállítások */
-/*
-.modal-open {
-  overflow-y: hidden !important;
-}
-*/
 .modal {
   z-index: 9900;
 }
@@ -23,6 +18,12 @@
 }
 
 /*
+.modal-open {
+  overflow-y: hidden !important;
+}
+*/
+
+/*
 .modal-header {
     border-bottom: 1px solid #e5e5e5;
     min-height: 16.43px;
@@ -38,53 +39,6 @@
     border-top: 1px solid #e5e5e5;
     padding: 15px;
     text-align: right;
-}
-*/
-
-
-
-
-/* line 2802, scss/_slider.scss */
-.item .preview .features-label {
-  position: absolute;
-  text-transform: uppercase;
-  color: #fff;
-  /*
-  top: 10px;
-  left: 10px;
-  */		
-  padding: 6px 10px; 
-}
-/* line 2809, scss/_slider.scss */
-.item .preview .features-label.best {
-  background-color: #2dd1cf;
-}
-/* line 2812, scss/_slider.scss */
-.item .preview .features-label.new {
-  background-color: #b2d12d;
-}
-/* line 2815, scss/_slider.scss */
-.item .preview .features-label.hot {
-  background-color: #d12d2d;
-}
-/* line 2818, scss/_slider.scss */
-.item .preview .features-label.sale {
-  background-color: #d1cb2d;
-}
-
-/*
-.register-block {
-    border: 1px solid #e7e4e4;
-    padding: 19px;
-}
-
-.register-form input[type="text"], .register-form input[type="email"], .register-form input[type="tel"] {
-    border: 1px solid #e7e4e4;
-    font-size: 16px;
-    height: 46px;
-    margin-bottom: 15px;
-    padding-left: 16px;
-    width: 100%;
 }
 */
 
@@ -107,4 +61,48 @@
 .modal-content .send-btn:hover {
     opacity: 0.8;
     transform: scale(0.95);
+}
+
+
+/*
+.register-block {
+    border: 1px solid #e7e4e4;
+    padding: 19px;
+}
+
+.register-form input[type="text"], .register-form input[type="email"], .register-form input[type="tel"] {
+    border: 1px solid #e7e4e4;
+    font-size: 16px;
+    height: 46px;
+    margin-bottom: 15px;
+    padding-left: 16px;
+    width: 100%;
+}
+*/
+
+
+.item .preview .item-label.sale {
+    background-color: rgba(62, 199, 69, 0.8);
+}
+.item .preview .item-label.rest {
+    background-color: rgba(73, 158, 255, 0.8);
+}
+
+.item .preview .item-label {
+    padding: 6px 0;
+    right: 37%;
+    text-align: center;
+    top: 10%;
+    transform: rotate(-45deg);
+    width: 100%;
+    z-index: 0;
+    color: #fff;
+    font-size: 16px;
+    position: absolute;
+    text-shadow: 1px 1px 2px #969696;
+    text-transform: uppercase;
+}
+
+.preview {
+    overflow: hidden;
 }
