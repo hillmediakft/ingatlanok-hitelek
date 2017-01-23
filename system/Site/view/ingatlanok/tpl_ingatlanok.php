@@ -73,7 +73,7 @@ use System\Libs\Language as Lang;
                                                     $css_class = 'rest';
                                                 }
                                             ?>
-                                            <!-- <span class="features-label <?php echo $css_class; ?>"><?php echo $label; ?></span> -->
+                                            <!-- <span class="features-label <?php //echo $css_class; ?>"><?php //echo $label; ?></span> -->
                                             <span class="item-label <?php echo $css_class; ?>"><?php echo $label; ?></span>
 
                                             
