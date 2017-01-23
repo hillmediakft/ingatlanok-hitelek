@@ -106,3 +106,12 @@
 .preview {
     overflow: hidden;
 }
+
+.property-desc h4.title {
+    color: #000;
+    /*display: block;*/
+    font-family: "Lato-Bold",Arial,sans-serif;
+    font-size: 24px;
+    margin-bottom: 12px;
+    text-decoration: none;
+}
