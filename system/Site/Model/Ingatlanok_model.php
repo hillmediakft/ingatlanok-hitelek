@@ -91,11 +91,11 @@ class Ingatlanok_model extends SiteModel {
     }
 
     /**
-     * 	Lekérdezi az ingatlanok összes adatát id alapján
+     * 	Lekérdezi egy ingatlan összes adatát id alapján
      * 	
      * 	@param array 
      */
-    public function get_property_query($id)
+    public function getProperty($id)
     {
 //        $this->query->debug(true);
         $this->query->set_columns(array(
@@ -145,9 +145,9 @@ class Ingatlanok_model extends SiteModel {
             'ingatlanok.konditerem',
             'ingatlanok.latitude',
             'ingatlanok.longitude',
-            'ingatlan_kategoria.*',
             'district_list.district_name',
             'city_list.city_name',
+            'ingatlan_kategoria.*',
             'ingatlan_allapot.*',
             'ingatlan_futes.*',
             'ingatlan_parkolas.*',
@@ -171,7 +171,8 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_where('id', '=', $id);
         $this->query->set_where('status', '=', 1);
 
-        return $this->query->select();
+        $result = $this->query->select();
+        return (isset($result[0])) ? $result[0] : $result;
     }
 
     /**
@@ -824,13 +825,14 @@ foreach ($params as $key => $value) {
     /**
      * Hasonló ingatlanok
      *
-     * Hosszú leírás
-     *
-     * @param int       $var1	leírás
-     * @param string 	$var2	leírás
-     * @return array, boolean 
+     * @param int       $ingatlan_id
+     * @param string    $ingatlan_tipus
+     * @param string    $kategoria
+     * @param string    $varos
+     * @param string 	$ar
+     * @return array || false 
      */
-    public function hasonlo_ingatlanok($ingatlan_id, $ingatlan_tipus, $kategoria, $varos, $ar)
+    public function hasonloIngatlanok($ingatlan_id, $ingatlan_tipus, $kategoria, $varos, $ar)
     {
         $min_ar = $ar - ($ar * 0.1);
         $max_ar = $ar + ($ar * 0.1);
