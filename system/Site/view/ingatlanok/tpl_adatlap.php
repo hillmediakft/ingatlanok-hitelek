@@ -18,72 +18,95 @@ use System\Libs\Language as Lang;
             </div>
         </div>
 
+        <!-- Szürke doboz felül -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ingatlan-info-box">
+                        doboz
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="container">
             <div class="row">
                 <div class="col-md-9 col-sm-12">
 
                     <div class="single-item-page">
+
+
+
                         
-                        <!-- PHOTO SLIDER -->
-                        <div class="row">
-                            <div class="col-sm-12">
-                                
-                                <h3 class="section-title">Retail Space In West Side <span class="price">USD <span class="value">999,000</span></span></h3>
-                                <div class="item-photos">
-                                    <div id="slideshow-main" class="main-slides">
-                                        <div class="jcarousel-arrows">
-                                            <a href="#" class="prev-slide"><i class="fa fa-angle-left"></i></a>
-                                            <a href="#" class="next-slide"><i class="fa fa-angle-right"></i></a>
+
+                        <?php if (!empty($pictures)) { ?>
+                            <!-- PHOTO SLIDER -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    
+                                    <!-- <h3 class="section-title">Retail Space In West Side <span class="price">USD <span class="value">999,000</span></span></h3> -->
+                                    <div class="item-photos">
+                                        <div id="slideshow-main" class="main-slides">
+                                            
+                                            <!-- eladó/kiadó cimke-->                                        
+                                            <?php
+                                                if ($ingatlan['tipus'] == 1) {
+                                                    $label = Lang::get('kereso_elado');
+                                                    $css_class = 'sale';
+                                                } else {
+                                                    $label = Lang::get('kereso_kiado');
+                                                    $css_class = 'rest';
+                                                }
+                                            ?>
+                                            <span class="item-label <?php echo $css_class; ?>"><?php echo $label; ?></span>
+
+                                            <div class="jcarousel-arrows">
+                                                <a href="#" class="prev-slide"><i class="fa fa-angle-left"></i></a>
+                                                <a href="#" class="next-slide"><i class="fa fa-angle-right"></i></a>
+                                            </div>
+                                            <div class="slides-container" id="slides-to-show">
+                                                <ul>
+                                                    <?php foreach ($pictures as $picture) { ?>
+                                                        <li>
+                                                            <img alt="<?php echo $ingatlan['ingatlan_nev_' . LANG]; ?>" src="<?php echo $this->getConfig('ingatlan_photo.upload_path') . $picture; ?>"/>
+                                                        </li>
+                                                    <?php } ?>
+                                                </ul>   
+                                            </div>                                  
                                         </div>
-                                        <div class="slides-container" id="slides-to-show">
-                                            <ul>
+                                        <div id="slideshow-carousel" class="main-thumbnail">
+                                            <ul id="carousel" class="jcarousel jcarousel-skin-tango">
                                                 <?php foreach ($pictures as $picture) { ?>
                                                     <li>
                                                         <img alt="<?php echo $ingatlan['ingatlan_nev_' . LANG]; ?>" src="<?php echo $this->getConfig('ingatlan_photo.upload_path') . $picture; ?>"/>
                                                     </li>
-                                                <?php } ?>
-                                            </ul>   
-                                        </div>                                  
-                                    </div>
-                                    <div id="slideshow-carousel" class="main-thumbnail">
-                                        <ul id="carousel" class="jcarousel jcarousel-skin-tango">
-                                            <?php foreach ($pictures as $picture) { ?>
-                                                <li>
-                                                    <img alt="<?php echo $ingatlan['ingatlan_nev_' . LANG]; ?>" src="<?php echo $this->getConfig('ingatlan_photo.upload_path') . $picture; ?>"/>
-                                                </li>
-                                            <?php } ?>                                            
-                                        </ul>
+                                                <?php } ?>                                            
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h4 class="small-section-title"><?php echo $ingatlan['ingatlan_nev_'. LANG]; ?></h4>
-                                <p>
-                                    <?php echo $ingatlan['leiras_' . LANG]; ?>
-                                </p>
+                        <?php } else { ?>
+                            <!-- 
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="empty-space-25"></div>
+                                </div>
                             </div>
-                        </div>
+                             -->
+                        <?php } ?>
+
+                        <!-- DETAIL INFO -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="small-section-title">Detail Information</h4>
+                                <!-- <h4 class="small-section-title">Detail Information</h4> -->
                                 <div class="detail-info-block">
-                                    <div class="column-3">
+                                    <div class="column-2">
                                         <div class="info-item">
                                             <span class="label-item">Azonosító:</span>
                                             <span class="value"><?php echo $ingatlan['id']; ?></span>
                                         </div>
-                                        <div class="info-item">
-                                            <span class="label-item">Alapterület:</span>
-                                            <span class="value"><?php echo $ingatlan['alapterulet']; ?></span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="label-item">Szobák:</span>
-                                            <span class="value"><?php echo $ingatlan['szobaszam']; ?></span>
-                                        </div>
-                                    </div>
-                                    <div class="column-3">
                                         <div class="info-item">
                                             <span class="label-item">Típus:</span>
                                             <span class="value"><?php echo ($ingatlan['tipus'] = 1) ? 'Eladó' : 'Kiadó'; ?></span>
@@ -92,12 +115,26 @@ use System\Libs\Language as Lang;
                                             <span class="label-item">Kategória:</span>
                                             <span class="value"><?php echo $ingatlan['kat_nev_' . LANG]; ?></span>
                                         </div>
+                                    </div>
+                                    <div class="column-2">
+                                        <div class="info-item">
+                                            <span class="label-item">Alapterület:</span>
+                                            <span class="value"><?php echo $ingatlan['alapterulet']; ?> m<sup>2</sup></span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label-item">Szerkezet:</span>
+                                            <span class="value"><?php echo $ingatlan['szerkezet_leiras_' . LANG]; ?></span>
+                                        </div>
                                         <div class="info-item">
                                             <span class="label-item">Állapot:</span>
                                             <span class="value"><?php echo $ingatlan['all_leiras_' . LANG]; ?></span>
                                         </div>
                                     </div>
-                                    <div class="column-3">
+                                    <div class="column-2">
+                                        <div class="info-item">
+                                            <span class="label-item">Szobák:</span>
+                                            <span class="value"><?php echo $ingatlan['szobaszam']; ?></span>
+                                        </div>
                                         <div class="info-item">
                                             <span class="label-item">Parkolás:</span>
                                             <span class="value"><?php echo $ingatlan['parkolas_leiras_' . LANG]; ?></span>
@@ -106,160 +143,93 @@ use System\Libs\Language as Lang;
                                             <span class="label-item">Fűtés:</span>
                                             <span class="value"><?php echo $ingatlan['energetika_leiras_' . LANG]; ?></span>
                                         </div>
-                                        <div class="info-item">
-                                            <span class="label-item">Szerkezet:</span>
-                                            <span class="value"><?php echo $ingatlan['szerkezet_leiras_' . LANG]; ?></span>
-                                        </div>
-                                    </div>
-                                    <div class="column-3">
-                                        <div class="info-item">
-                                            <span class="label-item">Roofing:</span>
-                                            <span class="value">New</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="label-item">Structure type:</span>
-                                            <span class="value">Wood</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="label-item">Basement:</span>
-                                            <span class="value">1</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
+                    <?php if (!empty($features)) { ?>
+                        <!-- FEATURES -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="small-section-title">Features</h4>
+                                <!-- <h4 class="small-section-title">Features</h4> -->
                                 <div class="features-info-block">
-                                    <div class="column-3">
+                                    
+                                    <div class="column-2">
                                         <div class="info-item">
-                                            <span class="feature-item">Ocean view</span>
+                                            <span class="<?php echo (!empty($features['erkely']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['erkely']['label']; ?></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="feature-item">GYM</span>
+                                            <span class="<?php echo (!empty($features['terasz']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['terasz']['label']; ?></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="feature-item">Front yard</span>
+                                            <span class="<?php echo (!empty($features['medence']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['medence']['label']; ?></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="feature-item">Roof Deck</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="feature-item">Sprinklers</span>
+                                            <span class="<?php echo (!empty($features['szauna']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['szauna']['label']; ?></span>
                                         </div>
                                     </div>
-                                    <div class="column-3">
+                                    <div class="column-2">
                                         <div class="info-item">
-                                            <span class="feature-item">Attic</span>
+                                            <span class="<?php echo (!empty($features['jacuzzi']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['jacuzzi']['label']; ?></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="feature-item">Basketball court</span>
+                                            <span class="<?php echo (!empty($features['kandallo']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['kandallo']['label']; ?></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="feature-item">Fireplace</span>
+                                            <span class="<?php echo (!empty($features['riaszto']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['riaszto']['label']; ?></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="feature-item">Concierge</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="feature-item">Recreation</span>
+                                            <span class="<?php echo (!empty($features['klima']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['klima']['label']; ?></span>
                                         </div>
                                     </div>
-                                    <div class="column-3">
+                                    <div class="column-2">
                                         <div class="info-item">
-                                            <span class="feature-item">Private space</span>
+                                            <span class="<?php echo (!empty($features['ontozorendszer']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['ontozorendszer']['label']; ?></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="feature-item">Washer and dryer</span>
+                                            <span class="<?php echo (!empty($features['automata_kapu']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['automata_kapu']['label']; ?></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="feature-item">Wine cellar</span>
+                                            <span class="<?php echo (!empty($features['elektromos_redony']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['elektromos_redony']['label']; ?></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="feature-item">Big pool</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="feature-item">Panoramic balconies</span>
-                                        </div>
-                                    </div>
-                                    <div class="column-3">
-                                        <div class="info-item">
-                                            <span class="feature-item">Ocean view</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="feature-item">GYM</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="feature-item">Front yard</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="feature-item">Roof Deck</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="feature-item">Sprinklers</span>
+                                            <span class="<?php echo (!empty($features['konditerem']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['konditerem']['label']; ?></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    <?php } ?>
+
+
+                        <!-- LEÍRÁS -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="small-section-title">Contact Information</h4>
+                                <h4 class="small-section-title">Leírás</h4>
+                                <p>
+                                    <?php echo $ingatlan['leiras_' . LANG]; ?>
+                                </p>
                             </div>
-                            <div class="col-sm-8">
+                        </div>
+
+                        <!-- TÉRKÉP -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="small-section-title">Elhelyezkedés</h4>
+                            </div>
+                            <div class="col-sm-12">
                                 <div class="map-container style-2">
-                                    <div id="map-banner-canvas" class="map-banner">
+                                    <div id="map-banner-canvas" class="map-banner" data-lat="<?php echo $ingatlan['latitude']; ?>" data-lng="<?php echo $ingatlan['longitude']; ?>">
+                                        <!-- A main.js file initBannerMap1() metodusa kezeli a térkép megjelenítését -->
                                         <script>
-                                            var locations = [
-                                                ['New York: Manhattan',40.728407, -74.010174,'images/markers/banner-map/1.6.png']
-                                            ];
+                                            var locations = [ ['', <?php echo $ingatlan['latitude']; ?>, <?php echo $ingatlan['longitude']; ?>, 'public/site_assets/images/markers/banner-map/1.6.png'] ];
                                         </script>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
-                                <div class="main-contact-info-block">
-                                    <ul class="contact-info-listing">
-                                        <li>
-                                            <span class="item-label">Address:</span>
-                                            <span class="item-value">Some Best Place</span>
-                                        </li>
-                                        <li>
-                                            <span class="item-label">City:</span>
-                                            <span class="item-value">Brooklyn</span>
-                                        </li>
-                                        <li>
-                                            <span class="item-label">State:</span>
-                                            <span class="item-value">New York</span>
-                                        </li>
-                                        <li>
-                                            <span class="item-label">Zip:</span>
-                                            <span class="item-value">9000</span>
-                                        </li>
-                                        <li>
-                                            <span class="item-label">Area:</span>
-                                            <span class="item-value">1000 Sq Ft</span>
-                                        </li>
-                                        <li>
-                                            <span class="item-label">Country:</span>
-                                            <span class="item-value">USA</span>
-                                        </li>
-                                        <li>
-                                            <span class="item-label">Phone:</span>
-                                            <span class="item-value">123-456-7890</span>
-                                        </li>
-                                        <li>
-                                            <span class="item-label">Email:</span>
-                                            <span class="item-value">info@yourwebsite.com</span>
-                                        </li>
-                                        <li>
-                                            <span class="item-label">Fax:</span>
-                                            <span class="item-value">123-456-7899</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
