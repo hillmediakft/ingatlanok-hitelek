@@ -5350,7 +5350,9 @@ footer.footer .bottom-footer .copy {
 /* line 2889, scss/_slider.scss */
 .map-container.style-2 {
   border: none;
-  height: 275px;
+  /*height: 275px;*/
+  height: 400px;
+  padding: 0; /*uj elem*/
 }
 
 /* line 2894, scss/_slider.scss */
