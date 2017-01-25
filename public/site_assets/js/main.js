@@ -19,7 +19,10 @@ $(document).ready(function(){
 	initScrollTop();
 	carouselInit();
 //	initContacMap();
-//	initBannerMap1();
+
+	// ingatlan adatlap terkep kezelő metódus 
+	initBannerMap1();
+	
 	galleryInit();
 	initAudio();
 	initMasonryPosts();
@@ -1347,8 +1350,8 @@ function initBannerMap1(){
 		
 		var mapOptions = {
 			scrollwheel: false,
-			zoom: 12,
-			disableDefaultUI: true,
+			zoom: 15,
+			disableDefaultUI: false,
 			center: new google.maps.LatLng(locations[0][1], locations[0][2])
 		};
 
