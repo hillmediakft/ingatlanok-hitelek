@@ -107,11 +107,62 @@
     overflow: hidden;
 }
 
-.property-desc h4.title {
-    color: #000;
-    /*display: block;*/
-    font-family: "Lato-Bold",Arial,sans-serif;
-    font-size: 24px;
-    margin-bottom: 12px;
-    text-decoration: none;
+/* ingatalan reszletek 3 oszlop beállítások */
+.detail-info-block .column-2, .features-info-block .column-2 {
+    border-right: 1px solid #e7e4e4;
+    float: left;
+    padding: 0 30px;
+    width: 33%;
+}
+.detail-info-block .column-2:last-child, .features-info-block .column-2:last-child {
+    border-right: 0 none;
+}
+
+
+.main-slides .item-label.sale {
+    background-color: rgba(62, 199, 69, 0.8);
+}
+.main-slides .item-label.rest {
+    background-color: rgba(73, 158, 255, 0.8);
+}
+.main-slides .item-label {
+    padding: 8px 0;
+    right: 42%;
+    text-align: center;
+    top: 10%;
+    transform: rotate(-45deg);
+    width: 100%;
+    z-index: 1000;
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    text-shadow: 1px 1px 2px #969696;
+    text-transform: uppercase;
+}
+.main-slides {
+    overflow: hidden;
+}
+
+.ingatlan-info-box {
+    background-color: #D8D8D8;
+    height: 120px;
+    margin: 20px 0 20px 0;
+}
+
+/* features elemek, amelyek nincsenek az ingatlamban */ 
+.features-info-block .info-item .feature-item-none::before {
+    color: #D8D8D8;
+    content: "\f00d";
+    display: block;
+    font-family: "FontAwesome";
+    font-size: 14px;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+.features-info-block .info-item .feature-item-none {
+    display: block;
+    padding-left: 21px;
+    position: relative;
+    color: #D8D8D8;
 }
