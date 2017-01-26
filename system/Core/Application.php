@@ -1,5 +1,4 @@
 <?php
-
 namespace System\Core;
 
 use System\Libs\DI;
@@ -47,7 +46,7 @@ class Application {
 
             $router->get('/', 'home@index');
             $router->get('/ingatlanok', 'ingatlanok@index');
-            $router->get('/ingatlan-ertekesitoink', 'ingatlanertekesitoink@index');
+            $router->get('/ingatlan-ertekesitoink', 'ingatlanErtekesitoink@index');
             $router->get('/ingatlanok/adatlap/:id/:title', 'ingatlanok@adatlap');
             $router->get('/rolunk', 'rolunk@index');
             $router->get('/kapcsolat', 'kapcsolat@index');
