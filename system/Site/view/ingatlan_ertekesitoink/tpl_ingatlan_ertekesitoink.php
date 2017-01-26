@@ -13,49 +13,54 @@ use System\Libs\Language as Lang;
                 </div>
             </div>
         </div>
-    </div>
-			<div class="agency-container with-sidebar column-4">
-				<div class="row">
-					<div class="col-sm-12 col-md-9">
-					<?php foreach($agents as $value) : ?>
-						<div class="col-md-4 col-sm-12">
-							<div class="agent-item">
-								<div class="preview">
-									<div class="overlay-holder">
-										<img src="<?php echo Config::get('user.upload_path') . $value['photo'];?>" alt="<?php echo $value['last_name'] . $value['first_name'];?>" alt="">
-										<div class="overlay">
-											<a href="agent-single_agent.html" class="incr">
-												<i class="fa fa-link"></i>
-											</a>
-										</div>
+
+		<div class="agency-container with-sidebar column-4">
+			
+			<div class="row">
+
+				<div class="col-sm-12 col-md-9">
+				<?php foreach($agents as $agent) : ?>
+					<div class="col-md-4 col-sm-12">
+						<div class="agent-item">
+							<div class="preview">
+								<div class="overlay-holder">
+									<img src="<?php echo Config::get('user.upload_path') . $agent['photo'];?>" alt="<?php echo $agent['last_name'] . $agent['first_name'];?>" alt="">
+									<div class="overlay">
+										<a href="agent-single_agent.html" class="incr">
+											<i class="fa fa-link"></i>
+										</a>
 									</div>
 								</div>
-								<span class="name"><?php echo $value['first_name'] . ' ' . $value['last_name'];?></span>
-								 <span class="properties"><a href="#" class="simple-btn sm-button outlined red"><?php echo $value['property'];?>  ingatlan</a></span>
-
-								<ul class="contact-listing">
-									<li>
-										<span class="icon"><i class="fa fa-phone"></i></span>
-										<span class="phone"><?php echo $value['phone'];?></span>
-									</li>
-									<li>
-										<span class="icon"><i class="fa fa-envelope"></i></span>
-										<a href="#" class="mail"><?php echo $value['email'];?></a>
-									</li>
-								</ul>
 							</div>
+							<span class="name"><?php echo $agent['first_name'] . ' ' . $agent['last_name'];?></span>
+							<span class="properties"><a href="ingatlanok?ertekesito=<?php echo $agent['id']; ?>" class="simple-btn sm-button outlined red"><?php echo $agent['property'];?>  ingatlan</a></span>
+							<ul class="contact-listing">
+								<li>
+									<span class="icon"><i class="fa fa-phone"></i></span>
+									<span class="phone"><?php echo $agent['phone'];?></span>
+								</li>
+								<li>
+									<span class="icon"><i class="fa fa-envelope"></i></span>
+									<a href="#" class="mail"><?php echo $agent['email'];?></a>
+								</li>
+							</ul>
 						</div>
-						<?php endforeach;?>
 					</div>
-					<!-- SIDEBAR -->
-					<div class="col-md-3 col-sm-4">
-						<aside class="sidebar main-sidebar">
-							<!-- KIEMELT INGATLANOK DOBOZ -->
-							<?php include($this->path('tpl_modul_kiemeltingatlanok')); ?>
-							<!-- KIEMELT INGATLANOK DOBOZ -->
-							<?php include($this->path('tpl_modul_banner')); ?>
-						</aside>        
-					</div> <!-- SIDEBAR END -->
+					<?php endforeach;?>
 				</div>
+				
+				<!-- SIDEBAR -->
+				<div class="col-md-3 col-sm-4">
+					<aside class="sidebar main-sidebar">
+						<!-- KIEMELT INGATLANOK DOBOZ -->
+						<?php include($this->path('tpl_modul_kiemeltingatlanok')); ?>
+						<!-- KIEMELT INGATLANOK DOBOZ -->
+						<?php include($this->path('tpl_modul_banner')); ?>
+					</aside>        
+				</div> <!-- SIDEBAR END -->
+			
 			</div>
+
 		</div>
+	</div> <!-- CONTAINER END -->
+</div>
