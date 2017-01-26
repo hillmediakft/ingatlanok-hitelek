@@ -241,10 +241,17 @@ foreach ($params as $key => $value) {
 
         $this->query->set_where('status', '=', 1);
 
+        /* *** ÉRTÉKESÍTŐ SZERINT **** */
+        if (isset($params['ertekesito'])) {
+            $this->query->set_where('ref_id', '=', (int)$params['ertekesito']);
+        }
+
+        /* *** TÍPUS SZERINT **** */
         if (isset($params['tipus']) && !empty($params['tipus'])) {
             $this->query->set_where('tipus', '=', $params['tipus']);
         }
 
+        /* *** KATEGÓRIA SZERINT **** */
         if (isset($params['kategoria']) && !empty($params['kategoria'])) {
             if (is_array($params['kategoria'])) {
                 $this->query->set_where('kategoria', 'in', $params['kategoria']);
