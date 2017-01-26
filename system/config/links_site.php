@@ -1,8 +1,10 @@
 <?php 
+/*
 $link['select2'] = array(
-	'css' => ADMIN_ASSETS . 'plugins/select2/select2.css',
-	'js' => ADMIN_ASSETS . 'plugins/select2/select2.min.js'
+	'css' => ADMIN_ASSETS . 'plugins/select2/css/select2.css',
+	'js' => ADMIN_ASSETS . 'plugins/select2/js/select2.min.js'
 );
+
 
 $link['datatable'] = array(
 	'css' => ADMIN_ASSETS . 'plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
@@ -34,12 +36,25 @@ $link['ckeditor'] = array(
 	'js' => ADMIN_ASSETS . 'plugins/ckeditor/ckeditor.js'
 );
 
+*/
+
 // Google Maps
 $link['google-maps-site'] = array(
 	'js' => array(
 		'https://maps.googleapis.com/maps/api/js?key=AIzaSyDsyHr_ERbn8TBSwHRB1mWk28VDByR-oL0'
 	) 
 );
+
+$link['multiselect'] = array(
+	'css' => SITE_ASSETS . '/vendors/jquery-ui-multiselect/jquery.multiselect.css',
+	'js' => SITE_ASSETS . '/vendors/jquery-ui-multiselect/jquery.multiselect.js'
+);
+
+$link['bootstrap-select'] = array(
+	'css' => SITE_ASSETS . '/vendors/bootstrap-select/css/bootstrap-select.css',
+	'js' => SITE_ASSETS . '/vendors/bootstrap-select/js/bootstrap-select.js'
+);
+
 
 return $link;
 ?>
