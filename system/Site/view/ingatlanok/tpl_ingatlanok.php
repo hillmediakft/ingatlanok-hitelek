@@ -18,6 +18,8 @@ use System\Libs\Language as Lang;
             <div class="row">
                 <div class="col-md-9 col-sm-8">
                     <div class="objects-block with-sidebar">
+                        
+                        <!-- TALÁLT ELEMEK ÉS SORBARENDEZÉS -->
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="sort-block extended gray-bg">
@@ -27,25 +29,44 @@ use System\Libs\Language as Lang;
                                     <div class="right">
                                         <div class="sort-item order">
 
+                                            <?php
+                                                $order = ($this->request->has_query('order')) ? $this->request->get_query('order') : false;
+                                                $order_by = ($this->request->has_query('order_by')) ? $this->request->get_query('order_by') : false;
+                                            ?>
+                                            <span class="sort-label">Sorrend:</span>
+                                            <div class="select-container">
+                                                <div id="select-type-holder1" class="ui-front">
+                                                    <select id="sorrend_select" name="sorrend_select" class="select filter-select" data-icon="false">
+                                                        <option <?php echo ($order_by == 'datum' && $order == 'desc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('desc', 'datum'); ?>">Legfrissebb elöl</option>
+                                                        <option <?php echo ($order_by == 'datum' && $order == 'asc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('asc', 'datum'); ?>">Legrégebbi elöl</option>
+                                                        <option <?php echo ($order_by == 'ar' && $order == 'desc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('desc', 'ar'); ?>">Legdrágább elöl</option>
+                                                        <option <?php echo ($order_by == 'ar' && $order == 'asc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('asc', 'ar'); ?>">Legolcsóbb elöl</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+<!-- Bootstrap select menu
+                                            <?php
+                                                //$order = ($this->request->has_query('order')) ? $this->request->get_query('order') : false;
+                                                //$order_by = ($this->request->has_query('order_by')) ? $this->request->get_query('order_by') : false;
+                                            ?>
+                                            <span class="sort-label">Sorrend:</span>
                                             <div class="form-group">
-                                                <span class="sort-label">Sorrend:</span>
-                                                <?php
-                                                    $order = ($this->request->has_query('order')) ? $this->request->get_query('order') : false;
-                                                    $order_by = ($this->request->has_query('order_by')) ? $this->request->get_query('order_by') : false;
-                                                ?>
                                                 <select id="sorrend_select" name="sorrend_select" class="form-control">
-                                                    <option <?php echo ($order_by == 'datum' && $order == 'desc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('desc', 'datum'); ?>">Legfrissebb elöl</option>
-                                                    <option <?php echo ($order_by == 'datum' && $order == 'asc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('asc', 'datum'); ?>">Legrégebbi elöl</option>
-                                                    <option <?php echo ($order_by == 'ar' && $order == 'desc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('desc', 'ar'); ?>">Legdrágább elöl</option>
-                                                    <option <?php echo ($order_by == 'ar' && $order == 'asc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('asc', 'ar'); ?>">Legolcsóbb elöl</option>
+                                                    <option <?php //echo ($order_by == 'datum' && $order == 'desc') ? 'selected' : ''; ?> value="<?php //echo $this->url_helper->add_order_to_url('desc', 'datum'); ?>">Legfrissebb elöl</option>
+                                                    <option <?php //echo ($order_by == 'datum' && $order == 'asc') ? 'selected' : ''; ?> value="<?php //echo $this->url_helper->add_order_to_url('asc', 'datum'); ?>">Legrégebbi elöl</option>
+                                                    <option <?php //echo ($order_by == 'ar' && $order == 'desc') ? 'selected' : ''; ?> value="<?php //echo $this->url_helper->add_order_to_url('desc', 'ar'); ?>">Legdrágább elöl</option>
+                                                    <option <?php //echo ($order_by == 'ar' && $order == 'asc') ? 'selected' : ''; ?> value="<?php //echo $this->url_helper->add_order_to_url('asc', 'ar'); ?>">Legolcsóbb elöl</option>
                                                 </select>
                                             </div>
+ -->
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="empty-space-30"></div>
