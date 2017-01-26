@@ -114,17 +114,20 @@ class Paginator {
     /**
      * 	Link létrehozása, amihez kapcsolódik az oldalszámláló paraméter (page=2)
      */
-    private function _get_path($uri_path) {
+    private function _get_path($uri_path)
+    {
         $this->querystring = '?';
         // ha van query string
-        if ($_GET) {
+        if (!empty($_GET)) {
             $params = $_GET;
             if (isset($params[$this->pagename])) {
                 unset($params[$this->pagename]);
             }
-            foreach ($params as $k => $v) {
-                $this->querystring .= $k . '=' . $v . '&';
-            }
+
+            // query string összeállítása 
+            $this->querystring .= http_build_query($params);
+            $this->querystring .= '&';
+
             unset($params);
             return $uri_path . $this->querystring;
         } else {
