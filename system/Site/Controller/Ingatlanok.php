@@ -22,7 +22,7 @@ class Ingatlanok extends SiteController {
         $data['title'] = $page_data['metatitle_' . $this->lang];
         $data['description'] = $page_data['metadescription_' . $this->lang];
         $data['keywords'] = $page_data['metakeywords_' . $this->lang];
-        
+
 
 // paginátor objektum létrehozása
         $pagine = new Paginator('p', $data['settings']['pagination']);
@@ -63,6 +63,8 @@ class Ingatlanok extends SiteController {
 
         //$view->setLazyRender();
 //$this->view->debug(true); 
+        $view->add_links(array('bootstrap-select'));
+        $view->add_link('js', SITE_JS . 'pages/handle_search.js');
         $view->add_link('js', SITE_JS . 'pages/ingatlanok.js');
         $view->render('ingatlanok/tpl_ingatlanok', $data);
     }
