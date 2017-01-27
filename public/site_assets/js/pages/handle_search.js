@@ -234,12 +234,8 @@ var handleSearch = function () {
 jQuery(document).ready(function ($) {
     handleSearch.init();
 
-	//$("#example").select2()
 
-	$('#example').selectpicker({
-	  //style: 'btn-info',
-	  size: 4
-	});
+	$('#example').selectpicker();
 
 
 });
