@@ -125,8 +125,19 @@ class Paginator {
             }
 
             // query string összeállítása 
-            $this->querystring .= http_build_query($params);
-            $this->querystring .= '&';
+            //$this->querystring .= http_build_query($params);
+            //$this->querystring .= '&';
+
+            foreach ($params as $k => $v) {
+                if (is_array($v)) {
+                    foreach ($v as $key => $value) {
+                        $this->querystring .= $key . '=' . $value . '&';
+                    }
+                } else {
+                    $this->querystring .= $k . '=' . $v . '&';
+                }
+            }
+
 
             unset($params);
             return $uri_path . $this->querystring;
