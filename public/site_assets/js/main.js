@@ -280,14 +280,28 @@ function initRange() {
 			// érvényesítjük a HTML-elemekre
 			runRange();
 
+
+	        $( "#tipus_select" ).selectmenu({
+				change: function( event, ui ) {
+					// beállítjuk az értékeket az ingatlan típusától függően
+					setTypeData(ui.item.value);
+					// érvényesítjük a HTML-elemekre
+					runRange();
+				}
+	        }); 
+
+
+/* sima bootstrap-es
 			// ha változik az ingatlan típusa (eladó/kiadó)	
 			$('#tipus_select').change(function(){
+				console.log('ggggg');
 				// beállítjuk az értékeket az ingatlan típusától függően
 				setTypeData($(this).val());
 				// érvényesítjük a HTML-elemekre
 				runRange();
 
 			});
+*/			
 
 			function addCommas(nStr) {
 				var x, x1,x2;
