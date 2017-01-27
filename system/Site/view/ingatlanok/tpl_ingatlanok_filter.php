@@ -5,6 +5,8 @@
             <span class="filter-label">Find Your Home</span>
         </div>
         <form action="ingatlanok" class="filter-form">
+            
+            <!-- ELADÓ/KIADÓ -->
             <div class="row">
                 <div class="col-sm-12">
                     <?php 
@@ -16,54 +18,53 @@
                         }
                     ?>
                     <span class="item-label"><?php echo Lang::get('kereso_elado'); ?>/<?php echo Lang::get('kereso_kiado'); ?></span>
-                    <div class="form-group">
-                        <select name="tipus" id="tipus_select" class="form-control">
+                    <div id="tipus_select_div" class="ui-front">
+                        <select name="tipus" id="tipus_select" data-icon="false" class="select filter-select">
                             <option <?php echo $selected_elado; ?> value="1"><?php echo Lang::get('kereso_elado'); ?></option>
                             <option <?php echo $selected_kiado; ?> value="2"><?php echo Lang::get('kereso_kiado'); ?></option>
                         </select>
-                    </div> 
-
+                    </div>
                 </div>
             </div>
+
+            <!-- VÁROS LISTA -->
             <div class="row">
                 <div class="col-sm-12">
-
                     <span class="item-label"><?php echo Lang::get('kereso_varos'); ?></span>
-                    <div class="form-group">
-                        <select name="varos" id="varos" class="form-control" >
+                    <div id="varos_select_div" class="ui-front">
+                        <select name="varos" id="varos_select" data-icon="false" class="select filter-select">
                             <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                             <?php echo $city_list; ?>
                         </select>
                     </div>
-
                 </div>
             </div>
+            
+            <!-- KERÜLET LISTA -->
             <div class="row">
                 <div class="col-sm-12">
-
                     <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
-                    <div class="form-group">
-                        <select disabled="disabled" id="district" name="kerulet" class="form-control" >
+                    <div id="district_select_div" class="ui-front">
+                        <select disabled="disabled" name="kerulet" id="district_select" data-icon="false" class="select filter-select">
                             <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                             <?php echo $district_list; ?>
                         </select>
                     </div>
- 
                 </div>
             </div>
+            
+            <!-- KATEGÓRIA -->
             <div class="row">
                 <div class="col-sm-12">
-
                     <span class="item-label"><?php echo Lang::get('kereso_kategoria'); ?></span>
-                    <div class="form-group">
-                        <select id="category_select" name="kategoria" class="form-control">
+                    <div id="category_select_div" class="ui-front">
+                        <select name="kategoria" id="category_select" data-icon="false" class="select filter-select">
                             <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                             <?php foreach ($category_list as $value) : ?>
                                 <option value="<?php echo $value['kat_id']; ?>"><?php echo $value['kat_nev_' . LANG]; ?></option>
-                                <?php endforeach ?>
+                            <?php endforeach ?>
                         </select>
                     </div>
-
                 </div>
             </div>
 
@@ -155,7 +156,28 @@
                 </div>
             </div>
 
+<div class="row">
+    <div class="col-sm-12">
+    
+        <span class="item-label">Example</span>
+        <div class="example">
 
+            <select name="example[]" class="selectpicker" title="--Mindegy--"  data-selected-text-format="count" multiple>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+                <option value="4">Option 4</option>
+                <option value="5">Option 5</option>
+            </select>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+            <!-- BUTTON -->
             <div class="row">
                 <div class="col-sm-12">
                     <nav id="rotate_btn_find" class="rotate_btn_find">
@@ -163,6 +185,24 @@
                     </nav>
                 </div>
             </div>
+
         </form>
     </div>
 </div>
+
+
+
+
+
+<!-- 
+
+<span class="item-label">Property Type</span>
+<div id="select-type-holder3" class="ui-front">
+    <select name="prop-select" data-icon="false" class="select filter-select">
+        <option selected="selected">Any</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+    </select>
+</div>
+ -->
