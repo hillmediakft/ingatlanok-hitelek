@@ -484,21 +484,22 @@ class User extends AdminController {
 
     /**
 	 *	A felhasználó képét tölti fel a szerverre, és készít egy kisebb méretű képet is.
-	 *
 	 *	Ez a metódus kettő XHR kérést dolgoz fel.
-	 *	Meghívásakor kap egy id nevű paramétert melynek értékei upload vagy crop
-	 *		upload paraméterrel meghívva: feltölti a kiválasztott képet
-	 *		crop paraméterrel meghívva: megvágja az eredeti képet és feltölti	
+	 *	Meghívásakor kap egy paramétert melynek értékei upload vagy crop
+	 *	upload paraméterrel meghívva: feltölti a kiválasztott képet
+	 *	crop paraméterrel meghívva: megvágja az eredeti képet és feltölti	
+	 *
+	 * @param string $parameter
+	 * @return void
 	 */
-	public function user_img_upload()
+	public function user_img_upload($parameter)
 	{
 		if( $this->request->is_ajax() ){
             // feltöltés helye
             $upload_path = Config::get('user.upload_path');
-
             // Kiválasztott kép feltöltése
-            if ($this->request->has_params('upload')) {
 
+            if ($parameter == 'upload') {
                 //képkezelő objektum létrehozása (a kép a szerveren a tmp könyvtárba kerül)	
                 $image = new Uploader($this->request->getFiles('img'));
                 $tempfilename = 'temp_' . uniqid();
@@ -522,7 +523,7 @@ class User extends AdminController {
             }
 
             // Kiválasztott kép vágása és vágott kép feltöltése
-            else if ($this->request->has_params('crop')) {
+            else if ($parameter == 'crop') {
 
                 // a croppic js küldi ezeket a POST adatokat 	
                 $imgUrl = $this->request->get_post('imgUrl');
