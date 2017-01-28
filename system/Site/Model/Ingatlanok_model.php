@@ -242,8 +242,8 @@ foreach ($params as $key => $value) {
         $this->query->set_where('status', '=', 1);
 
         /* *** ÉRTÉKESÍTŐ SZERINT **** */
-        if (isset($params['ertekesito'])) {
-            $this->query->set_where('ref_id', '=', (int)$params['ertekesito']);
+        if (isset($params['ref_id'])) {
+            $this->query->set_where('ref_id', '=', (int)$params['ref_id']);
         }
 
         /* *** TÍPUS SZERINT **** */
