@@ -154,13 +154,10 @@ class Ingatlanok extends SiteController {
         // paraméterekhez hozzáadjuk a ref_id elemet    
         $params['ref_id'] = (int)$id;
 
-var_dump($params);
-
-
 // paginátor objektum létrehozása
         $pagine = new Paginator('p', $data['settings']['pagination']);
 // limit-el lekérdezett adatok szűréssel (paraméterek bekerülnek a 'ingatlan_filter' session elembe)
-        $data['properties'] = $this->ingatlanok_model->properties_filter_query($pagine->get_limit(), $pagine->get_offset(), $params = $this->request->get_query(););
+        $data['properties'] = $this->ingatlanok_model->properties_filter_query($pagine->get_limit(), $pagine->get_offset(), $params);
 // összes elem, ami a szűrési feltételnek megfelel (vagy a tábla összes rekordja, ha nincs szűrés)
         $data['filtered_count'] = $this->ingatlanok_model->properties_filter_count_query();
 // összes elem megadása a paginátor objektumnak
