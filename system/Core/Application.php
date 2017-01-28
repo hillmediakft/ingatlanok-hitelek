@@ -56,6 +56,7 @@ class Application {
             $router->get('/hirek/kategoria/:id', 'hirek@kategoria', array('id'));
             $router->get('/hirek/:title/:id', 'hirek@reszletek', array('title', 'id'));
             $router->get('/kereses', 'kereses@index');
+            $router->get('/ingatlanok/ertekesito/:title/:id', 'ingatlanok@ertekesito', array('title', 'id'));
             
 
             $router->post('/user/login', 'user@login'); // ajax
