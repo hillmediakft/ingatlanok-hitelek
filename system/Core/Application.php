@@ -65,7 +65,7 @@ class Application {
             $router->post('/user/forgottpw', 'user@forgottpw'); // ajax
             $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
             
-
+$router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek');
 
 
 
@@ -82,6 +82,7 @@ class Application {
                 $router->get('/news', 'hirek@index');
                 $router->get('/news/category/:id', 'hirek@kategoria', array('id'));
                 $router->get('/news/:title/:id', 'hirek@reszletek', array('title', 'id'));
+                $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek');
             });
 
             

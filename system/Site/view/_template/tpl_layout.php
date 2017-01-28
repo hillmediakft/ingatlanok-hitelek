@@ -1,6 +1,6 @@
 <?php use System\Libs\Auth; ?>
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="<?php echo LANG;?>">
     <!--<![endif]-->
     <!-- BEGIN HEAD -->
     <head>
@@ -18,6 +18,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>fonts/font-awesome-4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/jquery-ui-1.11.4/jquery-ui.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/jcarousel/css/jquery.jcarousel.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/toastr/toastr.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->url_helper->autoversion(SITE_CSS . 'main-red.css');?>" />
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->url_helper->autoversion(SITE_CSS . 'custom.css');?>" />
         <link rel="shortcut icon" href="<?php echo SITE_IMAGE; ?>favicon.ico" />
@@ -64,6 +65,7 @@
                 <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-validation/localization/methods_hu.js"></script>
         <!-- Block UI -->
                 <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery.blockui.min.js"></script>
+                 <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/toastr/toastr.min.js"></script>
                 	
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <?php $this->get_js_link(); ?>
