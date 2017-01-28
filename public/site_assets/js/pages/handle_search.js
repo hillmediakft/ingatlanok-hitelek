@@ -100,7 +100,20 @@ var handleSearch = function () {
         });
     };
 
-
+    /**
+     * Select menu 
+     *
+     */
+    var select_menu = function() {
+    	// ha van selectpicker objektum
+        if (document.getElementById("example") != null) {
+	    
+    		$('#example').selectpicker();
+    	
+        } else {
+            return false;
+        }   	
+    };
 
 
 
@@ -126,7 +139,8 @@ var handleSearch = function () {
 		kategoria: '', 
 		min_ar: '', 
 		max_ar: '', 
-		min_terulet: '',
+		min_alapterulet: '',
+		max_alapterulet: '',
 		order: '',
 		order_by: ''
 	};
@@ -135,7 +149,7 @@ var handleSearch = function () {
 	 *
 	 *
 	 */
-	/*
+/*
 	var fieldStatus = function(){
 		
 		this.input = {
@@ -145,7 +159,10 @@ var handleSearch = function () {
 			kategoria: false, 
 			min_ar: false, 
 			max_ar: false, 
-			min_terulet: false
+			min_alapterulet: false,
+			max_alapterulet: false,
+			order: false,
+			order_by: false
 		};
 		
 		this.set_input = function($name, $data){
@@ -157,7 +174,7 @@ var handleSearch = function () {
 		}
 
 	};
-	*/
+*/
 
 	/**
 	 * Megvizsgálja a query stringet és ennek megfelelően beállítja a 
@@ -174,7 +191,7 @@ var handleSearch = function () {
 			
 			// a query stringet felbonjuk & jel mentén és berakjuk az elemeket egy tömbbe
 			var $qs_parts = $query_string.split('&');
-			// átmeneti tömb a ciklusban, ez fogja tártalmazni  akulcsot és az értéket
+			// átmeneti tömb a ciklusban, ez fogja tártalmazni a kulcsot és az értéket
 			var $option;
 		
 			// berakjuk az értékeket a search_parts objektumba
@@ -201,8 +218,11 @@ var handleSearch = function () {
 				else if($option[0] == 'max_ar'){
 					search_parts.max_ar = $option[1];
 				}
-				else if($option[0] == 'min_terulet'){
-					search_parts.min_terulet = $option[1];
+				else if($option[0] == 'min_alapterulet'){
+					search_parts.min_alapterulet = $option[1];
+				}
+				else if($option[0] == 'max_alapterulet'){
+					search_parts.max_alapterulet = $option[1];
 				}
 				else if($option[0] == 'order'){
 					search_parts.order = $option[1];
@@ -218,12 +238,47 @@ var handleSearch = function () {
 
 	};
 
+	var setSearchValue = function() {
+		// order option
+		var selected_marker;
+
+		// elemek értékének beállítása a query string alapján
+		check_search_input();
+
+		if (search_parts.order != "" && search_parts.order_by != "") {
+			
+			if (search_parts.order == "desc" && search_parts.order_by == "datum") {
+				selected_marker = 0;
+			}
+			else if (search_parts.order == "asc" && search_parts.order_by == "datum") {
+				selected_marker = 1;
+			}
+			else if (search_parts.order == "desc" && search_parts.order_by == "ar") {
+				selected_marker = 2;
+			}
+			else if (search_parts.order == "asc" && search_parts.order_by == "ar") {
+				selected_marker = 3;
+			}
+			console.log(selected_marker);
+		}
+
+
+		// selected-re állítjuk a --mindegy-- elemet
+		//$('#sorrend_select option[value=""]').prop('selected', true);
+		// frissítjük a kerület selectmenüt
+		//$( "#district_select" ).selectmenu( "refresh" );		
+
+	};
+
+
 
     return {
         //main function to initiate the module
         init: function () {
+        	setSearchValue();
         	enableDistrict();
             setOrder();
+            select_menu();
 
 			//check_search_input();
         }
@@ -233,9 +288,4 @@ var handleSearch = function () {
 
 jQuery(document).ready(function ($) {
     handleSearch.init();
-
-
-	//$('#example').selectpicker();
-
-
 });
