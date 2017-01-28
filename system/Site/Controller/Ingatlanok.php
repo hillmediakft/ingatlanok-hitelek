@@ -136,5 +136,50 @@ class Ingatlanok extends SiteController {
         $view->render('ingatlanok/tpl_adatlap', $data);
     }
 
+    /**
+     * Ügynök ingatlanjait jeleníti meg
+     */
+    public function ertekesito($title, $id)
+    {
+        $page_data = $this->ingatlanok_model->getPageData('ertekesito');
+        
+        $data = $this->addGlobalData();
+        $data['title'] = $page_data['metatitle_' . $this->lang];
+        $data['description'] = $page_data['metadescription_' . $this->lang];
+        $data['keywords'] = $page_data['metakeywords_' . $this->lang];
+
+
+
+        $params = $this->request->get_query();
+        // paraméterekhez hozzáadjuk a ref_id elemet    
+        $params['ref_id'] = (int)$id;
+
+var_dump($params);
+
+
+// paginátor objektum létrehozása
+        $pagine = new Paginator('p', $data['settings']['pagination']);
+// limit-el lekérdezett adatok szűréssel (paraméterek bekerülnek a 'ingatlan_filter' session elembe)
+        $data['properties'] = $this->ingatlanok_model->properties_filter_query($pagine->get_limit(), $pagine->get_offset(), $params = $this->request->get_query(););
+// összes elem, ami a szűrési feltételnek megfelel (vagy a tábla összes rekordja, ha nincs szűrés)
+        $data['filtered_count'] = $this->ingatlanok_model->properties_filter_count_query();
+// összes elem megadása a paginátor objektumnak
+        $pagine->set_total($data['filtered_count']);
+// lapozó linkek visszadása (paraméter az uri path)
+        $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path'));
+
+
+
+
+
+        $view = new View();
+        $view->setHelper(array('url_helper', 'str_helper'));
+        $view->add_link('js', SITE_JS . 'pages/handle_search.js');
+        $view->add_link('js', SITE_JS . 'pages/ertekesito_ingatlanok.js');
+//$this->view->debug(true); 
+        $view->render('ingatlanok/tpl_ertekesito_ingatlanok', $data);
+    }
+
+
 }
 ?>
