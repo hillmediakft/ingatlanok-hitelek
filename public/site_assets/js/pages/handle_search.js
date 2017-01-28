@@ -235,7 +235,7 @@ jQuery(document).ready(function ($) {
     handleSearch.init();
 
 
-	$('#example').selectpicker();
+	//$('#example').selectpicker();
 
 
 });
