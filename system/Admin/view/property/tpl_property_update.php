@@ -1,4 +1,6 @@
-<?php use System\libs\Session; ?>
+<?php
+
+use System\libs\Session; ?>
 <!-- BEGIN CONTENT -->
 <div class="page-content">
     <!-- BEGIN PAGE HEADER-->
@@ -143,7 +145,33 @@
                                                 <div class="input-group-addon">Ft</div>
                                             </div>
                                         </div>
-                                    </div>	
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0);" id="arvaltozas_aktivalas" class="btn default">Árváltozás aktiválása</a>
+                                        </div>
+                                    </div>
+
+                                    <!-- ÁR_KIADÓ -->
+                                    <div class="form-group" id="arvaltozas">
+                                        <label for="ar_elado_uj" class="control-label col-md-3">ÚJ eladási ár <small>(Ft)</small></label>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <input type="text" name="ar_elado_uj" id="ar_elado_uj" value=0 class="form-control"/>
+                                                <div class="input-group-addon">Ft</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0);" id="arvaltozas_deaktivalas" class="btn default">Árváltozás deaktiválása</a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group" id="email_kuldes_arvaltozasrol">
+                                        <label for="erkely" class="control-label col-md-3">E-mail küldés árváltozásról</label>
+                                        <div class="col-md-3">
+                                            <div class="checkbox">
+                                                <input type="checkbox" value="1" name="email_kuldes_arvaltozasrol">			
+                                            </div>
+                                        </div>
+                                    </div>                                    
 
                                     <!-- ÁR_KIADÓ -->
                                     <div class="form-group">
@@ -424,7 +452,7 @@
                                 </div>
                                 <div class="portlet-body">
 
-                                <!-- INGATLAN NÉV ÉS LEÍRÁS MAGYAR ANGOL-->
+                                    <!-- INGATLAN NÉV ÉS LEÍRÁS MAGYAR ANGOL-->
                                     <ul class="nav nav-tabs">
                                         <li class="active">
                                             <a href="#tab_1_1" data-toggle="tab"> Magyar </a>

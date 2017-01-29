@@ -119,7 +119,7 @@ var updateProperty = function () {
             $('#epulet_szintjei').prop("disabled", true);
         }
     };
-    
+
     /**
      *	Form adatok UPDATE elküldése gomb
      */
@@ -277,9 +277,9 @@ var updateProperty = function () {
                 varos: {
                     required: true
                 },
-				iranyitoszam: {
+                iranyitoszam: {
                     required: true,
-					number: true
+                    number: true
                 },
                 kerulet: {
                     required: true
@@ -287,17 +287,17 @@ var updateProperty = function () {
                 utca: {
                     required: true
                 },
-				hazszam: {
+                hazszam: {
                     required: true
                 },
                 alapterulet: {
                     required: true,
                     number: true
                 },
-				erkely_terulet: {
+                erkely_terulet: {
                     number: true
                 },
-				terasz_terulet: {
+                terasz_terulet: {
                     number: true
                 },
                 kozos_koltseg: {
@@ -843,6 +843,33 @@ var updateProperty = function () {
         });
     };
 
+    var arcsokkentes = function () {
+        // az új ár beviteli mezők és e-mail küldés checkbox elrejtése
+        $('#arvaltozas').hide();
+        $('#email_kuldes_arvaltozasrol').hide();
+        // az árváltozás aktiválása gombra kattintás után az új ár beviteli mező és e-mail küldés checkbox megjelenítése
+        $('#arvaltozas_aktivalas').click(function () {
+            $('#arvaltozas').fadeIn('slow');
+            $('#email_kuldes_arvaltozasrol').fadeIn('slow');
+        })
+        // az új ár beírása után az email küldés checkbox módosítása
+        // ha í beírt érték nem nulla, akkor pipa, egyébként pipa eltávolítása
+        $("input[name=ar_elado_uj]").change(function () {
+            if ($("input[name=ar_elado_uj]").val() != '0') {
+                $('input[name=email_kuldes_arvaltozasrol]').prop('checked', true).uniform();
+            } else {
+                $('input[name=email_kuldes_arvaltozasrol]').prop('checked', false).uniform();
+            }
+        })
+        // az árváltozás deaktiválása gombra kattintás után az új ár beviteli mező és e-mail küldés checkbox eltüntetése, új ar_elado_uj mező értékének 0-ra //          // állítása
+        $('#arvaltozas_deaktivalas').click(function () {
+            $('input[name=email_kuldes_arvaltozasrol]').prop('checked', false).uniform();
+            $('#email_kuldes_arvaltozasrol').fadeOut();
+            $("input[name=ar_elado_uj]").val('0');
+            $('#arvaltozas').fadeOut('slow');
+        })
+    };
+
     return {
         //main function to initiate the module
         init: function () {
@@ -865,6 +892,7 @@ var updateProperty = function () {
             streetAutocomplete();
             checkErkely();
             checkTerasz();
+            arcsokkentes();
         }
     };
 
