@@ -59,13 +59,16 @@
         <!-- MODAL handler -->
         <script type="text/javascript" src="<?php echo SITE_JS; ?>pages/modal_handler.js"></script>
         <!-- Form validátor -->
-                <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-validation/jquery.validate.min.js"></script>
-                <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-validation/additional-methods.min.js"></script>
-                <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-validation/localization/messages_hu.js"></script>
-                <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-validation/localization/methods_hu.js"></script>
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-validation/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-validation/additional-methods.min.js"></script>
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-validation/localization/messages_hu.js"></script>
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-validation/localization/methods_hu.js"></script>
         <!-- Block UI -->
-                <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery.blockui.min.js"></script>
-                 <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/toastr/toastr.min.js"></script>
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery.blockui.min.js"></script>
+        <!-- TOASTR -->
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/toastr/toastr.min.js"></script>
+        <!-- COMMON (tostr init, kedvencek)-->
+        <script type="text/javascript" src="<?php echo SITE_JS; ?>pages/common.js"></script>
                 	
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <?php $this->get_js_link(); ?>
