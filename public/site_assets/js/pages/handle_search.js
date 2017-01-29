@@ -240,26 +240,36 @@ var handleSearch = function () {
 
 	var setSearchValue = function() {
 		// order option
-		var selected_marker;
+		var selected;
 
 		// elemek értékének beállítása a query string alapján
 		check_search_input();
 
+		// sorrend opciók elemei
+		var order_options = $("#sorrend_select option");
+
 		if (search_parts.order != "" && search_parts.order_by != "") {
 			
 			if (search_parts.order == "desc" && search_parts.order_by == "datum") {
-				selected_marker = 0;
+				selected = order_options[0];
+				$(order_options[0]).attr('selected', true);
 			}
 			else if (search_parts.order == "asc" && search_parts.order_by == "datum") {
-				selected_marker = 1;
+				selected = order_options[1];
+				$(order_options[1]).attr('selected', true);
 			}
 			else if (search_parts.order == "desc" && search_parts.order_by == "ar") {
-				selected_marker = 2;
+				selected = order_options[2];
+				$(order_options[2]).attr('selected', true);
 			}
 			else if (search_parts.order == "asc" && search_parts.order_by == "ar") {
-				selected_marker = 3;
+				selected = order_options[3];
+				$(order_options[3]).attr('selected', true);
 			}
-			console.log(selected_marker);
+
+			// frissítjük a kerület selectmenüt
+			$( "#sorrend_select" ).selectmenu( "refresh" );
+			console.log($("#sorrend_select option:selected"));
 		}
 
 
@@ -275,7 +285,7 @@ var handleSearch = function () {
     return {
         //main function to initiate the module
         init: function () {
-        	setSearchValue();
+        	//setSearchValue();
         	enableDistrict();
             setOrder();
             select_menu();
