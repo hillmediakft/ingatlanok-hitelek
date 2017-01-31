@@ -65,7 +65,8 @@ class Application {
             $router->post('/user/forgottpw', 'user@forgottpw'); // ajax
             $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
             
-$router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek');
+            $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek');
+            $router->post('/sendemail/init/:title', 'SendEmail@init', array('type'));
 
 
 
