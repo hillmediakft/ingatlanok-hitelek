@@ -198,6 +198,8 @@ class Ingatlanok_model extends SiteModel {
             $params['max_alapterulet'] = (int) preg_replace('/\D/', '', $params['max_alapterulet']);
         }
 
+//var_dump($params);die;
+
         Session::set('ingatlan_filter', $params);
 
 
@@ -346,13 +348,17 @@ foreach ($params as $key => $value) {
         if (isset($params['min_ar']) && isset($params['max_ar'])) {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
                 // if ($params['min_ar'] != 0 && $params['max_ar'] != 50000000) {}
+                    $this->query->set_where('AND (');
                     $this->query->set_where('ar_elado', 'between', array($params['min_ar'], $params['max_ar']));
+                    $this->query->set_where(')');
             }
             elseif (isset($params['tipus']) && $params['tipus'] == 2) {
                 //$params['min_ar'] = (empty($params['min_ar'])) ? 0 : (int)$params['min_ar'];
                 //$params['max_ar'] = (empty($params['max_ar'])) ? 0 : (int)$params['max_ar'];
                 if ($params['min_ar'] <= $params['max_ar']) {
-                    $this->query->set_where('ar_kiado', 'between', array((int)$params['min_ar'], (int)$params['max_ar']));
+                    $this->query->set_where('AND (');
+                    $this->query->set_where('ar_kiado', 'between', array($params['min_ar'], $params['max_ar']));
+                    $this->query->set_where(')');
                 }
             }
         }
@@ -372,7 +378,9 @@ foreach ($params as $key => $value) {
 */        
         // minimum és maximum terület is meg van adva
         if ( isset($params['min_alapterulet']) && isset($params['max_alapterulet']) ) {
+            $this->query->set_where('AND (');
             $this->query->set_where('alapterulet', 'between', array($params['min_alapterulet'], $params['max_alapterulet']));
+            $this->query->set_where(')');
         }
 
     /* ************************* SZOBASZÁM ALAPJÁN KERESÉS **************************** */
@@ -421,7 +429,7 @@ foreach ($params as $key => $value) {
             $this->query->set_orderby('id', 'DESC');
         }
 
-// $this->query->debug(true);        
+//$this->query->debug(true);        
 //var_dump($params);
 
         return $this->query->select(); 

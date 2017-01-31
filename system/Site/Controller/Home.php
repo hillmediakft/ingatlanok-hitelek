@@ -3,6 +3,7 @@ namespace System\Site\Controller;
 
 use System\Core\SiteController;
 use System\Core\View;
+use System\Libs\Session;
 
 class Home extends SiteController {
 
@@ -22,7 +23,9 @@ class Home extends SiteController {
         $data['description'] = $page_data['metadescription_' . $this->lang];
         $data['keywords'] = $page_data['metakeywords_' . $this->lang];
         
-        
+        // szűrési paramétereket tartalmazó tömb
+        $data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
+var_dump($data['filter_params']);
         // a keresőhöz szükséges listák alőállítása
         $data['city_list'] = $this->ingatlanok_model->city_list_query_with_prop_no();
         $data['category_list'] = $this->ingatlanok_model->list_query('ingatlan_kategoria');
@@ -38,6 +41,7 @@ class Home extends SiteController {
 
         //$view->setLazyRender();
 //$this->view->debug(true); 
+        $view->add_link('js', SITE_JS . 'pages/handle_search.js');
         $view->add_link('js', SITE_JS . 'pages/home.js');
         $view->render('home/tpl_home', $data);
     }

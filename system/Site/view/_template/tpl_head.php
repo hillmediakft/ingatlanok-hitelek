@@ -4,7 +4,7 @@ use System\Libs\Auth;
 use System\Libs\Language as Lang;
 
 // ellenőrizzük, hogy be van-e jelentkezve a felhasználó (true vagy false)
-$logged_in = Auth::check();
+$logged_in = Auth::check(false);
 
 // login, register, forgottenpw modal
 include($this->path('tpl_login_modal'));

@@ -35,7 +35,6 @@ class Ingatlanok extends SiteController {
 // lapozó linkek visszadása (paraméter az uri path)
         $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path'));
 
-
         // a keresőhöz szükséges listák alőállítása
         $data['city_list'] = $this->ingatlanok_model->city_list_query_with_prop_no();
         $data['district_list'] = $this->ingatlanok_model->district_list_query_with_prop_no();
@@ -46,16 +45,12 @@ class Ingatlanok extends SiteController {
         $data['no_of_properties'] = $this->ingatlanok_model->get_count();
         // szűrési paramétereket tartalmazó tömb
         $data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
+var_dump($data['filter_params']);        
         // kiemelt ingatlanok
         $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
 
         $data['agents'] = $this->ingatlanok_model->get_agent();
 // var_dump($data);die;
-
-
-
-
-
 
 
         $view = new View();

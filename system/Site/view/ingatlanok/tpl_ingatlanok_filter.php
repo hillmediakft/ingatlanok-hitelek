@@ -56,12 +56,15 @@
             <!-- KATEGÓRIA -->
             <div class="row">
                 <div class="col-sm-12">
+                    <?php 
+                        $selected_kategoria = ($this->request->has_query('kategoria')) ? (int)$this->request->get_query('kategoria') : '';
+                    ?>
                     <span class="item-label"><?php echo Lang::get('kereso_kategoria'); ?></span>
                     <div id="category_select_div" class="ui-front">
                         <select name="kategoria" id="category_select" data-icon="false" class="select filter-select">
                             <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                             <?php foreach ($category_list as $value) : ?>
-                                <option value="<?php echo $value['kat_id']; ?>"><?php echo $value['kat_nev_' . LANG]; ?></option>
+                                <option value="<?php echo $value['kat_id']; ?>" <?php echo ($selected_kategoria == $value['kat_id']) ? 'selected' : ''; ?>><?php echo $value['kat_nev_' . LANG]; ?></option>
                             <?php endforeach ?>
                         </select>
                     </div>

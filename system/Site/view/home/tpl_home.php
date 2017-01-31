@@ -1,102 +1,28 @@
 <?php
-
 use System\Libs\Config;
 use System\Libs\Language as Lang;
 ?>
 <div class="home-banner style-2">
     <div class="container">
+        
         <div class="banner-content">
+            
             <div class="banner-message">
                 <div class="banner-entry">
                     <span class="entry-title">Lorem ipsum</span>
                     <span class="entry-message">Dolem dolores ipsum</span>
                 </div>
             </div>
+
+            <!-- KERESÉS FORM -->
             <div class="main-filter hidden-xs">
-                <form class="filter-form" action="ingatlanok">
-                    <div class="row">
-                        <div class="filter-column-3">
-                            <span class="item-label"><?php echo Lang::get('kereso_elado'); ?>/<?php echo Lang::get('kereso_kiado'); ?></span>
-                            <div class="form-group">
-                                <select name="tipus" class="form-control">
-                                    <option selected="selected" value="1"><?php echo Lang::get('kereso_elado'); ?></option>
-                                    <option value="2"><?php echo Lang::get('kereso_kiado'); ?></option>
-                                </select>
-                            </div>	
-                        </div>
-                        <div class="filter-column-3">
-                            <span class="item-label"><?php echo Lang::get('kereso_varos'); ?></span>
-                            <div class="form-group">
-                                <select name="varos" id="varos" class="form-control" >
-                                    <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>;
-<?php echo $city_list; ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="filter-column-3">
-                            <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
-                            <div class="form-group">
-                                <select disabled="disabled" id="district" name="kerulet" class="form-control" >
-                                    <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
-<?php echo $district_list; ?>
-                                </select>
-                            </div>
-                        </div>                    
-                        <div class="filter-column-3">
-                            <span class="item-label"><?php echo Lang::get('kereso_kategoria'); ?></span>
-                            <div class="form-group">
-                                <select name="kategoria" class="form-control">
-                                    <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
-                                    <?php foreach ($category_list as $value) : ?>
-                                        <option value="<?php echo $value['kat_id']; ?>"><?php echo $value['kat_nev_' . LANG]; ?></option>
-<?php endforeach ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="filter-column-3">
-                            <span class="item-label"><?php echo Lang::get('kereso_min_ar'); ?></span>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input name="min_ar" type="text" class="form-control">
-                                    <div class="input-group-addon">Ft</div>
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="filter-column-3">
-                            <span class="item-label"><?php echo Lang::get('kereso_max_ar'); ?></span>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input name="max_ar" type="text" class="form-control">
-                                    <div class="input-group-addon">Ft</div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="filter-column-3">
-                            <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
-                            <div class="form-group">
-                                <input name="min_terulet" type="text" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="filter-column-3">
-                            <button class="find-now-btn"><?php echo Lang::get('kereso_kereses'); ?></button>
-                        </div>
-
-
-                    </div>
-                </form>
+                <?php include($this->path('tpl_home_filter')); ?>
             </div>
-            <a href="#" class="visible-xs find-now-btn"><?php echo Lang::get('kereso_kereses'); ?></a>
-        </div>
+
+        </div> <!-- banner content END -->
+    
     </div>
 </div>
-
-
 
 
 <div id="content" class="container-fluid">
