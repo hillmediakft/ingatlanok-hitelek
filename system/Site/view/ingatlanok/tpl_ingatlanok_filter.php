@@ -112,7 +112,12 @@
                         </div>
                     </div>
                     -->
-                    <div id="terulet_slider_wrapper">
+
+                    <?php 
+                        $min_terulet = $this->request->has_query('min_alapterulet') ? $this->request->get_query('min_alapterulet') : "";
+                        $max_terulet = $this->request->has_query('max_alapterulet') ? $this->request->get_query('max_alapterulet') : "";
+                    ?>
+                    <div id="terulet_slider_wrapper" data-min="<?php echo $min_terulet; ?>" data-max="<?php echo $max_terulet; ?>">
                         <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
                         <div class="range-wrap">
                             <div class="range-fields">
