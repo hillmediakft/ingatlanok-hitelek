@@ -136,9 +136,10 @@ class Auth {
     /**
      *  Ellenőrzi, hogy be van-e jelentkezve a felhasználó és lejárt e a munkamenet időkorlát
      *
-     *  @return bool
+     * @param bool $destroy - ha false, akkor nem lesz session destroy, csak a login, és user elemekt törli 
+     * @return bool
      */
-    public static function check()
+    public static function check($destroy = true)
     {
         //$instance = self::instance();
 
@@ -180,9 +181,17 @@ class Auth {
             } 
         
         } else {
-            // ha nincs bejelentkezve a felhasználó    
-            Session::destroy();
-            return false;
+            // ha nincs bejelentkezve a felhasználó
+            if ($destroy) {
+                Session::destroy();
+                return false;
+            } else {
+                // töröljük a logged_in elemet és a user adatait    
+                Session::delete(self::$logged_in);
+                // töröljük a user adatokat    
+                Session::delete('user_data');
+                return false;
+            }    
         }
     }
 
