@@ -24,9 +24,9 @@ class Kapcsolat extends SiteController {
         
         
         // a keresőhöz szükséges listák alőállítása
-        $data['city_list'] = $this->ingatlanok_model->city_list_query_with_prop_no();
+  //      $data['city_list'] = $this->ingatlanok_model->city_list_query_with_prop_no();
  //       $data['category_list'] = $this->ingatlanok_model->list_query('ingatlan_kategoria');
-        $data['district_list'] = $this->ingatlanok_model->district_list_query_with_prop_no();
+ //       $data['district_list'] = $this->ingatlanok_model->district_list_query_with_prop_no();
 // kiemelt ingatlanok
             $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
 		// ingatlan értékesítők
@@ -37,6 +37,7 @@ class Kapcsolat extends SiteController {
 
         //$view->setLazyRender();
 //$this->view->debug(true); 
+        $view->add_links(array('google-maps-site'));
         $view->add_link('js', SITE_JS . 'pages/kapcsolat.js');
         $view->render('kapcsolat/tpl_kapcsolat', $data);
     }

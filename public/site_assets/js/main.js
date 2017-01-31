@@ -16,7 +16,7 @@ $(document).ready(function(){
 //	languageDropDownInit();
 	initScrollTop();
 	carouselInit();
-//	initContacMap();
+	initContacMap();
 
 	// ingatlan adatlap terkep kezelő metódus 
 	initBannerMap1();
@@ -1259,19 +1259,19 @@ function initContacMap() {
 	if(!document.getElementById('contact-map')) return false; 
 	function initialize() {
 		var image = {
-			url: 'images/markers/green-map-marker.png'
+			url: 'public/site_assets/images/map-marker.png'
 		};
 		var orangeImg = {
-			url: 'images/markers/orange-map-marker.png'
+			url: 'public/site_assets/images/markers/orange-map-marker.png'
 		};
 		var darkGreenImg = {
-			url: 'images/markers/dark-green-map-marker.png'
+			url: 'public/site_assets/images/markers/dark-green-map-marker.png'
 		};
 		var darkGreenImg2 = {
-			url: 'images/markers/dark-green-map-marker-2.png'
+			url: 'public/site_assets/images/markers/dark-green-map-marker-2.png'
 		};
 
-		var myLatlng = new google.maps.LatLng(40.71903012, -73.98419201);
+		var myLatlng = new google.maps.LatLng(47.482374, 19.064554);
 
 		var mapOptions = {
 			zoom: 17,                

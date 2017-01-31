@@ -1,15 +1,16 @@
 var Kapcsolat = function () {
 
+    // kapcsolat űrlap az irodánk oldalon
     var contact = function () {
 
-        $("#feedback-form form").on('submit', function (event) {
+        $("#contact-form-kapcsolat").on('submit', function (event) {
+            event.preventDefault();
             var $form = $(this);
             // $('#panel_ajax_message').empty();
             // $('#panel_ajax_message').hide();
 
-
-            $('#submit_button').after('<img src="public/site_assets/img/ajax-loader.gif" class="loader" />');
-            $('#submit_contact').attr('disabled', 'disabled');
+            $('#submit-button').addClass('button-loading');
+            //     $('#submit_contact_office').attr('disabled', 'disabled');
             $.ajax({
                 type: $form.attr('method'),
                 url: $form.attr('action'),
@@ -18,27 +19,23 @@ var Kapcsolat = function () {
                     msg = JSON.parse(msg);
                     //    $('#panel_ajax_message').append(msg);
                     //    $('#panel_ajax_message').slideDown('slow');
-                    $('#feedback-form img.loader').fadeOut('slow', function () {
-                        $(this).remove()
-                    });
-                    $('#submit_contact').removeAttr('disabled');
+                    $('#submit-button').removeAttr('disabled');
+                    $('#submit-button').removeClass('button-loading');
                     //$('#panel_ajax_message').delay(7500).slideUp(700);
-                    if (msg.success) {
-                        app.notifier.showSuccess(msg.success);
-                    }
-                    if (msg.error) {
-                        app.notifier.showError(msg.error);
-                    }
+                    toastr[msg.status](msg.message, msg.title)
 
-                    $('#panel_name').val('');
-                    $('#panel_email').val('');
-                    $('#panel_phone').val('');
-                    $('#panel_message').val('');
+                    $('#contact-form-kapcsolat input[name="name"]').val('');
+                    $('#contact-form-kapcsolat input[name="email"]').val('');
+                    $('#contact-form-kapcsolat input[name="phone"]').val('');
+                    $('#contact-form-kapcsolat textarea[name="message"]').val('');
                 }
             });
-            event.preventDefault();
+
         });
     }
+
+
+
 
     return {
         //main function to initiate the module
