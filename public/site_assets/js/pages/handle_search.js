@@ -32,7 +32,7 @@ var handleSearch = function () {
 					$range_min = $range_min_default;
 					$range_max = $range_max_default;
 				} else {
-					// keresésé szerinti, vagy default érték
+					// keresés szerinti, vagy default érték
 					$range_min = (search_parts.min_ar != '') ? search_parts.min_ar : $range_min_default;
 					$range_max = (search_parts.max_ar != '') ? search_parts.max_ar : $range_max_default;
 				}
@@ -50,7 +50,7 @@ var handleSearch = function () {
 					$range_min = $range_min_default;
 					$range_max = $range_max_default;
 				} else {
-					// keresésé szerinti, vagy default érték
+					// keresés szerinti, vagy default érték
 					$range_min = (search_parts.min_ar != '') ? search_parts.min_ar : $range_min_default;
 					$range_max = (search_parts.max_ar != '') ? search_parts.max_ar : $range_max_default;
 				}
@@ -481,6 +481,10 @@ var handleSearch = function () {
 
 	};
 
+	/**
+	 *	Sorrend select menü 
+	 */
+/*	 
 	var setOrderSelected = function() {
 		// order option
 		var selected;
@@ -510,7 +514,7 @@ var handleSearch = function () {
 				$(order_options[3]).attr('selected', true);
 			}
 
-			// frissítjük a kerület selectmenüt
+			// frissítjük a sorrend selectmenüt
 			$( "#sorrend_select" ).selectmenu( "refresh" );
 			console.log($("#sorrend_select option:selected"));
 		}
@@ -522,7 +526,7 @@ var handleSearch = function () {
 		//$( "#district_select" ).selectmenu( "refresh" );		
 
 	};
-
+*/
 
 
     return {
