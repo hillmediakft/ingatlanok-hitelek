@@ -690,6 +690,13 @@ use System\libs\Session; ?>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
+                                                    <input type="checkbox" name="butor" <?php echo ($content['butor'] == 1) ? 'checked="checked"' : ''; ?>><label>Bútorozott</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
                                                     <input type="checkbox" value="3" name="medence" <?php echo ($content['medence'] == 1) ? 'checked="checked"' : ''; ?>><label>Medence</label>				</div>
                                             </div>
                                         </div>

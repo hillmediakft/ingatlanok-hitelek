@@ -45,6 +45,10 @@
                                         <td><?php echo $property_data['id']; ?></td>
                                     </tr>
                                     <tr>
+                                        <td>Referenciaszám:</td>
+                                        <td><?php echo $property_data['ref_num']; ?></td>
+                                    </tr>
+                                    <tr>
                                         <td>Rögzítés / módosítás dátuma:</td>
                                         <td><?php echo date('Y-m-d H:i', $property_data['hozzaadas_datum']) . ' / ' . date('Y-m-d H:i', $property_data['modositas_datum']); ?></td>
                                     </tr>

@@ -703,6 +703,14 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
+                                                    <input type="checkbox" name="butor"><label>Bútorozott</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
                                                     <input type="checkbox" value="3" name="medence"><label>Medence</label>
                                                 </div>
                                             </div>

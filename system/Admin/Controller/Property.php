@@ -76,7 +76,8 @@ class Property extends AdminController {
     /**
      *  (AJAX) Az ingatlanok listáját adja vissza és kezeli a csoportos művelteket is
      */
-    public function getPropertyList() {
+    public function getPropertyList()
+    {
         if ($this->request->is_ajax()) {
 
             $request_data = $this->request->get_post();
@@ -661,7 +662,7 @@ class Property extends AdminController {
                     }
 
                     // jellemzok checkbox
-                    $jellemzok2 = array('medence', 'szauna', 'jacuzzi', 'kandallo', 'riaszto', 'klima', 'ontozorendszer', 'automata_kapu', 'elektromos_redony', 'konditerem');
+                    $jellemzok2 = array('butor', 'medence', 'szauna', 'jacuzzi', 'kandallo', 'riaszto', 'klima', 'ontozorendszer', 'automata_kapu', 'elektromos_redony', 'konditerem');
                     foreach ($jellemzok2 as $jellemzo) {
                         $data[$jellemzo] = (isset($data[$jellemzo])) ? 1 : 0;
                     }
