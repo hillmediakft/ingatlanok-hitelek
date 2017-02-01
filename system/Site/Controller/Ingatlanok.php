@@ -45,7 +45,7 @@ class Ingatlanok extends SiteController {
         $data['no_of_properties'] = $this->ingatlanok_model->get_count();
         // szűrési paramétereket tartalmazó tömb
         $data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
-var_dump($data['filter_params']);        
+//var_dump($data['filter_params']);        
         // kiemelt ingatlanok
         $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
 

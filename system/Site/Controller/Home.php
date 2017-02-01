@@ -25,7 +25,7 @@ class Home extends SiteController {
         
         // szűrési paramétereket tartalmazó tömb
         $data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
-var_dump($data['filter_params']);
+//var_dump($data['filter_params']);
         // a keresőhöz szükséges listák alőállítása
         $data['city_list'] = $this->ingatlanok_model->city_list_query_with_prop_no();
         $data['category_list'] = $this->ingatlanok_model->list_query('ingatlan_kategoria');
