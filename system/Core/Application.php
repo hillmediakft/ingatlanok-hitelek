@@ -223,7 +223,7 @@ class Application {
                 $router->get('/property/insert', 'property@insert');
                 $router->get('/property/update/:id', 'property@update', array('id'));
                 $router->get('/property/details/:id', 'property@details', array('id'));
-                $router->post('/property/getpropertylist', 'property@getpropertylist');
+                $router->post('/property/getpropertylist', 'property@getPropertyList');
                 $router->post('/property/delete', 'property@delete');
                 $router->post('/property/softdelete', 'property@softdelete');
                 $router->post('/property/county_city_list', 'property@county_city_list');
