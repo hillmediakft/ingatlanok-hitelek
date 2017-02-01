@@ -597,7 +597,7 @@ class Property extends AdminController {
 
                     $data['ar_elado'] = ($data['tipus'] == 1) ? $data['ar_elado'] : null;
                     $data['ar_kiado'] = ($data['tipus'] == 2) ? $data['ar_kiado'] : null;
-                    $data['hazszam'] = (isset($data['hazszam'])) ? $data['hazszam'] : '';
+                    $data['hazszam'] = (isset($data['hazszam'])) ? $data['hazszam'] : null;
                     $data['kerulet'] = (isset($data['kerulet'])) ? $data['kerulet'] : null;
 
                     //geolocation
@@ -616,21 +616,39 @@ class Property extends AdminController {
                     $data['utca_megjelenites'] = (isset($data['utca_megjelenites'])) ? 1 : 0;
                     $data['hazszam_megjelenites'] = (isset($data['hazszam_megjelenites'])) ? 1 : 0;
                     $data['terkep'] = (isset($data['terkep'])) ? 1 : 0;
-                    // jellemzők
+                    
+                    $data['szobaszam'] = (isset($data['szobaszam'])) ? (int)$data['szobaszam'] : null;
+                    $data['felszobaszam'] = (isset($data['felszobaszam'])) ? (int)$data['felszobaszam'] : null;
+                    $data['kozos_koltseg'] = (isset($data['kozos_koltseg'])) ? (int)$data['kozos_koltseg'] : null;
+                    $data['rezsi'] = (isset($data['rezsi'])) ? (int)$data['rezsi'] : null;
+                    $data['emelet'] = (isset($data['emelet'])) ? (int)$data['emelet'] : null;
+                    $data['epulet_szintjei'] = (isset($data['epulet_szintjei'])) ? (int)$data['epulet_szintjei'] : null;
+
+                // jellemzők
                     $data['tetoter'] = (isset($data['tetoter'])) ? 1 : 0;
                     $data['erkely'] = (isset($data['erkely'])) ? 1 : 0;
+                    //erkely terulet
+                    if (isset($data['erkely_terulet'])) {
+                        $data['erkely_terulet'] = ($data['erkely_terulet'] !== '') ? (int)$data['erkely_terulet'] : null;
+                    }
                     $data['terasz'] = (isset($data['terasz'])) ? 1 : 0;
-                    $data['medence'] = (isset($data['medence'])) ? 1 : 0;
-                    $data['szauna'] = (isset($data['szauna'])) ? 1 : 0;
-                    $data['jacuzzi'] = (isset($data['jacuzzi'])) ? 1 : 0;
-                    $data['kandallo'] = (isset($data['kandallo'])) ? 1 : 0;
-                    $data['riaszto'] = (isset($data['riaszto'])) ? 1 : 0;
-                    $data['klima'] = (isset($data['klima'])) ? 1 : 0;
-                    $data['ontozorendszer'] = (isset($data['ontozorendszer'])) ? 1 : 0;
-                    $data['automata_kapu'] = (isset($data['automata_kapu'])) ? 1 : 0;
-                    $data['elektromos_redony'] = (isset($data['elektromos_redony'])) ? 1 : 0;
-                    $data['konditerem'] = (isset($data['konditerem'])) ? 1 : 0;
+                    //terasz terulet
+                    if (isset($data['terasz_terulet'])) {
+                        $data['terasz_terulet'] = ($data['terasz_terulet'] !== '') ? (int)$data['terasz_terulet'] : null;
+                    }
 
+                    // jellemző select menüből
+                    $data['lift'] = (int)$data['lift'];
+                    $jellemzok1 = array('allapot', 'haz_allapot_kivul', 'haz_allapot_belul', 'furdo_wc', 'fenyviszony', 'futes', 'parkolas', 'kilatas', 'szerkezet', 'komfort', 'energetika', 'kert');
+                    foreach ($jellemzok1 as $jellemzo) {
+                        $data[$jellemzo] = ($data[$jellemzo] === '') ? null : (int)$data[$jellemzo];
+                    }
+
+                    // jellemzok checkbox
+                    $jellemzok2 = array('medence', 'szauna', 'jacuzzi', 'kandallo', 'riaszto', 'klima', 'ontozorendszer', 'automata_kapu', 'elektromos_redony', 'konditerem');
+                    foreach ($jellemzok2 as $jellemzo) {
+                        $data[$jellemzo] = (isset($data[$jellemzo])) ? 1 : 0;
+                    }
 
                     if ($update_marker) {
                         // UPDATE
@@ -688,6 +706,12 @@ class Property extends AdminController {
                         // $this->query->debug(true);
                         // a last insert id-t adja vissza
                         $last_id = $this->property_model->insert($data);
+                            if ($last_id === false) {
+                                $this->response->json(array(
+                                    "status" => 'error',
+                                    "error_messages" => array('Hiba történt az adatok adatbázisba írásakor!')
+                                ));
+                            }
 
                         EventManager::trigger('insert_property', array('insert', '#' . $last_id . ' azonosítójú ingatlan létrehozása'));
 
