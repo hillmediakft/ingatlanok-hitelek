@@ -23,6 +23,7 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_table(array('ingatlanok'));
         $this->query->set_columns(array(
             'ingatlanok.id',
+            'ingatlanok.ref_num',
             'ingatlanok.ingatlan_nev_' . $this->lang,
             'ingatlanok.status',
             'ingatlanok.tipus',
@@ -59,6 +60,7 @@ class Ingatlanok_model extends SiteModel {
 // $this->query->debug(true);
         $this->query->set_columns(array(
             'ingatlanok.id',
+            'ingatlanok.ref_num',
             'ingatlanok.ingatlan_nev_' . $this->lang,
             'ingatlanok.status',
             'ingatlanok.tipus',
@@ -101,6 +103,7 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_columns(array(
             'ingatlanok.id',
             'ingatlanok.ref_id',
+            'ingatlanok.ref_num',
             'ingatlanok.ingatlan_nev_' . $this->lang,
             'ingatlanok.leiras_' . $this->lang,
             'ingatlanok.status',
@@ -215,6 +218,7 @@ foreach ($params as $key => $value) {
 
         $this->query->set_columns("SQL_CALC_FOUND_ROWS 
           `ingatlanok`.`id`,
+          `ingatlanok`.`ref_num`,
           `ingatlanok`.`ingatlan_nev_" . $this->lang . "`,
           `ingatlanok`.`status`,
           `ingatlanok`.`tipus`,
@@ -868,6 +872,7 @@ foreach ($params as $key => $value) {
 
         $sql = "SELECT
                  ingatlanok.id,
+                 ingatlanok.ref_num,
                  ingatlanok.ingatlan_nev_" . $this->lang . ",
                  ingatlanok.tipus,
                  ingatlanok.ar_elado,
