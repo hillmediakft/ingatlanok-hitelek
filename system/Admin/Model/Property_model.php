@@ -52,6 +52,7 @@ class Property_model extends AdminModel {
 // $this->query->debug(true);
         $this->query->set_columns(array(
             'ingatlanok.id',
+            'ingatlanok.ref_num',
             'ingatlanok.kepek',
             'ingatlanok.kategoria',
             'ingatlanok.status',
@@ -61,8 +62,8 @@ class Property_model extends AdminModel {
             'ingatlanok.ar_kiado',
             'ingatlanok.alapterulet',
             'ingatlanok.szobaszam',
-            'ingatlan_kategoria.kat_nev_hu',
             'ingatlanok.megtekintes',
+            'ingatlan_kategoria.kat_nev_hu',
             'users.first_name',
             'users.last_name',
             'district_list.district_name',
@@ -89,6 +90,7 @@ class Property_model extends AdminModel {
         $this->query->set_columns(array(
             'ingatlanok.id',
             'ingatlanok.ref_id',
+            'ingatlanok.ref_num',
             'ingatlanok.ingatlan_nev_hu',
             'ingatlanok.leiras_hu',
             'ingatlanok.status',
@@ -366,6 +368,7 @@ class Property_model extends AdminModel {
     {
         $this->query->set_columns('SQL_CALC_FOUND_ROWS 
             `ingatlanok`.`id`,
+            `ingatlanok`.`ref_num`,
             `ingatlanok`.`kepek`,
             `ingatlanok`.`kategoria`,
             `ingatlanok`.`status`,

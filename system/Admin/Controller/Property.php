@@ -517,8 +517,10 @@ class Property extends AdminController {
      *  (AJAX) Új lakás adatok bevitele adatbázisba,
      *  Lakás adatok módosítása az adatbázisban
      */
-    public function insert_update() {
+    public function insert_update()
+    {
         if ($this->request->is_ajax()) {
+            
             if ($this->request->has_post()) {
                 //megadja, hogy update, vagy insert lesz
                 $update_marker = false;
@@ -547,6 +549,11 @@ class Property extends AdminController {
                 $error_messages = array();
                 $error_counter = 0;
 
+                //referencia szám
+                if (empty($data['ref_num'])) {
+                    $error_messages[] = Message::show('Nem adta meg az ingatlan referenciaszámát).');
+                    $error_counter += 1;
+                }
                 //ingatlan kategória
                 if (empty($data['tipus'])) {
                     $error_messages[] = Message::show('Nem adta meg az ingatlan ügylet típusát (eladó/kiadó).');
@@ -558,10 +565,12 @@ class Property extends AdminController {
                     $error_counter += 1;
                 }
                 //tulajdonos adatai
+                /*
                 if (empty($data['tulaj_nev'])) {
                     $error_messages[] = Message::show('A tulajdonos neve nem lehet üres.');
                     $error_counter += 1;
                 }
+                */
                 // ár
                 if (empty($data['ar_elado']) && empty($data['ar_kiado'])) {
                     $error_messages[] = Message::show('Nem adott meg árat.');
@@ -595,10 +604,18 @@ class Property extends AdminController {
                       }
                      */
 
+                    // referenciaszám
+                    $data['ref_num'] = (int)$data['ref_num'];
+
                     $data['ar_elado'] = ($data['tipus'] == 1) ? $data['ar_elado'] : null;
                     $data['ar_kiado'] = ($data['tipus'] == 2) ? $data['ar_kiado'] : null;
                     $data['hazszam'] = (isset($data['hazszam'])) ? $data['hazszam'] : null;
                     $data['kerulet'] = (isset($data['kerulet'])) ? $data['kerulet'] : null;
+
+                    // telek alapterület
+                    if (isset($data['telek_alapterulet'])) {
+                        $data['telek_alapterulet'] = ($data['telek_alapterulet'] !== '') ? (int)$data['telek_alapterulet'] : null;
+                    }
 
                     //geolocation
                     //$address = $iranyitoszam . ' ' . $varos . ' ' . $utca . ' ' . $hazszam . ' ' . $kerulet . ' kerulet';
@@ -612,16 +629,16 @@ class Property extends AdminController {
                         $data['longitude'] = 0;
                     }
 
-
                     $data['utca_megjelenites'] = (isset($data['utca_megjelenites'])) ? 1 : 0;
                     $data['hazszam_megjelenites'] = (isset($data['hazszam_megjelenites'])) ? 1 : 0;
                     $data['terkep'] = (isset($data['terkep'])) ? 1 : 0;
                     
+
                     $data['szobaszam'] = (isset($data['szobaszam'])) ? (int)$data['szobaszam'] : null;
                     $data['felszobaszam'] = (isset($data['felszobaszam'])) ? (int)$data['felszobaszam'] : null;
                     $data['kozos_koltseg'] = (isset($data['kozos_koltseg'])) ? (int)$data['kozos_koltseg'] : null;
                     $data['rezsi'] = (isset($data['rezsi'])) ? (int)$data['rezsi'] : null;
-                    $data['emelet'] = (isset($data['emelet'])) ? (int)$data['emelet'] : null;
+                    $data['emelet'] = (isset($data['emelet'])) ? $data['emelet'] : null;
                     $data['epulet_szintjei'] = (isset($data['epulet_szintjei'])) ? (int)$data['epulet_szintjei'] : null;
 
                 // jellemzők
@@ -638,8 +655,7 @@ class Property extends AdminController {
                     }
 
                     // jellemző select menüből
-                    $data['lift'] = (int)$data['lift'];
-                    $jellemzok1 = array('allapot', 'haz_allapot_kivul', 'haz_allapot_belul', 'furdo_wc', 'fenyviszony', 'futes', 'parkolas', 'kilatas', 'szerkezet', 'komfort', 'energetika', 'kert');
+                    $jellemzok1 = array('allapot', 'haz_allapot_kivul', 'haz_allapot_belul', 'furdo_wc', 'fenyviszony', 'futes', 'parkolas', 'kilatas', 'lift', 'szerkezet', 'energetika', 'kert');
                     foreach ($jellemzok1 as $jellemzo) {
                         $data[$jellemzo] = ($data[$jellemzo] === '') ? null : (int)$data[$jellemzo];
                     }
@@ -649,6 +665,7 @@ class Property extends AdminController {
                     foreach ($jellemzok2 as $jellemzo) {
                         $data[$jellemzo] = (isset($data[$jellemzo])) ? 1 : 0;
                     }
+
 
                     if ($update_marker) {
                         // UPDATE
@@ -1197,7 +1214,8 @@ class Property extends AdminController {
     /**
      * 	utca keresés autocomplete 
      */
-    public function street_list() {
+    public function street_list()
+    {
         if ($this->request->is_ajax()) {
             $text = $this->request->get_query('query');
             if ($text) {

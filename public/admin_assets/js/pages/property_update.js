@@ -257,6 +257,11 @@ var updateProperty = function () {
             focusInvalid: true, // do not focus the last invalid input
             ignore: ":disabled", // validate all fields including form hidden input
             rules: {
+                ref_num: {
+                    required: true,
+                    number: true,
+                    max: 9999
+                },                
                 kategoria: {
                     required: true
                 },
@@ -287,13 +292,21 @@ var updateProperty = function () {
                 utca: {
                     required: true
                 },
+                /*
                 hazszam: {
                     required: true
                 },
+                */
                 alapterulet: {
                     required: true,
                     number: true
                 },
+                telek_alapterulet: {
+                    number: true
+                },
+                belmagassag: {
+                    number: true
+                },                               
                 erkely_terulet: {
                     number: true
                 },
@@ -306,15 +319,17 @@ var updateProperty = function () {
                 rezsi: {
                     number: true
                 },
+                tulaj_email: {
+                    email: true
+                },
+                /*
                 tulaj_nev: {
                     required: true
                 },
                 tulaj_tel: {
                     required: true
                 },
-                tulaj_email: {
-                    email: true
-                }
+                */
 
             },
             // az invalidHandler akkor aktiválódik, ha elküldjük a formot és hiba van

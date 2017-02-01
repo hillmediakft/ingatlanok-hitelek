@@ -82,16 +82,22 @@
 
 
                                         <!-- REFERENS NÉV -->
-                                        <div class="">
-                                            <div class="form-group">
-                                                <label for="ref_name" class="control-label col-md-3">Referens felhasználó név</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" value="<?php echo Session::get('user_data.name'); ?>" class="form-control input-small" disabled />
-                                                </div>
+                                        <div class="form-group">
+                                            <label for="ref_name" class="control-label col-md-3">Referens felhasználó név</label>
+                                            <div class="col-md-9">
+                                                <input type="text" value="<?php echo Session::get('user_data.name'); ?>" class="form-control input-small" disabled />
                                             </div>
                                         </div>
 
+                                        <!-- REFERENCIA SZÁM -->
+                                        <div class="form-group">
+                                            <label for="ref_num" class="control-label col-md-3">Referencia szám <span class="required">*</span></label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="ref_num" id="ref_num" class="form-control input-small" />
+                                            </div>
+                                        </div>
 
+                                        <!-- STATUS -->
                                         <div class="form-group">
                                             <label for="status" class="control-label col-md-3">Státusz <span></span>
                                             </label>
@@ -129,7 +135,7 @@
                                             <label for="tipus" class="control-label col-md-3 ">Megbízás típusa <small>(Eladó / kiadó)</small><span class="required">*</span></label>
                                             <div class="col-md-9">
                                                 <select name="tipus" id="tipus" class="form-control input-small">
-                                                    <option value="">-- válasszon --</option>
+                                                    <!-- <option value="">-- válasszon --</option> -->
                                                     <option value="1">Eladó</option>
                                                     <option value="2">Kiadó</option>
                                                 </select>
@@ -143,7 +149,7 @@
                                                 <select name="kategoria" id="kategoria" class="form-control">
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($ingatlan_kat_list as $value) { ?>
-                                                        <option value="<?php echo $value['kat_id']; ?>"><?php echo $value['kat_nev_hu']; ?></option>
+                                                        <option value="<?php echo $value['kat_id']; ?>" <?php echo ($value['kat_nev_hu'] == 'Lakás') ? 'selected' : ''; ?>><?php echo $value['kat_nev_hu']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -155,7 +161,7 @@
                                             <label for="ar_elado" class="col-md-3 control-label">Eladási ár (Ft) <span class="required">*</span></label>
                                             <div class="col-md-3">
                                                 <div class="input-group">
-                                                    <input type="text" name="ar_elado" id="ar_elado" class="form-control" disabled/>
+                                                    <input type="text" name="ar_elado" id="ar_elado" class="form-control"/>
                                                     <div class="input-group-addon">Ft</div>
                                                 </div>
                                             </div>
@@ -183,23 +189,46 @@
                                             </div>
                                         </div>
 
-                                        <!-- Erkély alapterület -->
+                                        <!-- TELEK ALAPTERÜLET -->
+                                        <div class="form-group">
+                                            <label for="telek_alapterulet" class="control-label col-md-3">Telek alapterület</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    <input type="text" name="telek_alapterulet" id="telek_alapterulet" class="form-control"/>
+                                                    <div class="input-group-addon">m<sup>2</sup></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- BELMAGASSÁG -->
                                         <div class="form-group">
                                             <label for="belmagassag" class="control-label col-md-3">Belmagasság</label>
                                             <div class="col-md-3">
-                                                <input type="text" name="belmagassag" id="belmagassag" class="form-control" />
+                                                <div class="input-group">
+                                                    <input type="text" name="belmagassag" id="belmagassag" class="form-control" />
+                                                    <div class="input-group-addon">cm</div>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <!-- Terasz alapterület -->
-
+                                        <!-- TÁJOLÁS -->
                                         <div class="form-group">
                                             <label for="tajolas" class="control-label col-md-3">Tájolás</label>
                                             <div class="col-md-3">
-                                                <input type="text" name="tajolas" id="tajolas" class="form-control" />
+                                                <!-- <input type="text" name="tajolas" id="tajolas" class="form-control" /> -->
+                                                <select name="tajolas" id="tajolas" class="form-control">
+                                                    <option value="">-- válasszon --</option>
+                                                    <option value="Észak">Észak</option>
+                                                    <option value="Észak-kelet">Észak-kelet</option>
+                                                    <option value="Kelet">Kelet</option>
+                                                    <option value="Dél-kelet">Dél-kelet</option>
+                                                    <option value="Dél">Dél</option>
+                                                    <option value="Dél-nyugat">Dél-nyugat</option>
+                                                    <option value="Nyugat">Nyugat</option>
+                                                    <option value="Észak-nyugat">Észak-nyugat</option>
+                                                </select>
                                             </div>
                                         </div>
-
 
                                         <div class="form-group">
                                             <label for="erkely" class="control-label col-md-3">Erkély</label>
@@ -304,7 +333,7 @@
                                                 <select name="megye" id="megye_select" class="form-control">
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($county_list as $value) { ?>
-                                                        <option value="<?php echo $value['county_id']; ?>"><?php echo $value['county_name']; ?></option>
+                                                        <option value="<?php echo $value['county_id']; ?>" <?php echo ($value['county_id'] == 5) ? 'selected' : ''; ?>><?php echo $value['county_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -312,13 +341,15 @@
                                             <!-- VÁROS MEGADÁSA -->
                                             <div class="form-group" id="varos_div">
                                                 <label for="varos" class="control-label">Város<span class="required">*</span></label>
-                                                <select name="varos" id="varos_select" class="form-control"></select>
+                                                <select name="varos" id="varos_select" class="form-control">
+                                                    <option value="88">Budapest</option>
+                                                </select>
                                             </div>
 
                                             <!-- KERÜLET MEGADÁSA -->
                                             <div class="form-group" id="district_div">
                                                 <label for="kerulet" class="control-label">Kerület <span></span></label>
-                                                <select name="kerulet" id="district_select" class="form-control" disabled>
+                                                <select name="kerulet" id="district_select" class="form-control">
                                                     <option value="">-- válasszon --</option>
                                                     <?php foreach ($district_list as $value) { ?>
                                                         <option value="<?php echo $value['district_id']; ?>"><?php echo $value['district_name']; ?></option>
@@ -349,6 +380,12 @@
                                                         <label for="emelet" class="control-label">Emelet</label>
                                                         <select name="emelet" id="emelet" class="form-control">
                                                             <option value="">-- válasszon --</option>
+                                                            <option value="alagsor">Alagsor</option>
+                                                            <option value="pince">Pince</option>
+                                                            <option value="szuterén">Szuterén</option>
+                                                            <option value="földszint">Földszint</option>
+                                                            <option value="magasföldszint">Magasföldszint</option>
+                                                            <option value="félemelet">Félemelet</option>
                                                             <option value="1">1. emelet</option>
                                                             <option value="2">2. emelet</option>
                                                             <option value="3">3. emelet</option>
@@ -360,7 +397,6 @@
                                                             <option value="9">9. emelet</option>
                                                             <option value="10">10. emelet</option>
                                                             <option value="11">10. emelet felett</option>
-
                                                         </select>
                                                     </div>
                                                 </div>
@@ -615,6 +651,7 @@
                                             <div class="form-group">
                                                 <label for="lift">Lift</label>
                                                 <select class="form-control" name='lift' id='lift'>
+                                                    <option value="">-- válasszon --</option>
                                                     <option value="0">nincs</option>
                                                     <option value="1">van</option>
                                                 </select>
@@ -632,18 +669,6 @@
                                                 </select>
                                             </div>
                                         </div>
-
-                                        <div class="col-md-3" >
-                                            <div class="form-group">
-                                                <label for="komfort">Komfort</label>
-                                                <select class="form-control" name="komfort" id="komfort">
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_komfort_list as $value) { ?>
-                                                        <option value="<?php echo $value['komfort_id']; ?>"><?php echo $value['komfort_leiras_hu']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>                                    
 
                                         <div class="col-md-3" >
                                             <div class="form-group">
@@ -781,7 +806,7 @@
                                         <div class="col-md-6">
                                             <!-- TULAJ NEVE -->
                                             <div class="form-group">
-                                                <label for="tulaj_nev" class="control-label">Név <span class="required">*</span></label>
+                                                <label for="tulaj_nev" class="control-label">Név</label>
                                                 <input type="text" name="tulaj_nev" id="tulaj_nev" placeholder="" class="form-control" />
                                             </div>
                                         </div>
@@ -795,7 +820,7 @@
                                         <!-- TULAJ TELEFONSZÁM -->
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="tulaj_tel" class="control-label">Telefonszám <span class="required">*</span></label>
+                                                <label for="tulaj_tel" class="control-label">Telefonszám</label>
                                                 <input type="text" name="tulaj_tel" id="tulaj_tel" placeholder="" class="form-control" />
                                             </div>
                                         </div>
