@@ -44,12 +44,9 @@
                     <table class="table table-striped table-hover table-bordered" id="energetika">
                         <thead>
                             <tr>
-                                <th>
-                                    #id
-                                </th>
-                                <th>
-                                    Energetikai besorolás megnevezése
-                                </th>
+                                <th>#id</th>
+                                <th>Energetikai besorolás megnevezése agyar</th>
+                                <th>Energetikai besorolás megnevezése angol</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -63,7 +60,10 @@
                                     <?php echo $value['energetika_id'];?>
                                 </td>
                                 <td>
-                                    <?php echo $value['energetika_leiras'];?>
+                                    <?php echo $value['energetika_leiras_hu'];?>
+                                </td>
+                                <td>
+                                    <?php echo $value['energetika_leiras_en'];?>
                                 </td>
                                 <td>
                                     <a class="edit" href="javascript:;">
