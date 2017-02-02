@@ -38,9 +38,7 @@ use System\libs\Session; ?>
                 <div class="portlet-title">
                     <div class="caption"><i class="fa fa-edit"></i>Ingatlan adatok módosítása</div>
                     <div class="actions">
-                        <!-- Adatok elküldése UPDATE és kilépés -->
-                        <button class="btn green" id="data_update_ajax" data-id="<?php echo $content['id']; ?>" type="button" name="save_data">Mentés és kilépés <i class="fa fa-check"></i></button>
-                        <a class="btn default" id="button_megsem" href="admin/property">Kilépés <i class="fa fa-times"></i></a>
+
                     </div>								
                 </div>
 
@@ -57,6 +55,9 @@ use System\libs\Session; ?>
                                 <span><!-- ide jön az üzenet--></span>
                             </div>
 
+
+
+                            <!-- ALAP ADATOK -->
                             <div class="portlet light bg-inverse">
                                 <div class="portlet-title">
                                     <div class="caption font-green-sharp">
@@ -142,14 +143,13 @@ use System\libs\Session; ?>
                                         </div>
                                     </div>	
 
-                                    <!-- ÁR_ELADó -->	
-
+                                    <!-- ÁR_ELADÓ -->	
                                     <div class="form-group">
                                         <label for="ar_elado" class="control-label col-md-3">Eladási ár <small>(Ft)</small> <span class="required">*</span></label>
                                         <div class="col-md-3">
                                             <div class="input-group">
-                                                <input type="text" name="ar_elado" id="ar_elado" value="<?php echo $content['ar_elado']; ?>" class="form-control" disabled/>
-                                                <div class="input-group-addon">Ft</div>
+                                                <input type="text" name="ar_elado" id="ar_elado" value="<?php echo ($content['ar_elado'] / 1000000); ?>" class="form-control" disabled/>
+                                                <div class="input-group-addon">millió Ft</div>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -157,13 +157,13 @@ use System\libs\Session; ?>
                                         </div>
                                     </div>
 
-                                    <!-- ÁR_KIADÓ -->
+                                    <!-- ÚJ ÁR ELADÓ -->
                                     <div class="form-group" id="arvaltozas">
                                         <label for="ar_elado_uj" class="control-label col-md-3">ÚJ eladási ár <small>(Ft)</small></label>
                                         <div class="col-md-3">
                                             <div class="input-group">
                                                 <input type="text" name="ar_elado_uj" id="ar_elado_uj" value=0 class="form-control"/>
-                                                <div class="input-group-addon">Ft</div>
+                                                <div class="input-group-addon">millió Ft</div>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -185,8 +185,8 @@ use System\libs\Session; ?>
                                         <label for="ar_kiado" class="control-label col-md-3">Bérleti díj <small>(Ft)</small> <span class="required">*</span></label>
                                         <div class="col-md-3">
                                             <div class="input-group">
-                                                <input type="text" name="ar_kiado" id="ar_kiado" value="<?php echo $content['ar_kiado']; ?>" class="form-control" disabled/>
-                                                <div class="input-group-addon">Ft</div>
+                                                <input type="text" name="ar_kiado" id="ar_kiado" value="<?php echo ($content['ar_kiado'] / 1000); ?>" class="form-control" disabled/>
+                                                <div class="input-group-addon">ezer Ft</div>
                                             </div>
                                         </div>
                                     </div>
@@ -230,14 +230,14 @@ use System\libs\Session; ?>
                                         <div class="col-md-3">
                                             <select name="tajolas" id="tajolas" class="form-control">
                                                 <option value="">-- válasszon --</option>
-                                                <option value="Észak" <?php echo ($content['tajolas'] == 'Észak') ? 'selected' : ''; ?>>Észak</option>
-                                                <option value="Észak-kelet" <?php echo ($content['tajolas'] == 'Észak-kelet') ? 'selected' : ''; ?>>Észak-kelet</option>
-                                                <option value="Kelet" <?php echo ($content['tajolas'] == 'Kelet') ? 'selected' : ''; ?>>Kelet</option>
-                                                <option value="Dél-kelet" <?php echo ($content['tajolas'] == 'Dél-kelet') ? 'selected' : ''; ?>>Dél-kelet</option>
-                                                <option value="Dél" <?php echo ($content['tajolas'] == 'Dél') ? 'selected' : ''; ?>>Dél</option>
-                                                <option value="Dél-nyugat" <?php echo ($content['tajolas'] == 'Dél-nyugat') ? 'selected' : ''; ?>>Dél-nyugat</option>
-                                                <option value="Nyugat" <?php echo ($content['tajolas'] == 'Nyugat') ? 'selected' : ''; ?>>Nyugat</option>
-                                                <option value="Észak-nyugat" <?php echo ($content['tajolas'] == 'Észak-nyugat') ? 'selected' : ''; ?>>Észak-nyugat</option>
+                                                <option value="0" <?php echo ($content['tajolas'] == 0) ? 'selected' : ''; ?>>észak</option>
+                                                <option value="1" <?php echo ($content['tajolas'] == 1) ? 'selected' : ''; ?>>északkelet</option>
+                                                <option value="2" <?php echo ($content['tajolas'] == 2) ? 'selected' : ''; ?>>kelet</option>
+                                                <option value="3" <?php echo ($content['tajolas'] == 3) ? 'selected' : ''; ?>>délkelet</option>
+                                                <option value="4" <?php echo ($content['tajolas'] == 4) ? 'selected' : ''; ?>>dél</option>
+                                                <option value="5" <?php echo ($content['tajolas'] == 5) ? 'selected' : ''; ?>>délnyugat</option>
+                                                <option value="6" <?php echo ($content['tajolas'] == 6) ? 'selected' : ''; ?>>nyugat</option>
+                                                <option value="7" <?php echo ($content['tajolas'] == 7) ? 'selected' : ''; ?>>északnyugat</option>
                                             </select>
                                         </div>
                                     </div>
@@ -328,6 +328,250 @@ use System\libs\Session; ?>
                             </div>
 
 
+                            <!-- JELLEMZŐK -->
+                            <div class="portlet light bg-inverse">
+                                <div class="portlet-title">
+                                    <div class="caption font-green-sharp">
+                                        <i class="icon-share font-green-sharp"></i>
+                                        <span class="caption-subject bold uppercase"> Jellemzők</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="row">
+
+                                        <!-- INGATLAN ÁLLAPOTA -->  
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="allapot">Ingatlan állapota</label>
+                                                <select name="allapot" id="allapot" class="form-control">
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_allapot_list as $value) { ?>
+                                                        <option value="<?php echo $value['all_id']; ?>" <?php echo ($value['all_id'] == $content['allapot']) ? 'selected' : ''; ?>><?php echo $value['all_leiras_hu']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div> 
+                                        </div>
+                                        
+                                        <!-- INGATLAN ÁLLAPOTA KÍVÜL -->
+                                        <div class="col-md-3" >
+                                            <div class="form-group">
+                                                <label for="haz_allapot_kivul">Ház állapota kívül</label>
+                                                <select name="haz_allapot_kivul" id="haz_allapot_kivul" class="form-control">
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_haz_allapot_kivul_list as $value) { ?>
+                                                        <option value="<?php echo $value['haz_allapot_kivul_id']; ?>" <?php echo ($value['haz_allapot_kivul_id'] == $content['haz_allapot_kivul']) ? 'selected' : ''; ?>><?php echo $value['haz_allapot_kivul_leiras_hu']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- INGATLAN ÁLLAPOTA BELÜL -->
+                                        <div class="col-md-3" >
+                                            <div class="form-group">
+                                                <label for="haz_allapot_belul">Ház állapota belül</label>
+                                                <select name="haz_allapot_belul" id="haz_allapot_belul" class="form-control">
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_haz_allapot_belul_list as $value) { ?>
+                                                        <option value="<?php echo $value['haz_allapot_belul_id']; ?>" <?php echo ($value['haz_allapot_belul_id'] == $content['haz_allapot_belul']) ? 'selected' : ''; ?>><?php echo $value['haz_allapot_belul_leiras_hu']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div> 
+
+                                        <!-- ENERGETIKA -->
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="energetika">Energetikai tanúsítvány</label>
+                                                <select class="form-control" name='energetika' id='energetika'>
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_energetika_list as $value) { ?>
+                                                        <option value="<?php echo $value['energetika_id']; ?>" <?php echo ($value['energetika_id'] == $content['energetika']) ? 'selected' : ''; ?>><?php echo $value['energetika_leiras_hu']; ?></option>
+                                                    <?php } ?> 
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- FŰTÉS -->
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="futes">Fűtés</label>
+                                                <select class="form-control" name='futes' id='futes'>
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_futes_list as $value) { ?>
+                                                        <option value="<?php echo $value['futes_id']; ?>" <?php echo ($value['futes_id'] == $content['futes']) ? 'selected' : ''; ?>><?php echo $value['futes_leiras_hu']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div >                                       
+                                        
+                                        <!-- FÜRDŐSZOBA - WC -->
+                                        <div class="col-md-3" >
+                                            <div class="form-group">
+                                                <label for="furdo_wc">Fürdőszoba - WC</label>
+                                                <select name="furdo_wc" id="furdo_wc" class="form-control">
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_furdo_wc_list as $value) { ?>
+                                                        <option value="<?php echo $value['furdo_wc_id']; ?>" <?php echo ($value['furdo_wc_id'] == $content['furdo_wc']) ? 'selected' : ''; ?>><?php echo $value['furdo_wc_leiras_hu']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div> 
+                                        
+                                        <!-- FÉNYVISZONYOK -->
+                                        <div class="col-md-3" >
+                                            <div class="form-group">
+                                                <label for="fenyviszony">Fényviszonyok</label>
+                                                <select name="fenyviszony" id="fenyviszony" class="form-control">
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_fenyviszony_list as $value) { ?>
+                                                        <option value="<?php echo $value['fenyviszony_id']; ?>" <?php echo ($value['fenyviszony_id'] == $content['fenyviszony']) ? 'selected' : ''; ?>><?php echo $value['fenyviszony_leiras_hu']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div> 
+                                        
+                                        <!-- PARKOLÁS -->
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="parkolas">Parkolás</label>
+                                                <select class="form-control" name='parkolas' id='parkolas'>
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_parkolas_list as $value) { ?>
+                                                        <option value="<?php echo $value['parkolas_id']; ?>" <?php echo ($value['parkolas_id'] == $content['parkolas']) ? 'selected' : ''; ?>><?php echo $value['parkolas_leiras_hu']; ?></option>
+                                                    <?php } ?>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- KILÁTÁS -->
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="kilatas">Kilátás</label>
+                                                <select class="form-control" name='kilatas' id='kilatas'>
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_kilatas_list as $value) { ?>
+                                                        <option value="<?php echo $value['kilatas_id']; ?>" <?php echo ($value['kilatas_id'] == $content['kilatas']) ? 'selected' : ''; ?>><?php echo $value['kilatas_leiras_hu']; ?></option>
+                                                    <?php } ?> 
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- LIFT -->
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="lift">Lift</label>
+                                                <select class="form-control" name='lift' id='lift'>
+                                                    <option value="">-- válasszon --</option>
+                                                    <option value="0" <?php echo ($content['lift'] == 0) ? 'selected' : ''; ?>>nincs</option>
+                                                    <option value="1" <?php echo ($content['lift'] == 1) ? 'selected' : ''; ?>>van</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- SZERKEZET -->
+                                        <div class="col-md-3" >
+                                            <div class="form-group">
+                                                <label for="szerkezet">Szerkezet</label>
+                                                <select class="form-control" name="szerkezet" id="szerkezet">
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_szerkezet_list as $value) { ?>
+                                                        <option value="<?php echo $value['szerkezet_id']; ?>" <?php echo ($value['szerkezet_id'] == $content['szerkezet']) ? 'selected' : ''; ?>><?php echo $value['szerkezet_leiras_hu']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- KERT -->
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="kert">Kert</label>
+                                                <select class="form-control" name='kert' id='kert'>
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_kert_list as $value) { ?>
+                                                        <option value="<?php echo $value['kert_id']; ?>" <?php echo ($value['kert_id'] == $content['kert']) ? 'selected' : ''; ?>><?php echo $value['kert_leiras_hu']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>                                       
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" name="butor" <?php echo ($content['butor'] == 1) ? 'checked="checked"' : ''; ?>><label>Bútorozott</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="3" name="medence" <?php echo ($content['medence'] == 1) ? 'checked="checked"' : ''; ?>><label>Medence</label>             </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="4" name="szauna" <?php echo ($content['szauna'] == 1) ? 'checked="checked"' : ''; ?>><label>Szauna</label>                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="5" name="jacuzzi" <?php echo ($content['jacuzzi'] == 1) ? 'checked="checked"' : ''; ?>><label>Jacuzzi</label>             </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="6" name="kandallo" <?php echo ($content['kandallo'] == 1) ? 'checked="checked"' : ''; ?>><label>Kandalló</label>              </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="7" name="riaszto" <?php echo ($content['riaszto'] == 1) ? 'checked="checked"' : ''; ?>><label>Riasztó</label>             </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="9" name="klima" <?php echo ($content['klima'] == 1) ? 'checked="checked"' : ''; ?>><label>Klíma</label>               </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="10" name="ontozorendszer" <?php echo ($content['ontozorendszer'] == 1) ? 'checked="checked"' : ''; ?>><label>Öntözőrendszer</label>               </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="11" name="automata_kapu" <?php echo ($content['automata_kapu'] == 1) ? 'checked="checked"' : ''; ?>><label>Automata kapu</label>              </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="12" name="elektromos_redony" <?php echo ($content['elektromos_redony'] == 1) ? 'checked="checked"' : ''; ?>><label>Elektromos redőny</label>              </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="13" name="konditerem" <?php echo ($content['konditerem'] == 1) ? 'checked="checked"' : ''; ?>><label>Konditerem</label>               
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>      
+
+
                             <!-- **************** CÍM ADATOK ************************ -->
                             <div class="portlet light bg-inverse">
                                 <div class="portlet-title">
@@ -377,65 +621,50 @@ use System\libs\Session; ?>
                                                 <input type="text" name="iranyitoszam" id="iranyitoszam" value="<?php echo $content['iranyitoszam']; ?>" class="form-control input-small" />
                                             </div>	
 
-                                            <!-- HAZSZAM -->	
-                                            <div class="form-group">
-                                                <label for="hazszam" class="control-label">Házszám</label>
-                                                <input type="text" name="hazszam" id="hazszam" value="<?php echo $content['hazszam']; ?>" class="form-control input-xlarge" />
-                                            </div>	
-                                            <!-- EMELET -->	
-                                            <div class="form-group">
-                                                <label for="emelet" class="control-label">Emelet</label>
-                                                <select name="emelet" id="emelet" class="form-control input-xlarge">
-                                                    <option value="">-- válasszon --</option>
-                                                   
-                                                    <option value="alagsor" <?php echo ($content['emelet'] == 'alagsor') ? 'selected' : ''; ?>>Alagsor</option>
-                                                    <option value="pince" <?php echo ($content['emelet'] == 'pince') ? 'selected' : ''; ?>>Pince</option>
-                                                    <option value="szuterén" <?php echo ($content['emelet'] == 'szuterén') ? 'selected' : ''; ?>>Szuterén</option>
-                                                    <option value="földszint" <?php echo ($content['emelet'] == 'földszint') ? 'selected' : ''; ?>>Földszint</option>
-                                                    <option value="magasföldszint" <?php echo ($content['emelet'] == 'magasföldszint') ? 'selected' : ''; ?>>Magasföldszint</option>
-                                                    <option value="félemelet" <?php echo ($content['emelet'] == 'félemelet') ? 'selected' : ''; ?>>Félemelet</option>
-
-                                                    <option value="1" <?php echo ($content['emelet'] == 1) ? 'selected' : ''; ?>>1. emelet</option>
-                                                    <option value="2" <?php echo ($content['emelet'] == 2) ? 'selected' : ''; ?>>2. emelet</option>
-                                                    <option value="3" <?php echo ($content['emelet'] == 3) ? 'selected' : ''; ?>>3. emelet</option>
-                                                    <option value="4" <?php echo ($content['emelet'] == 4) ? 'selected' : ''; ?>>4. emelet</option>
-
-                                                    <option value="5" <?php echo ($content['emelet'] == 5) ? 'selected' : ''; ?>>5. emelet</option>
-                                                    <option value="6" <?php echo ($content['emelet'] == 6) ? 'selected' : ''; ?>>6. emelet</option>
-                                                    <option value="7" <?php echo ($content['emelet'] == 7) ? 'selected' : ''; ?>>7. emelet</option>
-                                                    <option value="8" <?php echo ($content['emelet'] == 8) ? 'selected' : ''; ?>>8. emelet</option>
-
-                                                    <option value="9" <?php echo ($content['emelet'] == 9) ? 'selected' : ''; ?>>9. emelet</option>
-                                                    <option value="10" <?php echo ($content['emelet'] == 10) ? 'selected' : ''; ?>>10. emelet</option>
-                                                    <option value="11" <?php echo ($content['emelet'] == 11) ? 'selected' : ''; ?>>10. emelet felett</option>
-
-                                                </select>
-                                            </div>                                        
-                                            <!-- EMELET/AJTÓ -->	
-                                            <div class="form-group">
-                                                <label for="emelet_ajto" class="control-label">Ajtó</label>
-                                                <input type="text" name="emelet_ajto" id="emelet_ajto" value="<?php echo $content['emelet_ajto']; ?>" class="form-control input-xlarge" />
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <!-- HAZSZAM -->
+                                                    <div class="form-group">
+                                                        <label for="hazszam" class="control-label">Házszám</label>
+                                                        <input type="text" name="hazszam" id="hazszam" value="<?php echo $content['hazszam']; ?>" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!-- EMELET -->
+                                                    <div class="form-group">
+                                                        <label for="emelet" class="control-label">Emelet</label>
+                                                        <select name="emelet" id="emelet" class="form-control">
+                                                            <option value="">-- válasszon --</option>
+                                                            <?php foreach ($ingatlan_emelet_list as $value) { ?>
+                                                                <option value="<?php echo $value['emelet_id']; ?>" <?php echo ($content['emelet'] == $value['emelet_id']) ? 'selected' : ''; ?>><?php echo $value['emelet_leiras_hu']; ?></option>
+                                                            <?php } ?>                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <!-- ÉPÜLET SZINTJEINEK SZÁMA -->	
-                                            <div class="form-group">
-                                                <label for="epulet_szintjei" class="control-label">Épület szinjei</label>
-                                                <select name="epulet_szintjei" id="epulet_szintjei" class="form-control input-xlarge">
-                                                    <option value="">-- válasszon --</option>
-                                                    <option value="1" <?php echo ($content['epulet_szintjei'] == 1) ? 'selected' : ''; ?>>1 emelet</option>
-                                                    <option value="2" <?php echo ($content['epulet_szintjei'] == 2) ? 'selected' : ''; ?>>2 emelet</option>
-                                                    <option value="3" <?php echo ($content['epulet_szintjei'] == 3) ? 'selected' : ''; ?>>3 emelet</option>
-                                                    <option value="4" <?php echo ($content['epulet_szintjei'] == 4) ? 'selected' : ''; ?>>4 emelet</option>
-                                                    <option value="5" <?php echo ($content['epulet_szintjei'] == 5) ? 'selected' : ''; ?>>5 emelet</option>
-                                                    <option value="6" <?php echo ($content['epulet_szintjei'] == 6) ? 'selected' : ''; ?>>6 emelet</option>
-                                                    <option value="7" <?php echo ($content['epulet_szintjei'] == 7) ? 'selected' : ''; ?>>7 emelet</option>
-                                                    <option value="8" <?php echo ($content['epulet_szintjei'] == 8) ? 'selected' : ''; ?>>8 emelet</option>
-                                                    <option value="9" <?php echo ($content['epulet_szintjei'] == 9) ? 'selected' : ''; ?>>9 emelet</option>
-                                                    <option value="10" <?php echo ($content['epulet_szintjei'] == 10) ? 'selected' : ''; ?>>10 emelet</option>
-                                                    <option value="11" <?php echo ($content['epulet_szintjei'] == 11) ? 'selected' : ''; ?>>10 emelet felett</option>
-                                                </select>
-                                            </div>                                        
-                                            <!-- CHECKBOX-OK -->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <!-- AJTÓ -->
+                                                    <div class="form-group">
+                                                        <label for="emelet_ajto" class="control-label">Ajtó</label>
+                                                        <input type="text" name="emelet_ajto" id="emelet_ajto" value="<?php echo $content['emelet_ajto']; ?>" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!-- ÉPÜLET SZINTJEINEK SZÁMA -->
+                                                    <div class="form-group">
+                                                        <label for="epulet_szintjei" class="control-label">Épület szinjei</label>
+                                                        <select name="epulet_szintjei" id="epulet_szintjei" class="form-control">
+                                                            <option value="">-- válasszon --</option>
+                                                            <?php foreach ($ingatlan_emelet_list as $value) { ?>
+                                                                <option value="<?php echo $value['emelet_id']; ?>" <?php echo ($content['epulet_szintjei'] == $value['emelet_id']) ? 'selected' : ''; ?>><?php echo $value['emelet_leiras_hu']; ?></option>
+                                                            <?php } ?> 
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                            <!-- CHECKBOX-OK -->
                                             <div class="form-group">
                                                 <div class="checkbox-list">
                                                     <label><input type="checkbox" name="tetoter" <?php echo ($content['tetoter'] == 1) ? 'checked="checked"' : ''; ?>> Tetőtéri lakás</label>
@@ -530,234 +759,6 @@ use System\libs\Session; ?>
                                 </div>
 
                             </div>
-
-                            <div class="portlet light bg-inverse">
-                                <div class="portlet-title">
-                                    <div class="caption font-green-sharp">
-                                        <i class="icon-share font-green-sharp"></i>
-                                        <span class="caption-subject bold uppercase"> Jellemzők</span>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <!-- INGATLAN ÁLLAPOTA -->	
-                                            <div class="form-group">
-                                                <label for="allapot">Ingatlan állapota</label>
-                                                <select name="allapot" id="allapot" class="form-control">
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_allapot_list as $value) { ?>
-                                                        <option value="<?php echo $value['all_id']; ?>" <?php echo ($value['all_id'] == $content['allapot']) ? 'selected' : ''; ?>><?php echo $value['all_leiras_hu']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div> 
-                                        </div>
-                                        <div class="col-md-3" >
-                                            <!-- INGATLAN ÁLLAPOTA -->
-                                            <div class="form-group">
-                                                <label for="haz_allapot_kivul">Ház állapota kívül</label>
-                                                <select name="haz_allapot_kivul" id="haz_allapot_kivul" class="form-control">
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_haz_allapot_kivul_list as $value) { ?>
-                                                        <option value="<?php echo $value['haz_allapot_kivul_id']; ?>" <?php echo ($value['haz_allapot_kivul_id'] == $content['haz_allapot_kivul']) ? 'selected' : ''; ?>><?php echo $value['haz_allapot_kivul_leiras_hu']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3" >
-                                            <!-- INGATLAN ÁLLAPOTA -->
-                                            <div class="form-group">
-                                                <label for="haz_allapot_belul">Ház állapota belül</label>
-                                                <select name="haz_allapot_belul" id="haz_allapot_belul" class="form-control">
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_haz_allapot_belul_list as $value) { ?>
-                                                        <option value="<?php echo $value['haz_allapot_belul_id']; ?>" <?php echo ($value['haz_allapot_belul_id'] == $content['haz_allapot_belul']) ? 'selected' : ''; ?>><?php echo $value['haz_allapot_belul_leiras_hu']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div> 
-                                        <div class="col-md-3" >
-                                            <!-- INGATLAN ÁLLAPOTA -->
-                                            <div class="form-group">
-                                                <label for="furdo_wc">Fürdőszoba - WC</label>
-                                                <select name="furdo_wc" id="furdo_wc" class="form-control">
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_furdo_wc_list as $value) { ?>
-                                                        <option value="<?php echo $value['furdo_wc_id']; ?>" <?php echo ($value['furdo_wc_id'] == $content['furdo_wc']) ? 'selected' : ''; ?>><?php echo $value['furdo_wc_leiras_hu']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div> 
-                                        <div class="col-md-3" >
-                                            <!-- INGATLAN ÁLLAPOTA -->
-                                            <div class="form-group">
-                                                <label for="fenyviszony">Fényviszonyok</label>
-                                                <select name="fenyviszony" id="fenyviszony" class="form-control">
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_fenyviszony_list as $value) { ?>
-                                                        <option value="<?php echo $value['fenyviszony_id']; ?>" <?php echo ($value['fenyviszony_id'] == $content['fenyviszony']) ? 'selected' : ''; ?>><?php echo $value['fenyviszony_leiras_hu']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div> 
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="futes">Fűtés</label>
-                                                <select class="form-control" name='futes' id='futes'>
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_futes_list as $value) { ?>
-                                                        <option value="<?php echo $value['futes_id']; ?>" <?php echo ($value['futes_id'] == $content['futes']) ? 'selected' : ''; ?>><?php echo $value['futes_leiras_hu']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="parkolas">Parkolás</label>
-                                                <select class="form-control" name='parkolas' id='parkolas'>
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_parkolas_list as $value) { ?>
-                                                        <option value="<?php echo $value['parkolas_id']; ?>" <?php echo ($value['parkolas_id'] == $content['parkolas']) ? 'selected' : ''; ?>><?php echo $value['parkolas_leiras_hu']; ?></option>
-                                                    <?php } ?>
-
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="kilatas">Kilátás</label>
-                                                <select class="form-control" name='kilatas' id='kilatas'>
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_kilatas_list as $value) { ?>
-                                                        <option value="<?php echo $value['kilatas_id']; ?>" <?php echo ($value['kilatas_id'] == $content['kilatas']) ? 'selected' : ''; ?>><?php echo $value['kilatas_leiras_hu']; ?></option>
-                                                    <?php } ?> 
-
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="lift">Lift</label>
-                                                <select class="form-control" name='lift' id='lift'>
-                                                    <option value="">-- válasszon --</option>
-                                                    <option value="0" <?php echo ($content['lift'] == 0) ? 'selected' : ''; ?>>nincs</option>
-                                                    <option value="1" <?php echo ($content['lift'] == 1) ? 'selected' : ''; ?>>van</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3" >
-                                            <div class="form-group">
-                                                <label for="szerkezet">Szerkezet</label>
-                                                <select class="form-control" name="szerkezet" id="szerkezet">
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_szerkezet_list as $value) { ?>
-                                                        <option value="<?php echo $value['szerkezet_id']; ?>" <?php echo ($value['szerkezet_id'] == $content['szerkezet']) ? 'selected' : ''; ?>><?php echo $value['szerkezet_leiras_hu']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="energetika">Energetikai tanúsítvány</label>
-                                                <select class="form-control" name='energetika' id='energetika'>
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_energetika_list as $value) { ?>
-                                                        <option value="<?php echo $value['energetika_id']; ?>" <?php echo ($value['energetika_id'] == $content['energetika']) ? 'selected' : ''; ?>><?php echo $value['energetika_leiras_hu']; ?></option>
-                                                    <?php } ?> 
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="kert">Kert</label>
-                                                <select class="form-control" name='kert' id='kert'>
-                                                    <option value="">-- válasszon --</option>
-                                                    <?php foreach ($ingatlan_kert_list as $value) { ?>
-                                                        <option value="<?php echo $value['kert_id']; ?>" <?php echo ($value['kert_id'] == $content['kert']) ? 'selected' : ''; ?>><?php echo $value['kert_leiras_hu']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                    </div>                                       
-
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="butor" <?php echo ($content['butor'] == 1) ? 'checked="checked"' : ''; ?>><label>Bútorozott</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="3" name="medence" <?php echo ($content['medence'] == 1) ? 'checked="checked"' : ''; ?>><label>Medence</label>				</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="4" name="szauna" <?php echo ($content['szauna'] == 1) ? 'checked="checked"' : ''; ?>><label>Szauna</label>				</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="5" name="jacuzzi" <?php echo ($content['jacuzzi'] == 1) ? 'checked="checked"' : ''; ?>><label>Jacuzzi</label>				</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="6" name="kandallo" <?php echo ($content['kandallo'] == 1) ? 'checked="checked"' : ''; ?>><label>Kandalló</label>				</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="7" name="riaszto" <?php echo ($content['riaszto'] == 1) ? 'checked="checked"' : ''; ?>><label>Riasztó</label>				</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="9" name="klima" <?php echo ($content['klima'] == 1) ? 'checked="checked"' : ''; ?>><label>Klíma</label>				</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="10" name="ontozorendszer" <?php echo ($content['ontozorendszer'] == 1) ? 'checked="checked"' : ''; ?>><label>Öntözőrendszer</label>				</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="11" name="automata_kapu" <?php echo ($content['automata_kapu'] == 1) ? 'checked="checked"' : ''; ?>><label>Automata kapu</label>				</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="12" name="elektromos_redony" <?php echo ($content['elektromos_redony'] == 1) ? 'checked="checked"' : ''; ?>><label>Elektromos redőny</label>				</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="13" name="konditerem" <?php echo ($content['konditerem'] == 1) ? 'checked="checked"' : ''; ?>><label>Konditerem</label>				
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 												
 
 
                             <!-- TULAJDONOS ADATAI -->
@@ -908,6 +909,13 @@ use System\libs\Session; ?>
 
 
                 </div> <!-- END PORTLET 1 BODY-->
+
+
+                <!-- Adatok elküldése UPDATE és kilépés -->
+                <button class="btn green" id="data_update_ajax" data-id="<?php echo $content['id']; ?>" type="button" name="save_data">Mentés és kilépés <i class="fa fa-check"></i></button>
+                <a class="btn default" id="button_megsem" href="admin/property">Kilépés <i class="fa fa-times"></i></a>
+
+
             </div> <!-- END PORTLET 1 -->
 
         </div> <!-- END COL-MD-12 -->
