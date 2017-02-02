@@ -25,6 +25,8 @@ class Application {
         if (AREA == 'site' && MULTILANG_SITE == true) {
             // nyelvi fájl betöltése
             Language::init(LANG, DI::get('connect'));
+            // egyeb fordítások
+            Config::load('translations');
         }
         // Megadjuk az Auth osztály alapbeállításait ('auth.php' config file betöltése)
         Auth::init('auth');
