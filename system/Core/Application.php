@@ -203,6 +203,7 @@ class Application {
                 $router->get('/datatables/ingatlan_haz_allapot_belul', 'datatables@ingatlan_haz_allapot_belul');
                 $router->get('/datatables/ingatlan_furdo_wc', 'datatables@ingatlan_furdo_wc');
                 $router->get('/datatables/ingatlan_fenyviszony', 'datatables@ingatlan_fenyviszony');
+                $router->get('/datatables/ingatlan_emelet', 'datatables@ingatlan_emelet');
                 $router->post('/datatables/ajax_delete', 'datatables@ajax_delete');
                 $router->post('/datatables/ajax_update_insert', 'datatables@ajax_update_insert');
 

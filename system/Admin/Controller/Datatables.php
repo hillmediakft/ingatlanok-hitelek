@@ -240,6 +240,23 @@ class Datatables extends AdminController {
         $view->add_links(array('datatable', 'bootbox', 'fenyviszony'));
         $view->render('datatables/tpl_fenyviszony', $data);
     } 
+
+    /**
+     * Emeletek lista
+     *
+     * @return void
+     */
+    public function ingatlan_emelet()
+    {
+        $view = new View();
+
+        $data['title'] = 'Ingatlan szintek';
+        $data['description'] = 'Ingatalan emeletek listája';
+        $data['epulet_emelet'] = $this->datatables_model->get_jellemzo_list('ingatlan_emelet');
+
+        $view->add_links(array('datatable', 'bootbox', 'emelet_list'));
+        $view->render('datatables/tpl_emelet', $data);
+    } 
     
     /**
      * 	Jellemző törlése törlése Ajax-szal

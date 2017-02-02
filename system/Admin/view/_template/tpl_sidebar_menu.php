@@ -128,6 +128,11 @@
                     <a href="admin/datatables/ingatlan_fenyviszony" class="nav-link">
                         <span class="title">Fényviszony</span>
                     </a>
+                </li>
+                <li class="<?php $this->menu_active('datatables', 'ingatlan_emelet'); ?>">
+                    <a href="admin/datatables/ingatlan_emelet" class="nav-link">
+                        <span class="title">Épület szintek</span>
+                    </a>
                 </li>                 
             </ul>
         </li> 

@@ -304,6 +304,7 @@ class Property extends AdminController {
         $data['ingatlan_energetika_list'] = $this->property_model->list_query('ingatlan_energetika');
         $data['ingatlan_kert_list'] = $this->property_model->list_query('ingatlan_kert');
         $data['ingatlan_szerkezet_list'] = $this->property_model->list_query('ingatlan_szerkezet');
+        $data['ingatlan_emelet_list'] = $this->property_model->list_query('ingatlan_emelet');
     $data['ingatlan_komfort_list'] = $this->property_model->list_query('ingatlan_komfort');
         $data['ingatlan_haz_allapot_belul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_belul');
         $data['ingatlan_haz_allapot_kivul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_kivul');
@@ -340,6 +341,7 @@ class Property extends AdminController {
         $data['ingatlan_energetika_list'] = $this->property_model->list_query('ingatlan_energetika');
         $data['ingatlan_kert_list'] = $this->property_model->list_query('ingatlan_kert');
         $data['ingatlan_szerkezet_list'] = $this->property_model->list_query('ingatlan_szerkezet');
+        $data['ingatlan_emelet_list'] = $this->property_model->list_query('ingatlan_emelet');
     $data['ingatlan_komfort_list'] = $this->property_model->list_query('ingatlan_komfort');
         $data['ingatlan_haz_allapot_belul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_belul');
         $data['ingatlan_haz_allapot_kivul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_kivul');
@@ -620,6 +622,12 @@ class Property extends AdminController {
 
                     // tájolás (szám kerül az adatbázisba: 0-7 ig)
                     $data['tajolas'] = ($data['tajolas'] !== '') ? $data['tajolas'] : null;
+                    // emelet
+                    $data['emelet'] = ($data['emelet'] !== '') ? $data['emelet'] : null;
+                    // épület szintjei
+                    if (isset($data['epulet_szintjei'])) {
+                        $data['epulet_szintjei'] = ($data['epulet_szintjei'] !== '') ? $data['epulet_szintjei'] : null;
+                    }
 
                     //geolocation
                     //$address = $iranyitoszam . ' ' . $varos . ' ' . $utca . ' ' . $hazszam . ' ' . $kerulet . ' kerulet';

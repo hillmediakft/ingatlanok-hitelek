@@ -178,6 +178,7 @@ $link['haz_allapot_kivul'] = array('js' => ADMIN_JS . 'pages/haz_allapot_kivul.j
 $link['haz_allapot_belul'] = array('js' => ADMIN_JS . 'pages/haz_allapot_belul.js');
 $link['furdo_wc'] = array('js' => ADMIN_JS . 'pages/furdo_wc.js');
 $link['fenyviszony'] = array('js' => ADMIN_JS . 'pages/fenyviszony.js');
+$link['emelet_list'] = array('js' => ADMIN_JS . 'pages/emelet_list.js');
 
 // Google Maps
 $link['google-maps'] = array(
