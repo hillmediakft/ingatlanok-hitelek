@@ -16,10 +16,10 @@ var Energetika = function () {
         function editRow(oTable, nRow) {
             var aData = oTable.fnGetData(nRow);
             var jqTds = $('>td', nRow);
-//            jqTds[0].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[0] + '">';
             jqTds[1].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[1] + '">';
-            jqTds[2].innerHTML = '<a class="edit" href=""><i class="fa fa-check"></i> Mentés</a>';
-            jqTds[3].innerHTML = '<a class="cancel" href=""><i class="fa fa-close"></i> Mégse</a>';
+            jqTds[2].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[2] + '">';
+            jqTds[3].innerHTML = '<a class="edit" href=""><i class="fa fa-check"></i> Mentés</a>';
+            jqTds[4].innerHTML = '<a class="cancel" href=""><i class="fa fa-close"></i> Mégse</a>';
         }
 
         function saveRow(oTable, nRow, lastInsertId) {
@@ -29,16 +29,17 @@ var Energetika = function () {
             }
 
             oTable.fnUpdate(jqInputs[0].value, nRow, 1, false);
-            oTable.fnUpdate('<a class="edit" href=""><i class="fa fa-edit"></i> Szerkeszt</a>', nRow, 2, false);
-            oTable.fnUpdate('<a class="delete" href=""><i class="fa fa-trash"></i> Töröl</a>', nRow, 3, false);
+            oTable.fnUpdate(jqInputs[1].value, nRow, 2, false);
+            oTable.fnUpdate('<a class="edit" href=""><i class="fa fa-edit"></i> Szerkeszt</a>', nRow, 3, false);
+            oTable.fnUpdate('<a class="delete" href=""><i class="fa fa-trash"></i> Töröl</a>', nRow, 4, false);
             oTable.fnDraw();
         }
 
         function cancelEditRow(oTable, nRow) {
             var jqInputs = $('input', nRow);
-//            oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[0].value, nRow, 1, false);
-            oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 2, false);
+            oTable.fnUpdate(jqInputs[1].value, nRow, 2, false);
+            oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 3, false);
             oTable.fnDraw();
         }
 
@@ -79,15 +80,16 @@ var Energetika = function () {
             "columnDefs": [
                 {"orderable": true, "searchable": true, "targets": 0},
                 {"orderable": true, "searchable": true, "targets": 1},
-                {"orderable": false, "searchable": false, "targets": 2},
+                {"orderable": true, "searchable": true, "targets": 2},
                 {"orderable": false, "searchable": false, "targets": 3},
+                {"orderable": false, "searchable": false, "targets": 4}
             ],
             "lengthMenu": [
                 [5, 15, 20, -1],
                 [5, 15, 20, "Összes"] // change per page values here
             ],
             // set the initial value
-            "pageLength": 20,
+            "pageLength": -1,
             "order": [
                 [0, "asc"]
             ] // set first column as a default sort by asc
@@ -106,15 +108,11 @@ var Energetika = function () {
                     place: "append", // "append" or "prepend" in container 
                     type: 'warning', // alert's type (success, danger, warning, info)
                     message: "A szerkesztett elemet mentse el, vagy klikkel-jen a mégse gombra.", // alert's message
-                    close: true, // make alert closable
-                    reset: true, // close all previouse alerts first
-                    // focus: true, // auto scroll to the alert after shown
-                    closeInSeconds: 7, // auto close after defined seconds
                     icon: "warning" // put icon before the message
                 });
 
             } else {
-                var aiNew = oTable.fnAddData(['', '', '', '']);
+                var aiNew = oTable.fnAddData(['', '', '', '', '']);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
                 editRow(oTable, nRow);
                 nEditing = nRow;
@@ -241,7 +239,15 @@ var Energetika = function () {
                         var ajax_message = $('#ajax_message');
                         var energetikaId = $(reference.closest('tr')).find('td:first').html();
                         energetikaId = $.trim(energetikaId);
-                        var data = $(reference.closest('tr')).find('input').val();
+                        
+                        //var data = $(reference.closest('tr')).find('input').val();
+
+                        // ha több input mező van, akkor tömböt kell küldeni a php-nak
+                        var data = new Array();
+                        // bejárjuk az input elemeket, és az value attribútum értékét berakjuk a data tömbbe
+                        $.each(reference.closest('tr').find('input'), function(index, val) {
+                            data.push($(this).val());
+                        });
                         
                         $.ajax({
                             type: "POST",
@@ -251,7 +257,7 @@ var Energetika = function () {
                                 table: 'ingatlan_energetika',
                                 id_name: 'energetika_id',
                                 leiras_name: 'energetika_leiras',
-                                data: data
+                                data: {"energetika_leiras_hu": data[0], "energetika_leiras_en": data[1]}
                             },
                             url: "admin/datatables/ajax_update_insert",
                             dataType: "json",

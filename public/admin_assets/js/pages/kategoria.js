@@ -94,6 +94,11 @@ var Kategoria = function () {
                 {"orderable": false, "searchable": false, "targets": 3},
                 {"orderable": false, "searchable": false, "targets": 4}
             ],
+            "lengthMenu": [
+                [5, 15, 20, -1],
+                [5, 15, 20, "Összes"] // change per page values here
+            ],
+            "pageLength": -1,            
             "order": [
                 [0, "asc"]
             ] // set first column as a default sort by asc

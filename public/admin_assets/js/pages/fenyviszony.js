@@ -114,6 +114,10 @@ var Fenyviszony = function () {
                     place: "append", // "append" or "prepend" in container 
                     type: 'warning', // alert's type (success, danger, warning, info)
                     message: "A szerkesztett elemet mentse el, vagy klikkel-jen a mégse gombra.", // alert's message
+                    close: true, // make alert closable
+                    reset: true, // close all previouse alerts first
+                    // focus: true, // auto scroll to the alert after shown
+                    closeInSeconds: 7, // auto close after defined seconds
                     icon: "warning" // put icon before the message
                 });
 
@@ -126,6 +130,7 @@ var Fenyviszony = function () {
             }
         });
 
+        //törlés
         table.on('click', '.delete', function (e) {
             e.preventDefault();
             reference = $(this);
@@ -216,6 +221,7 @@ var Fenyviszony = function () {
             }
         });
 
+        // edit, insert
         table.on('click', '.edit', function (e) {
             e.preventDefault();
             reference = $(this);
