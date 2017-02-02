@@ -114,7 +114,7 @@ DI::set('url_helper', function() {
 DI::set('arr_helper', function() {
     return new \System\Helper\Arr();
 });
-DI::set('arr_helper', function() {
+DI::set('num_helper', function() {
     return new \System\Helper\Num();
 });
 
