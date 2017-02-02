@@ -4,7 +4,7 @@ $config['orientation'] = array(
     'en' => array('north', 'northeast', 'east', 'southeast', 'south', 'southwest', 'west', 'northwest')
 );
 
-$config['emelet'] array(
+$config['emelet'] = array(
 	'hu' => array(
 		'alagsor',
 		'pince',
