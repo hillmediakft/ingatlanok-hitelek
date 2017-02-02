@@ -1,5 +1,4 @@
 <?php
-
 namespace System\Admin\Controller;
 
 use System\Core\AdminController;
@@ -10,7 +9,6 @@ use System\Libs\Message;
 use System\Libs\DI;
 use System\Libs\EventManager;
 use System\Libs\Geocoder;
-use System\Libs\Util;
 use System\Libs\Uploader;
 
 class Property extends AdminController {
@@ -167,6 +165,8 @@ class Property extends AdminController {
             // ebbe a tömbbe kerülnek az elküldendő adatok
             $data = array();
 
+            $num_helper = DI::get('num_helper');
+
             foreach ($result as $value) {
 
                 // id attribútum hozzáadása egy sorhoz 
@@ -210,7 +210,7 @@ class Property extends AdminController {
 
                 $temp['megtekintes'] = $value['megtekintes'];
 
-                $temp['ar'] = (!empty($value['ar_elado'])) ? Util::nice_number($value['ar_elado']) : Util::nice_number($value['ar_kiado']);
+                $temp['ar'] = (!empty($value['ar_elado'])) ? $num_helper->niceNumber($value['ar_elado']) : $num_helper->niceNumber($value['ar_kiado']);
 
                 $temp['status'] = ($value['status'] == 1) ? '<span class="label label-sm label-success">Aktív</span>' : '<span class="label label-sm label-danger">Inaktív</span>';
 
@@ -304,7 +304,7 @@ class Property extends AdminController {
         $data['ingatlan_energetika_list'] = $this->property_model->list_query('ingatlan_energetika');
         $data['ingatlan_kert_list'] = $this->property_model->list_query('ingatlan_kert');
         $data['ingatlan_szerkezet_list'] = $this->property_model->list_query('ingatlan_szerkezet');
-        $data['ingatlan_komfort_list'] = $this->property_model->list_query('ingatlan_komfort');
+    $data['ingatlan_komfort_list'] = $this->property_model->list_query('ingatlan_komfort');
         $data['ingatlan_haz_allapot_belul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_belul');
         $data['ingatlan_haz_allapot_kivul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_kivul');
         $data['ingatlan_furdo_wc_list'] = $this->property_model->list_query('ingatlan_furdo_wc');
@@ -340,7 +340,7 @@ class Property extends AdminController {
         $data['ingatlan_energetika_list'] = $this->property_model->list_query('ingatlan_energetika');
         $data['ingatlan_kert_list'] = $this->property_model->list_query('ingatlan_kert');
         $data['ingatlan_szerkezet_list'] = $this->property_model->list_query('ingatlan_szerkezet');
-        $data['ingatlan_komfort_list'] = $this->property_model->list_query('ingatlan_komfort');
+    $data['ingatlan_komfort_list'] = $this->property_model->list_query('ingatlan_komfort');
         $data['ingatlan_haz_allapot_belul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_belul');
         $data['ingatlan_haz_allapot_kivul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_kivul');
         $data['ingatlan_furdo_wc_list'] = $this->property_model->list_query('ingatlan_furdo_wc');
@@ -608,8 +608,8 @@ class Property extends AdminController {
                     // referenciaszám
                     $data['ref_num'] = (int)$data['ref_num'];
 
-                    $data['ar_elado'] = ($data['tipus'] == 1) ? $data['ar_elado'] : null;
-                    $data['ar_kiado'] = ($data['tipus'] == 2) ? $data['ar_kiado'] : null;
+                    $data['ar_elado'] = ($data['tipus'] == 1) ? $data['ar_elado'] * 1000000 : null;
+                    $data['ar_kiado'] = ($data['tipus'] == 2) ? $data['ar_kiado'] * 1000 : null;
                     $data['hazszam'] = (isset($data['hazszam'])) ? $data['hazszam'] : null;
                     $data['kerulet'] = (isset($data['kerulet'])) ? $data['kerulet'] : null;
 
@@ -617,6 +617,9 @@ class Property extends AdminController {
                     if (isset($data['telek_alapterulet'])) {
                         $data['telek_alapterulet'] = ($data['telek_alapterulet'] !== '') ? (int)$data['telek_alapterulet'] : null;
                     }
+
+                    // tájolás (szám kerül az adatbázisba: 0-7 ig)
+                    $data['tajolas'] = ($data['tajolas'] !== '') ? $data['tajolas'] : null;
 
                     //geolocation
                     //$address = $iranyitoszam . ' ' . $varos . ' ' . $utca . ' ' . $hazszam . ' ' . $kerulet . ' kerulet';
@@ -655,8 +658,8 @@ class Property extends AdminController {
                         $data['terasz_terulet'] = ($data['terasz_terulet'] !== '') ? (int)$data['terasz_terulet'] : null;
                     }
 
-                    // jellemző select menüből
-                    $jellemzok1 = array('allapot', 'haz_allapot_kivul', 'haz_allapot_belul', 'furdo_wc', 'fenyviszony', 'futes', 'parkolas', 'kilatas', 'lift', 'szerkezet', 'energetika', 'kert');
+                    // datatables jellemzők select menüből
+                    $jellemzok1 = array('lift', 'allapot', 'haz_allapot_kivul', 'haz_allapot_belul', 'furdo_wc', 'fenyviszony', 'futes', 'parkolas', 'kilatas', 'szerkezet', 'energetika', 'kert');
                     foreach ($jellemzok1 as $jellemzo) {
                         $data[$jellemzo] = ($data[$jellemzo] === '') ? null : (int)$data[$jellemzo];
                     }
