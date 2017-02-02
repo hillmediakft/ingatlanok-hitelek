@@ -6,7 +6,10 @@ namespace System\Helper;
 class Num {
 
 	/**
-	 * Nagy számokat alakítja át rövidebb formára 2 000 000 - 2 M
+	 * Nagy számokat kerekíti és alakítja át rövidebb formára: 2 000 000 - 2 M
+	 * 
+	 * @param string||number $n
+	 * @param bool $scale - ha false, akkor nem írja a szám után az M vagy E betűt
 	 */
     public function niceNumber($n, $scale = true)
     {
