@@ -165,20 +165,7 @@ $link['property_insert'] = array('js' => ADMIN_JS . 'pages/property_insert.js');
 $link['property_update'] = array('js' => ADMIN_JS . 'pages/property_update.js');
 
 // datatables
-$link['allapot'] = array('js' => ADMIN_JS . 'pages/allapot.js');
-$link['energetika'] = array('js' => ADMIN_JS . 'pages/energetika.js');
-$link['futes'] = array('js' => ADMIN_JS . 'pages/futes.js');
-$link['kategoria'] = array('js' => ADMIN_JS . 'pages/kategoria.js');
-$link['kert'] = array('js' => ADMIN_JS . 'pages/kert.js');
-$link['kilatas'] = array('js' => ADMIN_JS . 'pages/kilatas.js');
-$link['parkolas'] = array('js' => ADMIN_JS . 'pages/parkolas.js');
-$link['szerkezet'] = array('js' => ADMIN_JS . 'pages/szerkezet.js');
-$link['komfort'] = array('js' => ADMIN_JS . 'pages/komfort.js');
-$link['haz_allapot_kivul'] = array('js' => ADMIN_JS . 'pages/haz_allapot_kivul.js');
-$link['haz_allapot_belul'] = array('js' => ADMIN_JS . 'pages/haz_allapot_belul.js');
-$link['furdo_wc'] = array('js' => ADMIN_JS . 'pages/furdo_wc.js');
-$link['fenyviszony'] = array('js' => ADMIN_JS . 'pages/fenyviszony.js');
-$link['emelet_list'] = array('js' => ADMIN_JS . 'pages/emelet_list.js');
+$link['datatable_lists'] = array('js' => ADMIN_JS . 'pages/datatable_lists.js');
 
 // Google Maps
 $link['google-maps'] = array(
