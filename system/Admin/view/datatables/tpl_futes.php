@@ -39,6 +39,9 @@
                     </div>
                 <div class="portlet-body">
 
+                    <!-- ennek a div elemnek a data-marker attribútuma adja meg a javascriptnek, hogy melyik lista adataival kell dolgozni -->
+                    <div id="table-marker" data-marker="futes" style="display: none;"></div> 
+
                     <table class="table table-striped table-hover table-bordered" id="futes">
                         <thead>
                             <tr>
