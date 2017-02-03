@@ -32,7 +32,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Állapot oldal description';
         $data['allapot'] = $this->datatables_model->get_jellemzo_list('ingatlan_allapot');
 
-        $view->add_links(array('datatable', 'bootbox', 'allapot'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_allapot', $data);
     }
     
@@ -50,7 +50,8 @@ class Datatables extends AdminController {
         $data['description'] = 'Kategória oldal description';
         $data['kategoriak'] = $this->datatables_model->get_jellemzo_list('ingatlan_kategoria');
         
-        $view->add_links(array('datatable', 'bootbox', 'kategoria'));
+        //$view->add_links(array('datatable', 'bootbox', 'kategoria'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_kategoria', $data);
     }
     
@@ -67,7 +68,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Fűtés oldal description';
         $data['futes'] = $this->datatables_model->get_jellemzo_list('ingatlan_futes');
 
-        $view->add_links(array('datatable', 'bootbox', 'futes'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_futes', $data);
     } 
     
@@ -84,7 +85,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Energetika oldal description';
         $data['energetika'] = $this->datatables_model->get_jellemzo_list('ingatlan_energetika');
 
-        $view->add_links(array('datatable', 'bootbox', 'energetika'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_energetika', $data);
     } 
     
@@ -101,7 +102,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Kert description';
         $data['kert'] = $this->datatables_model->get_jellemzo_list('ingatlan_kert');
 
-        $view->add_links(array('datatable', 'bootbox', 'kert'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_kert', $data);
     }      
 
@@ -118,7 +119,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Kilátás description';
         $data['kilatas'] = $this->datatables_model->get_jellemzo_list('ingatlan_kilatas');
 
-        $view->add_links(array('datatable', 'bootbox', 'kilatas'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_kilatas', $data);
     }    
     
@@ -135,7 +136,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Parkolás description';
         $data['parkolas'] = $this->datatables_model->get_jellemzo_list('ingatlan_parkolas');
 
-        $view->add_links(array('datatable', 'bootbox', 'parkolas'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_parkolas', $data);
     }
     
@@ -152,7 +153,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Szerkezet description';
         $data['szerkezet'] = $this->datatables_model->get_jellemzo_list('ingatlan_szerkezet');
 
-        $view->add_links(array('datatable', 'bootbox', 'szerkezet'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_szerkezet', $data);
     }  
     
@@ -169,7 +170,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Komfort description';
         $data['komfort'] = $this->datatables_model->get_jellemzo_list('ingatlan_komfort');
 
-        $view->add_links(array('datatable', 'bootbox', 'komfort'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_komfort', $data);
     }    
     
@@ -186,7 +187,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Ház állapota kívül description';
         $data['haz_allapot_kivul'] = $this->datatables_model->get_jellemzo_list('ingatlan_haz_allapot_kivul');
 
-        $view->add_links(array('datatable', 'bootbox', 'haz_allapot_kivul'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_haz_allapot_kivul', $data);
     }  
     
@@ -203,7 +204,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Ház állapota belül description';
         $data['haz_allapot_belul'] = $this->datatables_model->get_jellemzo_list('ingatlan_haz_allapot_belul');
 
-        $view->add_links(array('datatable', 'bootbox', 'haz_allapot_belul'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_haz_allapot_belul', $data);
     }  
 
@@ -220,7 +221,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Fürdő WC description';
         $data['furdo_wc'] = $this->datatables_model->get_jellemzo_list('ingatlan_furdo_wc');
 
-        $view->add_links(array('datatable', 'bootbox', 'furdo_wc'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_furdo_wc', $data);
     }     
     
@@ -237,7 +238,7 @@ class Datatables extends AdminController {
         $data['description'] = 'fényviszony description';
         $data['fenyviszony'] = $this->datatables_model->get_jellemzo_list('ingatlan_fenyviszony');
 
-        $view->add_links(array('datatable', 'bootbox', 'fenyviszony'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_fenyviszony', $data);
     } 
 
@@ -254,7 +255,7 @@ class Datatables extends AdminController {
         $data['description'] = 'Ingatalan emeletek listája';
         $data['epulet_emelet'] = $this->datatables_model->get_jellemzo_list('ingatlan_emelet');
 
-        $view->add_links(array('datatable', 'bootbox', 'emelet_list'));
+        $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
         $view->render('datatables/tpl_emelet', $data);
     } 
     
@@ -295,7 +296,7 @@ class Datatables extends AdminController {
                 $id_name = $this->request->get_post('id_name');
                 // magyar nyelvű oszlop neve
                 $leiras_name = $this->request->get_post('leiras_name') . '_hu';
-                // asszociatív tömb amelyben a kulcs a nyelvi kód
+                // asszociatív tömb amelyben a kulcs a leiras_nev_ + nyelvi kód
                 $data = $this->request->get_post('data');
 
                 // ha üres string volt elküldve valamelyik nyelvnél
