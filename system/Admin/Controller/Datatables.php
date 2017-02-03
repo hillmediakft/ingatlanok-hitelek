@@ -158,20 +158,20 @@ class Datatables extends AdminController {
     }  
     
     /**
-     * Ingatlan komfort
+     * Ingatlan szoba_elrendezes
      *
      * @return void
      */
-    public function ingatlan_komfort()
+    public function ingatlan_szoba_elrendezes()
     {
         $view = new View();
 
-        $data['title'] = 'Komfort oldal';
-        $data['description'] = 'Komfort description';
-        $data['komfort'] = $this->datatables_model->get_jellemzo_list('ingatlan_komfort');
+        $data['title'] = 'Szoba elrendezés lista';
+        $data['description'] = 'Szoba elrendezés lista';
+        $data['szoba_elrendezes'] = $this->datatables_model->get_jellemzo_list('ingatlan_szoba_elrendezes');
 
         $view->add_links(array('datatable', 'bootbox', 'datatable_lists'));
-        $view->render('datatables/tpl_komfort', $data);
+        $view->render('datatables/tpl_szoba_elrendezes', $data);
     }    
     
     /**

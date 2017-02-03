@@ -198,12 +198,13 @@ class Application {
                 $router->get('/datatables/ingatlan_kilatas', 'datatables@ingatlan_kilatas');
                 $router->get('/datatables/ingatlan_parkolas', 'datatables@ingatlan_parkolas');
                 $router->get('/datatables/ingatlan_szerkezet', 'datatables@ingatlan_szerkezet');
-                $router->get('/datatables/ingatlan_komfort', 'datatables@ingatlan_komfort');
+                //$router->get('/datatables/ingatlan_komfort', 'datatables@ingatlan_komfort');
                 $router->get('/datatables/ingatlan_haz_allapot_kivul', 'datatables@ingatlan_haz_allapot_kivul');
                 $router->get('/datatables/ingatlan_haz_allapot_belul', 'datatables@ingatlan_haz_allapot_belul');
                 $router->get('/datatables/ingatlan_furdo_wc', 'datatables@ingatlan_furdo_wc');
                 $router->get('/datatables/ingatlan_fenyviszony', 'datatables@ingatlan_fenyviszony');
                 $router->get('/datatables/ingatlan_emelet', 'datatables@ingatlan_emelet');
+                $router->get('/datatables/ingatlan_szoba_elrendezes', 'datatables@ingatlan_szoba_elrendezes');
                 $router->post('/datatables/ajax_delete', 'datatables@ajax_delete');
                 $router->post('/datatables/ajax_update_insert', 'datatables@ajax_update_insert');
 

@@ -83,12 +83,12 @@ var DatatableLists = function () {
             db_id_name: 'kilatas_id',
             db_leiras_name: 'kilatas_leiras'
         },
-        komfort: {
-            html_table_id: "#komfort",
-            html_new_button: '#komfort_new',
-            db_table_name: 'ingatlan_komfort',
-            db_id_name: 'komfort_id',
-            db_leiras_name: 'komfort_leiras'
+        szoba_elrendezes: {
+            html_table_id: "#szoba_elrendezes",
+            html_new_button: '#szoba_elrendezes_new',
+            db_table_name: 'ingatlan_szoba_elrendezes',
+            db_id_name: 'szoba_elrendezes_id',
+            db_leiras_name: 'szoba_elrendezes_leiras'
         },
         parkolas: {
             html_table_id: "#parkolas",

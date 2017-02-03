@@ -482,6 +482,19 @@
                                             </div>
                                         </div>
 
+                                        <!-- SZOBA ELRENDEZÉS -->
+                                        <div class="col-md-3" >
+                                            <div class="form-group">
+                                                <label for="szoba_elrendezes">Szoba elrendezes</label>
+                                                <select class="form-control" name='szoba_elrendezes' id='szoba_elrendezes'>
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($ingatlan_szoba_elrendezes_list as $value) { ?>
+                                                        <option value="<?php echo $value['szoba_elrendezes_id']; ?>"><?php echo $value['szoba_elrendezes_leiras_hu']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                     </div> <!-- END ROW -->
 
                                     <div class="row">

@@ -305,7 +305,7 @@ class Property extends AdminController {
         $data['ingatlan_kert_list'] = $this->property_model->list_query('ingatlan_kert');
         $data['ingatlan_szerkezet_list'] = $this->property_model->list_query('ingatlan_szerkezet');
         $data['ingatlan_emelet_list'] = $this->property_model->list_query('ingatlan_emelet');
-    $data['ingatlan_komfort_list'] = $this->property_model->list_query('ingatlan_komfort');
+        $data['ingatlan_szoba_elrendezes_list'] = $this->property_model->list_query('ingatlan_szoba_elrendezes');
         $data['ingatlan_haz_allapot_belul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_belul');
         $data['ingatlan_haz_allapot_kivul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_kivul');
         $data['ingatlan_furdo_wc_list'] = $this->property_model->list_query('ingatlan_furdo_wc');
@@ -342,7 +342,7 @@ class Property extends AdminController {
         $data['ingatlan_kert_list'] = $this->property_model->list_query('ingatlan_kert');
         $data['ingatlan_szerkezet_list'] = $this->property_model->list_query('ingatlan_szerkezet');
         $data['ingatlan_emelet_list'] = $this->property_model->list_query('ingatlan_emelet');
-    $data['ingatlan_komfort_list'] = $this->property_model->list_query('ingatlan_komfort');
+        $data['ingatlan_szoba_elrendezes_list'] = $this->property_model->list_query('ingatlan_szoba_elrendezes');
         $data['ingatlan_haz_allapot_belul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_belul');
         $data['ingatlan_haz_allapot_kivul_list'] = $this->property_model->list_query('ingatlan_haz_allapot_kivul');
         $data['ingatlan_furdo_wc_list'] = $this->property_model->list_query('ingatlan_furdo_wc');
@@ -667,7 +667,7 @@ class Property extends AdminController {
                     }
 
                     // datatables jellemzők select menüből
-                    $jellemzok1 = array('lift', 'allapot', 'haz_allapot_kivul', 'haz_allapot_belul', 'furdo_wc', 'fenyviszony', 'futes', 'parkolas', 'kilatas', 'szerkezet', 'energetika', 'kert');
+                    $jellemzok1 = array('lift', 'allapot', 'haz_allapot_kivul', 'haz_allapot_belul', 'furdo_wc', 'fenyviszony', 'futes', 'parkolas', 'kilatas', 'szerkezet', 'energetika', 'kert', 'szoba_elrendezes');
                     foreach ($jellemzok1 as $jellemzo) {
                         $data[$jellemzo] = ($data[$jellemzo] === '') ? null : (int)$data[$jellemzo];
                     }

@@ -104,9 +104,9 @@
                         <span class="title">Szerkezet</span>
                     </a>
                 </li>  
-                <li class="<?php $this->menu_active('datatables', 'ingatlan_komfort'); ?>">
-                    <a href="admin/datatables/ingatlan_komfort" class="nav-link">
-                        <span class="title">Komfort</span>
+                <li class="<?php $this->menu_active('datatables', 'ingatlan_szoba_elrendezes'); ?>">
+                    <a href="admin/datatables/ingatlan_szoba_elrendezes" class="nav-link">
+                        <span class="title">Szoba elrendezés</span>
                     </a>
                 </li> 
                 <li class="<?php $this->menu_active('datatables', 'ingatlan_haz_allapot_kivul'); ?>">
