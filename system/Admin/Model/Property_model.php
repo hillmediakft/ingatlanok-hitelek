@@ -3,6 +3,7 @@ namespace System\Admin\Model;
 use System\Core\AdminModel;
 use \PDO;
 use System\Libs\Session;
+use System\Libs\Auth;
 
 class Property_model extends AdminModel {
 
@@ -333,6 +334,7 @@ class Property_model extends AdminModel {
     {
         $this->query->set_table(array('users'));
         $this->query->set_columns(array('id', 'first_name', 'last_name'));
+        $this->query->set_where('provider_type', '=', 'admin');
         return $this->query->select();
     }
 
@@ -397,11 +399,12 @@ class Property_model extends AdminModel {
         $this->query->set_offset($display_start);
         $this->query->set_limit($display_length);
 
-        if (Session::get('user_data.role_id') != 1) {
-            $this->query->set_where('ingatlanok.id', '=', Session::get('user_data.id'));
+        // ha nem superadmin a bejelentkezett felhasználó, akkor csak a saját ingatlanja jelennek meg
+        if (!Auth::isSuperadmin()) {
+            $this->query->set_where('ingatlanok.ref_id', '=', Auth::getUser('id'));
         }
         
-        $this->query->set_where('ingatlanok.deleted', '=', 0);
+        //$this->query->set_where('ingatlanok.deleted', '=', 0);
 
         //szűrés beállítások
         if (isset($request_data['action']) && $request_data['action'] == 'filter') {
