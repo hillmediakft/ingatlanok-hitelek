@@ -1,6 +1,4 @@
-<?php
-
-use System\libs\Session; ?>
+<?php use System\libs\Auth; ?>
 <!-- BEGIN CONTENT -->
 <div class="page-content">
     <!-- BEGIN PAGE HEADER-->
@@ -68,19 +66,33 @@ use System\libs\Session; ?>
                                 </div>
                                 <div class="portlet-body form-horizontal">
                                     <!-- ALAPBEÁLLÍTÁSOK -->
-                                    <!-- REFERENS KÓD -->	
+                                   
+                                    <!-- REFERENS KÓD -->   
+                                    <?php if (!Auth::isSuperadmin()) { ?>
                                     <div class="form-group">
                                         <label for="ref_id" class="control-label col-md-3">Referens kód</label>
                                         <div class="col-md-9">
                                             <input type="text" value="<?php echo $content['ref_id']; ?>" class="form-control input-small" disabled />
-                                            <input type="hidden" name="ref_id" value="<?php echo $content['ref_id']; ?>" />
                                         </div>
                                     </div>
+                                    <?php } ?>
+
                                     <!-- REFERENS NÉV -->
                                     <div class="form-group">
-                                        <label for="ref_name" class="control-label col-md-3">Referens felhasználó név</label>
-                                        <div class="col-md-9">
-                                            <input type="text" value="<?php echo Session::get('user_data.name'); ?>" class="form-control input-small" disabled />
+                                        <label for="ref_name" class="control-label col-md-3">Referens név</label>
+                                        <div class="col-md-3">
+                                            
+                                            <?php if (Auth::isSuperadmin()) { ?>
+                                            <select name="ref_id" class="form-control">
+                                                <option value="">-- válasszon --</option>
+                                                <?php foreach ($referens_list as $referens) { ?>
+                                                <option value="<?php echo $referens['id']; ?>" <?php echo ($referens['id'] == $content['ref_id']) ? 'selected' : ''; ?>><?php echo  '#' . $referens['id'] . ' - ' . $referens['first_name'] . ' ' . $referens['last_name']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <?php } else { ?>
+                                            <input type="text" value="<?php echo Auth::getUser('name'); ?>" class="form-control input-small" disabled />
+                                            <?php } ?>
+
                                         </div>
                                     </div>
 
@@ -109,10 +121,10 @@ use System\libs\Session; ?>
                                         <div class="col-md-9">
                                             <select name="kiemeles" id="kiemeles" class="form-control input-small">
                                                 <option value="0" <?php echo ($content['kiemeles'] == 0) ? 'selected' : ''; ?>>Nincs kiemelve</option>
-                                                <?php if (Session::get('user_data.role_id') == 1) : ?>  
+                                                <?php if (Auth::getUser('role_id') == 1) : ?>  
                                                     <option value="1" <?php echo ($content['tipus'] == 1) ? 'selected' : ''; ?>>Kiemelés</option>
                                                 <?php endif; ?>
-                                                <?php if (Session::get('user_data.role_id') > 1) : ?>  
+                                                <?php if (Auth::getUser('role_id') > 1) : ?>  
                                                     <option value="2" <?php echo ($content['tipus'] == 2) ? 'selected' : ''; ?>>Kiemelés</option>
                                                 <?php endif; ?>
                                             </select>

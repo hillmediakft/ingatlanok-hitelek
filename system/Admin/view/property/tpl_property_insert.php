@@ -1,4 +1,4 @@
-<?php use System\Libs\Session; ?>
+<?php use System\Libs\Auth; ?>
 <div class="page-content">
     <!-- BEGIN PAGE HEADER-->
 
@@ -64,22 +64,34 @@
                                 <div class="portlet-body form-horizontal">
 
                                     <div class="row">
-                                        <!-- REFERENS KÓD -->
 
+
+                                        <!-- REFERENS KÓD -->
+                                        <?php if (!Auth::isSuperadmin()) { ?>
                                         <div class="form-group">
                                             <label for="ref_id" class="control-label col-md-3">Referens kód</label>
                                             <div class="col-md-9">
-                                                <input type="text" value="<?php echo Session::get('user_data.id'); ?>" class="form-control input-small" disabled />
-                                                <input type="hidden" name="ref_id" value="<?php echo Session::get('user_data.id'); ?>" />
+                                                <input type="text" value="<?php echo Auth::getUser('id'); ?>" class="form-control input-small" disabled />
+                                                <input type="hidden" name="ref_id" value="<?php echo Auth::getUser('id'); ?>" />
                                             </div>
                                         </div>
-
+                                        <?php } ?>
 
                                         <!-- REFERENS NÉV -->
                                         <div class="form-group">
-                                            <label for="ref_name" class="control-label col-md-3">Referens felhasználó név</label>
+                                            <label for="ref_name" class="control-label col-md-3">Referens név</label>
                                             <div class="col-md-9">
-                                                <input type="text" value="<?php echo Session::get('user_data.name'); ?>" class="form-control input-small" disabled />
+
+                                                <?php if (Auth::isSuperadmin()) { ?>
+                                                <select name="ref_id" class="form-control input-small">
+                                                    <option value="">-- válasszon --</option>
+                                                    <?php foreach ($referens_list as $referens) { ?>
+                                                    <option value="<?php echo $referens['id']; ?>"><?php echo  '#' . $referens['id'] . ' - ' . $referens['first_name'] . ' ' . $referens['last_name']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                                <?php } else { ?>
+                                                <input type="text" value="<?php echo Auth::getUser('name'); ?>" class="form-control input-small" disabled />
+                                                <?php } ?>
                                             </div>
                                         </div>
 
@@ -111,11 +123,11 @@
                                             <div class="col-md-9">
                                                 <select name="kiemeles" id="kiemeles" class="form-control input-small">
                                                     <option value="0" selected>Nincs kiemelve</option>
-                                                    <?php if (Session::get('user_data.role_id') == 1) : ?>
+                                                    <?php if (Auth::getUser('role_id') == 1) : ?>
                                                         <option value="1">Kiemelés</option>
                                                     <?php endif; ?>
 
-                                                    <?php if (Session::get('user_data.role_id') > 1) : ?>
+                                                    <?php if (Auth::getUser('role_id') > 1) : ?>
                                                         <option value="2">Kiemelés</option>
                                                     <?php endif; ?>
                                                 </select>
