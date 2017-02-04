@@ -4,6 +4,7 @@ namespace System\Admin\Controller;
 use System\Core\AdminController;
 use System\Core\View;
 use System\Libs\Session;
+use System\Libs\Auth;
 use System\Libs\Config;
 use System\Libs\Message;
 use System\Libs\DI;
@@ -21,10 +22,11 @@ class Property extends AdminController {
     /**
      * Ingatlanok listája
      */
-    public function index() {
+    public function index()
+    {
         $view = new View();
 
-        $data['is_superadmin'] = (Session::get('user_data.role_id') == 1) ? true : false;
+        $data['is_superadmin'] = (Auth::isSuperadmin()) ? true : false;
         $data['filter'] = array();
         $data['title'] = 'Ingatlanok oldal';
         $data['description'] = 'Ingatlanok oldal description';
@@ -228,30 +230,34 @@ class Property extends AdminController {
                     <li><a href="' . $this->request->get_uri('site_url') . 'property/details/' . $value['id'] . '"><i class="fa fa-eye"></i> Részletek</a></li>';
 
                 // update
-                $temp['menu'] .= (1) ? '<li><a href="' . $this->request->get_uri('site_url') . 'property/update/' . $value['id'] . '"><i class="fa fa-pencil"></i> Szerkeszt</a></li>' : '';
+                // if (Auth::hasAccess('property.update')) {}    
+                    $temp['menu'] .= '<li><a href="' . $this->request->get_uri('site_url') . 'property/update/' . $value['id'] . '"><i class="fa fa-pencil"></i> Szerkeszt</a></li>';
 
                 // törlés
-                if (1) {
+                if (Auth::hasAccess('property.delete')) {
                     $temp['menu'] .= '<li><a href="javascript:;" class="delete_item" data-id="' . $value['id'] . '"> <i class="fa fa-trash"></i> Töröl</a></li>';
-                } else {
-                    $temp['menu'] .= '<li class="disabled-link"><a href="javascript:;" title="Nincs jogosultsága törölni" class="disable-target"><i class="fa fa-trash"></i> Töröl</a></li>';
+                    //$temp['menu'] .= '<li class="disabled-link"><a href="javascript:;" title="Nincs jogosultsága törölni" class="disable-target"><i class="fa fa-trash"></i> Töröl</a></li>';
                 }
 
                 // kiemelés
-                if ($value['kiemeles'] == 0) {
-                    $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_kiemeles" data-action="add_kiemeles"><i class="fa fa-plus-circle"></i> Kiemelés</a></li>';
-                }
-                if ($value['kiemeles'] > 0) {
-                    $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_kiemeles" data-action="delete_kiemeles"><i class="fa fa-minus-circle"></i> Kiemelés törlése</a></li>';
+                if (Auth::hasAccess('property.kiemeles')) {
+                    if ($value['kiemeles'] == 0) {
+                        $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_kiemeles" data-action="add_kiemeles"><i class="fa fa-plus-circle"></i> Kiemelés</a></li>';
+                    }
+                    if ($value['kiemeles'] > 0) {
+                        $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_kiemeles" data-action="delete_kiemeles"><i class="fa fa-minus-circle"></i> Kiemelés törlése</a></li>';
+                    }
                 }
 
                 // status
-                if ($value['status'] == 0) {
-                    $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_status" data-action="make_active"><i class="fa fa-check"></i> Aktivál</a></li>';
-                } else {
-                    $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_status" data-action="make_inactive"><i class="fa fa-ban"></i> Blokkol</a></li>';
+                if (Auth::hasAccess('property.change_status')) {
+                    if ($value['status'] == 0) {
+                        $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_status" data-action="make_active"><i class="fa fa-check"></i> Aktivál</a></li>';
+                    } else {
+                        $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_status" data-action="make_inactive"><i class="fa fa-ban"></i> Blokkol</a></li>';
+                    }
                 }
-
+                
                 $temp['menu'] .= '</ul></div></div>';
 
 
@@ -295,6 +301,10 @@ class Property extends AdminController {
         $data['county_list'] = $this->property_model->countyList();
         // kerületek nevének és id-jének lekérdezése az option listához
         $data['district_list'] = $this->property_model->list_query('district_list');
+        
+        // admin user-ek listája
+        $data['referens_list'] = $this->property_model->usersList();
+        
         // ingatlan kategóriák lekérdezése
         $data['ingatlan_kat_list'] = $this->property_model->list_query('ingatlan_kategoria');
         $data['ingatlan_allapot_list'] = $this->property_model->list_query('ingatlan_allapot');
@@ -319,19 +329,29 @@ class Property extends AdminController {
     /**
      * 	Lakás adatainak módosítása oldal	
      */
-    public function update($id) {
+    public function update($id)
+    {
+
         // $id = (int) $this->request->get_params('id');
         $id = (int) $id;
-        $view = new View();
-
+        
         $data['title'] = 'Ingatlan adatok módosítás oldal';
         $data['description'] = 'Ingatlan adatok módosítás description';
         // a lakás összes adatának lekérdezése az ingatlanok táblából
         $data['content'] = $this->property_model->getPropertyAlldata($id);
+
+        // ha nem superadmin, és az ingatlan ref_id-je nem egyezik a bejelentkezett user id-jével 
+        if ( Auth::isSuperadmin() || ($data['content']['ref_id'] != Auth::getUser('id')) ) {
+            Message::set('error', 'Nincs engedélye módosítani az ingatlan adatait!');
+            $this->response->redirectBack('admin/property');
+        }
+
         // Megyék adatainak lekérdezése az option listához
         $data['county_list'] = $this->property_model->countyList();
         // kerületek nevének és id-jének lekérdezése az option listához
         $data['district_list'] = $this->property_model->list_query('district_list');
+        // admin user-ek listája
+        $data['referens_list'] = $this->property_model->usersList();
         // ingatlan kategóriák lekérdezése
         $data['ingatlan_kat_list'] = $this->property_model->list_query('ingatlan_kategoria');
         $data['ingatlan_allapot_list'] = $this->property_model->list_query('ingatlan_allapot');
@@ -348,18 +368,20 @@ class Property extends AdminController {
         $data['ingatlan_furdo_wc_list'] = $this->property_model->list_query('ingatlan_furdo_wc');
         $data['ingatlan_fenyviszony_list'] = $this->property_model->list_query('ingatlan_fenyviszony');
 
+        $view = new View();
         // helperek beállítása
         $view->setHelper(array('url_helper'));
-
 //$view->debug(true);
         $view->add_links(array('jquery-ui', 'select2', 'validation', 'ckeditor', 'kartik-bootstrap-fileinput', 'google-maps', 'property_update', 'autocomplete'));
         $view->render('property/tpl_property_update', $data);
+        
     }
 
     /**
      * 	(AJAX) Lakás részletek (modal-ba)
      */
-    public function view_property_ajax($id) {
+    public function view_property_ajax($id)
+    {
         if ($this->request->is_ajax()) {
             // $id = (int) $this->request->get_params('id');
             $id = (int) id;
@@ -379,7 +401,8 @@ class Property extends AdminController {
     /**
      *  (AJAX) Lakás törlése
      */
-    public function delete() {
+    public function delete()
+    {
         if ($this->request->is_ajax()) {
             if (Auth::hassAccess('property.delete')) {
 
@@ -419,7 +442,8 @@ class Property extends AdminController {
      * @param array $id_data
      * @return integer || false
      */
-    private function _delete($id_data) {
+    private function _delete($id_data)
+    {
         // a sikeres törlések számát tárolja
         $success_counter = 0;
         // a sikertelen törlések számát tárolja
@@ -486,7 +510,8 @@ class Property extends AdminController {
     /**
      *  (AJAX) Lakás nem végleges törlése
      */
-    public function softDelete() {
+    public function softDelete()
+    {
         if ($this->request->is_ajax()) {
             if (Auth::hassAccess('property.delete')) {
 
@@ -552,9 +577,14 @@ class Property extends AdminController {
                 $error_messages = array();
                 $error_counter = 0;
 
+                // referens azonosítója
+                if (isset($data['ref_id']) && $data['ref_id'] === '') {
+                    $error_messages[] = Message::show('Nem adott meg referenst.');
+                    $error_counter += 1;
+                }
                 //referencia szám
                 if (empty($data['ref_num'])) {
-                    $error_messages[] = Message::show('Nem adta meg az ingatlan referenciaszámát).');
+                    $error_messages[] = Message::show('Nem adta meg az ingatlan referenciaszámát.');
                     $error_counter += 1;
                 }
                 //ingatlan kategória
@@ -681,8 +711,10 @@ class Property extends AdminController {
 
                     if ($update_marker) {
                         // UPDATE
-                        // az update-nél már nem kell a referens id-jét módosítani
-                        unset($data['ref_id']);
+                        // az update-nél ha superadmin módosít, akkor lesz ref_id input elem
+                        if (isset($data['ref_id'])) {
+                            $data['ref_id'] = (int)$data['ref_id'];
+                        }
 
                         if ($update_real) {
                             // a módosítás dátum a "rendes" módosításkor fog bekerülni az adatbázisba 
@@ -729,7 +761,10 @@ class Property extends AdminController {
                         }
                     } else {
                         // INSERT
-                        $data['ref_id'] = Session::get('user_data.id');
+
+                        // referens
+                        $data['ref_id'] = (int)$data['ref_id'];
+
                         $data['hozzaadas_datum'] = time();
 
                         // $this->query->debug(true);
