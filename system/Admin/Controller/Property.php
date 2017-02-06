@@ -721,7 +721,7 @@ class Property extends AdminController {
 
 
                     if ($update_marker) {
-                        // UPDATE
+                // UPDATE
                         // az update-nél ha superadmin módosít, akkor lesz ref_id input elem
                         if (isset($data['ref_id'])) {
                             $data['ref_id'] = (int)$data['ref_id'];
@@ -762,6 +762,7 @@ class Property extends AdminController {
                                 "status" => 'success',
                                 "message" => ''
                             ));
+
                         } else {
                             Message::set('error', 'A módosítások mentése nem sikerült, próbálja újra!');
 
@@ -770,9 +771,10 @@ class Property extends AdminController {
                                 "message" => ''
                             ));
                         }
-                    } else {
-                        // INSERT
 
+                    }
+                // INSERT
+                    else {
                         // referens
                         $data['ref_id'] = (int)$data['ref_id'];
 
