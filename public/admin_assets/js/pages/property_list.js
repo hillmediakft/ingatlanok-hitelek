@@ -56,20 +56,19 @@ var Property = function () {
 
                 // A php feldolgozónak küld a táblázatról információkat, azért hogy a szerver a megfelelő adatokat adhasson vissza pl. szűrésnél
                 "columnDefs": [
-                
-                    {"name": "chechbox", "searchable": false, "orderable": false, "targets": 0},
-                    {"name": "id", "searchable": true, "orderable": true, "targets": 1},
-                    {"name": "kepek", "searchable": false, "orderable": false, "targets": 2},
-                    {"name": "tipus", "searchable": true, "orderable": true, "targets": 3},
-                    {"name": "kategoria", "searchable": true, "orderable": true, "targets": 4},
-                    {"name": "varos", "searchable": true, "orderable": true, "targets": 5},
-                    {"name": "alapterulet", "searchable": true, "orderable": true, "targets": 6},
-         //           {"name": "szobaszam", "searchable": true, "orderable": true, "targets": 7},
-                    {"name": "megtekintes", "searchable": false, "orderable": true, "targets": 7},
-                    {"name": "ar_elado", "searchable": true, "orderable": true, "targets": 8},
-                    {"name": "status", "searchable": true, "orderable": true, "targets": 9},
-                    {"name": "menu", "searchable": false, "orderable": false, "targets": 10}
-                
+                    {"name": "checkbox", "searchable": false, "orderable": false, "targets": 0},
+                    {"name": "id", "searchable": true, "orderable": true, "targets": 1, "visible": false},
+                    {"name": "ref_num", "searchable": true, "orderable": true, "targets": 2},
+                    {"name": "kepek", "searchable": false, "orderable": false, "targets": 3},
+                    
+                    {"name": "tipus", "searchable": true, "orderable": true, "targets": 4},
+                    {"name": "kategoria", "searchable": true, "orderable": true, "targets": 5},
+                    {"name": "varos", "searchable": true, "orderable": true, "targets": 6},
+                    {"name": "alapterulet", "searchable": true, "orderable": true, "targets": 7},
+                    {"name": "megtekintes", "searchable": false, "orderable": true, "targets": 8},
+                    {"name": "ar", "searchable": true, "orderable": true, "targets": 9},
+                    {"name": "status", "searchable": true, "orderable": true, "targets": 10},
+                    {"name": "menu", "searchable": false, "orderable": false, "targets": 11}
                 ],
                 
                 // ha a php feldolgozó asszociatív tömböt ad vissza adatként (pl.: 'name' => 'László', 'age' => '38', 'haircolor' => 'blonde' ...), akkor meg kell adni az egyes elem nevét!    
@@ -78,12 +77,13 @@ var Property = function () {
                 "columns": [
                     { "data": "checkbox" },
                     { "data": "id" },
+                    { "data": "ref_num" },
                     { "data": "kepek" },
+                    
                     { "data": "tipus" },
                     { "data": "kategoria" },
                     { "data": "varos" },
                     { "data": "alapterulet" },
-              //      { "data": "szobaszam" },
                     { "data": "megtekintes" },
                     { "data": "ar" },
                     { "data": "status" },
