@@ -257,6 +257,9 @@ var updateProperty = function () {
             focusInvalid: true, // do not focus the last invalid input
             ignore: ":disabled", // validate all fields including form hidden input
             rules: {
+                ref_id: {
+                    required: true,
+                },                
                 ref_num: {
                     required: true,
                     number: true,
@@ -332,12 +335,33 @@ var updateProperty = function () {
                 */
 
             },
+
+            // hiba elem helye, a helyes megjelenés miatt
+            errorPlacement: function (error, element) { // render error placement for each input type
+                if (element.parent(".input-group").size() > 0) {
+                    error.insertAfter(element.parent(".input-group"));
+                } else if (element.attr("data-error-container")) { 
+                    error.appendTo(element.attr("data-error-container"));
+                } else if (element.parents('.radio-list').size() > 0) { 
+                    error.appendTo(element.parents('.radio-list').attr("data-error-container"));
+                } else if (element.parents('.radio-inline').size() > 0) { 
+                    error.appendTo(element.parents('.radio-inline').attr("data-error-container"));
+                } else if (element.parents('.checkbox-list').size() > 0) {
+                    error.appendTo(element.parents('.checkbox-list').attr("data-error-container"));
+                } else if (element.parents('.checkbox-inline').size() > 0) { 
+                    error.appendTo(element.parents('.checkbox-inline').attr("data-error-container"));
+                } else {
+                    error.insertAfter(element); // for other inputs, just perform default behavior
+                }
+            },
+
             // az invalidHandler akkor aktiválódik, ha elküldjük a formot és hiba van
             invalidHandler: function (event, validator) { //display error alert on form submit              
                 //success1.hide();
                 var errors = validator.numberOfInvalids();
                 error1_span.html(errors + ' mezőt nem megfelelően töltött ki!');
                 error1.show();
+                App.scrollTo(error1, -200);
                 error1.delay(4000).fadeOut('slow');
 
                 //console.log(event);	
@@ -706,10 +730,10 @@ var updateProperty = function () {
                 App.unblockUI();
             },
             success: function (result) {
-                console.log(result);
+                //console.log(result);
 
                 if (result.status == 'success') {
-                    console.log('adatok módosítva az adatbázisban');
+                    //console.log('adatok módosítva az adatbázisban');
 
                     var $host = window.location.host;
                     window.location.href = "http://" + $host + "/admin/property";
@@ -732,13 +756,13 @@ var updateProperty = function () {
                     error_span.html('');
 
                     // result tömb (hibaüzenetek) bejárása
-                    $.each(result, function (index, value) {
+                    $.each(result.error_messages, function (index, value) {
                         //console.log(index + ' : ' + value);
                         error_span.append(value + "<br />");
                     });
 
                     error.show();
-                    error.delay(7000).fadeOut('slow');
+                    error.delay(10000).fadeOut('slow');
                     console.log('Hiba az adatok adatbáziba írásakor!');
                 }
             },
