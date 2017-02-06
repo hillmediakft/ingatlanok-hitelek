@@ -391,10 +391,9 @@ class Property_model extends AdminModel {
         );
 
         $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
-        $this->query->set_join('left', 'users', 'ingatlanok.id', '=', 'users.id');
+        $this->query->set_join('left', 'users', 'ingatlanok.ref_id', '=', 'users.id');
         $this->query->set_join('left', 'district_list', 'ingatlanok.kerulet', '=', 'district_list.district_id');
         $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
-
 
         $this->query->set_offset($display_start);
         $this->query->set_limit($display_length);
