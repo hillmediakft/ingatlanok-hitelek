@@ -411,6 +411,9 @@ class Property_model extends AdminModel {
             if (isset($request_data['id']) && !empty($request_data['id'])) {
                 $this->query->set_where('ingatlanok.id', '=', $request_data['id']);
             }
+        if (isset($request_data['ref_num']) && !empty($request_data['ref_num'])) {
+            $this->query->set_where('ingatlanok.ref_num', '=', $request_data['ref_num']);
+        }
             if (isset($request_data['status']) && ($request_data['status'] != '')) {
                 $this->query->set_where('ingatlanok.status', '=', $request_data['status']);
             }
