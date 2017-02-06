@@ -850,7 +850,7 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="portlet">
                                                 <div class="portlet-body">
                                                     <h4 class="block">Feltöltött képek:</h4>
@@ -871,7 +871,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <!-- KÉPEK FELTÖLTÉSE -->
                                             <div class="portlet">
                                                 <div class="portlet-body">
