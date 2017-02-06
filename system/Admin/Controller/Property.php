@@ -182,17 +182,16 @@ class Property extends AdminController {
                 $temp['checkbox'] = (1) ? '<input type="checkbox" class="checkboxes" name="ingatlan_id_' . $value['id'] . '" value="' . $value['id'] . '"/>' : '';
 
             // 2. id oszlop    
-                $temp['id'] = '#' . $value['id'] . '<br>';
-                if ($value['kiemeles'] == 1) {
-                    $temp['id'] .= '<span class="label label-sm label-success">Kiemelt</span>';
-                }
-                if ($value['kiemeles'] == 2) {
-                    $temp['id'] .= '<span class="label label-sm label-warning">Kiemelt</span>';
-                }
+                $temp['id'] = $value['id'];
 
             // 3. Referenci szám oszlop    
-                $temp['ref_num'] = $value['ref_num'];
-
+                $temp['ref_num'] = '#' . $value['ref_num'] . '<br>';
+                if ($value['kiemeles'] == 1) {
+                    $temp['ref_num'] .= '<span class="label label-sm label-success">Kiemelt</span>';
+                }
+                if ($value['kiemeles'] == 2) {
+                    $temp['ref_num'] .= '<span class="label label-sm label-warning">Kiemelt</span>';
+                }
 
             // 4. Képek oszlop    
                 if (!empty($value['kepek'])) {
@@ -204,7 +203,6 @@ class Property extends AdminController {
                 } else {
                     $temp['kepek'] = '<img src="' . ADMIN_ASSETS . 'img/placeholder_80x60.jpg" alt="" />';
                 }
-
 
             // 5. Referens oszlop    
                 $temp['ref_name'] = $value['first_name'] . '<br>' . $value['last_name'];
@@ -819,7 +817,8 @@ class Property extends AdminController {
     /**
      * 	(AJAX) File listát jeleníti (frissíti) meg feltöltéskor (képek)
      */
-    public function show_file_list() {
+    public function show_file_list()
+    {
         if ($this->request->is_ajax()) {
             // db rekord id-je
             $id = $this->request->get_post('id', 'integer');
