@@ -1,4 +1,4 @@
-<!-- BEGIN CONTENT -->
+ BEGIN CONTENT -->
     <div class="page-content">
 
         <div class="row">
@@ -62,7 +62,10 @@
                                         <th width="1%">
                                             <input type="checkbox" class="group-checkable" data-set="#property .checkboxes"/>
                                         </th>
-                                        <th width="1%" title="Az ingatlan azonosító száma">#id</th>
+                                        <th width="1%" title="Az ingatlan azonosító száma">id</th>
+
+                                        <th width="1%" title="Az ingatlan referencia száma">ref.szám</th>
+                                        
                                         <th width="1%">Kép</th>
                                         <?php if($is_superadmin) { ?>
                                         <th width="1%">Referens</th>
@@ -78,7 +81,7 @@
                                     </tr>
 
                                     <tr role="row" class="filter">
-                                        <td colspan="12" id="filter_td" style="display:none;">
+                                        <td colspan="<?php echo ($is_superadmin === true) ? '13' : '12'; ?>" id="filter_td" style="display:none;">
                                             
                                             <div class="portlet">
                                                 
@@ -271,4 +274,4 @@
 
             </div>
         </div>
-    </div> <!-- END PAGE CONTENT-->
+    </div> <!-- END PAGE CONTENT
