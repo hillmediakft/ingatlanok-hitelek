@@ -79,7 +79,7 @@
 
                                     <!-- REFERENS NÉV -->
                                     <div class="form-group">
-                                        <label for="ref_name" class="control-label col-md-3">Referens név</label>
+                                        <label for="ref_name" class="control-label col-md-3">Referens név <span class="required">*</span></label>
                                         <div class="col-md-3">
                                             
                                             <?php if (Auth::isSuperadmin()) { ?>
