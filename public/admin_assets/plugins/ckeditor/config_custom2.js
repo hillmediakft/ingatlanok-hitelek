@@ -60,7 +60,7 @@ config.toolbar = [
 	config.entities = false;
 	config.basicEntities = false;
   
-  config.baseHref = 'http://localhost/jatszobusz/';
+  //config.baseHref = 'http://localhost/';
   // protect curly brackets from editing
   CKEDITOR.config.protectedSource.push(/{[\s\S]*?}/g); // protect content in { }
   config.protectedSource.push( /<i[\s\S]*?\>/g ); //allows beginning <i> tag
