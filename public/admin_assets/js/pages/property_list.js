@@ -440,7 +440,7 @@ var Property = function () {
 
             vframework.deleteItems({
                 table_id: "property",
-                url: "admin/property/softdelete",
+                url: "admin/property/delete",
                 confirm_message: "Biztosan törölni akarja az ingatlant?"
             });
 
