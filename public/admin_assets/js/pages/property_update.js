@@ -652,8 +652,8 @@ var updateProperty = function () {
      * CKeditor inicializálása
      */
     var ckeditorInit = function () {
-        CKEDITOR.replace('leiras_hu', {customConfig: 'config_custom3.js'});
-        CKEDITOR.replace('leiras_en', {customConfig: 'config_custom3.js'});
+        CKEDITOR.replace('leiras_hu', {customConfig: 'config_minimal1.js'});
+        CKEDITOR.replace('leiras_en', {customConfig: 'config_minimal1.js'});
     };
 
     /**
