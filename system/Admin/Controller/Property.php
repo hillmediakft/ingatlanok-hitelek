@@ -178,10 +178,10 @@ class Property extends AdminController {
                 // csak a datatables 1.10.5 verzió felett
                 //$temp['DT_RowAttr'] = array('data-proba' => 'ertek_proba');
 
-            // Checkbox oszlop    
+            // 1. Checkbox oszlop    
                 $temp['checkbox'] = (1) ? '<input type="checkbox" class="checkboxes" name="ingatlan_id_' . $value['id'] . '" value="' . $value['id'] . '"/>' : '';
 
-            // id oszlop    
+            // 2. id oszlop    
                 $temp['id'] = '#' . $value['id'] . '<br>';
                 if ($value['kiemeles'] == 1) {
                     $temp['id'] .= '<span class="label label-sm label-success">Kiemelt</span>';
@@ -190,7 +190,11 @@ class Property extends AdminController {
                     $temp['id'] .= '<span class="label label-sm label-warning">Kiemelt</span>';
                 }
 
-            // Képek oszlop    
+            // 3. Referenci szám oszlop    
+                $temp['ref_num'] = $value['ref_num'];
+
+
+            // 4. Képek oszlop    
                 if (!empty($value['kepek'])) {
                     $photo_names = json_decode($value['kepek']);
                     //$photo_name = array_shift($photo_names);
@@ -201,35 +205,36 @@ class Property extends AdminController {
                     $temp['kepek'] = '<img src="' . ADMIN_ASSETS . 'img/placeholder_80x60.jpg" alt="" />';
                 }
 
-            // Referens oszlop    
-                $temp['ref_id'] = $value['first_name'] . '<br>' . $value['last_name'];
+
+            // 5. Referens oszlop    
+                $temp['ref_name'] = $value['first_name'] . '<br>' . $value['last_name'];
                 
-            // Típus oszlop    
+            // 6. Típus oszlop    
                 $temp['tipus'] = ($value['tipus'] == 1) ? 'eladó' : 'kiadó';
 
-            // Kategória oszlop    
+            // 7. Kategória oszlop    
                 $temp['kategoria'] = $value['kat_nev_hu'];
                 
-            // Város oszlop    
+            // 8. Város oszlop    
                 $kerulet = !empty($value['kerulet']) ? '<br>' . $value['kerulet'] . '. kerület' : '';
                 $temp['varos'] = $value['city_name'] . $kerulet . '<br>' . $value['utca'];
 
-            // Alapterület oszlop    
+            // 9. Alapterület oszlop    
                 $temp['alapterulet'] = $value['alapterulet'];
 
         //$temp['szobaszam'] = $value['szobaszam'];
 
-            // Megtekintés oszlop    
+            // 10. Megtekintés oszlop    
                 $temp['megtekintes'] = $value['megtekintes'];
 
-            // Ár oszlop    
+            // 11. Ár oszlop    
                 $temp['ar'] = (!empty($value['ar_elado'])) ? $num_helper->niceNumber($value['ar_elado']) : $num_helper->niceNumber($value['ar_kiado']);
 
-            // Status oszlop    
+            // 12. Status oszlop    
                 $temp['status'] = ($value['status'] == 1) ? '<span class="label label-sm label-success">Aktív</span>' : '<span class="label label-sm label-danger">Inaktív</span>';
 
 
-            //----- MENU HTML -----------------
+            //----- 13. MENU HTML -----------------
 
                 $temp['menu'] = '           
                   <div class="actions">
@@ -415,7 +420,7 @@ class Property extends AdminController {
     public function delete()
     {
         if ($this->request->is_ajax()) {
-            if (Auth::hassAccess('property.delete')) {
+            if (Auth::hasAccess('property.delete')) {
 
                 // a POST-ban kapott item_id tömb 
                 $id_data = $this->request->get_post('item_id');
@@ -424,11 +429,11 @@ class Property extends AdminController {
                 $result = $this->_delete($id_data);
 
                 if ($result !== false) {
-                    EventManager::trigger('delete_property', array('delete', $success_counter . ' ingatlan törlése'));
+                    EventManager::trigger('delete_property', array('delete', $result . ' ingatlan törlése'));
 
                     $this->response->json(array(
                         "status" => 'success',
-                        "message_success" => $result . 'Ingatlan törölve.'
+                        "message_success" => $result . 'ingatlan törölve.'
                     ));
                 } else {
                     // ha a törlési sql parancsban hiba van
@@ -524,7 +529,7 @@ class Property extends AdminController {
     public function softDelete()
     {
         if ($this->request->is_ajax()) {
-            if (Auth::hassAccess('property.delete')) {
+            if (Auth::hasAccess('property.delete')) {
 
                 $id = $this->request->get_post('item_id');
 
@@ -860,7 +865,8 @@ class Property extends AdminController {
     /**
      * 	Képek sorbarendezése (AJAX)
      */
-    public function photo_sort() {
+    public function photo_sort()
+    {
         if ($this->request->is_ajax()) {
 
             $id = $this->request->get_post('id', 'integer');
@@ -885,7 +891,7 @@ class Property extends AdminController {
             $data['kepek'] = json_encode($result_arr);
 
             // beírjuk az adatbázisba
-            $result = $this->query->update($id, $data);
+            $result = $this->property_model->update($id, $data);
 
             if ($result === 1) {
                 $this->response->json(array('status' => 'success'));
@@ -900,7 +906,8 @@ class Property extends AdminController {
     /**
      * 	(AJAX) Kép vagy dokumentum törlése a feltöltöttek listából
      */
-    public function file_delete() {
+    public function file_delete()
+    {
         if ($this->request->is_ajax()) {
 
             $id = $this->request->get_post('id', 'integer');
@@ -967,7 +974,8 @@ class Property extends AdminController {
     /**
      * 	(AJAX) File feltöltés (képek)
      */
-    public function file_upload_ajax() {
+    public function file_upload_ajax()
+    {
         if ($this->request->is_ajax()) {
             //uploadExtraData beállítás küldi
             $id = $this->request->get_post('id', 'integer');
@@ -1054,7 +1062,8 @@ class Property extends AdminController {
     /**
      * 	(AJAX) Dokumentum feltöltés
      */
-    public function doc_upload_ajax() {
+    public function doc_upload_ajax()
+    {
         if ($this->request->is_ajax()) {
             //uploadExtraData beállítás küldi
             $id = $this->request->get_post('id', 'integer');
