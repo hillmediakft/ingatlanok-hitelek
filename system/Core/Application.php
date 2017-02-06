@@ -240,6 +240,7 @@ class Application {
                 $router->post('/property/file_delete', 'property@file_delete');
                 $router->post('/property/change_kiemeles', 'property@change_kiemeles');
                 $router->post('/property/change_status', 'property@change_status');
+            $router->post('/property/photo_sort', 'property@photo_sort');
 
                 $router->get('/property/download/:filename', 'property@download', array('file'));
 
