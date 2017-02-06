@@ -178,9 +178,10 @@ class Property extends AdminController {
                 // csak a datatables 1.10.5 verzió felett
                 //$temp['DT_RowAttr'] = array('data-proba' => 'ertek_proba');
 
-
+            // Checkbox oszlop    
                 $temp['checkbox'] = (1) ? '<input type="checkbox" class="checkboxes" name="ingatlan_id_' . $value['id'] . '" value="' . $value['id'] . '"/>' : '';
 
+            // id oszlop    
                 $temp['id'] = '#' . $value['id'] . '<br>';
                 if ($value['kiemeles'] == 1) {
                     $temp['id'] .= '<span class="label label-sm label-success">Kiemelt</span>';
@@ -189,7 +190,7 @@ class Property extends AdminController {
                     $temp['id'] .= '<span class="label label-sm label-warning">Kiemelt</span>';
                 }
 
-
+            // Képek oszlop    
                 if (!empty($value['kepek'])) {
                     $photo_names = json_decode($value['kepek']);
                     //$photo_name = array_shift($photo_names);
@@ -199,25 +200,36 @@ class Property extends AdminController {
                 } else {
                     $temp['kepek'] = '<img src="' . ADMIN_ASSETS . 'img/placeholder_80x60.jpg" alt="" />';
                 }
+
+            // Referens oszlop    
                 $temp['ref_id'] = $value['first_name'] . '<br>' . $value['last_name'];
+                
+            // Típus oszlop    
                 $temp['tipus'] = ($value['tipus'] == 1) ? 'eladó' : 'kiadó';
 
+            // Kategória oszlop    
                 $temp['kategoria'] = $value['kat_nev_hu'];
+                
+            // Város oszlop    
                 $kerulet = !empty($value['kerulet']) ? '<br>' . $value['kerulet'] . '. kerület' : '';
                 $temp['varos'] = $value['city_name'] . $kerulet . '<br>' . $value['utca'];
 
+            // Alapterület oszlop    
                 $temp['alapterulet'] = $value['alapterulet'];
 
-                $temp['szobaszam'] = $value['szobaszam'];
+        //$temp['szobaszam'] = $value['szobaszam'];
 
+            // Megtekintés oszlop    
                 $temp['megtekintes'] = $value['megtekintes'];
 
+            // Ár oszlop    
                 $temp['ar'] = (!empty($value['ar_elado'])) ? $num_helper->niceNumber($value['ar_elado']) : $num_helper->niceNumber($value['ar_kiado']);
 
+            // Status oszlop    
                 $temp['status'] = ($value['status'] == 1) ? '<span class="label label-sm label-success">Aktív</span>' : '<span class="label label-sm label-danger">Inaktív</span>';
 
 
-                //----- MENU HTML -----------------
+            //----- MENU HTML -----------------
 
                 $temp['menu'] = '           
                   <div class="actions">
@@ -291,9 +303,8 @@ class Property extends AdminController {
     /**
      * 	Új lakás hozzáadása
      */
-    public function insert() {
-        $view = new View();
-
+    public function insert()
+    {
         // adatok bevitele a view objektumba
         $data['title'] = 'Új lakás oldal';
         $data['description'] = 'Új lakás description';
@@ -321,6 +332,7 @@ class Property extends AdminController {
         $data['ingatlan_furdo_wc_list'] = $this->property_model->list_query('ingatlan_furdo_wc');
         $data['ingatlan_fenyviszony_list'] = $this->property_model->list_query('ingatlan_fenyviszony');
 
+        $view = new View();
 //$view->debug(true);
         $view->add_links(array('jquery-ui', 'select2', 'validation', 'ckeditor', 'kartik-bootstrap-fileinput', 'google-maps', 'property_insert', 'autocomplete'));
         $view->render('property/tpl_property_insert', $data);
@@ -331,7 +343,6 @@ class Property extends AdminController {
      */
     public function update($id)
     {
-
         // $id = (int) $this->request->get_params('id');
         $id = (int) $id;
         
@@ -341,7 +352,7 @@ class Property extends AdminController {
         $data['content'] = $this->property_model->getPropertyAlldata($id);
 
         // ha nem superadmin, és az ingatlan ref_id-je nem egyezik a bejelentkezett user id-jével 
-        if ( Auth::isSuperadmin() || ($data['content']['ref_id'] != Auth::getUser('id')) ) {
+        if ( !Auth::isSuperadmin() && ($data['content']['ref_id'] != Auth::getUser('id')) ) {
             Message::set('error', 'Nincs engedélye módosítani az ingatlan adatait!');
             $this->response->redirectBack('admin/property');
         }
