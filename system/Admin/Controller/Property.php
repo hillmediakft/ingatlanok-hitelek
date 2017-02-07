@@ -337,7 +337,7 @@ class Property extends AdminController {
 
         $view = new View();
 //$view->debug(true);
-        $view->add_links(array('jquery-ui', 'select2', 'validation', 'ckeditor', 'kartik-bootstrap-fileinput', 'google-maps', 'property_insert', 'autocomplete'));
+        $view->add_links(array('jquery-ui', 'select2', 'validation', 'ckeditor', 'kartik-bootstrap-fileinput', 'bootstrap-toastr', 'google-maps', 'property_insert', 'autocomplete'));
         $view->render('property/tpl_property_insert', $data);
     }
 
@@ -386,7 +386,7 @@ class Property extends AdminController {
         // helperek beállítása
         $view->setHelper(array('url_helper'));
 //$view->debug(true);
-        $view->add_links(array('jquery-ui', 'select2', 'validation', 'ckeditor', 'kartik-bootstrap-fileinput', 'google-maps', 'property_update', 'autocomplete'));
+        $view->add_links(array('jquery-ui', 'select2', 'validation', 'ckeditor', 'kartik-bootstrap-fileinput', 'bootstrap-toastr', 'google-maps', 'property_update', 'autocomplete'));
         $view->render('property/tpl_property_update', $data);
         
     }
