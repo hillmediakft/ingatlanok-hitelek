@@ -34,8 +34,8 @@ var Page_update = function () {
 			vframework.hideAlert();
 			
 			vframework.ckeditorInit({
-				page_body_hu: "config_minimal2",
-				page_body_en: "config_minimal2"
+				page_body_hu: "config_max1",
+				page_body_en: "config_max1"
 			});
 			
         }
