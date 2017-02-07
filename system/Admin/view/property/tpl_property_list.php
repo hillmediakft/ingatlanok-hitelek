@@ -102,14 +102,14 @@
 
                                                         <div class="col-md-2">
                                                             <div class="form-group">
-                                                                <label class="control-label">Ingatlan #id</label>
-                                                                <input type="text" class="form-control form-filter input-sm" name="id" id="id">                            
+                                                                <label for="ref_num" class="control-label">Referenciaszám</label>
+                                                                <input type="text" class="form-control form-filter input-sm" name="ref_num" id="ref_num">                            
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-2">
                                                             <div class="form-group">
-                                                                <label class="control-label">Státusz</label>
+                                                                <label for="status" class="control-label">Státusz</label>
                                                                 <select name="status" class="form-control form-filter input-sm">
                                                                     <option value="">-- mindegy --</option>
                                                                     <option value="1">Aktív</option>
