@@ -1,5 +1,20 @@
 var updateProperty = function () {
 
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "showDuration": "1000",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
     var locationsInput = function () {
 
 
@@ -247,8 +262,8 @@ var updateProperty = function () {
         // http://docs.jquery.com/Plugins/Validation
 
         var form1 = $('#upload_data_form');
-        var error1 = $('.alert-danger', form1);
-        var error1_span = $('.alert-danger > span', form1);
+        //var error1 = $('.alert-danger', form1);
+        //var error1_span = $('.alert-danger > span', form1);
         //var success1 = $('.alert-success', form1);
 
         form1.validate({
@@ -263,6 +278,7 @@ var updateProperty = function () {
                 ref_num: {
                     required: true,
                     number: true,
+                    min: 1000,
                     max: 9999
                 },                
                 kategoria: {
@@ -359,11 +375,11 @@ var updateProperty = function () {
             invalidHandler: function (event, validator) { //display error alert on form submit              
                 //success1.hide();
                 var errors = validator.numberOfInvalids();
-                error1_span.html(errors + ' mezőt nem megfelelően töltött ki!');
-                error1.show();
-                App.scrollTo(error1, -200);
-                error1.delay(4000).fadeOut('slow');
-
+                //error1_span.html(errors + ' mezőt nem megfelelően töltött ki!');
+                //error1.show();
+                //App.scrollTo(error1, -200);
+                //error1.delay(4000).fadeOut('slow');
+toastr['error'](errors + ' mezőt nem megfelelően töltött ki!');
                 //console.log(event);	
                 //console.log(validator);	
             },
@@ -391,7 +407,7 @@ var updateProperty = function () {
                 label.closest('.form-group').removeClass('has-error'); // set success class to the control group
             },
             submitHandler: function (form) {
-                error1.hide();
+                //error1.hide();
 
                 //success1.show();
                 //success1.delay(4000).fadeOut('slow');
@@ -428,7 +444,7 @@ var updateProperty = function () {
             showCaption: false,
             showUpload: true,
             language: "hu",
-            maxFileCount: 10,
+            maxFileCount: 20,
             maxFileSize: 3000,
             allowedFileExtensions: ["jpg", "jpeg", "gif", "png", "bmp"],
             allowedPreviewTypes: ['image'],
@@ -461,19 +477,23 @@ var updateProperty = function () {
          */
 
         $("#input-4").on('filebatchuploadsuccess', function (event, data, previewId, index) {
-
+        /* 
             var form2 = $('#upload_files_form');
             var success2 = $('.alert-success', form2);
             var success2_span = $('.alert-success > span', form2);
             var error2 = $('.alert-danger', form2);
             var error2_span = $('.alert-danger > span', form2);
+        */    
             var sortable_ul = $("#photo_list");
 
             if (data.response.status == 'success') {
                 //console.log('A feltöltés sikeres!');
+/*
                 success2_span.html('Kép feltöltése sikeres.');
                 success2.show();
                 success2.delay(3000).fadeOut('fast');
+*/
+toastr['success']('Kép feltöltése sikeres.');
 
                 // képek lekérdezése a listás megjelenítéshez
                 $.ajax({
@@ -493,10 +513,13 @@ var updateProperty = function () {
                 });
 
             } else {
-                //console.log(data.response);
+/*                
                 error2_span.html(data.response[0]);
                 error2.show();
                 error2.delay(3000).fadeOut('fast');
+*/                
+toastr['error'](data.response[0]);
+
             }
         });
 
@@ -535,7 +558,7 @@ var updateProperty = function () {
             showCaption: false,
             showUpload: true,
             language: "hu",
-            maxFileCount: 10,
+            maxFileCount: 20,
             maxFileSize: 3000,
             allowedFileExtensions: ["jpg", "txt", "pdf", "xps", "csv", "doc", "docx", "xls", "xlsx", "ppt", "pps", "rtf", "ods", "odt", "odp"],
             allowedPreviewTypes: ['image'],
@@ -571,19 +594,22 @@ var updateProperty = function () {
         });
 
         $("#input-5").on('filebatchuploadsuccess', function (event, data, previewId, index) {
-
+/*            
             var form2 = $('#upload_files_form');
             var success2 = $('.alert-success', form2);
             var success2_span = $('.alert-success > span', form2);
             var error2 = $('.alert-danger', form2);
             var error2_span = $('.alert-danger > span', form2);
+*/            
             var $dokumentumok = $("#dokumentumok");
 
             if (data.response.status == 'success') {
-                //console.log('A feltöltés sikeres!');
+/*
                 success2_span.html('File feltöltése sikeres.');
                 success2.show();
                 success2.delay(3000).fadeOut('fast');
+*/                
+toastr['success']('File feltöltése sikeres.');              
 
                 // dokumentumok lekérdezése a listás megjelenítéshez
                 $.ajax({
@@ -603,10 +629,13 @@ var updateProperty = function () {
                 });
 
             } else {
-                console.log(data.response);
+/*
                 error2_span.html(data.response[0]);
                 error2.show();
                 error2.delay(3000).fadeOut('fast');
+*/                
+toastr['error'](data.response[0]);
+
             }
         });
 
@@ -750,24 +779,28 @@ var updateProperty = function () {
 
                 } else {
                     // üzenet doboz megjelenítése
+/*                    
                     var form1 = $('#upload_data_form');
                     var error = $('.alert-danger', form1);
                     var error_span = $('.alert-danger > span', form1);
                     error_span.html('');
+*/
 
                     // result tömb (hibaüzenetek) bejárása
                     $.each(result.error_messages, function (index, value) {
                         //console.log(index + ' : ' + value);
-                        error_span.append(value + "<br />");
+                        //error_span.append(value + "<br />");
+                        toastr['error'](value);
                     });
-
+/*
                     error.show();
                     error.delay(10000).fadeOut('slow');
+*/
                     console.log('Hiba az adatok adatbáziba írásakor!');
                 }
             },
             error: function (result, status, e) {
-                alert(e);
+                console.log(e);
             }
         });
     }
@@ -807,6 +840,9 @@ var updateProperty = function () {
         })
     }
 
+    /**
+     * Geocoding
+     */  
     var mapGeocoding = function () {
 
         var map = new GMaps({

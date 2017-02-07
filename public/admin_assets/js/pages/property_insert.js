@@ -1,5 +1,20 @@
 var InsertProperty = function () {
 
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "showDuration": "1000",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
     var locationsInput = function () {
         //$("#city_div").hide();
         //$("#district_div").hide();
@@ -246,8 +261,8 @@ var InsertProperty = function () {
         // http://docs.jquery.com/Plugins/Validation
 
         var form1 = $('#upload_data_form');
-        var error1 = $('.alert-danger', form1);
-        var error1_span = $('.alert-danger > span', form1);
+        //var error1 = $('.alert-danger', form1);
+        //var error1_span = $('.alert-danger > span', form1);
         //var success1 = $('.alert-success', form1);
 
         form1.validate({
@@ -262,6 +277,7 @@ var InsertProperty = function () {
                 ref_num: {
                     required: true,
                     number: true,
+                    min: 1000,
                     max: 9999
                 },
                 kategoria: {
@@ -364,11 +380,11 @@ var InsertProperty = function () {
             invalidHandler: function (event, validator) { //display error alert on form submit              
                 //success1.hide();
                 var errors = validator.numberOfInvalids();
-                error1_span.html(errors + ' mezőt nem megfelelően töltött ki!');
-                error1.show();
-                App.scrollTo(error1, -200);
-                error1.delay(4000).fadeOut('slow');
-
+                //error1_span.html(errors + ' mezőt nem megfelelően töltött ki!');
+                //error1.show();
+                //App.scrollTo(error1, -200);
+                //error1.delay(4000).fadeOut('slow');
+toastr['error'](errors + ' mezőt nem megfelelően töltött ki!');
                 //console.log(event);	
                 //console.log(validator);	
             },
@@ -396,7 +412,7 @@ var InsertProperty = function () {
                 label.closest('.form-group').removeClass('has-error'); // set success class to the control group
             },
             submitHandler: function (form) {
-                error1.hide();
+                //error1.hide();
 
                 //success1.show();
                 //success1.delay(4000).fadeOut('slow');
@@ -431,7 +447,7 @@ var InsertProperty = function () {
             showCaption: false,
             showUpload: true,
             language: "hu",
-            maxFileCount: 10,
+            maxFileCount: 20,
             maxFileSize: 3000,
             allowedFileExtensions: ["jpg", "jpeg", "gif", "png", "bmp"],
             allowedPreviewTypes: ['image'],
@@ -485,6 +501,9 @@ var InsertProperty = function () {
 
             if (data.response.status == 'success') {
                 // console.log('A feltöltés sikeres!');
+
+toastr['success'](data.response.message);                
+/*
                 App.alert({
                     type: 'success',
                     //icon: 'warning',
@@ -496,7 +515,7 @@ var InsertProperty = function () {
                     //focus: true, // auto scroll to the alert after shown
                     closeInSeconds: 3 // auto close after defined seconds
                 });
-
+*/
                 // képek lekérdezése a listás megjelenítéshez
                 $.ajax({
                     url: "admin/property/show_file_list",
@@ -515,6 +534,9 @@ var InsertProperty = function () {
                 });
 
             } else if (data.response.status == 'error') {
+
+toastr['success'](data.response.message);                
+/*
                 App.alert({
                     type: 'danger',
                     //icon: 'warning',
@@ -526,8 +548,11 @@ var InsertProperty = function () {
                     //focus: true, // auto scroll to the alert after shown
                     closeInSeconds: 3 // auto close after defined seconds
                 });
-
+*/
             } else {
+                
+toastr['success'](data.response[0]);
+/*
                 App.alert({
                     type: 'danger',
                     //icon: 'warning',
@@ -539,6 +564,7 @@ var InsertProperty = function () {
                     //focus: true, // auto scroll to the alert after shown
                     closeInSeconds: 3 // auto close after defined seconds
                 });
+*/                
             }
         });
 
@@ -577,7 +603,7 @@ var InsertProperty = function () {
             showCaption: false,
             showUpload: true,
             language: "hu",
-            maxFileCount: 10,
+            maxFileCount: 20,
             maxFileSize: 3000,
             allowedFileExtensions: ["jpg", "txt", "pdf", "xps", "csv", "doc", "docx", "xls", "xlsx", "ppt", "pps", "rtf", "ods", "odt", "odp"],
             allowedPreviewTypes: ['image'],
@@ -614,6 +640,9 @@ var InsertProperty = function () {
         $("#input-5").on('filebatchuploadsuccess', function (event, data, previewId, index) {
 
             if (data.response.status == 'success') {
+                
+toastr['success'](data.response.message);                
+/*
                 App.alert({
                     type: 'success',
                     //icon: 'warning',
@@ -625,7 +654,7 @@ var InsertProperty = function () {
                     //focus: true, // auto scroll to the alert after shown
                     closeInSeconds: 3 // auto close after defined seconds
                 });
-
+*/
                 // dokumentumok lekérdezése a listás megjelenítéshez
                 $.ajax({
                     url: "admin/property/show_file_list",
@@ -644,6 +673,9 @@ var InsertProperty = function () {
                 });
 
             } else if (data.response.status == 'error') {
+                
+toastr['success'](data.response.message);
+/*
                 App.alert({
                     type: 'danger',
                     //icon: 'warning',
@@ -655,8 +687,11 @@ var InsertProperty = function () {
                     //focus: true, // auto scroll to the alert after shown
                     closeInSeconds: 3 // auto close after defined seconds
                 });
-
+*/
             } else {
+
+toastr['success'](data.response[0]);
+/*                
                 App.alert({
                     type: 'danger',
                     //icon: 'warning',
@@ -668,6 +703,7 @@ var InsertProperty = function () {
                     //focus: true, // auto scroll to the alert after shown
                     closeInSeconds: 3 // auto close after defined seconds
                 });
+*/
             }
         });
 
@@ -805,6 +841,9 @@ var InsertProperty = function () {
                     $('#data_update_ajax').prop('disabled', false);
                     $('#data_update_ajax').show();
 
+
+toastr['success'](result.message);
+/*
                     App.alert({
                         type: 'success',
                         //icon: 'warning',
@@ -816,7 +855,7 @@ var InsertProperty = function () {
                         //focus: true, // auto scroll to the alert after shown
                         closeInSeconds: 3 // auto close after defined seconds
                     });
-
+*/
                     // file input objektumok kiegészítése és frissítése az ID adattal
                     handleFileUpload();
                     handleDocUpload();
@@ -824,28 +863,31 @@ var InsertProperty = function () {
                     // file feltöltő tabok megjelentése
                     //$('form#upload_files_form .tab-content').show();
 
-
                 } else {
                     // üzenet doboz megjelenítése
+/*
                     var form1 = $('#upload_data_form');
                     var error = $('.alert-danger', form1);
                     var error_span = $('.alert-danger > span', form1);
                     error_span.html('');
-
+*/
                     // result tömb (hibaüzenetek) bejárása
                     $.each(result.error_messages, function (index, value) {
                         //console.log(index + ' : ' + value);
-                        error_span.append(value + "<br />");
+                        //error_span.append(value + "<br />");
+                        toastr['error'](value);
                     });
 
+/*
                     error.show();
                     error.delay(7000).fadeOut('slow');
+*/
                     console.log('Hiba az adatok adatbáziba írásakor!');
                 }
 
             },
             error: function (result, status, e) {
-                alert(e);
+                console.log(e);
             }
         });
     };
@@ -858,7 +900,7 @@ var InsertProperty = function () {
     var update_data = function () {
         //utca nevének küldése a php-nak rejtett inputmezőben (az irányítószám és házszám nélkül)
         var orig_utca_nev = $("#utca_select option:selected").html();
-        console.log(orig_utca_nev);
+        //console.log(orig_utca_nev);
         //megvizsgáljuk, hogy az utca listából kiválasztottak-e valamit, mert ha nem akkor az orig_utca_nev értéke "undefined" lesz (ha undefined, akkor a replace-t nem lehet végrehajtani és hibaüzentet ad a console-ban)
         if (typeof orig_utca_nev != 'undefined') {
             var utca_nev_temp = orig_utca_nev.replace(/\s\([0-9]+\)/, ''); //leszedük az irányítószámot
@@ -909,19 +951,22 @@ var InsertProperty = function () {
 
                 } else {
                     // üzenet doboz megjelenítése
+/*
                     var form1 = $('#upload_data_form');
                     var error = $('.alert-danger', form1);
                     var error_span = $('.alert-danger > span', form1);
                     error_span.html('');
-
+*/
                     // result tömb (hibaüzenetek) bejárása
                     $.each(result.error_messages, function (index, value) {
                         //console.log(index + ' : ' + value);
-                        error_span.append(value + "<br />");
+                        //error_span.append(value + "<br />");
+                        toastr['error'](value);
                     });
-
+/*
                     error.show();
                     error.delay(10000).fadeOut('slow');
+*/
                     console.log('Hiba az adatok adatbáziba írásakor!');
                 }
 
