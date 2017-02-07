@@ -15,6 +15,11 @@ $link['bootstrap-editable'] = array(
 	'js' => ADMIN_ASSETS . 'plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js'
 );
 
+$link['bootstrap-toastr'] = array(
+	'css' => ADMIN_ASSETS . 'plugins/bootstrap-toastr/toastr.min.css',
+	'js' => ADMIN_ASSETS . 'plugins/bootstrap-toastr/toastr.min.js'
+);
+
 $link['ckeditor'] = array(
 	'js' => ADMIN_ASSETS . 'plugins/ckeditor/ckeditor.js'
 );
