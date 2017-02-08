@@ -65,8 +65,8 @@ var Property = function () {
                     {"name": "kategoria", "searchable": true, "orderable": true, "targets": 5},
                     {"name": "varos", "searchable": true, "orderable": true, "targets": 6},
                     {"name": "alapterulet", "searchable": true, "orderable": true, "targets": 7},
-                    {"name": "megtekintes", "searchable": false, "orderable": true, "targets": 8},
-                    {"name": "ar", "searchable": true, "orderable": true, "targets": 9},
+                    {"name": "megtekintes", "searchable": false, "orderable": false, "targets": 8},
+                    {"name": "ar", "searchable": false, "orderable": false, "targets": 9},
                     {"name": "status", "searchable": true, "orderable": true, "targets": 10},
                     {"name": "menu", "searchable": false, "orderable": false, "targets": 11}
                 ],
@@ -105,7 +105,7 @@ var Property = function () {
                 //"ordering": false,
                 
                 "order": [
-                    [1, "desc"]
+                    [2, "desc"]
                 ] // set first column as a default sort by asc
             }
         });
@@ -374,6 +374,91 @@ var Property = function () {
     };
 
 
+    /**
+     * Egy elem klónozása ajax-al confirm
+     */
+    var cloneConfirm = function () {
+        $('table#property').on('click', '.clone_item', function(e){
+            e.preventDefault();
+            //var name = $(this).closest("tr").find('td:nth-child(3)').text();
+            var id = $(this).attr('data-id'); // a klónozandó elem id-je
+            bootbox.setDefaults({
+                locale: "hu", 
+            });
+            bootbox.confirm('Biztosan klónozni akara a rekordot?', function(result) {
+                if (result) {
+                    _cloneItem(id);
+                }
+            }); 
+        }); 
+    };
+
+    /**
+     * Ingatlan klónozása
+     * @param id - rekord id-je
+     */
+    var _cloneItem = function (id) {
+
+        $.ajax({
+            url: 'admin/property/cloning',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                item_id: id
+            },
+            beforeSend: function() {
+                App.blockUI({
+                    boxed: true,
+                    message: 'Feldolgozás...'
+                });
+            },
+            complete: function(){
+                App.unblockUI();
+            },
+            success: function (result) {
+                if (result.status == 'success') {
+                    // datatable objektum hozzárendelése a table változóhoz
+                    var table = $('#property').DataTable();
+
+                    // A táblázat újrarajzolása
+                    table.draw();
+
+                    App.alert({
+                        type: 'success',
+                        //icon: 'warning',
+                        message: result.message,
+                        container: ajax_message,
+                        place: 'append',
+                        close: true, // make alert closable
+                        reset: false, // close all previouse alerts first
+                        //focus: true, // auto scroll to the alert after shown
+                        closeInSeconds: 3 // auto close after defined seconds
+                    });                                
+
+                
+                }    
+                else if (result.status == 'error') {
+                    App.alert({
+                        type: 'danger',
+                        //icon: 'warning',
+                        message: result.message,
+                        container: ajax_message,
+                        place: 'append',
+                        close: true, // make alert closable
+                        //reset: false, // close all previouse alerts first
+                        //focus: true, // auto scroll to the alert after shown
+                        closeInSeconds: 5 // auto close after defined seconds
+                    });
+                }
+            },
+            error: function(xhr, textStatus, errorThrown){
+                console.log(errorThrown);
+                console.log("Hiba történt: " + textStatus);
+                console.log("Rendszerválasz: " + xhr.responseText); 
+            } 
+        }); // ajax end
+    };
+
 
     /**
      *	A részletek megjelenítéséhez használt modal
@@ -433,6 +518,7 @@ var Property = function () {
             locationsInput();
             enableDistrict();
 
+            cloneConfirm();
            
             vframework.changeStatus({
                 url: "admin/property/change_status"
