@@ -136,6 +136,10 @@ var Property = function () {
                 else if(action.val() == 'group_delete_highlight'){
                     confirm_str = "Biztosan törölni akarja a kiemelést?";
                 }
+                // referens áthelyezésnél lesz ez az eset
+                else {
+                    confirm_str = "Biztosan végre akarja hajtani a műveletet?";
+                }
                 
                 bootbox.setDefaults({
                     locale: "hu", 
@@ -158,7 +162,8 @@ var Property = function () {
                     //icon: 'warning',
                     message: 'Válasszon csoportműveletet!',
                     container: grid.getTableWrapper(),
-                    place: 'prepend'
+                    place: 'prepend',
+                    //closeInSeconds: 10 // auto close after defined seconds
                 });
             } else if (grid.getSelectedRowsCount() === 0) {
                 App.alert({
@@ -166,13 +171,13 @@ var Property = function () {
                     //icon: 'warning',
                     message: 'Nem jelölt ki semmit!',
                     container: grid.getTableWrapper(),
-                    place: 'prepend'
+                    place: 'prepend',
+                    //closeInSeconds: 10 // auto close after defined seconds
                 });
             }
         });
 
     };
-
 
 
 /*
