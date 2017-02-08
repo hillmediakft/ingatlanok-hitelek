@@ -528,19 +528,15 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                         // új kép létrehozása
                         $imageobject->save($upload_path, $newfilename);
                         
-                        // csak a normal kep neve kerül az adatbázisba                        
-                        if ($counter === 0) {
-                            $new_filenames[] = $imageobject->getDest('filename');
-                        }
-
+                        // hibaellenőrzés
                         if ($imageobject->checkError()) {
                             $errors[] = $imageobject->getError();
-                            /*
-                            $this->response->json(array(
-                                'status' => 'error',
-                                'message' => $imageobject->getError()
-                            ));
-                            */
+                        }
+                        else {
+                            // ha nem volt hiba, akkor csak a normal kep neve kerül az adatbázisba                        
+                            if ($counter === 0) {
+                                $new_filenames[] = $imageobject->getDest('filename');
+                            }
                         }
                     
                         $counter++;
@@ -565,17 +561,14 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
 
                     $fileobject = new Uploader($upload_path . $doc);
                     $fileobject->save($upload_path, $newfilename);
-                    // dokumentum neve bekerül a $new_docnames tömbbe
-                    $new_docnames[] = $fileobject->getDest('filename');
 
+                    // hibaellenorzes
                     if ($fileobject->checkError()) {
                         $errors[] = $fileobject->getError();
-                        /*
-                        $this->response->json(array(
-                            'status' => 'error',
-                            'message' => $fileobject->getError()
-                        ));
-                        */
+                    }
+                    else {
+                        // a sikeresen létrehozott dokumentum neve bekerül a $new_docnames tömbbe
+                        $new_docnames[] = $fileobject->getDest('filename');
                     }
                     
                 }
@@ -587,11 +580,17 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
 
             // ha valamilyen hiba volt a képek másolása közben
             if (!empty($errors)) {
+
+                // ha valamelyik kép, vagy dokumentum lemásolódott, akkor frissítjük az adatbázist
+                if ( (isset($new_filenames) && !empty($new_filenames)) || (isset($new_docnames) && !empty($new_docnames)) ) {
+                    $this->property_model->update($last_insert_id, $update_data);
+                }
+
                 $update_marker = false;
                 //Message::set('Hiba történt az új képek vagy dokumentumok másolása közben!');
                 $this->response->json(array(
-                    'status' => 'error',
-                    'message' => 'Hiba történt a képek vagy dokumentumok másolása közben!'
+                    'status' => 'warning',
+                    'message' => 'A klónozás megtörtént, de hiba történt a képek vagy dokumentumok másolása közben!'
                 ));                
             }
 
