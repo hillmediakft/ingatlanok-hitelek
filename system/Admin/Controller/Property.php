@@ -51,7 +51,8 @@ class Property extends AdminController {
     /**
      * Ingatlan részletek
      */
-    public function details($id) {
+    public function details($id)
+    {
         // $id = (int) $this->request->get_params('id');
         $id = (int) $id;
 
@@ -205,7 +206,7 @@ class Property extends AdminController {
                 }
 
             // 5. Referens oszlop    
-                $temp['ref_name'] = $value['first_name'] . '<br>' . $value['last_name'];
+                $temp['ref_id'] = $value['first_name'] . '<br>' . $value['last_name'];
                 
             // 6. Típus oszlop    
                 $temp['tipus'] = ($value['tipus'] == 1) ? 'eladó' : 'kiadó';
@@ -249,10 +250,13 @@ class Property extends AdminController {
                     $temp['menu'] .= '<li><a href="' . $this->request->get_uri('site_url') . 'property/update/' . $value['id'] . '"><i class="fa fa-pencil"></i> Szerkeszt</a></li>';
 
                 // törlés
-                if (Auth::hasAccess('property.delete')) {
+                // if (Auth::hasAccess('property.delete')) { }
                     $temp['menu'] .= '<li><a href="javascript:;" class="delete_item" data-id="' . $value['id'] . '"> <i class="fa fa-trash"></i> Töröl</a></li>';
                     //$temp['menu'] .= '<li class="disabled-link"><a href="javascript:;" title="Nincs jogosultsága törölni" class="disable-target"><i class="fa fa-trash"></i> Töröl</a></li>';
-                }
+                    
+// REKORD klónozása
+//$temp['menu'] .= '<li><a href="' . $this->request->get_uri('site_url') . 'property/clone/' . $value['id'] . '"> <i class="fa fa-trash"></i> Klónozás</a></li>';
+$temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $value['id'] . '"> <i class="fa fa-clone"></i> Klónozás</a></li>';
 
                 // kiemelés
                 if (Auth::hasAccess('property.kiemeles')) {
@@ -390,6 +394,233 @@ class Property extends AdminController {
         $view->render('property/tpl_property_update', $data);
         
     }
+
+    /**
+     * Ingatlan klónozása
+     */
+    public function cloning()
+    {
+        if ($this->request->is_ajax()) { 
+
+        // if (Auth::hasAccess('property.cloning')) {   }
+
+            $id = (int)$this->request->get_post('item_id');
+            // Ha van kép, vagy dokumentum, akkor az értékét true-ra állítjuk
+            $update_marker = false;
+            // új file-ok létrehozásakor keletkező hibák tömbje
+            $errors = array();
+
+            $url_helper = DI::get('url_helper');
+
+            $data = $this->property_model->getPropertyAlldata($id);
+            unset($data['id']);
+
+            // képek filenevek
+            if (!is_null($data['kepek'])) {
+                $temp = json_decode($data['kepek']);
+                $kepek_arr = array();
+                foreach ($temp as $kep) {
+                    $small = $url_helper->thumbPath($kep, false, 'small');
+                    $thumb = $url_helper->thumbPath($kep, false, 'thumb');
+                    $kepek_arr[] = array($kep, $small, $thumb);
+                }
+            }
+            unset($data['kepek']);
+            
+            // dokumentumok filenevek
+            if (!is_null($data['docs'])) {
+                $docs_arr = json_decode($data['docs']);
+            }
+            unset($data['docs']);
+
+            // ezeknek a mezőknek integer típusú értéket kell kapniuk
+            $integer_items = array(
+                'ref_id',
+                'ref_num',
+                'status',
+                'kategoria',
+                'tipus',
+                'allapot',
+                'kiemeles',
+                'megye',
+                'varos',
+                'kerulet',
+                'tetoter',
+                'epulet_szintjei',
+                'utca_megjelenites',
+                'hazszam_megjelenites',
+                'terkep',
+                'ar_elado',
+                'ar_elado_regi',
+                'ar_kiado',
+                'alapterulet',
+                'telek_alapterulet',
+                'erkely_terulet',
+                'terasz_terulet',
+                'szobaszam',
+                'felszobaszam',
+                'szoba_elrendezes',
+                'kozos_koltseg',
+                'rezsi',
+                'lift',
+                'butor',
+                'energetika',
+                'kert',
+                'haz_allapot_belul',
+                'haz_allapot_kivul',
+                'fenyviszony',
+                'furdo_wc',
+                'erkely',
+                'terasz',
+                'medence',
+                'szauna',
+                'jacuzzi',
+                'kandallo',
+                'riaszto',
+                'klima',
+                'ontozorendszer',
+                'automata_kapu',
+                'elektromos_redony',
+                'konditerem',
+                'megtekintes',
+                'kepek_szama'
+            );
+
+            foreach ($integer_items as $value) {
+                $data[$value] = (int)$data[$value];
+            }
+
+            // létrehozzuk az új rekordot a másik rekord adataival (id, kepek, docs oszlopadatok nélkül)
+            $last_insert_id = $this->property_model->insert($data);
+            if ($last_insert_id === false) {
+                //Message::set('Hiba az adatbázisba íráskor. Az ingatlan másolata nem jött létre!');
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Hiba az adatbázisba íráskor. Az ingatlan másolata nem jött létre!'
+                ));
+            }
+
+        // képek klónozása az új rekordhoz
+            // ha létrehoztuk a $kepek_arr tömböt... mert tartoznak képek az ingatlanhoz
+            if (isset($kepek_arr)) {
+                // feltöltés helye
+                $upload_path = Config::get('ingatlan_photo.upload_path');
+                // az új képek neveit fogja tárolni
+                $new_filenames = array();
+                // uj kepek letrehozasa
+                foreach ($kepek_arr as $kepek) {
+                    
+                    $tempfilename = $last_insert_id . '_' . md5(uniqid());
+                    $counter = 0;
+
+                    foreach ($kepek as $kep) {
+                        $imageobject = new Uploader($upload_path . $kep);
+                        
+                        // a kepek tombben 3 elem van: normal_kep, small_kep, thumb_kep
+                        if ($counter === 0) {
+                            $newfilename = $tempfilename;
+                        } elseif ($counter === 1) {
+                            $newfilename = $tempfilename . '_small';
+                        } elseif ($counter === 2) {
+                            $newfilename = $tempfilename . '_thumb';
+                        }
+
+                        // új kép létrehozása
+                        $imageobject->save($upload_path, $newfilename);
+                        
+                        // csak a normal kep neve kerül az adatbázisba                        
+                        if ($counter === 0) {
+                            $new_filenames[] = $imageobject->getDest('filename');
+                        }
+
+                        if ($imageobject->checkError()) {
+                            $errors[] = $imageobject->getError();
+                            /*
+                            $this->response->json(array(
+                                'status' => 'error',
+                                'message' => $imageobject->getError()
+                            ));
+                            */
+                        }
+                    
+                        $counter++;
+                    }
+                }
+ 
+                // az adatbázis kepek oszlopába kerülő adat
+                $update_data['kepek'] = json_encode($new_filenames);
+                $update_marker = true;
+            }
+
+        // dokumentumok klónozása az új rekordhoz
+            // ha létrehoztuk a $docs_arr tömböt... mert tartoznak dokumentumok az ingatlanhoz
+            if (isset($docs_arr)) {
+                // feltöltés helye
+                $upload_path = Config::get('ingatlan_doc.upload_path');
+                // az új képek neveit fogja tárolni
+                $new_docnames = array();
+                // uj kepek letrehozasa
+                foreach ($docs_arr as $doc) {
+                    $newfilename = $last_insert_id . '_' . md5(uniqid());
+
+                    $fileobject = new Uploader($upload_path . $doc);
+                    $fileobject->save($upload_path, $newfilename);
+                    // dokumentum neve bekerül a $new_docnames tömbbe
+                    $new_docnames[] = $fileobject->getDest('filename');
+
+                    if ($fileobject->checkError()) {
+                        $errors[] = $fileobject->getError();
+                        /*
+                        $this->response->json(array(
+                            'status' => 'error',
+                            'message' => $fileobject->getError()
+                        ));
+                        */
+                    }
+                    
+                }
+
+                // az adatbázis docs oszlopába kerülő adat
+                $update_data['docs'] = json_encode($new_docnames);
+                $update_marker = true;
+            }
+
+            // ha valamilyen hiba volt a képek másolása közben
+            if (!empty($errors)) {
+                $update_marker = false;
+                //Message::set('Hiba történt az új képek vagy dokumentumok másolása közben!');
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Hiba történt a képek vagy dokumentumok másolása közben!'
+                ));                
+            }
+
+            if ($update_marker) {
+                // az új képek neveivel frissítjük a rekordot
+                $result = $this->property_model->update($last_insert_id, $update_data);
+                if ($result === false) {
+                    //Message::set('Az új képek és dokumentumok adatai nem kerületek be az adatbázisba!');
+                    $this->response->json(array(
+                        'status' => 'error',
+                        'message' => 'Az új képek és dokumentumok adatai nem kerületek be az adatbázisba!'
+                    ));                
+                }
+
+            }
+            
+            //$this->response->redirect('admin/property');
+            $this->response->json(array(
+                'status' => 'success',
+                'message' => 'Az ingatlan klónozása megtörtént'
+            ));
+
+        } else {
+            $this->response->redirect('admin/error');
+        }    
+
+    }
+
+
 
     /**
      * 	(AJAX) Lakás részletek (modal-ba)
@@ -917,6 +1148,8 @@ class Property extends AdminController {
 
             // fájlok nevét tartalmazó tömb
             $file_name_arr = $this->property_model->getFilenames($id, $type);
+            // file-ok száma
+            $files_number = count($file_name_arr);
             // törlendő file neve
             $filename = $file_name_arr[$sort_id];
             // töröljük a tömbből az elemet
@@ -934,7 +1167,12 @@ class Property extends AdminController {
                 $data[$type] = $new_file_list;
             }
 
-            // módosított file lista beírása az adatbázisba
+            // kepek esetén az adatbázisban a kepek_szama oszlop értékét is módosítani kell
+            if ($type == 'kepek') {
+                $data['kepek_szama'] = $files_number - 1;
+            }
+
+            // módosított file lista beírása az adatbázisba (képek esetén kepek_szama oszlop frissítése)
             $result = $this->property_model->update($id, $data);
 
             if ($result) {
@@ -1127,7 +1365,8 @@ class Property extends AdminController {
      *  @param  integer                 $data (0 vagy 1)    
      *  @return integer || false
      */
-    private function _status_kiemeles_update($id_arr, $column, $data) {
+    private function _status_kiemeles_update($id_arr, $column, $data)
+    {
         $success_counter = 0;
 
         $id_arr = (!is_array($id_arr)) ? (array) $id_arr : $id_arr;
@@ -1154,7 +1393,8 @@ class Property extends AdminController {
      *
      * @return void
      */
-    public function change_status() {
+    public function change_status()
+    {
         if ($this->request->is_ajax()) {
 
             if ($this->request->has_post('action') && $this->request->has_post('id')) {
@@ -1206,7 +1446,8 @@ class Property extends AdminController {
      *
      * @return void
      */
-    public function change_kiemeles() {
+    public function change_kiemeles()
+    {
         if ($this->request->is_ajax()) {
             if ($this->request->has_post('action') && $this->request->has_post('id')) {
 
@@ -1235,7 +1476,8 @@ class Property extends AdminController {
     /**
      * 	(AJAX) - Visszadja a kiválasztott kerület városrészeinek option listáját  
      */
-    public function kerulet_utca_list() {
+    public function kerulet_utca_list()
+    {
         if ($this->request->is_ajax()) {
             if ($this->request->has_post('district_id')) {
                 $id = $this->request->get_post('district_id', 'integer');
@@ -1257,7 +1499,8 @@ class Property extends AdminController {
     /**
      * 	(AJAX) - Visszadja a kiválasztott megye városainak option listáját  
      */
-    public function county_city_list() {
+    public function county_city_list()
+    {
         if ($this->request->is_ajax()) {
             if ($this->request->has_post('county_id')) {
                 $id = $this->request->get_post('county_id', 'integer');
@@ -1296,7 +1539,8 @@ class Property extends AdminController {
     /**
      * File letöltése
      */
-    public function download() {
+    public function download()
+    {
         $file = $this->request->get_params('file');
         $file_path = Config::get('ingatlan_doc.upload_path') . $file;
         $file_helper = DI::get('file_helper');
@@ -1305,5 +1549,4 @@ class Property extends AdminController {
     }
 
 }
-
 ?>
