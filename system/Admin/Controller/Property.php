@@ -91,64 +91,85 @@ class Property extends AdminController {
             // csoportos műveletek kezelése
             if (isset($request_data['customActionType']) && isset($request_data['customActionName'])) {
 
-                switch ($request_data['customActionName']) {
+                // ha az ügynök neve és id-je a kiválasztott csoportos művelet (vagyis van a csoportművelet nevében @ karakter)
+                if ( strpos($request_data['customActionName'], '@') !== false ) {
+                    $agent_temp = explode('@', $request_data['customActionName']);
+                    $agent_name = $agent_temp[0];
+                    $agent_id = (int)$agent_temp[1];
+                    unset($agent_temp);
 
-                    case 'group_delete':
-                        // az id-ket tartalmazó tömböt kapja paraméterként
-                        $result = $this->_delete($request_data['id']);
-
-                        if ($result !== false) {
-                            $custom_action_message = $result . ' ingatlan törölve.';
-                            EventManager::trigger('delete_property', array('delete', $result . ' ingatlan törlése'));
-                        } else {
-                            $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
-                        }
-                        break;
-
-                    case 'group_make_active':
-
-                        $result = $this->_status_kiemeles_update($request_data['id'], 'status', 1);
-
-                        if ($result >= 0) {
-                            $custom_action_message = $result . ' rekord státusza aktívra változott.';
-                        } else if ($result === false) {
-                            $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
-                        }
-                        break;
-
-                    case 'group_make_inactive':
-
-                        $result = $this->_status_kiemeles_update($request_data['id'], 'status', 0);
-
-                        if ($result >= 0) {
-                            $custom_action_message = $result . ' rekord státusza inaktívra változott.';
-                        } else if ($result === false) {
-                            $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
-                        }
-                        break;
-
-                    case 'group_make_highlight':
-
-                        $result = $this->_status_kiemeles_update($request_data['id'], 'kiemeles', 1);
-
-                        if ($result >= 0) {
-                            $custom_action_message = $result . ' elem kiemelve.';
-                        } else if ($result === false) {
-                            $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
-                        }
-                        break;
-
-                    case 'group_delete_highlight':
-
-                        $result = $this->_status_kiemeles_update($request_data['id'], 'kiemeles', 0);
-
-                        if ($result >= 0) {
-                            $custom_action_message = $result . ' elem kiemelés törölve.';
-                        } else if ($result === false) {
-                            $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
-                        }
-                        break;
+                    $result = $this->property_model->changeAgent($request_data['id'], $agent_id);
+                    
+                    if ($result !== false) {
+                        $custom_action_message = $result . ' ingatlan áthelyezve ' . $agent_name . ' referenshez.';
+                    } else {
+                        $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
+                    }
                 }
+                else {
+
+                    switch ($request_data['customActionName']) {
+
+                        case 'group_delete':
+                            // az id-ket tartalmazó tömböt kapja paraméterként
+                            $result = $this->_delete($request_data['id']);
+
+                            if ($result !== false) {
+                                $custom_action_message = $result . ' ingatlan törölve.';
+                                EventManager::trigger('delete_property', array('delete', $result . ' ingatlan törlése'));
+                            } else {
+                                $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
+                            }
+                            break;
+
+                        case 'group_make_active':
+
+                            $result = $this->_status_kiemeles_update($request_data['id'], 'status', 1);
+
+                            if ($result >= 0) {
+                                $custom_action_message = $result . ' rekord státusza aktívra változott.';
+                            } else if ($result === false) {
+                                $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
+                            }
+                            break;
+
+                        case 'group_make_inactive':
+
+                            $result = $this->_status_kiemeles_update($request_data['id'], 'status', 0);
+
+                            if ($result >= 0) {
+                                $custom_action_message = $result . ' rekord státusza inaktívra változott.';
+                            } else if ($result === false) {
+                                $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
+                            }
+                            break;
+
+                        case 'group_make_highlight':
+
+                            $result = $this->_status_kiemeles_update($request_data['id'], 'kiemeles', 1);
+
+                            if ($result >= 0) {
+                                $custom_action_message = $result . ' elem kiemelve.';
+                            } else if ($result === false) {
+                                $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
+                            }
+                            break;
+
+                        case 'group_delete_highlight':
+
+                            $result = $this->_status_kiemeles_update($request_data['id'], 'kiemeles', 0);
+
+                            if ($result >= 0) {
+                                $custom_action_message = $result . ' elem kiemelés törölve.';
+                            } else if ($result === false) {
+                                $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
+                            }
+                            break;
+                    }
+                
+                }
+            
+
             }
 
 
@@ -946,7 +967,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                         $data[$jellemzo] = ($data[$jellemzo] === '') ? null : (int)$data[$jellemzo];
                     }
 
-                    // jellemzok checkbox
+                // EXTRÁK - checkbox
                     $jellemzok2 = array('butor', 'medence', 'szauna', 'jacuzzi', 'kandallo', 'riaszto', 'klima', 'ontozorendszer', 'automata_kapu', 'elektromos_redony', 'konditerem');
                     foreach ($jellemzok2 as $jellemzo) {
                         $data[$jellemzo] = (isset($data[$jellemzo])) ? 1 : 0;
