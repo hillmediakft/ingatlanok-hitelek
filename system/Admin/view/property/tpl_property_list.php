@@ -49,6 +49,16 @@
                                     <option value="group_make_highlight">Kiemelés</option>
                                     <option value="group_delete_highlight">Kiemelés törlése</option>
                                     <option value="group_delete">Töröl</option>
+
+                                    <?php if ($is_superadmin) { ?>
+                                        <optgroup label="Áthelyezés referenshez">
+                                            <?php foreach ($users as $user) { ?>
+                                                <option value="<?php echo $user['first_name'] . ' ' . $user['last_name'] . '@' . $user['id']; ?>"><?php echo $user['first_name'] . ' ' . $user['last_name']; ?></option>
+                                            <?php } ?>
+                                        </optgroup>
+                                    <?php } ?>
+
+
                                 </select>
                                 <button class="btn btn-sm grey-cascade table-group-action-submit" title="Csoportos művelet végrehajtása"><i class="fa fa-check"></i> Csoportművelet</button>
                             </div>
