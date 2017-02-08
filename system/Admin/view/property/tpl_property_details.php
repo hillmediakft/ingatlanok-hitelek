@@ -13,9 +13,7 @@
                 <div class="portlet-title">
                     <div class="caption"><i class="fa fa-list"></i>Ingatlan adatai</div>
                     <div class="actions">
-                        <?php if (Auth::hasAccess('property.update')) { ?> 
-                            <a href="admin/property/update/<?php echo $property_data['id']; ?>" class="btn grey-steel btn-sm"><i class="fa fa-edit"></i> Adatok szerkesztése</a>
-                        <?php } ?>
+                        <a href="admin/property/update/<?php echo $property_data['id']; ?>" class="btn grey-steel btn-sm"><i class="fa fa-edit"></i> Adatok szerkesztése</a>
                         <a href="admin/property" class="btn blue-madison btn-sm"><i class="fa fa-arrow-left"></i> Vissza az ingatlanokhoz</a>
 
                     </div>
