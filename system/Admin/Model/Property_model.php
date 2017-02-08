@@ -14,8 +14,6 @@ class Property_model extends AdminModel {
         parent::__construct();
     }
 
-
-
     /**
      * INSERT
      */
@@ -502,17 +500,41 @@ class Property_model extends AdminModel {
             $num = $request_data['order'][0]['column']; //ez az oszlop száma
             $dir = $request_data['order'][0]['dir']; // asc vagy desc
             $order = $request_data['columns'][$num]['name']; // az oszlopokat az adatbázis mezői szerint kell elnevezni (a javascript datattables columnDefs beállításában)
+        
+        // referenciaszám szerint rendezés    
+            if ($order == "ref_num") {
+                $this->query->set_orderby('ref_num', $dir);
+            }            
+        // referens neve szerint rendezés    
             if ($order == "ref_id") {
-                $order = 'user_last_name';
+                //$order = array('first_name');
+                $this->query->set_orderby('first_name', $dir);
+                $this->query->set_orderby('last_name', 'asc');
             }
+        // ingatlan tipus szerint rendezés    
+            if ($order == "tipus") {
+                //$order = array('kat_nev_hu');
+                $this->query->set_orderby('tipus', $dir);
+            }            
+        // ingatlan kategória szerint rendezés    
             if ($order == "kategoria") {
-                $order = 'kat_nev_hu';
+                //$order = array('kat_nev_hu');
+                $this->query->set_orderby('kat_nev_hu', $dir);
             }
+        // város szerint rendezés    
             if ($order == "varos") {
-                $order = 'city_name';
+                // $order = array('city_name');
+                $this->query->set_orderby('city_name', $dir);
+            }
+        // alapterület szerint rendezés    
+            if ($order == "alapterulet") {
+                $this->query->set_orderby('alapterulet', $dir);
+            }
+        // status szerint rendezés    
+            if ($order == "status") {
+                $this->query->set_orderby('status', $dir);
             }
 
-            $this->query->set_orderby(array($order), $dir);
         }
 
         return $this->query->select();
