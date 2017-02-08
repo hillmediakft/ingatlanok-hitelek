@@ -40,6 +40,19 @@ class Property_model extends AdminModel {
         return $this->query->delete();
     }
 
+    /**
+     *  Ügynök azonosító módosítása a megadott id-jű rekordoknál
+     *
+     * @param array     $id_arr - rekordok id-je, ahol módosítani kell a referens id-t
+     * @param inerger   $ref_id - referens id, amire módosítani kell
+     * @return integer || false
+     */
+    public function changeAgent(array $id_arr, $ref_id)
+    {
+        $this->query->set_where('id', 'in', $id_arr);
+        return $this->query->update(array('ref_id' => $ref_id));
+    }
+
 
 /* ------------------*/
 
