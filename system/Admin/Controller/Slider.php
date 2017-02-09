@@ -18,6 +18,7 @@ class Slider extends AdminController {
     public function index()
     {
         Auth::hasAccess('slider.index', $this->request->get_httpreferer());
+        
         $view = new View();
 
         $data['title'] = 'Slider oldal';
@@ -34,6 +35,8 @@ class Slider extends AdminController {
      */
     public function insert()
     {
+        Auth::hasAccess('slider.insert', $this->request->get_httpreferer());
+
             if ($this->request->has_post()) {
 
                 // fájl feltöltési hiba ellenőrzése
@@ -77,7 +80,6 @@ class Slider extends AdminController {
                 }
             }
 
-        Auth::hasAccess('slider.insert', $this->request->get_httpreferer());    
         $view = new View();
         
         $data['title'] = 'Új slide oldal';
@@ -93,6 +95,8 @@ class Slider extends AdminController {
      */
     public function update($id)
     {
+        Auth::hasAccess('slider.update', $this->request->get_httpreferer());
+
         $id = (int)$id;
 
             if ($this->request->has_post()) {
@@ -146,7 +150,6 @@ class Slider extends AdminController {
                 $this->response->redirect('admin/slider');
             }
 
-        Auth::hasAccess('slider.update', $this->request->get_httpreferer()); 
         $view = new View();
         
         $data['title'] = 'Slider szerkesztése oldal';
@@ -163,7 +166,14 @@ class Slider extends AdminController {
     public function delete()
     {
         if($this->request->is_ajax()){
-            if(Auth::hasAccess('slider.delete')){
+            
+                if(!Auth::hasAccess('slider.delete')){
+                    $this->response->json(array(
+                        'status' => 'error',
+                        'message' => 'Nincs engedélye a művelet végrehajtásához!'
+                    ));
+                }                    
+
                 // a POST-ban kapott item_id egy tömb
                 $id_arr = $this->request->get_post('item_id');
                 // a sikeres törlések számát tárolja
@@ -226,11 +236,6 @@ class Slider extends AdminController {
                 // respond tömb visszaadása
                 $this->response->json($respond);
 
-            } else {
-                $this->response->json(array(
-                    'status' => 'error',
-                    'message' => 'Nincs engedélye a művelet végrehajtásához!'
-                ));
             }
         }
     }

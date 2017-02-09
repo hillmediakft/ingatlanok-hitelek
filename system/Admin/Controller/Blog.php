@@ -3,6 +3,7 @@ namespace System\Admin\Controller;
 use System\Core\AdminController;
 use System\Core\View;
 use System\Libs\DI;
+use System\Libs\Auth;
 use System\Libs\Message;
 use System\Libs\Config;
 use System\Libs\Uploader;
@@ -18,11 +19,13 @@ class Blog extends AdminController {
     
 	public function index()
 	{
-		$view = new View();
+		Auth::hasAccess('blog.index', $this->request->get_httpreferer());
 
 		$data['title'] = 'Admin blog oldal';
 		$data['description'] = 'Admin blog oldal description';	
 		$data['all_blog'] = $this->blog_model->selectBlog();
+		
+		$view = new View();
 		//$view->setHelper(array('str', 'arr'));
 // $view->debug(true);		
 		$view->add_links(array('datatable', 'bootbox', 'vframework', 'blog'));
@@ -34,6 +37,8 @@ class Blog extends AdminController {
      */
     public function insert()
 	{
+		Auth::hasAccess('blog.insert', $this->request->get_httpreferer());
+
 		if( $this->request->is_post() ){
 
 			// kép feltöltési hiba vizsgálata
@@ -98,6 +103,8 @@ if($this->request->checkUploadError('upload_blog_picture')){
      */
 	public function update($id)
 	{
+		Auth::hasAccess('blog.update', $this->request->get_httpreferer());
+
 		$id = (int)$id;
 
 		if( $this->request->has_post() ){
@@ -170,7 +177,14 @@ if($this->request->checkUploadError('upload_blog_picture')){
 	public function delete()
 	{
         if($this->request->is_ajax()){
-	        if(1){
+		        
+		        if(!Auth::hasAccess('blog.delete')){
+		            $this->response->json(array(
+		            	'status' => 'error',
+		            	'message' => 'Nincs engedélye a művelet végrehajtásához!'
+		            ));
+				}	            
+
 	        	// a POST-ban kapott item_id egy tömb
 	        	$id_arr = $this->request->get_post('item_id');
 				// a sikeres törlések számát tárolja
@@ -236,14 +250,7 @@ if($this->request->checkUploadError('upload_blog_picture')){
 
 		        // respond tömb visszaadása
 		        $this->response->json($respond);
-		   		
 
-	        } else {
-	            $this->response->json(array(
-	            	'status' => 'error',
-	            	'message' => 'Nincs engedélye a művelet végrehajtásához!'
-	            ));
-	        }
         }
 	}
 

@@ -21,6 +21,8 @@ class Clients extends AdminController {
      */
     public function index()
     {
+        Auth::hasAccess('client.index', $this->request->get_httpreferer());    
+
         $view = new View();
         
         $data['title'] = 'Partnereink oldal';
@@ -36,6 +38,15 @@ class Clients extends AdminController {
      */
     public function insert()
     {
+        //var_dump($this->request->get_httpreferer());die;
+
+        Auth::hasAccess('client.insert', $this->request->get_httpreferer());
+        /*
+        if (Auth::hasAccess('client.insert')) {
+            die('dsasdsdsdsdsdsdsd');
+        }
+        */
+
         if ( $this->request->has_post() ) {
            
             $img_url = $this->request->get_post('img_url');
@@ -85,6 +96,8 @@ class Clients extends AdminController {
      */
     public function delete()
     {
+        Auth::hasAccess('client.delete', $this->request->get_httpreferer());
+
         if($this->request->is_ajax()){
             if(Auth::hasAccess('client.delete')){
                 // a POST-ban kapott item_id egy tömb
@@ -161,6 +174,8 @@ class Clients extends AdminController {
      */
     public function update($id)
     {
+        Auth::hasAccess('client.update', $this->request->get_httpreferer());
+
         $id = (int)$id;
         
         if ($this->request->has_post()) {

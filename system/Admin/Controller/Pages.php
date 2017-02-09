@@ -14,6 +14,8 @@ class Pages extends AdminController {
 
 	public function index()
 	{
+		Auth::hasAccess('pages.index', $this->request->get_httpreferer());
+
 		$view = new View();
 
 		$data['title'] = 'Admin pages oldal';
@@ -29,6 +31,8 @@ class Pages extends AdminController {
 	 */
 	public function update($id)
 	{
+		Auth::hasAccess('pages.update', $this->request->get_httpreferer());
+
 		$id = (int) $id;
 
 			if($this->request->is_post()) {

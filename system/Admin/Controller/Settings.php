@@ -11,7 +11,10 @@ class Settings extends AdminController {
         $this->loadModel('settings_model');
     }
 
-    public function index() {
+    public function index()
+    {
+        Auth::hasAccess('settings.index', $this->request->get_httpreferer());
+
         if ($this->request->has_post('submit_settings')) {
 
             $data = $this->request->get_post();
@@ -40,5 +43,4 @@ class Settings extends AdminController {
     }
 
 }
-
 ?>

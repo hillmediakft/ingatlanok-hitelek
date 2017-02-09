@@ -27,6 +27,8 @@ class Newsletter extends AdminController {
 
 	public function index()
 	{
+		Auth::hasAccess('newsletter.index', $this->request->get_httpreferer());
+
 		$view = new View();
 
 		$data['title'] = 'Hírlevél oldal';
@@ -42,6 +44,8 @@ class Newsletter extends AdminController {
 	 */
 	public function insert()
 	{
+		Auth::hasAccess('newsletter.insert', $this->request->get_httpreferer());
+
 		if($this->request->has_post()) {
 			
 			$data['newsletter_name'] = $this->request->get_post('newsletter_name');
@@ -74,6 +78,8 @@ class Newsletter extends AdminController {
 	 */
 	public function update($id)
 	{
+		Auth::hasAccess('newsletter.update', $this->request->get_httpreferer());
+
 		$id = (int)$id;
 
 			if($this->request->has_post()) {
@@ -111,7 +117,14 @@ class Newsletter extends AdminController {
 	public function delete()
 	{
         if($this->request->is_ajax()){
-	        if(1){
+		        
+		        if(!Auth::hasAccess('newsletter.delete')){
+		            $this->response->json(array(
+		            	'status' => 'error',
+		            	'message' => 'Nincs engedélye a művelet végrehajtásához!'
+		            ));	        	
+		        }
+
 	        	// a POST-ban kapott item_id egy tömb
 	        	$id_arr = $this->request->get_post('item_id');
 				// a sikeres törlések számát tárolja
@@ -162,12 +175,6 @@ class Newsletter extends AdminController {
 		        // respond tömb visszaadása
 				$this->response->json($respond);
 
-	        } else {
-	            $this->response->json(array(
-	            	'status' => 'error',
-	            	'message' => 'Nincs engedélye a művelet végrehajtásához!'
-	            ));
-	        }
         }
 	}
 

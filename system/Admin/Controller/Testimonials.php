@@ -3,6 +3,7 @@ namespace System\Admin\Controller;
 
 use System\Core\AdminController;
 use System\Core\View;
+use System\Libs\Auth;
 use System\Libs\Session;
 use System\Libs\Message;
 use System\Libs\Validate;
@@ -17,6 +18,8 @@ class Testimonials extends AdminController {
 
 	public function index()
 	{
+		Auth::hasAccess('testimonial.index', $this->request->get_httpreferer());
+
 		$view = new View();
 		
 		$data['title'] = 'testimonials oldal';
@@ -35,6 +38,8 @@ class Testimonials extends AdminController {
 	 */
 	public function insert()
 	{
+		Auth::hasAccess('testimonial.insert', $this->request->get_httpreferer());
+
 			if($this->request->has_post()) {
 
 				$data['name'] = $this->request->get_post('testimonial_name');
@@ -107,6 +112,8 @@ class Testimonials extends AdminController {
 	 */
 	public function update($id)
 	{
+		Auth::hasAccess('testimonial.update', $this->request->get_httpreferer());
+
 		$id = (int)$id;
 
 			if($this->request->has_post()) {
@@ -144,6 +151,8 @@ class Testimonials extends AdminController {
 	 */
 	public function delete($id)
 	{
+		Auth::hasAccess('testimonial.delete', $this->request->get_httpreferer());
+
 		$result = $this->testimonials_model->delete( (int)$id );
 		
 		// ha sikeres a törlés 1 a vissaztérési érték

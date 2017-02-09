@@ -24,7 +24,7 @@ class Property extends AdminController {
      */
     public function index()
     {
-        $view = new View();
+        Auth::hasAccess('property.index', $this->request->get_httpreferer());
 
         $data['is_superadmin'] = (Auth::isSuperadmin()) ? true : false;
         $data['filter'] = array();
@@ -39,6 +39,8 @@ class Property extends AdminController {
         // ingatlan kategóriák lekérdezése
         $data['ingatlan_kat_list'] = $this->property_model->list_query('ingatlan_kategoria');
 
+        $view = new View();
+        
         if (!$data['is_superadmin']) {
             $view->add_links(array('datatable', 'select2', 'bootbox', 'vframework', 'property_list'));
         } else {
@@ -333,6 +335,8 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
      */
     public function insert()
     {
+        Auth::hasAccess('property.insert', $this->request->get_httpreferer());
+
         // adatok bevitele a view objektumba
         $data['title'] = 'Új lakás oldal';
         $data['description'] = 'Új lakás description';
@@ -371,6 +375,8 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
      */
     public function update($id)
     {
+        Auth::hasAccess('property.update', $this->request->get_httpreferer());
+
         // $id = (int) $this->request->get_params('id');
         $id = (int) $id;
         
@@ -423,7 +429,12 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
     {
         if ($this->request->is_ajax()) { 
 
-        // if (Auth::hasAccess('property.cloning')) {   }
+            if (!Auth::hasAccess('property.cloning')) {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Nincs engedélye a művelet végrehalytásához!'
+                ));
+            }
 
             $id = (int)$this->request->get_post('item_id');
             // Ha van kép, vagy dokumentum, akkor az értékét true-ra állítjuk
@@ -669,34 +680,35 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
     public function delete()
     {
         if ($this->request->is_ajax()) {
-            if (Auth::hasAccess('property.delete')) {
-
-                // a POST-ban kapott item_id tömb 
-                $id_data = $this->request->get_post('item_id');
-
-                // rekord törlése
-                $result = $this->_delete($id_data);
-
-                if ($result !== false) {
-                    EventManager::trigger('delete_property', array('delete', $result . ' ingatlan törlése'));
-
-                    $this->response->json(array(
-                        "status" => 'success',
-                        "message_success" => $result . 'ingatlan törölve.'
-                    ));
-                } else {
-                    // ha a törlési sql parancsban hiba van
-                    $this->response->json(array(
-                        "status" => 'error',
-                        "message" => 'Adatbázis lekérdezési hiba!'
-                    ));
-                }
-            } else {
+            
+            if (!Auth::hasAccess('property.delete')) {
                 $this->response->json(array(
                     'status' => 'error',
                     'message' => 'Nincs engedélye a művelet végrehajtásához!'
                 ));
             }
+
+            // a POST-ban kapott item_id tömb 
+            $id_data = $this->request->get_post('item_id');
+
+            // rekord törlése
+            $result = $this->_delete($id_data);
+
+            if ($result !== false) {
+                EventManager::trigger('delete_property', array('delete', $result . ' ingatlan törlése'));
+
+                $this->response->json(array(
+                    "status" => 'success',
+                    "message_success" => $result . 'ingatlan törölve.'
+                ));
+            } else {
+                // ha a törlési sql parancsban hiba van
+                $this->response->json(array(
+                    "status" => 'error',
+                    "message" => 'Adatbázis lekérdezési hiba!'
+                ));
+            }
+
         } else {
             $this->response->redirect('admin/error');
         }
@@ -778,29 +790,30 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
     public function softDelete()
     {
         if ($this->request->is_ajax()) {
-            if (Auth::hasAccess('property.delete')) {
-
-                $id = $this->request->get_post('item_id');
-
-                $result = $this->property_model->update($id, array('deleted' => 1));
-
-                if ($result !== false) {
-                    $this->response->json(array(
-                        "status" => 'success',
-                        "message_success" => 'Ingatlan törölve.'
-                    ));
-                } else {
-                    $this->response->json(array(
-                        "status" => 'error',
-                        "message" => 'Adatbázis lekérdezési hiba!'
-                    ));
-                }
-            } else {
+            
+            if (!Auth::hasAccess('property.delete')) {
                 $this->response->json(array(
                     'status' => 'error',
                     'message' => 'Nincs engedélye a művelet végrehajtásához!'
                 ));
             }
+
+            $id = $this->request->get_post('item_id');
+
+            $result = $this->property_model->update($id, array('deleted' => 1));
+
+            if ($result !== false) {
+                $this->response->json(array(
+                    "status" => 'success',
+                    "message_success" => 'Ingatlan törölve.'
+                ));
+            } else {
+                $this->response->json(array(
+                    "status" => 'error',
+                    "message" => 'Adatbázis lekérdezési hiba!'
+                ));
+            }
+
         } else {
             $this->response->redirect('admin/error');
         }
@@ -1160,6 +1173,13 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
     {
         if ($this->request->is_ajax()) {
 
+            if (!Auth::hasAccess('property.file_delete')) {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Nincs engedélye a művelet végrehajtásához!'
+                ));
+            }
+
             $id = $this->request->get_post('id', 'integer');
             // a kapott szorszámból kivonunk egyet, mert a képeket tartalamzó tömbben 0-tól indul a számozás
             $sort_id = ($this->request->get_post('sort_id', 'integer')) - 1;
@@ -1417,6 +1437,13 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
     {
         if ($this->request->is_ajax()) {
 
+            if (!Auth::hasAccess('property.change_status')) {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Nincs engedélye a művelet végrehajtásához!'
+                ));
+            }
+
             if ($this->request->has_post('action') && $this->request->has_post('id')) {
 
                 $id = $this->request->get_post('id', 'integer');
@@ -1469,6 +1496,14 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
     public function change_kiemeles()
     {
         if ($this->request->is_ajax()) {
+
+            if (!Auth::hasAccess('property.kiemeles')) {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Nincs engedélye a művelet végrehajtásához!'
+                ));
+            }
+
             if ($this->request->has_post('action') && $this->request->has_post('id')) {
 
                 $id = $this->request->get_post('id', 'integer');
