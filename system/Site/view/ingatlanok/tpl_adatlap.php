@@ -214,6 +214,7 @@ use System\Libs\Language as Lang;
                             </div>
                         </div>
 
+                        <?php if ($ingatlan['terkep'] == 1) { ?>
                         <!-- TÉRKÉP -->
                         <div class="row">
                             <div class="col-sm-12">
@@ -229,8 +230,9 @@ use System\Libs\Language as Lang;
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                        <?php } ?>
+
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="empty-space-25"></div>
