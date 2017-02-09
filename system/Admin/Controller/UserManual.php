@@ -13,6 +13,8 @@ class UserManual extends AdminController {
 
 	public function index()
 	{
+		Auth::hasAccess('user_manual.index', $this->request->get_httpreferer());
+		
 		$view = new View();
 		
 		$data['title'] = 'Admin dokumentáció oldal';

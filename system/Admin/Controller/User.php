@@ -200,6 +200,12 @@ class User extends AdminController {
 		// $id = (int)$this->request->get_params('id');	
 		$id = (int)$id;	
 
+		// ha más profilját akarja módosítani
+		if ( (Auth::getUser('id') != $id) && !Auth::isSuperadmin() ) {
+			Message::set('error', 'Nincs engedélye módosítani a profilt.');
+			$this->response->redirect('admin/user');
+		}
+
 		if($this->request->has_post('submit_edit_user')) {
             
 	        // adatok a $_POST tömbből
@@ -333,6 +339,7 @@ class User extends AdminController {
 	            }
 	        } 
 		}
+
 		$view = new View();
 
 		$data['title'] = 'Profilom oldal';
@@ -411,7 +418,14 @@ class User extends AdminController {
 	public function delete()
 	{
         if($this->request->is_ajax()){
-	        if(Auth::hasAccess('user.delete')){
+	        
+	        if(!Auth::hasAccess('user.delete')){
+	            $this->response->json(array(
+	            	'status' => 'error',
+	            	'message' => 'Nincs engedélye a művelet végrehajtásához!'
+	            ));
+	        }
+
 	        	// a POST-ban kapott item_id egy tömb
 	        	$id_arr = $this->request->get_post('item_id');
 		        // a sikeres törlések számát tárolja
@@ -472,13 +486,6 @@ class User extends AdminController {
 		        // respond tömb visszaadása
 		        $this->response->json($respond);
 
-
-	        } else {
-	            $this->response->json(array(
-	            	'status' => 'error',
-	            	'message' => 'Nincs engedélye a művelet végrehajtásához!'
-	            ));
-	        }
         }
 	}
 
@@ -585,62 +592,60 @@ class User extends AdminController {
     {
         if ( $this->request->is_ajax() ) {
         	// jogosultság vizsgálat
-        	if (Auth::hasAccess('user.change_status')) {
-        	
-	            if ( $this->request->has_post('action') && $this->request->has_post('id') ) {
-				
-					$id = $this->request->get_post('id', 'integer');
-					$action = $this->request->get_post('action');
-
-					if($action == 'make_active') {
-						$result = $this->user_model->changeStatus($id, 1);
-						if($result !== false){
-							$this->response->json(array(
-								"status" => 'success',
-								"message" => 'A felhasználó aktiválása megtörtént!'
-							)); 	
-						} else {
-							$this->response->json(array(
-								"status" => 'error',
-								"message" => 'Adatbázis hiba! A felhasználó státusza nem változott meg!'
-							));
-						}
-					}
-					if($action == 'make_inactive') {
-						//ha a szuperadmint akarjuk blokkolni 
-						if($this->user_model->is_user_superadmin($id)) {
-							$this->response->json(array(
-								"status" => 'error',
-								"message" => 'Szuperadminisztrátor nem blokkolható!'
-							));
-							return;					
-						}
-					
-						$result = $this->user_model->changeStatus($id, 0);
-						if($result !== false){
-							$this->response->json(array(
-								"status" => 'success',
-								"message" => 'A felhasználó blokkolása megtörtént!'
-							)); 	
-						} else {
-							$this->response->json(array(
-								"status" => 'error',
-								"message" => 'Adatbázis hiba! A felhasználó státusza nem változott meg!'
-							));
-						}
-						
-					}
-				} else {
-					$this->response->json(array(
-						"status" => 'error',
-						"message" => 'unknown_error'
-					));
-				}
-
-			} else {
+        	if (!Auth::hasAccess('user.change_status')) {
 				$this->response->json(array(
 					"status" => 'error',
 					"message" => 'Nincs engedélye a művelet végrehajtásához.'
+				));			
+			}        		
+        	
+            if ( $this->request->has_post('action') && $this->request->has_post('id') ) {
+			
+				$id = $this->request->get_post('id', 'integer');
+				$action = $this->request->get_post('action');
+
+				if($action == 'make_active') {
+					$result = $this->user_model->changeStatus($id, 1);
+					if($result !== false){
+						$this->response->json(array(
+							"status" => 'success',
+							"message" => 'A felhasználó aktiválása megtörtént!'
+						)); 	
+					} else {
+						$this->response->json(array(
+							"status" => 'error',
+							"message" => 'Adatbázis hiba! A felhasználó státusza nem változott meg!'
+						));
+					}
+				}
+				if($action == 'make_inactive') {
+					//ha a szuperadmint akarjuk blokkolni 
+					if($this->user_model->is_user_superadmin($id)) {
+						$this->response->json(array(
+							"status" => 'error',
+							"message" => 'Szuperadminisztrátor nem blokkolható!'
+						));
+						return;					
+					}
+				
+					$result = $this->user_model->changeStatus($id, 0);
+					if($result !== false){
+						$this->response->json(array(
+							"status" => 'success',
+							"message" => 'A felhasználó blokkolása megtörtént!'
+						)); 	
+					} else {
+						$this->response->json(array(
+							"status" => 'error',
+							"message" => 'Adatbázis hiba! A felhasználó státusza nem változott meg!'
+						));
+					}
+					
+				}
+			} else {
+				$this->response->json(array(
+					"status" => 'error',
+					"message" => 'unknown_error'
 				));
 			}
 
