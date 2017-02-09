@@ -7,9 +7,9 @@ use System\Libs\Language as Lang;
             <div class="row">
                 <div class="col-sm-12">
                     <div class="breadcrumbs">
-                        <span class="clickable"><a href="index.html">Home</a></span>
+                        <span class="clickable"><a href="index.html"><?php echo Lang::get('menu_home'); ?></a></span>
                         <span class="delimiter">/</span>
-                        <span class="active-page">Properties</span>
+                        <span class="active-page"><?php echo Lang::get('menu_ingatlanok'); ?></span>
                     </div>
                 </div>
             </div>
@@ -99,10 +99,14 @@ use System\Libs\Language as Lang;
 
                                             
                                         <?php if ($value['kepek']) { ?>
-                                            <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                            <a href="ingatlanok/adatlap/<?php echo $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+                                                <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                            </a>                                        
                                         <?php } ?>
                                         <?php if ($value['kepek'] == null) { ?>
-                                            <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                            <a href="ingatlanok/adatlap/<?php echo $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+                                                <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                            </a>                                        
                                         <?php } ?>
                                         <span class="like">
                                             <i class="fa fa-heart"></i>

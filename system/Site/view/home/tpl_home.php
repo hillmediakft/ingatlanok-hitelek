@@ -105,22 +105,28 @@ use System\Libs\Language as Lang;
                     </div>
                     <div class="obj-carousel carousel">
                         <ul>
-                            <?php foreach ($all_properties as $value) { ?>
-    <?php $photo_array = json_decode($value['kepek']); ?>
+                            <?php 
+                                foreach ($all_properties as $value) { 
+                                    $photo_array = json_decode($value['kepek']);
+                            ?>
                                 <li>
                                     <div class="item">
                                         <div class="preview">
                                             <?php if ($value['kepek']) { ?>
-                                                <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                                <a href="ingatlanok/adatlap/<?php echo $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+                                                    <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                                </a>
                                             <?php } ?>
                                             <?php if ($value['kepek'] == null) { ?>
-                                                <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
-    <?php } ?>
+                                                <a href="ingatlanok/adatlap/<?php echo $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+                                                    <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                                </a>
+                                            <?php } ?>
                                             <span class="like">
                                                 <i class="fa fa-heart"></i>
                                             </span>
                                             <span class="price-box">
-    <?php echo ($value['tipus'] == 1) ? number_format($value['ar_elado'], 0, ',', '.') : number_format($value['ar_kiado'], 0, ',', '.') ?> Ft
+                                            <?php echo ($value['tipus'] == 1) ? number_format($value['ar_elado'], 0, ',', '.') : number_format($value['ar_kiado'], 0, ',', '.') ?> Ft
                                             </span>
                                         </div>
                                         <div class="item-thumbnail">
