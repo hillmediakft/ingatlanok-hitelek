@@ -617,7 +617,7 @@ class Auth {
      * @param string $target_url    egy átirányítási hely, ha nincs engedély 
      * @return void
      */
-    public static function hasAccess($permission, $target_url = null)
+    public static function hasAccess($permission, $target_url = false)
     {
         //$instance = self::instance();   
         $instance = DI::get('auth');
@@ -641,14 +641,26 @@ class Auth {
             }
         }
 
+    // ha van engedély
         if($instance->_checkAccess($permission)){
             return true;
         }
+    // ha nincs engedély
         else {
+            if ($target_url === false) {
+                return false;
+            }
             if(!is_null($target_url)) {
                 $instance->_accessDenied($permission, $target_url);
             }
-            return false;
+            // ha null a target url, például ha a http referer értéke null
+            else {
+                $target_url = BASE_URL;
+                if (AREA == 'admin') {
+                    $target_url .= '/admin'; 
+                }
+                $instance->_accessDenied($permission, $target_url);
+            }
         }
     } 
 
