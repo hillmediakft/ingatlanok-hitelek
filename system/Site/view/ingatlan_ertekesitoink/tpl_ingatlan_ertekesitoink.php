@@ -33,7 +33,7 @@ use System\Libs\Language as Lang;
 								</div>
 							</div>
 							<span class="name"><?php echo $agent['first_name'] . ' ' . $agent['last_name'];?></span>
-							<span class="properties"><a href="ingatlanok/ertekesito/<?php echo strtolower($agent['first_name']) . '-' . strtolower($agent['last_name']) . '/' . $agent['id']; ?>" class="simple-btn sm-button outlined red"><?php echo $agent['property'];?>  ingatlan</a></span>
+							<span class="properties"><a href="ingatlanok/ertekesito/<?php echo $this->str_helper->stringToSlug($agent['first_name']) . '-' . $this->str_helper->stringToSlug($agent['last_name']) . '/' . $agent['id']; ?>" class="simple-btn sm-button outlined red"><?php echo $agent['property'];?>  ingatlan</a></span>
 							<ul class="contact-listing">
 								<li>
 									<span class="icon"><i class="fa fa-phone"></i></span>
