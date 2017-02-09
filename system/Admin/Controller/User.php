@@ -23,6 +23,8 @@ class User extends AdminController {
 
 	public function index()
 	{
+		Auth::hasAccess('user.index', $this->request->get_httpreferer());	
+
 		$view = new View();
 
 		$data['title'] = 'Users oldal';
@@ -426,65 +428,65 @@ class User extends AdminController {
 	            ));
 	        }
 
-	        	// a POST-ban kapott item_id egy tömb
-	        	$id_arr = $this->request->get_post('item_id');
-		        // a sikeres törlések számát tárolja
-		        $success_counter = 0;
-		        // a sikeresen törölt id-ket tartalmazó tömb
-		        $success_id = array();
-		        // a sikertelen törlések számát tárolja
-		        $fail_counter = 0;
+        	// a POST-ban kapott item_id egy tömb
+        	$id_arr = $this->request->get_post('item_id');
+	        // a sikeres törlések számát tárolja
+	        $success_counter = 0;
+	        // a sikeresen törölt id-ket tartalmazó tömb
+	        $success_id = array();
+	        // a sikertelen törlések számát tárolja
+	        $fail_counter = 0;
 
-		        $file_helper = DI::get('file_helper'); 
-		        $photo_path = Config::get('user.upload_path');
-		        $default_photo = Config::get('user.default_photo');
+	        $file_helper = DI::get('file_helper'); 
+	        $photo_path = Config::get('user.upload_path');
+	        $default_photo = Config::get('user.default_photo');
 
-		        // bejárjuk a $id_arr tömböt és minden elemen végrehajtjuk a törlést
-		        foreach ($id_arr as $id) {
-		            //átalakítjuk a integer-ré a kapott adatot
-		            $id = (int) $id;
-		            //lekérdezzük a törlendő user avatar képének a nevét, hogy törölhessük a szerverről
-		            $photo_name = $this->user_model->selectPicture($id);
-		            //felhasználó törlése 
-		            $result = $this->user_model->delete($id);
+	        // bejárjuk a $id_arr tömböt és minden elemen végrehajtjuk a törlést
+	        foreach ($id_arr as $id) {
+	            //átalakítjuk a integer-ré a kapott adatot
+	            $id = (int) $id;
+	            //lekérdezzük a törlendő user avatar képének a nevét, hogy törölhessük a szerverről
+	            $photo_name = $this->user_model->selectPicture($id);
+	            //felhasználó törlése 
+	            $result = $this->user_model->delete($id);
 
-		            if ($result !== false) {
-		                // ha a törlési sql parancsban nincs hiba
-		                if ($result > 0) {
-		                    //kép törlése, ha nem a default kép
-		                    if ($photo_name != $default_photo) {
-		                        //kép file törlése a szerverről
-		                        $file_helper->delete($photo_path . $photo_name);    
-		                    }
-		                    //sikeres törlés
-		                    $success_counter += $result;
-		                    $success_id[] = $id;
-		                } else {
-		                    //sikertelen törlés
-		                    $fail_counter += 1;
-		                }
-		            } else {
-		                // ha a törlési sql parancsban hiba van
-		                $this->response->json(array(
-		                    'status' => 'error',                  
-		                    'message_error' => 'unknown_error',                  
-		                ));
-		            }
-		        }
+	            if ($result !== false) {
+	                // ha a törlési sql parancsban nincs hiba
+	                if ($result > 0) {
+	                    //kép törlése, ha nem a default kép
+	                    if ($photo_name != $default_photo) {
+	                        //kép file törlése a szerverről
+	                        $file_helper->delete($photo_path . $photo_name);    
+	                    }
+	                    //sikeres törlés
+	                    $success_counter += $result;
+	                    $success_id[] = $id;
+	                } else {
+	                    //sikertelen törlés
+	                    $fail_counter += 1;
+	                }
+	            } else {
+	                // ha a törlési sql parancsban hiba van
+	                $this->response->json(array(
+	                    'status' => 'error',                  
+	                    'message_error' => 'unknown_error',                  
+	                ));
+	            }
+	        }
 
-		        // üzenetek visszaadása
-		        $respond = array();
-		        $respond['status'] = 'success';
-		        
-		        if ($success_counter > 0) {
-		            $respond['message_success'] = $success_counter . ' felhasználó törölve.';
-		        }
-		        if ($fail_counter > 0) {
-		            $respond['message_error'] = $fail_counter . ' felhasználót már töröltek!';
-		        }
+	        // üzenetek visszaadása
+	        $respond = array();
+	        $respond['status'] = 'success';
+	        
+	        if ($success_counter > 0) {
+	            $respond['message_success'] = $success_counter . ' felhasználó törölve.';
+	        }
+	        if ($fail_counter > 0) {
+	            $respond['message_error'] = $fail_counter . ' felhasználót már töröltek!';
+	        }
 
-		        // respond tömb visszaadása
-		        $this->response->json($respond);
+	        // respond tömb visszaadása
+	        $this->response->json($respond);
 
         }
 	}
