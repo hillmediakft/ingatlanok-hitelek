@@ -22,6 +22,7 @@ class Allas extends SiteController {
         $data['description'] = $page_data['metadescription_' . $this->lang];
         $data['keywords'] = $page_data['metakeywords_' . $this->lang];
         
+        $data['body'] = $page_data['body_' . $this->lang];        
         
         // a keresőhöz szükséges listák alőállítása
         $data['city_list'] = $this->ingatlanok_model->city_list_query_with_prop_no();
