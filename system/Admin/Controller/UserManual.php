@@ -3,6 +3,7 @@ namespace System\Admin\Controller;
 
 use System\Core\AdminController;
 use System\Core\View;
+use System\Libs\Auth;
 
 class UserManual extends AdminController {
 
