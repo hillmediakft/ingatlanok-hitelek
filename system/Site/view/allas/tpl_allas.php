@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Állás</h1>
+                <?php echo $body; ?>
             </div>
         </div>
     </div>
