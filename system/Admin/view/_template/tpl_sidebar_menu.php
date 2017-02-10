@@ -232,30 +232,34 @@
         </li>
 
         <!--  GALÉRIÁK -->
-        <li class="nav-item <?php $this->menu_active('photo_gallery|video_gallery'); ?> ">
+        <!-- 
+        <li class="nav-item <?php //$this->menu_active('photo_gallery|video_gallery'); ?> ">
             <a href="javascript:;" class="nav-link nav-toggle">
                 <i class="fa fa-picture-o"></i>
                 <span class="title">Galériák</span>
                 <span class="arrow"></span>
             </a>
             <ul class="sub-menu">
-                <li class="nav-item <?php $this->menu_active('photo_gallery', 'index'); ?> ">
+                <li class="nav-item <?php //$this->menu_active('photo_gallery', 'index'); ?> ">
                     <a href="admin/photo-gallery" class="nav-link ">
                         <span class="title">Képgaléria</span>
                     </a>
                 </li>
-                <li class="nav-item <?php $this->menu_active('photo_gallery', 'category'); ?> ">
+                <li class="nav-item <?php //$this->menu_active('photo_gallery', 'category'); ?> ">
                     <a href="admin/photo-gallery/category" class="nav-link ">
                         <span class="title">Képgaléria kategóriák</span>
                     </a>
                 </li>
-                <li class="nav-item <?php $this->menu_active('video_gallery'); ?> ">
+                <li class="nav-item <?php //$this->menu_active('video_gallery'); ?> ">
                     <a href="admin/video_gallery" class="nav-link ">
                         <span class="title">Videógaléra</span>
                     </a>
                 </li>
             </ul>
         </li>
+        -->
+
+
 
         <!-- MODULOK -->
         <li class="nav-item <?php $this->menu_active('slider|testimonials|clients'); ?> ">
@@ -287,7 +291,7 @@
         </li>
 
         <!-- FILE-KEZELŐ -->
-        <li class="nav-item <?php $this->menu_active('file_manager'); ?> ">
+        <li class="nav-item <?php $this->menu_active('filemanager', 'index'); ?> ">
             <a href="admin/filemanager" class="nav-link ">
                 <i class="fa fa-folder-open-o"></i>
                 <span class="title">Fájlkezelő</span>
@@ -311,7 +315,7 @@
         </li>
 
         <!-- DOKUMENTÁCIÓ -->
-        <li class="nav-item <?php $this->menu_active('user_manual'); ?> ">
+        <li class="nav-item <?php $this->menu_active('user-manual'); ?> ">
             <a href="admin/user-manual" class="nav-link ">
                 <i class="fa fa-file-text-o"></i>
                 <span class="title">Dokumentáció</span>
@@ -327,30 +331,34 @@
         </li>
 
         <!-- HÍRLEVÉL -->
-        <li class="nav-item <?php $this->menu_active('newsletter'); ?> ">
+        <!--
+        <li class="nav-item <?php //$this->menu_active('newsletter'); ?> ">
             <a href="javascript:;" class="nav-link nav-toggle">
                 <i class="fa fa-suitcase"></i>
                 <span class="title">Hírlevél</span>
                 <span class="arrow"></span>
             </a>
             <ul class="sub-menu">
-                <li class="nav-item <?php $this->menu_active('newsletter', 'index'); ?> ">
+                <li class="nav-item <?php //$this->menu_active('newsletter', 'index'); ?> ">
                     <a href="admin/newsletter" class="nav-link ">
                         <span class="title">Hírlevelek</span>
                     </a>
                 </li>
-                <li class="nav-item <?php $this->menu_active('newsletter', 'insert'); ?> ">
+                <li class="nav-item <?php //$this->menu_active('newsletter', 'insert'); ?> ">
                     <a href="admin/newsletter/insert" class="nav-link ">
                         <span class="title">Új hírlevél</span>
                     </a>
                 </li>
-                <li class="nav-item <?php $this->menu_active('newsletter', 'newsletter_stats'); ?> ">
+                <li class="nav-item <?php //$this->menu_active('newsletter', 'newsletter_stats'); ?> ">
                     <a href="admin/newsletter/newsletter_stats" class="nav-link ">
                         <span class="title">Elküldött hírlevelek</span>
                     </a>
                 </li>
             </ul>
         </li>
+        -->
+
+
 
         <!-- BLOG -->
         <li class="nav-item <?php $this->menu_active('blog'); ?> ">
