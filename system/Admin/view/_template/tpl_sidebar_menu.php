@@ -288,7 +288,7 @@
 
         <!-- FILE-KEZELŐ -->
         <li class="nav-item <?php $this->menu_active('file_manager'); ?> ">
-            <a href="admin/file_manager" class="nav-link ">
+            <a href="admin/filemanager" class="nav-link ">
                 <i class="fa fa-folder-open-o"></i>
                 <span class="title">Fájlkezelő</span>
             </a>

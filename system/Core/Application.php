@@ -161,7 +161,7 @@ class Application {
                 $router->post('/clients/order', 'clients@order');
 
                 // file manager	
-                $router->get('/file_manager', 'file_manager@index');
+                $router->get('/filemanager', 'FileManager@index');
 
                 // settings	
                 $router->match('GET|POST', '/settings', 'settings@index');
