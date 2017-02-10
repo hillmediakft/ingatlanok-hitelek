@@ -49,6 +49,7 @@ $link['datepicker'] = array(
 	)
 );
 
+
 $link['elfinder'] = array(
 	'css' => array(
 		ADMIN_ASSETS . 'plugins/elfinder/css/elfinder.min.css',
@@ -59,6 +60,15 @@ $link['elfinder'] = array(
 		ADMIN_ASSETS . 'plugins/elfinder/js/i18n/elfinder.hu.js'
 	)
 );
+$link['jquery-ui-elfinder'] = array(
+	'css' => array(
+		ADMIN_ASSETS . 'plugins/jquery-ui-elfinder/jquery-ui-theme-smoothness.css'
+	),
+	'js' => array(
+		ADMIN_ASSETS . 'plugins/jquery-ui-elfinder/jquery-ui.min.js'
+	)
+);
+
 
 $link['fancybox'] = array(
 	'css' => ADMIN_ASSETS . 'plugins/fancybox/source/jquery.fancybox.css',	
