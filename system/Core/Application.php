@@ -167,7 +167,7 @@ class Application {
                 $router->match('GET|POST', '/settings', 'settings@index');
 
                 // user manual	
-                $router->get('/user-manual', 'user_manual@index');
+                //$router->get('/user-manual', 'UserManual@index');
 
                 // translations	
                 $router->get('/translations', 'translations@index');
