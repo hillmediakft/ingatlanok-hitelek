@@ -522,6 +522,8 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                 $data[$value] = (int)$data[$value];
             }
 
+            // a statust inaktívra állítjuk
+            $data['status'] = 0;
             // létrehozzuk az új rekordot a másik rekord adataival (id, kepek, docs oszlopadatok nélkül)
             $last_insert_id = $this->property_model->insert($data);
             if ($last_insert_id === false) {
