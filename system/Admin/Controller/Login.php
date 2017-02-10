@@ -51,6 +51,7 @@ class Login extends AdminController {
 			}			
 		}
 
+/*
             // bejelentkezés cookie-val
             $auth = DI::get('auth');
             $login_status = $auth->loginWithCookie();
@@ -63,6 +64,7 @@ class Login extends AdminController {
                 // cookie törlése
                 $auth->deleteCookie();
             }
+*/
 
         $view = new View();
         $view->set_layout(null);

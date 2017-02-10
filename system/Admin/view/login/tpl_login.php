@@ -37,10 +37,14 @@
                     <label for="login_input_password">Jelszó</label>
                     <input id="login_input_password" class="form-control" type="password" name="user_password" autocomplete="off">
                 </div>
+<!--
                 <div class="form-group" style="margin-bottom:15px;">
                     <input class="remember-me-checkbox" type="checkbox" name="user_rememberme">
                     <label>Emlékezz rám</label>
                 </div>
+-->
+                <div style="height: 10px;"></div>
+
                 <div class="form-group text-center">
                     <input class="btn btn-info" type="submit"  name="submit_login" value="Bejelentkezés" />
                 </div>
