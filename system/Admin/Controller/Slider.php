@@ -167,76 +167,75 @@ class Slider extends AdminController {
     {
         if($this->request->is_ajax()){
             
-                if(!Auth::hasAccess('slider.delete')){
-                    $this->response->json(array(
-                        'status' => 'error',
-                        'message' => 'Nincs engedélye a művelet végrehajtásához!'
-                    ));
-                }                    
+            if(!Auth::hasAccess('slider.delete')){
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Nincs engedélye a művelet végrehajtásához!'
+                ));
+            }                    
 
-                // a POST-ban kapott item_id egy tömb
-                $id_arr = $this->request->get_post('item_id');
-                // a sikeres törlések számát tárolja
-                $success_counter = 0;
-                // a sikeresen törölt id-ket tartalmazó tömb
-                $success_id = array();      
-                // a sikertelen törlések számát tárolja
-                $fail_counter = 0; 
+            // a POST-ban kapott item_id egy tömb
+            $id_arr = $this->request->get_post('item_id');
+            // a sikeres törlések számát tárolja
+            $success_counter = 0;
+            // a sikeresen törölt id-ket tartalmazó tömb
+            $success_id = array();      
+            // a sikertelen törlések számát tárolja
+            $fail_counter = 0; 
 
-                $file_helper = DI::get('file_helper');
-                $url_helper = DI::get('url_helper');
+            $file_helper = DI::get('file_helper');
+            $url_helper = DI::get('url_helper');
 
-                // bejárjuk a $id_arr tömböt és minden elemen végrehajtjuk a törlést
-                foreach($id_arr as $id) {
-                    //átalakítjuk a integer-ré a kapott adatot
-                    $id = (int)$id;
-                    //lekérdezzük a törlendő blog képének a nevét, hogy törölhessük a szerverről
-                    $photo_name = $this->slider_model->selectPicture($id);
-                    //blog törlése  
-                    $result = $this->slider_model->delete($id);
-                    
-                    if($result !== false) {
-                        // ha a törlési sql parancsban nincs hiba
-                        if($result > 0){
-                            //ha van feltöltött képe a bloghoz (az adatbázisban szerepel a file-név)
-                            if(!empty($photo_name)){
-                                $picture_path = Config::get('slider.upload_path') . $photo_name;
-                                $thumb_picture_path = $url_helper->thumbPath($picture_path);
-                                $file_helper->delete(array($picture_path, $thumb_picture_path));
-                            }               
-                            //sikeres törlés
-                            $success_counter += $result;
-                            $success_id[] = $id;
-                        }
-                        else {
-                            //sikertelen törlés
-                            $fail_counter += 1;
-                        }
+            // bejárjuk a $id_arr tömböt és minden elemen végrehajtjuk a törlést
+            foreach($id_arr as $id) {
+                //átalakítjuk a integer-ré a kapott adatot
+                $id = (int)$id;
+                //lekérdezzük a törlendő blog képének a nevét, hogy törölhessük a szerverről
+                $photo_name = $this->slider_model->selectPicture($id);
+                //blog törlése  
+                $result = $this->slider_model->delete($id);
+                
+                if($result !== false) {
+                    // ha a törlési sql parancsban nincs hiba
+                    if($result > 0){
+                        //ha van feltöltött képe a bloghoz (az adatbázisban szerepel a file-név)
+                        if(!empty($photo_name)){
+                            $picture_path = Config::get('slider.upload_path') . $photo_name;
+                            $thumb_picture_path = $url_helper->thumbPath($picture_path);
+                            $file_helper->delete(array($picture_path, $thumb_picture_path));
+                        }               
+                        //sikeres törlés
+                        $success_counter += $result;
+                        $success_id[] = $id;
                     }
                     else {
-                        // ha a törlési sql parancsban hiba van
-                        $this->response->json(array(
-                            'status' => 'error',
-                            'message_error' => 'Hibas sql parancs: nem sikerult a DELETE lekerdezes az adatbazisbol!',                  
-                        ));
+                        //sikertelen törlés
+                        $fail_counter += 1;
                     }
                 }
-
-                // üzenetek visszaadása
-                $respond = array();
-                $respond['status'] = 'success';
-                
-                if ($success_counter > 0) {
-                    $respond['message_success'] = 'A slide törölve.';
+                else {
+                    // ha a törlési sql parancsban hiba van
+                    $this->response->json(array(
+                        'status' => 'error',
+                        'message_error' => 'Hibas sql parancs: nem sikerult a DELETE lekerdezes az adatbazisbol!',                  
+                    ));
                 }
-                if ($fail_counter > 0) {
-                    $respond['message_error'] = 'A slide-ot már töröltek!';
-                }
-
-                // respond tömb visszaadása
-                $this->response->json($respond);
-
             }
+
+            // üzenetek visszaadása
+            $respond = array();
+            $respond['status'] = 'success';
+            
+            if ($success_counter > 0) {
+                $respond['message_success'] = 'A slide törölve.';
+            }
+            if ($fail_counter > 0) {
+                $respond['message_error'] = 'A slide-ot már töröltek!';
+            }
+
+            // respond tömb visszaadása
+            $this->response->json($respond);
+
         }
     }
 
