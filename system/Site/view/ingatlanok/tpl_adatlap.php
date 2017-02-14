@@ -105,7 +105,7 @@ use System\Libs\Language as Lang;
                                     <div class="column-2">
                                         <div class="info-item">
                                             <span class="label-item">Azonosító:</span>
-                                            <span class="value"><?php echo $ingatlan['id']; ?></span>
+                                            <span class="value"><?php echo $ingatlan['ref_num']; ?></span>
                                         </div>
                                         <div class="info-item">
                                             <span class="label-item">Típus:</span>
@@ -141,68 +141,30 @@ use System\Libs\Language as Lang;
                                         </div>
                                         <div class="info-item">
                                             <span class="label-item">Fűtés:</span>
-                                            <span class="value"><?php echo $ingatlan['energetika_leiras_' . LANG]; ?></span>
+                                            <span class="value"><?php echo $ingatlan['futes_leiras_' . LANG]; ?></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
-                    <?php if (!empty($features)) { ?>
                         <!-- FEATURES -->
+                        <?php if (!empty($features)) { ?>
                         <div class="row">
                             <div class="col-sm-12">
                                 <!-- <h4 class="small-section-title">Features</h4> -->
                                 <div class="features-info-block">
-                                    
-                                    <div class="column-2">
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['erkely']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['erkely']['label']; ?></span>
+                                    <?php foreach ($features as $feature) { ?>
+                                        <div class="column-2">
+                                            <div class="info-item">
+                                                <span class="feature-item"><?php echo Lang::get($feature); ?></span>
+                                            </div>
                                         </div>
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['terasz']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['terasz']['label']; ?></span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['medence']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['medence']['label']; ?></span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['szauna']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['szauna']['label']; ?></span>
-                                        </div>
-                                    </div>
-                                    <div class="column-2">
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['jacuzzi']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['jacuzzi']['label']; ?></span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['kandallo']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['kandallo']['label']; ?></span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['riaszto']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['riaszto']['label']; ?></span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['klima']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['klima']['label']; ?></span>
-                                        </div>
-                                    </div>
-                                    <div class="column-2">
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['ontozorendszer']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['ontozorendszer']['label']; ?></span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['automata_kapu']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['automata_kapu']['label']; ?></span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['elektromos_redony']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['elektromos_redony']['label']; ?></span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="<?php echo (!empty($features['konditerem']['status'])) ? 'feature-item' : 'feature-item-none' ?>"><?php echo $features['konditerem']['label']; ?></span>
-                                        </div>
-                                    </div>
+                                    <?php } ?>    
                                 </div>
                             </div>
                         </div>
-                    <?php } ?>
-
+                        <?php } ?>
 
                         <!-- LEÍRÁS -->
                         <div class="row">
