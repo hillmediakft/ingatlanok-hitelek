@@ -1,4 +1,7 @@
-<?php use System\Libs\Auth; ?>
+<?php
+use System\Libs\Auth;
+use System\Libs\Language as Lang;
+?>
 <!-- BEGIN CONTENT -->
 <div class="page-content">
 
@@ -273,7 +276,7 @@
 
                                     <tr>
                                         <td>Bútorozott:</td>
-                                        <td><?php echo ($property_data['butor'] == 1) ? '<span class="label label-sm label-info"><i class="fa fa-check"></i></span>' : '<span class="label label-sm label-default"><i class="fa fa-minus"></i></span>'; ?></td>
+                                        <td><?php echo ($property_data['ext_butor'] == 1) ? '<span class="label label-sm label-info"><i class="fa fa-check"></i></span>' : '<span class="label label-sm label-default"><i class="fa fa-minus"></i></span>'; ?></td>
                                     </tr>
 
 
@@ -291,20 +294,22 @@
                                     <tr>
                                         <td colspan=2>
                                             <?php
-                                            echo ($property_data['erkely']) ? 'erkély, ' : '';
-                                            echo ($property_data['terasz']) ? 'terasz, ' : '';
-                                            echo ($property_data['medence']) ? 'medence, ' : '';
-                                            echo ($property_data['szauna']) ? 'szauna, ' : '';
-                                            echo ($property_data['jacuzzi']) ? 'jacuzzi, ' : '';
-                                            echo ($property_data['kandallo']) ? 'kandalló, ' : '';
-                                            echo ($property_data['riaszto']) ? 'riasztó, ' : '';
-                                            echo ($property_data['klima']) ? 'klíma, ' : '';
-                                            echo ($property_data['ontozorendszer']) ? 'öntözőrendszer, ' : '';
-                                            echo ($property_data['automata_kapu']) ? 'automata kapu, ' : '';
-                                            echo ($property_data['elektromos_redony']) ? 'elektromos redőny, ' : '';
-                                            echo ($property_data['konditerem']) ? 'konditerem ' : '';
-                                            ?>	
-
+                                                if (empty($features)) {
+                                                    echo ' - ';
+                                                } else {
+                                                    $count = count($features);
+                                                    $counter = 1;
+                                                    $text = '';
+                                                    foreach ($features as $feature) {
+                                                        $text .= Lang::get($feature);
+                                                        if ($counter < $count) {
+                                                            $text .= ', ';
+                                                        }
+                                                        $counter++;  
+                                                    }
+                                                    echo $text;
+                                                }
+                                            ?>
                                         </td></tr>
                                 </tbody>
                             </table>
