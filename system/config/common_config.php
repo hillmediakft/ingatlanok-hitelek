@@ -120,4 +120,34 @@ $config['documents'] = array(
 $config['ingatlan_doc'] = array(
     'upload_path' => UPLOADS . 'ingatlan_doc/'
 );
+
+// az extra jellemzők oszlopnevei az adatbazisból
+$config['extra'] = array(
+    'ext_butor',
+    'ext_medence',
+    'ext_szauna',
+    'ext_jacuzzi',
+    'ext_kandallo',
+    'ext_riaszto',
+    'ext_klima',
+    'ext_ontozorendszer',
+    'ext_automata_kapu',
+    'ext_elektromos_redony',
+    'ext_konditerem',
+    'ext_galeria',                          
+    'ext_furdoben_kad', 
+    'ext_furdoben_zuhany',
+    'ext_masszazskad',
+    'ext_amerikaikonyha',
+    'ext_konyhaablak',
+    'ext_kamra',
+    'ext_panorama',
+    'ext_biztonsagi_ajto',
+    'ext_redony',
+    'ext_racs',
+    'ext_video_kaputelefon',
+    'ext_porta_szolgalat',
+    'ext_beepitett_szekreny',
+    'ext_tarolo_helyiseg'
+);
 ?>
