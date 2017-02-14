@@ -11,6 +11,7 @@ use System\Libs\DI;
 use System\Libs\EventManager;
 use System\Libs\Geocoder;
 use System\Libs\Uploader;
+use System\Libs\Language as Lang;
 
 class Property extends AdminController {
 
@@ -58,15 +59,30 @@ class Property extends AdminController {
         // $id = (int) $this->request->get_params('id');
         $id = (int) $id;
 
-        $view = new View();
 
         $data['title'] = 'Ingatlan részletek oldal';
         $data['description'] = 'Ingatlan részletek oldal description';
         $data['property_data'] = $this->property_model->getPropertyDetails($id);
+
+        // készíítünk egy a létező extrák db nevét tartalamzó tömb elemet
+        $data['features'] = array();
+        $features_temp = Config::get('extra');
+        foreach ($data['property_data'] as $key => $value) {
+            if (in_array($key, $features_temp) && $value == 1) {
+                $data['features'][] = $key;
+            }
+        }
+        if (!empty($data['features'])) {
+            // az extrák listájához az elemek nevét a translation táblából kapjuk meg
+            Lang::init('hu', DI::get('connect'));
+        }
+
+
         $data['photos'] = json_decode($data['property_data']['kepek']);
         $data['docs'] = json_decode($data['property_data']['docs']);
+        
+        $view = new View();
         //$view->debug(true);
-
         $view->setHelper(array('url_helper'));
         $view->add_links(array('fancybox', 'property_details'));
         $view->render('property/tpl_property_details', $data);
