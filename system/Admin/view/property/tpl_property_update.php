@@ -524,74 +524,190 @@
                                     </div>                                       
 
                                     <div class="row">
+
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" name="butor" <?php echo ($content['butor'] == 1) ? 'checked="checked"' : ''; ?>><label>Bútorozott</label>
+                                                    <input type="checkbox" value="1" name="ext_butor" <?php echo ($content['ext_butor'] == 1) ? 'checked="checked"' : ''; ?>><label>Bútorozott</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" value="3" name="medence" <?php echo ($content['medence'] == 1) ? 'checked="checked"' : ''; ?>><label>Medence</label>             </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="4" name="szauna" <?php echo ($content['szauna'] == 1) ? 'checked="checked"' : ''; ?>><label>Szauna</label>                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="5" name="jacuzzi" <?php echo ($content['jacuzzi'] == 1) ? 'checked="checked"' : ''; ?>><label>Jacuzzi</label>             </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="6" name="kandallo" <?php echo ($content['kandallo'] == 1) ? 'checked="checked"' : ''; ?>><label>Kandalló</label>              </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="7" name="riaszto" <?php echo ($content['riaszto'] == 1) ? 'checked="checked"' : ''; ?>><label>Riasztó</label>             </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="9" name="klima" <?php echo ($content['klima'] == 1) ? 'checked="checked"' : ''; ?>><label>Klíma</label>               </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="10" name="ontozorendszer" <?php echo ($content['ontozorendszer'] == 1) ? 'checked="checked"' : ''; ?>><label>Öntözőrendszer</label>               </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="11" name="automata_kapu" <?php echo ($content['automata_kapu'] == 1) ? 'checked="checked"' : ''; ?>><label>Automata kapu</label>              </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="12" name="elektromos_redony" <?php echo ($content['elektromos_redony'] == 1) ? 'checked="checked"' : ''; ?>><label>Elektromos redőny</label>              </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="13" name="konditerem" <?php echo ($content['konditerem'] == 1) ? 'checked="checked"' : ''; ?>><label>Konditerem</label>               
+                                                    <input type="checkbox" value="2" name="ext_medence" <?php echo ($content['ext_medence'] == 1) ? 'checked="checked"' : ''; ?>><label>Medence</label>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="3" name="ext_szauna" <?php echo ($content['ext_szauna'] == 1) ? 'checked="checked"' : ''; ?>><label>Szauna</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="4" name="ext_jacuzzi" <?php echo ($content['ext_jacuzzi'] == 1) ? 'checked="checked"' : ''; ?>><label>Jacuzzi</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="5" name="ext_kandallo" <?php echo ($content['ext_kandallo'] == 1) ? 'checked="checked"' : ''; ?>><label>Kandalló</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="6" name="ext_riaszto" <?php echo ($content['ext_riaszto'] == 1) ? 'checked="checked"' : ''; ?>><label>Riasztó</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="7" name="ext_klima" <?php echo ($content['ext_klima'] == 1) ? 'checked="checked"' : ''; ?>><label>Klíma</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="8" name="ext_ontozorendszer" <?php echo ($content['ext_ontozorendszer'] == 1) ? 'checked="checked"' : ''; ?>><label>Öntözőrendszer</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="9" name="ext_automata_kapu" <?php echo ($content['ext_automata_kapu'] == 1) ? 'checked="checked"' : ''; ?>><label>Automata kapu</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="10" name="ext_elektromos_redony" <?php echo ($content['ext_elektromos_redony'] == 1) ? 'checked="checked"' : ''; ?>><label>Elektromos redőny</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="11" name="ext_konditerem" <?php echo ($content['ext_konditerem'] == 1) ? 'checked="checked"' : ''; ?>><label>Konditerem</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="12" name="ext_galeria" <?php echo ($content['ext_galeria'] == 1) ? 'checked="checked"' : ''; ?>><label>Galéria</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="13" name="ext_furdoben_kad" <?php echo ($content['ext_furdoben_kad'] == 1) ? 'checked="checked"' : ''; ?>><label>Fürdőben kád</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="14" name="ext_furdoben_zuhany" <?php echo ($content['ext_furdoben_zuhany'] == 1) ? 'checked="checked"' : ''; ?>><label>Fürdőben zuhany</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="15" name="ext_masszazskad" <?php echo ($content['ext_masszazskad'] == 1) ? 'checked="checked"' : ''; ?>><label>Masszázskád</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="16" name="ext_amerikaikonyha" <?php echo ($content['ext_amerikaikonyha'] == 1) ? 'checked="checked"' : ''; ?>><label>Amerikai konyha</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="17" name="ext_konyhaablak" <?php echo ($content['ext_konyhaablak'] == 1) ? 'checked="checked"' : ''; ?>><label>Konyhaablak</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="18" name="ext_kamra" <?php echo ($content['ext_kamra'] == 1) ? 'checked="checked"' : ''; ?>><label>Kamra</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="19" name="ext_panorama" <?php echo ($content['ext_panorama'] == 1) ? 'checked="checked"' : ''; ?>><label>Panoráma</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="20" name="ext_biztonsagi_ajto" <?php echo ($content['ext_biztonsagi_ajto'] == 1) ? 'checked="checked"' : ''; ?>><label>Biztonsági ajtó</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="21" name="ext_redony" <?php echo ($content['ext_redony'] == 1) ? 'checked="checked"' : ''; ?>><label>Redőny</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="22" name="ext_racs" <?php echo ($content['ext_racs'] == 1) ? 'checked="checked"' : ''; ?>><label>Rács</label>
+                                                </div>
+                                            </div>
+                                        </div>                                                                                  
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="23" name="ext_video_kaputelefon" <?php echo ($content['ext_video_kaputelefon'] == 1) ? 'checked="checked"' : ''; ?>><label>Videó kaputelefon</label>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="24" name="ext_porta_szolgalat" <?php echo ($content['ext_porta_szolgalat'] == 1) ? 'checked="checked"' : ''; ?>><label>Porta szolgálat</label>
+                                                </div>
+                                            </div>
+                                        </div>                                                                                  
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="25" name="ext_beepitett_szekreny" <?php echo ($content['ext_beepitett_szekreny'] == 1) ? 'checked="checked"' : ''; ?>><label>Beépített szekrény</label>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="26" name="ext_tarolo_helyiseg" <?php echo ($content['ext_tarolo_helyiseg'] == 1) ? 'checked="checked"' : ''; ?>><label>Tároló helyiség</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>      

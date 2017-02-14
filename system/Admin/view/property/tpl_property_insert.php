@@ -514,85 +514,182 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" name="butor"><label>Bútorozott</label>
+                                                    <input type="checkbox" value="1" name="ext_butor"><label>Bútorozott</label>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" value="3" name="medence"><label>Medence</label>
+                                                    <input type="checkbox" value="2" name="ext_medence"><label>Medence</label>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" value="4" name="szauna"><label>Szauna</label>
+                                                    <input type="checkbox" value="3" name="ext_szauna"><label>Szauna</label>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" value="5" name="jacuzzi"><label>Jacuzzi</label>
+                                                    <input type="checkbox" value="4" name="ext_jacuzzi"><label>Jacuzzi</label>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" value="6" name="kandallo"><label>Kandalló</label>                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="7" name="riaszto"><label>Riasztó</label>
+                                                    <input type="checkbox" value="5" name="ext_kandallo"><label>Kandalló</label>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" value="9" name="klima"><label>Klíma</label>
+                                                    <input type="checkbox" value="6" name="ext_riaszto"><label>Riasztó</label>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" value="10" name="ontozorendszer"><label>Öntözőrendszer</label>                                                                   </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" value="11" name="automata_kapu"><label>Automata kapu</label>             
+                                                    <input type="checkbox" value="7" name="ext_klima"><label>Klíma</label>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" value="12" name="elektromos_redony"><label>Elektromos redőny</label>
+                                                    <input type="checkbox" value="8" name="ext_ontozorendszer"><label>Öntözőrendszer</label>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" value="13" name="konditerem"><label>Konditerem</label>
+                                                    <input type="checkbox" value="9" name="ext_automata_kapu"><label>Automata kapu</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="10" name="ext_elektromos_redony"><label>Elektromos redőny</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="11" name="ext_konditerem"><label>Konditerem</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="12" name="ext_galeria"><label>Galéria</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="13" name="ext_furdoben_kad"><label>Fürdőben kád</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="14" name="ext_furdoben_zuhany"><label>Fürdőben zuhany</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="15" name="ext_masszazskad"><label>Masszázskád</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="16" name="ext_amerikaikonyha"><label>Amerikai konyha</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="17" name="ext_konyhaablak"><label>Konyhaablak</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="18" name="ext_kamra"><label>Kamra</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="19" name="ext_panorama"><label>Panoráma</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="20" name="ext_biztonsagi_ajto"><label>Biztonsági ajtó</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="21" name="ext_redony"><label>Redőny</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="22" name="ext_racs"><label>Rács</label>
+                                                </div>
+                                            </div>
+                                        </div>                                                                                  
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="23" name="ext_video_kaputelefon"><label>Videó kaputelefon</label>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="24" name="ext_porta_szolgalat"><label>Porta szolgálat</label>
+                                                </div>
+                                            </div>
+                                        </div>                                                                                  
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="25" name="ext_beepitett_szekreny"><label>Beépített szekrény</label>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="26" name="ext_tarolo_helyiseg"><label>Tároló helyiség</label>
                                                 </div>
                                             </div>
                                         </div>
