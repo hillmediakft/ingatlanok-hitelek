@@ -20,6 +20,11 @@ $link['bootstrap-toastr'] = array(
 	'js' => ADMIN_ASSETS . 'plugins/bootstrap-toastr/toastr.min.js'
 );
 
+$link['bootstrap-sessiontimeout'] = array(
+	'js' => ADMIN_ASSETS . 'plugins/bootstrap-sessiontimeout/bootstrap-session-timeout.min.js',
+	'js' => ADMIN_ASSETS . 'plugins/bootstrap-sessiontimeout/ui-session-timeout.js',
+);
+
 $link['ckeditor'] = array(
 	'js' => ADMIN_ASSETS . 'plugins/ckeditor/ckeditor.js'
 );

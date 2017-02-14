@@ -145,6 +145,12 @@
     <script src="<?php echo ADMIN_JS;?>app.js" type="text/javascript"></script>
     <script src="<?php echo ADMIN_JS;?>layout.js" type="text/javascript"></script>
     <script src="<?php echo ADMIN_JS;?>quick-sidebar.js" type="text/javascript"></script>
+
+<!--
+<script src="<?php //echo ADMIN_ASSETS;?>plugins/bootstrap-sessiontimeout/bootstrap-session-timeout.min.js" type="text/javascript"></script>
+<script src="<?php //echo ADMIN_ASSETS;?>plugins/bootstrap-sessiontimeout/ui-session-timeout.js" type="text/javascript"></script>
+-->
+    
     <!-- END GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <?php $this->get_js_link(); ?>
