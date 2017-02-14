@@ -3,6 +3,7 @@ namespace System\Site\Controller;
 
 use System\Core\SiteController;
 use System\Core\View;
+use System\Libs\Config;
 use System\Libs\Session;
 use System\Libs\Paginator;
 
@@ -82,38 +83,14 @@ class Ingatlanok extends SiteController {
         // ingatlanhoz tartozó képek
         $data['pictures'] = json_decode($data['ingatlan']['kepek']);
 
-        // "features" elemek létrehozása (az értékek fog bekerülni a template-be)
-            $features_temp = array(
-                'erkely' => 'Erkély',
-                'terasz' => 'Terasz', 
-                'medence' => 'Medence', 
-                'szauna' => 'Szauna', 
-                'jacuzzi' => 'Jacuzzi', 
-                'kandallo' => 'Kandalló', 
-                'riaszto' => 'Riasztó', 
-                'klima' => 'Klíma', 
-                'ontozorendszer' => 'Öntözőrendszer', 
-                'automata_kapu' => 'Automata kapu', 
-                'elektromos_redony' => 'Elektromos redőny', 
-                'konditerem' => 'Konditerem'
-            );
-            $data['features'] = array();
-            // feltöltjük a $data['features'] tömböt
-            $features_counter = 0;
-            foreach ($data['ingatlan'] as $key => $value) {
-                foreach ($features_temp as $k => $v) {
-                    if ($key == $k) {
-                        if (!empty($value)) {
-                            $features_counter++;
-                        }
-                        $data['features'][$key] = array('label' => $v, 'status' => $value);
-                    }
-                }
+        // csak a valóban létező extrák db nevét tartalamzó tömb elem legyártása
+        $data['features'] = array();
+        $features_temp = Config::get('extra');
+        foreach ($data['ingatlan'] as $key => $value) {
+            if (in_array($key, $features_temp) && $value == 1) {
+                $data['features'][] = $key;
             }
-            // ha nincs a lakáshoz egyetlen "feature" sem akkor a deatures tömbelem üres lesz
-            if ($features_counter === 0) {
-                $data['features'] = array();
-            }
+        }
 
         // ar változó a hasonló ingatlanok lekérdezéshez
         $ar = ($data['ingatlan']['tipus'] = 1) ? $data['ingatlan']['ar_elado'] : $data['ingatlan']['ar_kiado'];

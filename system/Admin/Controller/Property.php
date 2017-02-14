@@ -465,7 +465,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
             }
             unset($data['docs']);
 
-            // ezeknek a mezőknek integer típusú értéket kell kapniuk
+            // ezeknek a mezőknek integer típusú értéket kell kapniuk + a configból az extrákat tartalamazó mezők
             $integer_items = array(
                 'ref_id',
                 'ref_num',
@@ -495,7 +495,6 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                 'kozos_koltseg',
                 'rezsi',
                 'lift',
-                'butor',
                 'energetika',
                 'kert',
                 'haz_allapot_belul',
@@ -504,19 +503,11 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                 'furdo_wc',
                 'erkely',
                 'terasz',
-                'medence',
-                'szauna',
-                'jacuzzi',
-                'kandallo',
-                'riaszto',
-                'klima',
-                'ontozorendszer',
-                'automata_kapu',
-                'elektromos_redony',
-                'konditerem',
                 'megtekintes',
                 'kepek_szama'
             );
+            // az extrákat tartalamazó mezőket is hozzáadjuk
+            $integer_items = array_merge($integer_items, Config::get('extra'));
 
             foreach ($integer_items as $value) {
                 $data[$value] = (int)$data[$value];
@@ -983,7 +974,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                     }
 
                 // EXTRÁK - checkbox
-                    $jellemzok2 = array('butor', 'medence', 'szauna', 'jacuzzi', 'kandallo', 'riaszto', 'klima', 'ontozorendszer', 'automata_kapu', 'elektromos_redony', 'konditerem');
+                    $jellemzok2 = Config::get('extra');
                     foreach ($jellemzok2 as $jellemzo) {
                         $data[$jellemzo] = (isset($data[$jellemzo])) ? 1 : 0;
                     }

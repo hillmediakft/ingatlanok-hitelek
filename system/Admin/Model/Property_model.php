@@ -100,102 +100,42 @@ class Property_model extends AdminModel {
     {
 // $this->query->debug(true);
         $this->query->set_columns(array(
-            'ingatlanok.id',
-            'ingatlanok.ref_id',
-            'ingatlanok.ref_num',
-            'ingatlanok.ingatlan_nev_hu',
-            'ingatlanok.leiras_hu',
-            'ingatlanok.status',
-            'ingatlanok.kiemeles',
-            'ingatlanok.tipus',
-            'ingatlanok.kategoria',
-            'ingatlanok.kerulet',
-            'ingatlanok.ar_elado',
-            'ingatlanok.ar_kiado',
-            'ingatlanok.alapterulet',
-            'ingatlanok.erkely_terulet',
-            'ingatlanok.terasz_terulet',
-            'ingatlanok.belmagassag',
-            'ingatlanok.tajolas',
-            'ingatlanok.szobaszam',
-            'ingatlanok.felszobaszam',
-            'ingatlanok.allapot',
-            'ingatlanok.kepek',
-            'ingatlanok.docs',
-            'ingatlanok.varos',
-            'ingatlanok.megye',
-            'ingatlanok.utca',
-            'ingatlanok.emelet_ajto',
-            'ingatlanok.iranyitoszam',
-            'ingatlanok.tetoter',
-            'ingatlanok.utca_megjelenites',
-            'ingatlanok.hazszam_megjelenites',
-            'ingatlanok.terkep',
-            'ingatlanok.hazszam',
-            'ingatlanok.emelet',
-            'ingatlanok.epulet_szintjei',
-            'ingatlanok.kozos_koltseg',
-            'ingatlanok.rezsi',
-            'ingatlanok.futes',
-            'ingatlanok.parkolas',
-            'ingatlanok.kilatas',
-            'ingatlanok.lift',
-            'ingatlanok.butor',
-            'ingatlanok.energetika',
-            'ingatlanok.kert',
-            'ingatlanok.haz_allapot_kivul',
-            'ingatlanok.haz_allapot_belul',
-            'ingatlanok.furdo_wc',
-            'ingatlanok.fenyviszony',
-            'ingatlanok.erkely',
-            'ingatlanok.terasz',
-            'ingatlanok.medence',
-            'ingatlanok.szauna',
-            'ingatlanok.jacuzzi',
-            'ingatlanok.kandallo',
-            'ingatlanok.riaszto',
-            'ingatlanok.klima',
-            'ingatlanok.ontozorendszer',
-            'ingatlanok.automata_kapu',
-            'ingatlanok.elektromos_redony',
-            'ingatlanok.konditerem',
-            'ingatlanok.latitude',
-            'ingatlanok.longitude',
-            'ingatlanok.hozzaadas_datum',
-            'ingatlanok.modositas_datum',
-            'ingatlanok.tulaj_nev',
-            'ingatlanok.tulaj_cim',
-            'ingatlanok.tulaj_tel',
-            'ingatlanok.tulaj_email',
-            'ingatlanok.tulaj_notes',
+            'ingatlanok.*',
             'ingatlan_kategoria.kat_nev_hu',
             'district_list.district_name',
             'city_list.city_name',
             'county_list.county_name',
+            
             'ingatlan_allapot.all_leiras_hu',
             'ingatlan_futes.futes_leiras_hu',
             'ingatlan_parkolas.parkolas_leiras_hu',
             'ingatlan_kilatas.kilatas_leiras_hu',
             'ingatlan_energetika.energetika_leiras_hu',
             'ingatlan_kert.kert_leiras_hu',
+            
             'users.first_name',
             'users.last_name'
         ));
 
-        $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
         $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
         $this->query->set_join('left', 'county_list', 'ingatlanok.megye', '=', 'county_list.county_id');
         $this->query->set_join('left', 'district_list', 'ingatlanok.kerulet', '=', 'district_list.district_id');
+        
         $this->query->set_join('left', 'ingatlan_allapot', 'ingatlanok.allapot', '=', 'ingatlan_allapot.all_id');
-        $this->query->set_join('left', 'ingatlan_futes', 'ingatlanok.futes', '=', 'ingatlan_futes.futes_id');
-        $this->query->set_join('left', 'ingatlan_parkolas', 'ingatlanok.parkolas', '=', 'ingatlan_parkolas.parkolas_id');
-        $this->query->set_join('left', 'ingatlan_kilatas', 'ingatlanok.kilatas', '=', 'ingatlan_kilatas.kilatas_id');
+        $this->query->set_join('left', 'ingatlan_emelet', 'ingatlanok.emelet', '=', 'ingatlan_emelet.emelet_id');
         $this->query->set_join('left', 'ingatlan_energetika', 'ingatlanok.energetika', '=', 'ingatlan_energetika.energetika_id');
-        $this->query->set_join('left', 'ingatlan_kert', 'ingatlanok.kert', '=', 'ingatlan_kert.kert_id');
-        $this->query->set_join('left', 'ingatlan_haz_allapot_kivul', 'ingatlanok.haz_allapot_kivul', '=', 'ingatlan_haz_allapot_kivul.haz_allapot_kivul_id');
-        $this->query->set_join('left', 'ingatlan_haz_allapot_belul', 'ingatlanok.haz_allapot_belul', '=', 'ingatlan_haz_allapot_belul.haz_allapot_belul_id');
-        $this->query->set_join('left', 'ingatlan_furdo_wc', 'ingatlanok.furdo_wc', '=', 'ingatlan_furdo_wc.furdo_wc_id');
         $this->query->set_join('left', 'ingatlan_fenyviszony', 'ingatlanok.fenyviszony', '=', 'ingatlan_fenyviszony.fenyviszony_id');
+        $this->query->set_join('left', 'ingatlan_furdo_wc', 'ingatlanok.furdo_wc', '=', 'ingatlan_furdo_wc.furdo_wc_id');
+        $this->query->set_join('left', 'ingatlan_futes', 'ingatlanok.futes', '=', 'ingatlan_futes.futes_id');
+        $this->query->set_join('left', 'ingatlan_haz_allapot_belul', 'ingatlanok.haz_allapot_belul', '=', 'ingatlan_haz_allapot_belul.haz_allapot_belul_id');
+        $this->query->set_join('left', 'ingatlan_haz_allapot_kivul', 'ingatlanok.haz_allapot_kivul', '=', 'ingatlan_haz_allapot_kivul.haz_allapot_kivul_id');
+        $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
+        $this->query->set_join('left', 'ingatlan_kert', 'ingatlanok.kert', '=', 'ingatlan_kert.kert_id');
+        $this->query->set_join('left', 'ingatlan_kilatas', 'ingatlanok.kilatas', '=', 'ingatlan_kilatas.kilatas_id');
+        $this->query->set_join('left', 'ingatlan_parkolas', 'ingatlanok.parkolas', '=', 'ingatlan_parkolas.parkolas_id');
+        $this->query->set_join('left', 'ingatlan_szerkezet', 'ingatlanok.szerkezet', '=', 'ingatlan_szerkezet.szerkezet_id');
+        $this->query->set_join('left', 'ingatlan_szoba_elrendezes', 'ingatlanok.szoba_elrendezes', '=', 'ingatlan_szoba_elrendezes.szoba_elrendezes_id');
+        
         $this->query->set_join('left', 'users', 'ingatlanok.ref_id', '=', 'users.id');
 
         $this->query->set_where('ingatlanok.id', '=', $id);
