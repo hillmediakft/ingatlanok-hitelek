@@ -31,15 +31,30 @@ use System\Libs\Language as Lang;
 				</div>
 			
 				<!-- KERÜLET LISTA -->
-				<div class="col-sm-3">
-		            <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
-		            <div id="district_select_div" class="ui-front">
-		                <select disabled="disabled" name="kerulet" id="district_select" data-icon="false" class="select filter-select">
-		                    <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
-		                    <?php echo $district_list; ?>
-		                </select>
-		            </div>
-				</div>
+<!-- 
+                <div class="col-sm-3">
+                    <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
+                    <div id="district_select_div" class="ui-front">
+                        <select disabled="disabled" name="kerulet" id="district_select" data-icon="false" class="select filter-select">
+                            <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
+                            <?php echo $district_list; ?>
+                        </select>
+                    </div>
+                </div>
+-->
+
+
+    <div class="col-sm-3">
+        <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
+        <div id="district_select_div">
+            <select name="kerulet[]" id="district_select" class="selectpicker" data-selected-text-format="count" multiple disabled="disabled" title="-- <?php echo Lang::get('kereso_mindegy'); ?> --">
+                <!-- <option value="">-- <?php //echo Lang::get('kereso_mindegy'); ?> --</option> -->
+                <?php echo $district_list; ?>
+            </select>
+        </div>
+    </div>
+
+
 
 				<!-- KATEGÓRIA -->
 				<div class="col-sm-3">

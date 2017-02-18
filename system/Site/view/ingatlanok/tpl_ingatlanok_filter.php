@@ -41,18 +41,41 @@
             </div>
             
             <!-- KERÜLET LISTA -->
+<!-- 
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
+                    <span class="item-label"><?php //echo Lang::get('kereso_kerulet'); ?></span>
                     <div id="district_select_div" class="ui-front">
                         <select disabled="disabled" name="kerulet" id="district_select" data-icon="false" class="select filter-select">
-                            <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
-                            <?php echo $district_list; ?>
+                            <option value="">-- <?php //echo Lang::get('kereso_mindegy'); ?> --</option>
+                            <?php //echo $district_list; ?>
                         </select>
                     </div>
                 </div>
             </div>
+ -->            
             
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
+        <div id="district_select_div">
+            <select name="kerulet[]" id="district_select" class="selectpicker" data-selected-text-format="count" multiple disabled="disabled" title="-- <?php echo Lang::get('kereso_mindegy'); ?> --">
+                <!-- <option value="">-- <?php //echo Lang::get('kereso_mindegy'); ?> --</option> -->
+                <?php echo $district_list; ?>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
             <!-- KATEGÓRIA -->
             <div class="row">
                 <div class="col-sm-12">
@@ -164,25 +187,9 @@
                 </div>
             </div>
 
-<!-- 
-<div class="row">
-    <div class="col-sm-12">
-    
-        <span class="item-label">Example</span>
-        <div class="example">
 
-            <select name="example[]" class="selectpicker" title="--Mindegy--"  data-selected-text-format="count" multiple>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-                <option value="4">Option 4</option>
-                <option value="5">Option 5</option>
-            </select>
-        </div>
-        
-    </div>
-</div>
- -->
+
+
 
 
 
