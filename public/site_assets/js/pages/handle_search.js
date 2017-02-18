@@ -364,6 +364,7 @@ var handleSearch = function () {
 
     		$('#district_select').selectpicker({
     			//size: 4,
+    			width: '100%',
     			countSelectedText: '{0} ' + countSelectedText
 
     		});
