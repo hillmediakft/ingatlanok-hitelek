@@ -1149,7 +1149,7 @@ footer.footer .bottom-footer .copy {
 /*______________________SLIDERS_______________________*/
 /* line 2, scss/_slider.scss */
 .home-banner {
-  height: 540px;
+  height: 480px;
   background: url("../images/banners/home-top.jpg") no-repeat center;
   position: relative;
 }
@@ -1198,7 +1198,8 @@ footer.footer .bottom-footer .copy {
   bottom: 4%;
   left: 0;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.5);
+  bottom: 80px;
+  background-color: rgba(255, 255, 255, 0.75);
   padding: 26px 30px;
 }
 /* line 44, scss/_slider.scss */
@@ -1217,7 +1218,7 @@ footer.footer .bottom-footer .copy {
 .home-banner .banner-content .banner-message {
   background-color: rgba(58, 56, 59, 0.8);
   position: absolute;
-  top: 10%;
+  top: 7%;
   padding: 40px;
   left: 0;
 }
