@@ -239,39 +239,44 @@ var handleSearch = function () {
     /**
      * Kerület lista kezelése
      */
-/*     
-    var enableDistrict_SIMA = function () {
+     
+    var enableDistrict_Selectpicker = function () {
 
-        var option_value = $("select#varos option:selected").val();
-
+    	var option_value = $("select#varos_select option:selected").val();
+        
         if (option_value == '88') {
-            $('#district').prop("disabled", false);
+            $('#district_select').prop("disabled", false);
+            $('#district_select').selectpicker('refresh');
         }
 
-        //kerület és városrész option lista megjelenítése, ha a kiválasztott megye Budapest
-        $("#varos").change(function () {
-            
-            //option listaelem tartalom
-            //var str = $("select#varos option:selected").text();
-            // option listaelem value
-            option_value = $("select#varos option:selected").val();
-            // az érték üres lesz, ha a válassz elemet választjuk ki az option listából
+        //kerület és városrész option lista megjelenítése, ha a kiválasztott város Budapest
+        $( "#varos_select" ).selectmenu({
+			change: function( event, ui ) {
+	            //option listaelem tartalom
+		            //var str = ui.item.label;
+	            // option listaelem value
+	            option_value = ui.item.value;
+	            if (option_value == '88') {
+					$('#district_select').prop("disabled", false);
+					$('#district_select').selectpicker('deselectAll');
+					$('#district_select').selectpicker('refresh');
+	            } else {
+	                $('#district_select').prop("disabled", true);
+					$('#district_select').selectpicker('deselectAll');
+	                $('#district_select').selectpicker('refresh');
+	            }
 
-            if (option_value == '88') {
-                $('#district').prop("disabled", false);
+			}
 
-            } else {
-                $('#district option[value=""]').prop('selected', true);
-                $('#district').prop("disabled", true);
-            }
-        })
+        });  
+
     };
-*/
+
 
     /**
      * Kerület lista kezelése
      */
-    var enableDistrict = function () {
+    var enableDistrict_SelectMenu = function () {
 
         var option_value = $("select#varos_select option:selected").val();
 
@@ -345,9 +350,23 @@ var handleSearch = function () {
      */
     var select_menu = function() {
     	// ha van selectpicker objektum
-        if (document.getElementById("example") != null) {
-	    
-    		$('#example').selectpicker();
+        if (document.getElementById("district_select_div") != null) {
+
+			var lang = $('html').prop('lang'); 	
+        	var countSelectedText; 
+
+        	if (lang == 'hu') {
+        		countSelectedText = 'elem kiválasztva';
+        	}
+        	else if (lang == 'en') {
+        		countSelectedText = 'items selected';
+        	}
+
+    		$('#district_select').selectpicker({
+    			//size: 4,
+    			countSelectedText: '{0} ' + countSelectedText
+
+    		});
     	
         } else {
             return false;
@@ -533,12 +552,12 @@ var handleSearch = function () {
         //main function to initiate the module
         init: function () {
 			checkSearchInput();
+            select_menu();
         	
         	//setOrderSelected();
-        	
-        	enableDistrict();
+        	enableDistrict_Selectpicker();
+        	//enableDistrict_SelectMenu();
             setOrder();
-            select_menu();
         	initRangePrice();
         	initRangeArea();
 
