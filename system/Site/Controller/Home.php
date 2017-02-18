@@ -40,7 +40,8 @@ class Home extends SiteController {
         $view->setHelper(array('url_helper', 'str_helper'));
 
         //$view->setLazyRender();
-//$this->view->debug(true); 
+//$this->view->debug(true);
+        $view->add_links(array('bootstrap-select')); 
         $view->add_link('js', SITE_JS . 'pages/handle_search.js');
         $view->add_link('js', SITE_JS . 'pages/home.js');
         $view->render('home/tpl_home', $data);
