@@ -180,3 +180,97 @@
 #mezes_bodon {
     display: none;
 }
+
+
+
+#district_select_div {
+    margin-bottom: 6px;
+} 
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #e7e4e4;
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.dropdown-menu > li > a {
+    line-height: 2;
+    background-color: none;
+    border-top: 5px;
+}
+
+        .dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+            color: #c44a35;
+            text-decoration: none;
+            background-color: none;
+            border-top: 5px;
+        }
+
+.bs-caret {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 34px;
+    height: 34px;
+    background-color: #c44a35;
+}
+
+.caret {
+    color: #fff;
+}
+
+
+#district_select_div .btn-default {
+    background-color: #fff;
+    border-color: #e7e4e4;
+
+    color: #808080;
+    font-family: "Lato-Regular",Arial,sans-serif;
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+.btn-default.active.focus,
+.btn-default.active:focus,
+.btn-default.active:hover,
+.btn-default.focus:active,
+.btn-default:active:focus,
+.btn-default:active:hover,
+.open > .dropdown-toggle.btn-default.focus,
+.open > .dropdown-toggle.btn-default:focus,
+.open > .dropdown-toggle.btn-default:hover {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+
+.btn-group.open .dropdown-toggle {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.dropup .dropdown-menu {
+    margin-bottom: 0px;
+}
+
+
