@@ -33,11 +33,11 @@ use System\Libs\Language as Lang;
 				<!-- KERÜLET LISTA -->
 <!-- 
                 <div class="col-sm-3">
-                    <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
+                    <span class="item-label"><?php //echo Lang::get('kereso_kerulet'); ?></span>
                     <div id="district_select_div" class="ui-front">
                         <select disabled="disabled" name="kerulet" id="district_select" data-icon="false" class="select filter-select">
-                            <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
-                            <?php echo $district_list; ?>
+                            <option value="">-- <?php //echo Lang::get('kereso_mindegy'); ?> --</option>
+                            <?php //echo $district_list; ?>
                         </select>
                     </div>
                 </div>
@@ -79,14 +79,17 @@ use System\Libs\Language as Lang;
 			<!-- ALSÓ SOR -->
 			<div class="row">
 				
-				<!-- ALAPTERÜLET SLIDER -->
-				<div class="col-sm-4">
+                <!-- ALAPTERÜLET -->
+                <div class="col-sm-2">
                     <?php 
                         $min_terulet = $this->request->has_query('min_alapterulet') ? $this->request->get_query('min_alapterulet') : "";
                         $max_terulet = $this->request->has_query('max_alapterulet') ? $this->request->get_query('max_alapterulet') : "";
                     ?>
-                    <div id="terulet_slider_wrapper" data-min="<?php echo $min_terulet; ?>" data-max="<?php echo $max_terulet; ?>">
-                        <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
+                    
+				<!-- ALAPTERÜLET SLIDER -->
+<!-- 
+                    <div id="terulet_slider_wrapper" data-min="<?php //echo $min_terulet; ?>" data-max="<?php //echo $max_terulet; ?>">
+                        <span class="item-label"><?php //echo Lang::get('kereso_alapterulet'); ?></span>
                         <div class="range-wrap">
                             <div class="range-fields">
                                 <input type="text" id="min_terulet" name="min_alapterulet"/>
@@ -100,10 +103,32 @@ use System\Libs\Language as Lang;
                             </div>
                         </div>
                     </div>
-				</div>
+-->
+                    <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input name="min_terulet" type="text" class="form-control" placeholder="minimum">
+                            <div class="input-group-addon">m<sup>2</sup></div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-sm-2">
+                    <span class="item-label">&nbsp;</span>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input name="max_terulet" type="text" class="form-control" placeholder="maximum">
+                            <div class="input-group-addon">m<sup>2</sup></div>
+                        </div>
+                    </div>                    
+                </div>
+
+
+                <!-- ÁR SLIDER -->
+                <div class="col-sm-2">
+                    
 				<!-- ÁR SLIDER -->
-				<div class="col-sm-4">
+<!-- 
                     <div id="ar_slider_wrapper">
                         <span class="item-label">Ár</span>
                         <div class="range-wrap">
@@ -118,8 +143,26 @@ use System\Libs\Language as Lang;
                                 <span class="max-value"></span>
                             </div>
                         </div>
-                    </div>					
-				</div>				
+                    </div>
+-->
+                   <span class="item-label"><?php echo Lang::get('kereso_min_ar'); ?></span>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input name="min_ar" type="text" class="form-control" placeholder="minimum">
+                            <div class="input-group-addon">Ft</div>
+                        </div>
+                    </div>
+
+				</div>
+                <div class="col-sm-2">
+                    <span class="item-label"><?php echo Lang::get('kereso_max_ar'); ?></span>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input name="max_ar" type="text" class="form-control" placeholder="maximum">
+                            <div class="input-group-addon">Ft</div>
+                        </div>
+                    </div>                    
+                </div>				
 
 				<div class="col-sm-4">
 					<button class="find-now-btn"><?php echo Lang::get('kereso_kereses'); ?></button>
