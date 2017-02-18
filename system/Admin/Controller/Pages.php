@@ -38,8 +38,10 @@ class Pages extends AdminController {
 
 			if($this->request->is_post()) {
 				
-				$data['body_hu'] = $this->request->get_post('page_body_hu', 'strip_danger_tags');
-				$data['body_en'] = $this->request->get_post('page_body_en', 'strip_danger_tags');
+				if ($this->request->has_post('page_body_hu')) {
+					$data['body_hu'] = $this->request->get_post('page_body_hu', 'strip_danger_tags');
+					$data['body_en'] = $this->request->get_post('page_body_en', 'strip_danger_tags');
+				}
 				$data['metatitle_hu'] = $this->request->get_post('page_metatitle_hu');
 				$data['metatitle_en'] = $this->request->get_post('page_metatitle_en');
 				$data['metadescription_hu'] = $this->request->get_post('page_metadescription_hu');
@@ -64,7 +66,7 @@ class Pages extends AdminController {
 		$data['title'] = 'Oldal szerkesztése';
 		$data['description'] = 'Oldal szerkesztése description';
 		$data['page'] = $this->pages_model->onePage($id);
-		
+
 		$view->add_links(array('bootbox', 'ckeditor', 'vframework', 'page_update'));
 		$view->render('pages/tpl_page_update', $data);
 	}

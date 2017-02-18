@@ -71,11 +71,13 @@
                                         <input type='text' name='page_metakeywords_hu' class='form-control' value="<?php echo $page['metakeywords_hu'] ?>">
                                     </div>
 
+                                    <?php if ($page['body_edit'] == 1) { ?>
                                     <div class="form-group">
                                         <label for="page_body_hu">Tartalom</label>
                                         <textarea type="text" name="page_body_hu" class="form-control"><?php echo $page['body_hu'] ?></textarea>
                                     </div>
-
+                                    <?php } ?>
+                                    
                                 </div>
                                 <div class="tab-pane fade" id="tab_1_2">
                         
@@ -93,11 +95,13 @@
                                         <label for="page_metakeywords_en">Kulcsszavak</label>
                                         <input type='text' name='page_metakeywords_en' class='form-control' value="<?php echo $page['metakeywords_en'] ?>">
                                     </div>
-
+                                    
+                                    <?php if ($page['body_edit'] == 1) { ?>
                                     <div class="form-group">
                                         <label for="page_body_en">Tartalom</label>
                                         <textarea type="text" name="page_body_en" class="form-control"><?php echo $page['body_en'] ?></textarea>
                                     </div>
+                                    <?php } ?>
 
                                 </div>
                             </div> <!-- TAB-CONTENT END-->
