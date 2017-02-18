@@ -10,8 +10,7 @@ select.selectpicker {
   display: none !important;
 }
 .bootstrap-select {
-  /*width: 220px \0;*/
-  width: 230px \0;
+  width: 220px \0;
   /*IE9 and below*/
 }
 .bootstrap-select > .dropdown-toggle {
@@ -67,8 +66,7 @@ select.selectpicker {
   width: auto !important;
 }
 .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
-  /*width: 220px;*/
-  width: 230px;
+  width: 220px;
 }
 .bootstrap-select .dropdown-toggle:focus {
   /*outline: thin dotted #333333 !important;*/
