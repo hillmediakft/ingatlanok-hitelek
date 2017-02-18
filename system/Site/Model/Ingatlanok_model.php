@@ -243,7 +243,7 @@ foreach ($params as $key => $value) {
         }
 
         // ha van város, de nincs kerület
-        if ( (isset($params['varos']) && !empty($params['varos'])) &&  ( !isset($params['kerulet']) || (isset($params['kerulet']) && empty($params['kerulet'])) ) ) {
+        if ( (isset($params['varos']) && !empty($params['varos'])) && ( !isset($params['kerulet']) || (isset($params['kerulet']) && empty($params['kerulet'])) ) ) {
             if (is_array($params['varos'])) {
                 $this->query->set_where('varos', 'in', $params['varos']);
             } else {
@@ -1217,15 +1217,16 @@ foreach ($params as $key => $value) {
         if (isset($filter['tipus']) && $filter['tipus'] == 2) {
             $filter_with_names['tipus'] = 'Kiadó';
         }
+    // kerület
         if (isset($filter['kerulet']) && $filter['kerulet'] !== '') {
-            /*
+            
             foreach ($filter['kerulet'] as $value) {
                 $filter_with_names['kerulet'][] = 'Budapest, ' . $value . '. kerület';
             }
-            */
-            $filter_with_names['kerulet'][] = 'Budapest, ' . $filter['kerulet'] . '. kerület';
+            
+            //$filter_with_names['kerulet'][] = 'Budapest, ' . $filter['kerulet'] . '. kerület';
         }
-
+    // város
         if (isset($filter['varos']) && $filter['varos'] !== '') {
             /*
             foreach ($filter['varos'] as $value) {
@@ -1234,7 +1235,7 @@ foreach ($params as $key => $value) {
             */
             $filter_with_names['varos'][] = $this->getCityNameById($filter['varos']);
         }
-
+    // kategória
         if (isset($filter['kategoria']) && $filter['kategoria'] !== '') {
             /*
             foreach ($filter['kategoria'] as $value) {
