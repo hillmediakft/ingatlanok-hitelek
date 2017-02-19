@@ -1,0 +1,136 @@
+<?php 
+use System\Libs\Language as Lang;
+?>
+<form class="filter-form" action="ingatlanok">
+	<div class="row">
+		<div class="col-sm-12">
+			
+			<!-- FELSŐ SOR -->
+			<div class="row">
+
+				<!-- ELADÓ/KIADÓ -->
+				<div class="col-sm-3">
+                    <span class="item-label"><?php echo Lang::get('kereso_elado'); ?>/<?php echo Lang::get('kereso_kiado'); ?></span>
+                    <div id="tipus_select_div" class="ui-front">
+                        <select name="tipus" id="tipus_select" data-icon="false" class="select filter-select">
+                            <option <?php echo (isset($filter_params['tipus']) && $filter_params['tipus'] == 1) ? 'selected' : ''; ?> value="1"><?php echo Lang::get('kereso_elado'); ?></option>
+                            <option <?php echo (isset($filter_params['tipus']) && $filter_params['tipus'] == 2) ? 'selected' : ''; ?> value="2"><?php echo Lang::get('kereso_kiado'); ?></option>
+                        </select>
+                    </div>
+				</div>
+
+				<!-- VÁROS LISTA -->
+				<div class="col-sm-3">
+                    <span class="item-label"><?php echo Lang::get('kereso_varos'); ?></span>
+                    <div id="varos_select_div" class="ui-front">
+                        <select name="varos" id="varos_select" data-icon="false" class="select filter-select">
+                            <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
+                            <?php echo $city_list; ?>
+                        </select>
+                    </div>
+				</div>
+			
+				<!-- KERÜLET LISTA -->
+<!-- 
+                <div class="col-sm-3">
+                    <span class="item-label"><?php //echo Lang::get('kereso_kerulet'); ?></span>
+                    <div id="district_select_div" class="ui-front">
+                        <select disabled="disabled" name="kerulet" id="district_select" data-icon="false" class="select filter-select">
+                            <option value="">-- <?php //echo Lang::get('kereso_mindegy'); ?> --</option>
+                            <?php //echo $district_list; ?>
+                        </select>
+                    </div>
+                </div>
+-->
+
+
+    <div class="col-sm-3">
+        <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
+        <div id="district_select_div">
+            <select name="kerulet[]" id="district_select" class="selectpicker" data-selected-text-format="count" multiple disabled="disabled" title="-- <?php echo Lang::get('kereso_mindegy'); ?> --">
+                <!-- <option value="">-- <?php //echo Lang::get('kereso_mindegy'); ?> --</option> -->
+                <?php echo $district_list; ?>
+            </select>
+        </div>
+    </div>
+
+
+
+				<!-- KATEGÓRIA -->
+				<div class="col-sm-3">
+                    <?php 
+                        $selected_kategoria = isset($filter_params['kategoria']) ? $filter_params['kategoria'][0]['kat_id'] : '';
+                    ?>
+                    <span class="item-label"><?php echo Lang::get('kereso_kategoria'); ?></span>
+                    <div id="category_select_div" class="ui-front">
+                        <select name="kategoria" id="category_select" data-icon="false" class="select filter-select">
+                            <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
+                            <?php foreach ($category_list as $value) : ?>
+                                <option value="<?php echo $value['kat_id']; ?>" <?php echo ($selected_kategoria == $value['kat_id']) ? 'selected' : ''; ?>><?php echo $value['kat_nev_' . LANG]; ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>					
+				</div>
+
+
+
+			</div>
+
+			<!-- ALSÓ SOR -->
+			<div class="row">
+				
+                <!-- ALAPTERÜLET -->
+                <div class="col-sm-4">
+                    <?php 
+                        $min_terulet = $this->request->has_query('min_alapterulet') ? $this->request->get_query('min_alapterulet') : "";
+                        $max_terulet = $this->request->has_query('max_alapterulet') ? $this->request->get_query('max_alapterulet') : "";
+                    ?>
+				<!-- ALAPTERÜLET SLIDER -->
+                    <div id="terulet_slider_wrapper" data-min="<?php echo $min_terulet; ?>" data-max="<?php echo $max_terulet; ?>">
+                        <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
+                        <div class="range-wrap">
+                            <div class="range-fields">
+                                <input type="text" id="min_terulet" name="min_alapterulet"/>
+                                <span class="delimiter"></span>
+                                <input type="text" id="max_terulet" name="max_alapterulet"/>
+                            </div>
+                            <div id="terulet_slider" class="slider"></div>
+                            <div class="scale">
+                                <span class="min-value"></span>
+                                <span class="max-value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÁR SLIDER -->
+                <div class="col-sm-4">
+                    
+                    <div id="ar_slider_wrapper">
+                        <span class="item-label">Ár</span>
+                        <div class="range-wrap">
+                            <div class="range-fields">
+                                <input type="text" id="min_ar" name="min_ar"/>
+                                <span class="delimiter"></span>
+                                <input type="text" id="max_ar" name="max_ar"/>
+                            </div>
+                            <div id="ar_slider" class="slider"></div>
+                            <div class="scale">
+                                <span class="min-value"></span>
+                                <span class="max-value"></span>
+                            </div>
+                        </div>
+                    </div>
+
+				</div>
+
+				<div class="col-sm-4">
+					<button class="find-now-btn"><?php echo Lang::get('kereso_kereses'); ?></button>
+            		<!-- <a href="#" class="visible-xs find-now-btn"><?php //echo Lang::get('kereso_kereses'); ?></a> -->
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</form>
