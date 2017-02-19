@@ -107,7 +107,7 @@ use System\Libs\Language as Lang;
                     <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
                     <div class="form-group">
                         <div class="input-group">
-                            <input name="min_terulet" type="text" class="form-control" placeholder="minimum">
+                            <input name="min_alapterulet" type="text" class="form-control" placeholder="minimum">
                             <div class="input-group-addon">m<sup>2</sup></div>
                         </div>
                     </div>
@@ -117,7 +117,7 @@ use System\Libs\Language as Lang;
                     <span class="item-label">&nbsp;</span>
                     <div class="form-group">
                         <div class="input-group">
-                            <input name="max_terulet" type="text" class="form-control" placeholder="maximum">
+                            <input name="max_alapterulet" type="text" class="form-control" placeholder="maximum">
                             <div class="input-group-addon">m<sup>2</sup></div>
                         </div>
                     </div>                    
