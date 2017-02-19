@@ -50,7 +50,7 @@ include($this->path('tpl_forgottenpw_modal'));
                         <a href="/"><img alt="" class="flag" src="<?php echo SITE_IMAGE; ?>flag_hu.jpg"> Magyar</a>
                     <?php } ?>
                     <?php if ($this->request->get_uri('langcode') == "hu") { ?>
-                        <a href="/en"><img alt="" class="flag" src="<?php echo SITE_IMAGE; ?>flag_en.jpg">English</a>
+                        <a href="/en"><img alt="" class="flag" src="<?php echo SITE_IMAGE; ?>flag_en.jpg"> English</a>
                     <?php } ?>
 
                 </div>
