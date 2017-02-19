@@ -2,17 +2,6 @@
 use System\Libs\Language as Lang;
 ?>		
 
-		<div class="row">
-			<div class="main-filter property-filter gray-bg">
-				<div class="container">
-					<!-- 
-					<div class="filter-label-block">
-						<span class="filter-label">Find Your Home</span>
-					</div>
-					-->
-					
-
-
 <form class="filter-form" action="ingatlanok">
 	<div class="row">
 		<div class="col-sm-12">
@@ -185,8 +174,3 @@ use System\Libs\Language as Lang;
 
 	</div>
 </form>
-
-
-				</div>
-			</div>
-		</div>
