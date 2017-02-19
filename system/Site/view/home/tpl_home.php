@@ -17,10 +17,9 @@ use System\Libs\Language as Lang;
             <!-- KERESÉS FORM -->
             <div class="main-filter hidden-xs">
                 <?php include($this->path('tpl_home_filter')); ?>
-                <?php //include($this->path('tpl_home_filter_OLD')); ?>
+                <?php //include($this->path('tpl_home_filter_type1')); ?>
             </div>
-            <!-- 
-             -->
+
 
         </div> <!-- banner content END -->
     
@@ -29,9 +28,7 @@ use System\Libs\Language as Lang;
 
 
 <div id="content" class="container-fluid">
-
-<?php //include($this->path('tpl_home_filter_new')); ?>
-    
+ 
 	
 <div class="row">
 			<div class="our-features-banner gray-bg light">
