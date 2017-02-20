@@ -505,6 +505,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                 'telek_alapterulet',
                 'erkely_terulet',
                 'terasz_terulet',
+                'belmagassag',
                 'szobaszam',
                 'felszobaszam',
                 'szoba_elrendezes',
@@ -937,6 +938,8 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                         $data['telek_alapterulet'] = ($data['telek_alapterulet'] !== '') ? (int)$data['telek_alapterulet'] : null;
                     }
 
+                    // belmagasság
+                    $data['belmagassag'] = ($data['belmagassag'] !== '') ? (int)$data['belmagassag'] : null;
                     // tájolás (szám kerül az adatbázisba: 0-7 ig)
                     $data['tajolas'] = ($data['tajolas'] !== '') ? $data['tajolas'] : null;
                     // emelet
