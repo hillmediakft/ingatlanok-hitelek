@@ -17,7 +17,6 @@ use System\Libs\Language as Lang;
             <!-- KERESÉS FORM -->
             <div class="main-filter hidden-xs">
                 <?php include($this->path('tpl_home_filter')); ?>
-                <?php //include($this->path('tpl_home_filter_type1')); ?>
             </div>
 
 
