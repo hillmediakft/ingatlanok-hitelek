@@ -966,10 +966,10 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                     $data['terkep'] = (isset($data['terkep'])) ? 1 : 0;
                     
 
-                    $data['szobaszam'] = (isset($data['szobaszam'])) ? (int)$data['szobaszam'] : null;
-                    $data['felszobaszam'] = (isset($data['felszobaszam'])) ? (int)$data['felszobaszam'] : null;
-                    $data['kozos_koltseg'] = (isset($data['kozos_koltseg'])) ? (int)$data['kozos_koltseg'] : null;
-                    $data['rezsi'] = (isset($data['rezsi'])) ? (int)$data['rezsi'] : null;
+                    $data['szobaszam'] = ($data['szobaszam'] !== '') ? (int)$data['szobaszam'] : null;
+                    $data['felszobaszam'] = ($data['felszobaszam'] !== '') ? (int)$data['felszobaszam'] : null;
+                    $data['kozos_koltseg'] = ($data['kozos_koltseg'] !== '') ? (int)$data['kozos_koltseg'] : null;
+                    $data['rezsi'] = ($data['rezsi'] !== '') ? (int)$data['rezsi'] : null;
                     $data['emelet'] = (isset($data['emelet'])) ? $data['emelet'] : null;
                     $data['epulet_szintjei'] = (isset($data['epulet_szintjei'])) ? (int)$data['epulet_szintjei'] : null;
 
