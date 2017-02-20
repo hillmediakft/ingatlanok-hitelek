@@ -137,7 +137,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <input name="min_ar" type="text" class="form-control" placeholder="minimum" value="<?php echo $min_ar; ?>">
-                            <div class="input-group-addon">Ft</div>
+                            <div class="input-group-addon" id="ar_min_mertek">M Ft</div>
                         </div>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <input name="max_ar" type="text" class="form-control" placeholder="maximum" value="<?php echo $max_ar; ?>">
-                            <div class="input-group-addon">Ft</div>
+                            <div class="input-group-addon" id="ar_max_mertek">M Ft</div>
                         </div>
                     </div> 
                 </div>
