@@ -1,249 +1,248 @@
 var handleSearch = function () {
 
-	/**
-	 * Ár beállító slidert kezeli
-	 * 
-	 */
-	function initRangePrice() {
-		// elemek, amik változnak azingatlan típúsának megfelelően (eladó/kiadó)
-		var $min;
-		var $max;
-		var $step;
-		var $range_min;
-		var $range_max;
+			/**
+			 * Ár beállító slidert kezeli
+			 * 
+			 */
+			function initRangePrice() {
+				// elemek, amik változnak azingatlan típúsának megfelelően (eladó/kiadó)
+				var $min;
+				var $max;
+				var $step;
+				var $range_min;
+				var $range_max;
 
-		/**
-		 * Beállítani a megfelelő értékeket az ingatlan típusának megfelelően
-		 * Ha az ingatlan típusát megváltoztatjuk (eladó/kiadó), akkor visszaállítjuk az értékeket a defaultra
-		 *
-		 * @param type ingatlan típusa (1 vagy 2)
-		 * @param is_change true vagy false
-		 */
-		function setTypeData(type, is_change) {
-			// eladó
-			if (type == 1) {
-				$min = 0;
-				$max = 100000000;
-				$step = 500000;
-				var $range_min_default = 0;
-				var $range_max_default = 30000000;
-				// ha az ingatlan típus változtatása miatt hívtuk meg a metódust
-				if (is_change) {
-					$range_min = $range_min_default;
-					$range_max = $range_max_default;
-				} else {
-					// keresés szerinti, vagy default érték
-					$range_min = (search_parts.min_ar != '') ? search_parts.min_ar : $range_min_default;
-					$range_max = (search_parts.max_ar != '') ? search_parts.max_ar : $range_max_default;
+				/**
+				 * Beállítani a megfelelő értékeket az ingatlan típusának megfelelően
+				 * Ha az ingatlan típusát megváltoztatjuk (eladó/kiadó), akkor visszaállítjuk az értékeket a defaultra
+				 *
+				 * @param type ingatlan típusa (1 vagy 2)
+				 * @param is_change true vagy false
+				 */
+				function setTypeData(type, is_change) {
+					// eladó
+					if (type == 1) {
+						$min = 0;
+						$max = 100000000;
+						$step = 500000;
+						var $range_min_default = 0;
+						var $range_max_default = 30000000;
+						// ha az ingatlan típus változtatása miatt hívtuk meg a metódust
+						if (is_change) {
+							$range_min = $range_min_default;
+							$range_max = $range_max_default;
+						} else {
+							// keresés szerinti, vagy default érték
+							$range_min = (search_parts.min_ar != '') ? search_parts.min_ar : $range_min_default;
+							$range_max = (search_parts.max_ar != '') ? search_parts.max_ar : $range_max_default;
+						}
+
+					}
+					// kiadó
+					else {
+						$min = 0;
+						$max = 500000;
+						$step = 10000;
+						var $range_min_default = 0;
+						var $range_max_default = 150000;
+						// ha az ingatlan típus változtatása miatt hívtuk meg a metódust
+						if (is_change) {
+							$range_min = $range_min_default;
+							$range_max = $range_max_default;
+						} else {
+							// keresés szerinti, vagy default érték
+							$range_min = (search_parts.min_ar != '') ? search_parts.min_ar : $range_min_default;
+							$range_max = (search_parts.max_ar != '') ? search_parts.max_ar : $range_max_default;
+						}
+				
+					}
 				}
 
-			}
-			// kiadó
-			else {
-				$min = 0;
-				$max = 500000;
-				$step = 10000;
-				var $range_min_default = 0;
-				var $range_max_default = 150000;
-				// ha az ingatlan típus változtatása miatt hívtuk meg a metódust
-				if (is_change) {
-					$range_min = $range_min_default;
-					$range_max = $range_max_default;
-				} else {
-					// keresés szerinti, vagy default érték
-					$range_min = (search_parts.min_ar != '') ? search_parts.min_ar : $range_min_default;
-					$range_max = (search_parts.max_ar != '') ? search_parts.max_ar : $range_max_default;
-				}
-		
-			}
-		}
-
-		// az ingatlan típusa (eladó/kiadó)
-		var tipus = $('#tipus_select').val();
-		// beállítjuk az adatokat, a második paraméter false, mert nem volt típus változtatás 
-		setTypeData(tipus, false);
-		// érvényesítjük a HTML-elemekre
-		runRange();
-
-
-        $( "#tipus_select" ).selectmenu({
-			change: function( event, ui ) {
-				// beállítjuk az értékeket az ingatlan típusától függően, második paramétert true-ra kell állítani!
-				setTypeData(ui.item.value, true);
+				// az ingatlan típusa (eladó/kiadó)
+				var tipus = $('#tipus_select').val();
+				// beállítjuk az adatokat, a második paraméter false, mert nem volt típus változtatás 
+				setTypeData(tipus, false);
 				// érvényesítjük a HTML-elemekre
 				runRange();
-			}
-        }); 
 
 
-/* sima bootstrap-es
-		// ha változik az ingatlan típusa (eladó/kiadó)	
-		$('#tipus_select').change(function(){
-			console.log('ggggg');
-			// beállítjuk az értékeket az ingatlan típusától függően
-			setTypeData($(this).val());
-			// érvényesítjük a HTML-elemekre
-			runRange();
-
-		});
-*/			
-
-		function addCommas(nStr) {
-			var x, x1,x2;
-			nStr += '';
-			x = nStr.split('.');
-			x1 = x[0];
-			x2 = x.length > 1 ? '.' + x[1] : '';
-			var rgx = /(\d+)(\d{3})/;
-			while (rgx.test(x1)) {
-				x1 = x1.replace(rgx, '$1' + ',' + '$2');
-			}
-			return x1 + x2;
-		}
-
-		// módosítja a html-ben lévő értékeket, input mező értékeket stb.
-		function runRange(){
-
-			$("#ar_slider").slider({
-				min: $min,
-				max: $max,
-				step: $step,
-				values: [$range_min, $range_max],
-				range: true,
-				stop: function(event, ui) {
-					$("input#min_ar").val(addCommas(ui.values[0].toString()));
-					$("input#max_ar").val(addCommas(ui.values[1]));
-				},
-				slide: function(event, ui){
-					$("input#min_ar").val(addCommas(ui.values[0].toString()));
-					$("input#max_ar").val(addCommas(ui.values[1]));
-				}
-			});
-
-			$('.range-wrap').each(function(){
-				$("input#min_ar").val(addCommas($("#ar_slider").slider("values", 0)));
-				$("input#max_ar").val(addCommas($("#ar_slider").slider("values", 1)));
-				$('#ar_slider_wrapper .min-value').text($('#ar_slider').slider('option', 'min') + ' Ft');
-				$('#ar_slider_wrapper .max-value').text( addCommas( $('#ar_slider').slider('option', 'max') + ' Ft' ) );
-				
-				$("input#min_ar").change(function(){
-					var value1=$("input#min_ar").val().replace(/\D/g,'');
-					var value2=$("input#max_ar").val().replace(/\D/g,'');
-
-					if(parseInt(value1, 10) > parseInt(value2, 10)){
-						value1 = value2;
-						$("input#min_ar").val(value1);
+		        $( "#tipus_select" ).selectmenu({
+					change: function( event, ui ) {
+						// beállítjuk az értékeket az ingatlan típusától függően, második paramétert true-ra kell állítani!
+						setTypeData(ui.item.value, true);
+						// érvényesítjük a HTML-elemekre
+						runRange();
 					}
-					$("#ar_slider").slider("values",0,value1);	
-				});
+		        }); 
 
-				
-				$("input#max_ar").change(function(){
-					var value1=$("input#min_ar").val().replace(/\D/g,'');
-					var value2=$("input#max_ar").val().replace(/\D/g,'');
+
+		/* sima bootstrap-es
+				// ha változik az ingatlan típusa (eladó/kiadó)	
+				$('#tipus_select').change(function(){
+					console.log('ggggg');
+					// beállítjuk az értékeket az ingatlan típusától függően
+					setTypeData($(this).val());
+					// érvényesítjük a HTML-elemekre
+					runRange();
+
+				});
+		*/			
+
+				function addCommas(nStr) {
+					var x, x1,x2;
+					nStr += '';
+					x = nStr.split('.');
+					x1 = x[0];
+					x2 = x.length > 1 ? '.' + x[1] : '';
+					var rgx = /(\d+)(\d{3})/;
+					while (rgx.test(x1)) {
+						x1 = x1.replace(rgx, '$1' + ',' + '$2');
+					}
+					return x1 + x2;
+				}
+
+				// módosítja a html-ben lévő értékeket, input mező értékeket stb.
+				function runRange(){
+
+					$("#ar_slider").slider({
+						min: $min,
+						max: $max,
+						step: $step,
+						values: [$range_min, $range_max],
+						range: true,
+						stop: function(event, ui) {
+							$("input#min_ar").val(addCommas(ui.values[0].toString()));
+							$("input#max_ar").val(addCommas(ui.values[1]));
+						},
+						slide: function(event, ui){
+							$("input#min_ar").val(addCommas(ui.values[0].toString()));
+							$("input#max_ar").val(addCommas(ui.values[1]));
+						}
+					});
+
+					$('.range-wrap').each(function(){
+						$("input#min_ar").val(addCommas($("#ar_slider").slider("values", 0)));
+						$("input#max_ar").val(addCommas($("#ar_slider").slider("values", 1)));
+						$('#ar_slider_wrapper .min-value').text($('#ar_slider').slider('option', 'min') + ' Ft');
+						$('#ar_slider_wrapper .max-value').text( addCommas( $('#ar_slider').slider('option', 'max') + ' Ft' ) );
+						
+						$("input#min_ar").change(function(){
+							var value1=$("input#min_ar").val().replace(/\D/g,'');
+							var value2=$("input#max_ar").val().replace(/\D/g,'');
+
+							if(parseInt(value1, 10) > parseInt(value2, 10)){
+								value1 = value2;
+								$("input#min_ar").val(value1);
+							}
+							$("#ar_slider").slider("values",0,value1);	
+						});
+
+						
+						$("input#max_ar").change(function(){
+							var value1=$("input#min_ar").val().replace(/\D/g,'');
+							var value2=$("input#max_ar").val().replace(/\D/g,'');
+							
+							if (value2 > $max) { value2 = $max; jQuery("input#max_ar").val($max)}
+
+							if(parseInt(value1, 10) > parseInt(value2, 10)){
+								value2 = value1;
+								$("input#max_ar").val(value2);
+							}
+							$("#ar_slider").slider("values",1,value2);
+						});
+					});
+				} // vege
+
+			}
+
+			/**
+			 *	Alapterület beállító slidert kezeli
+			 * 
+			 */
+			function initRangeArea() {
+				// a csúszka alapértékei
+				var $range_min = 0;
+				var $range_max = 150;
+
+					// ha van a query stringben keresés alapterületre, akkor ennek megfelelően állítjuk be a range_min és range_max értékét 
+					if (search_parts.min_alapterulet != '') {
+						$range_min = search_parts.min_alapterulet;
+					}
+					if (search_parts.max_alapterulet != '') {
+						$range_max = search_parts.max_alapterulet;
+					}
+
+				function addCommas(nStr) {
+					var x, x1,x2;
+					nStr += '';
+					x = nStr.split('.');
+					x1 = x[0];
+					x2 = x.length > 1 ? '.' + x[1] : '';
+					var rgx = /(\d+)(\d{3})/;
+					while (rgx.test(x1)) {
+						x1 = x1.replace(rgx, '$1' + ',' + '$2');
+					}
+					return x1 + x2;
+				}
+
+
+				$("#terulet_slider").slider({
+					min: 0,
+					max: 1000,
+					step: 5,
+					values: [$range_min, $range_max],
+					range: true,
+					stop: function(event, ui) {
+						$("input#min_terulet").val(addCommas(ui.values[0].toString()));
+						$("input#max_terulet").val(addCommas(ui.values[1]));
+					},
+					slide: function(event, ui){
+						$("input#min_terulet").val(addCommas(ui.values[0].toString()));
+						$("input#max_terulet").val(addCommas(ui.values[1]));
+					}
+				});
+				$('.range-wrap').each(function(){
+					$("input#min_terulet").val(addCommas($("#terulet_slider").slider("values", 0)));
+					$("input#max_terulet").val(addCommas($("#terulet_slider").slider("values", 1)));
+					$('#terulet_slider_wrapper .min-value').text($('#terulet_slider').slider('option', 'min') + " m2");
+					$('#terulet_slider_wrapper .max-value').text($('#terulet_slider').slider('option', 'max') + " m2");
 					
-					if (value2 > $max) { value2 = $max; jQuery("input#max_ar").val($max)}
 
-					if(parseInt(value1, 10) > parseInt(value2, 10)){
-						value2 = value1;
-						$("input#max_ar").val(value2);
-					}
-					$("#ar_slider").slider("values",1,value2);
+					$("input#min_terulet").change(function(){
+						var value1=$("input#min_terulet").val().replace(/\D/g,'');
+						var value2=$("input#max_terulet").val().replace(/\D/g,'');
+
+						if(parseInt(value1, 10) > parseInt(value2, 10)){
+							value1 = value2;
+							$("input#min_terulet").val(value1);
+						}
+						$("#terulet_slider").slider("values",0,value1);	
+					});
+
+					
+					$("input#max_terulet").change(function(){
+						var value1=$("input#min_terulet").val().replace(/\D/g,'');
+						var value2=$("input#max_terulet").val().replace(/\D/g,'');
+						
+						if (value2 > 500) { value2 = 500; jQuery("input#max_terulet").val(500)}
+
+						if(parseInt(value1, 10) > parseInt(value2, 10)){
+							value2 = value1;
+							$("input#max_terulet").val(value2);
+						}
+						$("#terulet_slider").slider("values",1,value2);
+					});
 				});
-			});
-		} // vege
-
-	}
-
-	/**
-	 *	Alapterület beállító slidert kezeli
-	 * 
-	 */
-	function initRangeArea() {
-		// a csúszka alapértékei
-		var $range_min = 0;
-		var $range_max = 150;
-
-			// ha van a query stringben keresés alapterületre, akkor ennek megfelelően állítjuk be a range_min és range_max értékét 
-			if (search_parts.min_alapterulet != '') {
-				$range_min = search_parts.min_alapterulet;
 			}
-			if (search_parts.max_alapterulet != '') {
-				$range_max = search_parts.max_alapterulet;
-			}
-
-		function addCommas(nStr) {
-			var x, x1,x2;
-			nStr += '';
-			x = nStr.split('.');
-			x1 = x[0];
-			x2 = x.length > 1 ? '.' + x[1] : '';
-			var rgx = /(\d+)(\d{3})/;
-			while (rgx.test(x1)) {
-				x1 = x1.replace(rgx, '$1' + ',' + '$2');
-			}
-			return x1 + x2;
-		}
-
-
-		$("#terulet_slider").slider({
-			min: 0,
-			max: 1000,
-			step: 5,
-			values: [$range_min, $range_max],
-			range: true,
-			stop: function(event, ui) {
-				$("input#min_terulet").val(addCommas(ui.values[0].toString()));
-				$("input#max_terulet").val(addCommas(ui.values[1]));
-			},
-			slide: function(event, ui){
-				$("input#min_terulet").val(addCommas(ui.values[0].toString()));
-				$("input#max_terulet").val(addCommas(ui.values[1]));
-			}
-		});
-		$('.range-wrap').each(function(){
-			$("input#min_terulet").val(addCommas($("#terulet_slider").slider("values", 0)));
-			$("input#max_terulet").val(addCommas($("#terulet_slider").slider("values", 1)));
-			$('#terulet_slider_wrapper .min-value').text($('#terulet_slider').slider('option', 'min') + " m2");
-			$('#terulet_slider_wrapper .max-value').text($('#terulet_slider').slider('option', 'max') + " m2");
-			
-
-			$("input#min_terulet").change(function(){
-				var value1=$("input#min_terulet").val().replace(/\D/g,'');
-				var value2=$("input#max_terulet").val().replace(/\D/g,'');
-
-				if(parseInt(value1, 10) > parseInt(value2, 10)){
-					value1 = value2;
-					$("input#min_terulet").val(value1);
-				}
-				$("#terulet_slider").slider("values",0,value1);	
-			});
-
-			
-			$("input#max_terulet").change(function(){
-				var value1=$("input#min_terulet").val().replace(/\D/g,'');
-				var value2=$("input#max_terulet").val().replace(/\D/g,'');
-				
-				if (value2 > 500) { value2 = 500; jQuery("input#max_terulet").val(500)}
-
-				if(parseInt(value1, 10) > parseInt(value2, 10)){
-					value2 = value1;
-					$("input#max_terulet").val(value2);
-				}
-				$("#terulet_slider").slider("values",1,value2);
-			});
-		});
-	}
 
 
     /**
      * Kerület lista kezelése
      */
-     
     var enableDistrict_Selectpicker = function () {
 
     	var option_value = $("select#varos_select option:selected").val();
-        
+
         if (option_value == '88') {
             $('#district_select').prop("disabled", false);
             $('#district_select').selectpicker('refresh');
@@ -309,6 +308,33 @@ var handleSearch = function () {
 			}
 
         });  
+
+    }
+
+    /**
+     *	A keresőnél az ár mértékét állítja: E FT vagy M FT
+     */
+    var arMertek = function(){
+
+    	var type_value = $("select#tipus_select option:selected").val();
+
+		if (type_value == 2) {
+			$('#ar_min_mertek').text('E Ft');
+			$('#ar_max_mertek').text('E Ft');
+		}
+
+        $( "#tipus_select" ).selectmenu({
+			change: function( event, ui ) {
+				if (ui.item.value == 1) {
+					$('#ar_min_mertek').text('M Ft');
+					$('#ar_max_mertek').text('M Ft');
+				}
+				else if (ui.item.value == 2) {
+					$('#ar_min_mertek').text('E Ft');
+					$('#ar_max_mertek').text('E Ft');
+				}
+			}
+        }); 
 
     }
 
@@ -559,8 +585,9 @@ var handleSearch = function () {
         	enableDistrict_Selectpicker();
         	//enableDistrict_SelectMenu();
             setOrder();
-        	initRangePrice();
-        	initRangeArea();
+        	//initRangePrice();
+        	//initRangeArea();
+        	arMertek();
 
         }
     };
