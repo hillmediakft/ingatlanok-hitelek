@@ -141,28 +141,28 @@ use System\Libs\Language as Lang;
                             
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Azonosító:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_azonosito'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['ref_num']; ?></span>
                                 </div>
                             </div>
                             
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Típus:</span>
-                                    <span class="value"><?php echo ($ingatlan['tipus'] = 1) ? 'Eladó' : 'Kiadó'; ?></span>
+                                    <span class="label-item"><?php echo Lang::get('jell_tipus'); ?>:</span>
+                                    <span class="value"><?php echo ($ingatlan['tipus'] = 1) ? Lang::get('jell_elado') : Lang::get('jell_kiado'); ?></span>
                                 </div>
                             </div>
                             
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Kategória:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_kategoria'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['kat_nev_' . LANG]; ?></span>
                                 </div>
                             </div>
 
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Alapterület:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_alapterulet'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['alapterulet']; ?> m<sup>2</sup></span>
                                 </div>
                             </div>
@@ -170,7 +170,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['telek_alapterulet'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Telek alapterület:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_telek_alapterulet'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['telek_alapterulet']; ?></span>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['belmagassag'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Belmagasság:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_belmagassag'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['belmagassag']; ?></span>
                                 </div>
                             </div>
@@ -188,7 +188,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['tajolas'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Tájolás:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_tajolas'); ?>:</span>
                                     <span class="value"><?php echo Config::get('orientation.' . LANG . '.' . $ingatlan['tajolas']); ?></span>
                                 </div>
                             </div>
@@ -197,7 +197,7 @@ use System\Libs\Language as Lang;
                             <?php if ($ingatlan['erkely'] == 1 && !empty($ingatlan['erkely_terulet'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Erkely:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_erkely'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['erkely_terulet']; ?> m<sup>2</sup></span>
                                 </div>
                             </div>
@@ -206,7 +206,7 @@ use System\Libs\Language as Lang;
                             <?php if ($ingatlan['terasz'] == 1 && !empty($ingatlan['terasz_terulet'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Terasz:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_terasz'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['terasz_terulet']; ?> m<sup>2</sup></span>
                                 </div>
                             </div>
@@ -215,7 +215,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['szobaszam'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Szobák:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_szobaszam'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['szobaszam']; ?></span>
                                 </div>
                             </div>
@@ -224,7 +224,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['felszobaszam'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Fél szobák:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_felszobaszam'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['felszobaszam']; ?></span>
                                 </div>
                             </div>
@@ -234,8 +234,8 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['kozos_koltseg'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Közös költség:</span>
-                                    <span class="value"><?php echo $ingatlan['kozos_koltseg']; ?></span>
+                                    <span class="label-item"><?php echo Lang::get('jell_kozos_koltseg'); ?>:</span>
+                                    <span class="value"><?php echo $ingatlan['kozos_koltseg']; ?> Ft</span>
                                 </div>
                             </div>
                             <?php } ?>
@@ -243,8 +243,8 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['rezsi'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Átlagos rezsi:</span>
-                                    <span class="value"><?php echo $ingatlan['rezsi']; ?></span>
+                                    <span class="label-item"><?php echo Lang::get('jell_rezsi'); ?>:</span>
+                                    <span class="value"><?php echo $ingatlan['rezsi']; ?> Ft</span>
                                 </div>
                             </div>
                             <?php } ?>
@@ -252,7 +252,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['szerkezet'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Szerkezet:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_szerkezet'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['szerkezet_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>
@@ -261,7 +261,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['allapot'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Állapot:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_allapot'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['all_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>                            
@@ -270,7 +270,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['futes'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Fűtés:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_futes'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['futes_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>                                                        
@@ -279,7 +279,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['energetika'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Energetika:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_energetika'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['energetika_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>                                                        
@@ -288,7 +288,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['haz_allapot_belul'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Ház állapota belül:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_haz_allapot_belul'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['haz_allapot_belul_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>                                                        
@@ -297,26 +297,25 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['haz_allapot_kivul'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Ház állapota kívül:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_haz_allapot_kivul'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['haz_allapot_kivul_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>                                                        
                             <?php } ?>
 
-                           <?php if (!is_null($ingatlan['parkolas'])) { ?>
+                            <?php if (!is_null($ingatlan['parkolas'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Parkolás:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_parkolas'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['parkolas_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>
                             <?php } ?>
 
-
                             <?php if (!is_null($ingatlan['furdo_wc'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Fürdő - wc:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_furdo_wc'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['furdo_wc_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>
@@ -325,7 +324,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['fenyviszony'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Fényviszony:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_fenyviszony'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['fenyviszony_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>
@@ -334,7 +333,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['kilatas'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Kilátás:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_kilatas'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['kilatas_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>
@@ -343,7 +342,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['kert'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Kert:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_kert'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['kert_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>
@@ -352,7 +351,7 @@ use System\Libs\Language as Lang;
                             <?php if (!is_null($ingatlan['szoba_elrendezes'])) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Szoba elrendezés:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_szoba_elrendezes'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['szoba_elrendezes_leiras_' . LANG]; ?></span>
                                 </div>
                             </div>
@@ -361,7 +360,7 @@ use System\Libs\Language as Lang;
                             <?php if ($ingatlan['lift'] == 1) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Lift:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_lift'); ?>:</span>
                                     <span class="value"><i class="fa fa-check"></i></span>
                                 </div>
                             </div>
@@ -370,19 +369,11 @@ use System\Libs\Language as Lang;
                             <?php if ($ingatlan['tetoter'] == 1) { ?>
                             <div class="column-2">
                                 <div class="info-item">
-                                    <span class="label-item">Tetőtér:</span>
+                                    <span class="label-item"><?php echo Lang::get('jell_tetoter'); ?>:</span>
                                     <span class="value"><i class="fa fa-check"></i></span>
                                 </div>
                             </div>
                             <?php } ?>
-
-
-
-
-
-
-
-
 
                         </div>
                     </div>
