@@ -41,7 +41,7 @@ include($this->path('tpl_forgottenpw_modal'));
         </div>
         <div class="right-part">
             <div class="extra-item login">
-                <span class="event-entry"><a href="javascript:void(0)" id="kedvencek"><i class="fa fa-heart"></i><?php echo Lang::get('header_top_kedvencek'); ?></a></span>
+                <span class="event-entry"><a href="kedvencek" id="kedvencek"><i class="fa fa-heart"></i><?php echo Lang::get('header_top_kedvencek'); ?></a></span>
             </div>
             <div class="extra-item event">
                 <div class="country-select">

@@ -62,6 +62,7 @@ class Ingatlanok extends SiteController {
         $view->add_links(array('bootstrap-select'));
         $view->add_link('js', SITE_JS . 'pages/handle_search.js');
         $view->add_link('js', SITE_JS . 'pages/ingatlanok.js');
+        $view->add_link('js', SITE_JS . 'kedvencek.js');
         $view->render('ingatlanok/tpl_ingatlanok', $data);
     }
 
@@ -103,6 +104,7 @@ class Ingatlanok extends SiteController {
 //$this->view->debug(true); 
 
         $view->add_links(array('google-maps-site'));
+        $view->add_link('js', SITE_JS . 'kedvencek.js');
         //$view->add_link('js', SITE_JS . 'pages/adatlap.js');
         
         $view->render('ingatlanok/tpl_adatlap', $data);
@@ -148,6 +150,8 @@ class Ingatlanok extends SiteController {
 //$this->view->debug(true); 
         $view->render('ingatlanok/tpl_ertekesito_ingatlanok', $data);
     }
+    
+ 
 
 
 }
