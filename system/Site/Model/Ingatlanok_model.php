@@ -192,6 +192,15 @@ class Ingatlanok_model extends SiteModel {
             }
         }
 
+    // alapterület mezők adatát alakítjuk át számmá    
+        if ((isset($params['min_alapterulet']) && !empty($params['min_alapterulet']))) {
+            $params['min_alapterulet'] = intval($num_helper->stringToNumber($params['min_alapterulet']));
+        }
+        if ((isset($params['max_alapterulet']) && !empty($params['max_alapterulet']))) {
+            $params['max_alapterulet'] = intval($num_helper->stringToNumber($params['max_alapterulet']));
+        }
+
+
         // eltávolítjuk a nem numerikus karaktereket    
         /*
         if (isset($params['min_ar'])) {
@@ -385,13 +394,13 @@ foreach ($params as $key => $value) {
             $this->query->set_where('alapterulet', '<=', $params['max_alapterulet']);
         }
         // minimum és maximum terület is meg van adva
-/*
+
         if ( isset($params['min_alapterulet']) && isset($params['max_alapterulet']) ) {
             $this->query->set_where('AND (');
             $this->query->set_where('alapterulet', 'between', array($params['min_alapterulet'], $params['max_alapterulet']));
             $this->query->set_where(')');
         }
-*/        
+        
 
     /* ************************* SZOBASZÁM ALAPJÁN KERESÉS **************************** */
 
