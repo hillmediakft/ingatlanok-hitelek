@@ -316,11 +316,21 @@ var handleSearch = function () {
      */
     var arMertek = function(){
 
+		var lang = $('html').prop('lang'); 	
+    	var ezer; 
+
+    	if (lang == 'hu') {
+    		ezer = 'E';
+    	}
+    	else if (lang == 'en') {
+    		ezer = 'k';
+    	}
+
     	var type_value = $("select#tipus_select option:selected").val();
 
 		if (type_value == 2) {
-			$('#ar_min_mertek').text('E Ft');
-			$('#ar_max_mertek').text('E Ft');
+			$('#ar_min_mertek').text(ezer + ' Ft');
+			$('#ar_max_mertek').text(ezer + ' Ft');
 		}
 
         $( "#tipus_select" ).selectmenu({
@@ -330,8 +340,8 @@ var handleSearch = function () {
 					$('#ar_max_mertek').text('M Ft');
 				}
 				else if (ui.item.value == 2) {
-					$('#ar_min_mertek').text('E Ft');
-					$('#ar_max_mertek').text('E Ft');
+					$('#ar_min_mertek').text(ezer + ' Ft');
+					$('#ar_max_mertek').text(ezer + ' Ft');
 				}
 			}
         }); 
