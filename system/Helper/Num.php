@@ -39,5 +39,47 @@ class Num {
         return number_format($n);
     }
 
+    /**
+     * Egy szám stringet alakít át számmá
+     *
+     * @param string $number
+     * @param integer $decimals		- lebegőpontos számoknál ennyi tizedesjegyre kerekít (56,125 -ös szám esetén:  1-es: 56.1 - 2-es: 56.13 - 3-as: 56,125)
+     * @return integer || float
+     */
+    public function stringToNumber($number, $decimals = 1)
+    {
+		if (strpos($number, ',') !== false) {
+			$temp = explode(',', $number);
+		}
+		elseif (strpos($number, '.') !== false) {
+			$temp = explode('.', $number);
+		}
+		else {
+			$result = preg_replace('~\D~', '', $number);
+			if ($result === '') {
+				$result = 0;
+			}
+			// visszaad egy egész számot
+			return intval($result);
+		}
+		
+		// ha volt a stringben ',' vagy '.' karakter
+		if (isset($temp)) {
+			foreach($temp as &$value) {
+				$value = preg_replace('~\D~', '', $value);
+				if ($value === '') {
+					$value = 0;
+				}
+			}
+
+			$result = $temp[0] . '.' . $temp[1];	
+		}
+
+		$result = number_format($result, $decimals, '.', '');
+		// visszaad egy lebegőpontos számot
+		return floatval($result);
+    }
+
+
 }
 ?>
