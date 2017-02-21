@@ -885,13 +885,13 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                     $error_messages[] = Message::show('Nem adta meg az ingatlan fajtáját.');
                     $error_counter += 1;
                 }
-                //tulajdonos adatai
-                /*
-                if (empty($data['tulaj_nev'])) {
-                    $error_messages[] = Message::show('A tulajdonos neve nem lehet üres.');
+
+                //ingatlan megnevezése
+                if (empty($data['ingatlan_nev_hu'])) {
+                    $error_messages[] = Message::show('Az ingatlan magyar megnevezése nem lehet üres.');
                     $error_counter += 1;
                 }
-                */
+
                 // ár
                 if (empty($data['ar_elado']) && empty($data['ar_kiado'])) {
                     $error_messages[] = Message::show('Nem adott meg árat.');
@@ -972,6 +972,11 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                     $data['rezsi'] = ($data['rezsi'] !== '') ? (int)$data['rezsi'] : null;
                     $data['emelet'] = (isset($data['emelet'])) ? $data['emelet'] : null;
                     $data['epulet_szintjei'] = (isset($data['epulet_szintjei'])) ? (int)$data['epulet_szintjei'] : null;
+
+                    // ha nincs megadva angol nyelvü ingatlan megnevezés, akkor a magyar lesz az angolnál is
+                    if ($data['ingatlan_nev_en'] === '') {
+                        $data['ingatlan_nev_en'] = $data['ingatlan_nev_hu'];
+                    }
 
                 // jellemzők
                     $data['tetoter'] = (isset($data['tetoter'])) ? 1 : 0;
