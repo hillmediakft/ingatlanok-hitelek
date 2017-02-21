@@ -28,11 +28,10 @@ use System\Libs\Language as Lang;
                                     </div>
                                     <div class="right">
                                         <div class="sort-item order">
-
                                             <?php
-                                                $order = ($this->request->has_query('order')) ? $this->request->get_query('order') : false;
-                                                $order_by = ($this->request->has_query('order_by')) ? $this->request->get_query('order_by') : false;
-                                            ?>
+                                                $order = (isset($filter_params['order'])) ? $filter_params['order'] : false;
+                                                $order_by = (isset($filter_params['order_by'])) ? $filter_params['order_by'] : false;
+                                            ?>                                            
                                             <span class="sort-label">Sorrend:</span>
                                             <div class="select-container">
                                                 <div id="select-type-holder1" class="ui-front">

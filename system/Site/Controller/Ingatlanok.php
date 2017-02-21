@@ -139,6 +139,8 @@ class Ingatlanok extends SiteController {
 // lapozó linkek visszadása (paraméter az uri path)
         $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path'));
 
+// szűrési paramétereket tartalmazó tömb
+        $data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
 
 
 
