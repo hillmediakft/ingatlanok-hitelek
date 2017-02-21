@@ -153,6 +153,8 @@ class Ingatlanok_model extends SiteModel {
      */
     public function properties_filter_query($limit = null, $offset = null, $params)
     {
+        Session::set('ingatlan_filter', $params);
+
         $num_helper = DI::get('num_helper');
 
     // Ár mezők adatit alakítjuk át
@@ -176,7 +178,6 @@ class Ingatlanok_model extends SiteModel {
             }
         }
 
-
         // eltávolítjuk a nem numerikus karaktereket    
         /*
         if (isset($params['min_ar'])) {
@@ -194,7 +195,6 @@ class Ingatlanok_model extends SiteModel {
 */
 // var_dump($params);die;
 
-        Session::set('ingatlan_filter', $params);
 
 
 // üres stringet tartalamzó paraméterek eltávolítása
@@ -1250,10 +1250,12 @@ foreach ($params as $key => $value) {
         $filter_with_names = array();
 
         if (isset($filter['tipus']) && $filter['tipus'] == 1) {
-            $filter_with_names['tipus'] = 'Eladó';
+            // $filter_with_names['tipus'] = 'Eladó';
+            $filter_with_names['tipus'] = 1;
         }
         if (isset($filter['tipus']) && $filter['tipus'] == 2) {
-            $filter_with_names['tipus'] = 'Kiadó';
+            // $filter_with_names['tipus'] = 'Kiadó';
+            $filter_with_names['tipus'] = 2;
         }
     // kerület
         if (isset($filter['kerulet']) && $filter['kerulet'] !== '') {
