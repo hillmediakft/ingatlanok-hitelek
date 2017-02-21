@@ -174,29 +174,29 @@ class Ingatlanok_model extends SiteModel {
     // Ár mezők adatit alakítjuk át
         if (isset($params['tipus']) && $params['tipus'] == 1) {
             
-            if ((isset($params['min_ar']) && !empty($params['min_ar']))) {
+            if ((isset($params['min_ar']) && ($params['min_ar']) !== '')) {
                 $params['min_ar'] = intval($num_helper->stringToNumber($params['min_ar']) * 1000000);
             }
-            if ((isset($params['max_ar']) && !empty($params['max_ar']))) {
+            if ((isset($params['max_ar']) && ($params['max_ar']) !== '')) {
                 $params['max_ar'] = intval($num_helper->stringToNumber($params['max_ar']) * 1000000);
             }
 
         }
         elseif (isset($params['tipus']) && $params['tipus'] == 2) {
 
-            if ((isset($params['min_ar']) && !empty($params['min_ar']))) {
+            if ((isset($params['min_ar']) && ($params['min_ar']) !== '')) {
                 $params['min_ar'] = intval($num_helper->stringToNumber($params['min_ar']) * 1000);
             }
-            if ((isset($params['max_ar']) && !empty($params['max_ar']))) {
+            if ((isset($params['max_ar']) && ($params['max_ar']) !== '')) {
                 $params['max_ar'] = intval($num_helper->stringToNumber($params['max_ar']) * 1000);
             }
         }
 
     // alapterület mezők adatát alakítjuk át számmá    
-        if ((isset($params['min_alapterulet']) && !empty($params['min_alapterulet']))) {
+        if ((isset($params['min_alapterulet']) && ($params['min_alapterulet']) !== '')) {
             $params['min_alapterulet'] = intval($num_helper->stringToNumber($params['min_alapterulet']));
         }
-        if ((isset($params['max_alapterulet']) && !empty($params['max_alapterulet']))) {
+        if ((isset($params['max_alapterulet']) && ($params['max_alapterulet']) !== '')) {
             $params['max_alapterulet'] = intval($num_helper->stringToNumber($params['max_alapterulet']));
         }
 
@@ -328,7 +328,7 @@ foreach ($params as $key => $value) {
     // ************************* ÁR ALAPJÁN KERESÉS **************************** 
 
         // csak minimum ár van megadva
-        if ((isset($params['min_ar']) && !empty($params['min_ar'])) AND ( $params['min_ar'] >= 0) AND ( isset($params['max_ar']) AND $params['max_ar'] == '')) {
+        if ((isset($params['min_ar']) && ($params['min_ar']) !== '' ) && ( $params['min_ar'] >= 0) && ( isset($params['max_ar']) && $params['max_ar'] === '')) {
 
             if (isset($params['tipus']) && $params['tipus'] == 1) {
                 $this->query->set_where('ar_elado', '>=', $params['min_ar']);
@@ -339,7 +339,7 @@ foreach ($params as $key => $value) {
         }
 
         // csak maximum ár van megadva
-        if ((isset($params['max_ar']) && !empty($params['max_ar'])) AND ( $params['max_ar'] >= 0) AND ( isset($params['min_ar']) AND $params['min_ar'] == '')) {
+        if ((isset($params['max_ar']) && ($params['max_ar']) !== '') && ( $params['max_ar'] >= 0) && ( isset($params['min_ar']) && $params['min_ar'] === '')) {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
                 $this->query->set_where('ar_elado', '<=', $params['max_ar']);
             }
@@ -349,7 +349,7 @@ foreach ($params as $key => $value) {
         }
         
         // minimum és maximum ár is meg van adva
-        if ((isset($params['min_ar']) && !empty($params['min_ar'])) AND ( $params['min_ar'] >= 0) AND ( isset($params['max_ar']) && !empty($params['max_ar'])) AND ( $params['max_ar'] > 0)) {
+        if ((isset($params['min_ar']) && ($params['min_ar']) !== '') && ( $params['min_ar'] >= 0) && ( isset($params['max_ar']) && ($params['max_ar']) !== '') && ( $params['max_ar'] > 0)) {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
                 $this->query->set_where('ar_elado', 'between', array($params['min_ar'], $params['max_ar']));
                 //$this->query->set_where('ar_elado', '>=', $params['min_ar']);
@@ -387,16 +387,16 @@ foreach ($params as $key => $value) {
 
     /* ************************* TERÜLET ALAPJÁN KERESÉS **************************** */
         // csak minimum terület van megadva
-        if ((isset($params['min_alapterulet']) && !empty($params['min_alapterulet'])) AND ( $params['min_alapterulet'] > 0) AND ( isset($params['max_alapterulet']) AND $params['max_alapterulet'] == '')) {
+        if ((isset($params['min_alapterulet']) && ($params['min_alapterulet']) !== '') AND ( $params['min_alapterulet'] > 0) AND ( isset($params['max_alapterulet']) AND $params['max_alapterulet'] === '')) {
             $this->query->set_where('alapterulet', '>=', $params['min_alapterulet']);
         }
 
         // csak maximum terulet van megadva
-        if ((isset($params['max_alapterulet']) && !empty($params['max_alapterulet'])) AND ( $params['max_alapterulet'] > 0) AND ( isset($params['min_alapterulet']) AND $params['min_alapterulet'] == '')) {
+        if ((isset($params['max_alapterulet']) && ($params['max_alapterulet']) !== '') AND ( $params['max_alapterulet'] > 0) AND ( isset($params['min_alapterulet']) AND $params['min_alapterulet'] === '')) {
             $this->query->set_where('alapterulet', '<=', $params['max_alapterulet']);
         }
         // minimum és maximum terület is meg van adva
-        if ( ( isset($params['min_alapterulet']) && !empty($params['min_alapterulet']) ) && ( isset($params['max_alapterulet']) && !empty($params['max_alapterulet']) ) ) {
+        if ( ( isset($params['min_alapterulet']) && ($params['min_alapterulet']) !== '' ) && ( isset($params['max_alapterulet']) && ($params['max_alapterulet']) !== '' ) ) {
             $this->query->set_where('AND (');
             $this->query->set_where('alapterulet', 'between', array($params['min_alapterulet'], $params['max_alapterulet']));
             $this->query->set_where(')');
