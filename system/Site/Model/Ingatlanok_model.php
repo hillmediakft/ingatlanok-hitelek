@@ -347,6 +347,7 @@ foreach ($params as $key => $value) {
                 $this->query->set_where('ar_kiado', '<=', $params['max_ar']);
             }
         }
+        
         // minimum és maximum ár is meg van adva
         if ((isset($params['min_ar']) && !empty($params['min_ar'])) AND ( $params['min_ar'] >= 0) AND ( isset($params['max_ar']) && !empty($params['max_ar'])) AND ( $params['max_ar'] > 0)) {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
@@ -360,6 +361,7 @@ foreach ($params as $key => $value) {
                 // $this->query->set_where('ar_kiado', '<=', $params['max_ar']);
             }
         }
+
 
 /*
         // minimum és maximum ár is meg van adva
@@ -394,8 +396,7 @@ foreach ($params as $key => $value) {
             $this->query->set_where('alapterulet', '<=', $params['max_alapterulet']);
         }
         // minimum és maximum terület is meg van adva
-
-        if ( isset($params['min_alapterulet']) && isset($params['max_alapterulet']) ) {
+        if ( ( isset($params['min_alapterulet']) && !empty($params['min_alapterulet']) ) && ( isset($params['max_alapterulet']) && !empty($params['max_alapterulet']) ) ) {
             $this->query->set_where('AND (');
             $this->query->set_where('alapterulet', 'between', array($params['min_alapterulet'], $params['max_alapterulet']));
             $this->query->set_where(')');
