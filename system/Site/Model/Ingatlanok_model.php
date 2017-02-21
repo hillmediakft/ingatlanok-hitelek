@@ -152,8 +152,30 @@ class Ingatlanok_model extends SiteModel {
      */
     public function properties_filter_query($limit = null, $offset = null, $params)
     {
-        var_dump($params['min_ar'] * 1000000);
-die;
+
+            if (isset($params['tipus']) && $params['tipus'] == 1) {
+                
+                if ((isset($params['min_ar']) && !empty($params['min_ar']))) {
+                    $params['min_ar'] = $params['min_ar'] * 1000000;
+                }
+                if ((isset($params['max_ar']) && !empty($params['max_ar']))) {
+                    $params['max_ar'] = $params['max_ar'] * 1000000;
+                }
+
+            }
+            elseif (isset($params['tipus']) && $params['tipus'] == 2) {
+
+                if ((isset($params['min_ar']) && !empty($params['min_ar']))) {
+                    $params['min_ar'] = $params['min_ar'] * 1000;
+                }
+                if ((isset($params['max_ar']) && !empty($params['max_ar']))) {
+                    $params['max_ar'] = $params['max_ar'] * 1000;
+                }
+
+
+            }
+
+
 
 
         // eltávolítjuk a nem numerikus karaktereket    
