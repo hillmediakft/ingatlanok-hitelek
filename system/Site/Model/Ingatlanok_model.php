@@ -153,7 +153,21 @@ class Ingatlanok_model extends SiteModel {
      */
     public function properties_filter_query($limit = null, $offset = null, $params)
     {
+        // sorrendre vonatkozó információt a session-ből veszi, ha nincs a query stringben, de van a session-ben
+        if (Session::has('ingatlan_filter.order')) {
+            $order_temp = Session::get('ingatlan_filter.order');
+        }
+        if (Session::has('ingatlan_filter.order_by')) {
+            $order_by_temp = Session::get('ingatlan_filter.order_by');
+        }
+        if ( ( !isset($params['order']) && !isset($params['order_by']) ) && ( isset($order_temp) && isset($order_by_temp) ) ) {
+            $params['order'] = $order_temp;
+            $params['order_by'] = $order_by_temp;
+        }
+
+        // berakjuk az új keresési paramétereket a session-be    
         Session::set('ingatlan_filter', $params);
+
 
         $num_helper = DI::get('num_helper');
 
@@ -1307,6 +1321,14 @@ foreach ($params as $key => $value) {
 
         if (isset($filter['max_szobaszam'])) {
             $filter_with_names['max_szobaszam'] = $filter['max_szobaszam'];
+        }
+
+        if (isset($filter['order'])) {
+            $filter_with_names['order'] = $filter['order'];
+        }
+
+        if (isset($filter['order_by'])) {
+            $filter_with_names['order_by'] = $filter['order_by'];
         }
 
         return $filter_with_names;
