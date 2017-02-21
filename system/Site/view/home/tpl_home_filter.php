@@ -43,18 +43,15 @@ use System\Libs\Language as Lang;
                 </div>
 -->
 
-
-    <div class="col-sm-3">
-        <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
-        <div id="district_select_div">
-            <select name="kerulet[]" id="district_select" class="selectpicker" data-selected-text-format="count" multiple disabled="disabled" title="-- <?php echo Lang::get('kereso_mindegy'); ?> --">
-                <!-- <option value="">-- <?php //echo Lang::get('kereso_mindegy'); ?> --</option> -->
-                <?php echo $district_list; ?>
-            </select>
-        </div>
-    </div>
-
-
+                <div class="col-sm-3">
+                    <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
+                    <div id="district_select_div">
+                        <select name="kerulet[]" id="district_select" class="selectpicker" data-selected-text-format="count" multiple disabled="disabled" title="-- <?php echo Lang::get('kereso_mindegy'); ?> --">
+                            <!-- <option value="">-- <?php //echo Lang::get('kereso_mindegy'); ?> --</option> -->
+                            <?php echo $district_list; ?>
+                        </select>
+                    </div>
+                </div>
 
 				<!-- KATEGÓRIA -->
 				<div class="col-sm-3">
@@ -72,8 +69,6 @@ use System\Libs\Language as Lang;
                     </div>					
 				</div>
 
-
-
 			</div>
 
 			<!-- ALSÓ SOR -->
@@ -81,13 +76,10 @@ use System\Libs\Language as Lang;
 				
                 <!-- ALAPTERÜLET MINIMUM -->
                 <div class="col-sm-2">
-                    <?php 
-                        $min_terulet = $this->request->has_query('min_alapterulet') ? $this->request->get_query('min_alapterulet') : "";
-                    ?>
                     <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
                     <div class="form-group">
                         <div class="input-group">
-                            <input name="min_alapterulet" type="text" class="form-control" placeholder="minimum" value="<?php echo $min_terulet; ?>">
+                            <input name="min_alapterulet" type="text" class="form-control" placeholder="minimum" value="<?php echo (isset($filter_params['min_alapterulet'])) ? $filter_params['min_alapterulet'] : ''; ?>">
                             <div class="input-group-addon">m<sup>2</sup></div>
                         </div>
                     </div>
@@ -95,13 +87,10 @@ use System\Libs\Language as Lang;
 
                 <!-- ALAPTERÜLET MAXIMUM -->
                 <div class="col-sm-2">
-                    <?php 
-                        $max_terulet = $this->request->has_query('max_alapterulet') ? $this->request->get_query('max_alapterulet') : "";
-                    ?>                
                     <span class="item-label">&nbsp;</span>
                     <div class="form-group">
                         <div class="input-group">
-                            <input name="max_alapterulet" type="text" class="form-control" placeholder="maximum" value="<?php echo $max_terulet; ?>">
+                            <input name="max_alapterulet" type="text" class="form-control" placeholder="maximum" value="<?php echo (isset($filter_params['max_alapterulet'])) ? $filter_params['max_alapterulet'] : ''; ?>">
                             <div class="input-group-addon">m<sup>2</sup></div>
                         </div>
                     </div>                    
@@ -109,13 +98,10 @@ use System\Libs\Language as Lang;
 
                 <!-- ÁR MINIMUM -->
                 <div class="col-sm-2">
-                    <?php 
-                        $min_ar = $this->request->has_query('min_ar') ? $this->request->get_query('min_ar') : "";
-                    ?>               
                     <span class="item-label"><?php echo Lang::get('kereso_min_ar'); ?></span>
                     <div class="form-group">
                         <div class="input-group">
-                            <input name="min_ar" type="text" class="form-control" placeholder="minimum" value="<?php echo $min_ar; ?>">
+                            <input name="min_ar" type="text" class="form-control" placeholder="minimum" value="<?php echo (isset($filter_params['min_ar'])) ? $filter_params['min_ar'] : ''; ?>">
                             <div class="input-group-addon" id="ar_min_mertek">M Ft</div>
                         </div>
                     </div>
@@ -123,13 +109,10 @@ use System\Libs\Language as Lang;
                 
                 <!-- ÁR MAXIMUM -->
                 <div class="col-sm-2">
-                    <?php 
-                        $max_ar = $this->request->has_query('max_ar') ? $this->request->get_query('max_ar') : "";
-                    ?>                
                     <span class="item-label"><?php echo Lang::get('kereso_max_ar'); ?></span>
                     <div class="form-group">
                         <div class="input-group">
-                            <input name="max_ar" type="text" class="form-control" placeholder="maximum" value="<?php echo $max_ar; ?>">
+                            <input name="max_ar" type="text" class="form-control" placeholder="maximum" value="<?php echo (isset($filter_params['max_ar'])) ? $filter_params['max_ar'] : ''; ?>">
                             <div class="input-group-addon" id="ar_max_mertek">M Ft</div>
                         </div>
                     </div>                    
