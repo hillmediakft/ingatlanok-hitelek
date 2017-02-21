@@ -3,6 +3,7 @@ namespace System\Site\Model;
 use System\Core\SiteModel;
 use System\Libs\Session;
 use \PDO;
+use System\Libs\DI;
 
 class Ingatlanok_model extends SiteModel {
 
@@ -152,30 +153,28 @@ class Ingatlanok_model extends SiteModel {
      */
     public function properties_filter_query($limit = null, $offset = null, $params)
     {
+        $num_helper = DI::get('num_helper');
 
-            if (isset($params['tipus']) && $params['tipus'] == 1) {
-                
-                if ((isset($params['min_ar']) && !empty($params['min_ar']))) {
-                    $params['min_ar'] = $params['min_ar'] * 1000000;
-                }
-                if ((isset($params['max_ar']) && !empty($params['max_ar']))) {
-                    $params['max_ar'] = $params['max_ar'] * 1000000;
-                }
-
+    // Ár mezők adatit alakítjuk át
+        if (isset($params['tipus']) && $params['tipus'] == 1) {
+            
+            if ((isset($params['min_ar']) && !empty($params['min_ar']))) {
+                $params['min_ar'] = intval($num_helper->stringToNumber($params['min_ar']) * 1000000);
             }
-            elseif (isset($params['tipus']) && $params['tipus'] == 2) {
-
-                if ((isset($params['min_ar']) && !empty($params['min_ar']))) {
-                    $params['min_ar'] = $params['min_ar'] * 1000;
-                }
-                if ((isset($params['max_ar']) && !empty($params['max_ar']))) {
-                    $params['max_ar'] = $params['max_ar'] * 1000;
-                }
-
-
+            if ((isset($params['max_ar']) && !empty($params['max_ar']))) {
+                $params['max_ar'] = intval($num_helper->stringToNumber($params['max_ar']) * 1000000);
             }
 
+        }
+        elseif (isset($params['tipus']) && $params['tipus'] == 2) {
 
+            if ((isset($params['min_ar']) && !empty($params['min_ar']))) {
+                $params['min_ar'] = intval($num_helper->stringToNumber($params['min_ar']) * 1000);
+            }
+            if ((isset($params['max_ar']) && !empty($params['max_ar']))) {
+                $params['max_ar'] = intval($num_helper->stringToNumber($params['max_ar']) * 1000);
+            }
+        }
 
 
         // eltávolítjuk a nem numerikus karaktereket    
@@ -309,11 +308,9 @@ foreach ($params as $key => $value) {
         if ((isset($params['min_ar']) && !empty($params['min_ar'])) AND ( $params['min_ar'] >= 0) AND ( isset($params['max_ar']) AND $params['max_ar'] == '')) {
 
             if (isset($params['tipus']) && $params['tipus'] == 1) {
-                $params['min_ar'] = $params['min_ar'] * 1000000;
                 $this->query->set_where('ar_elado', '>=', $params['min_ar']);
             }
             elseif (isset($params['tipus']) && $params['tipus'] == 2) {
-                $params['min_ar'] = $params['min_ar'] * 1000;
                 $this->query->set_where('ar_kiado', '>=', $params['min_ar']);
             }
         }
@@ -321,26 +318,20 @@ foreach ($params as $key => $value) {
         // csak maximum ár van megadva
         if ((isset($params['max_ar']) && !empty($params['max_ar'])) AND ( $params['max_ar'] >= 0) AND ( isset($params['min_ar']) AND $params['min_ar'] == '')) {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
-                $params['max_ar'] = $params['max_ar'] * 1000000;
                 $this->query->set_where('ar_elado', '<=', $params['max_ar']);
             }
             elseif (isset($params['tipus']) && $params['tipus'] == 2) {
-                $params['max_ar'] = $params['max_ar'] * 1000;
                 $this->query->set_where('ar_kiado', '<=', $params['max_ar']);
             }
         }
         // minimum és maximum ár is meg van adva
         if ((isset($params['min_ar']) && !empty($params['min_ar'])) AND ( $params['min_ar'] >= 0) AND ( isset($params['max_ar']) && !empty($params['max_ar'])) AND ( $params['max_ar'] > 0)) {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
-                $params['min_ar'] = $params['min_ar'] * 1000000;
-                $params['max_ar'] = $params['max_ar'] * 1000000;
                 $this->query->set_where('ar_elado', 'between', array($params['min_ar'], $params['max_ar']));
                 //$this->query->set_where('ar_elado', '>=', $params['min_ar']);
                 //$this->query->set_where('ar_elado', '<=', $params['max_ar']);
             }
             elseif (isset($params['tipus']) && $params['tipus'] == 2) {
-                $params['min_ar'] = $params['min_ar'] * 1000;
-                $params['max_ar'] = $params['max_ar'] * 1000;
                 $this->query->set_where('ar_kiado', 'between', array($params['min_ar'], $params['max_ar']));
                 // $this->query->set_where('ar_kiado', '>=', $params['min_ar']);
                 // $this->query->set_where('ar_kiado', '<=', $params['max_ar']);
