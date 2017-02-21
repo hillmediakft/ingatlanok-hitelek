@@ -578,9 +578,8 @@ var handleSearch = function () {
     return {
         //main function to initiate the module
         init: function () {
-			checkSearchInput();
+			//checkSearchInput();
             select_menu();
-        	
         	//setOrderSelected();
         	enableDistrict_Selectpicker();
         	//enableDistrict_SelectMenu();
