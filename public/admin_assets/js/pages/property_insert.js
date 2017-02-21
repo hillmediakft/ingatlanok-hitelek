@@ -316,6 +316,10 @@ var InsertProperty = function () {
                 utca: {
                     required: true
                 },
+                ingatlan_nev_hu: {
+                    required: true
+                },
+
                 /*
 				hazszam: {
                     required: true
