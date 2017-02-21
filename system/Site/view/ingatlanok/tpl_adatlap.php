@@ -1,6 +1,7 @@
 <?php
 
 use System\Libs\Config;
+use System\Libs\Cookie;
 use System\Libs\Language as Lang;
 ?>
 <div id="content" class="container-fluid">
@@ -40,9 +41,13 @@ use System\Libs\Language as Lang;
                             <div class="row">
                                 <div class="col-sm-12">
 
-                        <!-- <h3 class="section-title">Retail Space In West Side <span class="price">USD <span class="value">999,000</span></span></h3> -->
+                                <!-- <h3 class="section-title">Retail Space In West Side <span class="price">USD <span class="value">999,000</span></span></h3> -->
                                     <div class="item-photos">
+
                                         <div id="slideshow-main" class="main-slides">
+                                            <div id="kedvencek_<?php echo $ingatlan['id']; ?>" class="like <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'active' : ''; ?>">
+                                                <i class="fa fa-heart"></i>
+                                            </div>
 
                                             <!-- eladó/kiadó cimke-->                                        
                                             <?php
@@ -96,7 +101,7 @@ use System\Libs\Language as Lang;
                     <div class="col-md-4">      
                         <div class="row">
                             <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-envelope"></i> Értesítés árváltozásról</a>
-                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-heart"></i> Kedvencekhez</a>
+                            <a id="kedvencekhez_<?php echo $ingatlan['id']; ?>" data-id="<?php echo $ingatlan['id']; ?>" class="simple-btn sm-button filled red <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'disabled' : ''; ?>" href="javascript:void();"><i class="fa fa-heart"></i> Kedvencekhez</a>
                         </div>
                         <div class="row">
                             <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-share"></i> Megosztás</a>
@@ -138,21 +143,21 @@ use System\Libs\Language as Lang;
                     <div class="col-sm-12">
                         <!-- <h4 class="small-section-title">Detail Information</h4> -->
                         <div class="detail-info-block">
-                            
+
                             <div class="column-2">
                                 <div class="info-item">
                                     <span class="label-item"><?php echo Lang::get('jell_azonosito'); ?>:</span>
                                     <span class="value"><?php echo $ingatlan['ref_num']; ?></span>
                                 </div>
                             </div>
-                            
+
                             <div class="column-2">
                                 <div class="info-item">
                                     <span class="label-item"><?php echo Lang::get('jell_tipus'); ?>:</span>
                                     <span class="value"><?php echo ($ingatlan['tipus'] = 1) ? Lang::get('jell_elado') : Lang::get('jell_kiado'); ?></span>
                                 </div>
                             </div>
-                            
+
                             <div class="column-2">
                                 <div class="info-item">
                                     <span class="label-item"><?php echo Lang::get('jell_kategoria'); ?>:</span>
@@ -168,211 +173,211 @@ use System\Libs\Language as Lang;
                             </div>
 
                             <?php if (!is_null($ingatlan['telek_alapterulet'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_telek_alapterulet'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['telek_alapterulet']; ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_telek_alapterulet'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['telek_alapterulet']; ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['belmagassag'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_belmagassag'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['belmagassag']; ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_belmagassag'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['belmagassag']; ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['tajolas'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_tajolas'); ?>:</span>
-                                    <span class="value"><?php echo Config::get('orientation.' . LANG . '.' . $ingatlan['tajolas']); ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_tajolas'); ?>:</span>
+                                        <span class="value"><?php echo Config::get('orientation.' . LANG . '.' . $ingatlan['tajolas']); ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if ($ingatlan['erkely'] == 1 && !empty($ingatlan['erkely_terulet'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_erkely'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['erkely_terulet']; ?> m<sup>2</sup></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_erkely'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['erkely_terulet']; ?> m<sup>2</sup></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if ($ingatlan['terasz'] == 1 && !empty($ingatlan['terasz_terulet'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_terasz'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['terasz_terulet']; ?> m<sup>2</sup></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_terasz'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['terasz_terulet']; ?> m<sup>2</sup></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
-                            
+
                             <?php if (!is_null($ingatlan['szobaszam'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_szobaszam'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['szobaszam']; ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_szobaszam'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['szobaszam']; ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['felszobaszam'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_felszobaszam'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['felszobaszam']; ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_felszobaszam'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['felszobaszam']; ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
 
                             <?php if (!is_null($ingatlan['kozos_koltseg'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_kozos_koltseg'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['kozos_koltseg']; ?> Ft</span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_kozos_koltseg'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['kozos_koltseg']; ?> Ft</span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['rezsi'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_rezsi'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['rezsi']; ?> Ft</span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_rezsi'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['rezsi']; ?> Ft</span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['szerkezet'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_szerkezet'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['szerkezet_leiras_' . LANG]; ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_szerkezet'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['szerkezet_leiras_' . LANG]; ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>                            
 
                             <?php if (!is_null($ingatlan['allapot'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_allapot'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['all_leiras_' . LANG]; ?></span>
-                                </div>
-                            </div>                            
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_allapot'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['all_leiras_' . LANG]; ?></span>
+                                    </div>
+                                </div>                            
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['futes'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_futes'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['futes_leiras_' . LANG]; ?></span>
-                                </div>
-                            </div>                                                        
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_futes'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['futes_leiras_' . LANG]; ?></span>
+                                    </div>
+                                </div>                                                        
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['energetika'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_energetika'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['energetika_leiras_' . LANG]; ?></span>
-                                </div>
-                            </div>                                                        
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_energetika'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['energetika_leiras_' . LANG]; ?></span>
+                                    </div>
+                                </div>                                                        
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['haz_allapot_belul'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_haz_allapot_belul'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['haz_allapot_belul_leiras_' . LANG]; ?></span>
-                                </div>
-                            </div>                                                        
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_haz_allapot_belul'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['haz_allapot_belul_leiras_' . LANG]; ?></span>
+                                    </div>
+                                </div>                                                        
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['haz_allapot_kivul'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_haz_allapot_kivul'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['haz_allapot_kivul_leiras_' . LANG]; ?></span>
-                                </div>
-                            </div>                                                        
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_haz_allapot_kivul'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['haz_allapot_kivul_leiras_' . LANG]; ?></span>
+                                    </div>
+                                </div>                                                        
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['parkolas'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_parkolas'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['parkolas_leiras_' . LANG]; ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_parkolas'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['parkolas_leiras_' . LANG]; ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['furdo_wc'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_furdo_wc'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['furdo_wc_leiras_' . LANG]; ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_furdo_wc'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['furdo_wc_leiras_' . LANG]; ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['fenyviszony'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_fenyviszony'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['fenyviszony_leiras_' . LANG]; ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_fenyviszony'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['fenyviszony_leiras_' . LANG]; ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
-                    
+
                             <?php if (!is_null($ingatlan['kilatas'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_kilatas'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['kilatas_leiras_' . LANG]; ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_kilatas'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['kilatas_leiras_' . LANG]; ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['kert'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_kert'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['kert_leiras_' . LANG]; ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_kert'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['kert_leiras_' . LANG]; ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if (!is_null($ingatlan['szoba_elrendezes'])) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_szoba_elrendezes'); ?>:</span>
-                                    <span class="value"><?php echo $ingatlan['szoba_elrendezes_leiras_' . LANG]; ?></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_szoba_elrendezes'); ?>:</span>
+                                        <span class="value"><?php echo $ingatlan['szoba_elrendezes_leiras_' . LANG]; ?></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if ($ingatlan['lift'] == 1) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_lift'); ?>:</span>
-                                    <span class="value"><i class="fa fa-check"></i></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_lift'); ?>:</span>
+                                        <span class="value"><i class="fa fa-check"></i></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                             <?php if ($ingatlan['tetoter'] == 1) { ?>
-                            <div class="column-2">
-                                <div class="info-item">
-                                    <span class="label-item"><?php echo Lang::get('jell_tetoter'); ?>:</span>
-                                    <span class="value"><i class="fa fa-check"></i></span>
+                                <div class="column-2">
+                                    <div class="info-item">
+                                        <span class="label-item"><?php echo Lang::get('jell_tetoter'); ?>:</span>
+                                        <span class="value"><i class="fa fa-check"></i></span>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
 
                         </div>

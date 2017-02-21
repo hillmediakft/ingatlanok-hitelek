@@ -59,6 +59,7 @@ class Application {
             $router->get('/hirek/:title/:id', 'hirek@reszletek', array('title', 'id'));
             $router->get('/kereses', 'kereses@index');
             $router->get('/ingatlanok/ertekesito/:title/:id', 'ingatlanok@ertekesito', array('title', 'id'));
+            $router->get('/kedvencek', 'kedvencek@index');
             
 
             $router->post('/user/login', 'user@login'); // ajax
@@ -66,6 +67,7 @@ class Application {
             $router->post('/user/register', 'user@register'); // ajax
             $router->post('/user/forgottpw', 'user@forgottpw'); // ajax
             $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
+            $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
             
             $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek');
             $router->post('/sendemail/init/:title', 'SendEmail@init', array('type'));
