@@ -351,12 +351,16 @@ foreach ($params as $key => $value) {
         // minimum és maximum ár is meg van adva
         if ((isset($params['min_ar']) && ($params['min_ar']) !== '') && ( $params['min_ar'] >= 0) && ( isset($params['max_ar']) && ($params['max_ar']) !== '') && ( $params['max_ar'] > 0)) {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
+                $this->query->set_where('AND (');
                 $this->query->set_where('ar_elado', 'between', array($params['min_ar'], $params['max_ar']));
+                $this->query->set_where(')');
                 //$this->query->set_where('ar_elado', '>=', $params['min_ar']);
                 //$this->query->set_where('ar_elado', '<=', $params['max_ar']);
             }
             elseif (isset($params['tipus']) && $params['tipus'] == 2) {
+                $this->query->set_where('AND (');
                 $this->query->set_where('ar_kiado', 'between', array($params['min_ar'], $params['max_ar']));
+                $this->query->set_where(')');
                 // $this->query->set_where('ar_kiado', '>=', $params['min_ar']);
                 // $this->query->set_where('ar_kiado', '<=', $params['max_ar']);
             }
