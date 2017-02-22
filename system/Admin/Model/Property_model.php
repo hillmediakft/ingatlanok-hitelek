@@ -319,6 +319,7 @@ class Property_model extends AdminModel {
      */
     public function filteredPropertys($request_data, $display_start, $display_length)
     {
+//var_dump($request_data);die;        
         $this->query->set_columns('SQL_CALC_FOUND_ROWS 
             `ingatlanok`.`id`,
             `ingatlanok`.`ref_num`,
@@ -396,7 +397,7 @@ class Property_model extends AdminModel {
             /*             * ************************* ÁR ALAPJÁN KERESÉS **************************** */
 
             // csak minimum ár van megadva
-            if ((isset($request_data['min_ar']) && !empty($request_data['min_ar'])) AND ( $request_data['min_ar'] > 0) AND ( isset($request_data['max_ar']) AND $request_data['max_ar'] == '')) {
+            if ((isset($request_data['min_ar']) && ($request_data['min_ar']) !== '') && ( $request_data['min_ar'] >= 0) && ( isset($request_data['max_ar']) && $request_data['max_ar'] === '')) {
                 if (isset($request_data['tipus']) && $request_data['tipus'] == 1) {
                     $this->query->set_where('ar_elado', '>=', $request_data['min_ar']);
                 } elseif (isset($request_data['tipus']) && $request_data['tipus'] == 2) {
@@ -405,7 +406,7 @@ class Property_model extends AdminModel {
             }
 
             // csak maximum ár van megadva
-            if ((isset($request_data['max_ar']) && !empty($request_data['max_ar'])) AND ( $request_data['max_ar'] > 0) AND ( isset($request_data['min_ar']) AND $request_data['min_ar'] == '')) {
+            if ((isset($request_data['max_ar']) && ($request_data['max_ar']) !== '') && ( $request_data['max_ar'] > 0) && ( isset($request_data['min_ar']) && $request_data['min_ar'] === '')) {
                 if (isset($request_data['tipus']) && $request_data['tipus'] == 1) {
                     $this->query->set_where('ar_elado', '<=', $request_data['max_ar']);
                 } elseif (isset($request_data['tipus']) && $request_data['tipus'] == 2) {
@@ -413,37 +414,47 @@ class Property_model extends AdminModel {
                 }
             }
             // minimum és maximum ár is meg van adva
-            if ((isset($request_data['min_ar']) && !empty($request_data['min_ar'])) AND ( $request_data['min_ar'] > 0) AND ( isset($request_data['max_ar']) && !empty($request_data['max_ar'])) AND ( $request_data['max_ar'] > 0)) {
+            if ((isset($request_data['min_ar']) && ($request_data['min_ar']) !== '') && ( $request_data['min_ar'] >= 0) && ( isset($request_data['max_ar']) && ($request_data['max_ar']) !== '') && ( $request_data['max_ar'] > 0)) {
                 if (isset($request_data['tipus']) && $request_data['tipus'] == 1) {
-                    $this->query->set_where('ar_elado', '>=', $request_data['min_ar']);
-                    $this->query->set_where('ar_elado', '<=', $request_data['max_ar']);
+                    $this->query->set_where('AND (');
+                    $this->query->set_where('ar_elado', 'between', array($request_data['min_ar'], $request_data['max_ar']));
+                    $this->query->set_where(')');
+                    // $this->query->set_where('ar_elado', '>=', $request_data['min_ar']);
+                    // $this->query->set_where('ar_elado', '<=', $request_data['max_ar']);
                 } elseif (isset($request_data['tipus']) && $request_data['tipus'] == 2) {
-                    $this->query->set_where('ar_kiado', '>=', $request_data['min_ar']);
-                    $this->query->set_where('ar_kiado', '<=', $request_data['max_ar']);
+                    $this->query->set_where('AND (');
+                    $this->query->set_where('ar_kiado', 'between', array($request_data['min_ar'], $request_data['max_ar']));
+                    $this->query->set_where(')');
+                    // $this->query->set_where('ar_kiado', '>=', $request_data['min_ar']);
+                    // $this->query->set_where('ar_kiado', '<=', $request_data['max_ar']);
                 }
             }
 
 
-            /*             * ************************* TERÜLET ALAPJÁN KERESÉS **************************** */
+            /* ************************* TERÜLET ALAPJÁN KERESÉS **************************** */
 
             // csak minimum terület van megadva
-            if ((isset($request_data['min_alapterulet']) && !empty($request_data['min_alapterulet'])) AND ( $request_data['min_alapterulet'] > 0) AND ( isset($request_data['max_alapterulet']) AND $request_data['max_alapterulet'] == '')) {
+            if ((isset($request_data['min_alapterulet']) && ($request_data['min_alapterulet']) !== '') && ( $request_data['min_alapterulet'] >= 0) && ( isset($request_data['max_alapterulet']) && $request_data['max_alapterulet'] === '')) {
                 $this->query->set_where('alapterulet', '>=', $request_data['min_alapterulet']);
             }
 
             // csak maximum terulet van megadva
-            if ((isset($request_data['max_alapterulet']) && !empty($request_data['max_alapterulet'])) AND ( $request_data['max_alapterulet'] > 0) AND ( isset($request_data['min_alapterulet']) AND $request_data['min_alapterulet'] == '')) {
+            if ((isset($request_data['max_alapterulet']) && ($request_data['max_alapterulet']) !== '') && ( $request_data['max_alapterulet'] > 0) && ( isset($request_data['min_alapterulet']) && $request_data['min_alapterulet'] === '')) {
                 $this->query->set_where('alapterulet', '<=', $request_data['max_alapterulet']);
             }
             // minimum és maximum ár is meg van adva
-            if ((isset($request_data['min_alapterulet']) && !empty($request_data['min_alapterulet'])) AND ( $request_data['min_alapterulet'] > 0) AND ( isset($request_data['max_alapterulet']) && !empty($request_data['max_alapterulet'])) AND ( $request_data['max_alapterulet'] > 0)) {
-                $this->query->set_where('alapterulet', '>=', $request_data['min_alapterulet']);
-                $this->query->set_where('alapterulet', '<=', $request_data['max_alapterulet']);
+            if ((isset($request_data['min_alapterulet']) && ($request_data['min_alapterulet']) !== '') && ( $request_data['min_alapterulet'] >= 0) && ( isset($request_data['max_alapterulet']) && ($request_data['max_alapterulet']) !== '') && ( $request_data['max_alapterulet'] > 0)) {
+                //$this->query->set_where('alapterulet', '>=', $request_data['min_alapterulet']);
+                //$this->query->set_where('alapterulet', '<=', $request_data['max_alapterulet']);
+                $this->query->set_where('AND (');
+                $this->query->set_where('alapterulet', 'between', array($request_data['min_alapterulet'], $request_data['max_alapterulet']));
+                $this->query->set_where(')');
+
             }
 
-            /*             * ********************* MINIMUM SZOBASZÁM ********************** */
+            /* ********************* MINIMUM SZOBASZÁM ********************** */
             // minimum szobaszám
-            if (isset($request_data['szobaszam']) && !empty($request_data['szobaszam']) AND $request_data['szobaszam'] > 0) {
+            if (isset($request_data['szobaszam']) && !empty($request_data['szobaszam']) && $request_data['szobaszam'] > 0) {
                 $this->query->set_where('szobaszam', '>=', $request_data['szobaszam']);
             }
         }
@@ -489,7 +500,7 @@ class Property_model extends AdminModel {
             }
 
         }
-
+$this->query->debug(true); 
         return $this->query->select();
     }
 
