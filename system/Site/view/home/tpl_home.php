@@ -193,25 +193,25 @@ use System\Libs\Language as Lang;
                     </div>
                     <div class="ag-carousel carousel">
                         <ul>
-						<?php foreach($agents as $value) : ?>
+						<?php foreach($agents as $agent) : ?>
                             <li>
                                 <div class="item">
                                     <div class="preview">
-                                        <img src="<?php echo Config::get('user.upload_path') . $value['photo'];?>" alt="<?php echo $value['last_name'] . $value['first_name'];?>">
+                                        <img src="<?php echo Config::get('user.upload_path') . $agent['photo'];?>" alt="<?php echo $agent['last_name'] . $agent['first_name'];?>">
                                         <div class="overlay">
-                                            <a href="agent-single_agent.html"><i class="fa fa-search-plus"></i></a>
+                                            <a href="#"><i class="fa fa-search-plus"></i></a>
                                         </div>
                                     </div>
-                                    <span class="name"><?php echo $value['first_name'] . ' ' . $value['last_name'];?></span>
-                                    <span class="properties"><a href="#" class="simple-btn sm-button outlined red"><?php echo $value['property'];?> ingatlan</a></span>
+                                    <span class="name"><?php echo $agent['first_name'] . ' ' . $agent['last_name'];?></span>
+                                    <span class="properties"><a href="ingatlanok/ertekesito/<?php echo $this->str_helper->stringToSlug($agent['first_name']) . '-' . $this->str_helper->stringToSlug($agent['last_name']) . '/' . $agent['id']; ?>" class="simple-btn sm-button outlined red"><?php echo $agent['property'];?> ingatlan</a></span>
                                     <ul class="contact-listing">
                                         <li>
                                             <span class="icon"><i class="fa fa-phone"></i></span>
-                                            <span class="phone"><?php echo $value['phone'];?></span>
+                                            <span class="phone"><?php echo $agent['phone'];?></span>
                                         </li>
                                         <li>
                                             <span class="icon"><i class="fa fa-envelope"></i></span>
-                                            <a href="#" class="mail"><?php echo $value['email'];?></a>
+                                            <a href="#" class="mail"><?php echo $agent['email'];?></a>
                                         </li>
                                     </ul>
                                 </div>
