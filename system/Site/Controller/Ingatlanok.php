@@ -81,6 +81,7 @@ class Ingatlanok extends SiteController {
 
         // ingatlani adatainak lekérdezése
         $data['ingatlan'] = $this->ingatlanok_model->getProperty((int)$id);
+
         // ingatlanhoz tartozó képek
         $data['pictures'] = json_decode($data['ingatlan']['kepek']);
 
@@ -94,7 +95,7 @@ class Ingatlanok extends SiteController {
         }
 
         // ar változó a hasonló ingatlanok lekérdezéshez
-        $ar = ($data['ingatlan']['tipus'] = 1) ? $data['ingatlan']['ar_elado'] : $data['ingatlan']['ar_kiado'];
+        $ar = ($data['ingatlan']['tipus'] == 1) ? $data['ingatlan']['ar_elado'] : $data['ingatlan']['ar_kiado'];
         // hasonló ingatlanok
         $data['hasonlo_ingatlan'] = $this->ingatlanok_model->hasonloIngatlanok($id, $data['ingatlan']['tipus'], $data['ingatlan']['kategoria'], $data['ingatlan']['varos'], $ar);
 
