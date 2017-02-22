@@ -753,7 +753,7 @@
                                             </div>	
                                             <!-- UTCA MEGADÁSA -->	
                                             <div class="form-group">
-                                                <label for="utca" class="control-label">UtcaUtca <small>(házszám nélkül)</small><span class="required">*</span></label>
+                                                <label for="utca" class="control-label">Utca <small>(házszám nélkül)</small><span class="required">*</span></label>
                                                 <input type="text" name="utca" id="utca_autocomplete" value="<?php echo $content['utca']; ?>" class="form-control" />
                                             </div>
                                             <!-- IRANYITOSZAM -->	
