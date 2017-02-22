@@ -53,6 +53,22 @@ class Property_model extends AdminModel {
         return $this->query->update(array('ref_id' => $ref_id));
     }
 
+    /**
+     * Egy város nevét kérdezi le city_id alapján a city_list táblából
+     *
+     * @param integer $id
+     * @return string
+     */
+    public function getCityName($id)
+    {
+        $id = (int)$id;
+        $this->query->set_table('city_list');
+        $this->query->set_columns('city_name');
+        $this->query->set_where('city_id', '=', $id);
+        $result = $this->query->select();
+        return $result[0]['city_name'];
+    }
+
 
 /* ------------------*/
 
