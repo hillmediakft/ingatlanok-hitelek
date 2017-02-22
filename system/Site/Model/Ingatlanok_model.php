@@ -818,6 +818,7 @@ foreach ($params as $key => $value) {
 
         // ügynökhöz tartozó ingatlanok egy lekérdezéssel (ez gyorsabb!)
         $this->query->set_columns('ref_id');
+        $this->query->set_where('status', '=', 1);
         $ref_id_arr = $this->query->select();
         $temp_arr = array();
         // temp_arr tomb feltöltése: kulcs a ref_id, érték az ügynökhöz tartozó ingatlanok száma
