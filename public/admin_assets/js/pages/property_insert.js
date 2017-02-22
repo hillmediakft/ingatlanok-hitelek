@@ -319,12 +319,6 @@ var InsertProperty = function () {
                 ingatlan_nev_hu: {
                     required: true
                 },
-
-                /*
-				hazszam: {
-                    required: true
-                },
-                */
                 alapterulet: {
                     required: true,
                     number: true
@@ -349,15 +343,7 @@ var InsertProperty = function () {
                 },
                 tulaj_email: {
                     email: true
-                },
-                /*
-                tulaj_nev: {
-                    required: true
-                },
-                tulaj_tel: {
-                    required: true
                 }
-                */
 
             },
 
