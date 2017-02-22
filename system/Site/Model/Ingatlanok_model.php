@@ -824,10 +824,16 @@ foreach ($params as $key => $value) {
                 $temp_arr[$value['ref_id']] = 1;
             }
         }
+
         // a visszaadandó tömbbe belerakjuk a property elemet
         foreach ($agents as $key => &$agent) {
-            $agent['property'] = $temp_arr[$agent['id']];
+            if (isset($temp_arr[$agent['id']])) {
+                $agent['property'] = $temp_arr[$agent['id']];
+            } else {
+                $agent['property'] = 0;
+            }
         }
+
 
 /*
         // ügynökhöz tartozó ingatlanok ciklusban több lekérdezéssel (ez lassabb!)
