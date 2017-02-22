@@ -154,8 +154,8 @@
                                                             <div class="form-group">
                                                                 <label class="control-label">Eladó / kiadó</label>
                                                                 <select name="tipus" id="tipus" class="form-control form-filter input-sm">
-                                                                    <option value="">-- mindegy --</option>
-                                                                    <option value="1" selected>Eladó</option>
+                                                                    <!-- <option value="">-- mindegy --</option> -->
+                                                                    <option value="1">Eladó</option>
                                                                     <option value="2">Kiadó</option>
                                                                 </select>
                                                             </div>
