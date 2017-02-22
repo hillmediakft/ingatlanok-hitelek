@@ -206,3 +206,9 @@ cursor: move;
     background-color: #f3f3f3;
     opacity: 1;
 }
+
+/* kiegészítés az ajax-os datatable táblázathoz */
+.portlet-datatable .dataTables_wrapper .table-responsive {
+    padding: 0 2px !important;
+    overflow-x: visible;
+}
