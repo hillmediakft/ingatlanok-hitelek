@@ -98,10 +98,10 @@ use System\Libs\Language as Lang; ?>
                                 <form action="sendemail/init/contact" method="POST" id="contact-form-kapcsolat">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <input type="text" name="name" class="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?> *">
+                                            <input type="text" name="name" class="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?> *" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="email" name="email" class="email" placeholder="Email *">
+                                            <input type="email" name="email" class="email" placeholder="Email *" required oninvalid="this.setCustomValidity('Adjon meg egy email címet!')" oninput="setCustomValidity('')">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -113,7 +113,7 @@ use System\Libs\Language as Lang; ?>
                                         </div>
                                     </div>
                                     <input type="text" name="mezes_bodon" id="mezes_bodon">
-                                    <textarea name="message" class="message" placeholder="<?php echo Lang::get('kapcsolat_email_uzenet'); ?> *"></textarea>
+                                    <textarea name="message" class="message" placeholder="<?php echo Lang::get('kapcsolat_email_uzenet'); ?> *" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')"></textarea>
                                     <button id="submit-button" class="send-btn"><?php echo Lang::get('kapcsolat_email_kuldes'); ?></button>
                                 </form>
                             </div>
