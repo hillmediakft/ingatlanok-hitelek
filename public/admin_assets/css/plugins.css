@@ -2321,3 +2321,8 @@ pre[class*="language-"] {
   color: #e1e5ec;
   border-color: #2ab4c0;
   background: #e43a45; }
+
+/* kiegészítés az ajax-os datatable táblázathoz */
+.portlet-datatable .dataTables_wrapper .table-responsive {
+    padding: 0 2px !important;
+}
