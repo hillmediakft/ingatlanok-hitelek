@@ -950,9 +950,11 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                     }
 
                     //geolocation
+                    // lekérdezzük a város nevét az id-je alapján
+                    $city_name = $this->property_model->getCityName($data['varos']);
                     //$address = $iranyitoszam . ' ' . $varos . ' ' . $utca . ' ' . $hazszam . ' ' . $kerulet . ' kerulet';
-                    $address = $data['iranyitoszam'] . ' ' . $data['varos'] . ' ' . $data['utca'] . ' ' . $data['hazszam'];
-                    $loc = geocoder::getLocation($address);
+                    $address = $data['iranyitoszam'] . ' ' . $city_name . ' ' . $data['utca'] . ' ' . $data['hazszam'];
+                    $loc = Geocoder::getLocation($address);
                     if ($loc) {
                         $data['latitude'] = $loc['lat'];
                         $data['longitude'] = $loc['lng'];
