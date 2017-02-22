@@ -7,7 +7,7 @@
                 <div id="ajax_message"></div> 						
                 <?php $this->renderFeedbackMessages(); ?>				
 
-                <div class="portlet">
+                <div class="portlet portlet-datatable">
                     <div class="portlet-title">
                         <div class="caption"><i class="fa fa-list"></i>Ingatlanok listája</div>
                         <div class="actions">
