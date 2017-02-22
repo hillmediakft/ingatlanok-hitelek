@@ -76,7 +76,7 @@ use System\Libs\Language as Lang;
 				
                 <!-- ALAPTERÜLET MINIMUM -->
                 <div class="col-sm-2">
-                    <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
+                    <span class="item-label"><?php echo Lang::get('kereso_terulet_minimum'); ?></span>
                     <div class="form-group">
                         <div class="input-group">
                             <input name="min_alapterulet" type="text" class="form-control" placeholder="minimum" value="<?php echo (isset($filter_params['min_alapterulet'])) ? $filter_params['min_alapterulet'] : ''; ?>">
@@ -87,7 +87,7 @@ use System\Libs\Language as Lang;
 
                 <!-- ALAPTERÜLET MAXIMUM -->
                 <div class="col-sm-2">
-                    <span class="item-label">&nbsp;</span>
+                    <span class="item-label"><?php echo Lang::get('kereso_terulet_maximum'); ?></span>
                     <div class="form-group">
                         <div class="input-group">
                             <input name="max_alapterulet" type="text" class="form-control" placeholder="maximum" value="<?php echo (isset($filter_params['max_alapterulet'])) ? $filter_params['max_alapterulet'] : ''; ?>">
