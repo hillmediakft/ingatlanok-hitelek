@@ -24,7 +24,7 @@ use System\Libs\Language as Lang;
                             <div class="col-sm-12">
                                 <div class="sort-block extended gray-bg">
                                     <div class="left">
-                                        <span class="founded">Találatok száma: <span class="value"><?php echo $filtered_count; ?></span></span>
+                                        <span class="founded"><?php echo Lang::get('kereso_talalatok_szama'); ?>: <span class="value"><?php echo $filtered_count; ?></span></span>
                                     </div>
                                     <div class="right">
                                         <div class="sort-item order">
@@ -33,14 +33,14 @@ use System\Libs\Language as Lang;
                                                 $order = (isset($filter_params['order'])) ? $filter_params['order'] : false;
                                                 $order_by = (isset($filter_params['order_by'])) ? $filter_params['order_by'] : false;
                                             ?>
-                                            <span class="sort-label">Sorrend:</span>
+                                            <span class="sort-label"><?php echo Lang::get('kereso_sorrend'); ?>:</span>
                                             <div class="select-container">
                                                 <div id="select-type-holder1" class="ui-front">
                                                     <select id="sorrend_select" name="sorrend_select" class="select filter-select" data-icon="false">
-                                                        <option <?php echo ($order_by == 'datum' && $order == 'desc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('desc', 'datum'); ?>">Legfrissebb elöl</option>
-                                                        <option <?php echo ($order_by == 'datum' && $order == 'asc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('asc', 'datum'); ?>">Legrégebbi elöl</option>
-                                                        <option <?php echo ($order_by == 'ar' && $order == 'desc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('desc', 'ar'); ?>">Legdrágább elöl</option>
-                                                        <option <?php echo ($order_by == 'ar' && $order == 'asc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('asc', 'ar'); ?>">Legolcsóbb elöl</option>
+                                                        <option <?php echo ($order_by == 'datum' && $order == 'desc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('desc', 'datum'); ?>"><?php echo Lang::get('kereso_legfrissebb_elol'); ?></option>
+                                                        <option <?php echo ($order_by == 'datum' && $order == 'asc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('asc', 'datum'); ?>"><?php echo Lang::get('kereso_legregebbi_elol'); ?></option>
+                                                        <option <?php echo ($order_by == 'ar' && $order == 'desc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('desc', 'ar'); ?>"><?php echo Lang::get('kereso_legdragabb_elol'); ?></option>
+                                                        <option <?php echo ($order_by == 'ar' && $order == 'asc') ? 'selected' : ''; ?> value="<?php echo $this->url_helper->add_order_to_url('asc', 'ar'); ?>"><?php echo Lang::get('kereso_legolcsobb_elol'); ?></option>
                                                     </select>
                                                 </div>
                                             </div>
