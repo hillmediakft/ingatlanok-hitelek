@@ -500,7 +500,7 @@ class Property_model extends AdminModel {
             }
 
         }
-$this->query->debug(true); 
+//$this->query->debug(true); 
         return $this->query->select();
     }
 
