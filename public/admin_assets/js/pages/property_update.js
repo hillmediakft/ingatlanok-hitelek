@@ -824,16 +824,16 @@ toastr['error'](data.response[0]);
 
         if (option_value == '1') {
             $('#ar_elado').prop("disabled", false);
-            $('#ar_elado_uj').prop("disabled", false);
+            $('#ar_elado_eredeti').prop("disabled", false);
             $('#ar_kiado').prop("disabled", true);
-            $('#ar_kiado_uj').prop("disabled", true);
+            $('#ar_kiado_eredeti').prop("disabled", true);
 
         }
         if (option_value == '2') {
             $('#ar_elado').prop("disabled", true);
-            $('#ar_elado_uj').prop("disabled", true);
+            $('#ar_elado_eredeti').prop("disabled", true);
             $('#ar_kiado').prop("disabled", false);
-            $('#ar_kiado_uj').prop("disabled", false);
+            $('#ar_kiado_eredeti').prop("disabled", false);
         }
 
         //típus kiválasztása szerint engedélyezi / blokkolja az ár beviteli mezőket
@@ -843,16 +843,16 @@ toastr['error'](data.response[0]);
             // az érték üres lesz, ha a válassz elemet választjuk ki az option listából
             if (option_value == '1') {
                 $('#ar_elado').prop("disabled", false);
-                $('#ar_elado_uj').prop("disabled", false);
+                $('#ar_elado_eredeti').prop("disabled", false);
                 $('#ar_kiado').prop("disabled", true);
-                $('#ar_kiado_uj').prop("disabled", true);
+                $('#ar_kiado_eredeti').prop("disabled", true);
 
             }
             if (option_value == '2') {
                 $('#ar_elado').prop("disabled", true);
-                $('#ar_elado_uj').prop("disabled", true);
+                $('#ar_elado_eredeti').prop("disabled", true);
                 $('#ar_kiado').prop("disabled", false);
-                $('#ar_kiado_uj').prop("disabled", false);
+                $('#ar_kiado_eredeti').prop("disabled", false);
             }
 
         })
