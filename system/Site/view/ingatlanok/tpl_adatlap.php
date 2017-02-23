@@ -1,5 +1,5 @@
 <?php
-
+use System\Libs\Auth;
 use System\Libs\Config;
 use System\Libs\Cookie;
 use System\Libs\Language as Lang;
@@ -100,7 +100,7 @@ use System\Libs\Language as Lang;
                     </div>
                     <div class="col-md-4">      
                         <div class="row">
-                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-envelope"></i> Értesítés árváltozásról</a>
+                            <a id="arvaltozas_ertesites" data-id="<?php echo $ingatlan['id']; ?>" class="simple-btn sm-button filled red" href="javascript:void(0);"><i class="fa fa-envelope"></i> Értesítés árváltozásról</a>
                             <a id="kedvencekhez_<?php echo $ingatlan['id']; ?>" data-id="<?php echo $ingatlan['id']; ?>" class="simple-btn sm-button filled red <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'disabled' : ''; ?>" href="javascript:void();"><i class="fa fa-heart"></i> Kedvencekhez</a>
                         </div>
                         <div class="row">
