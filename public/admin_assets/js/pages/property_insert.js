@@ -101,25 +101,26 @@ var InsertProperty = function () {
         }
     };
 
+    /**
+     * Eladó és kiadó ár mezők ki/be kapcsolása
+     */
     var enableDisablePrices = function () {
-
         //típus kiválasztása szerint engedélyezi / blokkolja az ár beviteli mezőket
         $("#tipus").change(function () {
-            var str = "";
             // option listaelem value
-            option_value = $("select#tipus option:selected").val();
-            // az érték üres lesz, ha a válassz elemet választjuk ki az option listából
+            var option_value = $("select#tipus option:selected").val();
             if (option_value == '1') {
                 $('#ar_elado').prop("disabled", false);
+                $('#ar_elado_eredeti').prop("disabled", false);
                 $('#ar_kiado').prop("disabled", true);
-
+                $('#ar_kiado_eredeti').prop("disabled", true);
             }
             if (option_value == '2') {
                 $('#ar_elado').prop("disabled", true);
+                $('#ar_elado_eredeti').prop("disabled", true);
                 $('#ar_kiado').prop("disabled", false);
-
+                $('#ar_kiado_eredeti').prop("disabled", false);
             }
-
         })
     };
 
