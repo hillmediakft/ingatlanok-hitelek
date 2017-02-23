@@ -257,7 +257,7 @@
                                     <table border="0" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td>
-                                                <p>Tisztelt Trendy Ingatlaniroda!</p>
+                                                <p>Tisztelt Ingatlaniroda!</p>
                                                 <p>Szeretném a cégükkel felvenni a kapcsolatot.</p>
                                                 <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                                                     <tbody>
@@ -295,8 +295,8 @@
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td class="content-block">
-                                        <span class="apple-link">Trendy Ingatlaniroda, 1444 Budapest, Minta u. 6.</span>
-                                        <br> Telefon: +36-1 -555-5678, e-mail: info@trendyingatlan.hu
+                                        <span class="apple-link">Mavalux Ingatlaniroda, 1444 Budapest, Minta u. 6.</span>
+                                        <br> Telefon: +36-1 -555-5678, e-mail: 
                                     </td>
                                 </tr>
                                 <tr>
