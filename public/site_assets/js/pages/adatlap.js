@@ -1,5 +1,22 @@
 var Adatlap = function () {
 
+    /**
+     *
+     *
+     */
+    var arvaltozasReg = function () {
+        var propertyID = $('#arvaltozas_ertesites').attr('data-id');
+
+        $('#arvaltozas_ertesites').on('click', function(){
+
+            console.log('raklikkelt az arvaltozas_ertesites gombra');
+
+        });
+
+    } 
+
+
+
     /*
      * Google térkép objektumok
      */
@@ -56,6 +73,7 @@ var Adatlap = function () {
 		//main method to initiate page
 		init: function () {           
 			// call local function
+            arvaltozasReg();
 			//googleMapsInit();
 		},
  
@@ -64,5 +82,5 @@ var Adatlap = function () {
 }();
 
 $(document).ready(function() {
-	//Adatlap.init();
+	Adatlap.init();
 });
