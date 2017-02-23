@@ -286,12 +286,18 @@ var InsertProperty = function () {
                 tipus: {
                     required: true
                 },
+                ar_elado_eredeti: {
+                    required: true,
+                    number: true
+                },
                 ar_elado: {
+                    number: true
+                },
+                ar_kiado_eredeti: {
                     required: true,
                     number: true
                 },
                 ar_kiado: {
-                    required: true,
                     number: true
                 },
                 szobaszam: {
