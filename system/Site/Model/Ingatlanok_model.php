@@ -2,6 +2,7 @@
 namespace System\Site\Model;
 use System\Core\SiteModel;
 use System\Libs\Session;
+use System\Libs\Cookie;
 use \PDO;
 use System\Libs\DI;
 
