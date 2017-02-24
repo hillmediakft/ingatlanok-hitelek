@@ -14919,6 +14919,7 @@ a.simple-btn.outlined.red:hover {
   border: 1px solid #e7e4e4;
   padding: 26px 0;
   margin-bottom: 27px;
+  background: #f8f8f8;
 }
 /* line 6094, scss/_shortcodes.scss */
 .detail-info-block:after,

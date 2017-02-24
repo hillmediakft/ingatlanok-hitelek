@@ -33,9 +33,17 @@ use System\Libs\Language as Lang;
                         <h3 class="section-title"><span class="price"><span class="value">
                                     <?php
                                     if ($ingatlan['tipus'] == 1) {
-                                        echo $ingatlan['ar_elado'] . ' Ft';
+                                        if ($ingatlan['ar_elado_eredeti']) {
+                                            echo $this->num_helper->niceNumber($ingatlan['ar_elado']) . ' Ft ' . '<span class="line-through">' . $this->num_helper->niceNumber($ingatlan['ar_elado_eredeti']) . ' Ft</span>';
+                                        } else {
+                                            echo $this->num_helper->niceNumber($ingatlan['ar_elado']) . ' Ft';
+                                        }
                                     } else {
-                                        echo $ingatlan['ar_kiado'] . ' Ft';
+                                        if ($ingatlan['ar_kiado_eredeti']) {
+                                            echo $this->num_helper->niceNumber($ingatlan['ar_kiado']) . ' Ft ' . '<span class="line-through">' . $this->num_helper->niceNumber($ingatlan['ar_kiado_eredeti']) . ' Ft</span>';
+                                        } else {
+                                            echo $this->num_helper->niceNumber($ingatlan['ar_kiado']) . ' Ft';
+                                        }
                                     }
                                     ?>
                                 </span>
@@ -61,14 +69,14 @@ use System\Libs\Language as Lang;
                     <div class="col-sm-4">
                         <div class="agent-box">
                             <div class="agent-image">
-                                <img class="img-thumbnail" style="width:120px; height:120px;" src="<?php echo Config::get('user.upload_path') . $agent['photo']; ?>">
+                                <img class="img-thumbnail" src="<?php echo Config::get('user.upload_path') . $agent['photo']; ?>">
                             </div>
 
                             <div class="agent-details">
-                                 <div class="agent-name">
-                                     <h6><?php echo $agent['first_name'] . ' ' . $agent['last_name']; ?></h6>
-                                     <div>13. kerületi ingatlanok specialistája</div>
-                                 </div>
+                                <div class="agent-name">
+                                    <h6><?php echo $agent['first_name'] . ' ' . $agent['last_name']; ?></h6>
+                                    <div>13. kerületi ingatlanok specialistája</div>
+                                </div>
                                 <div>Tel: <?php echo $agent['phone']; ?></div>
                                 <div class="label label-danger">Hívjon most!</div>
                             </div>
@@ -90,7 +98,7 @@ use System\Libs\Language as Lang;
                         <div class="row">
                             <div class="col-sm-12">
 
-                                                            <!-- <h3 class="section-title">Retail Space In West Side <span class="price">USD <span class="value">999,000</span></span></h3> -->
+                                                                <!-- <h3 class="section-title">Retail Space In West Side <span class="price">USD <span class="value">999,000</span></span></h3> -->
                                 <div class="item-photos">
 
                                     <div id="slideshow-main" class="main-slides">

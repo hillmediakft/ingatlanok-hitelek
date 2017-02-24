@@ -167,6 +167,9 @@
 .ingatlan-info-box .agent-box .agent-image {
     display: table-cell;
 }
+.ingatlan-info-box .agent-box .agent-image img {
+    max-width: 120px;
+}
 .ingatlan-info-box .agent-box .agent-details {
     display: table-cell;
     padding-left: 15px;
@@ -331,5 +334,7 @@
     margin-bottom: 0px;
 }
 
-
+.line-through {
+    text-decoration: line-through;
+}
 
