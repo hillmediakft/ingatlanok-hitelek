@@ -20,7 +20,7 @@ use System\Libs\Language as Lang;
         </div>
     </div>
 
-    <!-- Szürke doboz felül -->
+    <!-- Szürke doboz felül ingatlan-info-box -->
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
