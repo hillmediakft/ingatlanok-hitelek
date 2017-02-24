@@ -14,20 +14,25 @@ var Kapcsolat = function () {
             $.ajax({
                 type: $form.attr('method'),
                 url: $form.attr('action'),
+                dataType: 'json',
                 data: $form.serialize(),
-                success: function (msg) {
-                    msg = JSON.parse(msg);
-                    //    $('#panel_ajax_message').append(msg);
+                
+                success: function (result) {
+                    result = JSON.parse(result);
+                    //    $('#panel_ajax_message').append(result);
                     //    $('#panel_ajax_message').slideDown('slow');
                     $('#submit-button').removeAttr('disabled');
                     $('#submit-button').removeClass('button-loading');
                     //$('#panel_ajax_message').delay(7500).slideUp(700);
-                    toastr[msg.status](msg.message, msg.title)
+                    toastr[result.status](result.message, result.title)
 
+                    $form.reset();
+/*
                     $('#contact-form-kapcsolat input[name="name"]').val('');
                     $('#contact-form-kapcsolat input[name="email"]').val('');
                     $('#contact-form-kapcsolat input[name="phone"]').val('');
                     $('#contact-form-kapcsolat textarea[name="message"]').val('');
+*/                    
                 }
             });
 
