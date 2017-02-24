@@ -87,6 +87,15 @@ class Ingatlanok extends SiteController {
         $data['pictures'] = json_decode($data['ingatlan']['kepek']);
         // ügynök adatai
         $data['agent'] = $this->ingatlanok_model->get_agent($data['ingatlan']['ref_id']);
+        
+        // Árváltozás értesítés gomb állapotának beállításához kell (disable/enable)
+        if (Auth::isUserLoggedIn()) {
+            $user_id = Auth::getUser('id');
+            $data['ertesites_arvaltozasrol'] = $this->ingatlanok_model->selectPriceChange((int)$user_id, (int)$data['ingatlan']['id']);
+        } else {
+            $data['ertesites_arvaltozasrol'] = false;
+        }
+
 
         // csak a valóban létező extrák db nevét tartalamzó tömb elem legyártása
         $data['features'] = array();
