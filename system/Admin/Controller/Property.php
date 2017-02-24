@@ -1015,11 +1015,13 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                         $data['ar_elado_eredeti'] = null;
                         $data['ar_elado'] = null;
 
-                        // rejtett mezőkből jövő adatelemek törlése (ezeket nem kell az adatbáziba írni, mert nincs ilyen db oszlop)
-                        unset($data['ar_elado_hidden']);
-                        unset($data['ar_kiado_hidden']);
                     }                    
 
+                    // rejtett mezőkből jövő adatelemek törlése (ezeket nem kell az adatbáziba írni, mert nincs ilyen db oszlop)
+                    if (isset($data['ar_elado_hidden']) || isset($data['ar_kiado_hidden'])) {
+                        unset($data['ar_elado_hidden']);
+                        unset($data['ar_kiado_hidden']);
+                    }
 
                             // ár eladó
                             // $data['ar_elado'] = ($data['tipus'] == 1) ? $data['ar_elado'] * 1000000 : null;
