@@ -142,11 +142,55 @@
 .main-slides {
     overflow: hidden;
 }
-
+/* *********** ingatlan infobox adatlap oldalon ****** */
 .ingatlan-info-box {
-    background-color: #D8D8D8;
-    height: 120px;
+    background-color: #f8f8f8;
+    border: 1px solid #e7e4e4;
+    height: auto;
     margin: 20px 0 20px 0;
+    overflow: hidden;
+}
+.ingatlan-info-box .section-title {
+    margin: 10px 0 10px 0;
+}
+.ingatlan-info-box h5 {
+    margin: 10px 0 10px 0;
+}
+.ingatlan-info-box h3.section-title .price {
+    float: none;
+}
+.ingatlan-info-box .agent-box {
+    display: table;
+    margin: 10px 10px 10px 0;
+}
+
+.ingatlan-info-box .agent-box .agent-image {
+    display: table-cell;
+}
+.ingatlan-info-box .agent-box .agent-details {
+    display: table-cell;
+    padding-left: 15px;
+    vertical-align: top;
+}
+.ingatlan-info-box .agent-box .agent-details .agent-name {
+    display: block;
+    padding-bottom: 10px;
+}
+.ingatlan-info-box .agent-box .agent-details .agent-name h6{
+    padding-bottom: 5px;
+    margin: 0;
+}
+
+.ingatlan-info-box .icon-box .heading .title {
+    font-family: 'Lato-Bold', Arial, sans-serif;
+    font-size: 16px;
+    color: #000;
+    display: table-cell;
+    vertical-align: middle;
+}
+.ingatlan-info-box .icon-box .heading {
+    display: table;
+    margin-bottom: 7px;
 }
 
 /* features elemek, amelyek nincsenek az ingatlamban */ 
@@ -286,5 +330,6 @@
 .dropup .dropdown-menu {
     margin-bottom: 0px;
 }
+
 
 

@@ -25,103 +25,151 @@ use System\Libs\Language as Lang;
         <div class="row">
             <div class="col-sm-12">
                 <div class="ingatlan-info-box">
-                    doboz
+                    <div class="col-sm-5">
+                        <h3 class="section-title"><?php echo $ingatlan['ingatlan_nev_' . LANG]; ?></h3>
+                        <h5><?php echo $ingatlan['city_name'] . ' ' . $ingatlan['district_name'] . 'kerület'; ?> 
+                    </div>
+                    <div class="col-sm-3">
+                        <h3 class="section-title"><span class="price"><span class="value">
+                                    <?php
+                                    if ($ingatlan['tipus'] == 1) {
+                                        echo $ingatlan['ar_elado'] . ' Ft';
+                                    } else {
+                                        echo $ingatlan['ar_kiado'] . ' Ft';
+                                    }
+                                    ?>
+                                </span>
+                            </span>
+                        </h3>
+                        <div class="icon-box">
+                            <div class="heading">
+                                <div class="icon">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <span class="title"><?php echo $ingatlan['kat_nev_' . LANG]; ?></span>
+                            </div>
+                        </div>
+                        <div class="icon-box">
+                            <div class="heading">
+                                <div class="icon">
+                                    <i class="fa fa-map-o"></i>
+                                </div>
+                                <span class="title"><?php echo $ingatlan['alapterulet']; ?> m<sup>2</sup></span>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-sm-4">
+                        <div class="agent-box">
+                            <div class="agent-image">
+                                <img class="img-thumbnail" src="<?php echo SITE_IMAGE; ?>placeholder120x120.png">
+                            </div>
+
+                            <div class="agent-details">
+                                 <div class="agent-name">
+                                     <h6>Kovács Géza</h6>
+                                     <div>13. kerületi ingatlanok specialistája</div>
+                                 </div>
+                                <div>Tel: +36 20 345-5678</div>
+                                <div class="label label-danger">Hívjon most!</div>
+                            </div>
+                        </div>   
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <aside class="sidebar main-sidebar">
-        <div class="container">
-            <div class="row">
-                <div class="single-item-page">
-                    <div class="col-md-8">
-                        <?php if (!empty($pictures)) { ?>
-                            <!-- PHOTO SLIDER -->
-                            <div class="row">
-                                <div class="col-sm-12">
+<aside class="sidebar main-sidebar">
+    <div class="container">
+        <div class="row">
+            <div class="single-item-page">
+                <div class="col-md-8">
+                    <?php if (!empty($pictures)) { ?>
+                        <!-- PHOTO SLIDER -->
+                        <div class="row">
+                            <div class="col-sm-12">
 
-                                <!-- <h3 class="section-title">Retail Space In West Side <span class="price">USD <span class="value">999,000</span></span></h3> -->
-                                    <div class="item-photos">
+                                                            <!-- <h3 class="section-title">Retail Space In West Side <span class="price">USD <span class="value">999,000</span></span></h3> -->
+                                <div class="item-photos">
 
-                                        <div id="slideshow-main" class="main-slides">
-                                            <div id="kedvencek_<?php echo $ingatlan['id']; ?>" class="like <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'active' : ''; ?>">
-                                                <i class="fa fa-heart"></i>
-                                            </div>
-
-                                            <!-- eladó/kiadó cimke-->                                        
-                                            <?php
-                                            if ($ingatlan['tipus'] == 1) {
-                                                $label = Lang::get('kereso_elado');
-                                                $css_class = 'sale';
-                                            } else {
-                                                $label = Lang::get('kereso_kiado');
-                                                $css_class = 'rest';
-                                            }
-                                            ?>
-                                            <span class="item-label <?php echo $css_class; ?>"><?php echo $label; ?></span>
-
-                                            <div class="jcarousel-arrows">
-                                                <a href="#" class="prev-slide"><i class="fa fa-angle-left"></i></a>
-                                                <a href="#" class="next-slide"><i class="fa fa-angle-right"></i></a>
-                                            </div>
-                                            <div class="slides-container" id="slides-to-show">
-                                                <ul>
-                                                    <?php foreach ($pictures as $picture) { ?>
-                                                        <li>
-                                                            <img alt="<?php echo $ingatlan['ingatlan_nev_' . LANG]; ?>" src="<?php echo $this->getConfig('ingatlan_photo.upload_path') . $picture; ?>"/>
-                                                        </li>
-                                                    <?php } ?>
-                                                </ul>   
-                                            </div>                                  
+                                    <div id="slideshow-main" class="main-slides">
+                                        <div id="kedvencek_<?php echo $ingatlan['id']; ?>" class="like <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'active' : ''; ?>">
+                                            <i class="fa fa-heart"></i>
                                         </div>
-                                        <div id="slideshow-carousel" class="main-thumbnail">
-                                            <ul id="carousel" class="jcarousel jcarousel-skin-tango">
+
+                                        <!-- eladó/kiadó cimke-->                                        
+                                        <?php
+                                        if ($ingatlan['tipus'] == 1) {
+                                            $label = Lang::get('kereso_elado');
+                                            $css_class = 'sale';
+                                        } else {
+                                            $label = Lang::get('kereso_kiado');
+                                            $css_class = 'rest';
+                                        }
+                                        ?>
+                                        <span class="item-label <?php echo $css_class; ?>"><?php echo $label; ?></span>
+
+                                        <div class="jcarousel-arrows">
+                                            <a href="#" class="prev-slide"><i class="fa fa-angle-left"></i></a>
+                                            <a href="#" class="next-slide"><i class="fa fa-angle-right"></i></a>
+                                        </div>
+                                        <div class="slides-container" id="slides-to-show">
+                                            <ul>
                                                 <?php foreach ($pictures as $picture) { ?>
                                                     <li>
                                                         <img alt="<?php echo $ingatlan['ingatlan_nev_' . LANG]; ?>" src="<?php echo $this->getConfig('ingatlan_photo.upload_path') . $picture; ?>"/>
                                                     </li>
-                                                <?php } ?>                                            
-                                            </ul>
-                                        </div>
+                                                <?php } ?>
+                                            </ul>   
+                                        </div>                                  
+                                    </div>
+                                    <div id="slideshow-carousel" class="main-thumbnail">
+                                        <ul id="carousel" class="jcarousel jcarousel-skin-tango">
+                                            <?php foreach ($pictures as $picture) { ?>
+                                                <li>
+                                                    <img alt="<?php echo $ingatlan['ingatlan_nev_' . LANG]; ?>" src="<?php echo $this->getConfig('ingatlan_photo.upload_path') . $picture; ?>"/>
+                                                </li>
+                                            <?php } ?>                                            
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                        <?php } else { ?>
-                            <!-- 
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="empty-space-25"></div>
-                                </div>
+                        </div>
+                    <?php } else { ?>
+                        <!-- 
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="empty-space-25"></div>
                             </div>
-                            -->
-                        <?php } ?>
+                        </div>
+                        -->
+                    <?php } ?>
 
+                </div>
+                <div class="col-md-4">      
+                    <div class="row">
+                        <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-envelope"></i> Értesítés árváltozásról</a>
+                        <a id="kedvencekhez_<?php echo $ingatlan['id']; ?>" data-id="<?php echo $ingatlan['id']; ?>" class="simple-btn sm-button filled red <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'disabled' : ''; ?>" href="javascript:void();"><i class="fa fa-heart"></i> Kedvencekhez</a>
                     </div>
-                    <div class="col-md-4">      
-                        <div class="row">
-                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-envelope"></i> Értesítés árváltozásról</a>
-                            <a id="kedvencekhez_<?php echo $ingatlan['id']; ?>" data-id="<?php echo $ingatlan['id']; ?>" class="simple-btn sm-button filled red <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'disabled' : ''; ?>" href="javascript:void();"><i class="fa fa-heart"></i> Kedvencekhez</a>
-                        </div>
-                        <div class="row">
-                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-share"></i> Megosztás</a>
-                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-print"></i> Nyomtatás</a>
-                        </div>
-                        <div class="row">
-                            <div class="widget questions">
-                                <div class="heading">
-                                    <span class="widget-title">Kapcsolatfelvétel</span>
-                                </div>
-                                <div class="widget-entry gray-bg">
-                                    <div class="questions-form">
-                                        <form action="#">
-                                            <input type="text" class="name" placeholder="név">
-                                            <input type="email" class="email" placeholder="Email">
-                                            <input type="text" class="email" placeholder="Telefonszám">
-                                            <textarea class="message" placeholder="Üzenet"></textarea>
-                                            <button class="send-btn">Küldés</button>
-                                        </form>
-                                    </div>
+                    <div class="row">
+                        <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-share"></i> Megosztás</a>
+                        <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-print"></i> Nyomtatás</a>
+                    </div>
+                    <div class="row">
+                        <div class="widget questions">
+                            <div class="heading">
+                                <span class="widget-title">Kapcsolatfelvétel</span>
+                            </div>
+                            <div class="widget-entry gray-bg">
+                                <div class="questions-form">
+                                    <form action="#">
+                                        <input type="text" class="name" placeholder="név">
+                                        <input type="email" class="email" placeholder="Email">
+                                        <input type="text" class="email" placeholder="Telefonszám">
+                                        <textarea class="message" placeholder="Üzenet"></textarea>
+                                        <button class="send-btn">Küldés</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -129,6 +177,7 @@ use System\Libs\Language as Lang;
                 </div>
             </div>
         </div>
+    </div>
 
 </div>
 
