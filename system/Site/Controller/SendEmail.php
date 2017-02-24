@@ -29,6 +29,8 @@ class SendEmail extends SiteController {
                 if ($template == "agent") {
                     $this->to_email = $this->request->get_post('agent_email');
                     $this->to_name = $this->request->get_post('agent_name');
+                    $this->to_name = $this->request->get_post('property_id');
+                    $this->to_name = $this->request->get_post('url');
                     $this->subject = 'Érdeklődés';
                     $this->template = $template;
                 }
