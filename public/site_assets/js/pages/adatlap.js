@@ -1,7 +1,22 @@
 var Adatlap = function () {
 
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "showDuration": "1000",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
     /**
-     *
+     * 
      *
      */
     var arvaltozasReg = function () {
@@ -9,7 +24,46 @@ var Adatlap = function () {
 
         $('#arvaltozas_ertesites').on('click', function(){
 
-            console.log('raklikkelt az arvaltozas_ertesites gombra');
+             console.log(propertyID);
+
+            $.ajax({
+                url: '/ingatlanok/arvaltozasErtesites',
+                type: 'POST',
+                dataType: 'json',
+                data: {property_id: propertyID},
+            
+                beforeSend: function() {
+                    /*
+                    App.blockUI({
+                        boxed: true,
+                        message: 'Feldolgozás...'
+                    });
+                    */
+                },
+                complete: function(){
+                    /*
+                    App.unblockUI();
+                    */
+                },
+                // itt kapjuk meg (és dolgozzuk fel) a feldolgozó php által visszadott adatot 
+                success: function(result){
+                    if(result.status == 'success'){
+
+toastr['success'](result.message);
+
+                    }
+            
+                    if(result.status == 'error'){
+
+toastr['error'](result.message);
+   
+                    }
+            
+                },
+                error: function(result, status, e){
+                        console.log(e);
+                } 
+            });
 
         });
 
