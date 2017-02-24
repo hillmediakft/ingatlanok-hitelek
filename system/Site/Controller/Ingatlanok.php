@@ -85,6 +85,8 @@ class Ingatlanok extends SiteController {
 
         // ingatlanhoz tartozó képek
         $data['pictures'] = json_decode($data['ingatlan']['kepek']);
+        // ügynök adatai
+        $data['agent'] = $this->ingatlanok_model->get_agent($data['ingatlan']['ref_id']);
 
         // csak a valóban létező extrák db nevét tartalamzó tömb elem legyártása
         $data['features'] = array();
