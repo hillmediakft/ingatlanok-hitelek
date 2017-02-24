@@ -209,24 +209,12 @@
                                         <div class="col-md-3">
                                             <div class="input-group">
                                                 <?php $ar_kiado = (!is_null($content['ar_kiado'])) ? ($content['ar_kiado'] / 1000) : ''; ?>
-                                                <input type="hidden" name="ar_kiado" value="<?php echo $ar_kiado; ?>" class="form-control" />
+                                                <input type="hidden" name="ar_kiado_hidden" value="<?php echo $ar_kiado; ?>" class="form-control" />
                                                 <input type="text" name="ar_kiado" id="ar_kiado" value="<?php echo $ar_kiado; ?>" class="form-control" />
                                                 <div class="input-group-addon">ezer Ft</div>
                                             </div>
                                         </div>
                                     </div>
-
-                                  
-
-                                    <!-- EMAIL KULDES ARVALTOZASROL -->
-                                    <div class="form-group" id="email_kuldes_arvaltozasrol">
-                                        <label for="email_kuldes_arvaltozasrol" class="control-label col-md-3">E-mail küldés árváltozásról</label>
-                                        <div class="col-md-3">
-                                            <div class="checkbox">
-                                                <input type="checkbox" value="1" name="email_kuldes_arvaltozasrol">         
-                                            </div>
-                                        </div>
-                                    </div> 
 
                                     <!-- ALAPTERÜLET -->    
                                     <div class="form-group">
