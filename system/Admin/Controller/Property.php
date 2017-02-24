@@ -1105,28 +1105,6 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                             // a módosítás dátum a "rendes" módosításkor fog bekerülni az adatbázisba 
                             $data['modositas_datum'] = time();
 
-
-
-
-// ha van új ár és nagyobb mint 0, akkor a jelenlegi ár lesz a régi ár, az új ár pedig az aktuális ár
-if (!empty($data['ar_elado_uj']) && $data['ar_elado_uj'] > 0) {
-    $regi_ar = $data['ar_elado'];
-    $data['ar_elado'] = $data['ar_elado_uj'];
-    $data['ar_elado_regi'] = $regi_ar;
-
-    if (isset($data['email_kuldes_arvaltozasrol'])) {
-        // event managerrel e-mailt küldeni azoknak, akik feliratoztak az illető ingatlan árának figyelésére
-        // email_kuldes_arvaltozasrol elem eltávolítása a tömbból, mivel nincs ilyen oszlop az ingatlanok táblában
-        unset($data['email_kuldes_arvaltozasrol']);
-    }
-}
-// ar_elado_uj elem eltávolítása a tömbból, mivel nincs ilyen oszlop az ingatlanok táblában
-unset($data['ar_elado_uj']);
-
-
-
-
-
                         }
 
                         // adatok adatbázisba írása
