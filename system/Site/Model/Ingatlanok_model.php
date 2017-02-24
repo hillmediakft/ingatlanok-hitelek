@@ -1414,5 +1414,37 @@ foreach ($params as $key => $value) {
         }
     }    
 
+
+    /**
+     * Az arvaltozas táblából kérdezi le, hogy van-e olyan rekor, ahol a user_id és a property_id egyezik
+     * (vagyis a user kért-e már az árváltozásról értesítést)
+     *
+     * @param integer $user_id
+     * @param integer $property_id
+     * @return bool
+     */
+    public function selectPriceChange($user_id, $property_id)
+    {   
+        $this->query->set_table('arvaltozas');
+        $this->query->set_where('user_id', '=', $user_id);
+        $this->query->set_where('property_id', '=', $property_id);
+        $result = $this->query->select();
+        return (empty($result)) ? false : true ;
+    }
+
+    /**
+     * Az arvaltozas tablaba ír be egy új rekordot
+     *
+     * @param array $data
+     */
+    public function insertPriceChange($user_id, $property_id)
+    {   
+        $this->query->set_table('arvaltozas');
+        return $this->query->insert(array('user_id' => $user_id, 'property_id' => $property_id));
+    }
+
+
+
+
 }
 ?>
