@@ -163,26 +163,41 @@ class Ingatlanok extends SiteController {
     public function arvaltozasErtesites()
     {
         if ($this->request->is_ajax()) {
-            
-            $property_id = $this->request->get_post('property_id');
-
-            //echo "----" . $property_id . '-----';
 
             if (Auth::isUserLoggedIn()) {
+                $property_id = $this->request->get_post('property_id');
+                $user_id = Auth::getUser('id');
+
+                // megnézzük, hogy az arvaltozas tablaban van e ennek a felhasználónak ehhez az ingatlanhoz tartozó rekordja
+                // ha van ilyen rekord, akkor true, ha nincs akkor false
+                $result = $this->ingatlanok_model->selectPriceChange($user_id, $property_id);
+                if ($result) {
+                    $this->response->json(array(
+                        'status' => 'success',
+                        'message' => 'Ön már aktiválta ezt a funkciót.'
+                    ));
+                }
+                else {
+                    // beírjuk az adatbázisba az új rekordot
+                    $this->ingatlanok_model->insertPriceChange($user_id, $property_id);
+                }
+
                 $this->response->json(array(
                     'status' => 'success',
-                    'message' => 'message-' . $property_id . '-message'
+                    'message' => 'Értesítés árváltozásról funkció aktiválva.'
                 ));
-            } else {
+
+            }
+            // ha nincs bejelentkezve a felhasználó
+            else {
                 $this->response->json(array(
                     'status' => 'error',
-                    'message' => 'Ennek a funkciónek a használatához be kell jelentkeznie.'
+                    'message' => 'A funkció használatához be kell jelentkeznie.'
                 ));
             }
 
-
-
-
+        } else {
+            $this->response->redirect('error');
         }
     }
 
