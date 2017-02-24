@@ -990,7 +990,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                             // ha volt új ár módosítás
                             elseif ($data['ar_kiado'] != $data['ar_kiado_hidden']) {
                                 //die('ar módositas történt');
-                                $data['ar_kiado'] = intval($num_helper->stringToNumber($data['ar_kiado']) * 1000000);
+                                $data['ar_kiado'] = intval($num_helper->stringToNumber($data['ar_kiado']) * 1000);
                                 $ar_kiado_modosult = true;
                             }
                             // ha nem volt változás az új árban
