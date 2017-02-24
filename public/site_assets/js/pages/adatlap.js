@@ -16,19 +16,25 @@ var Adatlap = function () {
     }
 
     /**
-     * 
-     *
+     * Értesítés árváltozásról regisztráció funkciót kezeli
      */
     var arvaltozasReg = function () {
-        var propertyID = $('#arvaltozas_ertesites').attr('data-id');
 
-        $('#arvaltozas_ertesites').on('click', function(){
+        $('#arvaltozas_ertesites').on('click', function(event){
+            event.preventDefault();
+            
+            var gomb = $(this);
 
-             console.log(propertyID);
+            // ha már van disabled osztálya a gombnak
+            if ($(gomb).hasClass('disabled')) {
+                return false;
+            }
+
+            var propertyID = $(gomb).attr('data-id');
 
             $.ajax({
                 url: '/ingatlanok/arvaltozasErtesites',
-                type: 'POST',
+                type: 'post',
                 dataType: 'json',
                 data: {property_id: propertyID},
             
@@ -48,20 +54,20 @@ var Adatlap = function () {
                 // itt kapjuk meg (és dolgozzuk fel) a feldolgozó php által visszadott adatot 
                 success: function(result){
                     if(result.status == 'success'){
-
-toastr['success'](result.message);
-
+                        // disabled-re állítjuk a gombot
+                        $(gomb).addClass('disabled');
+                        // üzenet megjelenítése
+                        toastr['success'](result.message);
                     }
             
                     if(result.status == 'error'){
-
-toastr['error'](result.message);
-   
+                        // üzenet megjelenítése
+                        toastr['error'](result.message);
                     }
             
                 },
                 error: function(result, status, e){
-                        console.log(e);
+                    console.log(e);
                 } 
             });
 
