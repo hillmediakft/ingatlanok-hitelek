@@ -499,8 +499,9 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                 'hazszam_megjelenites',
                 'terkep',
                 'ar_elado',
-                'ar_elado_regi',
+                'ar_elado_eredeti',
                 'ar_kiado',
+                'ar_kiado_eredeti',
                 'alapterulet',
                 'telek_alapterulet',
                 'erkely_terulet',
@@ -527,7 +528,9 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
             $integer_items = array_merge($integer_items, Config::get('extra'));
 
             foreach ($integer_items as $value) {
-                $data[$value] = (int)$data[$value];
+                if (!is_null($data[$value])) {
+                    $data[$value] = (int)$data[$value];
+                }
             }
 
             // a statust inaktívra állítjuk
@@ -844,7 +847,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                 $update_real = false;
 
                 $data = $this->request->get_post(null, 'strip_danger_tags');
-
+//var_dump($data);
                 //echo json_encode($data);
                 // megvizsgáljuk, hogy a post adatok között van-e update_id
                 // update-nél a javasriptel hozzáadunk a post adatokhoz egy update_id elemet
@@ -893,7 +896,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                 }
 
                 // ár
-                if (empty($data['ar_elado']) && empty($data['ar_kiado'])) {
+                if (empty($data['ar_elado_eredeti']) && empty($data['ar_kiado_eredeti'])) {
                     $error_messages[] = Message::show('Nem adott meg árat.');
                     $error_counter += 1;
                 }
@@ -928,8 +931,106 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                     // referenciaszám
                     $data['ref_num'] = (int)$data['ref_num'];
 
-                    $data['ar_elado'] = ($data['tipus'] == 1) ? $data['ar_elado'] * 1000000 : null;
-                    $data['ar_kiado'] = ($data['tipus'] == 2) ? $data['ar_kiado'] * 1000 : null;
+                    // num helper példányosítása
+                    $num_helper = DI::get('num_helper');
+
+/* ***** ÁR MEZŐK ÉRTÉKÉNEK FELDOLGOZÁSA ***** */
+
+                    // új ár módosítást jelző változók
+                    $ar_elado_modosult = false;    
+                    $ar_kiado_modosult = false;    
+
+                    // típus eladó
+                    if ($data['tipus'] == 1) {
+
+                        $data['ar_elado_eredeti'] = intval($num_helper->stringToNumber($data['ar_elado_eredeti']) * 1000000);
+
+                        //insert és insert utáni upadate esetén
+                        if (!$update_marker || ($update_marker && !$update_real)) {
+                            // ha nem írtak be új árat
+                            if ($data['ar_elado'] === '') {
+                                //die('Nem adtak meg új árat');
+                                $data['ar_elado'] = $data['ar_elado_eredeti'];
+                            }
+                            else {
+                                $data['ar_elado'] = intval($num_helper->stringToNumber($data['ar_elado']) * 1000000);
+                            }
+                        }
+                        //valódi update esetén (csak ekkor van ar_elado_hidden mezo)
+                        elseif ($update_marker && $update_real) {
+                            // ha az új ár üres string volt
+                            if ($data['ar_elado'] === '') {
+                                //die('ha nem volt új ár, módosítaskor');
+                                $data['ar_elado'] = $data['ar_elado_eredeti'];
+                            }
+                            // ha volt új ár módosítás
+                            elseif ($data['ar_elado'] != $data['ar_elado_hidden']) {
+                                //die('ar módositas történt');
+                                $data['ar_elado'] = intval($num_helper->stringToNumber($data['ar_elado']) * 1000000);
+                                $ar_elado_modosult = true;
+                            }
+                            // ha nem volt változás az új árban
+                            else {
+                                unset($data['ar_elado']);
+                            }
+                        }
+                        
+                        $data['ar_kiado_eredeti'] = null;
+                        $data['ar_kiado'] = null;
+                    }
+                    // típus kiadó
+                    if ($data['tipus'] == 2) {
+
+                        $data['ar_kiado_eredeti'] = intval($num_helper->stringToNumber($data['ar_kiado_eredeti']) * 1000);
+
+                        //insert és insert utáni upadate esetén
+                        if (!$update_marker || ($update_marker && !$update_real)) {
+                            // ha nem írtak be új árat
+                            if ($data['ar_kiado'] === '') {
+                                //die('Nem adtak meg új árat');
+                                $data['ar_kiado'] = $data['ar_kiado_eredeti'];
+                            } else {
+                                $data['ar_kiado'] = intval($num_helper->stringToNumber($data['ar_kiado']) * 1000);
+                            }
+                        }
+                        //update esetén
+                        else {
+                            // ha az új ár üres string volt
+                            if ($data['ar_kiado'] === '') {
+                                //die('ha nem volt új ár, módosítaskor');
+                                $data['ar_kiado'] = $data['ar_kiado_eredeti'];
+                            }
+                            // ha volt új ár módosítás
+                            elseif ($data['ar_kiado'] != $data['ar_kiado_hidden']) {
+                                //die('ar módositas történt');
+                                $data['ar_kiado'] = intval($num_helper->stringToNumber($data['ar_kiado']) * 1000000);
+                                $ar_kiado_modosult = true;
+                            }
+                            // ha nem volt változás az új árban
+                            else {
+                                unset($data['ar_kiado']);
+                            }
+                        }     
+                        
+                        $data['ar_elado_eredeti'] = null;
+                        $data['ar_elado'] = null;
+
+                    }                    
+
+                    // rejtett mezőkből jövő adatelemek törlése (ezeket nem kell az adatbáziba írni, mert nincs ilyen db oszlop)
+                    if (isset($data['ar_elado_hidden']) || isset($data['ar_kiado_hidden'])) {
+                        unset($data['ar_elado_hidden']);
+                        unset($data['ar_kiado_hidden']);
+                    }
+
+                            // ár eladó
+                            // $data['ar_elado'] = ($data['tipus'] == 1) ? $data['ar_elado'] * 1000000 : null;
+                            // ár kiadó
+                            // $data['ar_kiado'] = ($data['tipus'] == 2) ? $data['ar_kiado'] * 1000 : null;
+
+/* ***** ÁR MEZŐK ÉRTÉKÉNEK FELDOLGOZÁSA VÉGE ***** */
+
+
                     $data['hazszam'] = (isset($data['hazszam'])) ? $data['hazszam'] : null;
                     $data['kerulet'] = (isset($data['kerulet'])) ? $data['kerulet'] : null;
 
@@ -1016,20 +1117,29 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                         if ($update_real) {
                             // a módosítás dátum a "rendes" módosításkor fog bekerülni az adatbázisba 
                             $data['modositas_datum'] = time();
-                            // ha van új ár és nagyobb mint 0, akkor a jelenlegi ár lesz a régi ár, az új ár pedig az aktuális ár
-                            if (!empty($data['ar_elado_uj']) && $data['ar_elado_uj'] > 0) {
-                                $regi_ar = $data['ar_elado'];
-                                $data['ar_elado'] = $data['ar_elado_uj'];
-                                $data['ar_elado_regi'] = $regi_ar;
 
-                                if (isset($data['email_kuldes_arvaltozasrol'])) {
-                                    // event managerrel e-mailt küldeni azoknak, akik feliratoztak az illető ingatlan árának figyelésére
-                                    // email_kuldes_arvaltozasrol elem eltávolítása a tömbból, mivel nincs ilyen oszlop az ingatlanok táblában
-                                    unset($data['email_kuldes_arvaltozasrol']);
-                                }
-                            }
-                            // ar_elado_uj elem eltávolítása a tömbból, mivel nincs ilyen oszlop az ingatlanok táblában
-                            unset($data['ar_elado_uj']);
+
+
+
+// ha van új ár és nagyobb mint 0, akkor a jelenlegi ár lesz a régi ár, az új ár pedig az aktuális ár
+if (!empty($data['ar_elado_uj']) && $data['ar_elado_uj'] > 0) {
+    $regi_ar = $data['ar_elado'];
+    $data['ar_elado'] = $data['ar_elado_uj'];
+    $data['ar_elado_regi'] = $regi_ar;
+
+    if (isset($data['email_kuldes_arvaltozasrol'])) {
+        // event managerrel e-mailt küldeni azoknak, akik feliratoztak az illető ingatlan árának figyelésére
+        // email_kuldes_arvaltozasrol elem eltávolítása a tömbból, mivel nincs ilyen oszlop az ingatlanok táblában
+        unset($data['email_kuldes_arvaltozasrol']);
+    }
+}
+// ar_elado_uj elem eltávolítása a tömbból, mivel nincs ilyen oszlop az ingatlanok táblában
+unset($data['ar_elado_uj']);
+
+
+
+
+
                         }
 
                         // adatok adatbázisba írása

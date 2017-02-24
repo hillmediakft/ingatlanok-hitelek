@@ -130,6 +130,7 @@
                                             </select>
                                         </div>
                                     </div>
+
                                     <!-- ÜGYLET TÍPUSA -->	
                                     <div class="form-group">
                                         <label for="tipus" class="control-label col-md-3">Megbízás típusa <small>(Eladó / kiadó)</small><span class="required">*</span></label>
@@ -141,7 +142,8 @@
 
                                             </select>
                                         </div>
-                                    </div>                                   
+                                    </div>
+
                                     <!-- LAKÁS FAJTÁJA -->	
                                     <div class="form-group">
                                         <label for="kategoria" class="control-label col-md-3">Ingatlan típusa <span class="required">*</span></label>
@@ -155,53 +157,76 @@
                                         </div>
                                     </div>	
 
-                                    <!-- ÁR_ELADÓ -->	
+                                    <!-- EREDETI ÁR ELADÓ -->
                                     <div class="form-group">
-                                        <label for="ar_elado" class="control-label col-md-3">Eladási ár <small>(Ft)</small> <span class="required">*</span></label>
+                                        <label for="ar_elado_eredeti" class="control-label col-md-3">Eredeti eladási ár <small>(Ft)</small> <span class="required">*</span></label>
                                         <div class="col-md-3">
                                             <div class="input-group">
-                                                <input type="text" name="ar_elado" id="ar_elado" value="<?php echo ($content['ar_elado'] / 1000000); ?>" class="form-control" disabled/>
+                                                <input type="text" name="ar_elado_eredeti" id="ar_elado_eredeti" value="<?php echo (!is_null($content['ar_elado_eredeti'])) ? ($content['ar_elado_eredeti'] / 1000000) : ''; ?>" class="form-control"/>
                                                 <div class="input-group-addon">millió Ft</div>
                                             </div>
                                         </div>
+                                        <!--
                                         <div class="col-md-2">
-                                            <a href="javascript:void(0);" id="arvaltozas_aktivalas" class="btn default">Árváltozás aktiválása</a>
+                                            <button type="button" id="arvaltozas_deaktivalas" class="btn default">Árváltozás deaktiválása</button>
                                         </div>
+                                        -->
                                     </div>
 
-                                    <!-- ÚJ ÁR ELADÓ -->
-                                    <div class="form-group" id="arvaltozas">
-                                        <label for="ar_elado_uj" class="control-label col-md-3">ÚJ eladási ár <small>(Ft)</small></label>
+                                    <!-- ÚJ ÁR_ELADÓ -->   
+                                    <div class="form-group">
+                                        <label for="ar_elado" class="control-label col-md-3">Új eladási ár <small>(Ft)</small></label>
                                         <div class="col-md-3">
                                             <div class="input-group">
-                                                <input type="text" name="ar_elado_uj" id="ar_elado_uj" value=0 class="form-control"/>
+                                                <?php $ar_elado = (!is_null($content['ar_elado'])) ? ($content['ar_elado'] / 1000000) : ''; ?>
+                                                <input type="hidden" name="ar_elado_hidden" value="<?php echo $ar_elado; ?>" class="form-control"/>
+                                                <input type="text" name="ar_elado" id="ar_elado" value="<?php echo $ar_elado; ?>" class="form-control" />
                                                 <div class="input-group-addon">millió Ft</div>
                                             </div>
                                         </div>
+                                        <!-- 
                                         <div class="col-md-2">
-                                            <a href="javascript:void(0);" id="arvaltozas_deaktivalas" class="btn default">Árváltozás deaktiválása</a>
+                                            <button type="button" id="arvaltozas_aktivalas" class="btn default">Árváltozás aktiválása</button>
                                         </div>
+                                        -->
                                     </div>
-                                    
-                                    <div class="form-group" id="email_kuldes_arvaltozasrol">
-                                        <label for="erkely" class="control-label col-md-3">E-mail küldés árváltozásról</label>
-                                        <div class="col-md-3">
-                                            <div class="checkbox">
-                                                <input type="checkbox" value="1" name="email_kuldes_arvaltozasrol">			
-                                            </div>
-                                        </div>
-                                    </div>                                    
 
-                                    <!-- ÁR_KIADÓ -->
+
+                                    <!-- ÚJ ÁR KIADÓ -->
                                     <div class="form-group">
-                                        <label for="ar_kiado" class="control-label col-md-3">Bérleti díj <small>(Ft)</small> <span class="required">*</span></label>
+                                        <label for="ar_kiado_eredeti" class="control-label col-md-3">Eredeti bérleti díj <small>(Ft)</small> <span class="required">*</span></label>
                                         <div class="col-md-3">
                                             <div class="input-group">
-                                                <input type="text" name="ar_kiado" id="ar_kiado" value="<?php echo ($content['ar_kiado'] / 1000); ?>" class="form-control" disabled/>
+                                                <input type="text" name="ar_kiado_eredeti" id="ar_kiado_eredeti" value="<?php echo (!is_null($content['ar_kiado_eredeti'])) ? ($content['ar_kiado_eredeti'] / 1000) : ''; ?>" class="form-control" />
+                                                <div class="input-group-addon">ezer Ft</div>
+                                            </div>
+                                        </div>
+                                    </div>  
+
+                                    <!-- ÁR KIADÓ -->
+                                    <div class="form-group">
+                                        <label for="ar_kiado" class="control-label col-md-3">Új bérleti díj <small>(Ft)</small></label>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <?php $ar_kiado = (!is_null($content['ar_kiado'])) ? ($content['ar_kiado'] / 1000) : ''; ?>
+                                                <input type="hidden" name="ar_kiado" value="<?php echo $ar_kiado; ?>" class="form-control" />
+                                                <input type="text" name="ar_kiado" id="ar_kiado" value="<?php echo $ar_kiado; ?>" class="form-control" />
                                                 <div class="input-group-addon">ezer Ft</div>
                                             </div>
                                         </div>
                                     </div>
+
+                                  
+
+                                    <!-- EMAIL KULDES ARVALTOZASROL -->
+                                    <div class="form-group" id="email_kuldes_arvaltozasrol">
+                                        <label for="email_kuldes_arvaltozasrol" class="control-label col-md-3">E-mail küldés árváltozásról</label>
+                                        <div class="col-md-3">
+                                            <div class="checkbox">
+                                                <input type="checkbox" value="1" name="email_kuldes_arvaltozasrol">         
+                                            </div>
+                                        </div>
+                                    </div> 
 
                                     <!-- ALAPTERÜLET -->    
                                     <div class="form-group">

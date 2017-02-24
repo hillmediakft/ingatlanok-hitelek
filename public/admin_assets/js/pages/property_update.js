@@ -287,12 +287,18 @@ var updateProperty = function () {
                 tipus: {
                     required: true
                 },
+                ar_elado_eredeti: {
+                    required: true,
+                    number: true
+                },
                 ar_elado: {
+                    number: true
+                },
+                ar_kiado_eredeti: {
                     required: true,
                     number: true
                 },
                 ar_kiado: {
-                    required: true,
                     number: true
                 },
                 megye: {
@@ -808,20 +814,26 @@ toastr['error'](data.response[0]);
         });
     }
 
+    /**
+     *  Új ár mező be- és kikapcsolása (enable/disable)
+     *
+     */
     var enableDisablePrices = function () {
-
         // option listaelem value
-        option_value = $("select#tipus option:selected").val();
-        // az érték üres lesz, ha a válassz elemet választjuk ki az option listából
+        var option_value = $("select#tipus option:selected").val();
+
         if (option_value == '1') {
             $('#ar_elado').prop("disabled", false);
+            $('#ar_elado_eredeti').prop("disabled", false);
             $('#ar_kiado').prop("disabled", true);
+            $('#ar_kiado_eredeti').prop("disabled", true);
 
         }
         if (option_value == '2') {
             $('#ar_elado').prop("disabled", true);
+            $('#ar_elado_eredeti').prop("disabled", true);
             $('#ar_kiado').prop("disabled", false);
-
+            $('#ar_kiado_eredeti').prop("disabled", false);
         }
 
         //típus kiválasztása szerint engedélyezi / blokkolja az ár beviteli mezőket
@@ -831,13 +843,16 @@ toastr['error'](data.response[0]);
             // az érték üres lesz, ha a válassz elemet választjuk ki az option listából
             if (option_value == '1') {
                 $('#ar_elado').prop("disabled", false);
+                $('#ar_elado_eredeti').prop("disabled", false);
                 $('#ar_kiado').prop("disabled", true);
+                $('#ar_kiado_eredeti').prop("disabled", true);
 
             }
             if (option_value == '2') {
                 $('#ar_elado').prop("disabled", true);
+                $('#ar_elado_eredeti').prop("disabled", true);
                 $('#ar_kiado').prop("disabled", false);
-
+                $('#ar_kiado_eredeti').prop("disabled", false);
             }
 
         })
@@ -922,16 +937,21 @@ toastr['error'](data.response[0]);
     };
 
     var arcsokkentes = function () {
-        // az új ár beviteli mezők és e-mail küldés checkbox elrejtése
-        $('#arvaltozas').hide();
-        $('#email_kuldes_arvaltozasrol').hide();
-        // az árváltozás aktiválása gombra kattintás után az új ár beviteli mező és e-mail küldés checkbox megjelenítése
+       // az új ár beviteli mezők és e-mail küldés checkbox elrejtése
+        //$('#arvaltozas').hide();
+        //$('#email_kuldes_arvaltozasrol').hide();
+        
+       // az árváltozás aktiválása gombra kattintás után az új ár beviteli mező és e-mail küldés checkbox megjelenítése
+        /*
         $('#arvaltozas_aktivalas').click(function () {
             $('#arvaltozas').fadeIn('slow');
             $('#email_kuldes_arvaltozasrol').fadeIn('slow');
         })
-        // az új ár beírása után az email küldés checkbox módosítása
-        // ha í beírt érték nem nulla, akkor pipa, egyébként pipa eltávolítása
+        */
+
+       // az új ár beírása után az email küldés checkbox módosítása
+       // ha í beírt érték nem nulla, akkor pipa, egyébként pipa eltávolítása
+        /*
         $("input[name=ar_elado_uj]").change(function () {
             if ($("input[name=ar_elado_uj]").val() != '0') {
                 $('input[name=email_kuldes_arvaltozasrol]').prop('checked', true).uniform();
@@ -939,13 +959,17 @@ toastr['error'](data.response[0]);
                 $('input[name=email_kuldes_arvaltozasrol]').prop('checked', false).uniform();
             }
         })
-        // az árváltozás deaktiválása gombra kattintás után az új ár beviteli mező és e-mail küldés checkbox eltüntetése, új ar_elado_uj mező értékének 0-ra //          // állítása
+        */
+
+       // az árváltozás deaktiválása gombra kattintás után az új ár beviteli mező és e-mail küldés checkbox eltüntetése, új ar_elado_uj mező értékének 0-ra //          // állítása
+        /*
         $('#arvaltozas_deaktivalas').click(function () {
             $('input[name=email_kuldes_arvaltozasrol]').prop('checked', false).uniform();
             $('#email_kuldes_arvaltozasrol').fadeOut();
             $("input[name=ar_elado_uj]").val('0');
             $('#arvaltozas').fadeOut('slow');
         })
+        */
     };
 
     return {

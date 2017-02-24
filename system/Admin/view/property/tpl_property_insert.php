@@ -116,8 +116,6 @@
                                         </div>
 
                                         <!-- ÜGYLET TÍPUSA -->
-
-
                                         <div class="form-group">
                                             <label for="kiemeles" class="control-label col-md-3">Kiemelés <span></span></label>
                                             <div class="col-md-9">
@@ -162,9 +160,20 @@
                                         </div>
 
 
-                                        <!-- ÁR_ELADó -->
+                                        <!-- EREDETI ÁR_ELADÓ -->
                                         <div class="form-group">
-                                            <label for="ar_elado" class="col-md-3 control-label">Eladási ár (Ft) <span class="required">*</span></label>
+                                            <label for="ar_elado_eredeti" class="col-md-3 control-label">Eredeti eladási ár <span class="required">*</span></label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    <input type="text" name="ar_elado_eredeti" id="ar_elado_eredeti" class="form-control"/>
+                                                    <div class="input-group-addon">millió Ft</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- ÚJ ÁR_ELADÓ -->
+                                        <div class="form-group">
+                                            <label for="ar_elado" class="col-md-3 control-label">Új eladási ár </label>
                                             <div class="col-md-3">
                                                 <div class="input-group">
                                                     <input type="text" name="ar_elado" id="ar_elado" class="form-control"/>
@@ -173,9 +182,20 @@
                                             </div>
                                         </div>
 
-                                        <!-- ÁR_KIADÓ -->
+                                        <!-- EREDETI ÁR_KIADÓ -->
                                         <div class="form-group">
-                                            <label for="ar_kiado" class="control-label col-md-3">Bérleti díj (Ft) <span class="required">*</span></label>
+                                            <label for="ar_kiado_eredeti" class="control-label col-md-3">Eredeti bérleti díj <span class="required">*</span></label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    <input type="text" name="ar_kiado_eredeti" id="ar_kiado_eredeti" class="form-control" disabled/>
+                                                    <div class="input-group-addon">ezer Ft</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Új ÁR_KIADÓ -->
+                                        <div class="form-group">
+                                            <label for="ar_kiado" class="control-label col-md-3">Új bérleti díj</label>
                                             <div class="col-md-3">
                                                 <div class="input-group">
                                                     <input type="text" name="ar_kiado" id="ar_kiado" class="form-control" disabled/>

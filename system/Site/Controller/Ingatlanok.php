@@ -106,7 +106,7 @@ class Ingatlanok extends SiteController {
 
         $view->add_links(array('google-maps-site'));
         $view->add_link('js', SITE_JS . 'kedvencek.js');
-        //$view->add_link('js', SITE_JS . 'pages/adatlap.js');
+        $view->add_link('js', SITE_JS . 'pages/adatlap.js');
         
         $view->render('ingatlanok/tpl_adatlap', $data);
     }
