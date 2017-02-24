@@ -61,6 +61,7 @@ class Application {
             $router->get('/ingatlanok/ertekesito/:title/:id', 'ingatlanok@ertekesito', array('title', 'id'));
             $router->get('/kedvencek', 'kedvencek@index');
             
+            $router->post('/ingatlanok/arvaltozasErtesites', 'ingatlanok@arvaltozasErtesites'); // ajax
 
             $router->post('/user/login', 'user@login'); // ajax
             $router->get('/felhasznalo/kijelentkezes', 'user@logout');
