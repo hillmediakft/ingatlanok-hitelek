@@ -3,6 +3,7 @@ namespace System\Site\Controller;
 
 use System\Core\SiteController;
 use System\Core\View;
+use System\Libs\Auth;
 use System\Libs\Config;
 use System\Libs\Session;
 use System\Libs\Paginator;
@@ -154,7 +155,34 @@ class Ingatlanok extends SiteController {
         $view->render('ingatlanok/tpl_ertekesito_ingatlanok', $data);
     }
     
- 
+    /**
+     * 
+     */
+    public function arvaltozasErtesites()
+    {
+        if ($this->request->is_ajax()) {
+            
+            $property_id = $this->request->get_post('property_id');
+
+            //echo "----" . $property_id . '-----';
+
+            if (Auth::isUserLoggedIn()) {
+                $this->response->json(array(
+                    'status' => 'success',
+                    'message' => 'message-' . $property_id . '-message'
+                ));
+            } else {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Ennek a funkciónek a használatához be kell jelentkeznie.'
+                ));
+            }
+
+
+
+
+        }
+    }
 
 
 }
