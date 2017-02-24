@@ -61,15 +61,15 @@ use System\Libs\Language as Lang;
                     <div class="col-sm-4">
                         <div class="agent-box">
                             <div class="agent-image">
-                                <img class="img-thumbnail" src="<?php echo SITE_IMAGE; ?>placeholder120x120.png">
+                                <img class="img-thumbnail" style="width:120px; height:120px;" src="<?php echo Config::get('user.upload_path') . $agent['photo']; ?>">
                             </div>
 
                             <div class="agent-details">
                                  <div class="agent-name">
-                                     <h6>Kovács Géza</h6>
+                                     <h6><?php echo $agent['first_name'] . ' ' . $agent['last_name']; ?></h6>
                                      <div>13. kerületi ingatlanok specialistája</div>
                                  </div>
-                                <div>Tel: +36 20 345-5678</div>
+                                <div>Tel: <?php echo $agent['phone']; ?></div>
                                 <div class="label label-danger">Hívjon most!</div>
                             </div>
                         </div>   
