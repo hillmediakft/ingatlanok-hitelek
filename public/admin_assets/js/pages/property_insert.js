@@ -110,15 +110,11 @@ var InsertProperty = function () {
             // option listaelem value
             var option_value = $("select#tipus option:selected").val();
             if (option_value == '1') {
-                $('#ar_elado').prop("disabled", false);
                 $('#ar_elado_eredeti').prop("disabled", false);
-                $('#ar_kiado').prop("disabled", true);
                 $('#ar_kiado_eredeti').prop("disabled", true);
             }
             if (option_value == '2') {
-                $('#ar_elado').prop("disabled", true);
                 $('#ar_elado_eredeti').prop("disabled", true);
-                $('#ar_kiado').prop("disabled", false);
                 $('#ar_kiado_eredeti').prop("disabled", false);
             }
         })
@@ -291,14 +287,8 @@ var InsertProperty = function () {
                     required: true,
                     number: true
                 },
-                ar_elado: {
-                    number: true
-                },
                 ar_kiado_eredeti: {
                     required: true,
-                    number: true
-                },
-                ar_kiado: {
                     number: true
                 },
                 szobaszam: {
