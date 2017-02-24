@@ -171,34 +171,12 @@
                                             </div>
                                         </div>
 
-                                        <!-- ÚJ ÁR_ELADÓ -->
-                                        <div class="form-group">
-                                            <label for="ar_elado" class="col-md-3 control-label">Új eladási ár </label>
-                                            <div class="col-md-3">
-                                                <div class="input-group">
-                                                    <input type="text" name="ar_elado" id="ar_elado" class="form-control"/>
-                                                    <div class="input-group-addon">millió Ft</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <!-- EREDETI ÁR_KIADÓ -->
                                         <div class="form-group">
                                             <label for="ar_kiado_eredeti" class="control-label col-md-3">Eredeti bérleti díj <span class="required">*</span></label>
                                             <div class="col-md-3">
                                                 <div class="input-group">
                                                     <input type="text" name="ar_kiado_eredeti" id="ar_kiado_eredeti" class="form-control" disabled/>
-                                                    <div class="input-group-addon">ezer Ft</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Új ÁR_KIADÓ -->
-                                        <div class="form-group">
-                                            <label for="ar_kiado" class="control-label col-md-3">Új bérleti díj</label>
-                                            <div class="col-md-3">
-                                                <div class="input-group">
-                                                    <input type="text" name="ar_kiado" id="ar_kiado" class="form-control" disabled/>
                                                     <div class="input-group-addon">ezer Ft</div>
                                                 </div>
                                             </div>
