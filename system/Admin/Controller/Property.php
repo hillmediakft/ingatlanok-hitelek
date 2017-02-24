@@ -947,14 +947,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
 
                         //insert és insert utáni upadate esetén
                         if (!$update_marker || ($update_marker && !$update_real)) {
-                            // ha nem írtak be új árat
-                            if ($data['ar_elado'] === '') {
-                                //die('Nem adtak meg új árat');
-                                $data['ar_elado'] = $data['ar_elado_eredeti'];
-                            }
-                            else {
-                                $data['ar_elado'] = intval($num_helper->stringToNumber($data['ar_elado']) * 1000000);
-                            }
+                            $data['ar_elado'] = $data['ar_elado_eredeti'];
                         }
                         //valódi update esetén (csak ekkor van ar_elado_hidden mezo)
                         elseif ($update_marker && $update_real) {
@@ -985,13 +978,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
 
                         //insert és insert utáni upadate esetén
                         if (!$update_marker || ($update_marker && !$update_real)) {
-                            // ha nem írtak be új árat
-                            if ($data['ar_kiado'] === '') {
-                                //die('Nem adtak meg új árat');
-                                $data['ar_kiado'] = $data['ar_kiado_eredeti'];
-                            } else {
-                                $data['ar_kiado'] = intval($num_helper->stringToNumber($data['ar_kiado']) * 1000);
-                            }
+                            $data['ar_kiado'] = $data['ar_kiado_eredeti'];
                         }
                         //update esetén
                         else {
