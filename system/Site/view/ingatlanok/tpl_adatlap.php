@@ -171,12 +171,19 @@ use System\Libs\Language as Lang;
                             </div>
                             <div class="widget-entry gray-bg">
                                 <div class="questions-form">
-                                    <form action="#">
+                                    <form action="sendemail/init/agent" method="post" id="contact-form-kapcsolat">
                                         <input type="text" class="name" placeholder="név">
                                         <input type="email" class="email" placeholder="Email">
                                         <input type="text" class="email" placeholder="Telefonszám">
+                                        <input type="text" name="mezes_bodon" id="mezes_bodon">
                                         <textarea class="message" placeholder="Üzenet"></textarea>
-                                        <button class="send-btn">Küldés</button>
+
+                                        <input type="hidden" name="agent_name">
+                                        <input type="hidden" name="agent_email">
+                                        <input type="hidden" name="property_id" value="">
+                                        <input type="hidden" name="url" value="<?php echo $this->request->get_uri('current_url'); ?>">
+
+                                        <button class="send-btn" id="submit-button">Küldés</button>
                                     </form>
                                 </div>
                             </div>
