@@ -69,6 +69,7 @@ class Application {
             $router->post('/user/forgottpw', 'user@forgottpw'); // ajax
             $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
             $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
+            $router->post('/kedvencek/delete_property_from_cookie', 'kedvencek@delete_property_from_cookie'); // ajax
             
             $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek');
             $router->post('/sendemail/init/:title', 'SendEmail@init', array('type'));

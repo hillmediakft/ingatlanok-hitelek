@@ -1,5 +1,7 @@
 <?php
+
 namespace System\Site\Model;
+
 use System\Core\SiteModel;
 use System\Libs\Session;
 use System\Libs\Cookie;
@@ -7,18 +9,18 @@ use \PDO;
 
 class Kedvencek_model extends SiteModel {
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    function __construct() {
+        parent::__construct();
+    }
+
     /**
      * 	Lekérdezi az ingatlanok táblából a kiemelet ingatlanokat
      * 	
      * 	@param array 
      */
-    public function get_favourite_properties_data($id_array)
-    {
+    public function get_favourite_properties($id_array) {
 // $this->query->debug(true);
+        $this->query->set_table('ingatlanok');
         $this->query->set_columns(array(
             'ingatlanok.id',
             'ingatlanok.ref_num',
@@ -27,7 +29,9 @@ class Kedvencek_model extends SiteModel {
             'ingatlanok.tipus',
             'ingatlanok.kerulet',
             'ingatlanok.ar_elado',
+            'ingatlanok.ar_elado_eredeti',
             'ingatlanok.ar_kiado',
+            'ingatlanok.ar_kiado_eredeti',
             'ingatlanok.alapterulet',
             'ingatlanok.szobaszam',
             'ingatlanok.kepek',
@@ -52,8 +56,8 @@ class Kedvencek_model extends SiteModel {
 
         return $this->query->select();
     }
-    
-   /**
+
+    /**
      * 	Frissíti a cookie-t a kedvencekhez
      */
     public function refresh_kedvencek_cookie($id) {
@@ -63,16 +67,17 @@ class Kedvencek_model extends SiteModel {
             $kedvencek_array[] = $id;
             $kedvencek_json = json_encode($kedvencek_array);
             Cookie::set('kedvencek', $kedvencek_json);
+            return true;
 
-     //       echo $this->favourite_property_html($id);
+            //       echo $this->favourite_property_html($id);
         } elseif ($kedvencek_array == null) {
             $kedvencek_array[] = $id;
             $kedvencek_json = json_encode($kedvencek_array);
             Cookie::set('kedvencek', $kedvencek_json);
-
-    //        echo $this->favourite_property_html($id);
+            return true;
+            //        echo $this->favourite_property_html($id);
         } else {
-            return;
+            return false;
         }
     }
 
@@ -92,6 +97,7 @@ class Kedvencek_model extends SiteModel {
 
         $kedvencek_json = json_encode($kedvencek_array);
         Cookie::set('kedvencek', $kedvencek_json);
+        return true;
     }
 
     /**
@@ -104,7 +110,7 @@ class Kedvencek_model extends SiteModel {
 
         $photo_array = json_decode($property_data['kepek']);
 
-         $string = '';
+        $string = '';
         $string .= '<article class="property-item" id="favourite_property_' . $property_data['id'] . '">';
         $string .= '<div class="row">';
         $string .= '<div class="col-md-5 col-sm-5">';
@@ -120,7 +126,7 @@ class Kedvencek_model extends SiteModel {
         } else {
             $string .= $property_data['city_name'];
         }
-                $string .= '<div class="price">';
+        $string .= '<div class="price">';
         if ($property_data['tipus'] == 1) {
             $string .= '<span class="attr-pricing">' . number_format($property_data['ar_elado'], 0, ',', '.') . ' Ft</span>';
         } elseif ($property_data['tipus'] == 2) {
@@ -138,6 +144,8 @@ class Kedvencek_model extends SiteModel {
         $string .= '</div>'; //row
         $string .= '</article>';
         return $string;
-    }   
+    }
+
 }
+
 ?>

@@ -710,16 +710,14 @@ foreach ($params as $key => $value) {
                     $kedvencek_array[] = $id;
                     $kedvencek_json = json_encode($kedvencek_array);
                     Cookie::set('kedvencek', $kedvencek_json);
-
-                    echo $this->favourite_property_html($id);
+                    return true;
                 } elseif ($kedvencek_array == null) {
                     $kedvencek_array[] = $id;
                     $kedvencek_json = json_encode($kedvencek_array);
                     Cookie::set('kedvencek', $kedvencek_json);
-
-                    echo $this->favourite_property_html($id);
+                    return true;
                 } else {
-                    return;
+                    return false;
                 }
             }
 

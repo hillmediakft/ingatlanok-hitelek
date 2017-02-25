@@ -334,7 +334,35 @@
     margin-bottom: 0px;
 }
 
-.line-through {
+h3.section-title .line-through {
     text-decoration: line-through;
+    font-size: 24px;
+    color:#000; 
 }
 
+.objects-block.list-sidebar .item-info .price .line-through {
+    text-decoration: line-through;
+    font-size: 18px;
+    color:#000; 
+}
+
+.badge.badge-danger {
+    background-color: #c44a35;
+}
+.kedvencek .main-sidebar {
+  padding-top: 0px;
+}
+.kedvencek .main-sidebar .widget.main-filter-widget {
+    margin-top: 0px;
+}
+
+.objects-block.list-full .item .preview .lower-price, .objects-block.list-sidebar .item .preview .lower-price {
+position: absolute;
+background: rgba(73, 158, 255, 0.8);
+bottom: 0px;
+right: 0px;
+padding: 5px 7px;
+color: #fff;
+font-size: 16px;
+}
+ 

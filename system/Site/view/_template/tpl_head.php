@@ -1,6 +1,7 @@
 <?php 
 use System\Libs\Config;
 use System\Libs\Auth;
+use System\Libs\Cookie;
 use System\Libs\Language as Lang;
 
 // ellenőrizzük, hogy be van-e jelentkezve a felhasználó (true vagy false)
@@ -41,7 +42,11 @@ include($this->path('tpl_forgottenpw_modal'));
         </div>
         <div class="right-part">
             <div class="extra-item login">
-                <span class="event-entry"><a href="kedvencek" id="kedvencek"><i class="fa fa-heart"></i><?php echo Lang::get('header_top_kedvencek'); ?></a></span>
+                <span class="event-entry">
+                    <a href="kedvencek" id="kedvencek"><i class="fa fa-heart"></i><?php echo Lang::get('header_top_kedvencek'); ?>
+                    <?php echo '<span class="badge badge-danger">' . count(json_decode(Cookie::get('kedvencek'))) . '</span>';?>
+                    </a>
+                </span>
             </div>
             <div class="extra-item event">
                 <div class="country-select">

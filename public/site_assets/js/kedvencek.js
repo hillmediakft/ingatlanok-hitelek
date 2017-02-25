@@ -1,5 +1,20 @@
 var Kedvencek = function () {
 
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "showDuration": "1000",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
     /* ********************** Kedvencekhez adás ************************* */
     var addToFavourites = function () {
         $('[id*=kedvencekhez]').on('click', function (event) {
@@ -11,20 +26,16 @@ var Kedvencek = function () {
                     url: "kedvencek/add_property_to_cookie",
                     data: "ingatlan_id=" + property_id,
                     beforeSent: function () {
-                        $('#loadingDiv').show();
                     },
                     complete: function () {
-                        $('#loadingDiv').hide();
                     },
-                    success: function (data) {
-                        console.log('active');
-                        //        $('#favourite-property-widget .properties__list').append(data);
+                    success: function (result) {
                         $('#kedvencek_' + property_id).addClass('active');
+                        kedvencek_szama = $('#kedvencek span.badge').html();
+                        kedvencek_szama++
+                        $('#kedvencek span.badge').html(kedvencek_szama);
                         $('#kedvencekhez_' + property_id).addClass('disabled');
-                        //         $('#empty-favourites-list').remove();
-                        //         $('#kedvencek_szama').html(getKedvencekNumber());
-                        //        app.notifier.showSuccess('Az ingatlant hozzáadta a kedvencekhez!');
-                        // $('#hozzaadas_modal').modal('show');
+                        toastr['success'](result.message);
                     }
                 });
             }
@@ -35,30 +46,27 @@ var Kedvencek = function () {
     /* ********************** Kedvenc törlése ************************* */
     // olyan elemeknél is működik, amelyeket dinamikusan hoztunk létre 
     var deleteFavourite = function () {
-        $('#favourite-property-widget').on('click', '[id*=delete_kedvenc]', function () {
+        $('[id*=delete_from_kedvencek]').on('click', function (event) {
+            event.preventDefault();
+            
             property_id = $(this).attr('data-id');
 
             $.ajax({
                 type: "post",
-                url: "ingatlanok/delete_property_from_cookie",
+                url: "kedvencek/delete_property_from_cookie",
                 data: "ingatlan_id=" + property_id,
                 beforeSent: function () {
-                    $('#loadingDiv').show();
                 },
                 complete: function () {
-                    $('#loadingDiv').hide();
                 },
-                success: function () {
+                success: function (result) {
 
-                    $('#favourite_property_' + property_id).remove();
-                    $('#kedvencek_' + property_id).removeClass('active');
-                    kedvencekSzama = $("#favourite-property-widget > .properties__list > article").length;
-                    if (kedvencekSzama == 0) {
-                        $('#favourite-property-widget .properties__list').append('<span id="empty-favourites-list"><i class="fa fa-exclamation-triangle"></i> A kedvencek listája üres!</span>');
-                    }
-                    $('#kedvencek_szama').html(kedvencekSzama);
-                    app.notifier.showSuccess('Az ingatlant törölte a kedvencek közül!');
-                    // $('#torles_modal').modal('show');
+                    kedvencek_szama = $('#kedvencek span.badge').html();
+                    kedvencek_szama = kedvencek_szama - 1;
+                    $('#kedvencek span.badge').html(kedvencek_szama);
+                    $('#kedvenc_item_' + property_id).slideUp();
+                    toastr['success'](result.message);
+
                 }
             });
 
