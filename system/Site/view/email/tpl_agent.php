@@ -21,7 +21,7 @@
                                     <table border="0" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td>
-                                                <p style="color: #666; font-size: 14px; font-weight: 700">Tisztelt <?php echo $agent_name; ?>!</p>
+                                                <p style="color: #666; font-size: 14px; font-weight: 700">Tisztelt {agent_name}!</p>
                                                 <p>Szeretnék érdeklődni az egyik ingatlannal kapcsolatban.</p>
                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                     <tbody>
@@ -30,16 +30,20 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                                     <tbody>
                                                                         <tr>
-                                                                            <td style="width: 100px;">Név:</td><td><?php echo $name; ?></td>
+                                                                            <td style="width: 100px;">Név:</td><td>{name}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td style="width: 100px;">Email:</td><td><?php echo $email; ?></td>
+                                                                            <td style="width: 100px;">Email:</td><td>{email}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td style="width: 100px;">Telefonszám:</td><td><?php echo $phone; ?></td>
+                                                                            <td style="width: 100px;">Telefonszám:</td><td>{phone}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td style="width: 100px;">Üzenet:</td><td><?php echo $message; ?></td>
+                                                                            <td style="width: 100px;">Üzenet:</td><td>{message}</td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <td style="width: 100px;">Ingatlan ref. szám:</td><td>{ref_num}</td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -56,13 +60,18 @@
                             <!-- END MAIN CONTENT AREA -->
                         </table>
 
+                        <div style="margin-top:20px; text-align: center;">
+                            <a href="{url}" target="_blank">Ingatlan megjelenítése az oldalon.</a>
+                        </div>
+
+
                         <!-- START FOOTER -->
                         <div style="clear: both; padding-top: 10px; text-align: center; width: 100%;">
                             <hr style="border: 0; border-bottom: 1px solid #fff; Margin: 10px 0;">
                             <table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
                                 <tr>
                                     <td style="color: #999999; font-size: 12px; text-align: center">
-                                        <p style="color: #999999; font-size: 12px; text-align: center;">Ez az üzenet a trendyingatlan.hu weboldalon keresztül érkezett!</p>
+                                        <p style="color: #999999; font-size: 12px; text-align: center;">Ez az üzenet az ingatlanok-hitelek.hu weboldalon keresztül érkezett!</p>
                                     </td>
                                 </tr>
                                 <tr>
