@@ -5,34 +5,23 @@ var Kapcsolat = function () {
 
         $("#contact-form-kapcsolat").on('submit', function (event) {
             event.preventDefault();
-            var $form = $(this);
-            // $('#panel_ajax_message').empty();
-            // $('#panel_ajax_message').hide();
 
-            $('#submit-button').addClass('button-loading');
-            //     $('#submit_contact_office').attr('disabled', 'disabled');
+            var $form = $(this);
+
             $.ajax({
                 type: $form.attr('method'),
                 url: $form.attr('action'),
-                //dataType: 'json',
+                dataType: 'json',
                 data: $form.serialize(),
-                
+                beforeSend: function() {
+                    //$('#submit-button').addClass('disabled');
+                    $('#submit-button').addClass('button-loading');
+                }, 
                 success: function (result) {
-                    result = JSON.parse(result);
-                    //    $('#panel_ajax_message').append(result);
-                    //    $('#panel_ajax_message').slideDown('slow');
-                    $('#submit-button').removeAttr('disabled');
+                    //$('#submit-button').removeClass('disabled');
                     $('#submit-button').removeClass('button-loading');
-                    //$('#panel_ajax_message').delay(7500).slideUp(700);
+                    document.getElementById("contact-form-kapcsolat").reset();
                     toastr[result.status](result.message, result.title)
-
-                    $form.reset();
-/*
-                    $('#contact-form-kapcsolat input[name="name"]').val('');
-                    $('#contact-form-kapcsolat input[name="email"]').val('');
-                    $('#contact-form-kapcsolat input[name="phone"]').val('');
-                    $('#contact-form-kapcsolat textarea[name="message"]').val('');
-*/                    
                 }
             });
 
