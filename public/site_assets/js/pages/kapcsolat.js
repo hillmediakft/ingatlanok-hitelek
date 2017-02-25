@@ -14,7 +14,7 @@ var Kapcsolat = function () {
             $.ajax({
                 type: $form.attr('method'),
                 url: $form.attr('action'),
-                dataType: 'json',
+                //dataType: 'json',
                 data: $form.serialize(),
                 
                 success: function (result) {
