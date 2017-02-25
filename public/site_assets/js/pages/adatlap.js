@@ -73,8 +73,36 @@ var Adatlap = function () {
 
         });
 
-    } 
+    }; 
 
+    // kapcsolat űrlap az irodánk oldalon
+    var contactAgent = function () {
+
+        $("#contact-form-agent").on('submit', function (event) {
+            event.preventDefault();
+            var $form = $(this);
+
+            $.ajax({
+                type: $form.attr('method'),
+                url: $form.attr('action'),
+                dataType: 'json',
+                data: $form.serialize(),
+                beforeSend: function() {
+                    $('#submit-button').addClass('button-loading');
+                },                
+                success: function (result) {
+                    //result = JSON.parse(result);
+                    $('#submit-button').removeAttr('disabled');
+                    toastr[result.status](result.message, result.title)
+                    $form.reset();
+                },
+                complete: function(){
+                    $('#submit-button').removeClass('button-loading');
+                },                
+            });
+
+        });
+    }
 
 
     /*
@@ -134,6 +162,7 @@ var Adatlap = function () {
 		init: function () {           
 			// call local function
             arvaltozasReg();
+            contactAgent();
 			//googleMapsInit();
 		},
  
