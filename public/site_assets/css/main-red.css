@@ -14391,7 +14391,7 @@ a.simple-btn.outlined.red:hover {
 /* line 5710, scss/_shortcodes.scss */
 .objects-block.list-full .item, .objects-block.list-sidebar .item {
   position: relative;
-  min-height: 172px;
+  min-height: 176px;
   padding-left: 269px;
 }
 /* line 5714, scss/_shortcodes.scss */
@@ -14663,12 +14663,12 @@ a.simple-btn.outlined.red:hover {
 .objects-block .item .item-info,
 .objects-block .shop-item .item-info {
   float: right;
-  width: 175px;
+  width: 200px;
 }
 /* line 5902, scss/_shortcodes.scss */
 .objects-block .item .item-info .price,
 .objects-block .shop-item .item-info .price {
-  text-transform: uppercase;
+  text-transform: none;
   font-family: 'Lato-Bold', Arial, sans-serif;
   font-size: 20px;
   color: #c44a35;
@@ -14685,7 +14685,7 @@ a.simple-btn.outlined.red:hover {
 /* line 5913, scss/_shortcodes.scss */
 .objects-block .item .item-info .buttons,
 .objects-block .shop-item .item-info .buttons {
-  padding-top: 13px;
+  padding-top: 8px;
 }
 /* line 5915, scss/_shortcodes.scss */
 .objects-block .item .item-info .buttons .share,
