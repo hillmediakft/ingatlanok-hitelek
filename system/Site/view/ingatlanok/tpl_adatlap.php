@@ -554,19 +554,19 @@ use System\Libs\Language as Lang;
                                 <div class="widget-entry gray-bg">
                                     <div class="questions-form">
                                         <form action="sendemail/init/agent" method="post" id="contact-form-agent">
-                                            <input type="text" class="name" name="user_name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?>">
-                                            <input type="email" class="email" name="user_email" placeholder="Email">
-                                            <input type="text" class="name" name="user_phone" placeholder="<?php echo Lang::get('kapcsolat_email_telefon'); ?>">
-                                            <textarea class="message" name="user_message" placeholder="<?php echo Lang::get('kapcsolat_email_uzenet'); ?>"></textarea>
+                                            <input type="text" class="name" name="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?>" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')">
+                                            <input type="email" class="email" name="email" placeholder="Email" required oninvalid="this.setCustomValidity('Adjon meg egy email címet!')" oninput="setCustomValidity('')">
+                                            <input type="text" class="name" name="phone" placeholder="<?php echo Lang::get('kapcsolat_email_telefon'); ?>">
+                                            <textarea class="message" name="message" placeholder="<?php echo Lang::get('kapcsolat_email_uzenet'); ?>" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')"></textarea>
                                             
                                             <input type="text" name="mezes_bodon" id="mezes_bodon">
 
-                                            <input type="hidden" name="agent_name" value="">
+                                            <input type="hidden" name="agent_name" value="<?php echo $agent['first_name'] . ' ' . $agent['last_name']; ?>">
                                             <input type="hidden" name="agent_email" value="<?php echo $agent['email']; ?>">
-                                            <input type="hidden" name="property_id" value="<?php echo $ingatlan['id']; ?>">
+                                            <input type="hidden" name="ref_num" value="<?php echo $ingatlan['ref_num']; ?>">
                                             <input type="hidden" name="url" value="<?php echo $this->request->get_uri('current_url'); ?>">
 
-                                            <button type="button" class="send-btn" id="submit-button">Küldés</button>
+                                            <button type="submit" class="send-btn" id="submit-button">Küldés</button>
                                         </form>
                                     </div>
                                 </div>
