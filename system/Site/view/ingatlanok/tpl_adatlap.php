@@ -30,7 +30,11 @@ use System\Libs\Language as Lang;
                     
                     <div class="col-sm-5">
                         <h3 class="section-title"><?php echo $ingatlan['ingatlan_nev_' . LANG]; ?></h3>
-                        <h5><?php echo $ingatlan['city_name'] . ' ' . $ingatlan['district_name'] . 'kerület'; ?></h5> 
+                        <?php
+                            $d = (LANG == 'hu') ? 'kerület' : 'district';
+                            $district = (!is_null($ingatlan['district_name'])) ? $ingatlan['district_name'] . $d : '';
+                        ?>
+                        <h5><?php echo $ingatlan['city_name'] . ' ' . $district; ?></h5> 
                     </div>
 
                     <div class="col-sm-3">
