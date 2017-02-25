@@ -92,13 +92,10 @@ var Adatlap = function () {
                 },                
                 success: function (result) {
                     //result = JSON.parse(result);
-                    $('#submit-button').removeAttr('disabled');
-                    toastr[result.status](result.message, result.title)
-                    $form.reset();
-                },
-                complete: function(){
                     $('#submit-button').removeClass('button-loading');
-                },                
+                    document.getElementById("contact-form-agent").reset();
+                    toastr[result.status](result.message, result.title)
+                },
             });
 
         });
