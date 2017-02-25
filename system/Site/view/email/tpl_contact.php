@@ -36,6 +36,9 @@
                                                                             <td style="width: 100px;">Email:</td><td>{email}</td>
                                                                         </tr>
                                                                         <tr>
+                                                                            <td style="width: 100px;">Telefon:</td><td>{phone}</td>
+                                                                        </tr>
+                                                                        <tr>
                                                                             <td style="width: 100px;">Üzenet:</td><td>{message}</td>
                                                                         </tr>
                                                                     </tbody>
