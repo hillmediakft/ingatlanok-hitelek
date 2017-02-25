@@ -25,12 +25,11 @@ class Kedvencek extends SiteController {
         $data['description'] = $page_data['metadescription_' . $this->lang];
         $data['keywords'] = $page_data['metakeywords_' . $this->lang];
 
-
-// paginátor objektum létrehozása
-        $pagine = new Paginator('p', $data['settings']['pagination']);
-// limit-el lekérdezett adatok szűréssel (paraméterek bekerülnek a 'ingatlan_filter' session elembe)
-        $data['properties'] = $this->kedvencek_model->get_favourite_properties(json_decode(Cookie::get('kedvencek')));
-
+        if (count(json_decode(Cookie::get('kedvencek'))) > 0) {
+            $data['properties'] = $this->kedvencek_model->get_favourite_properties(json_decode(Cookie::get('kedvencek')));
+        } else {
+            $data['properties'] = array();
+        }
 
         // a keresőhöz szükséges listák alőállítása
         $data['city_list'] = $this->ingatlanok_model->city_list_query_with_prop_no();
