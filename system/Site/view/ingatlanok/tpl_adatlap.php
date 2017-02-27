@@ -558,7 +558,7 @@ use System\Libs\Language as Lang;
                                             <input type="hidden" name="ref_num" value="<?php echo $ingatlan['ref_num']; ?>">
                                             <input type="hidden" name="url" value="<?php echo $this->request->get_uri('current_url'); ?>">
 
-                                            <button type="submit" class="send-btn" id="submit-button">Küldés</button>
+                                            <button type="submit" class="send-btn" id="submit-button"><?php echo Lang::get('kapcsolat_email_kuldes'); ?></button>
                                         </form>
                                     </div>
                                 </div>
