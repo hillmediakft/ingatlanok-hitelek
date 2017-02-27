@@ -329,19 +329,16 @@ var handleSearch = function () {
     	var type_value = $("select#tipus_select option:selected").val();
 
 		if (type_value == 2) {
-			$('#ar_min_mertek').text(ezer + ' Ft');
-			$('#ar_max_mertek').text(ezer + ' Ft');
+			$('#ar_mertek').text(ezer + ' Ft');
 		}
 
         $( "#tipus_select" ).selectmenu({
 			change: function( event, ui ) {
 				if (ui.item.value == 1) {
-					$('#ar_min_mertek').text('M Ft');
-					$('#ar_max_mertek').text('M Ft');
+					$('#ar_mertek').text('M Ft');
 				}
 				else if (ui.item.value == 2) {
-					$('#ar_min_mertek').text(ezer + ' Ft');
-					$('#ar_max_mertek').text(ezer + ' Ft');
+					$('#ar_mertek').text(ezer + ' Ft');
 				}
 			}
         }); 
