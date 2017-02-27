@@ -191,11 +191,13 @@ use System\Libs\Language as Lang;
                                         <div class="preview">
                                             <img src="<?php echo Config::get('user.upload_path') . $agent['photo']; ?>" alt="<?php echo $agent['last_name'] . $agent['first_name']; ?>">
                                             <div class="overlay">
-                                                <a href="#"><i class="fa fa-search-plus"></i></a>
+                                                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.ertekesito.' . LANG) . '/' . $this->str_helper->stringToSlug($agent['first_name']) . '-' . $this->str_helper->stringToSlug($agent['last_name']) . '/' . $agent['id']; ?>"><i class="fa fa-search-plus"></i></a>
                                             </div>
                                         </div>
                                         <span class="name"><?php echo $agent['first_name'] . ' ' . $agent['last_name']; ?></span>
-                                        <span class="properties"><a href="ingatlanok/ertekesito/<?php echo $this->str_helper->stringToSlug($agent['first_name']) . '-' . $this->str_helper->stringToSlug($agent['last_name']) . '/' . $agent['id']; ?>" class="simple-btn sm-button outlined red"><?php echo $agent['property']; ?> ingatlan</a></span>
+                                        <span class="properties">
+                                            <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.ertekesito.' . LANG) . '/' . $this->str_helper->stringToSlug($agent['first_name']) . '-' . $this->str_helper->stringToSlug($agent['last_name']) . '/' . $agent['id']; ?>" class="simple-btn sm-button outlined red"><?php echo $agent['property'];?>  ingatlan</a>
+                                        </span>
                                         <ul class="contact-listing">
                                             <li>
                                                 <span class="icon"><i class="fa fa-phone"></i></span>

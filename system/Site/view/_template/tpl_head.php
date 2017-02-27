@@ -64,7 +64,7 @@ include($this->path('tpl_forgottenpw_modal'));
 
             <?php if ($logged_in === true) { ?>
             <div class="extra-item login">
-                <span style="color: #ffffff;">Bejelentkezve <?php echo Auth::getUser('name'); ?>&nbsp; &raquo; &nbsp;</span><a href="felhasznalo/kijelentkezes">Kijelentkezés</a>
+                <span style="color: #ffffff;"><?php echo Auth::getUser('name'); ?>&nbsp; &raquo; &nbsp;</span><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.user.logout.' . LANG); ?>"><?php echo Lang::get('header_top_kijelentkezes'); ?></a>
             </div>
             <?php } else { ?>
             <div class="extra-item login">
@@ -144,7 +144,7 @@ include($this->path('tpl_forgottenpw_modal'));
                             <div class="overlay"></div>
                         </li>
                         <li class="navigation-item">
-                            <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.ingatlanok.' . LANG);?>"><?php echo Lang::get('menu_ingatlanok'); ?></a>
+                            <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.index.' . LANG);?>"><?php echo Lang::get('menu_ingatlanok'); ?></a>
                             <div class="overlay"></div>
                         </li>
                         <li class="navigation-item">
@@ -152,30 +152,30 @@ include($this->path('tpl_forgottenpw_modal'));
                             <div class="overlay"></div>
                             <ul class="subnav">
                                 <li class="subnav-item">
-                                    <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.rolunk.' . LANG);?>"><?php echo Lang::get('menu_rolunk'); ?></a>
+                                    <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.rolunk.index.' . LANG);?>"><?php echo Lang::get('menu_rolunk'); ?></a>
                                     <div class="overlay"></div>
                                 </li>
                                 <li class="subnav-item">
-                                    <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.ingatlan-ertekesitoink.' . LANG);?>"><?php echo Lang::get('menu_ertekesitoink'); ?></a>
+                                    <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlan-ertekesitoink.index.' . LANG);?>"><?php echo Lang::get('menu_ertekesitoink'); ?></a>
                                     <div class="overlay"></div>
                                 </li>
 
                             </ul>
                         </li>
                         <li class="navigation-item">
-                            <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.kapcsolat.' . LANG);?>"><?php echo Lang::get('menu_kapcsolat'); ?></a>
+                            <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.kapcsolat.index.' . LANG);?>"><?php echo Lang::get('menu_kapcsolat'); ?></a>
                             <div class="overlay"></div>
                         </li>
                         <li class="navigation-item">
-                            <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.hitel.' . LANG);?>"><?php echo Lang::get('menu_hitel'); ?></a>
+                            <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hitel.index.' . LANG);?>"><?php echo Lang::get('menu_hitel'); ?></a>
                             <div class="overlay"></div>
                         </li>
                         <li class="navigation-item">
-                            <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.allas.' . LANG);?>"><?php echo Lang::get('menu_allas'); ?></a>
+                            <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.allas.index.' . LANG);?>"><?php echo Lang::get('menu_allas'); ?></a>
                             <div class="overlay"></div>
                         </li>
                         <li class="navigation-item">
-                            <a href="<?php echo $this->request->get_uri('site_url');?><?php echo Config::get('url.hirek.' . LANG);?>"><?php echo Lang::get('menu_hirek'); ?></a>
+                            <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.index.' . LANG);?>"><?php echo Lang::get('menu_hirek'); ?></a>
                             <div class="overlay"></div>
                         </li>                        
 
@@ -189,7 +189,7 @@ include($this->path('tpl_forgottenpw_modal'));
                         </span>
                     </button>
                 </nav>
-                <a href="kereses" class="submit-nav hidden-xs"><i class="fa fa-search"></i> <?php echo Lang::get('menu_kereses'); ?></a>
+                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.kereses.index.' . LANG);?>" class="submit-nav hidden-xs"><i class="fa fa-search"></i> <?php echo Lang::get('menu_kereses'); ?></a>
             </div>
         </div>
     </div>

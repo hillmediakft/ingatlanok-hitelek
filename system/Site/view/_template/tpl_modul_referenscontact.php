@@ -1,4 +1,7 @@
-<?php use System\Libs\Language as Lang; ?>
+<?php
+use System\Libs\Config;
+use System\Libs\Language as Lang;
+?>
 <div class="widget agents">
     <div class="heading">
         <span class="widget-title"><?php echo Lang::get('menu_ertekesitoink'); ?></span>
@@ -17,11 +20,9 @@
                             <div class="item-heading">
                                 <div class="preview" style="overflow: hidden;">
                                     <img src="<?php echo $this->getConfig('user.upload_path') . $agent['photo']; ?>" alt="">
-                                    <!--
                                     <div class="overlay">
-                                        <a href="agent-single_agent.html"><i class="fa fa-search-plus"></i></a>
+                                        <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.ertekesito.' . LANG) . '/' . $this->str_helper->stringToSlug($agent['first_name']) . '-' . $this->str_helper->stringToSlug($agent['last_name']) . '/' . $agent['id']; ?>"><i class="fa fa-search-plus"></i></a>
                                     </div>
-                                    -->
                                 </div>
                                 <div class="descr">
                                     <span class="name"><?php echo (LANG == 'hu') ? $agent['first_name'] . ' '. $agent['last_name'] : $agent['last_name'] . ' ' . $agent['first_name']; ?></span>

@@ -11,7 +11,7 @@ use System\Libs\Config;
             <div class="widget-entry">
                 <ul class="categories-listing">
                      <?php foreach ($blog_categories as $value) { ?>
-                    <li class="category-item"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.' . LANG) . '/' . Config::get('url.kategoria.' . LANG) . '/' . $value['id']; ?>"><?php echo $value['category_name_' . LANG]; ?></a></li>
+                    <li class="category-item"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.kategoria.' . LANG) . '/' . $value['id']; ?>"><?php echo $value['category_name_' . LANG]; ?></a></li>
                      <?php } ?>
                 </ul>
             </div>
