@@ -38,11 +38,7 @@ use System\Libs\Language as Lang;
                                 <div class="col-sm-12">
                                     <div class="item">
                                         <div class="preview">
-                                            <?php if ($value['ar_elado_eredeti'] || $value['ar_kiado_eredeti']) { ?>
-                                                <span class="lower-price">
-                                                    % <i class="fa fa-arrow-down"></i>
-                                                </span>
-                                            <?php } ?>
+                                            <?php $this->html_helper->showLowerPriceIcon($value);?>
                                             <!-- eladó/kiadó cimke-->                                        
                                             <?php
                                             if ($value['tipus'] == 1) {
@@ -81,21 +77,7 @@ use System\Libs\Language as Lang;
                                             </div>
                                             <div class="item-info">
                                                 <span class="price"> 
-                                                    <?php
-                                                    if ($value['tipus'] == 1) {
-                                                        if ($value['ar_elado_eredeti']) {
-                                                            echo $this->num_helper->niceNumber($value['ar_elado']) . ' Ft ' . '<span class="line-through">' . $this->num_helper->niceNumber($value['ar_elado_eredeti']) . ' Ft</span>';
-                                                        } else {
-                                                            echo $this->num_helper->niceNumber($value['ar_elado']) . ' Ft';
-                                                        }
-                                                    } else {
-                                                        if ($value['ar_kiado_eredeti']) {
-                                                            echo $this->num_helper->niceNumber($value['ar_kiado']) . ' Ft ' . '<span class="line-through">' . $this->num_helper->niceNumber($value['ar_kiado_eredeti']) . ' Ft</span>';
-                                                        } else {
-                                                            echo $this->num_helper->niceNumber($value['ar_kiado']) . ' Ft';
-                                                        }
-                                                    }
-                                                    ?>
+                                                    <?php $this->html_helper->showPrice($value);?>
                                                 </span>
                                                 <div class="pull-right buttons">
                                                     <a href="javascript:void();" id="delete_from_kedvencek_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" class="share"><i class="fa fa-trash-o fa-2x"></i></a>
