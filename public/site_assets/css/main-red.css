@@ -1199,7 +1199,7 @@ footer.footer .bottom-footer .copy {
   left: 0;
   position: absolute;
   bottom: 230px;
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: rgba(0, 0, 0, 0.55);
   padding: 26px 30px;
 }
 /* line 44, scss/_slider.scss */
@@ -1984,7 +1984,7 @@ footer.footer .bottom-footer .copy {
 .main-filter .filter-form .item-label {
   font-family: 'Lato-Bold', Arial, sans-serif;
   font-size: 16px;
-  color: #000;
+  color: #fff;
   display: block;
   width: 100%;
   margin-bottom: 13px;
