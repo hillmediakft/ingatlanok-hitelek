@@ -1989,6 +1989,16 @@ footer.footer .bottom-footer .copy {
   width: 100%;
   margin-bottom: 13px;
 }
+
+
+.search-page .main-filter .filter-form .item-label {
+    font-family: 'Lato-Bold', Arial, sans-serif;
+    font-size: 16px;
+    color: #000;
+    display: block;
+    width: 100%;
+    margin-bottom: 13px;
+}
 /* line 688, scss/_slider.scss */
 .main-filter .filter-form .item-label .label-descr {
   font-family: 'Lato-Regular', Arial, sans-serif;
