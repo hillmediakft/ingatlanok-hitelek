@@ -4,6 +4,8 @@ use System\Core\SiteModel;
 
 class Blog_model extends SiteModel {
 
+    protected $table = 'blog';
+
     function __construct() {
         parent::__construct();
     }
@@ -14,9 +16,8 @@ class Blog_model extends SiteModel {
      *
      * 	@param $id Integer 
      */
-    public function getBlogPosts($id = null) {
-        $this->query->reset();
-        $this->query->set_table(array('blog'));
+    public function getBlogPosts($id = null)
+    {
         $this->query->set_columns('*');
         if (!is_null($id)) {
             $id = (int) $id;
@@ -38,12 +39,15 @@ class Blog_model extends SiteModel {
      *
      * 	@param $id Integer 
      */
-    public function blog_pagination_query($limit = null, $offset = null) {
-
-        $this->query->reset();
-        $this->query->debug(false);
-        $this->query->set_table(array('blog'));
-        $this->query->set_columns('SQL_CALC_FOUND_ROWS *');
+    public function blog_pagination_query($limit = null, $offset = null)
+    {
+//$this->query->debug(false);
+        $this->query->set_columns(
+            "SQL_CALC_FOUND_ROWS
+            blog.* ,
+            blog_category.category_name_" . $this->lang
+        );
+        
         if (!is_null($limit)) {
             $this->query->set_limit($limit);
         }
@@ -59,7 +63,8 @@ class Blog_model extends SiteModel {
      * 	A jobs_filter_query() metódus után kell meghívni,
      *  és visszaadja a limittel lekérdezett de a szűrésnek megfelelő összes sor számát
      */
-    public function blog_pagination_count_query() {
+    public function blog_pagination_count_query()
+    {
         return $this->query->found_rows();
     }
 
@@ -69,10 +74,8 @@ class Blog_model extends SiteModel {
      *
      * 	@return array az adott kategóriájú blog bejegyzések tömbje  
      */
-    public function getBlogPostsByCategory($category) {
-        $this->query->reset();
-        $this->query->set_table(array('blog'));
-        $this->query->set_columns('*');
+    public function getBlogPostsByCategory($category)
+    {
         $this->query->set_where('category_id', '=', $category);
         $this->query->set_join('left', 'blog_category', 'blog.category_id', '=', 'blog_category.id');
         $this->query->set_orderby(array('blog.add_date'), 'DESC');
@@ -85,8 +88,8 @@ class Blog_model extends SiteModel {
      *
      * 	@param $id Integer 
      */
-    public function get_blog_categories() {
-        $this->query->reset();
+    public function get_blog_categories()
+    {
         $this->query->set_table(array('blog_category'));
         $this->query->set_columns('*');
         return $this->query->select();
@@ -98,8 +101,8 @@ class Blog_model extends SiteModel {
      *
      * 	@param $id Integer 
      */
-    public function blog_category_query($id = null) {
-        $this->query->reset();
+    public function blog_category_query($id = null)
+    {
         $this->query->set_table(array('blog_category'));
         $this->query->set_columns('*');
         if (!is_null($id)) {
@@ -117,14 +120,16 @@ class Blog_model extends SiteModel {
      *
      * 	@param $id Integer 
      */
-    public function blog_query_by_category_pagination($id, $limit = null, $offset = null) {
-
-        $this->query->reset();
-        $this->query->debug(false);
-        $this->query->set_table(array('blog'));
-        $this->query->set_columns('SQL_CALC_FOUND_ROWS *');
+    public function blog_query_by_category_pagination($id, $limit = null, $offset = null)
+    {
+//      $this->query->debug(false);
+        $this->query->set_columns(
+            "SQL_CALC_FOUND_ROWS 
+            blog.* ,
+            blog_category.category_name_" . $this->lang
+            );
         $this->query->set_where('blog.category_id', '=', $id);
-       $this->query->set_join('left', 'blog_category', 'blog.category_id', '=', 'blog_category.id');
+        $this->query->set_join('left', 'blog_category', 'blog.category_id', '=', 'blog_category.id');
 
         if (!is_null($limit)) {
             $this->query->set_limit($limit);
@@ -137,5 +142,4 @@ class Blog_model extends SiteModel {
     }
 
 }
-
 ?>
