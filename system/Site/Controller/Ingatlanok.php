@@ -56,7 +56,7 @@ class Ingatlanok extends SiteController {
 
 
         $view = new View();
-        $view->setHelper(array('url_helper', 'str_helper'));
+        $view->setHelper(array('url_helper', 'str_helper', 'html_helper'));
 
         //$view->setLazyRender();
 //$this->view->debug(true); 
@@ -159,7 +159,7 @@ class Ingatlanok extends SiteController {
 
 
         $view = new View();
-        $view->setHelper(array('url_helper', 'str_helper'));
+        $view->setHelper(array('url_helper', 'str_helper', 'html_helper'));
         $view->add_link('js', SITE_JS . 'pages/handle_search.js');
         $view->add_link('js', SITE_JS . 'pages/ertekesito_ingatlanok.js');
 //$this->view->debug(true); 
