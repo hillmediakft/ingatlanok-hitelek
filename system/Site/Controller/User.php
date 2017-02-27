@@ -99,7 +99,7 @@ class User extends SiteController {
     {
         DI::get('auth')->logout();
         // átirányítás a front-oldalra
-        $this->response->redirect();
+        $this->response->redirect($this->request->get_uri('site_url'));
     }  
 	
 	/**
