@@ -12,7 +12,7 @@ use System\Libs\Language as Lang;
                 <div class="breadcrumbs">
                     <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>"><?php echo Lang::get('menu_home'); ?></a></span>
                     <span class="delimiter">/</span>
-                    <span class="clickable"><a href="<?php echo Config::get('url.ingatlanok.' . LANG); ?>"><?php echo Lang::get('menu_ingatlanok'); ?></a></span>
+                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.' . LANG); ?>"><?php echo Lang::get('menu_ingatlanok'); ?></a></span>
                     <span class="delimiter">/</span>
                     <span class="active-page">Adatlap</span>
                 </div>
@@ -31,29 +31,17 @@ use System\Libs\Language as Lang;
                     <div class="col-sm-5">
                         <h3 class="section-title"><?php echo $ingatlan['ingatlan_nev_' . LANG]; ?></h3>
                         <?php
-                            $d = (LANG == 'hu') ? 'kerület' : 'district';
-                            $district = (!is_null($ingatlan['district_name'])) ? $ingatlan['district_name'] . $d : '';
+                            $district = (!is_null($ingatlan['district_name'])) ? $ingatlan['district_name'] . ' ' . Lang::get('kereso_kerulet') : '';
                         ?>
                         <h5><?php echo $ingatlan['city_name'] . ' ' . $district; ?></h5> 
                     </div>
 
                     <div class="col-sm-3">
-                        <h3 class="section-title"><span class="price"><span class="value">
-                                    <?php
-                                    if ($ingatlan['tipus'] == 1) {
-                                        if ($ingatlan['ar_elado_eredeti']) {
-                                            echo $this->num_helper->niceNumber($ingatlan['ar_elado']) . ' Ft ' . '<span class="line-through">' . $this->num_helper->niceNumber($ingatlan['ar_elado_eredeti']) . ' Ft</span>';
-                                        } else {
-                                            echo $this->num_helper->niceNumber($ingatlan['ar_elado']) . ' Ft';
-                                        }
-                                    } else {
-                                        if ($ingatlan['ar_kiado_eredeti']) {
-                                            echo $this->num_helper->niceNumber($ingatlan['ar_kiado']) . ' Ft ' . '<span class="line-through">' . $this->num_helper->niceNumber($ingatlan['ar_kiado_eredeti']) . ' Ft</span>';
-                                        } else {
-                                            echo $this->num_helper->niceNumber($ingatlan['ar_kiado']) . ' Ft';
-                                        }
-                                    }
-                                    ?>
+                        <h3 class="section-title">
+                            <span class="price">
+                                <span class="value">
+                                    <!-- ÁR MEGJELENÍTÉSE -->
+                                    <?php $this->html_helper->showPrice($ingatlan); ?>
                                 </span>
                             </span>
                         </h3>
