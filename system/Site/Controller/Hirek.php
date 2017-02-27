@@ -12,7 +12,7 @@ class Hirek extends SiteController {
     {
         parent::__construct();
         $this->loadModel('blog_model');
-        $this->loadModel('ingatlanok_model');
+        //$this->loadModel('ingatlanok_model');
     }
 
     public function index()
@@ -25,9 +25,6 @@ class Hirek extends SiteController {
         $data['keywords'] = $page_data['metakeywords_' . $this->lang];
         $data['content'] = $page_data['body_' . $this->lang];
 
-        $view = new View();
-        $view->setHelper(array('url_helper', 'str_helper'));
-
         // kiemelt ingatlanok
         //       $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(10);
         // blog kategóriák
@@ -38,7 +35,6 @@ class Hirek extends SiteController {
         $pagine = new Paginator(Lang::get('lapozas'), $data['settings']['pagination']);
         // adatok lekérdezése limittel
         $data['blog_list'] = $this->blog_model->blog_pagination_query($pagine->get_limit(), $pagine->get_offset());
-
         // szűrési feltételeknek megfelelő összes rekord száma
         $blog_count = $this->blog_model->blog_pagination_count_query();
 
@@ -46,22 +42,26 @@ class Hirek extends SiteController {
 
         $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path_full'));
 
-
-        ////$view->setLazyRender();
+        $view = new View();
+        $view->setHelper(array('url_helper', 'str_helper'));
 //$this->view->debug(true); 
         $view->add_link('js', SITE_JS . 'pages/hirek.js');
         $view->render('blog/tpl_blog', $data);
     }
 
+    /**
+     * Egy hír megjelenítése
+     *
+     * @param string $title 
+     * @param integer $id 
+     */
     public function reszletek($title, $id)
     {
         $id = (int)$id;	
-
-        $data = $this->addGlobalData();
-
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper'));
 
+        $data = $this->addGlobalData();
          // blog kategóriák
         $data['blog_categories'] = $this->blog_model->get_blog_categories();
         // kiemelt ingatlanok
@@ -81,17 +81,21 @@ class Hirek extends SiteController {
         $view->render('blog/tpl_show_blog', $data);
     }
 
+    /**
+     * Egy bizonyos kategóriába tartozó híreket jeleníti meg
+     *   
+     * @param integer $id
+     */
     public function kategoria($id)
     {
-
         $id = (int)$id;
         
+        $view = new View();
+        $view->setHelper(array('url_helper', 'str_helper'));  
+
         $page_data = $this->blog_model->getPageData('hirek');
 
         $data = $this->addGlobalData();
-
-        $view = new View();
-        $view->setHelper(array('url_helper', 'str_helper'));
 
         // kiemelt ingatlanok
         //       $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(10);
@@ -111,13 +115,11 @@ class Hirek extends SiteController {
         $pagine->set_total($blog_count);
 
         $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path_full'));
-
         
         $data['title'] = $data['category_name'];
         $data['description'] = $data['category_name'];
         $data['keywords'] = 'blog: ' . $data['category_name'];        
-        
-        ////$view->setLazyRender();
+       
 //$this->view->debug(true); 
         $view->add_link('js', SITE_JS . 'pages/hirek.js');
         $view->render('blog/tpl_blog_category', $data);        
