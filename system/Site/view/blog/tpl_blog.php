@@ -40,7 +40,7 @@ use System\Libs\Config;
                                                     <?php echo Lang::get('hirek_kategoria'); ?>: <a class="value" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.kategoria.' . LANG) . '/' . $value['category_id']; ?>"><?php echo $value['category_name_' . LANG]; ?></a>
                                                 </div>
                                             </div>
-                                            <span class="title"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.' . LANG) . '/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"><?php echo $value['title_' . LANG]; ?></a></span>
+                                            <span class="title"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.index.' . LANG) . '/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"><?php echo $value['title_' . LANG]; ?></a></span>
                                             <p>
                                                 <?php echo $this->str_helper->sentenceTrim($value['body_' . LANG], 3); ?> <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.index.' . LANG) . '/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"> 
                                                     [...] 
