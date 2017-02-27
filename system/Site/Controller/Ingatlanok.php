@@ -113,7 +113,7 @@ class Ingatlanok extends SiteController {
 
 
         $view = new View();
-        $view->setHelper(array('url_helper', 'str_helper', 'num_helper'));
+        $view->setHelper(array('url_helper', 'str_helper', 'num_helper', 'html_helper'));
 //$this->view->debug(true); 
 
         $view->add_links(array('google-maps-site'));
