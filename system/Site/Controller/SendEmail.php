@@ -3,6 +3,7 @@ namespace System\Site\Controller;
 
 use System\Core\SiteController;
 use System\Libs\Emailer;
+use System\Libs\Language as Lang;
 
 class SendEmail extends SiteController {
 
@@ -90,14 +91,14 @@ class SendEmail extends SiteController {
         if ($emailer->send()) {
             $this->response->json(array(
                 'status' => 'success',
-                'title' => 'Sikeres e-mail küldés!',
-                'message' => 'Köszönjük, hamarosan jelentkezünk!'
+                'title' => Lang::get('kapcsolat_email_kuldes_siker_cim'),
+                'message' => Lang::get('kapcsolat_email_kuldes_siker_uzenet')
                 ));
         } else {
             $this->response->json(array(
                 'status' => 'error',
-                'title' => 'Hiba történt!',
-                'message' => 'Hiba történt, próbálja újra!'
+                'title' => Lang::get('kapcsolat_email_kuldes_hiba_cim'),
+                'message' => Lang::get('kapcsolat_email_kuldes_hiba_uzenet')
                 ));
         }
     }
