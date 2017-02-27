@@ -16465,7 +16465,7 @@ a.simple-btn.outlined.red:hover {
 /* line 7395, scss/_shortcodes.scss */
 .agent-single-item .top .left .preview {
   border: 2px solid #c44a35;
-  padding: 6px;
+  /*padding: 6px;*/
   border-radius: 100%;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
