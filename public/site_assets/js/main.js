@@ -47,12 +47,6 @@ $(document).ready(function(){
 });
 
 
-$('.preview .like, .favourite, .like-box, .like-btn').each(function(){
-	$(this).on('click', function(){
-		$(this).toggleClass('active');
-		return false;
-	});
-});
 //initControls()
 function initControls() {
 
