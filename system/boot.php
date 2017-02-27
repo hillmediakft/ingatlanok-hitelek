@@ -117,6 +117,9 @@ DI::set('arr_helper', function() {
 DI::set('num_helper', function() {
     return new \System\Helper\Num();
 });
+DI::set('html_helper', function() {
+    return new \System\Helper\Html();
+});
 
 /*
   DI::factory('query', function($c){

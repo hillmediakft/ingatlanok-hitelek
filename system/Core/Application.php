@@ -60,6 +60,7 @@ class Application {
             $router->get('/kereses', 'kereses@index');
             $router->get('/ingatlanok/ertekesito/:title/:id', 'ingatlanok@ertekesito', array('title', 'id'));
             $router->get('/kedvencek', 'kedvencek@index');
+             $router->get('/kereses', 'kereses@index');
             
             $router->post('/ingatlanok/arvaltozasErtesites', 'ingatlanok@arvaltozasErtesites'); // ajax
 
