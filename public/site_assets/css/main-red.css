@@ -1149,13 +1149,13 @@ footer.footer .bottom-footer .copy {
 /*______________________SLIDERS_______________________*/
 /* line 2, scss/_slider.scss */
 .home-banner {
-  height: 480px;
+  height: 380px;
   background: url("../images/banners/home-top.jpg") no-repeat center;
   position: relative;
 }
 /* line 6, scss/_slider.scss */
 .home-banner.style-2 {
-  background: url("../images/banners/home-top-2.jpg") no-repeat center;
+  background: url("../images/budapest.jpg") no-repeat center;
 }
 /* line 9, scss/_slider.scss */
 .home-banner.style-3 {
@@ -1198,7 +1198,7 @@ footer.footer .bottom-footer .copy {
   bottom: 4%;
   left: 0;
   position: absolute;
-  bottom: 80px;
+  bottom: 230px;
   background-color: rgba(255, 255, 255, 0.75);
   padding: 26px 30px;
 }
@@ -2049,7 +2049,7 @@ footer.footer .bottom-footer .copy {
   position: absolute;
   width: 34px;
   height: 34px;
-  background-color: #c44a35;
+  background-color: #d26b5a;
 }
 /* line 742, scss/_slider.scss */
 .main-filter .filter-form .ui-front .ui-selectmenu-menu .ui-menu {
@@ -4095,7 +4095,6 @@ footer.footer .bottom-footer .copy {
   -o-transition: 0.3s linear;
   transition: 0.3s linear;
   z-index: 1000;
-  cursor: pointer;
 }
 /* line 2031, scss/_slider.scss */
 .object-slider .carousel .item .preview .like.active,
@@ -11276,7 +11275,7 @@ a.simple-btn.outlined.red:hover {
   position: absolute;
   width: 34px;
   height: 34px;
-  background-color: #c44a35;
+  background-color: #d26b5a;
 }
 /* line 3151, scss/_shortcodes.scss */
 .main-sidebar .widget.main-filter-widget .filter-form .ui-front .ui-selectmenu-menu .ui-menu {
@@ -20851,11 +20850,11 @@ footer.footer .widget .property-listing li {
 /* ************ form elements * */
 .form-control {
     border-radius: 0;
-    height: 40px;
+    height: 35px;
 }
 .form-control:focus {
     border-color: #999;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(196,74,53, 0.3);
+    box-shadow: none; 
     outline: 0 none;
 }
 
