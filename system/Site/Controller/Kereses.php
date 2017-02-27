@@ -1,5 +1,4 @@
 <?php
-
 namespace System\Site\Controller;
 
 use System\Core\SiteController;
@@ -17,7 +16,8 @@ class Kereses extends SiteController {
         $this->loadModel('ingatlanok_model');
     }
 
-    public function index() {
+    public function index()
+    {
         $page_data = $this->ingatlanok_model->getPageData('kereses');
 
         $data = $this->addGlobalData();
@@ -38,14 +38,11 @@ class Kereses extends SiteController {
 
         // szűrési paramétereket tartalmazó tömb
         $data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
-        
-//var_dump($data['filter_params']);die ;        
         // kiemelt ingatlanok
         $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
-
+        // referens adatok lekérdezése
         $data['agents'] = $this->ingatlanok_model->get_agent();
 // var_dump($data);die;
-
 
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'num_helper'));
@@ -54,7 +51,7 @@ class Kereses extends SiteController {
 //$this->view->debug(true); 
         $view->add_links(array('bootstrap-select'));
         $view->add_link('js', SITE_JS . 'pages/handle_search.js');
-        $view->add_link('js', SITE_JS . 'kereses.js');
+        //$view->add_link('js', SITE_JS . 'kereses.js');
         $view->render('kereses/tpl_kereses', $data);
     }
 
