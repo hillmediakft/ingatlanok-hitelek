@@ -67,7 +67,7 @@ use System\Libs\Config;
 
             </div>
 
-            <?php require('system/site/view/_template/tpl_sidebar_blog.php'); ?>   
+            <?php require($this->path('tpl_sidebar_blog')); ?>   
 
         </div>
     </div>
