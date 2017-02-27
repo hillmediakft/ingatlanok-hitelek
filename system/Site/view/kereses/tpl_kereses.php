@@ -106,8 +106,9 @@ use System\Libs\Language as Lang; ?>
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <input name="min_ar" type="text" class="form-control" placeholder="minimum" value="<?php echo (isset($filter_params['min_ar'])) ? $filter_params['min_ar'] : ''; ?>">                                                       
-                                                        <span class="input-group-addon">-</span>
+                                                        <span class="input-group-addon input-group-addon-hypen">-</span>
                                                         <input name="max_ar" type="text" class="form-control" placeholder="maximum" value="<?php echo (isset($filter_params['max_ar'])) ? $filter_params['max_ar'] : ''; ?>">
+                                                        <span class="input-group-addon" id="ar_mertek">M Ft</span>
                                                     </div>
                                                 </div>
                                             </div>                                            
@@ -115,12 +116,13 @@ use System\Libs\Language as Lang; ?>
                                             
                                             <!-- ALAPTERÜLET -->
                                             <div class="col-sm-3">
-                                                <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?> (m<sup>2</sup>)</span>
+                                                <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <input name="min_alapterulet" type="text" class="form-control" placeholder="minimum" value="<?php echo (isset($filter_params['min_alapterulet'])) ? $filter_params['min_alapterulet'] : ''; ?>">
-                                                        <span class="input-group-addon">-</span>
+                                                        <span class="input-group-addon input-group-addon-hypen">-</span>
                                                         <input name="max_alapterulet" type="text" class="form-control" placeholder="maximum" value="<?php echo (isset($filter_params['max_alapterulet'])) ? $filter_params['max_alapterulet'] : ''; ?>">
+                                                        <span class="input-group-addon">m<sup>2</sup></span>
                                                     </div>
                                                 </div>
                                             </div>    
@@ -128,12 +130,13 @@ use System\Libs\Language as Lang; ?>
                                             
                                             <!-- SZOBASZÁM -->
                                             <div class="col-sm-3">
-                                                <span class="item-label"><?php echo Lang::get('kereso_szobaszam'); ?> (m<sup>2</sup>)</span>
+                                                <span class="item-label"><?php echo Lang::get('kereso_szobaszam'); ?></span>
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <input name="min_szobaszam" type="text" class="form-control" placeholder="minimum" value="<?php echo (isset($filter_params['min_szobaszam'])) ? $filter_params['min_szobaszam'] : ''; ?>">
-                                                        <span class="input-group-addon">-</span>
+                                                        <span class="input-group-addon input-group-addon-hypen">-</span>
                                                         <input name="max_szobaszam" type="text" class="form-control" placeholder="maximum" value="<?php echo (isset($filter_params['max_szobaszam'])) ? $filter_params['max_szobaszam'] : ''; ?>">
+                                                        <span class="input-group-addon">db</span>
                                                     </div>
                                                 </div>
                                             </div>                                              
