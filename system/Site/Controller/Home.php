@@ -37,7 +37,7 @@ class Home extends SiteController {
         $data['agents'] = $this->ingatlanok_model->get_agent();
 
         $view = new View();
-        $view->setHelper(array('url_helper', 'str_helper'));
+        $view->setHelper(array('url_helper', 'str_helper', 'html_helper'));
 
         //$view->setLazyRender();
 //$this->view->debug(true);
