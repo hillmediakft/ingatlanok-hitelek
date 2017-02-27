@@ -391,4 +391,10 @@ font-size: 16px;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
- 
+
+.input-group-addon-hypen {
+    font-style: bold;
+    /*background-color: #f0f0f0;*/
+    background-color: #ffffff;
+    color: #7D7D7D;
+} 
