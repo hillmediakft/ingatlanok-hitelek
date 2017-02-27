@@ -128,6 +128,8 @@ class Ingatlanok extends SiteController {
      */
     public function ertekesito($title, $id)
     {
+        $id = (int)$id;
+
         $page_data = $this->ingatlanok_model->getPageData('ertekesito');
         
         $data = $this->addGlobalData();
@@ -139,7 +141,7 @@ class Ingatlanok extends SiteController {
 
         $params = $this->request->get_query();
         // paraméterekhez hozzáadjuk a ref_id elemet    
-        $params['ref_id'] = (int)$id;
+        $params['ref_id'] = $id;
 
 // paginátor objektum létrehozása
         $pagine = new Paginator('p', $data['settings']['pagination']);
@@ -155,8 +157,8 @@ class Ingatlanok extends SiteController {
 // szűrési paramétereket tartalmazó tömb
         $data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
 
-
-
+// referens adatai
+        $data['agent'] = $this->ingatlanok_model->get_agent($id);
 
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'html_helper'));
