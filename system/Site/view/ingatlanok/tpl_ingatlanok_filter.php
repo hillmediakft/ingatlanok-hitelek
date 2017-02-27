@@ -78,56 +78,33 @@ use System\Libs\Language as Lang;
                 </div>
             </div>
 
-            <!-- ALAPTERÜLET MINIMUM -->
+            <!-- ALAPTERÜLET -->
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="item-label"><?php echo Lang::get('kereso_terulet_minimum'); ?></span>
+                    <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
                     <div class="form-group">
                         <div class="input-group">
-                            <input name="min_alapterulet" type="text" class="form-control" placeholder="minimum" value="<?php echo (isset($filter_params['min_alapterulet'])) ? $filter_params['min_alapterulet'] : ''; ?>">
+                            <input name="min_alapterulet" type="text" class="form-control" placeholder="min." value="<?php echo (isset($filter_params['min_alapterulet'])) ? $filter_params['min_alapterulet'] : ''; ?>">
+                            <div class="input-group-addon input-group-addon-hypen">-</div>
+                            <input name="max_alapterulet" type="text" class="form-control" placeholder="max." value="<?php echo (isset($filter_params['max_alapterulet'])) ? $filter_params['max_alapterulet'] : ''; ?>">
                             <div class="input-group-addon">m<sup>2</sup></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ALAPTERÜLET MAXIMUM -->
+            <!-- ÁR -->
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="item-label"><?php echo Lang::get('kereso_terulet_maximum'); ?></span>
+                    <span class="item-label"><?php echo Lang::get('kereso_ar'); ?></span>
                     <div class="form-group">
                         <div class="input-group">
-                            <input name="max_alapterulet" type="text" class="form-control" placeholder="maximum" value="<?php echo (isset($filter_params['max_alapterulet'])) ? $filter_params['max_alapterulet'] : ''; ?>">
-                            <div class="input-group-addon">m<sup>2</sup></div>
-                        </div>
-                    </div> 
-
-                </div>
-            </div>            
-
-            <!-- ÁR MINIMUM -->
-            <div class="row">
-                <div class="col-sm-12">
-                    <span class="item-label"><?php echo Lang::get('kereso_min_ar'); ?></span>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input name="min_ar" type="text" class="form-control" placeholder="minimum" value="<?php echo (isset($filter_params['min_ar'])) ? $filter_params['min_ar'] : ''; ?>">
+                            <input name="min_ar" type="text" class="form-control" placeholder="min." value="<?php echo (isset($filter_params['min_ar'])) ? $filter_params['min_ar'] : ''; ?>">
+                            <div class="input-group-addon input-group-addon-hypen">-</div>
+                            <input name="max_ar" type="text" class="form-control" placeholder="max." value="<?php echo (isset($filter_params['max_ar'])) ? $filter_params['max_ar'] : ''; ?>">
                             <div class="input-group-addon" id="ar_min_mertek">M Ft</div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- ÁR MAXIMUM -->
-            <div class="row">
-                <div class="col-sm-12">
-                    <span class="item-label"><?php echo Lang::get('kereso_max_ar'); ?></span>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input name="max_ar" type="text" class="form-control" placeholder="maximum" value="<?php echo (isset($filter_params['max_ar'])) ? $filter_params['max_ar'] : ''; ?>">
-                            <div class="input-group-addon" id="ar_max_mertek">M Ft</div>
-                        </div>
-                    </div> 
                 </div>
             </div>
 
