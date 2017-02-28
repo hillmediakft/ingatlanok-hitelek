@@ -59,6 +59,7 @@ class Application {
             $router->get('/hirek/kategoria/:id', 'hirek@kategoria', array('id'));
             $router->get('/hirek/:title/:id', 'hirek@reszletek', array('title', 'id'));
             $router->get('/kereses', 'kereses@index');
+            $router->get('/profil', 'Profile@index');
             
             $router->get('/kedvencek', 'kedvencek@index');
             $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
@@ -91,6 +92,7 @@ class Application {
                 $router->get('/news/category/:id', 'hirek@kategoria', array('id'));
                 $router->get('/news/:title/:id', 'hirek@reszletek', array('title', 'id'));
                 $router->get('/search', 'kereses@index');
+                $router->get('/profile', 'Profile@index');
                 
                 $router->get('/favourites', 'kedvencek@index');
                 $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
