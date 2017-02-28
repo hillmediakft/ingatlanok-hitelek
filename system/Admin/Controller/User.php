@@ -102,6 +102,11 @@ class User extends AdminController {
 	            $user['email'] = $this->request->get_post('email');
 	            $user['phone'] = $this->request->get_post('phone');
 
+	            $user['title_hu'] = $this->request->get_post('title_hu');
+	            $user['title_en'] = $this->request->get_post('title_en');
+	            $user['description_hu'] = $this->request->get_post('description_hu');
+	            $user['description_en'] = $this->request->get_post('description_en');	            
+
 	            if (empty($this->request->get_post('img_url'))) {
 	                $user['photo'] = Config::get('user.default_photo');
 	            } else {
@@ -273,6 +278,11 @@ class User extends AdminController {
 	            $user['first_name'] = $this->request->get_post('first_name');
 	            $user['last_name'] = $this->request->get_post('last_name');
 	            $user['phone'] = $this->request->get_post('phone');
+	            
+	            $user['title_hu'] = $this->request->get_post('title_hu');
+	            $user['title_en'] = $this->request->get_post('title_en');
+	            $user['description_hu'] = $this->request->get_post('description_hu');
+	            $user['description_en'] = $this->request->get_post('description_en');
 
 	            //ha nem létezik a $password_empty változó, vagyis nem üres mindkét password mező	
 	            if (!isset($password_empty)) {
