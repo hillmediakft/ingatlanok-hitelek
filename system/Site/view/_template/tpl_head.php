@@ -61,8 +61,12 @@ include($this->path('tpl_forgottenpw_modal'));
                 </div>
             </div>
 
-
             <?php if ($logged_in === true) { ?>
+            <!-- PROFIL OLDAL LINK -->
+            <div class="extra-item login">
+                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.profil.index.' . LANG);?>"><i class="fa fa-user"></i><?php echo Lang::get('menu_profil'); ?></a>
+            </div>
+            <!-- KIJELENTKEZES -->
             <div class="extra-item login">
                 <span style="color: #ffffff;"><?php echo Auth::getUser('name'); ?>&nbsp; &raquo; &nbsp;</span><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.user.logout.' . LANG); ?>"><?php echo Lang::get('header_top_kijelentkezes'); ?></a>
             </div>
@@ -77,12 +81,6 @@ include($this->path('tpl_forgottenpw_modal'));
                 <a data-toggle="modal" data-target="#modal_register" href="#"><?php echo Lang::get('footer_regisztracio'); ?></a>
             </div>
             <?php } ?>
-
-
-
-
-
-
 
         </div>
     </div>
@@ -177,8 +175,7 @@ include($this->path('tpl_forgottenpw_modal'));
                         <li class="navigation-item">
                             <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.index.' . LANG);?>"><?php echo Lang::get('menu_hirek'); ?></a>
                             <div class="overlay"></div>
-                        </li>                        
-
+                        </li> 
 
                     </ul>
                     <button class="mobile_menu_btn toggle-nav visible-xs">
