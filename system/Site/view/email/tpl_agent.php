@@ -21,13 +21,13 @@
                                     <table border="0" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td>
-                                                <p style="color: #666; font-size: 14px; font-weight: 700">Tisztelt {agent_name}!</p>
+                                                <p style="color: #666; font-size: 18px; font-weight: 700">Tisztelt {agent_name}!</p>
                                                 <p>Szeretnék érdeklődni az egyik ingatlannal kapcsolatban.</p>
                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                     <tbody>
                                                         <tr>
                                                             <td align="left">
-                                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                                <table border="0" cellpadding="0" cellspacing="5">
                                                                     <tbody>
                                                                         <tr>
                                                                             <td style="width: 100px;">Név:</td><td>{name}</td>
@@ -39,7 +39,7 @@
                                                                             <td style="width: 100px;">Telefonszám:</td><td>{phone}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td style="width: 100px;">Üzenet:</td><td>{message}</td>
+                                                                            <td style="width: 100px; vertical-align: top;">Üzenet:</td><td>{message}</td>
                                                                         </tr>
 
                                                                         <tr>
