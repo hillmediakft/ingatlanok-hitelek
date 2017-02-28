@@ -16182,6 +16182,8 @@ a.simple-btn.outlined.red:hover {
   padding-top: 20px;
   padding-bottom: 15px;
   margin-bottom: 30px;
+    /* saját beállítás*/
+    overflow: hidden; 
 }
 /* line 7165, scss/_shortcodes.scss */
 .agency-container .agent-item .social-block {
@@ -16331,9 +16333,8 @@ a.simple-btn.outlined.red:hover {
 }
 /* line 7275, scss/_shortcodes.scss */
 .agency-container .agent-item .contact-listing li {
-  position: relative;
   padding-left: 26px;
-  min-height: 13px;
+  min-height: 21px;
   position: relative;
   margin-bottom: 7px;
   font-size: 15px;
