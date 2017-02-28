@@ -782,6 +782,8 @@ class Ingatlanok_model extends SiteModel {
             'users.id',
             'users.first_name',
             'users.last_name',
+            'users.title_' . $this->lang,
+            'users.description_' . $this->lang,
             'users.phone',
             'users.email',
             'users.photo'
