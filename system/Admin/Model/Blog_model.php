@@ -100,5 +100,19 @@ class Blog_model extends AdminModel {
 		return $this->query->select();
 	}
 
+    /**
+     * 	Status mező értékét módosítja
+     * 	
+     * 	@param	integer	$id	
+     * 	@param	integer	$data (0 vagy 1)	
+     * 	@return integer
+     */
+    public function changeStatus($id, $data)
+    {
+        $this->query->set_where('id', '=', $id);
+        return $this->query->update(array('status' => $data));
+    }
+
+
 }
 ?>
