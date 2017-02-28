@@ -73,6 +73,12 @@ $config['url'] = array(
             'hu' => 'kedvencek',
             'en' => 'favourites'
             )
+    ),
+    'profil' => array(
+        'index' => array(
+            'hu' => 'profil',
+            'en' => 'profile'
+            )
     )    
 );
 ?>
