@@ -56,6 +56,32 @@
             </ul>
         </li>
 
+        <!-- BLOG -->
+        <li class="nav-item <?php $this->menu_active('blog'); ?> ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="fa fa-suitcase"></i>
+                <span class="title">Hírek</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item <?php $this->menu_active('blog', 'index'); ?> ">
+                    <a href="admin/blog" class="nav-link ">
+                        <span class="title">Hírek</span>
+                    </a>
+                </li>
+                <li class="nav-item <?php $this->menu_active('blog', 'insert'); ?> ">
+                    <a href="admin/blog/insert" class="nav-link ">
+                        <span class="title">Új hír</span>
+                    </a>
+                </li>
+                <li class="nav-item <?php $this->menu_active('blog', 'category'); ?> ">
+                    <a href="admin/blog/category" class="nav-link ">
+                        <span class="title">Kategóriák</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <!-- DATATABLES -->
         <li class="nav-item <?php $this->menu_active('datatables'); ?>">
             <a href="javascript:;" class="nav-link nav-toggle">
@@ -358,34 +384,7 @@
         </li>
         -->
 
-
-
-        <!-- BLOG -->
-        <li class="nav-item <?php $this->menu_active('blog'); ?> ">
-            <a href="javascript:;" class="nav-link nav-toggle">
-                <i class="fa fa-suitcase"></i>
-                <span class="title">Blog</span>
-                <span class="arrow"></span>
-            </a>
-            <ul class="sub-menu">
-                <li class="nav-item <?php $this->menu_active('blog', 'index'); ?> ">
-                    <a href="admin/blog" class="nav-link ">
-                        <span class="title">Bejegyzések</span>
-                    </a>
-                </li>
-                <li class="nav-item <?php $this->menu_active('blog', 'insert'); ?> ">
-                    <a href="admin/blog/insert" class="nav-link ">
-                        <span class="title">Új bejegyzés</span>
-                    </a>
-                </li>
-                <li class="nav-item <?php $this->menu_active('blog', 'category'); ?> ">
-                    <a href="admin/blog/category" class="nav-link ">
-                        <span class="title">Kategóriák</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    <!-- END MENU ITEMS -->
+<!-- END MENU ITEMS -->
 
     </ul>
     <!-- END SIDEBAR MENU -->
