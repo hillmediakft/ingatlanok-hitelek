@@ -16,15 +16,19 @@ use System\Libs\Config;
                 </ul>
             </div>
         </div>
+
+
+<!-- 
+
         <div class="widget popular-posts">
             <div class="heading">
-                <span class="widget-title"><?php echo Lang::get('hirek_ingatlanok'); ?></span>
+                <span class="widget-title">Title</span>
             </div>
             <div class="widget-entry">
                 <div class="popular-posts-widget">
                     <div class="single-widget-post">
                         <div class="preview">
-                            <img alt="#" src="<?php echo SITE_IMAGE;?>latest-blog-posts/4.1.jpg">
+                            <img alt="#" src="<?php //echo SITE_IMAGE;?>latest-blog-posts/4.1.jpg">
                         </div>
                         <div class="descr">
                             <span class="title"><a href="#">Etiam Pharetraluct felis sed rhoncus</a></span>
@@ -32,7 +36,7 @@ use System\Libs\Config;
                     </div>
                     <div class="single-widget-post">
                         <div class="preview">
-                            <img alt="#" src="<?php echo SITE_IMAGE;?>latest-blog-posts/4.2.jpg">
+                            <img alt="#" src="<?php //echo SITE_IMAGE;?>latest-blog-posts/4.2.jpg">
                         </div>
                         <div class="descr">
                             <span class="title"><a href="#">Etiam Pharetraluct felis sed rhoncus</a></span>
@@ -40,7 +44,7 @@ use System\Libs\Config;
                     </div>
                     <div class="single-widget-post">
                         <div class="preview">
-                            <img alt="#" src="<?php echo SITE_IMAGE;?>latest-blog-posts/4.3.jpg">
+                            <img alt="#" src="<?php //echo SITE_IMAGE;?>latest-blog-posts/4.3.jpg">
                         </div>
                         <div class="descr">
                             <span class="title"><a href="#">Etiam Pharetraluct felis sed rhoncus</a></span>
@@ -52,7 +56,7 @@ use System\Libs\Config;
                 </nav>
             </div>
         </div>
-
+-->
 
     </aside>
 </div>
