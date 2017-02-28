@@ -20,7 +20,10 @@ class Blog_model extends AdminModel {
 	 */
 	public function selectBlog($id = null)
 	{
-		$this->query->set_columns(array('blog.id', 'blog.title_hu', 'blog.title_en', 'blog.body_hu', 'blog.body_en', 'blog.picture', 'blog.add_date', 'blog_category.category_name_hu', 'blog_category.category_name_en')); 
+		$this->query->set_columns(array(
+			'blog.*',
+			'blog_category.category_name_hu',
+			'blog_category.category_name_en')); 
 		$this->query->set_join('left', 'blog_category', 'blog.category_id', '=', 'blog_category.id'); 
 		
 		if(!is_null($id)){
