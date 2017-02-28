@@ -40,8 +40,8 @@ use System\Libs\Language as Lang;
                             </div>
                             <div class="middle">
                                 <span class="name"><?php echo $agent['first_name'] . ' ' . $agent['last_name']; ?></span>
-                                <span class="desc">Ingatlan értékesítő</span>
-                                <span class="properties"><?php echo $agent['property'];?> ingatlan</span>
+                                <span class="desc"><?php echo $agent['title_' . LANG]; ?></span>
+                                <span class="properties"><?php echo $agent['property'];?> <?php echo Lang::get('referens_ingatlan'); ?></span>
                                 <!-- 
                                 <div class="social-block">
                                     <ul class="sociable-listing">
@@ -94,11 +94,11 @@ use System\Libs\Language as Lang;
                             </div>
                         </div>
                         <div class="descr">
-                            <h4 class="column-title">About Me</h4>
-                            <p class="descr-text">Cras pulvinar diam quis neque vehicula, nec mattis ligula suscipit. Nullam eget egestas nibh. Sed pharetra accumsan enim sed tincidunt. Donec sit amet lectus pulvinar, placerat lectus id, dapibus urna. In malesuada tincidunt aliquam. Ut ut congue massa, at dignissim elit. Vestibulum efficitur cursus lectus a tincidunt. Curabitur sagittis, massa id euismod egestas, magna mauris venenatis augue, quis varius nibh erat vitae ligula. Duis sit amet massa nec mi dignissim.</p>
+                            <h4 class="column-title"><?php echo Lang::get('referens_cim_bemutatkozas'); ?></h4>
+                            <p class="descr-text"><?php echo $agent['description_' . LANG]; ?></p>
                         </div>
                         <div class="question-container">
-                            <h4 class="column-title">Have a Questions?</h4>
+                            <h4 class="column-title"><?php echo Lang::get('referens_cim_kapcsolat'); ?></h4>
                             <div class="contacts-block" style="padding-bottom: 0px;">
                                 <div class="message-form">
                                     <form action="<?php echo LANG; ?>/sendemail/init/agent_info" method="post" id="contact-form-agent">

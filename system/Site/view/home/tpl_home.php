@@ -196,7 +196,7 @@ use System\Libs\Language as Lang;
                                         </div>
                                         <span class="name"><?php echo $agent['first_name'] . ' ' . $agent['last_name']; ?></span>
                                         <span class="properties">
-                                            <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.ertekesito.' . LANG) . '/' . $this->str_helper->stringToSlug($agent['first_name']) . '-' . $this->str_helper->stringToSlug($agent['last_name']) . '/' . $agent['id']; ?>" class="simple-btn sm-button outlined red"><?php echo $agent['property'];?>  ingatlan</a>
+                                            <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.ertekesito.' . LANG) . '/' . $this->str_helper->stringToSlug($agent['first_name']) . '-' . $this->str_helper->stringToSlug($agent['last_name']) . '/' . $agent['id']; ?>" class="simple-btn sm-button outlined red"><?php echo $agent['property'] . ' ' . Lang::get('referens_ingatlan'); ?></a>
                                         </span>
                                         <ul class="contact-listing">
                                             <li>
