@@ -9,10 +9,10 @@
 				<i class="fa fa-angle-right"></i>
 			</li>
 			<li>
-				<a href="admin/blog">Blogok kezelése</a>
+				<a href="admin/blog">Hírek kezelése</a>
 				<i class="fa fa-angle-right"></i>
 			</li>
-			<li><a href="admin/blog/insert">Blog hozzáadása</a></li>
+			<li><span>Hír hozzáadása</span></li>
 		</ul>
 	</div>
 	<!-- END PAGE TITLE & BREADCRUMB-->
@@ -35,7 +35,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="fa fa-film"></i> 
-                            Blog bejegyzés hozzáadása
+                            Hír hozzáadása
                         </div>
                         <div class="actions">
                             <button class="btn green btn-sm" type="submit" id="submit_add_blog" name="submit_add_blog"><i class="fa fa-check"></i> Mentés</button>
@@ -68,6 +68,15 @@
 								</div>
 
 <div class="margin-bottom-40"></div>
+	
+								<!-- STÁTUSZ -->
+                                <div class="form-group">
+                                    <label for="status">Státusz</label>
+                                    <select name="status" class="form-control input-xlarge">
+                                        <option value="0">Inaktív</option>
+                                        <option value="1">Aktív</option>
+                                    </select>
+                                </div>
 
 								<div class="form-group">
 									<label for="blog_category">Kategória</label>

@@ -8,7 +8,7 @@
 					<a href="admin/home">Kezdőoldal</a> 
 					<i class="fa fa-angle-right"></i>
 				</li>
-				<li><a href="admin/blog">Blog</a></li>
+				<li><a href="admin/blog">Hírek</a></li>
 			</ul>
 		</div>
 		<!-- END PAGE TITLE & BREADCRUMB-->
@@ -29,10 +29,10 @@
 				<!-- BEGIN EXAMPLE TABLE PORTLET-->
 				<div class="portlet">
 					<div class="portlet-title">
-						<div class="caption"><i class="fa fa-cogs"></i>Blogok kezelése</div>
+						<div class="caption"><i class="fa fa-cogs"></i>Hírek kezelése</div>
 						
 							<div class="actions">
-								<a href="admin/blog/insert" class="btn blue btn-sm"><i class="fa fa-plus"></i> Új bejegyzés</a>
+								<a href="admin/blog/insert" class="btn blue btn-sm"><i class="fa fa-plus"></i> Új hír</a>
 								<button class="btn red btn-sm" id="delete_group" type="button"><i class="fa fa-trash"></i> Csoportos törlés</button>
 								<div class="btn-group">
 									<a data-toggle="dropdown" href="#" class="btn btn-sm default">
