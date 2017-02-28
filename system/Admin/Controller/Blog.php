@@ -70,8 +70,13 @@ if($this->request->checkUploadError('upload_blog_picture')){
 			// az adatbázisba kerülő adatok
 			$data['title_hu'] = $this->request->get_post('blog_title_hu');
 			$data['body_hu'] = $this->request->get_post('blog_body_hu', 'strip_danger_tags');
+			
 			$data['title_en'] = $this->request->get_post('blog_title_en');
+			if ($data['title_en'] === '') {
+				$data['title_en'] = $data['title_hu'];
+			}
 			$data['body_en'] = $this->request->get_post('blog_body_en', 'strip_danger_tags');
+			
 			$data['category_id'] = $this->request->get_post('blog_category');
 			$data['picture'] = $dest_image;
 			$data['add_date'] = date('Y-m-d-G:i');
@@ -125,7 +130,11 @@ if($this->request->checkUploadError('upload_blog_picture')){
 		// az adatbázisba kerülő adatok
 			$data['title_hu'] = $this->request->get_post('blog_title_hu');
 			$data['body_hu'] = $this->request->get_post('blog_body_hu', 'strip_danger_tags');
+			
 			$data['title_en'] = $this->request->get_post('blog_title_en');
+			if ($data['title_en'] === '') {
+				$data['title_en'] = $data['title_hu'];
+			}			
 			$data['body_en'] = $this->request->get_post('blog_body_en', 'strip_danger_tags');
 			
 			// ha van új feltöltött kép
