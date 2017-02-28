@@ -43,7 +43,8 @@ var Blog = function () {
                 {"orderable": true, "searchable": true, "targets": 1},
                 {"orderable": true, "searchable": false, "targets": 2},
                 {"orderable": true, "searchable": true, "targets": 3},
-                {"orderable": false, "searchable": false, "targets": 4}
+                {"orderable": true, "searchable": false, "targets": 4},
+                {"orderable": false, "searchable": false, "targets": 5}
             ],
 
             // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
@@ -96,11 +97,10 @@ var Blog = function () {
                 url: "admin/blog/delete"
             });
 
-/*
             vframework.changeStatus({
                 url: "admin/blog/change_status",
             });
-*/
+
             vframework.printTable({
                 print_button_id: "print_blog", // elem id-je, amivel elindítjuk a nyomtatást 
                 table_id: "blog",
