@@ -9,10 +9,10 @@
 				<i class="fa fa-angle-right"></i>
 			</li>
 			<li>
-				<a href="admin/blog">Blog</a>
+				<a href="admin/blog">Hírek</a>
 				<i class="fa fa-angle-right"></i>
 			</li>
-			<li><a href="admin/blog/category">Kategóriák</a></li>
+			<li><span>Kategóriák</span></li>
 		</ul>
 	</div>
 	<!-- END PAGE TITLE & BREADCRUMB-->
@@ -33,7 +33,7 @@
 				<!-- BEGIN EXAMPLE TABLE PORTLET-->
 				<div class="portlet">
 					<div class="portlet-title">
-						<div class="caption"><i class="fa fa-cogs"></i>Blog kategóriák</div>
+						<div class="caption"><i class="fa fa-cogs"></i>Hír kategóriák</div>
 						
 							<div class="actions">
 								<!-- <a href="admin/blog/category_insert" class="btn blue btn-sm"><i class="fa fa-plus"></i> Új kategória</a> -->
