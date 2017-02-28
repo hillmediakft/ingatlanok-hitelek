@@ -59,8 +59,11 @@ class Application {
             $router->get('/hirek/kategoria/:id', 'hirek@kategoria', array('id'));
             $router->get('/hirek/:title/:id', 'hirek@reszletek', array('title', 'id'));
             $router->get('/kereses', 'kereses@index');
+            
             $router->get('/kedvencek', 'kedvencek@index');
-             $router->get('/kereses', 'kereses@index');
+            $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
+            $router->post('/kedvencek/delete_property_from_cookie', 'kedvencek@delete_property_from_cookie'); // ajax
+            $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek');
             
             $router->post('/ingatlanok/arvaltozasErtesites', 'ingatlanok@arvaltozasErtesites'); // ajax
 
@@ -69,13 +72,8 @@ class Application {
             $router->post('/user/register', 'user@register'); // ajax
             $router->post('/user/forgottpw', 'user@forgottpw'); // ajax
             $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
-            $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
-            $router->post('/kedvencek/delete_property_from_cookie', 'kedvencek@delete_property_from_cookie'); // ajax
             
-            $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek');
             $router->post('/sendemail/init/:title', 'SendEmail@init', array('type'));
-
-
 
             $router->set404('error@index');
 
@@ -92,22 +90,22 @@ class Application {
                 $router->get('/news', 'hirek@index');
                 $router->get('/news/category/:id', 'hirek@kategoria', array('id'));
                 $router->get('/news/:title/:id', 'hirek@reszletek', array('title', 'id'));
-
                 $router->get('/search', 'kereses@index');
+                
+                $router->get('/favourites', 'kedvencek@index');
+                $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
+                $router->post('/kedvencek/delete_property_from_cookie', 'kedvencek@delete_property_from_cookie'); // ajax
+                $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek'); // ajax
+                
+                $router->post('/ingatlanok/arvaltozasErtesites', 'ingatlanok@arvaltozasErtesites'); // ajax
+
                 $router->get('/user/logout', 'user@logout');
                 $router->post('/user/login', 'user@login'); // ajax
                 $router->post('/user/register', 'user@register'); // ajax
                 $router->post('/user/forgottpw', 'user@forgottpw'); // ajax
                 $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
 
-                $router->post('/ingatlanok/arvaltozasErtesites', 'ingatlanok@arvaltozasErtesites'); // ajax
-
-                $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
-                $router->post('/kedvencek/delete_property_from_cookie', 'kedvencek@delete_property_from_cookie'); // ajax
-                $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek'); // ajax
-
                 $router->post('/sendemail/init/:title', 'SendEmail@init', array('type')); //ajax
-
 
             });
 
