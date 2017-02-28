@@ -68,6 +68,8 @@ if($this->request->checkUploadError('upload_blog_picture')){
 
 
 			// az adatbázisba kerülő adatok
+			$data['status'] = $this->request->get_post('status', 'integer');
+			
 			$data['title_hu'] = $this->request->get_post('blog_title_hu');
 			$data['body_hu'] = $this->request->get_post('blog_body_hu', 'strip_danger_tags');
 			
@@ -128,6 +130,8 @@ if($this->request->checkUploadError('upload_blog_picture')){
 			}
 
 		// az adatbázisba kerülő adatok
+			$data['status'] = $this->request->get_post('status', 'integer');
+
 			$data['title_hu'] = $this->request->get_post('blog_title_hu');
 			$data['body_hu'] = $this->request->get_post('blog_body_hu', 'strip_danger_tags');
 			
