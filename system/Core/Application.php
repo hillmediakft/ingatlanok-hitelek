@@ -211,6 +211,7 @@ class Application {
                 $router->get('/blog/category', 'blog@category');
                 $router->post('/blog/category_insert_update', 'blog@category_insert_update');
                 $router->post('/blog/category_delete', 'blog@category_delete');
+                $router->post('/blog/change_status', 'blog@change_status');
 
                 //datatables
                 $router->get('/datatables/ingatlan_kategoria', 'datatables@ingatlan_kategoria');
