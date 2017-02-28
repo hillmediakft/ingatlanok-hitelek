@@ -18,11 +18,15 @@ class Blog_model extends SiteModel {
      */
     public function getBlogPosts($id = null)
     {
-        $this->query->set_columns('*');
+        $this->query->set_columns(array(
+            'blog.*',
+            'blog_category.category_name_' . $this->lang
+            ));
         if (!is_null($id)) {
             $id = (int) $id;
             $this->query->set_where('blog.id', '=', $id);
         }
+        $this->query->set_where('blog.status', '=', 1);
         $this->query->set_join('left', 'blog_category', 'blog.category_id', '=', 'blog_category.id');
         $this->query->set_orderby(array('blog.add_date'), 'DESC');
         $result = $this->query->select();
@@ -55,6 +59,7 @@ class Blog_model extends SiteModel {
             $this->query->set_offset($offset);
         }
         $this->query->set_join('left', 'blog_category', 'blog.category_id', '=', 'blog_category.id');
+        $this->query->set_where('blog.status', '=', 1);
         $this->query->set_orderby(array('blog.add_date'), 'DESC');
         return $this->query->select();
     }
@@ -129,6 +134,7 @@ class Blog_model extends SiteModel {
             blog_category.category_name_" . $this->lang
             );
         $this->query->set_where('blog.category_id', '=', $id);
+        $this->query->set_where('blog.status', '=', 1);
         $this->query->set_join('left', 'blog_category', 'blog.category_id', '=', 'blog_category.id');
 
         if (!is_null($limit)) {
