@@ -477,6 +477,68 @@ if($this->request->checkUploadError('upload_blog_picture')){
 		return $filename;		
 	}
 
+    /**
+     * (AJAX) A blog táblában módosítja a status mező értékét
+     *
+     * @return void
+     */
+    public function change_status()
+    {
+        if ( $this->request->is_ajax() ) {
+        	// jogosultság vizsgálat
+        	if (!Auth::hasAccess('blog.change_status')) {
+				$this->response->json(array(
+					"status" => 'error',
+					"message" => 'Nincs engedélye a művelet végrehajtásához.'
+				));			
+			}        		
+        	
+            if ( $this->request->has_post('action') && $this->request->has_post('id') ) {
+			
+				$id = $this->request->get_post('id', 'integer');
+				$action = $this->request->get_post('action');
+
+				if($action == 'make_active') {
+					$result = $this->blog_model->changeStatus($id, 1);
+					if($result !== false){
+						$this->response->json(array(
+							"status" => 'success',
+							"message" => 'Az aktiválás megtörtént!'
+						)); 	
+					} else {
+						$this->response->json(array(
+							"status" => 'error',
+							"message" => 'Adatbázis hiba! A hír státusza nem változott meg!'
+						));
+					}
+				}
+				if($action == 'make_inactive') {
+					$result = $this->blog_model->changeStatus($id, 0);
+					if($result !== false){
+						$this->response->json(array(
+							"status" => 'success',
+							"message" => 'A blokkolás megtörtént!'
+						)); 	
+					} else {
+						$this->response->json(array(
+							"status" => 'error',
+							"message" => 'Adatbázis hiba! A státusz nem változott meg!'
+						));
+					}
+					
+				}
+			} else {
+				$this->response->json(array(
+					"status" => 'error',
+					"message" => 'unknown_error'
+				));
+			}
+
+		} else {
+			$this->response->redirect('admin/error');
+		}
+    }	
+
 
 }
 ?>
