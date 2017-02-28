@@ -54,6 +54,8 @@ class User_model extends AdminModel {
         ));
         $this->query->set_join('left', 'roles', 'users.role_id', '=', 'roles.id');
         
+        $this->query->set_where('users.provider_type', '=', 'admin');
+        
         if(!is_null($id)){
             $this->query->set_where('users.id', '=', $id);
 // $this->query->debug();            
