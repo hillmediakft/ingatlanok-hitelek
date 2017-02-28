@@ -67,6 +67,12 @@ $config['url'] = array(
             'hu' => 'felhasznalo/kijelentkezes',
             'en' => 'user/logout'
             )        
+    ),
+    'kedvencek' => array(
+        'index' => array(
+            'hu' => 'kedvencek',
+            'en' => 'favourites'
+            )
     )    
 );
 ?>
