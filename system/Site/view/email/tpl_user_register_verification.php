@@ -14,7 +14,7 @@
     
     <p> Regisztrációd megtörtént, de jelenleg passzív.</p>
     
-    <a href="{base_url}felhasznalo/ellenorzes/{user_id}/{user_activation_hash}">Klikkel erre a linkre a regisztraciód aktiválásához!</a>
+    <a href="{base_url}felhasznalo/ellenorzes/{user_id}/{user_activation_hash}">Klikkelj erre a linkre a regisztraciód aktiválásához!</a>
     
     <p>Az aktiválást követően a {base_url} oldalára jutsz, ahol bejelentkezhetsz a felhasználó neveddel és jelszavaddal.</p>
     
