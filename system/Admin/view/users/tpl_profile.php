@@ -69,10 +69,11 @@
 						<div class="col-md-3">
 							<ul class="ver-inline-menu tabbable margin-bottom-10">
 								<li class="active"><a data-toggle="tab" href="#tab_1_1"><i class="fa fa-cog"></i>Személyes adatok</a><span class="after"></span></li>
-								<li ><a data-toggle="tab" href="#tab_2_2"><i class="fa fa-picture-o"></i> Profil kép</a></li>
-								<li ><a data-toggle="tab" href="#tab_3_3"><i class="fa fa-lock"></i> Jelszó</a></li>
+								<li><a data-toggle="tab" href="#tab_2_2"><i class="fa fa-cog"></i> Egyéb adatok</a></li>
+								<li><a data-toggle="tab" href="#tab_3_3"><i class="fa fa-picture-o"></i> Profil kép</a></li>
+								<li><a data-toggle="tab" href="#tab_4_4"><i class="fa fa-lock"></i> Jelszó</a></li>
 								<?php if(Auth::hasAccess('user.edit_roles')) { ?>
-								<li ><a data-toggle="tab" href="#tab_4_4"><i class="fa fa-wrench"></i> Jogosultságok</a></li>
+								<li><a data-toggle="tab" href="#tab_5_5"><i class="fa fa-wrench"></i> Jogosultságok</a></li>
 								<?php } ?>
 							</ul>
 						</div>
@@ -108,8 +109,30 @@
 
 								</div>
 
-<!-- ****************************** PROFIL KÉP FELTÖLTÉSE ***************************** -->									
+<!-- ****************************** EGYÉB ADATOK ***************************** -->	
 								<div id="tab_2_2" class="tab-pane">
+									<h3>Egyéb adatok</h3>
+
+									<div class="form-group">
+										<label for="title_hu" class="control-label">Titulus (magyar)</label>
+										<input type="text" name="title_hu" id="title_hu" value="<?php echo $user['title_hu'];?>" class="form-control input-xlarge" />
+									</div>
+									<div class="form-group">
+										<label for="title_en" class="control-label">Titulus (angol)</label>
+										<input type="text" name="title_en" id="title_en" value="<?php echo $user['title_en'];?>" class="form-control input-xlarge" />
+									</div>
+									<div class="form-group">
+										<label for="description_hu" class="control-label">Bemutatkozás (magyar)</label>
+										<textarea rows="6" type="text" name="description_hu" id="description_hu" class="form-control input-xlarge"><?php echo $user['description_hu'];?></textarea>
+									</div>
+									<div class="form-group">
+										<label for="description_en" class="control-label">Bemutatkozás (angol)</label>
+										<textarea rows="6" type="text" name="description_en" id="description_en" class="form-control input-xlarge"><?php echo $user['description_en'];?></textarea>
+									</div>
+								</div>
+
+<!-- ****************************** PROFIL KÉP FELTÖLTÉSE ***************************** -->									
+								<div id="tab_3_3" class="tab-pane">
 									
 									<h3>Profilkép feltöltése</h3>
 										
@@ -128,7 +151,7 @@
 								</div>
 								
 <!-- ****************************** JELSZÓ MEGADÁSA ***************************** -->									
-								<div id="tab_3_3" class="tab-pane">
+								<div id="tab_4_4" class="tab-pane">
 									
 									<h3>Jelszó megadása</h3>
 										
@@ -144,9 +167,8 @@
 								</div>
 								
 <!-- ****************************** JOGOSULTSÁGOK ***************************** -->										
-								
                             <?php if(Auth::hasAccess('user.edit_roles')) { ?>
-								<div id="tab_4_4" class="tab-pane">
+								<div id="tab_5_5" class="tab-pane">
 								
 									<h3>Felhasználói jogosultság</h3>
 
