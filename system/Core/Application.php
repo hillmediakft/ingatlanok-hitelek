@@ -75,6 +75,8 @@ class Application {
             $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
             
             $router->post('/sendemail/init/:title', 'SendEmail@init', array('type'));
+            
+            $router->post('/profile/deleteFollowed', 'Profile@deleteFollowed'); // ajax
 
             $router->set404('error@index');
 
@@ -108,6 +110,8 @@ class Application {
                 $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
 
                 $router->post('/sendemail/init/:title', 'SendEmail@init', array('type')); //ajax
+
+                $router->post('/profile/deleteFollowed', 'Profile@deleteFollowed'); // ajax
 
             });
 
