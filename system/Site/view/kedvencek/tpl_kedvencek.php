@@ -77,7 +77,7 @@ use System\Libs\Language as Lang;
                                                     <?php $this->html_helper->showPrice($value);?>
                                                 </span>
                                                 <div class="pull-right buttons">
-                                                    <a href="javascript:void();" id="delete_from_kedvencek_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" class="share"><i class="fa fa-trash-o fa-2x"></i></a>
+                                                    <a href="javascript:void(0);" id="delete_from_kedvencek_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" class="share"><i class="fa fa-trash-o fa-2x"></i></a>
 
                                                 </div>
                                             </div>

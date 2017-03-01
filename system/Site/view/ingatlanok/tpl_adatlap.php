@@ -527,7 +527,7 @@ use System\Libs\Language as Lang;
                     <div class="row">
                         <div class="col-sm-12">
                             <a id="arvaltozas_ertesites" class="simple-btn sm-button filled red <?php echo ($ertesites_arvaltozasrol) ? 'disabled' : ''; ?>" data-id="<?php echo $ingatlan['id']; ?>" href="javascript:void(0);"><i class="fa fa-envelope"></i> Értesítés árváltozásról</a>
-                            <a id="kedvencekhez_<?php echo $ingatlan['id']; ?>" data-id="<?php echo $ingatlan['id']; ?>" class="simple-btn sm-button filled red <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'disabled' : ''; ?>" href="javascript:void();"><i class="fa fa-heart"></i> Kedvencekhez</a>
+                            <a id="kedvencekhez_<?php echo $ingatlan['id']; ?>" data-id="<?php echo $ingatlan['id']; ?>" class="simple-btn sm-button filled red <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'disabled' : ''; ?>" href="javascript:void(0);"><i class="fa fa-heart"></i> Kedvencekhez</a>
                         </div>
                     </div>
                     <div class="row">
