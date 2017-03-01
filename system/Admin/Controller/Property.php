@@ -1115,6 +1115,27 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                             if ($update_real) {
                                 Message::set('success', 'A módosítások sikeresen elmentve!');
                                 EventManager::trigger('update_property', array('update', '#' . $id . ' azonosítójú ingatlan módosítása'));
+                            
+    // ha módosították az árat (nem az eredeti árat)
+    if ($ar_elado_modosult === true || $ar_kiado_modosult === true) {
+
+        $price_change_data = array(
+            'property_id' => $id
+            );
+        if ($ar_elado_modosult === true) {
+            $price_change_data['ar_elado_eredeti'] = $data['ar_elado_eredeti'];
+            $price_change_data['ar_elado_uj'] = $data['ar_elado'];
+        }
+        if ($ar_kiado_modosult === true) {
+            $price_change_data['ar_kiado_eredeti'] = $data['ar_kiado_eredeti'];
+            $price_change_data['ar_kiado_uj'] = $data['ar_kiado'];
+        }
+
+        $user_id_array = $this->property_model->getPriceChangeUser($id);
+//EventManager::trigger('change_price', array($user_id_array, $price_change_data));
+    }    
+
+
                             } else {
                                 Message::set('success', 'Ingatlan adatai elmentve.');
                             }
