@@ -25,44 +25,6 @@ use System\Libs\Language as Lang;
 
 
 
-
-
-                            <div class="row">                    
-                            <h1><i class="fa fa-user"></i> Profil adatok szerkesztése</h1>
-                                <div class="col-sm-6">
-                                    <div class="contacts-block">
-                                        <div class="contact-form">
-
-                                            <form action="#">
-                                                
-                                                <input type="password" name="password" class="name" placeholder="Password">
-                                                <input type="password" name="password_again" class="name" placeholder="Password again">
-                                                <input type="password" name="password_new" class="name" placeholder="New password">
-
-                                                <button class="send-btn style-2">Send</button>
-                                            </form>
-                                           
-                                        </div>
-                                    </div>        
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="contacts-block">
-                                        <div class="contact-form">
-
-                                            <form action="#">
-                                                
-                                                <input type="text" class="name" placeholder="Name">
-                                                <input type="email" class="email" placeholder="Email">
-                                                <button class="send-btn style-2">Send Message</button>
-                                            </form> 
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
                 <div class="objects-block list-sidebar">
 
                     <?php if (count($properties) > 0) : ?> 
@@ -163,6 +125,37 @@ use System\Libs\Language as Lang;
                     <?php //include($this->path('tpl_modul_kiemeltingatlanok')); ?>
                     <!-- KIEMELT INGATLANOK DOBOZ -->
                     <?php //include($this->path('tpl_modul_banner')); ?>
+
+
+                <h1><i class="fa fa-user"></i> Profil adatok szerkesztése</h1>
+                        <div class="contacts-block">
+                            <div class="contact-form">
+
+                                <form action="#">
+                                    
+                                    <input type="password" name="password" class="name" placeholder="Password">
+                                    <input type="password" name="password_again" class="name" placeholder="Password again">
+                                    <input type="password" name="password_new" class="name" placeholder="New password">
+
+                                    <button class="send-btn style-2">Send</button>
+                                </form>
+                               
+                            </div>
+                        </div>        
+                        <div class="contacts-block">
+                            <div class="contact-form">
+
+                                <form action="#">
+                                    
+                                    <input type="text" class="name" placeholder="Name">
+                                    <input type="email" class="email" placeholder="Email">
+                                    <button class="send-btn style-2">Send Message</button>
+                                </form> 
+                               
+                            </div>
+                        </div>
+
+
                 </aside>        
             </div> <!-- SIDEBAR END -->
 
