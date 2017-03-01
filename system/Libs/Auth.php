@@ -118,7 +118,7 @@ class Auth {
     public static function init($auth_config)
     {
         Config::load($auth_config);
-        self::$session_expire_time = Config::get('auth.expire_time', 3600);
+        self::$session_expire_time = Config::get('auth.session_expire_time', 3600);
         self::$area = AREA;
     }
 
