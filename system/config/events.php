@@ -1,6 +1,8 @@
 <?php
 use System\Libs\LogIntoDb;
 use System\Libs\Emailer;
+use System\Libs\DI;
+use System\Libs\Query;
  
 $config['events'] = array(
 
@@ -40,26 +42,46 @@ $config['events'] = array(
 		$log->index($type, $message);
 
 	},
-	'change_price' => function($user_id_array, $price_change_data){
+	'change_price' => function($price_change_data){
 
-		foreach ($user_id_array as $value) {
-			# code...
+		$connect = DI::get('connect');	
+		$query = new Query($connect);
+
+		$from_email = $price_change_data['settings']['email'];
+		$from_name = $price_change_data['settings']['ceg'];
+		$subject = 'Ingatlan árváltozás értesítés';
+		$template_data = array(
+			'ingatlan_ref_id' => $price_change_data['ingatlan_ref_id'],
+			'ingatlan_nev' => $price_change_data['ingatlan_nev'],
+			'ingatlan_tipus' => $price_change_data['ingatlan_tipus'],
+            'ar_eredeti' => $price_change_data['ar_eredeti'],
+            'ar_uj' => $price_change_data['ar_uj'],
+            'url' => $price_change_data['url'],
+            'from_name' => $from_name
+			);
+
+		// email küldése a felhasználóknak
+		foreach ($price_change_data['user_id_array'] as $user_id) {
+
+			$query->set_table('users');
+			$query->set_columns(array(
+				'name',
+				'email'
+				));
+			$query->set_where('id', '=', $user_id);
+			$user = $query->select();
+
+			$to_email = $user[0]['email'];
+			$to_name = $user[0]['name'];
+
+			$template_data['user_name'] = $user[0]['name'];
+
+	        // paraméterek: ($from_email, $from_name, $to_email, $to_name, $subject, $form_data, $template)
+	        $emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, 'arvaltozas');
+	        $emailer->send();
+
 		}
-
-		$to_email = '';
-		$to_name = '';
-		$subject = '';
-		$from_email = '';
-		$from_name = '';
-		$template_data = '';
-
-        // paraméterek: ($from_email, $from_name, $to_email, $to_name, $subject, $form_data, $template)
-        $emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, 'arvaltozas');
-        if ($emailer->send()) {
-			return false;
-        } else {
-			return true;
-        }		
+       		
 	} 
 
 
