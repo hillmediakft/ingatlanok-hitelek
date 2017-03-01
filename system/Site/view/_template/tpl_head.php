@@ -64,7 +64,7 @@ include($this->path('tpl_forgottenpw_modal'));
             <?php if ($logged_in === true) { ?>
             <!-- PROFIL OLDAL LINK -->
             <div class="extra-item login">
-                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.profil.index.' . LANG);?>"><i class="fa fa-user"></i><?php echo Lang::get('menu_profil'); ?></a>
+                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.profil.index.' . LANG);?>"><i class="fa fa-user"></i><?php echo Lang::get('header_top_profil'); ?></a>
             </div>
             <!-- KIJELENTKEZES -->
             <div class="extra-item login">
