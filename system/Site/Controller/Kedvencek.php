@@ -53,7 +53,7 @@ class Kedvencek extends SiteController {
 //$this->view->debug(true); 
         $view->add_links(array('bootstrap-select'));
         $view->add_link('js', SITE_JS . 'pages/handle_search.js');
-        $view->add_link('js', SITE_JS . 'kedvencek.js');
+        $view->add_link('js', SITE_JS . 'pages/kedvencek.js');
         $view->render('kedvencek/tpl_kedvencek', $data);
     }
 
