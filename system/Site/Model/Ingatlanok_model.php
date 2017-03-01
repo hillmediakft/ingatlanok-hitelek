@@ -1403,6 +1403,76 @@ class Ingatlanok_model extends SiteModel {
         return $this->query->insert(array('user_id' => $user_id, 'property_id' => $property_id));
     }
 
-}
+    /**
+     * A felhasználó által árváltozás értesítésre kijelölt ingatlanok adatait adja vissza
+     *
+     * @param integer $user_id
+     * @return array
+     */
+    public function followedByProperty($user_id)
+    {
+        // user-hez tartozó ingatlan id-k lekérdezése az arvaltozas tablabol    
+        $this->query->set_table('arvaltozas');
+        $this->query->set_columns('property_id');
+        $this->query->set_where('user_id', '=', $user_id);
+        $temp = $this->query->select();
+        $id_array = array();
 
+        if(!empty($temp)) {
+            foreach ($temp as $value) {
+                $id_array[] = $value['property_id'];
+            }
+            unset($temp);
+        } else {
+            return $id_array;
+        }
+
+        // ingatlan adatok lekérdezése
+        $this->query->set_columns(array(
+            'ingatlanok.id',
+            'ingatlanok.ref_num',
+            'ingatlanok.ingatlan_nev_' . $this->lang,
+            'ingatlanok.status',
+            'ingatlanok.tipus',
+            'ingatlanok.kerulet',
+            'ingatlanok.ar_elado',
+            'ingatlanok.ar_elado_eredeti',
+            'ingatlanok.ar_kiado',
+            'ingatlanok.ar_kiado_eredeti',
+            'ingatlanok.alapterulet',
+            'ingatlanok.szobaszam',
+            'ingatlanok.kepek',
+            'ingatlanok.varos',
+            'ingatlan_kategoria.*',
+            'district_list.district_name',
+            'city_list.city_name'
+        ));
+
+        $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
+        $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
+        $this->query->set_join('left', 'district_list', 'ingatlanok.kerulet', '=', 'district_list.district_id');
+
+        $this->query->set_where('ingatlanok.id', 'in', $id_array);
+        $this->query->set_where('status', '=', 1);
+        $this->query->set_orderby('ingatlanok.id', 'DESC');
+
+        return $this->query->select();
+    }
+
+    /**
+     * A felhasználó által árváltozás értesítésre kijelölt ingatlanthoz
+     * tartozó rekordot törli az arvaltozas tablabol
+     *
+     * @param integer $property_id 
+     * @param integer $user_id
+     */
+    public function deleteFollowed($property_id, $user_id)
+    {
+        $this->query->set_table('arvaltozas');
+        $this->query->set_where('property_id', '=', $property_id);
+        $this->query->set_where('user_id', '=', $user_id, 'and');
+        return $this->query->delete();
+    }
+
+}
 ?>
