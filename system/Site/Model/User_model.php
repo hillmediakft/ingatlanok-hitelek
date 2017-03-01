@@ -37,15 +37,7 @@ class User_model extends SiteModel {
     public function selectUser($id = null)
     {
         $this->query->set_columns(array(
-            'users.id',
-            'users.name',
-            'users.first_name',
-            'users.last_name',
-            'users.active',
-            'users.email',
-            'users.role_id',
-            'users.phone',
-            'users.photo',
+            'users.*',
             'roles.role'
         ));
         $this->query->set_join('left', 'roles', 'users.role_id', '=', 'roles.id');
