@@ -40,6 +40,6 @@ $config['auth'] = array(
 	/**
 	 * Munkamenet lejárati ideje
 	 */
-	'session_expire_time' => 3600,
+	'session_expire_time' => 7200,
 );
 ?>
