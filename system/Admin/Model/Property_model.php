@@ -545,5 +545,27 @@ class Property_model extends AdminModel {
         return $suggestions;
     }
 
+    /**
+     * Egy bizonyos ingatlan árváltozás figyelésére feliratkozott felhasználók id-jének lekérdezése 
+     */
+    public function getPriceChangeUser($property_id)
+    {
+        // user-hez tartozó ingatlan id-k lekérdezése az arvaltozas tablabol    
+        $this->query->set_table('arvaltozas');
+        $this->query->set_columns('user_id');
+        $this->query->set_where('property_id', '=', $property_id);
+        $temp = $this->query->select();
+        $id_array = array();
+
+        if(!empty($temp)) {
+            foreach ($temp as $value) {
+                $id_array[] = $value['user_id'];
+            }
+            unset($temp);
+        }
+
+        return $id_array;
+    }
+
 }
 ?>
