@@ -1116,24 +1116,40 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                                 Message::set('success', 'A módosítások sikeresen elmentve!');
                                 EventManager::trigger('update_property', array('update', '#' . $id . ' azonosítójú ingatlan módosítása'));
                             
-    // ha módosították az árat (nem az eredeti árat)
-    if ($ar_elado_modosult === true || $ar_kiado_modosult === true) {
 
-        $price_change_data = array(
-            'property_id' => $id
-            );
-        if ($ar_elado_modosult === true) {
-            $price_change_data['ar_elado_eredeti'] = $data['ar_elado_eredeti'];
-            $price_change_data['ar_elado_uj'] = $data['ar_elado'];
-        }
-        if ($ar_kiado_modosult === true) {
-            $price_change_data['ar_kiado_eredeti'] = $data['ar_kiado_eredeti'];
-            $price_change_data['ar_kiado_uj'] = $data['ar_kiado'];
-        }
+                                // ha módosították az árat (nem az eredeti árat)
+                                if ($ar_elado_modosult === true || $ar_kiado_modosult === true) {
+                                    // lekérdezzük azoknak a felhasználóknak az id-jét, akik kérnek árváltozás értesítést erről az ingatlanról
+                                    $price_change_users = $this->property_model->getPriceChangeUser($id);
+                                    if (!empty($price_change_users)) {
+                                        
+                                        $price_change_data = array(
+                                            'ingatlan_ref_id' => '#' . $data['ref_num'],
+                                            'ingatlan_nev' => $data['ingatlan_nev_hu'],
+                                            'ingatlan_tipus' => $data['tipus'],
+                                            );
 
-        $user_id_array = $this->property_model->getPriceChangeUser($id);
-//EventManager::trigger('change_price', array($user_id_array, $price_change_data));
-    }    
+                                        if ($ar_elado_modosult === true) {
+                                            $price_change_data['ar_eredeti'] = $data['ar_elado_eredeti'];
+                                            $price_change_data['ar_uj'] = $data['ar_elado'];
+                                        }
+                                        if ($ar_kiado_modosult === true) {
+                                            $price_change_data['ar_eredeti'] = $data['ar_kiado_eredeti'];
+                                            $price_change_data['ar_uj'] = $data['ar_kiado'];
+                                        }
+
+                                        $price_change_data['url'] = BASE_URL . 'ingatlanok/adatlap/' . $id . '/' . DI::get('str_helper')->stringToSlug($data['ingatlan_nev_hu']);
+                                        $price_change_data['user_id_array'] = $price_change_users;
+
+                                        $this->loadModel('settings_model');
+                                        $price_change_data['settings'] = $this->settings_model->get_settings();
+
+                                // var_dump($price_change_data);
+                                // die;
+                                        EventManager::trigger('change_price', array($price_change_data));
+                                    }
+                                    
+                                }    
 
 
                             } else {
