@@ -21,10 +21,12 @@ class SiteController extends Controller {
     {
         parent::__construct();
 
-        // megnézzük, hogy be van-e jelentkezve a user és hogy lejárt-e a session időkorlát 
-        if (Auth::isUserLoggedIn() && !Auth::checkExpire()) {
-            //ha a user be van jelentkezve, de lejárt az időkorlát
-            $this->response->redirect($this->request->get_uri('current_url'));
+        // megnézzük, hogy be van-e jelentkezve a user 
+        if (Auth::isUserLoggedIn()) {
+            // megnézzük, hogy lejárt-e a session időkorlát 
+            if (!Auth::checkExpire()) {
+                $this->response->redirect($this->request->get_uri('current_url'));
+            }
         }
 
         // settings betöltése és hozzárendelése a controllereken belül elérhető a global_data változóhoz
