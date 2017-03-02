@@ -38,6 +38,15 @@ $link['ckeditor'] = array(
 
 */
 
+// JQuery validation
+$link['validation'] = array(
+	'js' => array(
+		SITE_ASSETS . 'vendors/jquery-validation/jquery.validate.js',
+		SITE_ASSETS . 'vendors/jquery-validation/additional-methods.min.js',
+		SITE_ASSETS . 'vendors/jquery-validation/localization/messages_hu.js'
+	)
+);
+
 // Google Maps
 $link['google-maps-site'] = array(
 	'js' => array(
@@ -46,13 +55,13 @@ $link['google-maps-site'] = array(
 );
 
 $link['multiselect'] = array(
-	'css' => SITE_ASSETS . '/vendors/jquery-ui-multiselect/jquery.multiselect.css',
-	'js' => SITE_ASSETS . '/vendors/jquery-ui-multiselect/jquery.multiselect.js'
+	'css' => SITE_ASSETS . 'vendors/jquery-ui-multiselect/jquery.multiselect.css',
+	'js' => SITE_ASSETS . 'vendors/jquery-ui-multiselect/jquery.multiselect.js'
 );
 
 $link['bootstrap-select'] = array(
-	'css' => SITE_ASSETS . '/vendors/bootstrap-select/css/bootstrap-select.css',
-	'js' => SITE_ASSETS . '/vendors/bootstrap-select/js/bootstrap-select.js'
+	'css' => SITE_ASSETS . 'vendors/bootstrap-select/css/bootstrap-select.css',
+	'js' => SITE_ASSETS . 'vendors/bootstrap-select/js/bootstrap-select.js'
 );
 
 
