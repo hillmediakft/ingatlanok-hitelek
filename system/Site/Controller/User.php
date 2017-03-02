@@ -261,11 +261,14 @@ class User extends SiteController {
      */
     private function _sendVerificationEmail($user_id, $user_name, $user_email, $user_activation_hash)
     {
-    	$from_email = 'info_ka@example.com'; // adatbázisból! 
-    	$from_name = 'teszt name 44'; // adatbázisból!
+    	$this->loadModel('settings_model');
+    	$settings = $this->settings_model->get_settings();
+
+    	$from_email = $settings['email']; // adatbázisból! 
+    	$from_name = $settings['ceg']; // adatbázisból!
     	$to_email = $user_email;
     	$to_name = $user_name;
-    	$subject = 'Subject helye...'; // adatbázisból!
+    	$subject = 'Regisztráció megerősítés.'; // adatbázisból!
     	$template_data = array(
 			'base_url' => BASE_URL,
 			'title' => 'Verify registration teszt',
@@ -381,11 +384,14 @@ class User extends SiteController {
      */
     private function _sendForgottenPwEmail($user_email, $user_name, $new_password)
     {
-    	$from_email = 'info_ka@example.com'; // adatbázisból! 
-    	$from_name = 'ingatlanok-hitelek'; // adatbázisból!
+    	$this->loadModel('settings_model');
+    	$settings = $this->settings_model->get_settings();
+
+    	$from_email = $settings['email']; // adatbázisból! 
+    	$from_name = $settings['ceg']; // adatbázisból!
     	$to_email = $user_email;
     	$to_name = $user_name;
-    	$subject = 'Subject helye...'; // adatbázisból!
+    	$subject = 'Elfelejtett jelszó.'; // adatbázisból!
     	$template_data = array(
 			'base_url' => BASE_URL,
 			'title' => 'Elfelejtett jelszó teszt',
