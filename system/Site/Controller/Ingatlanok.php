@@ -82,7 +82,8 @@ class Ingatlanok extends SiteController {
 
         // ingatlani adatainak lekérdezése
         $data['ingatlan'] = $this->ingatlanok_model->getProperty((int)$id);
-
+        $data['ingatlan']['ref_num'] = 'S-' . $data['ingatlan']['ref_num'];
+        
         // ingatlanhoz tartozó képek
         $data['pictures'] = json_decode($data['ingatlan']['kepek']);
         // ügynök adatai
