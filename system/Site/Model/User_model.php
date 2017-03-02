@@ -5,12 +5,6 @@ use System\Libs\Config;
 
 class User_model extends SiteModel {
 
-    /**
-     * 	Legyen-e email visszaigazolós regisztráció
-     * 	Értéke: true vagy false
-     */
-    private $email_verify;
-
     // tábla neve
     protected $table = 'users';
     // id neve
@@ -23,9 +17,6 @@ class User_model extends SiteModel {
     {
         parent::__construct();
 
-        //regisztráció email-es ellenőrzésének be- vagy kikapcsolása
-        //$this->email_verify = Config::get('reg_email_verify', true);
-        $this->email_verify = false;
     }
 
     /**
