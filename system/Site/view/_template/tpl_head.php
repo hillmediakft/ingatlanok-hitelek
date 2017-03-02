@@ -5,7 +5,7 @@ use System\Libs\Cookie;
 use System\Libs\Language as Lang;
 
 // ellenőrizzük, hogy be van-e jelentkezve a felhasználó (true vagy false)
-$logged_in = Auth::check(false);
+$logged_in = Auth::isUserLoggedIn();
 
 // login, register, forgottenpw modal
 include($this->path('tpl_login_modal'));
