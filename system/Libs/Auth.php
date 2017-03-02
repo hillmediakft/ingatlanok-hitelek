@@ -196,6 +196,25 @@ class Auth {
     }
 
     /**
+     * Munkamenet időkorlát lejáratának ellenőrzése
+     */
+    public static function checkExpire()
+    {
+        // ha lejárt az időkorlát
+        if(Session::get(self::$last_activity) < (time() - self::$session_expire_time)){
+            // töröljük a logged_in elemet és a user adatait    
+            Session::delete(self::$logged_in);
+            // töröljük a user adatokat    
+            Session::delete('user_data');
+            return false;
+
+        } else {
+            Session::set(self::$last_activity, time());
+            return true;
+        }                
+    }
+
+    /**
      * Ellenőrzi, hogy be van-e jelentkezve a felhasználó (a session user_logged_in elem meglétét és tartalmát vizsgálja)
      * @return bool 
      */
