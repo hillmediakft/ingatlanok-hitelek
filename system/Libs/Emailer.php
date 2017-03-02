@@ -63,7 +63,7 @@ class Emailer {
     /**
      * site vagy admin
      */
-    private $area = 'site';
+    private $area = 'Site';
 
     /**
      * CONSTRUCTOR
@@ -212,7 +212,7 @@ class Emailer {
      */
     private function _load_template_with_data($template, $template_data)
     {
-        $body = file_get_contents('system/' . $this->area . '/view/email/tpl_' . $template . '.php');
+        $body = file_get_contents('system/' . ucfirst($this->area) . '/view/email/tpl_' . $template . '.php');
         foreach ($template_data as $key => $value) {
             $body = str_replace('{' . $key . '}', $value, $body);
         }
