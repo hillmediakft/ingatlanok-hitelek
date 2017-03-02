@@ -59,7 +59,11 @@ class Application {
             $router->get('/hirek/kategoria/:id', 'hirek@kategoria', array('id'));
             $router->get('/hirek/:title/:id', 'hirek@reszletek', array('title', 'id'));
             $router->get('/kereses', 'kereses@index');
+
             $router->get('/profil', 'Profile@index');
+            $router->post('/profile/deleteFollowed', 'Profile@deleteFollowed'); // ajax
+            $router->post('/profile/change_userdata', 'Profile@changeUserdata'); // ajax
+            $router->post('/profile/change_password', 'Profile@changePassword'); // ajax
             
             $router->get('/kedvencek', 'kedvencek@index');
             $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
@@ -76,9 +80,11 @@ class Application {
             
             $router->post('/sendemail/init/:title', 'SendEmail@init', array('type'));
             
-            $router->post('/profile/deleteFollowed', 'Profile@deleteFollowed'); // ajax
 
             $router->set404('error@index');
+
+
+
 
             $router->mount('/en', function() use ($router) {
                 $router->get('/', 'home@index');
@@ -94,8 +100,12 @@ class Application {
                 $router->get('/news/category/:id', 'hirek@kategoria', array('id'));
                 $router->get('/news/:title/:id', 'hirek@reszletek', array('title', 'id'));
                 $router->get('/search', 'kereses@index');
-                $router->get('/profile', 'Profile@index');
                 
+                $router->get('/profile', 'Profile@index');
+                $router->post('/profile/deleteFollowed', 'Profile@deleteFollowed'); // ajax
+                $router->post('/profile/change_userdata', 'Profile@changeUserdata'); // ajax
+                $router->post('/profile/change_password', 'Profile@changePassword'); // ajax                
+                    
                 $router->get('/favourites', 'kedvencek@index');
                 $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
                 $router->post('/kedvencek/delete_property_from_cookie', 'kedvencek@delete_property_from_cookie'); // ajax
@@ -111,7 +121,6 @@ class Application {
 
                 $router->post('/sendemail/init/:title', 'SendEmail@init', array('type')); //ajax
 
-                $router->post('/profile/deleteFollowed', 'Profile@deleteFollowed'); // ajax
 
             });
 
