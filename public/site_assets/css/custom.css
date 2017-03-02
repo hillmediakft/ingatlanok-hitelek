@@ -407,9 +407,6 @@ font-size: 16px;
 }
 
 /* profil user adatok form validáláskor */
-label.has-error {
-    color: #a94442;
-}
 input.has-error {
     border-color: #a94442 !important;
 }
