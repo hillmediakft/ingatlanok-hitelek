@@ -60,7 +60,8 @@ var modalHandler = function () {
                 //ignore: "", // validate all fields including form hidden input
                 rules: {
                     user_name: {
-                        required: true
+                        required: true,
+                        minlength: 2
                     },
                     user_password: {
                         required: true
