@@ -68,7 +68,7 @@ include($this->path('tpl_forgottenpw_modal'));
             </div>
             <!-- KIJELENTKEZES -->
             <div class="extra-item login">
-                <span style="color: #ffffff;"><?php echo Auth::getUser('name'); ?>&nbsp; &raquo; &nbsp;</span><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.user.logout.' . LANG); ?>"><?php echo Lang::get('header_top_kijelentkezes'); ?></a>
+                <span id="logged_in_user_name" style="color: #ffffff;"><?php echo Auth::getUser('name'); ?></span><span style="color: #ffffff;">&nbsp; &raquo; &nbsp;</span><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.user.logout.' . LANG); ?>"><?php echo Lang::get('header_top_kijelentkezes'); ?></a>
             </div>
             <?php } else { ?>
             <div class="extra-item login">
