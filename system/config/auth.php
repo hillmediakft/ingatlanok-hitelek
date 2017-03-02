@@ -39,7 +39,8 @@ $config['auth'] = array(
 
 	/**
 	 * Munkamenet lejárati ideje
+	 * 18000 = 5 óra, 14400 = 4 óra, 10800 = 3 óra, 7200 = 2 óra, 3600 = 1 óra
 	 */
-	'session_expire_time' => 7200,
+	'session_expire_time' => 18000,
 );
 ?>
