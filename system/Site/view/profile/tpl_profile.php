@@ -127,34 +127,65 @@ use System\Libs\Language as Lang;
                     <?php //include($this->path('tpl_modul_banner')); ?>
 
 
-                <h1><i class="fa fa-user"></i> Profil adatok szerkesztése</h1>
+                    <h1><i class="fa fa-user"></i> Profil adatok szerkesztése</h1>
+                        
                         <div class="contacts-block">
+                            <h5>Jelszó módosítása</h5>
                             <div class="contact-form">
+                                <form action="profile/change_password" method="POST" id="new-password-form">
 
-                                <form action="#">
-                                    
-                                    <input type="password" name="password" class="name" placeholder="Password">
-                                    <input type="password" name="password_again" class="name" placeholder="Password again">
-                                    <input type="password" name="password_new" class="name" placeholder="New password">
+                                    <div class="form-group">
+                                        <label for="password_new">Új jelszó</label>
+                                        <div class="input-group">
+                                            <input type="password" name="password_new" class="name" id="password_new" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password_new_again">Új jelszó mégegyszer</label>
+                                        <div class="input-group">
+                                            <input type="password" name="password_new_again" class="name" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password_old">Régi jelszó</label>
+                                        <div class="input-group">
+                                            <input type="password" name="password_old" class="name" placeholder="">
+                                        </div>
+                                    </div>                                    
 
-                                    <button class="send-btn style-2">Send</button>
+
+
+
+                                    <button type="submit" class="send-btn style-2">Küld</button>
+
                                 </form>
-                               
-                            </div>
-                        </div>        
-                        <div class="contacts-block">
-                            <div class="contact-form">
-
-                                <form action="#">
-                                    
-                                    <input type="text" class="name" placeholder="Name">
-                                    <input type="email" class="email" placeholder="Email">
-                                    <button class="send-btn style-2">Send Message</button>
-                                </form> 
                                
                             </div>
                         </div>
 
+                        <div class="contacts-block">
+                            <h5>Felhasználói név vagy e-mail cím módosítása</h5>
+                            <div class="contact-form">
+                                <form action="profile/change_userdata" method="POST" id="new-userdata-form">
+                                    
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <label for="name">Név</label>
+                                            <input type="text" class="name" name="name" placeholder="Name" value="<?php echo $user['name']; ?>">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <label for="email">E-mail</label>
+                                            <input type="email" class="email" name="email" placeholder="Email" value="<?php echo $user['email']; ?>">
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="send-btn style-2">Küld</button>
+                                </form> 
+                            </div>
+                        </div>
 
                 </aside>        
             </div> <!-- SIDEBAR END -->
