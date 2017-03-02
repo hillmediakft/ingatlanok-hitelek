@@ -135,21 +135,21 @@ use System\Libs\Language as Lang;
                                 <form action="profile/change_password" method="POST" id="new-password-form">
 
                                     <div class="form-group">
-                                        <label for="password_new">Új jelszó</label>
+                                        <label class="control-label" for="password_new">Új jelszó</label>
                                         <div class="input-group">
-                                            <input type="password" name="password_new" class="name" id="password_new" placeholder="">
+                                            <input type="password" name="password_new" class="form-control" id="password_new" placeholder="">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="password_new_again">Új jelszó mégegyszer</label>
+                                        <label class="control-label" for="password_new_again">Új jelszó mégegyszer</label>
                                         <div class="input-group">
-                                            <input type="password" name="password_new_again" class="name" placeholder="">
+                                            <input type="password" name="password_new_again" class="form-control" placeholder="">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="password_old">Régi jelszó</label>
+                                        <label class="control-label" for="password_old">Régi jelszó</label>
                                         <div class="input-group">
-                                            <input type="password" name="password_old" class="name" placeholder="">
+                                            <input type="password" name="password_old" class="form-control" placeholder="">
                                         </div>
                                     </div>                                    
 
@@ -170,14 +170,14 @@ use System\Libs\Language as Lang;
                                     
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <label for="name">Név</label>
+                                            <label class="control-label" for="name">Név</label>
                                             <input type="text" class="name" name="name" placeholder="Name" value="<?php echo $user['name']; ?>">
                                         </div>
                                     </div>
                                     
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <label for="email">E-mail</label>
+                                            <label class="control-label" for="email">E-mail</label>
                                             <input type="email" class="email" name="email" placeholder="Email" value="<?php echo $user['email']; ?>">
                                         </div>
                                     </div>
