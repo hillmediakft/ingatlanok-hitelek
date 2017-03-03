@@ -12,7 +12,7 @@ class Kereses extends SiteController {
 
     public function __construct() {
         parent::__construct();
-        $this->loadModel('kereses_model');
+        //$this->loadModel('kereses_model');
         $this->loadModel('ingatlanok_model');
     }
 
