@@ -73,6 +73,7 @@ class Ingatlanok extends SiteController {
      */
     public function adatlap($id)
     {
+        $id = (int)$id;
         $page_data = $this->ingatlanok_model->getPageData('ingatlanok');
         
         $data = $this->addGlobalData();
@@ -81,7 +82,7 @@ class Ingatlanok extends SiteController {
         $data['keywords'] = $page_data['metakeywords_' . $this->lang];
 
         // ingatlani adatainak lekérdezése
-        $data['ingatlan'] = $this->ingatlanok_model->getProperty((int)$id);
+        $data['ingatlan'] = $this->ingatlanok_model->getProperty($id);
         $data['ingatlan']['ref_num'] = 'S-' . $data['ingatlan']['ref_num'];
         
         // ingatlanhoz tartozó képek
@@ -112,6 +113,8 @@ class Ingatlanok extends SiteController {
         // hasonló ingatlanok
         $data['hasonlo_ingatlan'] = $this->ingatlanok_model->hasonloIngatlanok($id, $data['ingatlan']['tipus'], $data['ingatlan']['kategoria'], $data['ingatlan']['varos'], $ar);
 
+        // Megtekintések számának növelése
+        $this->ingatlanok_model->increase_no_of_clicks($id);
 
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'num_helper', 'html_helper'));

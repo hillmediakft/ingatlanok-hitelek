@@ -1487,5 +1487,18 @@ class Ingatlanok_model extends SiteModel {
         return $this->query->delete();
     }
 
+    /**
+     * Növeli az adott ingatlan megtekintéseienk számát 1-gyel
+     *  
+     * @param integer $id    ingatlan id
+     * @return void
+     */
+    public function increase_no_of_clicks($id)
+    {
+        $this->query->set_where('id', '=', $id);
+        // a második aparaméter a 'fix' attributum
+        $this->query->update(array(), array('megtekintes' => 'megtekintes+1'));
+    }
+
 }
 ?>
