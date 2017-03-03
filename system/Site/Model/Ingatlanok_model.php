@@ -922,17 +922,15 @@ class Ingatlanok_model extends SiteModel {
 
     /**
      * Növeli az adott ingatlan megtekintéseienk számát 1-gyel
-     * 	
-     * @param $id array    ingatlan id
-     * @return void 
+     *  
+     * @param integer $id    ingatlan id
+     * @return void
      */
-    public function increase_no_of_clicks($id) {
-        $increase = array('megtekintes' => 'megtekintes+1');
-
-        $this->query->set_table(array('ingatlanok'));
-        $this->query->set_columns(array('id', 'megtekintes'));
+    public function increase_no_of_clicks($id)
+    {
         $this->query->set_where('id', '=', $id);
-        $this->query->update(array(), $increase);
+        // a második aparaméter a 'fix' attributum
+        $this->query->update(array(), array('megtekintes' => 'megtekintes+1'));
     }
 
     /**
@@ -1485,19 +1483,6 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_where('property_id', '=', $property_id);
         $this->query->set_where('user_id', '=', $user_id, 'and');
         return $this->query->delete();
-    }
-
-    /**
-     * Növeli az adott ingatlan megtekintéseienk számát 1-gyel
-     *  
-     * @param integer $id    ingatlan id
-     * @return void
-     */
-    public function increase_no_of_clicks($id)
-    {
-        $this->query->set_where('id', '=', $id);
-        // a második aparaméter a 'fix' attributum
-        $this->query->update(array(), array('megtekintes' => 'megtekintes+1'));
     }
 
 }
