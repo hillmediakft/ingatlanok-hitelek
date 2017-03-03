@@ -245,10 +245,29 @@ use System\Libs\Language as Lang; ?>
                                                         <?php endforeach ?>
                                                     </select>
                                                 </div>					
-                                            </div>                                             
+                                            </div>
 
                                         </fieldset>
                                     </div>                                    
+
+                                    <div class="row">
+                                        <fieldset>
+                                            <legend>Extrák</legend>
+                                                
+                                                <div class="col-sm-2">
+                                                    <ul class="extrak-list">
+                                                        <li class="filter-item">
+                                                            <label><input type="checkbox" name="ext_butor" value="1"> Bútorozott</label>
+                                                        </li>
+                                                        <li class="filter-item">
+                                                            <label><input type="checkbox" name="erkely" value="1"> Erkély</label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                        </fieldset>
+                                        
+                                    </div>
 
 
                                     <div class="row">
