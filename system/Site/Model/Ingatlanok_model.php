@@ -419,6 +419,7 @@ class Ingatlanok_model extends SiteModel {
             $this->query->set_where('szobaszam', 'between', array($params['min_szobaszam'], $params['max_szobaszam']));
         }
 
+/** JELLEMZŐK **/
         // állapot
         if ((isset($params['allapot']) && !empty($params['allapot']))) {
             $this->query->set_where('allapot', '=', $params['allapot']);
@@ -429,7 +430,19 @@ class Ingatlanok_model extends SiteModel {
             $this->query->set_where('futes', '=', $params['futes']);
         }
 
-        // ****** sorrend **************************************************
+/** EXTRÁK **/
+        // Bútorozott
+        if ((isset($params['ext_butor']) && ($params['ext_butor'] == 1))) {
+            $this->query->set_where('ext_butor', '=', 1);
+        }
+        // Erkély
+        if ((isset($params['erkely']) && ($params['erkely'] == 1))) {
+            $this->query->set_where('erkely', '=', 1);
+        }
+
+
+
+/** SORREND **/
         // ár szerint
         if (isset($params['order']) && !empty($params['order']) && isset($params['order_by']) && $params['order_by'] == 'ar') {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
