@@ -1,6 +1,7 @@
 <?php
-
-use System\Libs\Language as Lang; ?>
+use System\Libs\Config;
+use System\Libs\Language as Lang;
+?>
 <div id="content" class="container-fluid">
     <div class="container">
         <div class="row">
@@ -16,11 +17,11 @@ use System\Libs\Language as Lang; ?>
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1><i class="fa fa-search"></i> Részletes keresés</h1>
+                <h1><i class="fa fa-search"></i> <?php echo Lang::get('kereso_reszletes_kereso_cim'); ?></h1>
                 <div class="well search-page">
                     <div class="main-filter">
 
-                        <form class="filter-form" action="ingatlanok">
+                        <form class="filter-form" action="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.index.' . LANG); ?>">
                             <div class="row">
                                 <div class="col-sm-12">
 
@@ -79,9 +80,9 @@ use System\Libs\Language as Lang; ?>
                                             <!-- ÁLLAPOT -->
                                             <div class="col-sm-3">
                                                 <?php
-                                                $selected_allapot = isset($filter_params['allapot']) ? $filter_params['allapot'][0]['all_id'] : '';
+                                                $selected_allapot = isset($filter_params['allapot']) ? $filter_params['allapot'] : '';
                                                 ?>
-                                                <span class="item-label"><?php echo Lang::get('jell_allapot'); ?></span>
+                                                <span class="item-label"><?php echo Lang::get('kereso_allapot'); ?></span>
                                                 <div id="category_select_div" class="ui-front">
                                                     <select name="allapot" id="category_select" data-icon="false" class="select filter-select">
                                                         <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
@@ -155,9 +156,9 @@ use System\Libs\Language as Lang; ?>
                                             <!-- FŰTÉS -->
                                             <div class="col-sm-3">
                                                 <?php
-                                                $selected_futes = isset($filter_params['futes']) ? $filter_params['futes'][0]['futes_id'] : '';
+                                                $selected_futes = isset($filter_params['futes']) ? $filter_params['futes'] : '';
                                                 ?>
-                                                <span class="item-label"><?php echo Lang::get('jell_futes'); ?></span>
+                                                <span class="item-label"><?php echo Lang::get('kereso_futes'); ?></span>
                                                 <div id="category_select_div" class="ui-front">
                                                     <select name="futes" id="category_select" data-icon="false" class="select filter-select">
                                                         <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
@@ -171,9 +172,9 @@ use System\Libs\Language as Lang; ?>
                                             <!-- SZERKEZET -->
                                             <div class="col-sm-3">
                                                 <?php
-                                                $selected_szerkezet = isset($filter_params['szerkezet']) ? $filter_params['szerkezet'][0]['szerkezet_id'] : '';
+                                                $selected_szerkezet = isset($filter_params['szerkezet']) ? $filter_params['szerkezet'] : '';
                                                 ?>
-                                                <span class="item-label"><?php echo Lang::get('jell_szerkezet'); ?></span>
+                                                <span class="item-label"><?php echo Lang::get('kereso_szerkezet'); ?></span>
                                                 <div id="category_select_div" class="ui-front">
                                                     <select name="szerkezet" id="category_select" data-icon="false" class="select filter-select">
                                                         <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
@@ -187,9 +188,9 @@ use System\Libs\Language as Lang; ?>
                                             <!-- ENERGETKA -->
                                             <div class="col-sm-3">
                                                 <?php
-                                                $selected_energetika = isset($filter_params['energetika']) ? $filter_params['energetika'][0]['energetika_id'] : '';
+                                                $selected_energetika = isset($filter_params['energetika']) ? $filter_params['energetika'] : '';
                                                 ?>
-                                                <span class="item-label"><?php echo Lang::get('jell_energetika'); ?></span>
+                                                <span class="item-label"><?php echo Lang::get('kereso_energetika'); ?></span>
                                                 <div id="category_select_div" class="ui-front">
                                                     <select name="energetika" id="category_select" data-icon="false" class="select filter-select">
                                                         <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
@@ -205,7 +206,7 @@ use System\Libs\Language as Lang; ?>
                                                 <?php
                                                 $selected_lift = isset($filter_params['lift']) ? $filter_params['lift'] : '';
                                                 ?>
-                                                <span class="item-label"><?php echo Lang::get('jell_lift'); ?></span>
+                                                <span class="item-label"><?php echo Lang::get('kereso_lift'); ?></span>
                                                 <div id="lift_select_div" class="ui-front">
                                                     <select name="lift" id="lift_select" data-icon="false" class="select filter-select">
                                                         <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
@@ -215,14 +216,14 @@ use System\Libs\Language as Lang; ?>
                                                 </div>					
                                             </div>  
 
-                                            <!-- LIFT -->
+                                            <!-- KILÁTÁS -->
                                             <div class="col-sm-3">
                                                 <?php
-                                                $selected_kilatas = isset($filter_params['kilatas']) ? $filter_params['kilatas'][0]['kilatas_id'] : '';
+                                                $selected_kilatas = isset($filter_params['kilatas']) ? $filter_params['kilatas'] : '';
                                                 ?>
-                                                <span class="item-label"><?php echo Lang::get('jell_kilatas'); ?></span>
+                                                <span class="item-label"><?php echo Lang::get('kereso_kilatas'); ?></span>
                                                 <div id="kilatas_select_div" class="ui-front">
-                                                    <select name="lift" id="kilatas_select" data-icon="false" class="select filter-select">
+                                                    <select name="kilatas" id="kilatas_select" data-icon="false" class="select filter-select">
                                                         <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                                                         <?php foreach ($kilatas_list as $value) : ?>
                                                             <option value="<?php echo $value['kilatas_id']; ?>" <?php echo ($selected_kilatas == $value['kilatas_id']) ? 'selected' : ''; ?>><?php echo $value['kilatas_leiras_' . LANG]; ?></option>
@@ -234,14 +235,14 @@ use System\Libs\Language as Lang; ?>
                                             <!-- KERT -->
                                             <div class="col-sm-3">
                                                 <?php
-                                                $selected_kert = isset($filter_params['kert']) ? $filter_params['kert'][0]['kert_id'] : '';
+                                                $selected_kert = isset($filter_params['kert']) ? $filter_params['kert'] : '';
                                                 ?>
-                                                <span class="item-label"><?php echo Lang::get('jell_kert'); ?></span>
+                                                <span class="item-label"><?php echo Lang::get('kereso_kert'); ?></span>
                                                 <div id="kilatas_select_div" class="ui-front">
                                                     <select name="kert" id="kert_select" data-icon="false" class="select filter-select">
                                                         <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                                                         <?php foreach ($kert_list as $value) : ?>
-                                                            <option value="<?php echo $value['kert_id']; ?>" <?php echo ($selected_kilatas == $value['kert_id']) ? 'selected' : ''; ?>><?php echo $value['kert_leiras_' . LANG]; ?></option>
+                                                            <option value="<?php echo $value['kert_id']; ?>" <?php echo ($selected_kert == $value['kert_id']) ? 'selected' : ''; ?>><?php echo $value['kert_leiras_' . LANG]; ?></option>
                                                         <?php endforeach ?>
                                                     </select>
                                                 </div>					
@@ -257,10 +258,10 @@ use System\Libs\Language as Lang; ?>
                                                 <div class="col-sm-2">
                                                     <ul class="extrak-list">
                                                         <li class="filter-item">
-                                                            <label><input type="checkbox" name="ext_butor" value="1"> Bútorozott</label>
+                                                            <label><input type="checkbox" name="ext_butor" value="1"> <?php echo Lang::get('kereso_butor'); ?></label>
                                                         </li>
                                                         <li class="filter-item">
-                                                            <label><input type="checkbox" name="erkely" value="1"> Erkély</label>
+                                                            <label><input type="checkbox" name="erkely" value="1"> <?php echo Lang::get('kereso_erkely'); ?></label>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -268,6 +269,53 @@ use System\Libs\Language as Lang; ?>
                                         </fieldset>
                                         
                                     </div>
+
+                                    <div class="row">
+                                        <fieldset>
+                                            <legend>Keresés egyéb</legend>
+                                                
+                                                <!-- REFERENCIA SZÁM -->
+                                                <div class="col-sm-3">
+                                                    <span class="item-label"><?php echo Lang::get('kereso_ref_szam'); ?></span>
+                                                    <div class="form-group">
+                                                        <input type="text" name="ref_num" class="form-control" value="<?php echo (isset($filter_params['ref_num'])) ? $filter_params['ref_num'] : ''; ?>" />
+                                                    </div>
+                                                </div>
+
+                                                <!-- REFERENES -->
+                                                <div class="col-sm-3">
+                                                    <?php
+                                                    $selected_agent = isset($filter_params['ref_id']) ? $filter_params['ref_id'] : '';
+                                                    ?>
+                                                    <span class="item-label"><?php echo Lang::get('kereso_referens'); ?></span>
+                                                    <div id="category_select_div" class="ui-front">
+                                                        <select name="ref_id" id="referens_select" data-icon="false" class="select filter-select">
+                                                            <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
+                                                            <?php foreach ($agents as $agent) : ?>
+                                                                <option value="<?php echo $agent['id']; ?>" <?php echo ($selected_agent == $agent['id']) ? 'selected' : ''; ?>><?php echo $agent['first_name'] . ' ' . $agent['last_name']; ?></option>
+                                                            <?php endforeach ?>
+                                                        </select>
+                                                    </div>                  
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <span class="item-label"><?php echo Lang::get('kereso_ingatlan_nev'); ?></span>
+                                                    <div class="form-group">
+                                                        <input type="text" name="<?php echo 'ingatlan_nev_' . LANG; ?>" class="form-control" value="<?php echo (isset($filter_params['ingatlan_nev_' . LANG])) ? $filter_params['ingatlan_nev_' . LANG] : ''; ?>"/>
+                                                    </div>
+                                                </div>
+
+                                                <!-- UTCA NÉV -->
+                                                <div class="col-sm-3">
+                                                    <span class="item-label"><?php echo Lang::get('kereso_utca'); ?></span>
+                                                    <div class="form-group">
+                                                        <input type="text" name="utca" class="form-control" value="<?php echo (isset($filter_params['utca'])) ? $filter_params['utca'] : ''; ?>"/>
+                                                    </div>
+                                                </div>
+
+                                        </fieldset>
+                                    </div>
+
 
 
                                     <div class="row">
