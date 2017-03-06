@@ -171,7 +171,6 @@ class Ingatlanok_model extends SiteModel {
         // berakjuk az új keresési paramétereket a session-be    
         Session::set('ingatlan_filter', $params);
 
-
         $num_helper = DI::get('num_helper');
 
         // Ár mezők adatit alakítjuk át
@@ -262,13 +261,13 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_where('status', '=', 1);
 
         /*         * ** ÉRTÉKESÍTŐ SZERINT **** */
-        if (isset($params['ref_id'])) {
-            $this->query->set_where('ref_id', '=', (int) $params['ref_id']);
+        if (isset($params['ref_id']) && $params['ref_id'] !== '') {
+            $this->query->set_where('ref_id', '=', (int)$params['ref_id']);
         }
 
         /*         * ** TÍPUS SZERINT **** */
         if (isset($params['tipus']) && !empty($params['tipus'])) {
-            $this->query->set_where('tipus', '=', $params['tipus']);
+            $this->query->set_where('tipus', '=', (int)$params['tipus']);
         }
 
         /*         * ** KATEGÓRIA SZERINT **** */
@@ -440,7 +439,25 @@ class Ingatlanok_model extends SiteModel {
             $this->query->set_where('erkely', '=', 1);
         }
 
-
+/** EGYÉB KERESÉS **/
+        // Referencia szám
+        if (isset($params['ref_num']) && $params['ref_num'] !== '') {
+            $params['ref_num'] = intval(preg_replace('~\D~', '', $params['ref_num']));
+            $this->query->set_where('ref_num', '=', (int)$params['ref_num']);
+        }
+        // Ingatlan név hu
+        if (isset($params['ingatlan_nev_hu']) && $params['ingatlan_nev_hu'] !== '') {
+            $this->query->set_where('ingatlan_nev_hu', 'LIKE', '%' . $params['ingatlan_nev_hu'] . '%');
+        }
+        // Ingatlan név en
+        if (isset($params['ingatlan_nev_en']) && $params['ingatlan_nev_en'] !== '') {
+            $this->query->set_where('ingatlan_nev_en', 'LIKE', '%' . $params['ingatlan_nev_en'] . '%');
+        }
+        // Utca
+        if (isset($params['utca']) && $params['utca'] !== '') {
+            $this->query->set_where('utca', 'LIKE', '%' . $params['utca'] . '%');
+        }
+  
 
 /** SORREND **/
         // ár szerint
@@ -1328,6 +1345,51 @@ class Ingatlanok_model extends SiteModel {
         if (isset($filter['order_by'])) {
             $filter_with_names['order_by'] = $filter['order_by'];
         }
+
+        if (isset($filter['allapot']) && $filter['allapot'] !== '') {
+            $filter_with_names['allapot'] = $filter['allapot'];
+        }
+
+        if (isset($filter['futes']) && $filter['futes'] !== '') {
+            $filter_with_names['futes'] = $filter['futes'];
+        }
+
+        if (isset($filter['szerkezet']) && $filter['szerkezet'] !== '') {
+            $filter_with_names['szerkezet'] = $filter['szerkezet'];
+        }
+
+        if (isset($filter['energetika']) && $filter['energetika'] !== '') {
+            $filter_with_names['energetika'] = $filter['energetika'];
+        }
+
+        if (isset($filter['lift']) && $filter['lift'] !== '') {
+            $filter_with_names['lift'] = $filter['lift'];
+        }
+
+        if (isset($filter['kilatas']) && $filter['kilatas'] !== '') {
+            $filter_with_names['kilatas'] = $filter['kilatas'];
+        }
+
+        if (isset($filter['kert']) && $filter['kert'] !== '') {
+            $filter_with_names['kert'] = $filter['kert'];
+        }
+
+        if (isset($filter['ref_num']) && $filter['ref_num'] !== '') {
+            $filter_with_names['ref_num'] = $filter['ref_num'];
+        }
+
+        if (isset($filter['ref_id']) && $filter['ref_id'] !== '') {
+            $filter_with_names['ref_id'] = $filter['ref_id'];
+        }
+
+        if (isset($filter['utca']) && $filter['utca'] !== '') {
+            $filter_with_names['utca'] = $filter['utca'];
+        }
+
+        if (isset($filter['ingatlan_nev_' . LANG]) && $filter['ingatlan_nev_' . LANG] !== '') {
+            $filter_with_names['ingatlan_nev_' . LANG] = $filter['ingatlan_nev_' . LANG];
+        }
+
 
         return $filter_with_names;
     }
