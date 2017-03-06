@@ -507,11 +507,20 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                 'erkely_terulet',
                 'terasz_terulet',
                 'belmagassag',
+
+                'tajolas',
+
                 'szobaszam',
                 'felszobaszam',
                 'szoba_elrendezes',
                 'kozos_koltseg',
                 'rezsi',
+
+                'futes',
+                'parkolas',
+                'szerkezet',
+                'kilatas',
+
                 'lift',
                 'energetika',
                 'kert',
