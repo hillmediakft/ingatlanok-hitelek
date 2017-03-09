@@ -11,7 +11,7 @@ var User_insert = function () {
 			name : true,
 			email: true
 		},
-		tab_3_3: {
+		tab_4_4: {
 			password: true,
 			password_again: true
 		}
@@ -25,7 +25,7 @@ var User_insert = function () {
 
 		$('#user_insert_form').validate({
 			errorElement: 'span', //default input error message container
-			errorClass: 'help-block help-block-error', // default input error message class
+			errorClass: 'help-block', // default input error message class
 			focusInvalid: true, // do not focus the last invalid input
 			ignore: "input[name='img']",
 			rules: {
@@ -52,6 +52,28 @@ var User_insert = function () {
 					equalTo: "#password"
 				}
 			},
+
+            // hiba elem helye, a helyes megjelenés miatt
+            errorPlacement: function (error, element) { // render error placement for each input type
+/*
+                if (element.parent(".input-group").size() > 0) {
+                    error.insertAfter(element.parent(".input-group"));
+                } else if (element.attr("data-error-container")) { 
+                    error.appendTo(element.attr("data-error-container"));
+                } else if (element.parents('.radio-list').size() > 0) { 
+                    error.appendTo(element.parents('.radio-list').attr("data-error-container"));
+                } else if (element.parents('.radio-inline').size() > 0) { 
+                    error.appendTo(element.parents('.radio-inline').attr("data-error-container"));
+                } else if (element.parents('.checkbox-list').size() > 0) {
+                    error.appendTo(element.parents('.checkbox-list').attr("data-error-container"));
+                } else if (element.parents('.checkbox-inline').size() > 0) { 
+                    error.appendTo(element.parents('.checkbox-inline').attr("data-error-container"));
+                } else {
+                    error.insertAfter(element); // for other inputs, just perform default behavior
+                }
+*/                
+            },
+
 			// az invalidHandler akkor aktiválódik, ha elküldjük a formot és hiba van
 			invalidHandler: function (event, validator) { //display error alert on form submit              
 

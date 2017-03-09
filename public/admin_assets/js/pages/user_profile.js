@@ -11,7 +11,7 @@ var userProfile = function () {
 			name : true,
 			email: true
 		},
-		tab_3_3: {
+		tab_4_4: {
 			password: true,
 			password_again: true
 		}
