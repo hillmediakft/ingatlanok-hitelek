@@ -80,6 +80,16 @@ class Application {
             
             $router->post('/sendemail/init/:title', 'SendEmail@init', array('type'));
             
+        // landing page    
+        $router->get('/landing/:title', 'LandingPage@index', array('title'));
+
+            //mennyit-er-az-ingatlanom
+            $router->get('/mennyit-er-az-ingatlanom', 'MennyitErAzIngatlanom@index');
+            // befektetoknek
+            $router->get('/befektetoknek', 'Befektetoknek@index');
+            // berbeadoknak
+            $router->get('/berbeadoknak', 'Berbeadoknak@index');
+
 
             $router->set404('error@index');
 
@@ -120,6 +130,16 @@ class Application {
                 $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
 
                 $router->post('/sendemail/init/:title', 'SendEmail@init', array('type')); //ajax
+
+            // landing page    
+            $router->get('/landing/:title', 'LandingPage@index', array('title'));
+
+                //mennyit-er-az-ingatlanom
+                $router->get('/my-property-is-worth', 'MennyitErAzIngatlanom@index');
+                // befektetoknek
+                $router->get('/investors', 'Befektetoknek@index');
+                // berbeadoknak
+                $router->get('/boat-owners', 'Berbeadoknak@index');
 
 
             });
@@ -281,6 +301,12 @@ class Application {
                 $router->post('/property/cloning', 'property@cloning');
 
                 $router->get('/property/download/:filename', 'property@download', array('file'));
+
+            // landing page    
+            $router->get('/landingpage', 'LandingPage@index');
+            $router->match('GET|POST', '/landingpage/insert', 'LandingPage@insert');
+            $router->match('GET|POST', '/landingpage/update/:id', 'LandingPage@update');
+
 
                 // error	
                 $router->set404('error@index');
