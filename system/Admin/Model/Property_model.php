@@ -121,14 +121,22 @@ class Property_model extends AdminModel {
             'district_list.district_name',
             'city_list.city_name',
             'county_list.county_name',
-            
+
             'ingatlan_allapot.all_leiras_hu',
-            'ingatlan_futes.futes_leiras_hu',
-            'ingatlan_parkolas.parkolas_leiras_hu',
-            'ingatlan_kilatas.kilatas_leiras_hu',
+            'ingatlan_emelet.emelet_leiras_hu',
             'ingatlan_energetika.energetika_leiras_hu',
+            'ingatlan_fenyviszony.fenyviszony_leiras_hu',
+            'ingatlan_furdo_wc.furdo_wc_leiras_hu',
+            'ingatlan_futes.futes_leiras_hu',
+            'ingatlan_haz_allapot_belul.haz_allapot_belul_leiras_hu',
+            'ingatlan_haz_allapot_kivul.haz_allapot_kivul_leiras_hu',
+            'ingatlan_kategoria.kat_nev_hu',
             'ingatlan_kert.kert_leiras_hu',
-            
+            'ingatlan_kilatas.kilatas_leiras_hu',
+            'ingatlan_parkolas.parkolas_leiras_hu',
+            'ingatlan_szerkezet.szerkezet_leiras_hu',
+            'ingatlan_szoba_elrendezes.szoba_elrendezes_leiras_hu',
+
             'users.first_name',
             'users.last_name'
         ));
