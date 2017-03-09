@@ -79,6 +79,26 @@ $config['url'] = array(
             'hu' => 'profil',
             'en' => 'profile'
             )
-    )    
+    ),
+    'befektetoknek' => array(
+        'index' => array(
+            'hu' => 'befektetoknek',
+            'en' => 'investors'
+            )
+    ),
+    'berbeadoknak' => array(
+        'index' => array(
+            'hu' => 'berbeadoknak',
+            'en' => 'boat-owners'
+            )
+    ),
+    'mennyit-er-az-ingatlanom' => array(
+        'index' => array(
+            'hu' => 'mennyit-er-az-ingatlanom',
+            'en' => 'my-property-is-worth'
+            )
+    ),         
+
+
 );
 ?>
