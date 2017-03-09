@@ -1162,7 +1162,9 @@ function initBannerMap1(){
 			scrollwheel: false,
 			zoom: 15,
 			disableDefaultUI: false,
-			center: new google.maps.LatLng(locations[0][1], locations[0][2])
+			zoomControl: false,
+			streetViewControl: false,
+			center: new google.maps.LatLng(locations[0][1], locations[0][2]),
 		};
 
 		map = new google.maps.Map(document.getElementById('map-banner-canvas'), mapOptions);
@@ -1172,7 +1174,7 @@ function initBannerMap1(){
 			marker = new google.maps.Marker({
 				position: new google.maps.LatLng(locations[i][1], locations[i][2]),
 				map: map,
-				icon: locations[i][3]
+				icon: locations[i][3],
 			});
 		}
 	}
