@@ -125,7 +125,7 @@ use System\Libs\Language as Lang;
                                             <?php
                                             echo $property_data['utca'] . '&nbsp';
                                             echo $property_data['hazszam'] . '&nbsp';
-                                            echo (!empty($property_data['emelet'])) ? $property_data['emelet'] . '. emelet ' : '';
+                                            //echo (!empty($property_data['emelet_leiras_hu'])) ? $property_data['emelet_leiras_hu'] : '';
                                             echo (!empty($property_data['emelet_ajto'])) ? $property_data['emelet_ajto'] : '';
                                             ?>
                                     </tr>
@@ -207,12 +207,18 @@ use System\Libs\Language as Lang;
                                     </tr>
                                     <tr> 
                                         <td>Emelet:</td>
-                                        <td><?php echo (isset($property_data['emelet'])) ? $property_data['emelet'] . '.' : '-'; ?>
+                                        <td><?php echo (isset($property_data['emelet_leiras_hu'])) ? $property_data['emelet_leiras_hu'] : 'n.a.'; ?>
+                                        </td>
+                                    </tr>
+                                    <tr> 
+                                        <td>Épület szintjei:</td>
+                                        <td><?php echo (isset($property_data['epulet_szintjei'])) ? $property_data['emelet_leiras_hu'] : 'n.a.'; ?>
                                         </td>
                                     </tr>
 
                                     <?php
-                                    if ($property_data['emelet']) {
+                                    /*
+                                    if (isset($property_data['epulet_szintjei'])) {
 
                                         echo '<tr>';
                                         echo '<td>Épület szintjei:</td>';
@@ -222,6 +228,7 @@ use System\Libs\Language as Lang;
                                         echo '</td>';
                                         echo '</tr>';
                                     }
+                                    */
                                     ?>
 
 
