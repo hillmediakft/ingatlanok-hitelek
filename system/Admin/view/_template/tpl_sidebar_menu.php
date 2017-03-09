@@ -206,6 +206,29 @@
             </ul>
         </li>
 
+        <!-- SZERKESZTHETŐ ÉRKEZÉSI OLDALAK -->
+        <li class="nav-item <?php $this->menu_active('landingpage'); ?> ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="fa fa-files-o"></i>
+                <span class="title">Érkezési oldalak</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item <?php $this->menu_active('landingpage', 'index'); ?> ">
+                    <a href="admin/landingpage" class="nav-link ">
+                        <span class="title">Érkezési oldalak listája</span>
+                    </a>
+                </li>
+                <li class="nav-item <?php $this->menu_active('landingpage', 'insert'); ?> ">
+                    <a href="admin/landingpage/insert" class="nav-link">
+                        <span class="title">Érkezési oldal hozzáadása</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
         <!-- SZERKESZTHETŐ TARTALMI ELEMEK -->
         <li class="nav-item <?php $this->menu_active('content'); ?> ">
             <a href="javascript:;" class="nav-link nav-toggle">
