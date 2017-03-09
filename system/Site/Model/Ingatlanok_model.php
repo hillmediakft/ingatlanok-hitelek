@@ -806,7 +806,8 @@ class Ingatlanok_model extends SiteModel {
      *  @param integer 
      * 	@return array 
      */
-    public function get_agent($id = null) {
+    public function get_agent($id = null)
+    {
         $this->query->set_table(array('users'));
         $this->query->set_columns(array(
             'users.id',
@@ -827,6 +828,10 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_where('provider_type', '=', 'admin');
 
         $agents = $this->query->select();
+          // ha nincs a feltételeknek megfelelő referens
+          if (empty($agents)) {
+            return false;
+          }
 
         // ügynökhöz tartozó ingatlanok egy lekérdezéssel (ez gyorsabb!)
         $this->query->set_columns('ref_id');
