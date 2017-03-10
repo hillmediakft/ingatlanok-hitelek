@@ -33,7 +33,7 @@ var Adatlap = function () {
             var propertyID = $(gomb).attr('data-id');
 
             $.ajax({
-                url: '/ingatlanok/arvaltozasErtesites',
+                url: '/ingatlanok/arvaltozasertesites',
                 type: 'post',
                 dataType: 'json',
                 data: {property_id: propertyID},
