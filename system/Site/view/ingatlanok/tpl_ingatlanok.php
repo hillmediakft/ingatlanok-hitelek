@@ -161,6 +161,13 @@ use System\Libs\Language as Lang;
                 <aside class="sidebar main-sidebar">
                     <!-- KERESŐ DOBOZ -->
                     <?php include($this->path('tpl_ingatlanok_filter')); ?>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a id="save_search" href="javascript:void(0);" class="simple-btn lg-button outlined red" style="margin-top: 33px;">Keresés mentése</a>
+                        </div>
+                    </div>
+
                     <!-- REFERENSEK DOBOZ -->
                     <?php include($this->path('tpl_modul_referenscontact')); ?>
                     <!-- KIEMELT INGATLANOK DOBOZ -->
