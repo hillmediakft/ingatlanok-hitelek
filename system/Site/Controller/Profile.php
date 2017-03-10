@@ -16,7 +16,7 @@ class Profile extends SiteController {
 	{
 		parent::__construct();
 		$this->loadModel('user_model');
-		$this->loadModel('ingatlanok_model');
+		$this->loadModel('kereses_model');
 	}
 
 	/**
@@ -37,9 +37,15 @@ class Profile extends SiteController {
         	$this->response->redirect('error');
         }
 
+		// ingatlanok model betöltése
+		$this->loadModel('ingatlanok_model');
+        
+        // bejelentkezett user adatainak lekérdezése
         $data['user'] = $this->user_model->selectUser($id);
-
+        // követett ingatlanok adatainak lekérdezése
         $data['properties'] = $this->ingatlanok_model->followedByProperty($id);
+        // mentett keresés adatok lekérdezése
+        $data['saved_search'] = $this->kereses_model->selectSavedSearch($id);
 
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'num_helper', 'html_helper'));
@@ -48,6 +54,41 @@ class Profile extends SiteController {
         $view->add_links(array('validation'));
         $view->add_link('js', SITE_JS . 'pages/profile.js');
         $view->render('profile/tpl_profile', $data);        	
+	}
+
+	/**
+	 * Mentett keresés törlése
+	 */
+	public function deleteSavedSearch()
+	{
+		if ($this->request->is_ajax()) {
+			$record_id = $this->request->get_post('record_id');
+			$user_id = (int)Auth::getUser('id');
+
+			if (is_null($user_id)) {
+				$this->response->json(array(
+					'status' => 'error',
+					'message' => 'Nincs bejelentkezve a felhasználó!'
+					));	
+			}
+
+			$result = $this->kereses_model->deleteSavedSearch($record_id);
+
+			if ($result === 1) {
+				$this->response->json(array(
+					'status' => 'success',
+					'message' => ''
+					));
+			} else {
+				$this->response->json(array(
+					'status' => 'error',
+					'message' => 'Adatbázis lekérdezési hiba!'
+					));				
+			}
+
+		} else {
+			$this->response->redirect('error');
+		}		
 	}
 
 	/**
@@ -66,7 +107,9 @@ class Profile extends SiteController {
 					));	
 			}
 
-			$result = $this->ingatlanok_model->deleteFollowed($property_id, $user_id);
+			$this->loadModel('arvaltozas_model');
+
+			$result = $this->arvaltozas_model->deleteFollowed($property_id, $user_id);
 
 			if ($result === 1) {
 				$this->response->json(array(
