@@ -155,18 +155,32 @@ class Ingatlanok_model extends SiteModel {
      * @param integer $offset
      * @param array $params - a lekérdezéshez szükséges paramétereket tartalmazza
      */
-    public function properties_filter_query($limit = null, $offset = null, $params) {
-        // sorrendre vonatkozó információt a session-ből veszi, ha nincs a query stringben, de van a session-ben
-        if (Session::has('ingatlan_filter.order')) {
-            $order_temp = Session::get('ingatlan_filter.order');
+    public function properties_filter_query($limit = null, $offset = null, $params)
+    {
+/* SORREND MEGADÁSA HA NINCS A QUERY STRINGBEN */        
+        // ha nincs a query stringben sorrendre vonatkozó paraméter    
+        if ( (!isset($params['order']) && !isset($params['order_by'])) ) {
+
+            // sorrendre vonatkozó információt a session-ből veszi, ha nincs a query stringben, de van a session-ben
+            if (Session::has('ingatlan_filter.order')) {
+                $order_temp = Session::get('ingatlan_filter.order');
+            }
+            if (Session::has('ingatlan_filter.order_by')) {
+                $order_by_temp = Session::get('ingatlan_filter.order_by');
+            }
+
+            // ha van a sessionben sorrendre vonatkozó paraméter
+            if (isset($order_temp) && isset($order_by_temp)) {
+                $params['order'] = $order_temp;
+                $params['order_by'] = $order_by_temp;
+            }
+            // ha nincs a query stringben és a sessionben sem sorrendre vonatkozó paraméter
+            if (!isset($order_temp) && !isset($order_by_temp)) {
+                $params['order'] = 'desc';
+                $params['order_by'] = 'datum';
+            }
         }
-        if (Session::has('ingatlan_filter.order_by')) {
-            $order_by_temp = Session::get('ingatlan_filter.order_by');
-        }
-        if ((!isset($params['order']) && !isset($params['order_by']) ) && ( isset($order_temp) && isset($order_by_temp) )) {
-            $params['order'] = $order_temp;
-            $params['order_by'] = $order_by_temp;
-        }
+/* SORREND MEGADÁSA HA NINCS A QUERY STRINGBEN VÉGE */        
 
         // berakjuk az új keresési paramétereket a session-be    
         Session::set('ingatlan_filter', $params);
@@ -474,9 +488,9 @@ class Ingatlanok_model extends SiteModel {
         elseif (isset($params['order']) && !empty($params['order']) && isset($params['order_by']) && $params['order_by'] == 'datum') {
             $this->query->set_orderby(array('hozzaadas_datum'), $params['order']);
         }
-        // id szerint
+        // a metodus elejen van beállított szerint
         else {
-            $this->query->set_orderby('id', 'DESC');
+            $this->query->set_orderby($params['order'], $params['order_by']);
         }
 
 //$this->query->debug(true);        
