@@ -4,6 +4,7 @@ namespace System\Site\Controller;
 use System\Core\SiteController;
 use System\Core\View;
 use System\Libs\Config;
+use System\Libs\Auth;
 use System\Libs\Cookie;
 use System\Libs\Session;
 use System\Libs\Paginator;
@@ -12,7 +13,7 @@ class Kereses extends SiteController {
 
     public function __construct() {
         parent::__construct();
-        //$this->loadModel('kereses_model');
+        $this->loadModel('kereses_model');
         $this->loadModel('ingatlanok_model');
     }
 
@@ -51,10 +52,55 @@ class Kereses extends SiteController {
 //$this->view->debug(true); 
         $view->add_links(array('bootstrap-select'));
         $view->add_link('js', SITE_JS . 'pages/handle_search.js');
-        //$view->add_link('js', SITE_JS . 'kereses.js');
+        $view->add_link('js', SITE_JS . 'pages/kereses.js');
         $view->render('kereses/tpl_kereses', $data);
     }
 
-}
+    /**
+     * Keresés eredményének mentése
+     * (csak regisztrált felhasználóknak)
+     */
+    public function saveSearch()
+    {
+        if ($this->request->is_ajax()) {
 
+            if (Auth::isUserLoggedIn()) {
+                $search_url = $this->request->get_post('url');
+                $user_id = Auth::getUser('id');
+
+                // megnézzük, hogy a keresesek tablaban van e ennek a felhasználónak ilyen url-je mentve
+                // ha van ilyen rekord, akkor true, ha nincs akkor false
+                $result = $this->kereses_model->checkSaveSearch($user_id, $search_url);
+                if ($result) {
+                    $this->response->json(array(
+                        'status' => 'success',
+                        'message' => 'Ön már elmentette ezt a keresést.'
+                    ));
+                }
+                else {
+                    // beírjuk az adatbázisba az új rekordot
+                    $this->kereses_model->saveSearch($user_id, $search_url);
+                }
+
+                $this->response->json(array(
+                    'status' => 'success',
+                    'message' => 'Keresés elmentve.'
+                ));
+
+            }
+            // ha nincs bejelentkezve a felhasználó
+            else {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'A funkció használatához be kell jelentkeznie.'
+                ));
+            }
+
+        } else {
+            $this->response->redirect('error');
+        }
+    }
+
+
+}
 ?>
