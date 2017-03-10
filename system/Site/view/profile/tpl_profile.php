@@ -26,11 +26,12 @@ use System\Libs\Language as Lang;
 
 
                 <div class="objects-block list-sidebar">
+                    
+                    <h1><i class="fa fa-line-chart"></i> Árváltozás értesítésre jelölt ingatlanok</h1>
 
                     <?php if (count($properties) > 0) : ?> 
 
-                    <h1><i class="fa fa-line-chart"></i> Árváltozás értesítésre jelölt ingatlanok</h1>
-                        <div class="notification-box info">
+                        <div id="notification-box-info-changeprice" class="notification-box info">
                             <div class="icon"><i class="fa fa-info"></i></div>
                             <div class="descr"><span class="message">Ingatlan eltávolításához kattintson a kuka ikonra!</span></div>
                         </div>                         
@@ -100,17 +101,60 @@ use System\Libs\Language as Lang;
                     <?php endif ?>
 
                     <!-- INFO BOX - HA NINCSENEK LISTAELEMEK -->
-                    <div class="notification-box caution" <?php echo (count($properties) > 0) ? 'style="display: none;"' : ''; ?>>
+                    <div id="notification-box-caution-changeprice" class="notification-box caution" <?php echo (count($properties) > 0) ? 'style="display: none;"' : ''; ?>>
                         <div class="icon"><i class="fa fa-info"></i></div>
                         <div class="descr"><span class="message">Jelenleg egyetlen ingatlan árváltozásáról sem kért értesítést!</span></div>
                     </div>
 
-
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="empty-space"></div>
+                            <div class="empty-space-25"></div>
                         </div>
                     </div>
+
+
+                    <h1><i class="fa fa-search"></i> Mentett keresési eredmények</h1>
+
+                    <?php if (count($saved_search) > 0) { ?>
+
+                        <div id="notification-box-info-savedsearch" class="notification-box info">
+                            <div class="icon"><i class="fa fa-info"></i></div>
+                            <div class="descr"><span class="message">Egy elem eltávolításához kattintson a kuka ikonra!</span></div>
+                        </div> 
+
+                        <?php foreach ($saved_search as $id => $url) { ?>
+                        <div class="saved_search_box" id="saved_search_item_<?php echo $id; ?>">
+                            <div class="row" >
+                        <!-- 
+                                <div class="col-sm-5">
+                                    <div class="elem">
+                                        <span class="value">Eladó - Családi ház</span>
+                                    </div>
+                                </div>
+                         -->
+                                <div class="col-sm-10">
+                                    <div class="elem">
+                                        <a class="link" href="<?php echo $url; ?>">Urás a találati listához</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="pull-right buttons elem">
+                                        <a href="javascript:void();" id="delete_search_<?php echo $id; ?>" data-id="<?php echo $id; ?>" class="share"><i class="fa fa-trash-o fa-2x"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
+
+                    <?php } ?>
+
+                    <!-- INFO BOX - HA NINCSENEK LISTAELEMEK -->
+                    <div id="notification-box-caution-savedsearch" class="notification-box caution" <?php echo (count($saved_search) > 0) ? 'style="display: none;"' : ''; ?>>
+                        <div class="icon"><i class="fa fa-info"></i></div>
+                        <div class="descr"><span class="message">Nincsenek mentett keresései!</span></div>
+                    </div>
+
+
                 </div>
             </div>
 
@@ -129,8 +173,7 @@ use System\Libs\Language as Lang;
 
                     <h1><i class="fa fa-user"></i> Profil adatok szerkesztése</h1>
                         
-                        <div class="contacts-block">
-                            <h5>Jelszó módosítása</h5>
+                        <div class="contacts-block" style="padding-bottom: 20px;">
                             <div class="contact-form">
                                 <form action="profile/change_password" method="POST" id="new-password-form">
 
@@ -153,9 +196,6 @@ use System\Libs\Language as Lang;
                                         </div>
                                     </div>                                    
 
-
-
-
                                     <button type="submit" class="send-btn style-2">Küld</button>
 
                                 </form>
@@ -164,7 +204,6 @@ use System\Libs\Language as Lang;
                         </div>
 
                         <div class="contacts-block">
-                            <h5>Felhasználói név vagy e-mail cím módosítása</h5>
                             <div class="contact-form">
                                 <form action="profile/change_userdata" method="POST" id="new-userdata-form">
                                     
