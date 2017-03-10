@@ -439,3 +439,29 @@ input.has-error {
     margin-top: -1px;
     margin-right: 10px;
 }
+
+
+/* Keresés mentések */
+.saved_search_box {
+    font-size: 20px;
+    border: 1px solid #e7e4e4;
+    background-color: #eee;
+    margin-bottom: 10px;
+}
+.saved_search_box .elem {
+    padding: 10px;
+}
+.saved_search_box .elem .link {
+    text-decoration: none;
+    color: #000;
+}
+.saved_search_box .elem .link:hover {
+    color: #c44a35;
+}
+.saved_search_box .buttons .share {
+    color: #3a383b;
+    font-size: 12px;
+}
+.saved_search_box .buttons .share:hover {
+    color: #c44a35;
+}
