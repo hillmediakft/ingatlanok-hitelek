@@ -25,7 +25,7 @@ var Profile = function () {
 
             $.ajax({
                 type: "post",
-                url: "profile/deleteFollowed",
+                url: "profile/deletefollowed",
                 dataType: 'json',
                 data: {ingatlan_id: property_id},
                 beforeSent: function () {
@@ -34,7 +34,14 @@ var Profile = function () {
                 },
                 success: function (result) {
                 	if (result.status == 'success') {
-                    	$('#followed_item_' + property_id).slideUp();
+                        $('#followed_item_' + property_id).slideUp();
+                    	$('#followed_item_' + property_id).remove();
+
+                        if ($('[id*=followed_item').length == 0) {
+                            $('#notification-box-info-changeprice').hide();
+                            $('#notification-box-caution-changeprice').show();
+                        }
+                        
                 	} else {
                 		console.log(result.message);
                 	}
@@ -43,6 +50,42 @@ var Profile = function () {
 
         });
     }    
+
+    /**
+     * Mentett keresés törlése az adatbázisból
+     */
+    var deleteSavedSearch = function () {
+        $('[id*=delete_search]').on('click', function (event) {
+            event.preventDefault();
+            var id = $(this).attr('data-id');
+
+            $.ajax({
+                type: "post",
+                url: "profile/deletesavedsearch",
+                dataType: 'json',
+                data: {record_id: id},
+                beforeSent: function () {
+                },
+                complete: function () {
+                },
+                success: function (result) {
+                    if (result.status == 'success') {
+                        $('#saved_search_item_' + id).slideUp();
+                        $('#saved_search_item_' + id).remove();
+
+                        if ($('[id*=saved_search_item').length == 0) {
+                            $('#notification-box-info-savedsearch').hide();
+                            $('#notification-box-caution-savedsearch').show();
+                        }
+
+                    } else {
+                        console.log(result.message);
+                    }
+                }
+            });
+
+        });
+    }  
 
     /**
      * Felhasználó jelszavának módosítása
@@ -274,6 +317,7 @@ var Profile = function () {
 		//main method to initiate page
 		init: function () {           
 			// call local function
+            deleteSavedSearch();
 			deleteFollowed();
             handleValidation_password();
             handleValidation_userdata();
