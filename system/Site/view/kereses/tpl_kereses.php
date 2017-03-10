@@ -21,7 +21,7 @@ use System\Libs\Language as Lang;
                 <div class="well search-page">
                     <div class="main-filter">
 
-                        <form class="filter-form" action="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.index.' . LANG); ?>">
+                        <form id="advanced_filter_form" class="filter-form" action="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.index.' . LANG); ?>">
                             <div class="row">
                                 <div class="col-sm-12">
 
@@ -322,7 +322,10 @@ use System\Libs\Language as Lang;
 
                                         <div class="col-sm-2">
                                             <button class="find-now-btn"><?php echo Lang::get('kereso_kereses'); ?></button>
-                            <!-- <a href="#" class="visible-xs find-now-btn"><?php //echo Lang::get('kereso_kereses');       ?></a> -->
+                                           <!-- <a href="#" class="visible-xs find-now-btn"><?php //echo Lang::get('kereso_kereses');       ?></a> -->
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <a id="reset_form" href="javascript:void(0);" class="simple-btn sm-button filled red" style="margin-top: 33px; width: 100%;">Keresés törlése</a>
                                         </div>
                                     </div>
 
