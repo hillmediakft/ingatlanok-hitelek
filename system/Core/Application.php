@@ -61,16 +61,17 @@ class Application {
             $router->get('/kereses', 'kereses@index');
 
             $router->get('/profil', 'Profile@index');
-            $router->post('/profile/deleteFollowed', 'Profile@deleteFollowed'); // ajax
+            $router->post('/profile/deletefollowed', 'Profile@deleteFollowed'); // ajax
             $router->post('/profile/change_userdata', 'Profile@changeUserdata'); // ajax
             $router->post('/profile/change_password', 'Profile@changePassword'); // ajax
-            
+            $router->post('/profile/deletesavedsearch', 'Profile@deleteSavedSearch'); // ajax                
+
             $router->get('/kedvencek', 'kedvencek@index');
             $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
             $router->post('/kedvencek/delete_property_from_cookie', 'kedvencek@delete_property_from_cookie'); // ajax
             $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek');
             
-            $router->post('/ingatlanok/arvaltozasErtesites', 'ingatlanok@arvaltozasErtesites'); // ajax
+            $router->post('/ingatlanok/arvaltozasertesites', 'ingatlanok@arvaltozasErtesites'); // ajax
 
             $router->post('/user/login', 'user@login'); // ajax
             $router->get('/felhasznalo/kijelentkezes', 'user@logout');
@@ -89,7 +90,8 @@ class Application {
             $router->get('/befektetoknek', 'Befektetoknek@index');
             // berbeadoknak
             $router->get('/berbeadoknak', 'Berbeadoknak@index');
-
+            // keresés elmentése - AJAX
+            $router->post('/kereses/savesearch', 'Kereses@saveSearch');
 
             $router->set404('error@index');
 
@@ -112,16 +114,17 @@ class Application {
                 $router->get('/search', 'kereses@index');
                 
                 $router->get('/profile', 'Profile@index');
-                $router->post('/profile/deleteFollowed', 'Profile@deleteFollowed'); // ajax
+                $router->post('/profile/deletefollowed', 'Profile@deleteFollowed'); // ajax
                 $router->post('/profile/change_userdata', 'Profile@changeUserdata'); // ajax
                 $router->post('/profile/change_password', 'Profile@changePassword'); // ajax                
+                $router->post('/profile/deletesavedsearch', 'Profile@deleteSavedSearch'); // ajax                
                     
                 $router->get('/favourites', 'kedvencek@index');
                 $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
                 $router->post('/kedvencek/delete_property_from_cookie', 'kedvencek@delete_property_from_cookie'); // ajax
                 $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek'); // ajax
                 
-                $router->post('/ingatlanok/arvaltozasErtesites', 'ingatlanok@arvaltozasErtesites'); // ajax
+                $router->post('/ingatlanok/arvaltozasertesites', 'Ingatlanok@arvaltozasErtesites'); // ajax
 
                 $router->get('/user/logout', 'user@logout');
                 $router->post('/user/login', 'user@login'); // ajax
@@ -140,6 +143,8 @@ class Application {
                 $router->get('/investors', 'Befektetoknek@index');
                 // berbeadoknak
                 $router->get('/boat-owners', 'Berbeadoknak@index');
+                // keresés elmentése - AJAX
+                $router->post('/kereses/savesearch', 'Kereses@saveSearch');
 
 
             });
