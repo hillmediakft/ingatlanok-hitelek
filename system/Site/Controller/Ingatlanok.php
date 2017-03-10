@@ -63,7 +63,7 @@ class Ingatlanok extends SiteController {
         $view->add_links(array('bootstrap-select'));
         $view->add_link('js', SITE_JS . 'pages/handle_search.js');
         $view->add_link('js', SITE_JS . 'pages/ingatlanok.js');
-        $view->add_link('js', SITE_JS . 'kedvencek.js');
+        //$view->add_link('js', SITE_JS . 'kedvencek.js');
         $view->render('ingatlanok/tpl_ingatlanok', $data);
     }
 
@@ -93,7 +93,10 @@ class Ingatlanok extends SiteController {
         // Árváltozás értesítés gomb állapotának beállításához kell (disable/enable)
         if (Auth::isUserLoggedIn()) {
             $user_id = Auth::getUser('id');
-            $data['ertesites_arvaltozasrol'] = $this->ingatlanok_model->selectPriceChange((int)$user_id, (int)$data['ingatlan']['id']);
+            
+            $this->loadModel('arvaltozas_model');
+
+            $data['ertesites_arvaltozasrol'] = $this->arvaltozas_model->selectPriceChange((int)$user_id, (int)$data['ingatlan']['id']);
         } else {
             $data['ertesites_arvaltozasrol'] = false;
         }
@@ -173,7 +176,7 @@ class Ingatlanok extends SiteController {
     }
     
     /**
-     * 
+     * Hozzáad az arvaltozas tablahoz egy új rekordot, ha még nem létezik a megadott user-hez a megadott ingatlan id
      */
     public function arvaltozasErtesites()
     {
@@ -183,9 +186,11 @@ class Ingatlanok extends SiteController {
                 $property_id = $this->request->get_post('property_id');
                 $user_id = Auth::getUser('id');
 
+                $this->loadModel('arvaltozas_model');
+
                 // megnézzük, hogy az arvaltozas tablaban van e ennek a felhasználónak ehhez az ingatlanhoz tartozó rekordja
                 // ha van ilyen rekord, akkor true, ha nincs akkor false
-                $result = $this->ingatlanok_model->selectPriceChange($user_id, $property_id);
+                $result = $this->arvaltozas_model->selectPriceChange($user_id, $property_id);
                 if ($result) {
                     $this->response->json(array(
                         'status' => 'success',
@@ -194,7 +199,7 @@ class Ingatlanok extends SiteController {
                 }
                 else {
                     // beírjuk az adatbázisba az új rekordot
-                    $this->ingatlanok_model->insertPriceChange($user_id, $property_id);
+                    $this->arvaltozas_model->insertPriceChange($user_id, $property_id);
                 }
 
                 $this->response->json(array(
