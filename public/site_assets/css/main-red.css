@@ -551,8 +551,7 @@ header.header .h-cart-btn:hover {
   display: block;
   padding: 0 20px;
   border-right: 1px solid #999;
-  /*z-index: 99999;*/
-  z-index: 9000;
+  z-index: 1000;
   position: relative;
 }
 /* line 43, scss/_nav.scss */
