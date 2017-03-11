@@ -904,57 +904,144 @@ class Ingatlanok_model extends SiteModel {
      * @param string 	$ar
      * @return array || false 
      */
-    public function hasonloIngatlanok($ingatlan_id, $ingatlan_tipus, $kategoria, $varos, $ar) {
-        $min_ar = $ar - ($ar * 0.1);
-        $max_ar = $ar + ($ar * 0.1);
+    public function hasonloIngatlanok_OLD($ingatlan_id, $ingatlan_tipus, $kategoria, $varos, $ar)
+    {
+        $min_ar = intval($ar - ($ar * 0.1));
+        $max_ar = intval($ar + ($ar * 0.1));
         $price_string = ($ingatlan_tipus == 1) ? 'ar_elado' : 'ar_kiado';
 
         $data = array(
-            ':ingatlan_tipus' => $ingatlan_tipus,
-            ':kategoria' => $kategoria,
-            ':varos' => $varos,
-            ':price_string' => $price_string,
+            ':ingatlan_tipus' => (int)$ingatlan_tipus,
+            ':kategoria' => (int)$kategoria,
+            ':varos' => (int)$varos,
+            ':price_string' => '`ingatlanok`.`' . $price_string . '`',
             ':min_ar' => $min_ar,
             ':max_ar' => $max_ar,
             ':ingatlan_id' => $ingatlan_id
         );
-
-        /*
-          $sql = "SELECT id, ingatlan_nev, tipus, ar_elado, ar_kiado, varos, kategoria, szobaszam, alapterulet, kepek, ingatlan_kategoria.kat_nev, city_list.city_name FROM ingatlanok "
-          . "LEFT JOIN ingatlan_kategoria ON ingatlanok.kategoria=ingatlan_kategoria.kat_id "
-          . "LEFT JOIN city_list ON ingatlanok.varos=city_list.city_id "
-          . "WHERE status = 1 AND tipus = :ingatlan_tipus AND kategoria = :kategoria AND varos = :varos AND (:price_string BETWEEN :min_ar AND :max_ar) AND id != :ingatlan_id ORDER BY id DESC LIMIT 4";
-         */
+var_dump($data);
 
         $sql = "SELECT
-                 ingatlanok.id,
-                 ingatlanok.ref_num,
-                 ingatlanok.ingatlan_nev_" . $this->lang . ",
-                 ingatlanok.tipus,
-                 ingatlanok.ar_elado,
-                 ingatlanok.ar_kiado,
-                 ingatlanok.varos,
-                 ingatlanok.kategoria,
-                 ingatlanok.szobaszam,
-                 ingatlanok.alapterulet,
-                 ingatlanok.kepek,
-                 ingatlan_kategoria.*,
-                 city_list.city_name
-                 FROM ingatlanok 
-                 LEFT JOIN ingatlan_kategoria ON ingatlanok.kategoria = ingatlan_kategoria.kat_id 
-                 LEFT JOIN city_list ON ingatlanok.varos = city_list.city_id 
-                 WHERE status = 1 AND tipus = :ingatlan_tipus AND kategoria = :kategoria AND varos = :varos AND (:price_string BETWEEN :min_ar AND :max_ar) AND id != :ingatlan_id ORDER BY id DESC LIMIT 4
+                 `ingatlanok`.`id`,
+                 `ingatlanok`.`ref_num`,
+                 `ingatlanok`.`ingatlan_nev_$this->lang`,
+                 `ingatlanok`.`tipus`,
+                 `ingatlanok`.`ar_elado`,
+                 `ingatlanok`.`ar_kiado`,
+                 `ingatlanok`.`varos`,
+                 `ingatlanok`.`kategoria`,
+                 `ingatlanok`.`szobaszam`,
+                 `ingatlanok`.`alapterulet`,
+                 `ingatlanok`.`kepek`,
+                 `ingatlan_kategoria`.*,
+                 `city_list`.`city_name`
+                 FROM `ingatlanok` 
+                 LEFT JOIN `ingatlan_kategoria` ON `ingatlanok`.`kategoria` = `ingatlan_kategoria`.`kat_id`
+                 LEFT JOIN `city_list` ON `ingatlanok`.`varos` = `city_list`.`city_id` 
+                 WHERE `ingatlanok`.`status` = 1 AND `ingatlanok`.`tipus` = :ingatlan_tipus AND `ingatlanok`.`kategoria` = :kategoria AND `ingatlanok`.`varos` = :varos AND (:price_string BETWEEN :min_ar AND :max_ar) AND `ingatlanok`.`id` != :ingatlan_id ORDER BY id DESC LIMIT 4
                ";
 
+        $sql2 = "SELECT
+                 `ingatlanok`.`id`,
+                 `ingatlanok`.`ref_num`,
+                 `ingatlanok`.`ingatlan_nev_$this->lang`,
+                 `ingatlanok`.`tipus`,
+                 `ingatlanok`.`ar_elado`,
+                 `ingatlanok`.`ar_kiado`,
+                 `ingatlanok`.`varos`,
+                 `ingatlanok`.`kategoria`,
+                 `ingatlanok`.`szobaszam`,
+                 `ingatlanok`.`alapterulet`,
+                 `ingatlanok`.`kepek`,
+                 `ingatlan_kategoria`.*,
+                 `city_list`.`city_name`
+                 FROM `ingatlanok` 
+                 LEFT JOIN `ingatlan_kategoria` ON `ingatlanok`.`kategoria` = `ingatlan_kategoria`.`kat_id`
+                 LEFT JOIN `city_list` ON `ingatlanok`.`varos` = `city_list`.`city_id` 
+                 WHERE `status` = 1 AND `tipus` = 1 AND `kategoria` = 1 AND `varos` = 88 AND (`ar_elado` BETWEEN 37791000 AND 46189000) AND `id` != 3 ORDER BY id DESC LIMIT 4
+               ";
+
+
+
         $sth = $this->connect->prepare($sql);
+
+echo "<pre>";
+print_r($sth);        
+echo "</pre>";
         $result = $sth->execute($data);
 
-        if (!$result) {
+        if ($result === false) {
             return false;
         } else {
             return $sth->fetchAll(PDO::FETCH_ASSOC);
         }
     }
+
+    /**
+     * Hasonló ingatlanok
+     *
+     * @param int       $ingatlan_id
+     * @param string    $ingatlan_tipus
+     * @param string    $kategoria
+     * @param string    $varos
+     * @param string    $ar
+     * @return array || false 
+     */
+    public function hasonloIngatlanok($ingatlan_id, $ingatlan_tipus, $kategoria, $varos, $ar)
+    {
+        $min_ar = intval($ar - ($ar * 0.1));
+        $max_ar = intval($ar + ($ar * 0.1));
+        $price_string = ($ingatlan_tipus == 1) ? 'ar_elado' : 'ar_kiado';
+
+        //$this->query->set_table('ingatlanok');
+        $this->query->set_columns(array(
+            'ingatlanok.id',
+            'ingatlanok.ref_num',
+            'ingatlanok.ingatlan_nev_' . $this->lang,
+            'ingatlanok.tipus',
+            'ingatlanok.ar_elado',
+            'ingatlanok.ar_kiado',
+            'ingatlanok.varos',
+            'ingatlanok.kategoria',
+            'ingatlanok.szobaszam',
+            'ingatlanok.alapterulet',
+            'ingatlanok.kepek',
+            'ingatlan_kategoria.*',
+            'city_list.city_name'
+            ));
+
+        $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
+        $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
+        $this->query->set_where('status', '=', 1);
+        $this->query->set_where('tipus', '=', (int)$ingatlan_tipus);
+        $this->query->set_where('kategoria', '=', (int)$kategoria);
+        $this->query->set_where('varos', '=', (int)$varos);
+        $this->query->set_where('AND (');
+        $this->query->set_where($price_string, 'between', array($min_ar, $max_ar));
+        $this->query->set_where(')');
+        $this->query->set_where('ingatlanok.id', '!=', (int)$ingatlan_id, 'and');
+
+//$this->query->debug();
+        $result = $this->query->select();
+
+        if ($result === false) {
+            return false;
+        } else {
+            return $result;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Növeli az adott ingatlan megtekintéseienk számát 1-gyel
