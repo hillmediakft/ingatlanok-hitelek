@@ -101,6 +101,15 @@ var Adatlap = function () {
         });
     }
 
+    var equalHeights = function () {
+        var elem = ($('.object-slider.latest-properties'));
+        if (elem.length == 0) {
+            return false;
+        }
+        setTimeout(function () {
+            $('.object-slider.latest-properties div.item').equalHeights();
+        }, 200);
+    };
 
     /*
      * Google térkép objektumok
@@ -157,9 +166,9 @@ var Adatlap = function () {
  
 		//main method to initiate page
 		init: function () {           
-			// call local function
             arvaltozasReg();
             contactAgent();
+            equalHeights();
 			//googleMapsInit();
 		},
  
