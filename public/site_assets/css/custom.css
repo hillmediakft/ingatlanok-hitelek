@@ -440,6 +440,12 @@ input.has-error {
     margin-right: 10px;
 }
 
+.extrak-list .filter-item input[type="checkbox"]:checked::before {
+    content: "\f00c";
+    display: block;
+    color: #e42b1e;
+    font-family: "FontAwesome";
+}
 
 /* Keresés mentések */
 .saved_search_box {
@@ -464,4 +470,11 @@ input.has-error {
 }
 .saved_search_box .buttons .share:hover {
     color: #c44a35;
+}
+
+.rent-flat-sidebar .widget.filter input[type="checkbox"]:checked::before {
+    content: "\f00c";
+    display: block;
+    color: #e42b1e;
+    font-family: "FontAwesome";
 }
