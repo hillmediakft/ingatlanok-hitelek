@@ -14,7 +14,7 @@ use System\Libs\Language as Lang;
                     <span class="delimiter">/</span>
                     <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.' . LANG); ?>"><?php echo Lang::get('menu_ingatlanok'); ?></a></span>
                     <span class="delimiter">/</span>
-                    <span class="active-page">Adatlap</span>
+                    <span class="active-page"><?php echo Lang::get('adatlap_kenyermorzsa'); ?></span>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@ use System\Libs\Language as Lang;
                     <div class="col-sm-5">
                         <h3 class="section-title"><?php echo $ingatlan['ingatlan_nev_' . LANG]; ?></h3>
                         <?php
-                            $district = (!is_null($ingatlan['district_name'])) ? $ingatlan['district_name'] . ' ' . Lang::get('kereso_kerulet') : '';
+                            $district = (!is_null($ingatlan['district_name'])) ? $ingatlan['district_name'] . ' ' . Lang::get('adatlap_kerulet') : '';
                         ?>
                         <h5><?php echo $ingatlan['city_name'] . ' ' . $district; ?></h5> 
                     </div>
@@ -72,10 +72,10 @@ use System\Libs\Language as Lang;
                             <div class="agent-details">
                                 <div class="agent-name">
                                     <h6><?php echo $agent['first_name'] . ' ' . $agent['last_name']; ?></h6>
-                                    <div>13. kerületi ingatlanok specialistája</div>
+                                    <div><?php echo $agent['title_' . LANG]; ?></div>
                                 </div>
                                 <div>Tel: <?php echo $agent['phone']; ?></div>
-                                <div class="label label-danger">Hívjon most!</div>
+                                <div class="label label-danger"><?php echo Lang::get('adatlap_hivjon_most_cimke'); ?></div>
                             </div>
                         </div>   
                     </div>
@@ -422,7 +422,7 @@ use System\Libs\Language as Lang;
                     <!-- LEÍRÁS -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="small-section-title">Leírás</h4>
+                            <h4 class="small-section-title"><?php echo Lang::get('adatlap_leiras_cim'); ?></h4>
                             <p>
                                 <?php echo $ingatlan['leiras_' . LANG]; ?>
                             </p>
@@ -433,7 +433,7 @@ use System\Libs\Language as Lang;
                         <!-- TÉRKÉP -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="small-section-title">Elhelyezkedés</h4>
+                                <h4 class="small-section-title"><?php echo Lang::get('adatlap_terkep_cim'); ?></h4>
                             </div>
                             <div class="col-sm-12">
                                 <div class="map-container style-2">
@@ -448,21 +448,13 @@ use System\Libs\Language as Lang;
                         </div>
                     <?php } ?>
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="empty-space-25"></div>
-                        </div>
-                    </div>
-
                     <!-- HASONLÓ INGATLANOK -->
-                    <?php foreach ($hasonlo_ingatlan as $value) {
-                        $photo_array = json_decode($value['kepek']);
-                        ?>
+                    <?php if (!empty($hasonlo_ingatlan)) { ?>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="object-slider latest-properties style-2">
                                     <div class="heading">
-                                        <h4 class="small-section-title">Similar Properties</h4>
+                                        <h4 class="small-section-title"><?php echo Lang::get('adatlap_hasonlo_ingatlan_cim'); ?></h4>
                                         <div class="jcarousel-arrows">
                                             <a href="#" class="prev-slide"><i class="fa fa-angle-left"></i></a>
                                             <a href="#" class="next-slide"><i class="fa fa-angle-right"></i></a>
@@ -470,20 +462,37 @@ use System\Libs\Language as Lang;
                                     </div>
                                     <div class="obj-carousel carousel">
                                         <ul>
+                                            <?php foreach ($hasonlo_ingatlan as $value) {
+                                                $photo_array = json_decode($value['kepek']);
+                                            ?>
                                             <li>
                                                 <div class="item">
                                                     <div class="preview">
-                                                        <?php if ($value['kepek']) { ?>
+                                                        <?php $this->html_helper->showLowerPriceIcon($value); ?>
+                                                        <!-- eladó/kiadó cimke-->                                        
+                                                        <?php
+                                                        if ($value['tipus'] == 1) {
+                                                            $label = Lang::get('kereso_elado');
+                                                            $css_class = 'sale';
+                                                        } else {
+                                                            $label = Lang::get('kereso_kiado');
+                                                            $css_class = 'rest';
+                                                        }
+                                                        ?>
+                                                        <span class="item-label <?php echo $css_class; ?>"><?php echo $label; ?></span>
+
+                                                        <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+                                                        <?php if (!is_null($value['kepek'])) { ?>
                                                             <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
-                                                        <?php } ?>
-                                                        <?php if ($value['kepek'] == null) { ?>
+                                                        <?php } else { ?>
                                                             <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
                                                         <?php } ?>
-                                                        <span class="like">
-                                                            <i class="fa fa-heart"></i>
-                                                        </span>
+                                                        </a> 
+
+                                                        <?php $this->html_helper->showHeartIcon($value); ?>
+
                                                         <span class="price-box">
-                                                            <?php echo ($value['tipus'] == 1) ? number_format($value['ar_elado'], 0, ',', '.') : number_format($value['ar_kiado'], 0, ',', '.') ?> Ft
+                                                            <?php $this->html_helper->showPrice($value); ?>
                                                         </span>
                                                     </div>
                                                     <div class="item-thumbnail">
@@ -510,12 +519,14 @@ use System\Libs\Language as Lang;
                                                     </div>
                                                 </div>
                                             </li>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </div>  
                             </div>
                         </div>
-                    <?php } ?>
+
+                    <?php } ?>                        
 
                 </div> <!-- single-item-page END -->
             </div>
@@ -526,14 +537,14 @@ use System\Libs\Language as Lang;
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <a id="arvaltozas_ertesites" class="simple-btn sm-button filled red <?php echo ($ertesites_arvaltozasrol) ? 'disabled' : ''; ?>" data-id="<?php echo $ingatlan['id']; ?>" href="javascript:void(0);"><i class="fa fa-envelope"></i> Értesítés árváltozásról</a>
-                            <a id="kedvencekhez_<?php echo $ingatlan['id']; ?>" data-id="<?php echo $ingatlan['id']; ?>" class="simple-btn sm-button filled red <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'disabled' : ''; ?>" href="javascript:void(0);"><i class="fa fa-heart"></i> Kedvencekhez</a>
+                            <a id="arvaltozas_ertesites" class="simple-btn sm-button filled red <?php echo ($ertesites_arvaltozasrol) ? 'disabled' : ''; ?>" data-id="<?php echo $ingatlan['id']; ?>" href="javascript:void(0);"><i class="fa fa-envelope"></i> <?php echo Lang::get('adatlap_arvaltozas_gomb'); ?></a>
+                            <a id="kedvencekhez_<?php echo $ingatlan['id']; ?>" data-id="<?php echo $ingatlan['id']; ?>" class="simple-btn sm-button filled red <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'disabled' : ''; ?>" href="javascript:void(0);"><i class="fa fa-heart"></i> <?php echo Lang::get('adatlap_kedvencekhez_gomb'); ?></a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-share"></i> Megosztás</a>
-                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-print"></i> Nyomtatás</a>
+                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-share"></i> <?php echo Lang::get('adatlap_megosztas_gomb'); ?></a>
+                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-print"></i> <?php echo Lang::get('adatlap_nyomtatas_gomb'); ?></a>
                         </div>
                     </div>
 
@@ -541,7 +552,7 @@ use System\Libs\Language as Lang;
                         <div class="col-sm-12">
                             <div class="widget questions">
                                 <div class="heading">
-                                    <span class="widget-title">Kapcsolatfelvétel</span>
+                                    <span class="widget-title"><?php echo Lang::get('adatlap_kapcsolat_cim'); ?></span>
                                 </div>
                                 <div class="widget-entry gray-bg">
                                     <div class="questions-form">
