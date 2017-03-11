@@ -35,7 +35,8 @@ class Ingatlanok extends SiteController {
 // összes elem megadása a paginátor objektumnak
         $pagine->set_total($data['filtered_count']);
 // lapozó linkek visszadása (paraméter az uri path)
-        $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path'));
+
+        $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path_full'));
 
         // a keresőhöz szükséges listák alőállítása
         $data['city_list'] = $this->ingatlanok_model->city_list_query_with_prop_no();
@@ -159,7 +160,7 @@ class Ingatlanok extends SiteController {
 // összes elem megadása a paginátor objektumnak
         $pagine->set_total($data['filtered_count']);
 // lapozó linkek visszadása (paraméter az uri path)
-        $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path'));
+        $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path_full'));
 
 // szűrési paramétereket tartalmazó tömb
         $data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
