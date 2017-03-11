@@ -443,7 +443,7 @@ input.has-error {
 .extrak-list .filter-item input[type="checkbox"]:checked::before {
     content: "\f00c";
     display: block;
-    color: #e42b1e;
+    color: #000;
     font-family: "FontAwesome";
 }
 
