@@ -30,7 +30,8 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'styles', items: [ 'Styles', 'Format', 'FontSize' ] },
 		{ name: 'colors', items : [ 'TextColor', 'BGColor' ] },
 		{ name: 'document', items: [ 'Source' ] },
-		{ name: 'tools', items: [ 'Templates' ] }
+		{ name: 'tools', items: [ 'Templates' ] },
+		{ name: 'preview', items: ['Preview']}
 	];	
 		
 	// Gombok eltávolítása az eszköztárból
