@@ -1153,9 +1153,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                                         $this->loadModel('settings_model');
                                         $price_change_data['settings'] = $this->settings_model->get_settings();
 
-                                // var_dump($price_change_data);
-                                // die;
-                                        EventManager::trigger('change_price', array($price_change_data));
+                                        EventManager::trigger('change_price', array('change_price', '#' . $id . ' azonosítójú ingatlan ára módosult', $price_change_data));
                                     }
                                     
                                 }    

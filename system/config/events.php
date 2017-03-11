@@ -42,7 +42,10 @@ $config['events'] = array(
 		$log->index($type, $message);
 
 	},
-	'change_price' => function($price_change_data){
+	'change_price' => function($type, $message, $price_change_data){
+
+		$log = new LogIntoDb();
+		$log->index($type, $message);
 
 		$connect = DI::get('connect');	
 		$query = new Query($connect);
