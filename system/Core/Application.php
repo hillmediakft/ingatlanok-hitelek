@@ -312,6 +312,7 @@ class Application {
             $router->match('GET|POST', '/landingpage/insert', 'LandingPage@insert');
             $router->match('GET|POST', '/landingpage/update/:id', 'LandingPage@update');
 
+                $router->post('/user/deleteimage', 'User@deleteImage');
 
                 // error	
                 $router->set404('error@index');
