@@ -501,6 +501,25 @@ class User extends AdminController {
         }
 	}
 
+	/**
+	 * Törli a megadott képet
+	 */
+	public function deleteImage()
+	{
+		if ($this->request->is_ajax()) {
+			$file_path = $this->request->get_post('file');
+			DI::get('file_helper')->delete($file_path);
+
+			$this->response->json(array(
+				'status' => 'success',
+				'message' => 'ok'
+				));
+
+		} else {
+			$this->response->redirect('admin/error');
+		}
+	}
+
     /**
 	 *	A felhasználó képét tölti fel a szerverre, és készít egy kisebb méretű képet is.
 	 *	Ez a metódus kettő XHR kérést dolgoz fel.
