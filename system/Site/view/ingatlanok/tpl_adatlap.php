@@ -383,7 +383,7 @@ use System\Libs\Language as Lang;
                                     <div class="column-2">
                                         <div class="info-item">
                                             <span class="label-item"><?php echo Lang::get('jell_lift'); ?>:</span>
-                                            <span class="value"><i class="fa fa-check"></i></span>
+                                            <span class="value"><?php echo Lang::get('jell_van'); ?></span>
                                         </div>
                                     </div>
                                 <?php } ?>
@@ -392,7 +392,7 @@ use System\Libs\Language as Lang;
                                     <div class="column-2">
                                         <div class="info-item">
                                             <span class="label-item"><?php echo Lang::get('jell_tetoter'); ?>:</span>
-                                            <span class="value"><i class="fa fa-check"></i></span>
+                                            <span class="value"><?php echo Lang::get('jell_van'); ?></span>
                                         </div>
                                     </div>
                                 <?php } ?>
