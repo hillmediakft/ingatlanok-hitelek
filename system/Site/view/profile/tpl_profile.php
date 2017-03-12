@@ -122,8 +122,8 @@ use System\Libs\Language as Lang;
                             <div class="descr"><span class="message">Egy elem eltávolításához kattintson a kuka ikonra!</span></div>
                         </div> 
 
-                        <?php foreach ($saved_search as $id => $url) { ?>
-                        <div class="saved_search_box" id="saved_search_item_<?php echo $id; ?>">
+                        <?php foreach ($saved_search as $value) { ?>
+                        <div class="saved_search_box" id="saved_search_item_<?php echo $value['id']; ?>">
                             <div class="row" >
                         <!-- 
                                 <div class="col-sm-5">
@@ -134,12 +134,12 @@ use System\Libs\Language as Lang;
                          -->
                                 <div class="col-sm-10">
                                     <div class="elem">
-                                        <a class="link" href="<?php echo $url; ?>">Urás a találati listához</a>
+                                        <a class="link" href="<?php echo $value['url']; ?>"><?php echo $value['description']; ?></a>
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="pull-right buttons elem">
-                                        <a href="javascript:void();" id="delete_search_<?php echo $id; ?>" data-id="<?php echo $id; ?>" class="share"><i class="fa fa-trash-o fa-2x"></i></a>
+                                        <a href="javascript:void();" id="delete_search_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" class="share"><i class="fa fa-trash-o fa-2x"></i></a>
                                     </div>
                                 </div>
                             </div>

@@ -530,6 +530,39 @@ class Ingatlanok_model extends SiteModel {
     }
 
     /**
+     *  Lekérdezi egy város nevét a city_list táblából
+     *  
+     *  @param integer  $id   egy város id-je
+     */
+    public function selectCityName($id)
+    {
+        $this->query->set_table(array('city_list'));
+        $this->query->set_columns(array('city_name'));
+        $this->query->set_where('city_id', '=', $id);
+        $result = $this->query->select();
+        return $result[0]['city_name'];
+    }
+
+    /**
+     *  Lekérdezi egy kategória nevét az ingatlan_kategoria táblából
+     *  
+     *  @param integer  $id   egy város id-je
+     */
+    public function selectCategoryName($id)
+    {
+        $this->query->set_table(array('ingatlan_kategoria'));
+        $this->query->set_columns('kat_nev_' . LANG);
+        $this->query->set_where('kat_id', '=', $id);
+        $result = $this->query->select();
+        if(empty($result)) {
+            return '';
+        } else {
+            return $result[0]['kat_nev_' . LANG];
+        }
+
+    }
+
+    /**
      * 	Lekérdezi a városok nevét és id-jét a city_list táblából (az option listához)
      * 	A paraméter megadja, hogy melyik megyében lévő városokat adja vissza 		
      * 	@param integer	$id 	egy megye id-je (county_id)

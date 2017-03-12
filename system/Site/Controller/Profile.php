@@ -45,7 +45,45 @@ class Profile extends SiteController {
         // követett ingatlanok adatainak lekérdezése
         $data['properties'] = $this->ingatlanok_model->followedByProperty($id);
         // mentett keresés adatok lekérdezése
-        $data['saved_search'] = $this->kereses_model->selectSavedSearch($id);
+        $url_arr = $this->kereses_model->selectSavedSearch($id);
+
+// mentett keresés adatait állítjuk össze
+        $data['saved_search'] = array();
+        //$url_helper = DI::get('url_helper');
+        foreach ($url_arr as $key => $url) {
+        	
+	        $url_parts = parse_url($url);
+	        parse_str($url_parts['query'], $query_arr);
+        	//$temp = $url_helper->infoFromUrl($url);
+	        
+        	if ($query_arr['tipus'] == 1) {
+        		$tipus = (LANG == 'hu') ? 'Eladó' : 'For sale';
+        	} else {
+        		$tipus = (LANG == 'hu') ? 'Kiadó' : 'For rent';
+        	}
+
+	        $city_name = '';
+	        if (!empty($query_arr['varos'])) {
+        		$city_name = $this->ingatlanok_model->selectCityName($query_arr['varos']);
+	        }
+
+	        $string = $tipus;
+	        $string .= (!empty($city_name)) ? ' - ' . $city_name : '';
+        	        
+	        $category_name = '';
+	        if (!empty($query_arr['kategoria'])) {
+        		$category_name = $this->ingatlanok_model->selectCategoryName($query_arr['kategoria']);
+	        }
+
+	        $string .= (!empty($category_name)) ? ' - ' . $category_name : '';
+
+	        $data['saved_search'][] = array(
+	        	'id' => $key,
+	        	'description' => $string,
+	        	'url' => $url
+	        	);
+        }
+
 
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'num_helper', 'html_helper'));
