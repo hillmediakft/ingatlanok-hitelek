@@ -153,7 +153,7 @@ class Uri {
 	{
 		if(in_array('admin', $this->path_arr)){
 			$index_admin = array_search('admin', $this->path_arr);
-			if($index_admin <= 1){
+			if($index_admin == 0){
 					$this->index_admin = $index_admin;
 
 					// eltávolítjuk az admin elemet
