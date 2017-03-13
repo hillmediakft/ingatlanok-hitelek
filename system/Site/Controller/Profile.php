@@ -24,6 +24,10 @@ class Profile extends SiteController {
 	 */
 	public function index()
 	{
+		if (!Auth::isUserLoggedIn()) {
+			$this->response->redirect();
+		}
+
         $page_data = $this->user_model->getPageData('profil');
         
         $data = $this->addGlobalData();
