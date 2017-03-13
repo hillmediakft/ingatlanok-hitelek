@@ -164,7 +164,8 @@ use System\Libs\Language as Lang;
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <a id="save_search" href="javascript:void(0);" class="simple-btn lg-button outlined red" style="margin-top: 33px;">Keresés mentése</a>
+                            <!-- <a id="save_search" href="javascript:void(0);" class="simple-btn lg-button outlined red" style="margin-top: 33px;"><?php //echo Lang::get('kereso_kereses_mentese_gomb'); ?></a> -->
+                            <button id="save_search" class="save_search_button"><?php echo Lang::get('kereso_kereses_mentese_gomb'); ?></button>
                         </div>
                     </div>
 

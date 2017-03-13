@@ -481,6 +481,17 @@ input.has-error {
     color: #c44a35;
 }
 
+.save_search_button {
+    padding:5px 8px;
+    margin-bottom: 5px;
+    background-color: #3a383b;
+    color: #fff;
+    border: none;
+}
+.save_search_button:hover {
+    background-color: #c44a35;
+}
+
 .rent-flat-sidebar .widget.filter input[type="checkbox"]:checked::before {
     content: "\f00c";
     display: block;
