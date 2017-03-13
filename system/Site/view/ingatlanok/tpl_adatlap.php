@@ -193,7 +193,7 @@ use System\Libs\Language as Lang;
                                     <div class="column-2">
                                         <div class="info-item">
                                             <span class="label-item"><?php echo Lang::get('jell_telek_alapterulet'); ?>:</span>
-                                            <span class="value"><?php echo $ingatlan['telek_alapterulet']; ?></span>
+                                            <span class="value"><?php echo $ingatlan['telek_alapterulet']; ?> m<sup>2</sup></span>
                                         </div>
                                     </div>
                                 <?php } ?>
@@ -202,7 +202,7 @@ use System\Libs\Language as Lang;
                                     <div class="column-2">
                                         <div class="info-item">
                                             <span class="label-item"><?php echo Lang::get('jell_belmagassag'); ?>:</span>
-                                            <span class="value"><?php echo $ingatlan['belmagassag']; ?></span>
+                                            <span class="value"><?php echo $ingatlan['belmagassag']; ?> cm</span>
                                         </div>
                                     </div>
                                 <?php } ?>
@@ -577,7 +577,10 @@ use System\Libs\Language as Lang;
                         </div>
                     </div>
 
-                    <?php include($this->path('tpl_modul_banner')); ?>
+                    <?php //include($this->path('tpl_modul_banner')); ?>
+                    <?php include($this->path('tpl_modul_banner_mennyiterazingatlanom')); ?>
+                    <?php include($this->path('tpl_modul_banner_befektetoknek')); ?>
+                    <?php include($this->path('tpl_modul_banner_berbeadoknak')); ?>
 
                 </aside>
             </div>

@@ -17,46 +17,9 @@ use System\Libs\Config;
             </div>
         </div>
 
-
-<!-- 
-
-        <div class="widget popular-posts">
-            <div class="heading">
-                <span class="widget-title">Title</span>
-            </div>
-            <div class="widget-entry">
-                <div class="popular-posts-widget">
-                    <div class="single-widget-post">
-                        <div class="preview">
-                            <img alt="#" src="<?php //echo SITE_IMAGE;?>latest-blog-posts/4.1.jpg">
-                        </div>
-                        <div class="descr">
-                            <span class="title"><a href="#">Etiam Pharetraluct felis sed rhoncus</a></span>
-                        </div>
-                    </div>
-                    <div class="single-widget-post">
-                        <div class="preview">
-                            <img alt="#" src="<?php //echo SITE_IMAGE;?>latest-blog-posts/4.2.jpg">
-                        </div>
-                        <div class="descr">
-                            <span class="title"><a href="#">Etiam Pharetraluct felis sed rhoncus</a></span>
-                        </div>
-                    </div>
-                    <div class="single-widget-post">
-                        <div class="preview">
-                            <img alt="#" src="<?php //echo SITE_IMAGE;?>latest-blog-posts/4.3.jpg">
-                        </div>
-                        <div class="descr">
-                            <span class="title"><a href="#">Etiam Pharetraluct felis sed rhoncus</a></span>
-                        </div>
-                    </div>
-                </div>
-                <nav class="rotate_btn">
-                    <a href="#" class="all-posts-btn">Összes</a>
-                </nav>
-            </div>
-        </div>
--->
+        <!-- BANNER -->
+        <?php include($this->path('tpl_modul_banner_befektetoknek')); ?>
+        <?php include($this->path('tpl_modul_banner_mennyiterazingatlanom')); ?>
 
     </aside>
 </div>

@@ -120,8 +120,8 @@ use System\Libs\Language as Lang;
                     <?php include($this->path('tpl_modul_referenscontact')); ?>
                     <!-- KIEMELT INGATLANOK DOBOZ -->
                     <?php include($this->path('tpl_modul_kiemeltingatlanok')); ?>
-                    <!-- KIEMELT INGATLANOK DOBOZ -->
-                    <?php include($this->path('tpl_modul_banner')); ?>
+                    <!-- BANNER DOBOZ -->
+                    <?php include($this->path('tpl_modul_banner_mennyiterazingatlanom')); ?>
                 </aside>        
             </div> <!-- SIDEBAR END -->
 

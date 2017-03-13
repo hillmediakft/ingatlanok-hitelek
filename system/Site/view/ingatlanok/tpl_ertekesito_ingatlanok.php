@@ -73,7 +73,7 @@ use System\Libs\Language as Lang;
                                     <li>
                                         <div class="item-container">
                                             <span class="icon"><i class="fa fa-envelope"></i></span>
-                                            <a href="#" class="mail"><?php echo $agent['email']; ?></a>
+                                            <a href="mailto:<?php echo $agent['email']; ?>" class="mail"><?php echo $agent['email']; ?></a>
                                         </div>
                                     </li>
                                     <!-- 

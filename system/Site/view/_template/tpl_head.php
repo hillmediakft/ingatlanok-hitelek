@@ -112,7 +112,7 @@ include($this->path('tpl_forgottenpw_modal'));
                     </div>
                     <div class="descr">
                         <span class="box-title">E-mail:</span>
-                        <a href="#" class="box-text"><?php echo $settings['email']; ?></a>
+                        <a href="mailto:<?php echo $settings['email']; ?>" class="box-text"><?php echo $settings['email']; ?></a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <?php
-
-use System\Libs\Language as Lang; ?>
+use System\Libs\Language as Lang;
+?>
 <div id="content" class="container-fluid">
     <div class="container">
         <div class="row">
@@ -128,8 +128,8 @@ use System\Libs\Language as Lang; ?>
                     <?php include($this->path('tpl_modul_referenscontact')); ?>
                     <!-- KIEMELT INGATLANOK DOBOZ -->
                     <?php include($this->path('tpl_modul_kiemeltingatlanok')); ?>
-                    <!-- KIEMELT INGATLANOK DOBOZ -->
-<?php include($this->path('tpl_modul_banner')); ?>
+                    <!-- BANNER -->
+                    <?php include($this->path('tpl_modul_banner_befektetoknek')); ?>
                 </aside>        
             </div> <!-- SIDEBAR END -->
         </div>

@@ -172,8 +172,9 @@ use System\Libs\Language as Lang;
                     <?php include($this->path('tpl_modul_referenscontact')); ?>
                     <!-- KIEMELT INGATLANOK DOBOZ -->
                     <?php include($this->path('tpl_modul_kiemeltingatlanok')); ?>
-                    <!-- KIEMELT INGATLANOK DOBOZ -->
-                    <?php include($this->path('tpl_modul_banner')); ?>
+                    <!-- BANNER -->
+                    <?php include($this->path('tpl_modul_banner_berbeadoknak')); ?>
+
                 </aside>        
             </div> <!-- SIDEBAR END -->
 

@@ -43,7 +43,7 @@ use System\Libs\Language as Lang;
 								</li>
 								<li>
 									<span class="icon"><i class="fa fa-envelope"></i></span>
-									<a href="#" class="mail"><?php echo $agent['email'];?></a>
+									<a href="mailto:<?php echo $agent['email'];?>" class="mail"><?php echo $agent['email'];?></a>
 								</li>
 							</ul>
 						</div>
@@ -57,7 +57,7 @@ use System\Libs\Language as Lang;
 						<!-- KIEMELT INGATLANOK DOBOZ -->
 						<?php include($this->path('tpl_modul_kiemeltingatlanok')); ?>
 						<!-- KIEMELT INGATLANOK DOBOZ -->
-						<?php include($this->path('tpl_modul_banner')); ?>
+						<?php include($this->path('tpl_modul_banner_mennyiterazingatlanom')); ?>
 					</aside>        
 				</div> <!-- SIDEBAR END -->
 			
