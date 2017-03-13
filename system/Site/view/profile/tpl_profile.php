@@ -27,13 +27,13 @@ use System\Libs\Language as Lang;
 
                 <div class="objects-block list-sidebar">
                     
-                    <h1><i class="fa fa-line-chart"></i> Árváltozás értesítésre jelölt ingatlanok</h1>
+                    <h1><i class="fa fa-line-chart"></i> <?php echo Lang::get('kovetett_ingatlanok_cim'); ?></h1>
 
                     <?php if (count($properties) > 0) : ?> 
 
                         <div id="notification-box-info-changeprice" class="notification-box info">
                             <div class="icon"><i class="fa fa-info"></i></div>
-                            <div class="descr"><span class="message">Ingatlan eltávolításához kattintson a kuka ikonra!</span></div>
+                            <div class="descr"><span class="message"><?php echo Lang::get('profil_infodoboz_kek'); ?></span></div>
                         </div>                         
                         <?php
                         foreach ($properties as $value) {
@@ -103,7 +103,7 @@ use System\Libs\Language as Lang;
                     <!-- INFO BOX - HA NINCSENEK LISTAELEMEK -->
                     <div id="notification-box-caution-changeprice" class="notification-box caution" <?php echo (count($properties) > 0) ? 'style="display: none;"' : ''; ?>>
                         <div class="icon"><i class="fa fa-info"></i></div>
-                        <div class="descr"><span class="message">Jelenleg egyetlen ingatlan árváltozásáról sem kért értesítést!</span></div>
+                        <div class="descr"><span class="message"><?php echo Lang::get('profil_infodoboz_sarga'); ?></span></div>
                     </div>
 
                     <div class="row">
@@ -113,13 +113,13 @@ use System\Libs\Language as Lang;
                     </div>
 
 
-                    <h1><i class="fa fa-search"></i> Mentett keresési eredmények</h1>
+                    <h1><i class="fa fa-search"></i> <?php echo Lang::get('mentett_keresesek_cim'); ?></h1>
 
                     <?php if (count($saved_search) > 0) { ?>
 
                         <div id="notification-box-info-savedsearch" class="notification-box info">
                             <div class="icon"><i class="fa fa-info"></i></div>
-                            <div class="descr"><span class="message">Egy elem eltávolításához kattintson a kuka ikonra!</span></div>
+                            <div class="descr"><span class="message"><?php echo Lang::get('profil_infodoboz_kek'); ?></span></div>
                         </div> 
 
                         <?php foreach ($saved_search as $value) { ?>
@@ -151,7 +151,7 @@ use System\Libs\Language as Lang;
                     <!-- INFO BOX - HA NINCSENEK LISTAELEMEK -->
                     <div id="notification-box-caution-savedsearch" class="notification-box caution" <?php echo (count($saved_search) > 0) ? 'style="display: none;"' : ''; ?>>
                         <div class="icon"><i class="fa fa-info"></i></div>
-                        <div class="descr"><span class="message">Nincsenek mentett keresései!</span></div>
+                        <div class="descr"><span class="message"><?php echo Lang::get('profil_infodoboz_sarga'); ?></span></div>
                     </div>
 
 
@@ -171,32 +171,32 @@ use System\Libs\Language as Lang;
                     <?php //include($this->path('tpl_modul_banner')); ?>
 
 
-                    <h1><i class="fa fa-user"></i> Profil adatok szerkesztése</h1>
+                    <h1><i class="fa fa-user"></i> <?php echo Lang::get('profil_szerkesztese_cim'); ?></h1>
                         
                         <div class="contacts-block" style="padding-bottom: 20px;">
                             <div class="contact-form">
                                 <form action="profile/change_password" method="POST" id="new-password-form">
 
                                     <div class="form-group">
-                                        <label class="control-label" for="password_new">Új jelszó</label>
+                                        <label class="control-label" for="password_new"><?php echo Lang::get('profil_uj_jelszo'); ?></label>
                                         <div class="input-group">
                                             <input type="password" name="password_new" class="form-control" id="password_new" placeholder="">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label" for="password_new_again">Új jelszó mégegyszer</label>
+                                        <label class="control-label" for="password_new_again"><?php echo Lang::get('profil_jelszo_megegyszer'); ?></label>
                                         <div class="input-group">
                                             <input type="password" name="password_new_again" class="form-control" placeholder="">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label" for="password_old">Régi jelszó</label>
+                                        <label class="control-label" for="password_old"><?php echo Lang::get('profil_regi_jelszo'); ?></label>
                                         <div class="input-group">
                                             <input type="password" name="password_old" class="form-control" placeholder="">
                                         </div>
                                     </div>                                    
 
-                                    <button type="submit" class="send-btn style-2">Küld</button>
+                                    <button type="submit" class="send-btn style-2"><?php echo Lang::get('profil_kuldes_gomb'); ?></button>
 
                                 </form>
                                
@@ -209,7 +209,7 @@ use System\Libs\Language as Lang;
                                     
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <label class="control-label" for="name">Név</label>
+                                            <label class="control-label" for="name"><?php echo Lang::get('profil_felhasznalonev'); ?></label>
                                             <input type="text" class="name" name="name" placeholder="Name" value="<?php echo $user['name']; ?>">
                                         </div>
                                     </div>
@@ -221,7 +221,7 @@ use System\Libs\Language as Lang;
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="send-btn style-2">Küld</button>
+                                    <button type="submit" class="send-btn style-2"><?php echo Lang::get('profil_kuldes_gomb'); ?></button>
                                 </form> 
                             </div>
                         </div>
