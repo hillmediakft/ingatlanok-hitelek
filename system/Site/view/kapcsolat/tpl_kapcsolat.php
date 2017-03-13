@@ -62,7 +62,7 @@ use System\Libs\Language as Lang;
                                             <i class="fa fa-envelope"></i>
                                         </div>
                                         <div class="descr">
-                                            <a href="#"><?php echo $settings['email']; ?></a>
+                                            <a href="mailto:<?php echo $settings['email']; ?>"><?php echo $settings['email']; ?></a>
                                         </div>
                                     </div>
                                 </div>
