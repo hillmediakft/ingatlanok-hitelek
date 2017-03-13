@@ -1170,12 +1170,24 @@ function initBannerMap1(){
 		map = new google.maps.Map(document.getElementById('map-banner-canvas'), mapOptions);
 
 		for(var i in locations) {
+			
+			/*
 			var marker;
 			marker = new google.maps.Marker({
 				position: new google.maps.LatLng(locations[i][1], locations[i][2]),
 				map: map,
 				icon: locations[i][3],
 			});
+			*/
+
+			var circle = new google.maps.Circle({
+				map: map,
+				center: new google.maps.LatLng(locations[i][1], locations[i][2]),
+				radius: 450,
+				strokeColor: "#F0CA5C",
+				fillColor: "#F0CA5C"
+			});
+
 		}
 	}
 	disableMapPan('map-banner-canvas');
