@@ -7,7 +7,7 @@ use System\Libs\Language as Lang;
         <div class="row">
             <div class="col-sm-12">
                 <div class="breadcrumbs">
-                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>"><?php echo Lang::get('menu_kereses'); ?></a></span>
+                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>"><?php echo Lang::get('menu_home'); ?></a></span>
                     <span class="delimiter">/</span>
                     <span class="active-page"><?php echo Lang::get('menu_kereses'); ?></span>
                 </div>
