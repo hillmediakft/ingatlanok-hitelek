@@ -4,7 +4,7 @@ use System\Libs\Language as Lang;
 <div class="widget main-filter-widget gray-bg">
     <div class="widget-entry">
         <div class="filter-label-block">
-            <span class="filter-label">Find Your Home</span>
+            <span class="filter-label"></span>
         </div>
         <form action="ingatlanok" class="filter-form">
             
