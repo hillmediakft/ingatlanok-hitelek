@@ -359,6 +359,7 @@ var Property = function () {
         })
     };
 
+/*
     var printTable = function () {
         $('#print_property').on('click', function (e) {
             e.preventDefault();
@@ -372,6 +373,7 @@ var Property = function () {
         })
 
     };
+*/    
 
     var show_filter_div = function() {
 
@@ -523,7 +525,7 @@ var Property = function () {
             //enableDisableButtons();
             // resetSearchForm();
             changeKiemelesConfirm();
-            printTable();
+            //printTable();
             // handleModal();
             locationsInput();
             enableDistrict();
@@ -533,6 +535,12 @@ var Property = function () {
            
             vframework.changeStatus({
                 url: "admin/property/change_status"
+            });
+
+            vframework.printTable({
+                print_button_id: "print_property", // elem id-je, amivel elindítjuk a nyomtatást 
+                table_id: "property",
+                title: "Ingatlanok listája"
             });
 
             vframework.deleteItems({
