@@ -95,7 +95,7 @@ use System\Libs\Language as Lang;
                                         <span class="contact-message"><?php echo Lang::get('kapcsolat_email_megjegyzes'); ?></span>
                                     </div>
                                 </div>
-                                <form action="<?php echo LANG; ?>/sendemail/init/contact" method="POST" id="contact-form-kapcsolat">
+                                <form action="<?php echo (LANG != 'hu') ? LANG : ''; ?>/sendemail/init/contact" method="POST" id="contact-form-kapcsolat">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <input type="text" name="name" class="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?> *" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')">
