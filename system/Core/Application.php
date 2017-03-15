@@ -82,7 +82,7 @@ class Application {
             $router->post('/sendemail/init/:title', 'SendEmail@init', array('type'));
             
         // landing page    
-        $router->get('/landing/:title', 'LandingPage@index', array('title'));
+        $router->get('/marketing/:title', 'LandingPage@index', array('title'));
 
             //mennyit-er-az-ingatlanom
             $router->get('/mennyit-er-az-ingatlanom', 'MennyitErAzIngatlanom@index');
@@ -135,7 +135,7 @@ class Application {
                 $router->post('/sendemail/init/:title', 'SendEmail@init', array('type')); //ajax
 
             // landing page    
-            $router->get('/landing/:title', 'LandingPage@index', array('title'));
+            $router->get('/marketing/:title', 'LandingPage@index', array('title'));
 
                 //mennyit-er-az-ingatlanom
                 $router->get('/my-property-is-worth', 'MennyitErAzIngatlanom@index');
