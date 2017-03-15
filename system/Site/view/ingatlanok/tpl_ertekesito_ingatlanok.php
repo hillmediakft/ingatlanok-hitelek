@@ -101,7 +101,7 @@ use System\Libs\Language as Lang;
                             <h4 class="column-title"><?php echo Lang::get('referens_cim_kapcsolat'); ?></h4>
                             <div class="contacts-block" style="padding-bottom: 0px;">
                                 <div class="message-form">
-                                    <form action="<?php echo (LANG != 'hu') ? LANG : ''; ?>/sendemail/init/agent_info" method="post" id="contact-form-agent">
+                                    <form action="<?php echo (LANG != 'hu') ? LANG . '/' : ''; ?>sendemail/init/agent_info" method="post" id="contact-form-agent">
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <input type="text" class="name" name="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?> *" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')">

@@ -556,7 +556,7 @@ use System\Libs\Language as Lang;
                                 </div>
                                 <div class="widget-entry gray-bg">
                                     <div class="questions-form">
-                                        <form action="<?php echo (LANG != 'hu') ? LANG : ''; ?>/sendemail/init/agent" method="post" id="contact-form-agent">
+                                        <form action="<?php echo (LANG != 'hu') ? LANG . '/' : ''; ?>sendemail/init/agent" method="post" id="contact-form-agent">
                                             <input type="text" class="name" name="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?>" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')">
                                             <input type="email" class="email" name="email" placeholder="Email" required oninvalid="this.setCustomValidity('Adjon meg egy email címet!')" oninput="setCustomValidity('')">
                                             <input type="text" class="name" name="phone" placeholder="<?php echo Lang::get('kapcsolat_email_telefon'); ?>">
