@@ -27,7 +27,7 @@ $(document).ready(function () {
     initGalleryVerticalThumb();
     countDown();
     shopGalleryInit();
-    initPopUp();
+    //initPopUp();
 
     $(function () {
         $('.plus-btn').on('click', function () {
@@ -1464,16 +1464,3 @@ function initAudio() {
         });
     }
 }
-
-//initAudio
-function initPopUp() {
-    if (document.cookie.indexOf("pop-up") >= 0) {
-
-    } else {
-        document.cookie = "pop-up=true";
-        $('#pop-up-window').modal('show');
-
-    }
-}
-
-
