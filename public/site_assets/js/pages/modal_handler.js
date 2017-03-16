@@ -257,6 +257,7 @@ var modalHandler = function () {
                     
 					//$success_messages += '<br />';
                     $("#register_submit").hide();
+                    $("#close_button").show();
                     $("#register_form").hide();
                     $("#message_register").html('<div class="alert alert-success">'+$success_messages+'</div>');
                 } 

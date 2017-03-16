@@ -46,7 +46,7 @@
 		<div class="modal-footer">
 			<button type="button" class="send-btn" id="register_submit">Regisztrálok</button>
 			<!-- <button type="button" class="btn btn-primary" id="register_submit">Regisztrálok</button> -->
-			<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button> -->
+			<button id="close_button" type="button" class="btn btn-secondary" data-dismiss="modal" style="display: none;">Bezár</button>
 		</div>
 			
 
