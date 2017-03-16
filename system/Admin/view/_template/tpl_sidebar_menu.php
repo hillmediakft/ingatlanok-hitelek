@@ -229,21 +229,47 @@
         </li>
 
 
+        <!-- POP UP ABLAKOK -->
+        <li class="nav-item <?php $this->menu_active('pop_up_windows'); ?> ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="fa fa-windows"></i> 
+                <span class="title">Pop up ablakok</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item <?php $this->menu_active('pop_up_windows', 'index'); ?> ">
+                    <a href="admin/pop_up_windows" class="nav-link">
+                        <span class="title">Pop up ablakok listája</span>                    
+                    </a>
+                </li>
+                <li class="nav-item <?php $this->menu_active('pop_up_windows', 'insert'); ?> ">
+                    <a href="admin/pop_up_windows/insert" class="nav-link">
+                        <span class="title">Pop up ablak hozzáadása</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+
         <!-- SZERKESZTHETŐ TARTALMI ELEMEK -->
-        <li class="nav-item <?php $this->menu_active('content'); ?> ">
+        <!-- 
+        <li class="nav-item <?php //$this->menu_active('content'); ?> ">
             <a href="javascript:;" class="nav-link nav-toggle">
                 <i class="fa fa-files-o"></i>
                 <span class="title">Tartalmi elemek</span>
                 <span class="arrow"></span>
             </a>
             <ul class="sub-menu">
-                <li class="nav-item <?php $this->menu_active('content'); ?> ">
+                <li class="nav-item <?php //$this->menu_active('content'); ?> ">
                     <a href="admin/content" class="nav-link ">
                         <span class="title">Tartalmi elemek listája</span>
                     </a>
                 </li>
             </ul>
         </li>
+        -->
+
 
         <!-- ADMIN USERS -->
         <li class="nav-item <?php $this->menu_active('user'); ?> ">
