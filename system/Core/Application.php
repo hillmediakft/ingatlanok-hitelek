@@ -177,8 +177,8 @@ class Application {
                 $router->match('GET|POST', '/pages/update/:id', 'pages@update', array('id'));
 
                 // content	
-                $router->get('/content', 'content@index');
-                $router->match('GET|POST', '/content/edit/:id', 'content@edit', array('id'));
+                //$router->get('/content', 'content@index');
+                //$router->match('GET|POST', '/content/edit/:id', 'content@edit', array('id'));
 
                 // user	
                 $router->get('/user', 'user@index');
