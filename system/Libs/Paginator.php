@@ -131,7 +131,7 @@ class Paginator {
             foreach ($params as $k => $v) {
                 if (is_array($v)) {
                     foreach ($v as $key => $value) {
-                        $this->querystring .= $key . '=' . $value . '&';
+                        $this->querystring .= $k . '[]=' . $value . '&';
                     }
                 } else {
                     $this->querystring .= $k . '=' . $v . '&';
