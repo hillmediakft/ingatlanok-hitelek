@@ -100,12 +100,12 @@ class User extends AdminController {
 	            $user['first_name'] = $this->request->get_post('first_name');
 	            $user['last_name'] = $this->request->get_post('last_name');
 	            $user['email'] = $this->request->get_post('email');
-	            $user['phone'] = $this->request->get_post('phone');
+	            $user['phone'] = ( !empty($this->request->get_post('phone')) ) ? $this->request->get_post('phone') : null;
 
-	            $user['title_hu'] = $this->request->get_post('title_hu');
-	            $user['title_en'] = $this->request->get_post('title_en');
-	            $user['description_hu'] = $this->request->get_post('description_hu');
-	            $user['description_en'] = $this->request->get_post('description_en');	            
+	            $user['title_hu'] = ( !empty($this->request->get_post('title_hu')) ) ? $this->request->get_post('title_hu') : null;
+	            $user['title_en'] = ( !empty($this->request->get_post('title_en')) ) ? $this->request->get_post('title_en') : null;
+	            $user['description_hu'] = ( !empty($this->request->get_post('description_hu')) ) ? $this->request->get_post('description_hu') : null;
+	            $user['description_en'] = ( !empty($this->request->get_post('description_en')) ) ? $this->request->get_post('description_en') : null;	            
 
 	            if (empty($this->request->get_post('img_url'))) {
 	                $user['photo'] = Config::get('user.default_photo');
@@ -455,6 +455,19 @@ class User extends AdminController {
 	        foreach ($id_arr as $id) {
 	            //átalakítjuk a integer-ré a kapott adatot
 	            $id = (int) $id;
+
+	            // ha nem törölhető a felhasználó
+	            if (!$this->user_model->isDeletable($id)) {
+	                
+	            	$result = $this->user_model->selectUser($id);
+
+	                $this->response->json(array(
+	                    'status' => 'error',                  
+	                    'message' => 'A ' . $result['first_name'] . ' ' . $result['last_name'] . ' nevű felhasználó nem törölhető, mert ingatlan tartozik hozzá.',                  
+	                ));
+	            	//continue;
+	            }
+
 	            //lekérdezzük a törlendő user avatar képének a nevét, hogy törölhessük a szerverről
 	            $photo_name = $this->user_model->selectPicture($id);
 	            //felhasználó törlése 
