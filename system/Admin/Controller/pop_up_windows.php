@@ -1,122 +1,125 @@
 <?php
+namespace System\Admin\Controller;
 
-class Pop_up_windows extends Controller {
+use System\Core\AdminController;
+use System\Core\View;
+use System\Libs\Message;
+//use System\Libs\Session;
+//use System\Libs\Auth;
+//use System\Libs\Config;
+//use System\Libs\DI;
+//use System\Libs\Language as Lang;
 
-    function __construct() {
+class Pop_up_windows extends AdminController {
+
+    function __construct()
+    {
         parent::__construct();
         $this->loadModel('pop_up_windows_model');
-        Auth::handleLogin();
     }
 
-    public function index() {
-        /* 		Auth::handleLogin();
+    public function index()
+    {
+        //Auth::hasAccess('property.index', $this->request->get_httpreferer());
 
-          if (!Acl::create()->userHasAccess('home_menu')) {
-          exit('nincs hozzáférése');
-          }
-
-         */
-        // adatok bevitele a view objektumba
-        $this->view->title = 'Felugró ablakok oldal';
-        $this->view->description = 'Felugró ablakok oldal description';
-
-        $this->view->js_link[] = $this->make_link('js', ADMIN_ASSETS, 'plugins/bootbox/bootbox.min.js');
-        $this->view->js_link[] = $this->make_link('js', ADMIN_JS, 'pages/pop_up_windows.js');
-
-        $this->view->all_pop_up_windows = $this->pop_up_windows_model->all_pop_up_windows();
-
-        $this->view->render('pop_up_windows/tpl_pop_up_windows');
+        $data['title'] = 'Felugró ablakok oldal';
+        $data['description'] = 'Felugró ablakok oldal description';
+        $data['all_pop_up_windows'] = $this->pop_up_windows_model->selectAll();
+// var_dump($data);die;
+        $view = new View();
+        $view->add_links(array('bootbox', 'vframework'));
+        $view->add_link('js', ADMIN_JS . 'pages/pop_up_windows.js');
+        $view->render('pop_up_windows/tpl_pop_up_windows', $data);
     }
     
     /**
-     * 	Felugró ablakok módosítása
+     * 	Felugró ablakok hozzáadása
      *
      */
-    public function insert() {
+    public function insert()
+    {
+        if ($this->request->is_post()) {
 
-        if (isset($_POST['submit_new_pop_up_window'])) {
-            $result = $this->pop_up_windows_model->insert_pop_up_window();
+            $data['title'] = $this->request->get_post('title');
+            $data['description'] = $this->request->get_post('description');
+            $data['content'] = $this->request->get_post('content', 'strip_danger_tags');
+            $data['status'] = $this->request->get_post('status');
+
+            $result = $this->pop_up_windows_model->insert($data);
            
-            if ($result) {
-                $_SESSION["feedback_positive"][] = 'A felugró ablak sikeresen létrehozva!';
-                Util::redirect('pop_up_windows');
-            }
-            else {
-                $_SESSION["feedback_negative"][] = 'A felugró ablak létrehozása nem sikerült!';
-                Util::redirect('pop_up_windows/insert'); 
+            if ($result !== false) {
+                Message::set('success', 'A felugró ablak sikeresen létrehozva!');
+                $this->response->redirect('admin/pop_up_windows');
+            } else {
+                Message::set('error', 'unknown_error');
+                $this->response->redirect('admin/pop_up_windows/insert'); 
             }
         }
 
-        // adatok bevitele a view objektumba
-        $this->view->title = 'Felugró ablak létrehozása';
-        $this->view->description = 'Felugró ablak létrehozása description';
-        $this->view->js_link[] = $this->make_link('js', ADMIN_ASSETS, 'plugins/ckeditor/ckeditor.js');
-        $this->view->js_link[] = $this->make_link('js', ADMIN_ASSETS, 'plugins/bootbox/bootbox.min.js');
-        $this->view->js_link[] = $this->make_link('js', ADMIN_JS, 'pages/new_pop_up_window.js');
 
-        $this->view->render('pop_up_windows/tpl_insert_pop_up_window');
+        $data['title'] = 'Felugró ablak létrehozása';
+        $data['description'] = 'Felugró ablak létrehozása description';
+
+        $view = new View();
+        $view->add_links(array('bootbox', 'ckeditor', 'vframework'));
+        $view->add_link('js', ADMIN_JS . 'pages/pop_up_windows.js');
+        $view->render('pop_up_windows/tpl_insert_pop_up_window', $data);
     }    
 
     /**
      * 	Felugró ablakok módosítása
      *
      */
-    public function edit() {
-        if (!isset(Active::$params['id'])) {
-            throw new Exception('Nincs "id" nevű eleme az Active::$params tombnek! (lekerdezes nem hajthato vegre id alapjan)');
-            return false;
-        }
-        $id = (int) Active::$params['id'];
-        if (isset($_POST['submit_update_pop_up_window'])) {
+    public function update($id)
+    {
+        $id = (int)$id;
 
+        if ($this->request->is_post()) {
 
-            $result = $this->pop_up_windows_model->update_pop_up_window($id);
-            if ($result) {
-                $_SESSION["feedback_positive"][] = 'A felugró ablak sikeresen módosítva!';
-                Util::redirect('pop_up_windows');
+            $data['title'] = $this->request->get_post('title');
+            $data['description'] = $this->request->get_post('description');
+            $data['content'] = $this->request->get_post('content', 'strip_danger_tags');
+            $data['status'] = $this->request->get_post('status');
+
+            $result = $this->pop_up_windows_model->update($id, $data);
+            if ($result !== false) {
+                Message::set('success', 'A felugró ablak sikeresen módosítva!');
+                $this->response->redirect('admin/pop_up_windows');
             }
             else {
-                $_SESSION["feedback_negative"][] = 'A felugró ablak módosítása nem sikerült!';
-                Util::redirect('pop_up_windows/edit/' . $id); 
+                Message::set('error', 'A felugró ablak módosítása nem sikerült!');
+                $this->response->redirect('admin/pop_up_windows/update/' . $id); 
             }
         }
 
         // adatok bevitele a view objektumba
-        $this->view->title = 'Felugró ablakok szerkesztése';
-        $this->view->description = 'Felugró ablakok szerkesztése description';
-        $this->view->js_link[] = $this->make_link('js', ADMIN_ASSETS, 'plugins/ckeditor/ckeditor.js');
-        $this->view->js_link[] = $this->make_link('js', ADMIN_ASSETS, 'plugins/bootbox/bootbox.min.js');
-        $this->view->js_link[] = $this->make_link('js', ADMIN_JS, 'pages/edit_pop_up_window.js');
-
+        $data['title'] = 'Felugró ablakok szerkesztése';
+        $data['description'] = 'Felugró ablakok szerkesztése description';
         // visszadja a szerkesztendő oldal adatait egy tömbben (page_id, page_title ... stb.)
-        $this->view->data_arr = $this->pop_up_windows_model->pop_up_window_data_query($id);
+        $data['data_arr'] = $this->pop_up_windows_model->selectOne($id);
 
-        $this->view->render('pop_up_windows/tpl_edit_pop_up_window');
+        $view = new View();
+        $view->add_links(array('bootbox', 'ckeditor', 'vframework'));
+        $view->add_link('js', ADMIN_JS . 'pages/pop_up_windows.js');
+        $view->render('pop_up_windows/tpl_edit_pop_up_window', $data);
     }
 
     /**
      * 	pop-up window törlése
      */
-    public function delete() {
-        
-        if (!isset(Active::$params['id'])) {
-            throw new Exception('Nincs "id" nevű eleme a $params tombnek! (a lekerdezes nem hajthato vegre)');
-            return false;
-        }
+    public function delete($id)
+    {
+        $id = (int)$id;
+        $result = $this->pop_up_windows_model->delete($id);
 
-        $id = (int) Active::$params['id'];
-        $result = $this->pop_up_windows_model->delete_pop_up_window($id);
-
-        // visszatérés üzenetekkel
-        if ($result) {
-            $_SESSION["feedback_positive"][] = 'A felugró ablak sikeresen törölve!';
+        if ($result !== false) {
+            Message::set('success', 'A felugró ablak sikeresen törölve!');
         } else {
-            $_SESSION["feedback_negative"][] = 'A felugró ablak törlése nem sikerült!';
+            Message::set('success', 'unknown_error');
         }
 
-        Util::redirect('pop_up_windows');
+        $this->response->redirect('admin/pop_up_windows');
     }
 
 }
-
 ?>
