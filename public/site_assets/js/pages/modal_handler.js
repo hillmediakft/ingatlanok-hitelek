@@ -360,6 +360,16 @@ var modalHandler = function () {
 		
 	};
  
+
+    //pop up modal megjelenítő
+    var initPopUp = function(){
+        if (document.cookie.indexOf("pop-up") >= 0) {
+            return;
+        } else {
+            document.cookie = "pop-up=true";
+            $('#pop-up-window').modal('show');
+        }
+    }
 	
 	return {
 
@@ -367,6 +377,7 @@ var modalHandler = function () {
 		init: function () {
 			handle_login_modal();
 			handle_register_modal();
+            initPopUp();
 		}
  
 	};
