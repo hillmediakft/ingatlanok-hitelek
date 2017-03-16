@@ -313,6 +313,14 @@ class Application {
             $router->match('GET|POST', '/landingpage/update/:id', 'LandingPage@update');
 
                 $router->post('/user/deleteimage', 'User@deleteImage');
+                
+
+                $router->get('/pop_up_windows', 'Pop_up_windows@index');
+                $router->match('GET|POST', '/pop_up_windows/insert', 'Pop_up_windows@insert');
+                $router->match('GET|POST', '/pop_up_windows/update/:id', 'Pop_up_windows@update');
+                $router->get('/pop_up_windows/delete/:id', 'Pop_up_windows@delete');
+
+
 
                 // error	
                 $router->set404('error@index');
