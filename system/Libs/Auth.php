@@ -549,7 +549,7 @@ class Auth {
     private function _isActive($user_active)
     {
         if ($user_active != 1) {
-            $this->setError('Az ön belépési engedélye fel van függesztve!');
+            //$this->setError('Az ön belépési engedélye fel van függesztve!');
             return false;
         }
         return true;
