@@ -32,6 +32,19 @@ class SiteController extends Controller {
         // settings betöltése és hozzárendelése a controllereken belül elérhető a global_data változóhoz
         $this->loadModel('settings_model');
         $this->global_data['settings'] = $this->settings_model->get_settings();
+
+
+        $this->loadModel('pop_up_window_model');
+        $pop_up_window = $this->pop_up_window_model->get_pop_up_window();
+        if(!empty($pop_up_window)) {
+        $this->global_data['pop_up_window_title'] = $pop_up_window['title'];
+        $this->global_data['pop_up_window_content'] = $pop_up_window['content'];
+        $this->global_data['pop_up'] = true;
+        } else {
+            $this->global_data['pop_up'] = false;
+        }        
+        
+        
     }
 }
 ?>
