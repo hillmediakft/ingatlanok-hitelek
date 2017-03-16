@@ -301,6 +301,22 @@ class User_model extends AdminModel {
         return $this->query->update(array('password_hash' => $password_hash));
     }    
 
+    /**
+     * Lekérdezi, hogy egy bizonyos userhez, van-e ingatlan bejegyezve
+     */
+    public function isDeletable($id)
+    {
+        $this->query->set_table('ingatlanok');
+        $this->query->set_columns('id');
+        $this->query->set_where('ref_id', '=', $id);
+        $result = $this->query->select();
+
+        if (empty($result)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 } // end class
 ?>
