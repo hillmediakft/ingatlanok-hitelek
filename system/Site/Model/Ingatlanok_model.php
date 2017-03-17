@@ -870,6 +870,10 @@ class Ingatlanok_model extends SiteModel {
         if (!is_null($id)) {
             $this->query->set_where('id', '=', $id);
         }
+        // kivéve a fejlesztő usereket
+        $this->query->set_where('id', '!=', 1);
+        $this->query->set_where('id', '!=', 2);
+
         $this->query->set_where('active', '=', 1);
         // csak admin felhasználók!!
         $this->query->set_where('provider_type', '=', 'admin');
