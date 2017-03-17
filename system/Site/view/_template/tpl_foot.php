@@ -79,8 +79,8 @@ use System\Libs\Language as Lang;
                             $url_path = (LANG != 'hu') ? LANG . '/' : '';
                             $url_path .= Config::get('url.ingatlanok.index.' . LANG);
                         ?>
-                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest <?php echo strtolower(Lang::get('jell_elado')); ?><?php echo (LANG == 'hu') ? ' lakás' : ' apartman'; ?>  </a></li>
-                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=2&varos=88&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest <?php echo strtolower(Lang::get('jell_kiado')); ?><?php echo (LANG == 'hu') ? ' lakás' : ' apartman'; ?>  </a></li>
+                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest <?php echo mb_strtolower(Lang::get('jell_elado'), 'UTF-8'); ?><?php echo (LANG == 'hu') ? ' lakás' : ' apartman'; ?>  </a></li>
+                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=2&varos=88&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest <?php echo mb_strtolower(Lang::get('jell_kiado'), 'UTF-8'); ?><?php echo (LANG == 'hu') ? ' lakás' : ' apartman'; ?>  </a></li>
                         <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kerulet%5B%5D=5&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest 5. <?php echo Lang::get('adatlap_kerulet'); ?></a></li>
                         <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kerulet%5B%5D=6&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest 6. <?php echo Lang::get('adatlap_kerulet'); ?></a></li>
                         <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kerulet%5B%5D=3&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest 3. <?php echo Lang::get('adatlap_kerulet'); ?></a></li>
