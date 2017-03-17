@@ -1,7 +1,8 @@
-<?php 
+<?php
+use System\Libs\Config; 
 use System\Libs\Language as Lang;
 ?>
-<form class="filter-form" action="ingatlanok">
+<form class="filter-form" action="<?php echo (LANG != 'hu') ? LANG . '/' . Config::get('url.ingatlanok.index.' . LANG) : 'ingatlanok'; ?>">
 	<div class="row">
 		<div class="col-sm-12">
 			

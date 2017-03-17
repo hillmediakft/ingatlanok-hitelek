@@ -1,4 +1,5 @@
 <?php
+use System\Libs\Config;
 use System\Libs\Language as Lang;
 ?>
 <div class="widget main-filter-widget gray-bg">
@@ -6,7 +7,7 @@ use System\Libs\Language as Lang;
         <div class="filter-label-block">
             <span class="filter-label"></span>
         </div>
-        <form action="ingatlanok" class="filter-form">
+        <form action="<?php echo (LANG != 'hu') ? LANG . '/' . Config::get('url.ingatlanok.index.' . LANG) : 'ingatlanok'; ?>" class="filter-form">
             
             <!-- ELADÓ/KIADÓ -->
             <div class="row">
