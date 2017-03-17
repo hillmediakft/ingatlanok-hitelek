@@ -1,6 +1,7 @@
 <?php
-
-use System\Libs\Language as Lang; ?>
+use System\Libs\Config;
+use System\Libs\Language as Lang;
+?>
 <div class="scroll-container">
     <div class="container">
         <a href="#" class="scroll-top-btn"><i class="fa fa-angle-double-up"></i></a>
@@ -74,10 +75,18 @@ use System\Libs\Language as Lang; ?>
                 <div class="widget latest-tweets">
                     <span class="widget-title"><?php echo Lang::get('footer_ingatlanok'); ?></span>
                     <ul class="property-listing">
-                        <li><a class="author" href="#">Budapest 3. kerület</a></li>
-                        <li><a class="author" href="#">Budapest 10. kerület</a></li>
-                        <li><a class="author" href="#">Budapest 5. kerület</a></li>
-                        <li><a class="author" href="#">Budapest eladó lakás</a></li>
+                        <?php
+                            $url_path = (LANG != 'hu') ? LANG . '/' : '';
+                            $url_path .= Config::get('url.ingatlanok.index.' . LANG);
+                        ?>
+                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest <?php echo strtolower(Lang::get('jell_elado')); ?><?php echo (LANG == 'hu') ? ' lakás' : ' apartman'; ?>  </a></li>
+                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=2&varos=88&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest <?php echo strtolower(Lang::get('jell_kiado')); ?><?php echo (LANG == 'hu') ? ' lakás' : ' apartman'; ?>  </a></li>
+                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kerulet%5B%5D=5&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest 5. <?php echo Lang::get('adatlap_kerulet'); ?></a></li>
+                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kerulet%5B%5D=6&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest 6. <?php echo Lang::get('adatlap_kerulet'); ?></a></li>
+                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kerulet%5B%5D=3&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest 3. <?php echo Lang::get('adatlap_kerulet'); ?></a></li>
+                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kerulet%5B%5D=9&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest 9. <?php echo Lang::get('adatlap_kerulet'); ?></a></li>
+                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kerulet%5B%5D=10&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest 10. <?php echo Lang::get('adatlap_kerulet'); ?></a></li>
+                        <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kerulet%5B%5D=21&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest 21. <?php echo Lang::get('adatlap_kerulet'); ?></a></li>
                     </ul>
                 </div>
             </div>
