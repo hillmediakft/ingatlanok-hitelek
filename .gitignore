@@ -43,6 +43,7 @@ Temporary Items
 # Sajat fileok / mappak
 *.log
 *.tmp
+*.lock
 composer.lock
 uploads/
 _TEMP/
