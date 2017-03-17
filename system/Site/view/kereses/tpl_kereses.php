@@ -28,7 +28,7 @@ use System\Libs\Language as Lang;
                                     <!-- FELSŐ SOR -->
                                     <div class="row">
                                         <fieldset>
-                                            <legend>Alap adatok / elhelyezkedés</legend>
+                                            <legend><?php echo Lang::get('kereso_reszletes_alapadatok'); ?></legend>
                                             <!-- ELADÓ/KIADÓ -->
                                             <div class="col-sm-2">
                                                 <span class="item-label"><?php echo Lang::get('kereso_elado'); ?>/<?php echo Lang::get('kereso_kiado'); ?></span>
@@ -99,7 +99,7 @@ use System\Libs\Language as Lang;
                                     <!-- ALSÓ SOR -->
                                     <div class="row">
                                         <fieldset>
-                                            <legend>Ár / alapterület / szobaszám</legend>
+                                            <legend><?php echo Lang::get('kereso_reszletes_ar_alapt_szoba'); ?></legend>
                                             
                                             <!-- ÁR -->
                                             <div class="col-sm-3">
@@ -150,8 +150,7 @@ use System\Libs\Language as Lang;
                                     <!-- JELLEMZŐK SOR -->
                                     <div class="row">
                                         <fieldset>
-                                            <legend>Jellemzők</legend>
-
+                                            <legend><?php echo Lang::get('kereso_reszletes_jellemzok'); ?></legend>
 
                                             <!-- FŰTÉS -->
                                             <div class="col-sm-3">
@@ -253,7 +252,7 @@ use System\Libs\Language as Lang;
 
                                     <div class="row">
                                         <fieldset>
-                                            <legend>Extrák</legend>
+                                            <legend><?php echo Lang::get('kereso_reszletes_extrak'); ?></legend>
                                                 
                                                 <div class="col-sm-2">
                                                     <ul class="extrak-list">
@@ -272,7 +271,7 @@ use System\Libs\Language as Lang;
 
                                     <div class="row">
                                         <fieldset>
-                                            <legend>Keresés egyéb</legend>
+                                            <legend><?php echo Lang::get('kereso_reszletes_egyeb'); ?></legend>
                                                 
                                                 <!-- REFERENCIA SZÁM -->
                                                 <div class="col-sm-3">
@@ -325,7 +324,7 @@ use System\Libs\Language as Lang;
                                            <!-- <a href="#" class="visible-xs find-now-btn"><?php //echo Lang::get('kereso_kereses');       ?></a> -->
                                         </div>
                                         <div class="col-sm-2">
-                                            <a id="reset_form" href="javascript:void(0);" class="simple-btn sm-button filled red" style="margin-top: 33px; width: 100%;">Keresés törlése</a>
+                                            <a id="reset_form" href="javascript:void(0);" class="simple-btn sm-button filled red" style="margin-top: 33px; width: 100%;"><?php echo Lang::get('kereso_reszletes_kereses_torles'); ?></a>
                                         </div>
                                     </div>
 
