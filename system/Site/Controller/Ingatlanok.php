@@ -168,6 +168,10 @@ class Ingatlanok extends SiteController {
 // referens adatai
         $data['agent'] = $this->ingatlanok_model->get_agent($id);
 
+        if ($data['agent'] === false) {
+            $this->response->redirect('error');
+        }
+
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'html_helper'));
         $view->add_link('js', SITE_JS . 'pages/handle_search.js');
