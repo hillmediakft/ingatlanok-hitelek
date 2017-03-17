@@ -4,7 +4,8 @@
     "require": {
 		"phpmailer/phpmailer": "~5.2",
         "pimple/pimple": "~3.0",
-        "rev42/tfpdf": "^1.25"
+        "rev42/tfpdf": "^1.25",
+        "setasign/fpdf": "1.8.1"
 	},
 		"autoload": {
         "psr-4": {

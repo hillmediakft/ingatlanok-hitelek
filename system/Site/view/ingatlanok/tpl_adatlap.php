@@ -544,7 +544,9 @@ use System\Libs\Language as Lang;
                     <div class="row">
                         <div class="col-sm-12">
                             <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-share"></i> <?php echo Lang::get('adatlap_megosztas_gomb'); ?></a>
-                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-print"></i> <?php echo Lang::get('adatlap_nyomtatas_gomb'); ?></a>
+                            <form id="adatlap_nyomtatas_form" method="POST" action="adatlap/<?php echo $ingatlan['id']; ?>">
+                            <button id="adatlap_nyomtatas" type="submit" class="send-btn"><i class="fa fa-print"></i> <?php echo Lang::get('adatlap_nyomtatas_gomb'); ?></button>
+                            </form>
                         </div>
                     </div>
 

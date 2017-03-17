@@ -92,6 +92,7 @@ class Application {
             $router->get('/berbeadoknak', 'Berbeadoknak@index');
             // keresés elmentése - AJAX
             $router->post('/kereses/savesearch', 'Kereses@saveSearch');
+            $router->post('/adatlap/:id', 'Adatlap@index');
 
             $router->set404('error@index');
 
