@@ -131,12 +131,12 @@ include($this->path('tpl_forgottenpw_modal'));
     </div>
 </header>
 
-<div class="nav-block">
+<div class="nav-block hidden-xs">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <nav class="main-navigation">
-                    <ul class="navigation-listing hidden-xs">
+                    <ul class="navigation-listing" id="mobile_menu">
                         <li class="navigation-item">
                             <a href="<?php echo $this->request->get_uri('site_url');?>"><i class="fa fa-home"></i></a>
                             <div class="overlay"></div>
@@ -147,7 +147,7 @@ include($this->path('tpl_forgottenpw_modal'));
                         </li>
                         <li class="navigation-item">
                             <a href="javascript:void(0)"><?php echo Lang::get('menu_magunkrol'); ?></a>
-                            <div class="overlay"></div>
+                            <div class="overlay hidden-xs"></div>
                             <ul class="subnav">
                                 <li class="subnav-item">
                                     <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.rolunk.index.' . LANG);?>"><?php echo Lang::get('menu_rolunk'); ?></a>
@@ -178,19 +178,17 @@ include($this->path('tpl_forgottenpw_modal'));
                         </li> 
 
                     </ul>
-                    <button class="mobile_menu_btn toggle-nav visible-xs">
+          <!--          <button class="mobile_menu_btn toggle-nav visible-xs">
                         <span class="sandwich">
                             <span class="sw-topper"></span>
                             <span class="sw-bottom"></span>
                             <span class="sw-footer"></span>
                         </span>
-                    </button>
+                    </button> -->
                 </nav>
                 <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.kereses.index.' . LANG);?>" class="submit-nav hidden-xs"><i class="fa fa-search"></i> <?php echo Lang::get('menu_kereses'); ?></a>
             </div>
         </div>
     </div>
 </div>
-<div class="mobile-block">
 
-</div>

@@ -21,6 +21,7 @@ use System\Libs\Auth; ?>
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/jquery-ui-1.11.4/jquery-ui.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/jcarousel/css/jquery.jcarousel.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/toastr/toastr.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>vendors/slicknav/dist/slicknav.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->url_helper->autoversion(SITE_CSS . 'main-red.css'); ?>" />
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->url_helper->autoversion(SITE_CSS . 'custom.css'); ?>" />
         <link rel="shortcut icon" href="<?php echo SITE_IMAGE; ?>favicon.ico" />
@@ -40,9 +41,7 @@ use System\Libs\Auth; ?>
     <!-- END HEAD -->
 
     <body>
-        <!--   	<div class="loader">
-                    <div class="loader_inner"></div>
-            </div>  -->
+
         <?php include($this->path('tpl_head')); ?>
         <?php include($this->path('content')); ?>
         <?php include($this->path('tpl_foot')); ?>
@@ -51,7 +50,7 @@ use System\Libs\Auth; ?>
         <!-- /. Footer Start ./-->    
 
         <script type="text/javascript" src="<?php echo SITE_JS; ?>jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo SITE_JS; ?>main.js"></script>
+
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/languageswitcher/languageswitcher.js"></script>
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jcarousel/js/jquery.jcarousel.min.js"></script>
@@ -71,6 +70,10 @@ use System\Libs\Auth; ?>
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery.blockui.min.js"></script>
         <!-- TOASTR -->
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/toastr/toastr.min.js"></script>
+        <!-- MMenu -->
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/slicknav/dist/jquery.slicknav.js"></script>
+        <!-- Main.js -->        
+        <script type="text/javascript" src="<?php echo SITE_JS; ?>main.js"></script>
         <!-- COMMON (tostr init, kedvencek)-->
         <script type="text/javascript" src="<?php echo SITE_JS; ?>pages/common.js"></script>
 

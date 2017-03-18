@@ -498,3 +498,18 @@ input.has-error {
     color: #e42b1e;
     font-family: "FontAwesome";
 }
+
+.slicknav_menu {
+    display:none;
+}
+
+@media screen and (max-width: 40em) {
+    /* #menu is the original menu */
+    #menu_mobile {
+        display:none;
+    }
+
+    .slicknav_menu {
+        display:block;
+    }
+}

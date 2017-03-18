@@ -172,8 +172,7 @@ var initResponsiveNav = function () {
         }
     });
 };
-initResponsiveNav();
-
+// initResponsiveNav();
 
 //initRange
 function initRange() {

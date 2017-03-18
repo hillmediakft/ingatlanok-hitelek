@@ -8,7 +8,7 @@ use System\Libs\Language as Lang;
     <div class="container">
 
         <div class="banner-content">
-            <a href="#search-form-mobile" class="simple-btn sm-button filled red" data-toggle="collapse"><i class="fa fa-search"></i> Keresés</a>
+            <a href="#search-form-mobile" class="simple-btn sm-button filled red" data-toggle="collapse">Keresés <i class="fa fa-arrow-down"></i></a>
 
             <div id="search-form-mobile" class="collapse">
 

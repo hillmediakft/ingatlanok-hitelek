@@ -1,5 +1,5 @@
 var Common = function () {
- 
+
     var initToastr = function () {
         toastr.options = {
             "closeButton": true,
@@ -20,8 +20,8 @@ var Common = function () {
     var kedvencek = function () {
         $('#kedvencek').click(function () {
             var lang = $('html').attr('lang');
-            
-            if(lang == 'hu') {
+
+            if (lang == 'hu') {
                 lang = '';
             } else {
                 lang = lang + '/';
@@ -41,17 +41,26 @@ var Common = function () {
         })
     };
 
-	return {
-		//main method to initiate page
-		init: function () {           
-			// call local function
-			initToastr();
-			kedvencek();
-		},
- 
-	};
+    var initMobileMenu = function () {
+        console.log('init mobile menu');
+        $("#mobile_menu").slicknav({
+            'appendTo': '.header',
+            'brand': '<a href="/"><img src="public/site_assets/images/logo.png" alt=""></a>'
+        });
+    };
+
+    return {
+        //main method to initiate page
+        init: function () {
+            // call local function
+            initToastr();
+            kedvencek();
+            initMobileMenu();
+        },
+
+    };
 }();
 
-$(document).ready(function() {
-	Common.init();
+$(document).ready(function () {
+    Common.init();
 });

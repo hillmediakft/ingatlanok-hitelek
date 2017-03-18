@@ -93,7 +93,7 @@ body, html {
 /*______________________HEADER_______________________*/
 /* line 2, scss/_header.scss */
 .extra-header {
-  border-bottom: 1px solid #e7e4e4;
+  border-bottom: none;
   background: #555;
 }
 /* line 4, scss/_header.scss */
@@ -20796,7 +20796,7 @@ body header.header .contact .descr .box-title {
     display: none;
 }
 body header.header {
-    padding-top: 10px;
+    padding-top: 0px;
 }
 body header.header .logo {
     margin-bottom: 0px;
@@ -20815,6 +20815,10 @@ body header.header .logo {
 }  
 .main-filter .filter-form .ui-front {
     margin-bottom: 10px;
+}
+
+header.header .container {
+    display: none;
 }
 }
 @media only screen and (max-width: 370px) {
@@ -20846,6 +20850,94 @@ body header.header .logo {
   .calendar .calendar-month .month-entry {
     border-spacing: 0px;
   }
+   
+body .extra-header .left-part .extra-item {
+    display:  none;
+}
+
+.extra-header .extra-item {
+    height: 30px;
+    font-size: 11px;
+}
+.extra-header .extra-item.event {
+    padding: 10px 10px;
+}
+
+header.header .contact .descr .box-text {
+    font-size: 12px;
+}
+.extra-header .country-select span {
+    display: none;
+}
+.extra-item.login span.kedvencek-szoveg {
+    display: none;
+}
+.extra-header .extra-item.login {
+    padding: 10px 5px;
+}
+body header.header .contact .descr .box-title {
+    display: none;
+}
+body header.header {
+    padding-top: 0px;
+}
+body header.header .logo {
+    margin-bottom: 0px;
+}
+
+.home-banner .banner-content .main-filter {
+    top: 10px;
+}
+.main-filter .filter-form .item-label {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+}
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 100%!important;
+}  
+.main-filter .filter-form .ui-front {
+    margin-bottom: 10px;
+}
+.mobile-block .mobile-nav > .navigation-item {
+    padding: 10px 0;
+    display: block;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+header.header .container {
+    display: none;
+}
+}
+@media only screen and (max-width: 370px) {
+  /* line 3022, scss/_responsive.scss */
+  body .single-agent-banner .single-agent-banner-entry {
+    width: 300px;
+    height: 140px;
+    padding-top: 1px;
+  }
+  /* line 3026, scss/_responsive.scss */
+  body .single-agent-banner .single-agent-banner-entry .top .big {
+    font-size: 50px;
+    line-height: 50px;
+    margin-bottom: -5px;
+  }
+  /* line 3031, scss/_responsive.scss */
+  body .single-agent-banner .single-agent-banner-entry .top .small {
+    font-size: 20px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+  }
+  /* line 3036, scss/_responsive.scss */
+  body .single-agent-banner .single-agent-banner-entry .bottom .text {
+    font-size: 11px;
+    max-width: 250px;
+  }
+
+  /* line 3041, scss/_responsive.scss */
+  .calendar .calendar-month .month-entry {
+    border-spacing: 0px;
+  } 
 }
 @media only screen and (max-width: 280px) {
   /* line 3050, scss/_responsive.scss */
