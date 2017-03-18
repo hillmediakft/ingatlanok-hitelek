@@ -8366,16 +8366,20 @@ a.simple-btn.outlined.red:hover {
   padding-left: 37px;
   padding-right: 37px;
 }
-/* line 768, scss/_shortcodes.scss */
-button #adatlap_nyomtatas .send-btn {
+#adatlap_nyomtatas.send-btn {
   display: inline-block;
   width: auto;
   color: #fff;
   background-color: #c44a35;
   text-shadow: none;
-  padding-left: 37px;
-  padding-right: 37px;
+  padding: 9px 23px;
+  border: none;
+  margin-bottom: 15px;
 }
+#adatlap_nyomtatas.send-btn:hover {
+background-color: #353f45;
+}
+
 /* line 778, scss/_shortcodes.scss */
 .contacts-block .contacts-listing,
 .message-block .contacts-listing {

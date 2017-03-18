@@ -146,6 +146,12 @@ class Adatlap extends SiteController {
         }
 
         $extrak = rtrim($extrak, ", ");
+        
+        if (isset($ingatlan['ar_elado'])) {
+            $price = number_format($ingatlan['ar_elado']) . ' Ft';
+        } elseif (isset($ingatlan['ar_kiado'])) {
+            $price = number_format($ingatlan['ar_kiado']) . ' Ft / ';
+        }
 
 
         //		define('FPDF_FONTPATH','/home/www/font');
@@ -154,20 +160,30 @@ class Adatlap extends SiteController {
         $pdf = new \FPDF();
   //      $pdf->AliasNbPages();
         $pdf->AddPage();
-        $pdf->AddFont('courier', '');
-        $pdf->AddFont('courierb', '');
-        $pdf->SetFont('courierb', '', 12);
+        $pdf->AddFont('helvetica', '');
+        $pdf->AddFont('helveticab', '');
+        $pdf->SetFont('helveticab', '', 12);
+        
+         $pdf->Image('public/site_assets/images/logo.png', 10, 10, 25);
         $pdf->SetXY(50, 20);
         $pdf->SetDrawColor(200, 200, 200);
+        
+        /* ******* képek megjelenítése ******** */   
+        $i = 40;
+        foreach ($photos as $value) {
+
+            $pdf->Image(Config::get('ingatlan_photo.upload_path') . '/' . $value, 120, $i, 80);
+            $i = $i + 65;
+        }
 
         // Cell(szélesség, magasság, "szöveg", border (0-L-T-R-B), új pozíció 1- új sor, align, háttérszín, link  )
-        $pdf->Cell(120, 10, 'Ingatlan nyilvántartási szám: ' . $ingatlan['id'], 1, 0, 'C', 0);
+        $pdf->Cell(120, 10, $this->utf8_to_latin2_hun('Ingatlan nyilvántartási szám: ' . $ingatlan['ref_num']), 1, 0, 'C', 0);
 
 
 
         //Set x and y position for the main text, reduce font size and write content
         $pdf->SetXY(10, 35);
-        $pdf->SetFont('courier', '', 10);
+        $pdf->SetFont('helvetica', '', 10);
 
 
 
@@ -175,24 +191,28 @@ class Adatlap extends SiteController {
         $pdf->Cell(0, 1, '', 0, 0, 'L', 1);
         $pdf->Ln(5);
 
-        $pdf->SetFont('courierb', '', 13);
+        $pdf->SetFont('helveticab', '', 11);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun('Ref. szám: ' . $ingatlan['ref_num']), 0, 1, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($elado) . ' | ' . $this->utf8_to_latin2_hun($ingatlan['kat_nev_' . LANG]) . ' | ' . $price, 0, 1, 'L', 0);
+        $pdf->Ln(2);
+        $pdf->SetFont('helveticab', '', 13);
         $pdf->MultiCell(0, 8, $this->utf8_to_latin2_hun($ingatlan['ingatlan_nev_' . LANG]), 0, 'L', 0);
 
         $pdf->Ln(5);
-        $pdf->SetFont('courier', '', 9);
+        $pdf->SetFont('helvetica', '', 9);
         $pdf->MultiCell(90, 6, $this->utf8_to_latin2_hun($ingatlan['leiras_' . LANG]), 0, 'J', 0);
 
         $pdf->Ln(5);
 
-        $pdf->SetFont('courier', 'B', 9);
+        $pdf->SetFont('helvetica', 'B', 9);
         $pdf->Cell(0, 6, utf8_decode('Adatok:'), 0, 1, 'L', 0);
-        $pdf->SetFont('courier', '', 9);
+        $pdf->SetFont('helvetica', '', 9);
         $pdf->Cell(30, 5, utf8_decode('Elhelyezkedés:'), 0, 0, 'L', 0);
 
         if (isset($ingatlan['kerulet']) && ($ingatlan['utca_megjelenites'] == 1)) {
-            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name']) . ' ' . $kerulet . '. kerület ' . $this->utf8_to_latin2_hun($utca)), 0, 1, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name']) . ' ' . $kerulet . '. ' . $this->utf8_to_latin2_hun('kerület') . ' ' . $this->utf8_to_latin2_hun($utca)), 0, 1, 'L', 0);
         } elseif (isset($ingatlan['kerulet']) && $ingatlan['utca_megjelenites'] == null) {
-            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name'])) . ' ' . $kerulet . '. kerület ', 0, 1, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name'])) . ' ' . $kerulet . '. ' . $this->utf8_to_latin2_hun('kerület'), 0, 1, 'L', 0);
         } elseif (!isset($ingatlan['kerulet']) && ($ingatlan['utca_megjelenites'] == 1)) {
             $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name']) . ', ' . $this->utf8_to_latin2_hun($utca)), 0, 1, 'L', 0);
         } elseif (!isset($ingatlan['kerulet']) && !isset($ingatlan['utca_megjelenites'])) {
@@ -235,9 +255,9 @@ class Adatlap extends SiteController {
         $pdf->Ln(5);
 
 
-        $pdf->SetFont('courierb', '', 9);
+        $pdf->SetFont('helveticab', '', 9);
         $pdf->Cell(0, 5, $this->utf8_to_latin2_hun('Jellemzők:'), 0, 1, 'L', 0);
-        $pdf->SetFont('courier', '', 9);
+        $pdf->SetFont('helvetica', '', 9);
 
         /*         * ************ JELLEMZŐK ************** */
         $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Fűtés:'), 0, 0, 'L', 0);
@@ -265,13 +285,13 @@ class Adatlap extends SiteController {
         $pdf->Ln(5);
 
 
-        $pdf->SetFont('courierb', '', 9);
+        $pdf->SetFont('helveticab', '', 9);
 
 
 
 
         $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('Extrák:'), 0, 'L', 0);
-        $pdf->SetFont('courier', '', 9);
+        $pdf->SetFont('helvetica', '', 9);
         $pdf->MultiCell(100, 5, $this->utf8_to_latin2_hun($extrak), 0, 'L', 0);
 
 
@@ -282,98 +302,16 @@ class Adatlap extends SiteController {
         $pdf->Ln(5);
 
 
-        $pdf->SetFont('courierb', '', 9);
+        $pdf->SetFont('helveticab', '', 9);
         $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('További információért keresse ingatlan referensünket:'), 0, 'L', 0);
-        $pdf->SetFont('courier', '', 9);
+        $pdf->SetFont('helvetica', '', 9);
         $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun($agent['first_name']) . ' ' . $this->utf8_to_latin2_hun($agent['last_name']) . $this->utf8_to_latin2_hun(' | Tel: ') . $this->utf8_to_latin2_hun($agent['phone']), 0, 'L', 0);
         $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('E-mail: ' . $this->utf8_to_latin2_hun($agent['email'])), 0, 'L', 0);
-
-
-
-
-        //		$pdf->Image(UPLOADS_PATH . $ingatlan['kezdo_kep'],120,55,80);
-
-
-        $i = 55;
-
-        foreach ($photos as $value) {
-
-            $pdf->Image(Config::get('ingatlan_photo.upload_path') . '/' . $value, 120, $i, 80);
-            $i = $i + 65;
-        }
 
 
         $pdf->Output('adatlap_' . $id . '.pdf', 'D');
         exit();
     }
-
-
-
-    /**
-     * Ingatlan adatlap
-     * @param integer $id
-     */
-    public function adatlap($id)
-    {
-        $id = (int)$id;
-        $page_data = $this->ingatlanok_model->getPageData('ingatlanok');
-        
-        $data = $this->addGlobalData();
-        $data['title'] = $page_data['metatitle_' . $this->lang];
-        $data['description'] = $page_data['metadescription_' . $this->lang];
-        $data['keywords'] = $page_data['metakeywords_' . $this->lang];
-
-        // ingatlani adatainak lekérdezése
-        $data['ingatlan'] = $this->ingatlanok_model->getProperty($id);
-        $data['ingatlan']['ref_num'] = 'S-' . $data['ingatlan']['ref_num'];
-        
-        // ingatlanhoz tartozó képek
-        $data['pictures'] = json_decode($data['ingatlan']['kepek']);
-        // ügynök adatai
-        $data['agent'] = $this->ingatlanok_model->get_agent($data['ingatlan']['ref_id']);
-        
-        // Árváltozás értesítés gomb állapotának beállításához kell (disable/enable)
-        if (Auth::isUserLoggedIn()) {
-            $user_id = Auth::getUser('id');
-            
-            $this->loadModel('arvaltozas_model');
-
-            $data['ertesites_arvaltozasrol'] = $this->arvaltozas_model->selectPriceChange((int)$user_id, (int)$data['ingatlan']['id']);
-        } else {
-            $data['ertesites_arvaltozasrol'] = false;
-        }
-
-
-        // csak a valóban létező extrák db nevét tartalamzó tömb elem legyártása
-        $data['features'] = array();
-        $features_temp = Config::get('extra');
-        foreach ($data['ingatlan'] as $key => $value) {
-            if (in_array($key, $features_temp) && $value == 1) {
-                $data['features'][] = $key;
-            }
-        }
-
-        // ar változó a hasonló ingatlanok lekérdezéshez
-        $ar = ($data['ingatlan']['tipus'] == 1) ? $data['ingatlan']['ar_elado'] : $data['ingatlan']['ar_kiado'];
-        // hasonló ingatlanok
-        $data['hasonlo_ingatlan'] = $this->ingatlanok_model->hasonloIngatlanok($id, $data['ingatlan']['tipus'], $data['ingatlan']['kategoria'], $data['ingatlan']['varos'], $ar);
-
-        // Megtekintések számának növelése
-        $this->ingatlanok_model->increase_no_of_clicks($id);
-
-        $view = new View();
-        $view->setHelper(array('url_helper', 'str_helper', 'num_helper', 'html_helper'));
-//$this->view->debug(true); 
-
-        $view->add_links(array('google-maps-site'));
-        $view->add_link('js', SITE_JS . 'pages/kedvencek.js');
-        $view->add_link('js', SITE_JS . 'pages/adatlap.js');
-        
-        $view->render('ingatlanok/tpl_adatlap', $data);
-    }
-
-
-    
 
     
      public function utf8_to_latin2_hun($str) {
