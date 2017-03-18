@@ -3,21 +3,18 @@
 use System\Libs\Config;
 use System\Libs\Language as Lang;
 ?>
-<div class="home-banner style-2">
-    <div class="container">
 
-        <div class="banner-content">
-
-            <!-- KERESÉS FORM -->
-            <div class="main-filter hidden-xs">
-                <?php include($this->path('tpl_home_filter')); ?>
-            </div>
-
-
-        </div> <!-- banner content END -->
-
-    </div>
+<!-- KERESÉS FORM -->
+<div class="main-filter hidden-xs">
+    <?php include($this->path('tpl_home_filter')); ?>
 </div>
+
+
+<!-- KERESÉS FORM MOBIL -->
+<div class="main-filter hidden-sm">
+    <?php include($this->path('tpl_home_filter_mobile')); ?>
+</div>           
+
 
 
 <div id="content" class="container-fluid">

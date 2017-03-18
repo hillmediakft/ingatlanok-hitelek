@@ -43,7 +43,7 @@ include($this->path('tpl_forgottenpw_modal'));
         <div class="right-part">
             <div class="extra-item login">
                 <span class="event-entry">
-                    <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.kedvencek.index.' . LANG); ?>" id="kedvencek"><i class="fa fa-heart"></i><?php echo Lang::get('header_top_kedvencek'); ?>
+                    <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.kedvencek.index.' . LANG); ?>" id="kedvencek"><i class="fa fa-heart"></i><span class="kedvencek-szoveg"><?php echo Lang::get('header_top_kedvencek'); ?></span>
                     <?php echo '<span class="badge badge-danger">' . count(json_decode(Cookie::get('kedvencek'))) . '</span>';?>
                     </a>
                 </span>
@@ -52,10 +52,10 @@ include($this->path('tpl_forgottenpw_modal'));
                 <div class="country-select">
 
                     <?php if ($this->request->get_uri('langcode') == "en") { ?>
-                        <a href="/"><img alt="" class="flag" src="<?php echo SITE_IMAGE; ?>flag_hu.jpg"> Magyar</a>
+                    <a href="/"><img alt="" class="flag" src="<?php echo SITE_IMAGE; ?>flag_hu.jpg"> <span>Magyar</span></a>
                     <?php } ?>
                     <?php if ($this->request->get_uri('langcode') == "hu") { ?>
-                        <a href="/en"><img alt="" class="flag" src="<?php echo SITE_IMAGE; ?>flag_en.jpg"> English</a>
+                        <a href="/en"><img alt="" class="flag" src="<?php echo SITE_IMAGE; ?>flag_en.jpg"> <span>English<span></a>
                     <?php } ?>
 
                 </div>
@@ -88,7 +88,7 @@ include($this->path('tpl_forgottenpw_modal'));
 <header class="header">
     <div class="container">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-xs-3">
                 <div class="logo">
                     <a href="<?php echo $this->request->get_uri('site_url');?>"><img src="<?php echo SITE_IMAGE; ?>logo.png" alt=""></a>
                 </div>
@@ -105,7 +105,7 @@ include($this->path('tpl_forgottenpw_modal'));
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 hidden-xs">
                 <div class="contact">
                     <div class="icon">
                         <i class="fa fa-envelope"></i>
@@ -134,7 +134,7 @@ include($this->path('tpl_forgottenpw_modal'));
 <div class="nav-block">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-md-12">
                 <nav class="main-navigation">
                     <ul class="navigation-listing hidden-xs">
                         <li class="navigation-item">

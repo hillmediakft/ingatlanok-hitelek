@@ -20767,6 +20767,55 @@ body.shop-front header .cart-btn:hover {
     padding-left: 20px;
     background-position: center right;
   }
+  
+body .extra-header .left-part .extra-item {
+    display:  none;
+}
+
+.extra-header .extra-item {
+    height: 30px;
+    font-size: 11px;
+}
+.extra-header .extra-item.event {
+    padding: 10px 10px;
+}
+
+header.header .contact .descr .box-text {
+    font-size: 12px;
+}
+.extra-header .country-select span {
+    display: none;
+}
+.extra-item.login span.kedvencek-szoveg {
+    display: none;
+}
+.extra-header .extra-item.login {
+    padding: 10px 5px;
+}
+body header.header .contact .descr .box-title {
+    display: none;
+}
+body header.header {
+    padding-top: 10px;
+}
+body header.header .logo {
+    margin-bottom: 0px;
+}
+
+.home-banner .banner-content .main-filter {
+    top: 10px;
+}
+.main-filter .filter-form .item-label {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+}
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 100%!important;
+}  
+.main-filter .filter-form .ui-front {
+    margin-bottom: 10px;
+}
 }
 @media only screen and (max-width: 370px) {
   /* line 3022, scss/_responsive.scss */
