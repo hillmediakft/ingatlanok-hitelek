@@ -1148,7 +1148,7 @@ footer.footer .bottom-footer .copy {
 /*______________________SLIDERS_______________________*/
 /* line 2, scss/_slider.scss */
 .home-banner {
-  height: 380px;
+  height: 270px;
   background: url("../images/banners/home-top.jpg") no-repeat center;
   position: relative;
 }
@@ -1189,8 +1189,11 @@ footer.footer .bottom-footer .copy {
 }
 /* line 35, scss/_slider.scss */
 .home-banner .banner-content {
-  height: 540px;
-  position: relative;
+    height: 210px;
+    position: relative;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    margin-top: 30px;
 }
 /* line 38, scss/_slider.scss */
 .home-banner .banner-content .main-filter {
@@ -1894,7 +1897,7 @@ footer.footer .bottom-footer .copy {
 
 /* line 612, scss/_slider.scss */
 .main-filter {
-  padding: 26px 0;
+  padding: 0;
   position: relative;
   width: 100%;
 }
@@ -21037,4 +21040,12 @@ footer.footer .widget .property-listing li {
     bottom: 0px;
     transition: all 0.3s linear 0s;
 	padding: 5px 10px;
+}
+@media only screen and (min-width: 640px) {
+    div#search-form-mobile {
+        display: none;
+    }
+    a[href="#search-form-mobile"] {
+        display: none;
+    }
 }
