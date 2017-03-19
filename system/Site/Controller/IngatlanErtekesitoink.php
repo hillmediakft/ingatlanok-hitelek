@@ -36,7 +36,7 @@ class IngatlanErtekesitoink extends SiteController {
 
         //$view->setLazyRender();
 //$this->view->debug(true); 
- //       $view->add_link('js', SITE_JS . 'pages/ingatlan_ertekesitoink.js');
+        $view->add_link('js', SITE_JS . 'pages/ertekesitok.js');
         $view->render('ingatlan_ertekesitoink/tpl_ingatlan_ertekesitoink', $data);
     }
 }

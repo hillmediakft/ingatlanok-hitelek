@@ -34,9 +34,9 @@ var Ertekesito_ingatlanok = function () {
                 url: $form.attr('action'),
                 dataType: 'json',
                 data: $form.serialize(),
-                beforeSend: function() {
+                beforeSend: function () {
                     $('#submit-button').addClass('button-loading');
-                },                
+                },
                 success: function (result) {
                     //result = JSON.parse(result);
                     $('#submit-button').removeClass('button-loading');

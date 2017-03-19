@@ -245,10 +245,12 @@ use System\Libs\Language as Lang;
                 <!-- SIDEBAR -->
                 <div class="col-md-3 col-sm-12">
                     <aside class="sidebar main-sidebar">
-                        <!-- KERESŐ DOBOZ -->
-                        <?php //include($this->path('tpl_ingatlanok_filter'));  ?>
                         <!-- KIEMELT INGATLANOK DOBOZ -->
-                        <?php include($this->path('tpl_modul_banner')); ?>
+                        <?php include($this->path('tpl_modul_banner_berbeadoknak')); ?>
+                        <!-- KIEMELT INGATLANOK DOBOZ -->
+                        <?php include($this->path('tpl_modul_banner_befektetoknek')); ?>
+                        <!-- KIEMELT INGATLANOK DOBOZ -->
+                        <?php include($this->path('tpl_modul_banner_mennyiterazingatlanom')); ?>
                     </aside>        
                 </div> <!-- SIDEBAR END -->
             
