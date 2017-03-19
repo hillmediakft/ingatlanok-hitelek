@@ -1123,7 +1123,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
 
                             if ($update_real) {
                                 Message::set('success', 'A módosítások sikeresen elmentve!');
-                                EventManager::trigger('update_property', array('update', '#' . $id . ' azonosítójú ingatlan módosítása'));
+                                EventManager::trigger('update_property', array('update', '#' . $id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan módosítása'));
                             
 
                                 // ha módosították az árat (nem az eredeti árat)
@@ -1153,7 +1153,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                                         $this->loadModel('settings_model');
                                         $price_change_data['settings'] = $this->settings_model->get_settings();
 
-                                        EventManager::trigger('change_price', array('change_price', '#' . $id . ' azonosítójú ingatlan ára módosult', $price_change_data));
+                                        EventManager::trigger('change_price', array($price_change_data));
                                     }
                                     
                                 }    
@@ -1195,7 +1195,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
                                 ));
                             }
 
-                        EventManager::trigger('insert_property', array('insert', '#' . $last_id . ' azonosítójú ingatlan létrehozása'));
+                        EventManager::trigger('insert_property', array('insert', '#' . $last_id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan létrehozása'));
 
                         $this->response->json(array(
                             "status" => 'success',
