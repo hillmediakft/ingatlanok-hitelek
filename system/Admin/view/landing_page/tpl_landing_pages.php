@@ -38,7 +38,7 @@
 						<thead>
 							<tr class="heading">
 								<th>#id</th>
-								<th>Oldal neve</th>
+								<th>Kampány neve</th>
 								<th>Url</th>
 								<th>Létrehozva</th>
 								<th>Státusz</th>
