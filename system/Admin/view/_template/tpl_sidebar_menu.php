@@ -389,6 +389,14 @@
             </ul>
         </li>
 
+        <!-- NAPLÓ LISTA -->
+        <li class="nav-item <?php $this->menu_active('logs'); ?> ">
+            <a href="admin/logs" class="nav-link ">
+                <i class="fa fa-folder"></i>
+                <span class="title">Naplózás</span>
+            </a>
+        </li> 
+
         <!-- DOKUMENTÁCIÓ -->
         <li class="nav-item <?php $this->menu_active('user-manual'); ?> ">
             <a href="admin/user-manual" class="nav-link ">
