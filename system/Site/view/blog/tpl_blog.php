@@ -42,7 +42,7 @@ use System\Libs\Config;
                                             </div>
                                             <span class="title"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.index.' . LANG) . '/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"><?php echo $value['title_' . LANG]; ?></a></span>
                                             <p>
-                                                <?php echo $this->str_helper->sentenceTrim($value['body_' . LANG], 3); ?> <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.index.' . LANG) . '/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"> 
+                                                <?php echo $this->str_helper->sentenceTrim($value['body_' . LANG], 1); ?> <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.hirek.index.' . LANG) . '/' . $this->str_helper->stringToSlug($value['title_' . LANG]) . '/' . $value['id']; ?>"> 
                                                     [...] 
                                                 </a>
                                             </p>
