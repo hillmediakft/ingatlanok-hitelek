@@ -73,9 +73,9 @@ use System\Libs\Auth; ?>
         <!-- MMenu -->
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/slicknav/dist/jquery.slicknav.js"></script>
         <!-- Main.js -->        
-        <script type="text/javascript" src="<?php echo SITE_JS; ?>main.js"></script>
+        <script type="text/javascript" src="<?php echo $this->url_helper->autoversion(SITE_JS . 'main.js'); ?>"></script>
         <!-- COMMON (tostr init, kedvencek)-->
-        <script type="text/javascript" src="<?php echo SITE_JS; ?>pages/common.js"></script>
+        <script type="text/javascript" src="<?php echo $this->url_helper->autoversion(SITE_JS . 'pages/common.js'); ?>"></script>
 
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <?php $this->get_js_link(); ?>

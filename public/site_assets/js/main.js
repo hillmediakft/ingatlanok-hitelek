@@ -697,7 +697,7 @@ function carouselInit() {
                     } else if (width >= 640) {
                         items_t = 3;
                     } else {
-                        items_t = 2;
+                        items_t = 3;
                     }
                     $.when(
                             carouselNavigation.css('width', inner_width + 'px')
@@ -1203,7 +1203,7 @@ function initBannerMap1() {
 
         }
     }
-    disableMapPan('map-banner-canvas');
+  //  disableMapPan('map-banner-canvas');
     google.maps.event.addDomListener(window, 'load', initialize);
     return true;
 }
