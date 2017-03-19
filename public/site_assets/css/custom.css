@@ -518,3 +518,38 @@ input.has-error {
     border-radius: 0px;
     border-left: 5px solid #c44a35;
 }
+@media only screen and (max-width: 370px) {
+/* ************ ADATLAP OLDAL  ********* */
+.main-slides .item-label {
+    right: 35%;
+    font-size: 15px;
+}
+
+h3.section-title {
+    font-size: 20px;
+}
+.ingatlan-info-box h5 {
+    font-size: 16px;
+}
+.single-item-page .item-photos .main-thumbnail ul li {
+    height: auto;
+}
+.detail-info-block .column-2 {
+    padding: 2px 5px;
+    width: 100%;
+}
+.features-info-block .column-2 {
+    padding: 2px 5px;
+    width: 50%;
+}
+.ingatlan-info-box .agent-box {
+    display: table;
+    margin: 10px 0 10px 0; 
+}
+.ingatlan-info-box .agent-box .agent-image img {
+    max-width: 80px;
+}
+.detail-info-block, .features-info-block {
+    padding: 16px 0;
+}
+}
