@@ -46,8 +46,8 @@ var Logs = function () {
 
             "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
             "lengthMenu": [
-                [5, 15, 20, -1],
-                [5, 15, 20, "Összes"] // change per page values here
+                [10, 20, 50, 100, -1],
+                [10, 20, 50, 100, "Összes"] // change per page values here
             ],
             // set the initial value
             "pageLength": 20,            
