@@ -16973,7 +16973,8 @@ p .dropcaps.orange {
 ul.listing {
   list-style: none;
   padding: 0;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
+  padding-left: 15px;
 }
 /* line 58, scss/_tipography.scss */
 ul.listing.style-1 li, ul.listing.style-2 li, ul.listing.style-3 li, ul.listing.style-4 li {
@@ -17170,12 +17171,13 @@ h1 {
 
 /* line 226, scss/_tipography.scss */
 h2 {
-  font-size: 45px;
+  font-size: 25px;
+  color: #c44a35;
 }
 
 /* line 229, scss/_tipography.scss */
 h3 {
-  font-size: 30px;
+  font-size: 20px;
 }
 /* line 231, scss/_tipography.scss */
 h3.section-title {

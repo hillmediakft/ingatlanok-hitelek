@@ -513,3 +513,8 @@ input.has-error {
         display:block;
     }
 }
+
+.well {
+    border-radius: 0px;
+    border-left: 5px solid #c44a35;
+}
