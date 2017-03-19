@@ -39,7 +39,7 @@
                             <tr class="heading">
                                 <th>#id</th>
                                 <th>Kampány neve</th>
-                                <th>Url-ek</th>
+                                <th>Url-ek (magyar -angol)</th>
                                 <th>Létrehozva</th>
                                 <th>Státusz</th>
                                 <th style="width:0px"></th>
