@@ -320,6 +320,9 @@ class Application {
                 $router->match('GET|POST', '/pop_up_windows/insert', 'Pop_up_windows@insert');
                 $router->match('GET|POST', '/pop_up_windows/update/:id', 'Pop_up_windows@update');
                 $router->get('/pop_up_windows/delete/:id', 'Pop_up_windows@delete');
+                
+                // log lista oldal
+                $router->get('/logs', 'Logs@index');
 
 
 
