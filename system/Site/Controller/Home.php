@@ -35,6 +35,7 @@ class Home extends SiteController {
         $data['all_properties'] = $this->ingatlanok_model->kiemelt_properties_query(10);
 		// ingatlan értékesítők
         $data['agents'] = $this->ingatlanok_model->get_agent();
+        shuffle($data['agents']);
 
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'html_helper'));

@@ -53,6 +53,7 @@ class Ingatlanok extends SiteController {
         $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
 
         $data['agents'] = $this->ingatlanok_model->get_agent();
+        shuffle($data['agents']);
 // var_dump($data);die;
 
 
