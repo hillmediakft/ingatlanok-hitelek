@@ -92,17 +92,6 @@ use System\Libs\Language as Lang;
                                     <div class="item">
                                         <div class="preview">
                                             <?php $this->html_helper->showLowerPriceIcon($value); ?>
-                                            <!-- eladó/kiadó cimke-->                                        
-                                            <?php
-                                            if ($value['tipus'] == 1) {
-                                                $label = Lang::get('kereso_elado');
-                                                $css_class = 'sale';
-                                            } else {
-                                                $label = Lang::get('kereso_kiado');
-                                                $css_class = 'rest';
-                                            }
-                                            ?>
-                                            <span class="item-label <?php echo $css_class; ?>"><?php echo $label; ?></span>
 
                                             <?php if ($value['kepek']) { ?>
                                                 <a href="ingatlanok/adatlap/<?php echo $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
