@@ -43,6 +43,9 @@ class Ingatlanok extends SiteController {
         $data['district_list'] = $this->ingatlanok_model->district_list_query_with_prop_no();
         $data['category_list'] = $this->ingatlanok_model->list_query('ingatlan_kategoria');
 
+        // hirek az oldalsávba
+        $this->loadModel('blog_model');
+        $data['blogs'] = $this->blog_model->getBlogSidebar(3);
 
         // összes ingatlan száma a táblában
         $data['no_of_properties'] = $this->ingatlanok_model->get_count();
@@ -129,7 +132,8 @@ class Ingatlanok extends SiteController {
         $view->add_link('js', SITE_JS . 'pages/kedvencek.js');
         $view->add_link('js', SITE_JS . 'pages/adatlap.js');
         
-        $view->render('ingatlanok/tpl_adatlap', $data);
+        $view->render('ingatlanok/tpl_adatlap_v1', $data);
+        // $view->render('ingatlanok/tpl_adatlap_v2', $data);
     }
 
     /**
