@@ -182,6 +182,23 @@ class Ingatlanok_model extends SiteModel {
         }
 /* SORREND MEGADÁSA HA NINCS A QUERY STRINGBEN VÉGE */        
 
+/* MEGJELENÍTÉS MEGADÁSA HA NINCS A QUERY STRINGBEN */ 
+        if (!isset($params['view'])) {
+            // megjelenítésre vonatkozó információt a session-ből veszi, ha nincs a query stringben, de van a session-ben
+            if (Session::has('ingatlan_filter.view')) {
+                $view_temp = Session::get('ingatlan_filter.view');
+            }
+            // ha van a sessionben megjelenítésre vonatkozó paraméter
+            if (isset($view_temp)) {
+                $params['view'] = $view_temp;
+            } else {
+                // ha nincs a query stringben és a sessionben sem megjelenítésre vonatkozó paraméter
+                $params['view'] = 'grid';
+            }
+        }
+/* MEGJELENÍTÉS MEGADÁSA HA NINCS A QUERY STRINGBEN VÉGE */        
+
+
         // berakjuk az új keresési paramétereket a session-be    
         Session::set('ingatlan_filter', $params);
 
@@ -1418,7 +1435,8 @@ echo "</pre>";
      * 	A paraméter megadja, hogy melyik megyében lévő városokat adja vissza 		
      * 	@param integer	$id 	egy megye id-je (county_id)
      */
-    public function get_filter_params($filter) {
+    public function get_filter_params($filter)
+    {
         $filter_with_names = array();
 
         if (isset($filter['tipus']) && $filter['tipus'] == 1) {
@@ -1533,6 +1551,11 @@ echo "</pre>";
             $filter_with_names['ingatlan_nev_' . LANG] = $filter['ingatlan_nev_' . LANG];
         }
 
+        if (isset($filter['view'])) {
+            $filter_with_names['view'] = $filter['view'];
+        } else {
+            $filter_with_names['view'] = 'grid';
+        }
 
         return $filter_with_names;
     }
