@@ -43,7 +43,7 @@
 */
 
 .modal-content .send-btn {
-    background-color: #c44a35;
+    background-color: #9e2828;
     border: medium none;
     color: #fff;
     display: block;
@@ -251,7 +251,7 @@
     line-height: 1;
     color: #fff;
     text-align: center;
-    background-color: #d26b5a;
+    background-color: #cc5151;
     border: 1px solid #e7e4e4;
     border-radius: 0px;
 }
@@ -286,7 +286,7 @@
 }
 
         .dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
-            color: #c44a35;
+            color: #9e2828;
             text-decoration: none;
             background-color: none;
             border-top: 5px;
@@ -300,7 +300,7 @@
     right: 1px;
     width: 34px;
     height: 34px;
-    background-color: #d26b5a;
+    background-color: #cc5151;
 }
 
 .caret {
@@ -360,7 +360,7 @@ h3.section-title .lower-price {
 
 
 .badge.badge-danger {
-    background-color: #c44a35;
+    background-color: #9e2828;
 }
 .kedvencek .main-sidebar {
   padding-top: 0px;
@@ -471,14 +471,14 @@ input.has-error {
     color: #000;
 }
 .saved_search_box .elem .link:hover {
-    color: #c44a35;
+    color: #9e2828;
 }
 .saved_search_box .buttons .share {
     color: #3a383b;
     font-size: 12px;
 }
 .saved_search_box .buttons .share:hover {
-    color: #c44a35;
+    color: #9e2828;
 }
 
 .save_search_button {
@@ -489,7 +489,7 @@ input.has-error {
     border: none;
 }
 .save_search_button:hover {
-    background-color: #c44a35;
+    background-color: #9e2828;
 }
 
 .rent-flat-sidebar .widget.filter input[type="checkbox"]:checked::before {
@@ -516,7 +516,7 @@ input.has-error {
 
 .well {
     border-radius: 0px;
-    border-left: 5px solid #c44a35;
+    border-left: 5px solid #9e2828;
 }
 @media only screen and (max-width: 370px) {
 /* ************ ADATLAP OLDAL  ********* */
