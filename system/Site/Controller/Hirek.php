@@ -30,7 +30,7 @@ class Hirek extends SiteController {
         // blog kategóriák
         $data['blog_categories'] = $this->blog_model->get_blog_categories();
         // blogok
-        $data['blogs'] = $this->blog_model->getBlogPosts();
+        //$data['blogs'] = $this->blog_model->getBlogPosts();
         //      $data['kedvencek'] = $this->kedvencek_list;
         $pagine = new Paginator(Lang::get('lapozas'), $data['settings']['pagination']);
         // adatok lekérdezése limittel
@@ -39,6 +39,7 @@ class Hirek extends SiteController {
         $blog_count = $this->blog_model->blog_pagination_count_query();
 
         $pagine->set_total($blog_count);
+      
 
         $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path_full'));
 
