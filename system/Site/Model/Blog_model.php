@@ -38,6 +38,25 @@ class Blog_model extends SiteModel {
     }
 
     /**
+     *  Visszaad a blog táblából néhány elem id-jét, címét, dátumát a sidebarhoz
+     *
+     *  @param $limit Integer 
+     */
+    public function getBlogSidebar($limit = 3)
+    {
+        $this->query->set_columns(array(
+            'blog.id',
+            'blog.title_' . $this->lang,
+            'blog.picture',
+            'blog.add_date'
+            ));
+        $this->query->set_where('blog.status', '=', 1);
+        $this->query->set_orderby(array('blog.add_date'), 'DESC');
+        $this->query->set_limit($limit);
+        return $this->query->select();
+    }
+
+    /**
      * 	Visszaadja a blog tábla tartalmát
      * 	Ha kap egy id paramétert (integer), akkor csak egy sort ad vissza a táblából
      *
