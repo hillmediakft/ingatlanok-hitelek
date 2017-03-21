@@ -116,13 +116,17 @@ var Adatlap = function () {
      */
     var adatlapNyomtatas = function () {
 
-       $("#adatlap_nyomtatas_form").on('submit', function (event) {
+        $("#adatlap_nyomtatas").on('click', function (event) {
             event.preventDefault();
-
-this.submit();
-
+            $("#adatlap_nyomtatas_form").submit();
         });
 
+/*
+       $("#adatlap_nyomtatas_form").on('submit', function (event) {
+            event.preventDefault();
+            this.submit();
+        });
+*/
     };
 
     /*
