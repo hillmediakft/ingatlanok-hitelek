@@ -17,7 +17,7 @@ use System\Libs\Language as Lang;
             </div>
         </div>
 
-        <div class="objects-block with-sidebar">
+
         <!-- <div class="agency-container listing with-sidebar"> -->
             <div class="row">
 
@@ -150,6 +150,16 @@ use System\Libs\Language as Lang;
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="sort-item view-block">
+                                        <a href="<?php echo $this->url_helper->addToQueryString(array('view' => 'grid')); ?>" class="grid <?php echo ($filter_params['view'] == 'grid') ? 'active' : ''; ?>">
+                                            <i class="menu fa fa-th"></i>
+                                        </a>
+                                        <a href="<?php echo $this->url_helper->addToQueryString(array('view' => 'list')); ?>" class="list <?php echo ($filter_params['view'] == 'list') ? 'active' : ''; ?>">
+                                            <i class="fa fa-bars"></i>
+                                        </a>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -162,42 +172,32 @@ use System\Libs\Language as Lang;
                     </div>
 
 
-                    <!-- INGATALANOK LISTÁJA -->
-                    <div class="property-list" id="equalheight-property-list">
-                        <div class="row">
-                            <?php
-                            foreach ($properties as $value) {
-                                $photo_array = json_decode($value['kepek']);
+                    <?php if ($data['filter_params']['view'] == 'grid') { ?>
+
+                    <!-- INGATALANOK LISTÁJA GRID -->
+                    <div class="objects-block with-sidebar">
+                        <div class="property-list" id="equalheight-property-list">
+                            <div class="row">
+                                <?php
+                                foreach ($properties as $value) {
+                                    $photo_array = json_decode($value['kepek']);
                                 ?>
                                 <div class="col-lg-4 col-md-6">
                                     <div class="item">
                                         <div class="preview">
                                             <?php $this->html_helper->showLowerPriceIcon($value); ?>
-                                            <!-- eladó/kiadó cimke-->                                        
-                                            <?php
-                                            if ($value['tipus'] == 1) {
-                                                $label = Lang::get('kereso_elado');
-                                                $css_class = 'sale';
-                                            } else {
-                                                $label = Lang::get('kereso_kiado');
-                                                $css_class = 'rest';
-                                            }
-                                            ?>
-                                            <span class="item-label <?php echo $css_class; ?>"><?php echo $label; ?></span>
 
-                                            <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
-                                            <?php if (!is_null($value['kepek'])) { ?>
-                                                <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
-                                            <?php } else { ?>
-                                                <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
-                                            <?php } ?>
-                                            </a>
+                                                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+                                                <?php if (!is_null($value['kepek'])) { ?>
+                                                    <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                                <?php } else { ?>
+                                                    <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                                <?php } ?>
+                                                </a>                                        
 
-                                            <span class="like">
-                                                <i class="fa fa-heart"></i>
-                                            </span>
+                                            <?php $this->html_helper->showHeartIcon($value); ?>
                                             <span class="price-box">
-                                            <?php $this->html_helper->showPrice($value); ?>
+                                                <?php $this->html_helper->showPrice($value); ?>
                                             </span>
                                         </div>
                                         <div class="item-thumbnail">
@@ -205,6 +205,7 @@ use System\Libs\Language as Lang;
                                                 <span class="value"><?php echo $value['kat_nev_' . LANG]; ?></span>
                                             </div>
                                             <div class="single-thumbnail">
+
                                                 <span class="value"><?php echo $value['szobaszam']; ?> szoba</span>
                                             </div>
                                             <div class="single-thumbnail">
@@ -218,29 +219,102 @@ use System\Libs\Language as Lang;
                                                 echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . ' kerület' : '';
                                                 ?></p>
 
-                                            <div class="item-info"></div>
+                                            <div class="item-info">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-
-                    <!-- LAPOZÓ -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="objects-pagination left">
-                            <?php echo $data['pagine_links']; ?>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="empty-space"></div>
+                    <?php } else { ?>
+
+                    <!-- INGATALANOK LISTÁJA LIST -->
+                    <div class="objects-block list-sidebar">    
+                        <div class="row">
+                            <?php
+                            foreach ($properties as $value) {
+                                $photo_array = json_decode($value['kepek']);
+                            ?>
+                            <div class="col-sm-12">
+                                <div class="item">
+                                    <div class="preview">
+                                        <?php $this->html_helper->showLowerPriceIcon($value);?>
+
+                                        <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+                                        <?php if (!is_null($value['kepek'])) { ?>
+                                            <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                        <?php } else { ?>
+                                            <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                        <?php } ?>
+                                        </a>                                        
+
+                                    </div>
+                                    <div class="thumbnail-container">
+                                        <div class="item-thumbnail">
+                                            <div class="single-thumbnail">
+                                                <span class="value"><?php echo $value['kat_nev_' . LANG]; ?></span>
+                                            </div>
+                                            <div class="single-thumbnail">
+                                                <span class="value"><?php echo $value['szobaszam']; ?> szoba</span>
+                                            </div>
+                                            <div class="single-thumbnail">
+                                                <span class="value"><?php echo $value['alapterulet']; ?> m<sup>2</sup></span>
+                                            </div>
+                                        </div>
+                                        <div class="item-info">
+                                            <span class="price"> 
+                                                <?php $this->html_helper->showPrice($value);?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="item-entry">
+                                        <span class="item-title"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"><?php echo $value['ingatlan_nev_' . LANG]; ?></a></span>
+                                        <p class="item-text"><p><?php
+                                            echo $value['city_name'];
+                                            echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . ' kerület' : '';
+                                            ?></p></p>
+                                    </div>
+                                </div>
+                            </div>       
+                            <?php } ?>
                         </div>
+                    </div> 
+
+                    <?php } ?>
+
+
+                    <div class="objects-block with-sidebar">
+                        <!-- LAPOZÓ -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="objects-pagination left">
+                                <?php echo $data['pagine_links']; ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="empty-space"></div>
+                            </div>
+                        </div>
+                    
                     </div>
+
                 </div>
+
+
+
+
+
+
+
+
+
+
 
                 <!-- SIDEBAR -->
                 <div class="col-md-3 col-sm-12">
@@ -255,7 +329,21 @@ use System\Libs\Language as Lang;
                 </div> <!-- SIDEBAR END -->
             
             </div>
-        </div>
+        
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
 
     </div> <!-- END CONTAINER -->
 

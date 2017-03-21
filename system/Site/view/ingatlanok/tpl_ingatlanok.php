@@ -46,10 +46,10 @@ use System\Libs\Language as Lang;
                                 </div>
 
                                 <div class="sort-item view-block">
-                                    <a href="<?php echo $this->url_helper->addToQueryString('view', 'grid'); ?>" class="grid <?php echo ($filter_params['view'] == 'grid') ? 'active' : ''; ?>">
+                                    <a href="<?php echo $this->url_helper->addToQueryString(array('view' => 'grid')); ?>" class="grid <?php echo ($filter_params['view'] == 'grid') ? 'active' : ''; ?>">
                                         <i class="menu fa fa-th"></i>
                                     </a>
-                                    <a href="<?php echo $this->url_helper->addToQueryString('view', 'list'); ?>" class="list <?php echo ($filter_params['view'] == 'list') ? 'active' : ''; ?>">
+                                    <a href="<?php echo $this->url_helper->addToQueryString(array('view' => 'list')); ?>" class="list <?php echo ($filter_params['view'] == 'list') ? 'active' : ''; ?>">
                                         <i class="fa fa-bars"></i>
                                     </a>
                                 </div>
