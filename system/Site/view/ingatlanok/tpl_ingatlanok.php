@@ -85,19 +85,7 @@ use System\Libs\Language as Lang;
                                     <div class="item">
                                         <div class="preview">
                                             <?php $this->html_helper->showLowerPriceIcon($value); ?>
-                                            <!-- eladó/kiadó cimke-->                                        
-                                            <?php
-                                            if ($value['tipus'] == 1) {
-                                                $label = Lang::get('kereso_elado');
-                                                $css_class = 'sale';
-                                            } else {
-                                                $label = Lang::get('kereso_kiado');
-                                                $css_class = 'rest';
-                                            }
-                                            ?>
-                                            <!-- <span class="features-label <?php //echo $css_class;    ?>"><?php //echo $label;    ?></span> -->
-                                            <span class="item-label <?php echo $css_class; ?>"><?php echo $label; ?></span>
-
+  
                                                 <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
                                                 <?php if (!is_null($value['kepek'])) { ?>
                                                     <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
@@ -168,13 +156,18 @@ use System\Libs\Language as Lang;
                             <button id="save_search" class="save_search_button"><?php echo Lang::get('kereso_kereses_mentese_gomb'); ?></button>
                         </div>
                     </div>
-
-                    <!-- REFERENSEK DOBOZ -->
-                    <?php include($this->path('tpl_modul_referenscontact')); ?>
                     <!-- KIEMELT INGATLANOK DOBOZ -->
                     <?php include($this->path('tpl_modul_kiemeltingatlanok')); ?>
+                    <!-- HIREK -->
+                    <?php include($this->path('tpl_modul_hirek')); ?>
+
+                    <?php include($this->path('tpl_modul_banner_mennyiterazingatlanom')); ?>
+                    <?php include($this->path('tpl_modul_banner_befektetoknek')); ?>
+
                     <!-- BANNER -->
                     <?php include($this->path('tpl_modul_banner_berbeadoknak')); ?>
+                    <!-- REFERENSEK DOBOZ -->
+                    <?php //include($this->path('tpl_modul_referenscontact')); ?>
 
                 </aside>        
             </div> <!-- SIDEBAR END -->
