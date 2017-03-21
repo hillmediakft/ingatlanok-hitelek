@@ -12,7 +12,6 @@ use System\Libs\Language as Lang;
 				$photo_array = json_decode($ingatlan['kepek']);
 			?>
 				<div class="single-prop">
-					<span style="position:absolute; padding: 1px 4px; top: 0px; background-color: #C44A35; color: #ffffff;"><?php echo($ingatlan['tipus'] == 1) ? Lang::get('kereso_elado') : Lang::get('kereso_kiado'); ?></span>
 					<div class="preview">
 						<div style="overflow: hidden; width:85px; height:85px;">
 							<a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $ingatlan['id'] . '/' . $this->str_helper->stringToSlug($ingatlan['ingatlan_nev_' . LANG]); ?>">
