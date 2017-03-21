@@ -114,6 +114,36 @@ class Url
         }
     }
 
+
+    /**
+     * URL-ben hozzáad a query stringhez elemeket 
+     *
+     * @param array     $data 
+     * @return string   az új URL
+     */
+    public function addToQueryString(array $data)
+    {
+        $request_uri = urldecode($_SERVER['REQUEST_URI']);
+        $request_uri = str_replace(BASE_PATH,'', trim($request_uri, '/'));
+        $uri_parts = parse_url($request_uri);
+        $uri_parts['path'] = (isset($uri_parts['path'])) ? $uri_parts['path'] : '';
+        $uri_parts['query'] = (isset($uri_parts['query'])) ? $uri_parts['query'] : '';
+
+        if(!empty($uri_parts['query'])){
+            parse_str($uri_parts['query'], $query_arr);
+        } else {
+            $query_arr = array();
+        }
+
+        // értéket adunk
+        foreach ($data as $key => $value) {
+            $query_arr[$key] = $value;
+        }
+
+        return $uri_parts['path'] . '?' . http_build_query($query_arr);
+    }
+
+
     /**
      * Spamektől védett e-mail linket generál Javascripttel
      *
