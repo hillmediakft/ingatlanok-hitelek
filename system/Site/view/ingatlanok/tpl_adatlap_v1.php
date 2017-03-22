@@ -22,6 +22,7 @@ use System\Libs\Language as Lang;
 
 
     <!-- Szürke doboz felül ingatlan-info-box -->
+    <div id="sticker">
     <div class="container">
         <div class="row">
 
@@ -87,6 +88,7 @@ use System\Libs\Language as Lang;
 
         </div> <!-- END ROW -->
     </div> <!-- END CONTAINER -->
+</div>
 
     <div class="container">
         <div class="row">

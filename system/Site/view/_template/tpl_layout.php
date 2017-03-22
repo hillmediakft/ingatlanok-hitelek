@@ -70,6 +70,8 @@ use System\Libs\Auth; ?>
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery.blockui.min.js"></script>
         <!-- TOASTR -->
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/toastr/toastr.min.js"></script>
+                <!-- STICKY -->
+        <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/sticky/jquery.sticky.js"></script>
         <!-- MMenu -->
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/slicknav/dist/jquery.slicknav.js"></script>
         <!-- Main.js -->        
