@@ -238,11 +238,12 @@
 }
 
 
-
 #district_select_div {
     margin-bottom: 6px;
 } 
-
+#district_select_div_mobile {
+    margin-bottom: 12px;
+} 
 
 .input-group-addon {
     padding: 6px 12px;
@@ -308,7 +309,7 @@
 }
 
 
-#district_select_div .btn-default {
+#district_select_div .btn-default, #district_select_div_mobile .btn-default {
     background-color: #fff;
     border-color: #e7e4e4;
     color: #808080;
