@@ -553,3 +553,7 @@ h3.section-title {
     padding: 16px 0;
 }
 }
+
+#sticker {
+    z-index: 10000!important;
+}

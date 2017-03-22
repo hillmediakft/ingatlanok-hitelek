@@ -10,7 +10,7 @@ $(window).load(function () {
 
 $(document).ready(function () {
     "use string";
-
+    initSticky();
     initControls();
     // initRange();
 //	languageDropDownInit();
@@ -137,6 +137,10 @@ var countDown = function () {
             });
         })
     }
+};
+
+var initSticky = function () {
+    $("#sticker").sticky({topSpacing: -20});
 };
 
 //initResponsiveNav
@@ -1203,7 +1207,7 @@ function initBannerMap1() {
 
         }
     }
-  //  disableMapPan('map-banner-canvas');
+    //  disableMapPan('map-banner-canvas');
     google.maps.event.addDomListener(window, 'load', initialize);
     return true;
 }
