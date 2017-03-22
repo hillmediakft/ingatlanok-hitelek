@@ -4,6 +4,7 @@ namespace System\Helper;
 
 use System\Libs\DI;
 use System\Libs\Cookie;
+
 /**
  * Url és link helper
  */
@@ -56,7 +57,7 @@ class Html {
         }
         echo $html;
     }
-    
+
     /**
      * Kedvencekhez adáskor egy szív ikon megjelenítése
      * 
@@ -66,15 +67,15 @@ class Html {
      */
     public function showHeartIcon($ingatlan) {
         $html = '';
-        
-        if(Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) {
-        $html .= '<div class="like"><i class="fa fa-heart"></i></div>';
+
+        if (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) {
+            $html .= '<div class="like"><i class="fa fa-heart"></i></div>';
         } else {
             $html .= '';
         }
         echo $html;
-    }    
-    
+    }
+
     /**
      * Közösségi média megosztási gombok
      *  
@@ -84,22 +85,11 @@ class Html {
         $html = '';
 
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; // a megjelenített URL
-
-        $html .= "<div  style='height: 20px; float: left; margin-top: 10px; margin-left: 0px; border-right-width: 0px; margin-right: 10px'>";
-        $html .= "<div class='fb-like' data-href='$url' data-send='false' data-layout='button_count' data-width='130' data-show-faces='false' data-font='arial' data-action='recommend'></div>";
-        $html .= "</div>";
-
-        $html .= "<div  style='height: 20px; float: left; margin-bottom: 10px; margin-left: 0px; border-right-width: 0px; margin-left: 10px'>";
-        $html .= "<div class='g-plusone' data-size='medium'></div>";
-        $html .= "<script type='text/javascript'>
-  window.___gcfg = {lang: 'hu'};
-
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>";
+        $html .= "<div id='social-share-icons'>";
+        $html .= "<a href='http://www.facebook.com/sharer.php?u=$url' target='_blank' class='share_facebook'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x'></i></span></a>";
+        $html .= "<a href='http://pinterest.com/pin/create/button/?url=$url/&amp;media=http://ingatlanok-hitelek.hu/wp-content/uploads/2017/02/ingatlanok-hitelek.hu_5663-haz.jpg&amp;description=Parlament+melletti+lehet%C5%91s%C3%A9g' target='_blank' class='share_pinterest'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x'></i></span></a>";
+        $html .= "<a href='https://plus.google.com/share?url=http://ingatlanok-hitelek.hu/ingatlan/parlament-melletti-lehetoseg/' onclick='javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;' target='_blank' class='share_google'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x'></i></span></a>";
+        $html .= "<a href='http://twitter.com/home?status=Parlament+melletti+lehet%C5%91s%C3%A9g+$url' class='share_tweet' target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x'></i></span></a>";
         $html .= "</div>";
         return $html;
     }

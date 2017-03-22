@@ -563,3 +563,11 @@ h3.section-title {
     max-width: 500px;
     border-radius: 0px;
 }
+
+#social-share-icons a {
+    color: #9e2828;
+}
+
+#social-share-icons a:hover {
+    opacity: 0.5;
+}
