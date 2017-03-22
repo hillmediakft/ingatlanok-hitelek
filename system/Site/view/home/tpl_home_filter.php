@@ -14,7 +14,7 @@ use System\Libs\Language as Lang;
                         <div class="row">
 
                             <!-- ELADÓ/KIADÓ -->
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <span class="item-label"><?php echo Lang::get('kereso_elado'); ?>/<?php echo Lang::get('kereso_kiado'); ?></span>
                                 <div id="tipus_select_div" class="ui-front">
                                     <select name="tipus" id="tipus_select" data-icon="false" class="select filter-select">
@@ -25,7 +25,7 @@ use System\Libs\Language as Lang;
                             </div>
 
                             <!-- VÁROS LISTA -->
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <span class="item-label"><?php echo Lang::get('kereso_varos'); ?></span>
                                 <div id="varos_select_div" class="ui-front">
                                     <select name="varos" id="varos_select" data-icon="false" class="select filter-select">
@@ -36,7 +36,7 @@ use System\Libs\Language as Lang;
                             </div>
 
                             <!-- KERÜLET LISTA -->
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
                                 <div id="district_select_div">
                                     <select name="kerulet[]" id="district_select" class="selectpicker" data-selected-text-format="count" multiple disabled="disabled" title="-- <?php echo Lang::get('kereso_mindegy'); ?> --">
@@ -47,7 +47,7 @@ use System\Libs\Language as Lang;
                             </div>
 
                             <!-- KATEGÓRIA -->
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <?php
                                 $selected_kategoria = isset($filter_params['kategoria']) ? $filter_params['kategoria'][0]['kat_id'] : '';
                                 ?>
@@ -61,13 +61,31 @@ use System\Libs\Language as Lang;
                                     </select>
                                 </div>					
                             </div>
+                            
+                            <div class="col-sm-3">
+                                <span class="item-label"><?php echo Lang::get('kereso_ar'); ?></span>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input name="min_ar" type="text" class="form-control" placeholder="minimum" value="<?php echo (isset($filter_params['min_ar'])) ? $filter_params['min_ar'] : ''; ?>">
+                                        <div class="input-group-addon input-group-addon-hypen" id="ar_min_mertek">-</div>
+                                        <input name="max_ar" type="text" class="form-control" placeholder="maximum" value="<?php echo (isset($filter_params['max_ar'])) ? $filter_params['max_ar'] : ''; ?>">
+                                        <div class="input-group-addon" id="ar_mertek">M Ft</div>
+                                    </div>
+                                </div>
+                            </div>                            
 
+                            
+                            <div class="col-sm-1">
+                                <button class="find-now-btn"><i class="fa fa-search"></i></button>
+      <!--          <a href="#" class="visible-xs find-now-btn"><?php Lang::get('kereso_kereses');  ?></a> -->
+                            </div>                            
+                            
                         </div>
 
-                        <!-- ALSÓ SOR -->
+                        <!-- ALSÓ SOR 
                         <div class="row">
 
-                            <!-- ALAPTERÜLET -->
+                           
                             <div class="col-sm-4">
                                 <span class="item-label"><?php echo Lang::get('kereso_alapterulet'); ?></span>
                                 <div class="form-group">
@@ -80,7 +98,7 @@ use System\Libs\Language as Lang;
                                 </div>
                             </div>
 
-                            <!-- ÁR -->
+                        
                             <div class="col-sm-4">
                                 <span class="item-label"><?php echo Lang::get('kereso_ar'); ?></span>
                                 <div class="form-group">
@@ -95,10 +113,10 @@ use System\Libs\Language as Lang;
 
                             <div class="col-sm-4">
                                 <button class="find-now-btn"><?php echo Lang::get('kereso_kereses'); ?></button>
-                <!-- <a href="#" class="visible-xs find-now-btn"><?php //echo Lang::get('kereso_kereses');  ?></a> -->
+                <a href="#" class="visible-xs find-now-btn"><?php Lang::get('kereso_kereses');  ?></a>
                             </div>
 
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>

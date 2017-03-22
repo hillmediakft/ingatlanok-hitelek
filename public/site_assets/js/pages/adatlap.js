@@ -121,12 +121,22 @@ var Adatlap = function () {
             $("#adatlap_nyomtatas_form").submit();
         });
 
-/*
-       $("#adatlap_nyomtatas_form").on('submit', function (event) {
-            event.preventDefault();
-            this.submit();
+        /*
+         $("#adatlap_nyomtatas_form").on('submit', function (event) {
+         event.preventDefault();
+         this.submit();
+         });
+         */
+    };
+
+    /**
+     * Értesítés árváltozásról regisztráció funkciót kezeli
+     */
+    var initShare = function () {
+
+        $("#myPopover").popover({
+            html: true
         });
-*/
     };
 
     /*
@@ -189,6 +199,7 @@ var Adatlap = function () {
             equalHeights();
             //googleMapsInit();
             adatlapNyomtatas();
+            initShare();
         },
 
     };

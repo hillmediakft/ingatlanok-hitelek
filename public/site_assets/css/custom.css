@@ -558,3 +558,8 @@ h3.section-title {
 #sticker {
     z-index: 10000!important;
 }
+
+.popover {
+    max-width: 500px;
+    border-radius: 0px;
+}

@@ -75,7 +75,34 @@ class Html {
         echo $html;
     }    
     
+    /**
+     * Közösségi média megosztási gombok
+     *  
+     * @return  string  a html
+     */
+    public function socialMediaShare() {
+        $html = '';
 
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; // a megjelenített URL
+
+        $html .= "<div  style='height: 20px; float: left; margin-top: 10px; margin-left: 0px; border-right-width: 0px; margin-right: 10px'>";
+        $html .= "<div class='fb-like' data-href='$url' data-send='false' data-layout='button_count' data-width='130' data-show-faces='false' data-font='arial' data-action='recommend'></div>";
+        $html .= "</div>";
+
+        $html .= "<div  style='height: 20px; float: left; margin-bottom: 10px; margin-left: 0px; border-right-width: 0px; margin-left: 10px'>";
+        $html .= "<div class='g-plusone' data-size='medium'></div>";
+        $html .= "<script type='text/javascript'>
+  window.___gcfg = {lang: 'hu'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>";
+        $html .= "</div>";
+        return $html;
+    }
 
 }
 

@@ -31,16 +31,27 @@ use System\Libs\Auth; ?>
         <?php $this->get_css_link(); ?>
         <!-- END PAGE LEVEL PLUGIN STYLES -->
 
-<?php if (ENV == "production") { ?>
+        <?php if (ENV == "production") { ?>
             <script>
-    // Google analytics
+                // Google analytics
             </script>			
 
-<?php } ?>  
+        <?php } ?>  
     </head>
     <!-- END HEAD -->
 
     <body>
+
+        <div id="fb-root"></div>
+        <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
 
         <?php include($this->path('tpl_head')); ?>
         <?php include($this->path('content')); ?>
@@ -70,7 +81,7 @@ use System\Libs\Auth; ?>
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/jquery.blockui.min.js"></script>
         <!-- TOASTR -->
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/toastr/toastr.min.js"></script>
-                <!-- STICKY -->
+        <!-- STICKY -->
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/sticky/jquery.sticky.js"></script>
         <!-- MMenu -->
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/slicknav/dist/jquery.slicknav.js"></script>
@@ -80,7 +91,7 @@ use System\Libs\Auth; ?>
         <script type="text/javascript" src="<?php echo $this->url_helper->autoversion(SITE_JS . 'pages/common.js'); ?>"></script>
 
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<?php $this->get_js_link(); ?>
+        <?php $this->get_js_link(); ?>
         <!-- END PAGE LEVEL SCRIPTS -->
     </body>
 </html>

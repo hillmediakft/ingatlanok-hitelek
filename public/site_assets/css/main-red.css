@@ -1189,11 +1189,11 @@ footer.footer .bottom-footer .copy {
 }
 /* line 35, scss/_slider.scss */
 .home-banner .banner-content {
-    height: 210px;
+    height: 100px;
     position: relative;
-    background: rgba(0,0,0,0.5);
-    padding: 20px;
-    margin-top: 30px;
+    background: rgba(200,200,200,0.8);
+    padding: 10px;
+    margin-top: 170px;
 }
 /* line 38, scss/_slider.scss */
 .home-banner .banner-content .main-filter {
@@ -1986,7 +1986,7 @@ footer.footer .bottom-footer .copy {
 .main-filter .filter-form .item-label {
   font-family: 'Lato-Bold', Arial, sans-serif;
   font-size: 16px;
-  color: #fff;
+  color: #333;
   display: block;
   width: 100%;
   margin-bottom: 13px;
