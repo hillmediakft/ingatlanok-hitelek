@@ -1,5 +1,4 @@
 <?php
-
 use System\Libs\Config;
 use System\Libs\Language as Lang;
 ?>
@@ -31,30 +30,18 @@ use System\Libs\Language as Lang;
                                 <div id="varos_select_div" class="ui-front">
                                     <select name="varos" id="varos_select" data-icon="false" class="select filter-select">
                                         <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
-<?php echo $city_list; ?>
+                                        <?php echo $city_list; ?>
                                     </select>
                                 </div>
                             </div>
 
                             <!-- KERÜLET LISTA -->
-                            <!-- 
-                                            <div class="col-sm-3">
-                                                <span class="item-label"><?php //echo Lang::get('kereso_kerulet');  ?></span>
-                                                <div id="district_select_div" class="ui-front">
-                                                    <select disabled="disabled" name="kerulet" id="district_select" data-icon="false" class="select filter-select">
-                                                        <option value="">-- <?php //echo Lang::get('kereso_mindegy'); ?> --</option>
-<?php //echo $district_list;  ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                            -->
-
                             <div class="col-sm-3">
                                 <span class="item-label"><?php echo Lang::get('kereso_kerulet'); ?></span>
                                 <div id="district_select_div">
                                     <select name="kerulet[]" id="district_select" class="selectpicker" data-selected-text-format="count" multiple disabled="disabled" title="-- <?php echo Lang::get('kereso_mindegy'); ?> --">
                                         <!-- <option value="">-- <?php //echo Lang::get('kereso_mindegy'); ?> --</option> -->
-<?php echo $district_list; ?>
+                                        <?php echo $district_list; ?>
                                     </select>
                                 </div>
                             </div>
@@ -70,7 +57,7 @@ use System\Libs\Language as Lang;
                                         <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                                         <?php foreach ($category_list as $value) : ?>
                                             <option value="<?php echo $value['kat_id']; ?>" <?php echo ($selected_kategoria == $value['kat_id']) ? 'selected' : ''; ?>><?php echo $value['kat_nev_' . LANG]; ?></option>
-<?php endforeach ?>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>					
                             </div>
