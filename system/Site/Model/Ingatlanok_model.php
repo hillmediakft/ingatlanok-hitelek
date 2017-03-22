@@ -1056,6 +1056,7 @@ echo "</pre>";
             'ingatlanok.ar_elado',
             'ingatlanok.ar_kiado',
             'ingatlanok.varos',
+            'ingatlanok.kerulet',
             'ingatlanok.kategoria',
             'ingatlanok.szobaszam',
             'ingatlanok.alapterulet',
