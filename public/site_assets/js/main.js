@@ -140,7 +140,10 @@ var countDown = function () {
 };
 
 var initSticky = function () {
-    $("#sticker").sticky({topSpacing: -20});
+    var viewportWidth = $(window).width();
+        if (viewportWidth > 992) {
+            $("#sticker").sticky({topSpacing: -20});
+        }
 };
 
 //initResponsiveNav
