@@ -568,6 +568,18 @@ h3.section-title {
     color: #9e2828;
 }
 
+#social-share-icons a.share_facebook {
+    color: #3b5998;
+}
+
+#social-share-icons a.share_google {
+    color: #c63224;
+}
+
+#social-share-icons a.share_tweet {
+    color: #0085be;
+}
+
 #social-share-icons a:hover {
     opacity: 0.5;
 }

@@ -77,19 +77,21 @@ class Html {
     }
 
     /**
-     * Közösségi média megosztási gombok
+     * Közösségi média megosztási gombok az ingatlan adatlapra
      *  
+     * @param   string $image az ingatlanhoz tartozó első kép elérési útvonala
+     * @param   string $title az ingatlan neve
      * @return  string  a html
      */
-    public function socialMediaShare() {
+    public function socialMediaShare($image, $title) {
         $html = '';
 
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; // a megjelenített URL
         $html .= "<div id='social-share-icons'>";
-        $html .= "<a href='http://www.facebook.com/sharer.php?u=$url' target='_blank' class='share_facebook'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x'></i></span></a>";
-        $html .= "<a href='http://pinterest.com/pin/create/button/?url=$url/&amp;media=http://ingatlanok-hitelek.hu/wp-content/uploads/2017/02/ingatlanok-hitelek.hu_5663-haz.jpg&amp;description=Parlament+melletti+lehet%C5%91s%C3%A9g' target='_blank' class='share_pinterest'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x'></i></span></a>";
-        $html .= "<a href='https://plus.google.com/share?url=http://ingatlanok-hitelek.hu/ingatlan/parlament-melletti-lehetoseg/' onclick='javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;' target='_blank' class='share_google'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x'></i></span></a>";
-        $html .= "<a href='http://twitter.com/home?status=Parlament+melletti+lehet%C5%91s%C3%A9g+$url' class='share_tweet' target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x'></i></span></a>";
+        $html .= "<a href='https://www.facebook.com/sharer.php?u=$url' target='_blank' class='share_facebook'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x'></i></span></a>";
+        $html .= "<a href='http://pinterest.com/pin/create/button/?url=$url/&amp;media=$image&amp;description=$title' target='_blank' class='share_pinterest'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x'></i></span></a>";
+        $html .= "<a href='https://plus.google.com/share?url=$url' onclick='javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;' target='_blank' class='share_google'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-google-plus fa-stack-1x'></i></span></a>";
+        $html .= "<a href='http://twitter.com/home?status=$title+$url' class='share_tweet' target='_blank'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x'></i></span></a>";
         $html .= "</div>";
         return $html;
     }

@@ -108,7 +108,7 @@ use System\Libs\Language as Lang;
                                 <a id="adatlap_nyomtatas" class="simple-btn sm-button outlined red"><i class="fa fa-print"></i> <?php echo Lang::get('adatlap_nyomtatas_gomb'); ?></a>
                                 <!-- <button id="adatlap_nyomtatas" type="submit" class="send-btn"><i class="fa fa-print"></i> <?php echo Lang::get('adatlap_nyomtatas_gomb'); ?></button> -->
                             </form>
-                            <a id="myPopover" data-toggle="popover" title="Social share" data-placement="bottom" data-content="<?php echo $this->html_helper->socialMediaShare(); ?>" class="simple-btn sm-button outlined red" href="javascript:void(0)"><i class="fa fa-share"></i> <?php echo Lang::get('adatlap_megosztas_gomb'); ?></a>
+                            <a id="myPopover" data-toggle="popover" title="Social share" data-placement="bottom" data-content="<?php echo $this->html_helper->socialMediaShare($this->getConfig('ingatlan_photo.upload_path') . $pictures[0],  $ingatlan['ingatlan_nev_' . LANG]); ?>" class="simple-btn sm-button outlined red" href="javascript:void(0)"><i class="fa fa-share"></i> <?php echo Lang::get('adatlap_megosztas_gomb'); ?></a>
                         </div>
                     </div>
         
