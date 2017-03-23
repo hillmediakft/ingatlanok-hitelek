@@ -39,7 +39,7 @@
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="dashboard-stat red-intense">
                     <div class="visual">
-                        <i class="fa fa-file"></i>
+                        <i class="fa fa-files-o"></i>
                     </div>
                     <div class="details">
                         <div class="number">
@@ -57,17 +57,17 @@
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="dashboard-stat green-haze">
                     <div class="visual">
-                        <i class="fa fa-file"></i>
+                        <i class="fa fa-suitcase"></i>
                     </div>
                     <div class="details">
                         <div class="number">
 
                         </div>
                         <div class="desc">
-                            Valami
+                            Hírek
                         </div>
                     </div>
-                    <a href="#" class="more">
+                    <a href="admin/blog" class="more">
                         Tovább <i class="fa fa-arrow-right"></i>
                     </a>
                 </div>
@@ -75,17 +75,17 @@
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="dashboard-stat purple-plum">
                     <div class="visual">
-                        <i class="fa fa-file-archive-o"></i>
+                        <i class="fa fa-windows"></i>
                     </div>
                     <div class="details">
                         <div class="number">
 
                         </div>
                         <div class="desc">
-                            Valami 2
+                            Pop up ablakok
                         </div>
                     </div>
-                    <a href="#" class="more">
+                    <a href="admin/pop_up_windows" class="more">
                         Tovább <i class="fa fa-arrow-right"></i>
                     </a>
                 </div>
@@ -99,17 +99,17 @@
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="dashboard-stat blue-hoki">
                     <div class="visual">
-                        <i class="fa fa-file-text"></i>
+                        <i class="fa fa-home"></i>
                     </div>
                     <div class="details">
                         <div class="number">
 
                         </div>
                         <div class="desc">
-                            Valami 3
+                            Ingatlanok
                         </div>
                     </div>
-                    <a href="#" class="more">
+                    <a href="admin/property" class="more">
                         Tovább <i class="fa fa-arrow-right"></i>
                     </a>
                 </div>
@@ -117,17 +117,17 @@
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="dashboard-stat green-seagreen">
                     <div class="visual">
-                        <i class="fa fa-file-text-o"></i>
+                        <i class="fa fa-files-o"></i>
                     </div>
                     <div class="details">
                         <div class="number">
 
                         </div>
                         <div class="desc">
-                            Valami 4
+                            Érkezési oldalak
                         </div>
                     </div>
-                    <a href="#" class="more">
+                    <a href="admin/landingpage" class="more">
                         Tovább <i class="fa fa-arrow-right"></i>
                     </a>
                 </div>
@@ -135,17 +135,17 @@
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="dashboard-stat yellow-casablanca">
                     <div class="visual">
-                        <i class="fa fa-desktop"></i>
+                        <i class="fa fa-globe"></i>
                     </div>
                     <div class="details">
                         <div class="number">
 
                         </div>
                         <div class="desc">
-                            Valami 5
+                            Fordítások
                         </div>
                     </div>
-                    <a href="#" class="more">
+                    <a href="admin/translations" class="more">
                         Tovább <i class="fa fa-arrow-right"></i>
                     </a>
                 </div>
