@@ -12,7 +12,7 @@ use System\Libs\Language as Lang;
                 <div class="breadcrumbs">
                     <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url'); ?>"><?php echo Lang::get('menu_home'); ?></a></span>
                     <span class="delimiter">/</span>
-                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.' . LANG); ?>"><?php echo Lang::get('menu_ingatlanok'); ?></a></span>
+                    <span class="clickable"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.index.' . LANG); ?>"><?php echo Lang::get('menu_ingatlanok'); ?></a></span>
                     <span class="delimiter">/</span>
                     <span class="active-page"><?php echo Lang::get('adatlap_kenyermorzsa'); ?></span>
                 </div>
