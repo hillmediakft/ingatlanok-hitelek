@@ -583,3 +583,29 @@ h3.section-title {
 #social-share-icons a:hover {
     opacity: 0.5;
 }
+
+
+.item .banner-wrapper {
+    text-align: center;
+    padding: 10px;
+}
+.item .banner-wrapper .banner-title {
+    margin: 70px 0 10px 0;
+}
+.item .banner-wrapper .banner-text {
+    margin-bottom:30px;
+}
+.banner-wrapper-list {
+    text-align: center;
+    border: 1px solid #e7e4e4;
+    padding: 10px 50px 10px 50px;
+    margin-bottom: 30px;
+    background: #eee;
+    min-height: 176px;
+}
+.banner-wrapper-list h3 {
+    margin: 20px 0 10px 0;
+}
+.banner-wrapper-list .banner-text {
+    margin-bottom: 20px;
+}
