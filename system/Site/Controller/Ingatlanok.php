@@ -29,13 +29,27 @@ class Ingatlanok extends SiteController {
 // paginátor objektum létrehozása
         $pagine = new Paginator('p', $data['settings']['pagination']);
 // limit-el lekérdezett adatok szűréssel (paraméterek bekerülnek a 'ingatlan_filter' session elembe)
-        $data['properties'] = $this->ingatlanok_model->properties_filter_query($pagine->get_limit(), $pagine->get_offset(), $this->request->get_query());
+
+// A LIMIT ÉS AZ OFFSET MÓDOSÍTÁSA A BANNER MIATT
+// a limitbő k ikell vonni egyet, mert az egyik elem a banner lesz
+$limit = ((int)$pagine->get_limit() - 1);
+$offset = $pagine->get_offset();
+// az aktuális oldal szamabol kivonunk 1-et, hogy megkapjuk, hogy mennyi elemmel kell csökkenteni az offset-et, hiszen az ez előtti oldalakon egyel kevesebb elem jelent meg
+$kimaradt_elem = $pagine->getPageId() - 1;
+$offset = ($offset > 0) ? ($offset - $kimaradt_elem) : $offset;
+
+
+        $data['properties'] = $this->ingatlanok_model->properties_filter_query($limit, $offset, $this->request->get_query());
 // összes elem, ami a szűrési feltételnek megfelel (vagy a tábla összes rekordja, ha nincs szűrés)
         $data['filtered_count'] = $this->ingatlanok_model->properties_filter_count_query();
-// összes elem megadása a paginátor objektumnak
-        $pagine->set_total($data['filtered_count']);
-// lapozó linkek visszadása (paraméter az uri path)
-
+        
+// meghatározzuk a bannerek nélküli oldalak számát (ennyi banner lesz)
+$banner_number = $pagine->getNumberOfPages($data['filtered_count'], $pagine->get_limit());
+        // összes elem megadása a paginátor objektumnak
+        // az összes rekord számát növelni kell a bekerülő bannerek számával
+        $pagine->set_total($data['filtered_count'] + $banner_number);
+      
+// lapozó linkek visszadása (paraméter a path_full)
         $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path_full'));
 
         // a keresőhöz szükséges listák alőállítása
@@ -57,8 +71,27 @@ class Ingatlanok extends SiteController {
 
         $data['agents'] = $this->ingatlanok_model->get_agent();
         shuffle($data['agents']);
-// var_dump($data);die;
 
+
+
+/* *** BANNER  beszúrunk a tömbbe egy elemet **** */
+// elemek száma
+$count = count($data['properties']);
+if ($count > 0) {
+    // ha az elemek száma 1, vagy 2, akkor vagy a 2. vagy a 3. elem lesz 
+    if ($count < 3) {
+        array_splice($data['properties'], $count, 0, 'banner');
+    }
+    // ha az elemek száma több mint 3, akkor a 3. elem lesz
+    else {
+        array_splice($data['properties'], 2, 0, 'banner');
+    }
+}
+/* *** BANNER **** */
+
+
+
+//var_dump($data['properties']);die;
 
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'html_helper'));
