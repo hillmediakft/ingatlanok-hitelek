@@ -609,3 +609,13 @@ h3.section-title {
 .banner-wrapper-list .banner-text {
     margin-bottom: 20px;
 }
+
+
+/* adatlap slider lapozó gombok - main-red.css 7252 sor a befogado objektum beállításait tartalamazza */
+.single-item-page .item-photos .main-slides .jcarousel-arrows a.next-slide {
+  float: right;
+  margin-right: 20px;
+}
+.single-item-page .item-photos .main-slides .jcarousel-arrows a.prev-slide {
+  margin-left: 20px;
+}

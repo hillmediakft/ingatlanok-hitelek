@@ -7253,7 +7253,8 @@ footer.footer .bottom-footer .copy {
   position: absolute;
   z-index: 1;
   bottom: 20px;
-  left: 20px;
+  /*left: 20px;*/
+    width:100%;
 }
 /* line 909, scss/_gallery.scss */
 .single-item-page .item-photos .main-slides .jcarousel-arrows a {
@@ -7314,6 +7315,7 @@ footer.footer .bottom-footer .copy {
   height: auto;
   overflow: hidden;
   position: relative;
+  margin-top: 8px;
 }
 /* line 956, scss/_gallery.scss */
 .single-item-page .item-photos .main-thumbnail ul {
@@ -11726,7 +11728,7 @@ background-color: #353f45;
 }
 /* line 3500, scss/_shortcodes.scss */
 .main-sidebar .widget.questions .widget-entry .questions-form textarea {
-  height: 220px;
+  height: 120px;
   resize: none;
 }
 /* line 3504, scss/_shortcodes.scss */
