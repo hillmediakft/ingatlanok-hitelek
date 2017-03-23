@@ -132,8 +132,8 @@ class Ingatlanok extends SiteController {
         $view->add_link('js', SITE_JS . 'pages/kedvencek.js');
         $view->add_link('js', SITE_JS . 'pages/adatlap.js');
         
-        $view->render('ingatlanok/tpl_adatlap_v1', $data);
-        // $view->render('ingatlanok/tpl_adatlap_v2', $data);
+        //$view->render('ingatlanok/tpl_adatlap_v1', $data);
+        $view->render('ingatlanok/tpl_adatlap_v2', $data);
     }
 
     /**
