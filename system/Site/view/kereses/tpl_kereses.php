@@ -254,7 +254,7 @@ use System\Libs\Language as Lang;
                                         <fieldset>
                                             <legend><?php echo Lang::get('kereso_reszletes_extrak'); ?></legend>
                                                 
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-3">
                                                     <ul class="extrak-list">
                                                         <li class="filter-item">
                                                             <label><input type="checkbox" name="ext_butor" value="1"> <?php echo Lang::get('kereso_butor'); ?></label>
