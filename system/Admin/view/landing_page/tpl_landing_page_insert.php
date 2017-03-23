@@ -47,7 +47,7 @@
                         
                         <div class="form-group">
                             <label for="page_title_hu">Kampány (a kampányra vonatkozó elnevezés - pl.: 2017 áprilisi kampány: budapesti luxus ingatlanok</label>   
-                            <input type='text' name='page_title_hu' class='form-control' value="<?php echo $page['title_hu'] ?>" required>
+                            <input type='text' name='page_title_hu' class='form-control' value="" required>
                         </div>                          
 
                         <ul class="nav nav-tabs">
