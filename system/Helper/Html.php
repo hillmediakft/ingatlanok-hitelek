@@ -19,7 +19,7 @@ class Html {
      */
     public function showPrice($ingatlan) {
 
-        $num_helper = Di::get('num_helper');
+        $num_helper = DI::get('num_helper');
 
         if ($ingatlan['tipus'] == 1) {
             if (isset($ingatlan['ar_elado_eredeti']) && $ingatlan['ar_elado_eredeti'] != $ingatlan['ar_elado']) {
