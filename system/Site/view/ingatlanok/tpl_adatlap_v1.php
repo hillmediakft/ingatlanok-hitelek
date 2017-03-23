@@ -153,21 +153,53 @@ use System\Libs\Language as Lang;
             <div class="col-sm-12 col-md-4">
                 <aside class="sidebar main-sidebar" style="padding-top: 0;">
 
+
+                    <!-- GOMBOK -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <a id="arvaltozas_ertesites" class="simple-btn sm-button filled red <?php echo ($ertesites_arvaltozasrol) ? 'disabled' : ''; ?>" data-id="<?php echo $ingatlan['id']; ?>" href="javascript:void(0);"><i class="fa fa-envelope"></i> <?php echo Lang::get('adatlap_arvaltozas_gomb'); ?></a>
-                            <a id="kedvencekhez_<?php echo $ingatlan['id']; ?>" data-id="<?php echo $ingatlan['id']; ?>" class="simple-btn sm-button filled red <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'disabled' : ''; ?>" href="javascript:void(0);"><i class="fa fa-heart"></i> <?php echo Lang::get('adatlap_kedvencekhez_gomb'); ?></a>
+                            <a style="text-align: center; width: 100%;" id="arvaltozas_ertesites" class="simple-btn sm-button outlined red <?php echo ($ertesites_arvaltozasrol) ? 'disabled' : ''; ?>" data-id="<?php echo $ingatlan['id']; ?>" href="javascript:void(0);"><i class="fa fa-envelope"></i> <?php echo Lang::get('adatlap_arvaltozas_gomb'); ?></a>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-sm-12">
-                            <form style="display:inline;" id="adatlap_nyomtatas_form" method="POST" action="adatlap/<?php echo $ingatlan['id']; ?>">
-                                <!-- <button id="adatlap_nyomtatas" type="submit" class="send-btn"><i class="fa fa-print"></i> <?php //echo Lang::get('adatlap_nyomtatas_gomb'); ?></button> -->
-                                <a id="adatlap_nyomtatas" class="simple-btn sm-button filled red"><i class="fa fa-print"></i> <?php echo Lang::get('adatlap_nyomtatas_gomb'); ?></a>
+                            <a style="text-align: center; width: 100%;" id="kedvencekhez_<?php echo $ingatlan['id']; ?>" data-id="<?php echo $ingatlan['id']; ?>" class="simple-btn sm-button outlined red <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'disabled' : ''; ?>" href="javascript:void(0);"><i class="fa fa-heart"></i> <?php echo Lang::get('adatlap_kedvencekhez_gomb'); ?></a>
+                        </div>
+                        <div class="col-sm-12">
+                            <form style="display: inline;" id="adatlap_nyomtatas_form" method="POST" action="adatlap/<?php echo $ingatlan['id']; ?>">
+                                <a style="text-align: center; width: 100%;" id="adatlap_nyomtatas" class="simple-btn sm-button outlined red"><i class="fa fa-print"></i> <?php echo Lang::get('adatlap_nyomtatas_gomb'); ?></a>
+                                <!-- <button id="adatlap_nyomtatas" type="submit" class="send-btn"><i class="fa fa-print"></i> <?php echo Lang::get('adatlap_nyomtatas_gomb'); ?></button> -->
                             </form>
-                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-share"></i> <?php echo Lang::get('adatlap_megosztas_gomb'); ?></a>
+                        </div>
+                        <div class="col-sm-12">
+                            <a style="text-align: center; width: 100%;" id="myPopover" data-toggle="popover" title="Social share" data-placement="bottom" data-content="<?php echo $this->html_helper->socialMediaShare($this->getConfig('ingatlan_photo.upload_path') . $pictures[0],  $ingatlan['ingatlan_nev_' . LANG]); ?>" class="simple-btn sm-button outlined red" href="javascript:void(0)"><i class="fa fa-share"></i> <?php echo Lang::get('adatlap_megosztas_gomb'); ?></a>
                         </div>
                     </div>
+
+
+<!-- 
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a id="arvaltozas_ertesites" class="simple-btn sm-button filled red <?php //echo ($ertesites_arvaltozasrol) ? 'disabled' : ''; ?>" data-id="<?php echo $ingatlan['id']; ?>" href="javascript:void(0);"><i class="fa fa-envelope"></i> <?php echo Lang::get('adatlap_arvaltozas_gomb'); ?></a>
+                            <a id="kedvencekhez_<?php //echo $ingatlan['id']; ?>" data-id="<?php //echo $ingatlan['id']; ?>" class="simple-btn sm-button filled red <?php echo (Cookie::is_id_in_cookie('kedvencek', $ingatlan['id'])) ? 'disabled' : ''; ?>" href="javascript:void(0);"><i class="fa fa-heart"></i> <?php echo Lang::get('adatlap_kedvencekhez_gomb'); ?></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form style="display:inline;" id="adatlap_nyomtatas_form" method="POST" action="adatlap/<?php //echo $ingatlan['id']; ?>">
+ -->
+                                <!-- <button id="adatlap_nyomtatas" type="submit" class="send-btn"><i class="fa fa-print"></i> <?php //echo Lang::get('adatlap_nyomtatas_gomb'); ?></button> -->
+<!-- 
+                                <a id="adatlap_nyomtatas" class="simple-btn sm-button filled red"><i class="fa fa-print"></i> <?php //echo Lang::get('adatlap_nyomtatas_gomb'); ?></a>
+                            </form>
+                            <a class="simple-btn sm-button filled red" href="#"><i class="fa fa-share"></i> <?php //echo Lang::get('adatlap_megosztas_gomb'); ?></a>
+                        </div>
+                    </div>
+ -->
+
+
+
+
+
+
+
 
                     <div class="row">
                         <div class="col-sm-12">
