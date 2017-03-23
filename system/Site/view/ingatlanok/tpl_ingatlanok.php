@@ -71,7 +71,30 @@ use System\Libs\Language as Lang;
                     <div class="property-list" id="equalheight-property-list">
                         <div class="row">
                             <?php
-                            foreach ($properties as $value) {
+                                foreach ($properties as $value) {
+                            ?>
+                            
+
+<?php
+if ($value == 'banner') { ?>
+<div class="col-lg-4 col-md-6">
+    <div class="item">
+        <div class="banner-wrapper">
+            <div class="banner-title">
+                <h3>Aliquam convallis et tortor nec bibendum</h3>
+            </div>
+            <div class="banner-text">
+                Maecenas interdum lorem ac sapien ullamcorper congue. Curabitur suscipit est sed ante consectetur fermentum.
+            </div>
+            <div>
+                <a href="#" class="simple-btn sm-button filled red">Phasellus</a>
+            </div>
+        </div>
+    </div>
+</div>
+<?php continue; } ?>
+
+                            <?php     
                                 $photo_array = json_decode($value['kepek']);
                             ?>
                             <div class="col-lg-4 col-md-6">
@@ -126,6 +149,28 @@ use System\Libs\Language as Lang;
                     <div class="row">
                         <?php
                         foreach ($properties as $value) {
+                        ?>
+
+
+
+<?php
+if ($value == 'banner') { ?>
+<div class="col-sm-12">
+    <div class="banner-wrapper-list">
+        <div class="banner-title">
+            <h3>Aliquam convallis et tortor nec bibendum</h3>
+        </div>
+        <div class="banner-text">
+            Maecenas interdum lorem ac sapien ullamcorper congue. Curabitur suscipit est sed ante consectetur fermentum.
+        </div>
+        <div>
+            <a href="#" class="simple-btn sm-button filled red">Phasellus</a>
+        </div>
+    </div>
+</div>
+<?php continue; } ?>
+
+                        <?php 
                             $photo_array = json_decode($value['kepek']);
                         ?>
                         <div class="col-sm-12">
