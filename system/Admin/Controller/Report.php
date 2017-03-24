@@ -98,7 +98,7 @@ class Report extends AdminController {
     {
         foreach ($original as $key => $value) {
             $array[$key]['id'] = $value['id'];
-            $array[$key]['referens'] = $value['user_first_name'] . ' ' . $value['user_first_name'];
+            $array[$key]['referens'] = $value['first_name'] . ' ' . $value['first_name'];
             $array[$key]['varos'] = $value['city_name'];
             $array[$key]['kerulet'] = $value['district_name'];
             if ($value['tipus'] == 1) {
@@ -106,8 +106,8 @@ class Report extends AdminController {
             } else {
                 $array[$key]['tipus'] = 'Kiadó';
             }
-            $array[$key]['kategoria'] = $value['kat_nev'];
-            $array[$key]['allapot'] = $value['all_leiras'];
+            $array[$key]['kategoria'] = $value['kat_nev_hu'];
+            $array[$key]['allapot'] = $value['all_leiras_hu'];
             $array[$key]['alapterulet'] = $value['alapterulet'];
             $array[$key]['szobaszam'] = $value['szobaszam'];
             $array[$key]['ar_elado'] = $value['ar_elado'];

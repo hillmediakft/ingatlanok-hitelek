@@ -33,17 +33,17 @@ class Report_model extends AdminModel {
             'ingatlanok.allapot',
             'ingatlanok.alapterulet',
             'ingatlanok.szobaszam',
-            'ingatlan_kategoria.kat_nev',
+            'ingatlan_kategoria.kat_nev_hu',
             'ingatlanok.megtekintes',
-            'users.user_first_name',
-            'users.user_last_name',
+            'users.first_name',
+            'users.last_name',
             'district_list.district_name',
             'city_list.city_name',
-            'ingatlan_allapot.all_leiras'
+            'ingatlan_allapot.all_leiras_hu'
         ));
 
         $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
-        $this->query->set_join('left', 'users', 'ingatlanok.ref_id', '=', 'users.user_id');
+        $this->query->set_join('left', 'users', 'ingatlanok.ref_id', '=', 'users.id');
         $this->query->set_join('left', 'district_list', 'ingatlanok.kerulet', '=', 'district_list.district_id');
         $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
         $this->query->set_join('left', 'ingatlan_allapot', 'ingatlanok.allapot', '=', 'ingatlan_allapot.all_id');

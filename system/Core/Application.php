@@ -324,7 +324,8 @@ class Application {
                 // log lista oldal
                 $router->get('/logs', 'Logs@index');
 
-
+                // ingatlan csv export	
+                $router->get('/report/property', 'report@property');
 
                 // error	
                 $router->set404('error@index');
