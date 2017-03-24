@@ -5,7 +5,8 @@
 		"phpmailer/phpmailer": "~5.2",
         "pimple/pimple": "~3.0",
         "rev42/tfpdf": "^1.25",
-        "setasign/fpdf": "1.8.1"
+        "setasign/fpdf": "1.8.1",
+        "phpoffice/phpexcel": "^1.8"
 	},
 		"autoload": {
         "psr-4": {
