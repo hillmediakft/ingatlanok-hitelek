@@ -1,4 +1,5 @@
 <?php
+namespace System\Libs;
 /**
  * PHPReport
  * Library for generating reports from PHP
