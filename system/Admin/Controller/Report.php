@@ -2,6 +2,7 @@
 namespace System\Admin\Controller;
 use System\Core\AdminController;
 use System\Libs\Session;
+use System\Libs\PHPreport;
 /**
  * Ingatlan tábla adatainak exportálása
  * PHPreport osztály és PHPexcel package használatával 
