@@ -323,7 +323,7 @@ use System\Libs\Language as Lang;
                                             <button class="find-now-btn"><?php echo Lang::get('kereso_kereses'); ?></button>
                                            <!-- <a href="#" class="visible-xs find-now-btn"><?php //echo Lang::get('kereso_kereses');       ?></a> -->
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2" style="text-align:center;">
                                             <a id="reset_form" href="javascript:void(0);" class="simple-btn sm-button filled red" style="margin-top: 33px; width: 100%;"><?php echo Lang::get('kereso_reszletes_kereses_torles'); ?></a>
                                         </div>
                                     </div>
