@@ -121,7 +121,7 @@ if ($value == 'banner') { ?>
                                         </div>
                                         <div class="single-thumbnail">
 
-                                            <span class="value"><?php echo $value['szobaszam']; ?> szoba</span>
+                                            <span class="value"><?php echo (!empty($value['szobaszam'])) ? $value['szobaszam'] . ' ' . mb_strtolower(Lang::get('jell_szobaszam'), 'UTF-8') : ''; ?></span>
                                         </div>
                                         <div class="single-thumbnail">
                                             <span class="value"><?php echo $value['alapterulet']; ?> m<sup>2</sup></span>
