@@ -225,7 +225,7 @@ class Property extends AdminController {
                 $temp['id'] = $value['id'];
 
             // 3. Referenci szám oszlop    
-                $temp['ref_num'] = '#' . $value['ref_num'] . '<br>';
+                $temp['ref_num'] =  '<a href="' . $this->request->get_uri('site_url') . 'property/update/' . $value['id'] . '">#' . $value['ref_num'] . '</a><br>';
                 if ($value['kiemeles'] == 1) {
                     $temp['ref_num'] .= '<span class="label label-sm label-success">Kiemelt</span>';
                 }
@@ -239,9 +239,9 @@ class Property extends AdminController {
                     //$photo_name = array_shift($photo_names);
                     //unset($photo_names);      
                     $url_helper = DI::get('url_helper');
-                    $temp['kepek'] = '<img src="' . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_names[0]) . '" alt="" />';
+                    $temp['kepek'] = '<a href="' . $this->request->get_uri('site_url') . 'property/update/' . $value['id'] . '"><img src="' . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_names[0]) . '" alt="" /></a>';
                 } else {
-                    $temp['kepek'] = '<img src="' . ADMIN_ASSETS . 'img/placeholder_80x60.jpg" alt="" />';
+                    $temp['kepek'] = '<a href="' . $this->request->get_uri('site_url') . 'property/update/' . $value['id'] . '"><img src="' . ADMIN_ASSETS . 'img/placeholder_80x60.jpg" alt="" /></a>';
                 }
 
             // 5. Referens oszlop    
