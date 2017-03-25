@@ -259,6 +259,10 @@ use System\Libs\Language as Lang;
                                                         <li class="filter-item">
                                                             <label><input type="checkbox" name="ext_butor" value="1"> <?php echo Lang::get('kereso_butor'); ?></label>
                                                         </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <ul class="extrak-list">
                                                         <li class="filter-item">
                                                             <label><input type="checkbox" name="erkely" value="1"> <?php echo Lang::get('kereso_erkely'); ?></label>
                                                         </li>
@@ -281,7 +285,7 @@ use System\Libs\Language as Lang;
                                                     </div>
                                                 </div>
 
-                                                <!-- REFERENES -->
+                                                <!-- REFERENS -->
                                                 <div class="col-sm-3">
                                                     <?php
                                                     $selected_agent = isset($filter_params['ref_id']) ? $filter_params['ref_id'] : '';
@@ -297,20 +301,32 @@ use System\Libs\Language as Lang;
                                                     </div>                  
                                                 </div>
 
+                                                <!-- SZABAD SZAVAS KERESŐ MEZŐ -->
                                                 <div class="col-sm-3">
-                                                    <span class="item-label"><?php echo Lang::get('kereso_ingatlan_nev'); ?></span>
+                                                    <span class="item-label"><?php echo Lang::get('kereso_leiras_utca'); ?></span>
                                                     <div class="form-group">
-                                                        <input type="text" name="<?php echo 'ingatlan_nev_' . LANG; ?>" class="form-control" value="<?php echo (isset($filter_params['ingatlan_nev_' . LANG])) ? $filter_params['ingatlan_nev_' . LANG] : ''; ?>"/>
+                                                        <input type="text" name="free_word" class="form-control" value="<?php echo (isset($filter_params['free_word'])) ? $filter_params['free_word'] : ''; ?>"/>
                                                     </div>
                                                 </div>
 
-                                                <!-- UTCA NÉV -->
+<!-- 
                                                 <div class="col-sm-3">
-                                                    <span class="item-label"><?php echo Lang::get('kereso_utca'); ?></span>
+                                                    <span class="item-label"><?php //echo Lang::get('kereso_ingatlan_nev'); ?></span>
                                                     <div class="form-group">
-                                                        <input type="text" name="utca" class="form-control" value="<?php echo (isset($filter_params['utca'])) ? $filter_params['utca'] : ''; ?>"/>
+                                                        <input type="text" name="<?php //echo 'ingatlan_nev_' . LANG; ?>" class="form-control" value="<?php //echo (isset($filter_params['ingatlan_nev_' . LANG])) ? $filter_params['ingatlan_nev_' . LANG] : ''; ?>"/>
                                                     </div>
                                                 </div>
+ -->
+
+                                                <!-- UTCA NÉV -->
+<!-- 
+                                                <div class="col-sm-3">
+                                                    <span class="item-label"><?php //echo Lang::get('kereso_utca'); ?></span>
+                                                    <div class="form-group">
+                                                        <input type="text" name="utca" class="form-control" value="<?php //echo (isset($filter_params['utca'])) ? $filter_params['utca'] : ''; ?>"/>
+                                                    </div>
+                                                </div>
+ -->
 
                                         </fieldset>
                                     </div>
