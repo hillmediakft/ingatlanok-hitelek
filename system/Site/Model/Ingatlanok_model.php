@@ -476,6 +476,20 @@ class Ingatlanok_model extends SiteModel {
             $params['ref_num'] = intval(preg_replace('~\D~', '', $params['ref_num']));
             $this->query->set_where('ref_num', '=', (int)$params['ref_num']);
         }
+
+// Szabad szavas kereső mező
+if (isset($params['free_word']) && $params['free_word'] !== '') {
+    //$this->query->set_where('ingatlan_nev_hu', 'LIKE', '%' . $params['free_word'] . '%');
+    //$this->query->set_where('ingatlan_nev_en', 'LIKE', '%' . $params['free_word'] . '%', 'or');
+    $this->query->set_where('AND (');
+    $this->query->set_where('leiras_hu', 'LIKE', '%' . $params['free_word'] . '%');
+    $this->query->set_where('leiras_en', 'LIKE', '%' . $params['free_word'] . '%', 'or');
+    $this->query->set_where('utca', 'LIKE', '%' . $params['free_word'] . '%', 'or');
+    $this->query->set_where(')');
+}        
+
+
+/*
         // Ingatlan név hu
         if (isset($params['ingatlan_nev_hu']) && $params['ingatlan_nev_hu'] !== '') {
             $this->query->set_where('ingatlan_nev_hu', 'LIKE', '%' . $params['ingatlan_nev_hu'] . '%');
@@ -488,7 +502,7 @@ class Ingatlanok_model extends SiteModel {
         if (isset($params['utca']) && $params['utca'] !== '') {
             $this->query->set_where('utca', 'LIKE', '%' . $params['utca'] . '%');
         }
-  
+ */ 
 
 /** SORREND **/
         // ár szerint
@@ -1543,7 +1557,12 @@ echo "</pre>";
         if (isset($filter['ref_id']) && $filter['ref_id'] !== '') {
             $filter_with_names['ref_id'] = $filter['ref_id'];
         }
+        
+        if (isset($filter['free_word']) && $filter['free_word'] !== '') {
+            $filter_with_names['free_word'] = $filter['free_word'];
+        }
 
+/*
         if (isset($filter['utca']) && $filter['utca'] !== '') {
             $filter_with_names['utca'] = $filter['utca'];
         }
@@ -1551,6 +1570,8 @@ echo "</pre>";
         if (isset($filter['ingatlan_nev_' . LANG]) && $filter['ingatlan_nev_' . LANG] !== '') {
             $filter_with_names['ingatlan_nev_' . LANG] = $filter['ingatlan_nev_' . LANG];
         }
+*/        
+
 
         if (isset($filter['view'])) {
             $filter_with_names['view'] = $filter['view'];
