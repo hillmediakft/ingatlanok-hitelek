@@ -8,11 +8,11 @@
 }
 
 
-
+/*
 @font-face {
-  font-family: 'Lato-Regular';
-  src: url("../fonts/lato-regular/Lato-Regular_gdi.eot");
-  src: url("../fonts/lato-regular/Lato-Regular_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/lato-regular/Lato-Regular_gdi.woff") format("woff"), url("../fonts/lato-regular/Lato-Regular_gdi.ttf") format("truetype"), url("../fonts/lato-regular/Lato-Regular_gdi.svg#Lato-Regular") format("svg");
+  font-family: 'Lato';
+  src: url("../fonts/lato-regular/Lato_gdi.eot");
+  src: url("../fonts/lato-regular/Lato_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/lato-regular/Lato_gdi.woff") format("woff"), url("../fonts/lato-regular/Lato_gdi.ttf") format("truetype"), url("../fonts/lato-regular/Lato_gdi.svg#Lato") format("svg");
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;
@@ -58,6 +58,7 @@
   font-style: normal;
   font-stretch: normal;
 }
+*/
 @font-face {
   font-family: 'DINCondensed-Bold';
   src: url("../fonts/din-condensed-bold/DINCondensed-Bold_gdi.eot");
@@ -335,7 +336,7 @@ body, html {
   font-weight: normal;
   font-size: 13px;
   color: #808080;
-  font-family: "Lato-Regular", Arial, sans-serif;
+  font-family: "Lato", Arial, sans-serif;
   margin: 0;
   padding-left: 15px;
   padding-top: 4px;
@@ -369,7 +370,7 @@ body, html {
 .extra-header .extra-item.currency .ui-state-default .ui-selectmenu-text {
   font-size: 13px;
   color: #808080;
-  font-family: "Lato-Regular", Arial, sans-serif;
+  font-family: "Lato", Arial, sans-serif;
   padding-left: 15px;
 }
 /* line 241, scss/_header.scss */
@@ -2003,7 +2004,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 688, scss/_slider.scss */
 .main-filter .filter-form .item-label .label-descr {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   color: #808080;
 }
 /* line 693, scss/_slider.scss */
@@ -2036,7 +2037,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 714, scss/_slider.scss */
 .main-filter .filter-form .ui-front .ui-selectmenu-button.ui-state-default .ui-selectmenu-text {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   color: #808080;
   font-size: 14px;
   padding-top: 8px;
@@ -2076,7 +2077,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 749, scss/_slider.scss */
 .main-filter .filter-form .ui-front .ui-selectmenu-menu .ui-menu li.ui-menu-item {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #808080;
@@ -3555,7 +3556,7 @@ footer.footer .bottom-footer .copy {
 .blog-posts-holder.interested-products div.item div.item-entry .item-thumbnail .old-price,
 .interesting-offer.interested-products div.item div.item-entry .item-thumbnail .old-price,
 .featured-products.interested-products div.item div.item-entry .item-thumbnail .old-price {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   text-decoration: line-through;
   font-size: 16px;
   margin-right: 5px;
@@ -4802,7 +4803,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 2432, scss/_slider.scss */
 .popular-countries h2.block-title {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
 }
 /* line 2436, scss/_slider.scss */
 .popular-countries .carousel ul li .country-item {
@@ -5751,7 +5752,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 3196, scss/_slider.scss */
 .subscribe-banner .banner-text-block .banner-title {
-  font-family: 'Lato-Regular';
+  font-family: 'Lato';
   font-size: 28px;
   text-transform: uppercase;
   display: block;
@@ -6617,7 +6618,7 @@ footer.footer .bottom-footer .copy {
 /* line 360, scss/_gallery.scss */
 .our-objects-gallery .item .item-entry .item-info .price-holder .price {
   text-transform: uppercase;
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 20px;
   color: #9e2828;
 }
@@ -6735,7 +6736,7 @@ footer.footer .bottom-footer .copy {
 .main-isotope-gallerry-container .our-objects-gallery .gallery-element .preview .overlay-entry .date {
   display: block;
   text-align: center;
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 15px;
   color: #9e2828;
 }
@@ -7645,7 +7646,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 173, scss/_shortcodes.scss */
 .tabs .ui-tabs-nav .ui-state-default a {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 16px;
   color: #808080;
   padding: 16px 20px;
@@ -7671,7 +7672,7 @@ footer.footer .bottom-footer .copy {
   border-radius: 0;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 15px;
   color: #808080;
 }
@@ -8833,7 +8834,7 @@ background-color: #353f45;
 }
 /* line 1114, scss/_shortcodes.scss */
 .objects-block .objects-block-filter .right-block > .ui-front .ui-selectmenu-button.ui-state-default .ui-selectmenu-text {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   color: #808080;
   font-size: 14px;
   padding: 5px;
@@ -8874,7 +8875,7 @@ background-color: #353f45;
 }
 /* line 1150, scss/_shortcodes.scss */
 .objects-block .objects-block-filter .right-block > .ui-front .ui-selectmenu-menu .ui-menu li.ui-menu-item {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #808080;
@@ -10527,7 +10528,7 @@ background-color: #353f45;
 }
 /* line 2524, scss/_shortcodes.scss */
 .main-sidebar .widget .heading .widget-title {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 22px;
   color: #000;
 }
@@ -11250,7 +11251,7 @@ background-color: #353f45;
 }
 /* line 3097, scss/_shortcodes.scss */
 .main-sidebar .widget.main-filter-widget .filter-form .item-label .label-descr {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   color: #808080;
 }
 /* line 3102, scss/_shortcodes.scss */
@@ -11283,7 +11284,7 @@ background-color: #353f45;
 }
 /* line 3123, scss/_shortcodes.scss */
 .main-sidebar .widget.main-filter-widget .filter-form .ui-front .ui-selectmenu-button.ui-state-default .ui-selectmenu-text {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   color: #808080;
   font-size: 14px;
   padding-top: 8px;
@@ -11323,7 +11324,7 @@ background-color: #353f45;
 }
 /* line 3158, scss/_shortcodes.scss */
 .main-sidebar .widget.main-filter-widget .filter-form .ui-front .ui-selectmenu-menu .ui-menu li.ui-menu-item {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #808080;
@@ -11936,7 +11937,7 @@ background-color: #353f45;
 }
 /* line 3674, scss/_shortcodes.scss */
 .news-sidebar .widget.most-popular .tabs-side .ui-tabs-nav li.ui-state-default a {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 14px;
   color: #3a383b;
   padding: 7px 20px;
@@ -11992,7 +11993,7 @@ background-color: #353f45;
 /* line 3721, scss/_shortcodes.scss */
 .news-sidebar .widget.most-popular .news-listing .news-item .news-title {
   font-size: 15px;
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   display: block;
 }
 /* line 3725, scss/_shortcodes.scss */
@@ -12006,7 +12007,7 @@ background-color: #353f45;
 /* line 3732, scss/_shortcodes.scss */
 .news-sidebar .widget.most-popular .news-listing .news-item .views {
   color: #808080;
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 12px;
 }
 /* line 3736, scss/_shortcodes.scss */
@@ -12204,7 +12205,7 @@ background-color: #353f45;
 }
 /* line 3902, scss/_shortcodes.scss */
 .rent-flat-sidebar .widget.rooms .item-label .label-descr {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   color: #808080;
 }
 /* line 3907, scss/_shortcodes.scss */
@@ -12241,7 +12242,7 @@ background-color: #353f45;
 }
 /* line 3931, scss/_shortcodes.scss */
 .rent-flat-sidebar .widget.rooms .ui-front .ui-selectmenu-button.ui-state-default .ui-selectmenu-text {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   color: #808080;
   font-size: 14px;
   padding-top: 8px;
@@ -12281,7 +12282,7 @@ background-color: #353f45;
 }
 /* line 3966, scss/_shortcodes.scss */
 .rent-flat-sidebar .widget.rooms .ui-front .ui-selectmenu-menu .ui-menu li.ui-menu-item {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #808080;
@@ -12520,7 +12521,7 @@ background-color: #353f45;
 /* line 4166, scss/_shortcodes.scss */
 .objects-block .object-item .item-entry .item-info .price-holder .price {
   text-transform: uppercase;
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 20px;
   color: #9e2828;
 }
@@ -13570,7 +13571,7 @@ background-color: #353f45;
 }
 /* line 5020, scss/_shortcodes.scss */
 .sort-block .select-container .ui-front .ui-selectmenu-button.ui-state-default .ui-selectmenu-text {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   color: #808080;
   font-size: 14px;
   padding-top: 6px;
@@ -13610,7 +13611,7 @@ background-color: #353f45;
 }
 /* line 5055, scss/_shortcodes.scss */
 .sort-block .select-container .ui-front .ui-selectmenu-menu .ui-menu li.ui-menu-item {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #808080;
@@ -15183,7 +15184,7 @@ background-color: #353f45;
 }
 /* line 6270, scss/_shortcodes.scss */
 .blog-content.column-1 .single-blog-item .descr .title, .blog-content.column-2 .single-blog-item .descr .title, .blog-content.column-3 .single-blog-item .descr .title, .blog-content.full-width .single-blog-item .descr .title, .blog-content.masonry-posts .single-blog-item .descr .title {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 18px;
   margin-bottom: 12px;
   display: block;
@@ -15997,7 +15998,7 @@ background-color: #353f45;
 }
 /* line 6998, scss/_shortcodes.scss */
 .blog-single-post .blog-post-entry .title {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   font-size: 30px;
   margin-bottom: 12px;
   display: block;
@@ -17069,11 +17070,11 @@ h2.block-title.xs-marge {
 }
 /* line 140, scss/_tipography.scss */
 h2.block-title.inversed {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
 }
 /* line 143, scss/_tipography.scss */
 h2.block-title.regular {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
 }
 /* line 146, scss/_tipography.scss */
 h2.block-title.style-2 {
@@ -17160,7 +17161,7 @@ span.sub-title.left {
 
 /* line 217, scss/_tipography.scss */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   color: #000;
   margin-bottom: 32px;
   margin-top: 24px;
@@ -17305,7 +17306,7 @@ blockquote:after {
 
 /* line 13, scss/_main.scss */
 body {
-  font-family: "Lato-Regular", Arial, sans-serif;
+  font-family: "Lato", Arial, sans-serif;
   color: #808080;
   line-height: 1.35;
   font-size: 15px;
@@ -17470,7 +17471,7 @@ table.products-table tbody tr td:nth-child(2) a:hover {
 /* line 144, scss/_main.scss */
 .total-block .total-entry .coupon-block .coupon-code {
   width: 230px;
-  font-family: 'Lato-Regular', Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
   line-height: 36px;
   border: 1px solid #e7e4e4;
   padding-left: 14px;

@@ -14,7 +14,7 @@ use System\Libs\Auth; ?>
         <meta name="keywords" content="<?php echo $keywords; ?>" />
         <base href="<?php echo BASE_URL; ?>">
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" /> -->
+       <link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
         <!-- BOOTSTRAP CSS v3.3.5 -->
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_CSS; ?>bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo SITE_ASSETS; ?>fonts/font-awesome-4.4.0/css/font-awesome.min.css">
