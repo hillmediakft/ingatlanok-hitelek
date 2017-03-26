@@ -66,6 +66,11 @@ class Emailer {
     private $area = 'Site';
 
     /**
+     * debug
+     */
+    private $debug = false;
+
+    /**
      * CONSTRUCTOR
      *
      * @param  string   $from_email
@@ -106,6 +111,15 @@ class Emailer {
     public function setArea($area)
     {
         $this->area = $area;
+    }
+
+    /**
+     * Debug tulajdonság értékének beállítása (ha true ... akkor echo template)
+     * @param bool
+     */
+    public function setDebug($debug)
+    {
+        $this->debug = $debug;
     }
 
     /**
@@ -158,6 +172,11 @@ class Emailer {
 // levél tartalom beállítása
         $mail->Body = $this->_load_template_with_data($this->template, $this->template_data);
         //$mail->AltBody = '';
+
+if ($this->debug) {
+    echo $this->_load_template_with_data($this->template, $this->template_data);
+    return false;
+}
 
         $mail->addAddress($this->to_email, $this->to_name);     // Add a recipient (Name is optional)
         // $mail->addAddress($admin_email);
