@@ -1791,8 +1791,11 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
             $data[] = $this->property_model->getPropertyDetails($id);
         }
 
+
 $photo_link = BASE_URL . UPLOADS . 'ingatlan_photo/';
 $url_helper = DI::get('url_helper');
+$name = (empty($name)) ? 'érdeklődő' : $name;
+
 
 $html_data = "";
 $html_data .= "<table>\r\n";
@@ -1801,14 +1804,13 @@ $html_data .= "<table>\r\n";
 
             if (!empty($value['kepek'])) {
                 $kep_arr = json_decode($value['kepek']);
-                $kep = $kep_arr[0];
                 $img = "<img src=" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $kep_arr[0]) . " alt='' />";
             } else {
-                $img = '';
+                $img = "<img src=" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg') . " alt='' />";
             }
 
             $html_data .= "<tr>\r\n";
-            $html_data .= "<td>" . $value['ref_num'] . "</td>";
+            $html_data .= "<td>S-" . $value['ref_num'] . "</td>";
             $html_data .= "<td>" . $img . "</td>";
             $html_data .= "<td>" . $value['kat_nev_hu'] . "</td>";
             $html_data .= "</tr>\r\n";
@@ -1949,21 +1951,24 @@ ADATOK
 
 
 
+/*
 var_dump($template_data);
 die;
-/*
+*/
+
         $to_email = $email;
         $to_name = '';
         $subject = 'Érdeklődés';
         $template = 'ingatlanok_email';
-        $from_email = $settings['email'];
+        $from_email = $user->email;
         $from_name = $settings['ceg'];
 
         $emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template);
         $emailer->setArea('admin');
+$emailer->setDebug(true);
+
         // true vagy false
         return $emailer->send();
-*/
     }
 
 
