@@ -20575,7 +20575,7 @@ body.shop-front header .cart-btn:hover {
     margin-right: 0;
   }
   /* line 2845, scss/_responsive.scss */
-  body .bottom-footer .copy {
+  body .bottom-footer .copy, body .bottom-footer .policies {
     font-size: 11px;
   }
   /* line 2849, scss/_responsive.scss */

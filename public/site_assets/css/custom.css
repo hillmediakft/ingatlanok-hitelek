@@ -286,12 +286,12 @@
     border-top: 5px;
 }
 
-        .dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
-            color: #9e2828;
-            text-decoration: none;
-            background-color: none;
-            border-top: 5px;
-        }
+.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+    color: #9e2828;
+    text-decoration: none;
+    background-color: none;
+    border-top: 5px;
+}
 
 .bs-caret {
     content: '';
@@ -364,7 +364,7 @@ h3.section-title .lower-price {
     background-color: #9e2828;
 }
 .kedvencek .main-sidebar {
-  padding-top: 0px;
+    padding-top: 0px;
 }
 .kedvencek .main-sidebar .widget.main-filter-widget {
     margin-top: 0px;
@@ -374,13 +374,13 @@ h3.section-title .lower-price {
 .objects-block.with-sidebar .item .preview > .lower-price,
 .objects-block.list-sidebar .item .preview .lower-price, 
 .object-slider .carousel .item .preview > .lower-price {
-position: absolute;
-background: rgba(73, 158, 255, 0.8);
-bottom: 0px;
-right: 0px;
-padding: 5px 7px;
-color: #fff;
-font-size: 16px;
+    position: absolute;
+    background: rgba(73, 158, 255, 0.8);
+    bottom: 0px;
+    right: 0px;
+    padding: 5px 7px;
+    color: #fff;
+    font-size: 16px;
 }
 
 /* ** RÉSZLETES KERESÉS * */
@@ -520,39 +520,39 @@ input.has-error {
     border-left: 5px solid #9e2828;
 }
 @media only screen and (max-width: 370px) {
-/* ************ ADATLAP OLDAL  ********* */
-.main-slides .item-label {
-    right: 35%;
-    font-size: 15px;
-}
+    /* ************ ADATLAP OLDAL  ********* */
+    .main-slides .item-label {
+        right: 35%;
+        font-size: 15px;
+    }
 
-h3.section-title {
-    font-size: 20px;
-}
-.ingatlan-info-box h5 {
-    font-size: 16px;
-}
-.single-item-page .item-photos .main-thumbnail ul li {
-    height: auto;
-}
-.detail-info-block .column-2 {
-    padding: 2px 5px;
-    width: 100%;
-}
-.features-info-block .column-2 {
-    padding: 2px 5px;
-    width: 50%;
-}
-.ingatlan-info-box .agent-box {
-    display: table;
-    margin: 10px 0 10px 0; 
-}
-.ingatlan-info-box .agent-box .agent-image img {
-    max-width: 80px;
-}
-.detail-info-block, .features-info-block {
-    padding: 16px 0;
-}
+    h3.section-title {
+        font-size: 20px;
+    }
+    .ingatlan-info-box h5 {
+        font-size: 16px;
+    }
+    .single-item-page .item-photos .main-thumbnail ul li {
+        height: auto;
+    }
+    .detail-info-block .column-2 {
+        padding: 2px 5px;
+        width: 100%;
+    }
+    .features-info-block .column-2 {
+        padding: 2px 5px;
+        width: 50%;
+    }
+    .ingatlan-info-box .agent-box {
+        display: table;
+        margin: 10px 0 10px 0; 
+    }
+    .ingatlan-info-box .agent-box .agent-image img {
+        max-width: 80px;
+    }
+    .detail-info-block, .features-info-block {
+        padding: 16px 0;
+    }
 }
 
 #sticker {
@@ -613,11 +613,11 @@ h3.section-title {
 
 /* adatlap slider lapozó gombok - main-red.css 7252 sor a befogado objektum beállításait tartalamazza */
 .single-item-page .item-photos .main-slides .jcarousel-arrows a.next-slide {
-  float: right;
-  margin-right: 20px;
+    float: right;
+    margin-right: 20px;
 }
 .single-item-page .item-photos .main-slides .jcarousel-arrows a.prev-slide {
-  margin-left: 20px;
+    margin-left: 20px;
 }
 
 /* **** cookie ** */
@@ -643,3 +643,18 @@ h3.section-title {
 #cookie-law p a { 
     margin-left:10px; 
 }
+
+
+footer.footer .bottom-footer .copy {
+    text-align: left;
+}
+footer.footer .bottom-footer .policies {
+    text-align: right;
+}
+@media only screen and (max-width: 480px) {
+    footer.footer .bottom-footer .copy, footer.footer .bottom-footer .policies {
+        text-align: center;
+    }
+}
+
+

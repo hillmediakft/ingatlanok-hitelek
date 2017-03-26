@@ -1,4 +1,5 @@
 <?php
+
 use System\Libs\Config;
 use System\Libs\Language as Lang;
 ?>
@@ -16,26 +17,26 @@ use System\Libs\Language as Lang;
                     <p class="text"><?php echo Lang::get('footer_rolunk_szoveg'); ?></p>
                     <div class="social-block">
                         <ul class="sociable-listing">
-<?php if ($settings['facebook']) { ?>
+                            <?php if ($settings['facebook']) { ?>
                                 <li class="sociable-item">
                                     <a href="<?php echo $settings['facebook']; ?>" class="social-icon"><i class="fa fa-facebook"></i></a>
                                 </li>
-<?php } ?>
-<?php if ($settings['linkedin']) { ?>
+                            <?php } ?>
+                            <?php if ($settings['linkedin']) { ?>
                                 <li class="sociable-item">
                                     <a href="<?php echo $settings['linkedin']; ?>" class="social-icon"><i class="fa fa-linkedin"></i></a>
                                 </li>
-<?php } ?>
-<?php if ($settings['twitter']) { ?>
+                            <?php } ?>
+                            <?php if ($settings['twitter']) { ?>
                                 <li class="sociable-item">
                                     <a href="<?php echo $settings['twitter']; ?>" class="social-icon"><i class="fa fa-twitter"></i></a>
                                 </li>
-<?php } ?>
-<?php if ($settings['googleplus']) { ?>
+                            <?php } ?>
+                            <?php if ($settings['googleplus']) { ?>
                                 <li class="sociable-item">
                                     <a href="<?php echo $settings['googleplus']; ?>" class="social-icon"><i class="fa fa-google-plus"></i></a>
                                 </li>
-<?php } ?>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
@@ -76,8 +77,8 @@ use System\Libs\Language as Lang;
                     <span class="widget-title"><?php echo Lang::get('footer_ingatlanok'); ?></span>
                     <ul class="property-listing">
                         <?php
-                            $url_path = (LANG != 'hu') ? LANG . '/' : '';
-                            $url_path .= Config::get('url.ingatlanok.index.' . LANG);
+                        $url_path = (LANG != 'hu') ? LANG . '/' : '';
+                        $url_path .= Config::get('url.ingatlanok.index.' . LANG);
                         ?>
                         <li><a class="author" href="<?php echo $url_path; ?>?tipus=1&varos=88&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest <?php echo mb_strtolower(Lang::get('jell_elado'), 'UTF-8'); ?><?php echo (LANG == 'hu') ? ' lakás' : ' apartman'; ?>  </a></li>
                         <li><a class="author" href="<?php echo $url_path; ?>?tipus=2&varos=88&kategoria=1&min_alapterulet=&max_alapterulet=&min_ar=&max_ar=">Budapest <?php echo mb_strtolower(Lang::get('jell_kiado'), 'UTF-8'); ?><?php echo (LANG == 'hu') ? ' lakás' : ' apartman'; ?>  </a></li>
@@ -95,16 +96,24 @@ use System\Libs\Language as Lang;
                     <span class="widget-title"><?php echo Lang::get('footer_regisztracio'); ?></span>
                     <p><?php echo Lang::get('footer_regisztracio_szoveg'); ?></p>
                     <div class="newsletter">
-                        <!-- <a class="simple-btn sm-button filled red" href="<?php echo $this->request->get_uri('site_url');?>regisztracio"><?php echo Lang::get('footer_regisztracio_gomb'); ?></a> -->
+                        <!-- <a class="simple-btn sm-button filled red" href="<?php echo $this->request->get_uri('site_url'); ?>regisztracio"><?php echo Lang::get('footer_regisztracio_gomb'); ?></a> -->
                         <a class="simple-btn sm-button filled red" data-toggle="modal" data-target="#modal_register" href="#"><?php echo Lang::get('footer_regisztracio_gomb'); ?></a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
-                <div class="bottom-footer">
-                    <span class="copy">© <?php echo date('Y') . ' ' . $settings['ceg']; ?> – <?php echo Lang::get('footer_jog'); ?> | <a href="http://www.onlinemarketingguru.hu/weboldal-keszites.html"><?php echo Lang::get('footer_weboldal_keszites'); ?></a></span>
+            <div class="bottom-footer">
+                <div class="col-sm-6">
+                    <div class="copy">
+                        <span>© <?php echo date('Y') . ' ' . $settings['ceg']; ?> – <?php echo Lang::get('footer_jog'); ?> | <a href="http://www.onlinemarketingguru.hu/weboldal-keszites.html"><?php echo Lang::get('footer_weboldal_keszites'); ?></a>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="policies">
+                        <span><a href="/uploads/files/adatvedelemi-szabalyzat.pdf"><?php echo Lang::get('footer_adatvedelem'); ?></a> | <a href="/uploads/files/penzkezelesi-szabalyzat.pdf"><?php echo Lang::get('footer_penzkezeles'); ?></a></span>
+                    </div>
                 </div>
             </div>
         </div>
