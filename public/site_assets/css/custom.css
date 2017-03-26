@@ -619,3 +619,27 @@ h3.section-title {
 .single-item-page .item-photos .main-slides .jcarousel-arrows a.prev-slide {
   margin-left: 20px;
 }
+
+/* **** cookie ** */
+#cookie-law { 
+    width:100%;
+    background:rgba(0,0,0,0.6); 
+    margin:0px auto 0; 
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+}
+
+#cookie-law p { 
+    padding:10px; 
+    font-size:1em; 
+    font-weight:normal; 
+    text-align:center; 
+    color:#fff; 
+    margin:0;
+}
+
+#cookie-law p a { 
+    margin-left:10px; 
+}

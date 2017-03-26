@@ -85,6 +85,8 @@ use System\Libs\Auth; ?>
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/sticky/jquery.sticky.js"></script>
         <!-- MMenu -->
         <script type="text/javascript" src="<?php echo SITE_ASSETS; ?>vendors/slicknav/dist/jquery.slicknav.js"></script>
+        <!-- Cookie consent -->
+        <script src="<?php echo SITE_JS; ?>cookie_consent.js"></script>
         <!-- Main.js -->        
         <script type="text/javascript" src="<?php echo $this->url_helper->autoversion(SITE_JS . 'main.js'); ?>"></script>
         <!-- COMMON (tostr init, kedvencek)-->
