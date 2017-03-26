@@ -119,37 +119,73 @@ var Property = function () {
             if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
             
                 var confirm_str = '';
-                if(action.val() == 'group_make_active'){
-                    confirm_str = "Biztosan végre akarja hajtani az aktiválását?";
-                }
-                else if(action.val() == 'group_make_inactive'){
-                    confirm_str = "Biztosan végre akarja hajtani az inaktiválást?";
-                }
-                else if(action.val() == 'group_delete'){
-                    confirm_str = "Biztosan törölni akarja a rekordot?";
-                }
-                else if(action.val() == 'group_make_highlight'){
-                    confirm_str = "Biztosan végre akarja hajtani a kiemelést?";
-                }
-                else if(action.val() == 'group_delete_highlight'){
-                    confirm_str = "Biztosan törölni akarja a kiemelést?";
-                }
-                
-                bootbox.setDefaults({
-                    locale: "hu", 
-                });
-                bootbox.confirm(confirm_str, function(result) {
-                    if (result) {
 
+                // email küldése ingatlanokról
+                if(action.val() == 'group_send_property'){
+                    
+                    $('#email_send_modal').modal('show');
+
+                    $('#ingatlanok_kuldes').on('click', function(e){
+                        e.preventDefault();
+                        // email cím
+                        var email = $("input[name='email']").val();
+                        // név
+                        var name = $("input[name='name']").val();
+
+                        // adatok küldése
                         grid.setAjaxParam("customActionType", "group_action");
                         grid.setAjaxParam("customActionName", action.val());
+                    // email cím hozzáadása az adatokhoz
+                    grid.setAjaxParam("email", email);
                         grid.setAjaxParam("id", grid.getSelectedRows());
                         grid.getDataTable().ajax.reload();
                         grid.clearAjaxParams();
-                
+
+                        // modal bezárása
+                        $('#email_send_modal').modal('hide');
+
+                    });
+
+
+                } else {
+
+                    if(action.val() == 'group_make_active'){
+                        confirm_str = "Biztosan végre akarja hajtani az aktiválását?";
                     }
-                });             
-            
+                    else if(action.val() == 'group_make_inactive'){
+                        confirm_str = "Biztosan végre akarja hajtani az inaktiválást?";
+                    }
+                    else if(action.val() == 'group_delete'){
+                        confirm_str = "Biztosan törölni akarja a rekordot?";
+                    }
+                    else if(action.val() == 'group_make_highlight'){
+                        confirm_str = "Biztosan végre akarja hajtani a kiemelést?";
+                    }
+                    else if(action.val() == 'group_delete_highlight'){
+                        confirm_str = "Biztosan törölni akarja a kiemelést?";
+                    }
+                    // referens áthelyezésnél lesz ez az eset
+                    else {
+                        confirm_str = "Biztosan végre akarja hajtani a műveletet?";
+                    }
+                    
+                    bootbox.setDefaults({
+                        locale: "hu", 
+                    });
+                    bootbox.confirm(confirm_str, function(result) {
+                        if (result) {
+
+                            grid.setAjaxParam("customActionType", "group_action");
+                            grid.setAjaxParam("customActionName", action.val());
+                            grid.setAjaxParam("id", grid.getSelectedRows());
+                            grid.getDataTable().ajax.reload();
+                            grid.clearAjaxParams();
+                    
+                        }
+                    });             
+                
+                }
+
             } else if (action.val() == "") {
                 App.alert({
                     type: 'danger',
