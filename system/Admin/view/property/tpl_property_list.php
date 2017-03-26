@@ -15,9 +15,9 @@
                             <a href="admin/property/insert" class="btn blue btn-sm"><i class="fa fa-plus"></i> Új ingatlan</a>
 
                             <button id="show_filter_td" class="btn btn-sm grey-cascade" title="Szűrési feltételek megjelenítése"><i class="fa fa-search"></i> Szűrési feltételek</button>
-
                             <!-- <a href="admin/property" class="btn blue-madison btn-sm"><i class="fa fa-repeat"></i> Szűrés törlése</a> -->
                             <!-- <button class="btn red btn-sm" name="delete_property_submit" value="submit" type="submit"><i class="fa fa-trash"></i> Csoportos törlés</button> -->
+
                             <div class="btn-group">
                                 <a data-toggle="dropdown" href="#" class="btn btn-sm default">
                                     <i class="fa fa-wrench"></i> Eszközök <i class="fa fa-angle-down"></i>
@@ -31,6 +31,7 @@
                                     </li>
                                 </ul>
                             </div>
+
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -48,6 +49,8 @@
                                     <option value="group_make_highlight">Kiemelés</option>
                                     <option value="group_delete_highlight">Kiemelés törlése</option>
                                     <option value="group_delete">Töröl</option>
+<!-- Értesítés küldése ingatlanokról -->
+<option value="group_send_property">Értesítés ingatlanokról</option>
 
                                     <?php if ($is_superadmin) { ?>
                                         <optgroup label="Áthelyezés referenshez">
@@ -283,4 +286,33 @@
 
             </div>
         </div>
-    </div> <!-- END PAGE CONTENT
+    </div> <!-- END PAGE CONTENT -->
+
+    <!-- MODAL -->
+    <div class="modal fade" id="email_send_modal" tabindex="-1" role="email_send_modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Ingatlan adatok küldése</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" id="ingatlan_adatok_form" name="ingatlan_adatok_form">    
+                        <div class="form-group">
+                            <label for="name" class="control-label">Név</label>
+                            <input type="text" name="name" class="form-control input-xlarge" />
+                            <br>
+                            <label for="email" class="control-label">E-mail cím</label>
+                            <input type="email" name="email" class="form-control input-xlarge" />
+                        </div>
+                    </form> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Bezár</button>
+                    <button type="button" class="btn green" id="ingatlanok_kuldes">Küldés</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
