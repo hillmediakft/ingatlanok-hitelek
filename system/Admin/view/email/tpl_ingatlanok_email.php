@@ -1,38 +1,73 @@
 <!doctype html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Értesítés ingatlanokról</title>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Ingatlanok</title>
+    </head>
+    <body style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+        <table border="0" cellpadding="0" cellspacing="0" border-collapse="separate" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6; width: 100%;">
+            <tr>
+                <td>&nbsp;</td>
+                <td style=" display: block; Margin: 0 auto !important; max-width: 580px; padding: 10px; width: auto !important; width: 580px;">
+                    <div style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
 
-    <style type="text/css">
-        
-    </style>
+                        <!-- START CENTERED WHITE CONTAINER -->
+                        <table style=" background: #fff; border-radius: 3px; width: 100%;">
+
+                            <!-- START MAIN CONTENT AREA -->
+                            <tr>
+                                <td style="box-sizing: border-box; padding: 20px;">
+                                    <table border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <p style="color: #666; font-size: 18px; font-weight: 700">Tisztelt {name}!</p>
+                                                <p>Az ön által megadott paraméterek alapján az alábbi ingatlanokat tudjuk ajánlani.</p>
+                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="left">
+                                                                <table border="0" cellpadding="0" cellspacing="5">
+                                                                    <tbody>
+                                                                        {html_data}
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- END MAIN CONTENT AREA -->
+                        </table>
 
 
-</head>
-<body>
+                        <!-- START FOOTER -->
+                        <div style="clear: both; padding-top: 10px; text-align: center; width: 100%;">
+                            <hr style="border: 0; border-bottom: 1px solid #fff; Margin: 10px 0;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+                                <tr>
+                                    <td style="color: #999999; font-size: 12px; text-align: center">
+                                        <p style="color: #999999; font-size: 12px; text-align: center;">Ez az üzenet az ingatlanok-hitelek.hu weboldalon keresztül érkezett!</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                </tr>
+                            </table>
+                        </div>
 
-    <h2>Tisztelt {name}!</h2>
-    <p>Az ön által megadott paraméterek alapján az alábbi ingatlanokat tudjuk ajánlani.</p>
+                        <!-- END FOOTER -->
 
-    <h3><strong>Ingatlanok:</strong></h3>
-    
-    <div>
-        {html_data}
-    </div>
-
-<hr>
-
-    <div>
-        Referens neve: {ref_name} 
-    </div>
-    <div>
-        Telefon: {ref_phone} 
-    </div>
-    <div>
-        Email: {ref_email} 
-    </div>
-
-</body>
+                        <!-- END CENTERED WHITE CONTAINER --></div>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+    </body>
 </html>
+
+

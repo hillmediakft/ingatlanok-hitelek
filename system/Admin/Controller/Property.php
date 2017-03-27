@@ -1794,11 +1794,12 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
 
 $photo_link = BASE_URL . UPLOADS . 'ingatlan_photo/';
 $url_helper = DI::get('url_helper');
+$str_helper = DI::get('str_helper');
 $name = (empty($name)) ? 'érdeklődő' : $name;
 
 
 $html_data = "";
-$html_data .= "<table>\r\n";
+//$html_data .= "<table>\r\n";
 
         foreach ($data as $key => $value) {
 
@@ -1810,12 +1811,13 @@ $html_data .= "<table>\r\n";
             }
 
             $html_data .= "<tr>\r\n";
-            $html_data .= "<td>S-" . $value['ref_num'] . "</td>";
             $html_data .= "<td>" . $img . "</td>";
-            $html_data .= "<td>" . $value['kat_nev_hu'] . "</td>";
+            $html_data .= "<td>S-" . $value['ref_num'] . "</td>";
+            $html_data .= "<td>" . $value['ingatlan_nev_hu'] . "</td>";
+            $html_data .= "<td><a style='color:blue;' href='" . BASE_URL . 'ingatlanok/adatlap/' . $value['id'] . '/' . $str_helper->stringToSlug($value['ingatlan_nev_hu']) . "' target='_blank'>Ingatlan megjelenítése.</a></td>";
             $html_data .= "</tr>\r\n";
         }
-$html_data .= "</table>\r\n";
+//$html_data .= "</table>\r\n";
 
 // template-be kerülő változók
 $template_data = array(
