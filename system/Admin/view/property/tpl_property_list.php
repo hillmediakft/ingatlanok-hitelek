@@ -289,28 +289,28 @@
     </div> <!-- END PAGE CONTENT -->
 
     <!-- MODAL -->
-    <div class="modal fade" id="email_send_modal" tabindex="-1" role="email_send_modal" aria-hidden="true">
+    <div class="modal" id="email_send_modal" tabindex="-1" role="email_send_modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                    <form action="" method="POST" id="ingatlan_adatok_form" name="ingatlan_adatok_form">    
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">Ingatlan adatok küldése</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST" id="ingatlan_adatok_form" name="ingatlan_adatok_form">    
                         <div class="form-group">
                             <label for="name" class="control-label">Név</label>
                             <input type="text" name="name" class="form-control input-xlarge" />
                             <br>
                             <label for="email" class="control-label">E-mail cím</label>
-                            <input type="email" name="email" class="form-control input-xlarge" />
+                            <input type="email" name="email" class="form-control input-xlarge" required />
                         </div>
-                    </form> 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Bezár</button>
-                    <button type="button" class="btn green" id="ingatlanok_kuldes">Küldés</button>
+                    <button type="submit" class="btn green" id="ingatlanok_kuldes">Küldés</button>
                 </div>
+                    </form> 
             </div>
             <!-- /.modal-content -->
         </div>
