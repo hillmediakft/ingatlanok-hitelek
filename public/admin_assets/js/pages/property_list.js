@@ -125,7 +125,7 @@ var Property = function () {
                     
                     $('#email_send_modal').modal('show');
 
-                    $('#ingatlanok_kuldes').on('click', function(e){
+                    $('#ingatlan_adatok_form').on('submit', function(e){
                         e.preventDefault();
                         // email cím
                         var email = $("input[name='email']").val();
