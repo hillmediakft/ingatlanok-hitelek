@@ -271,7 +271,7 @@ class User extends SiteController {
     	$subject = 'Regisztráció megerősítés.'; // adatbázisból!
     	$template_data = array(
 			'base_url' => BASE_URL,
-			'title' => 'Verify registration teszt',
+			'title' => 'Regisztráció megerősítés',
 			'user_name' => $user_name,
 			'user_email' => $user_email,
 			'user_id' => $user_id,
@@ -280,7 +280,7 @@ class User extends SiteController {
     	$template_name = 'user_register_verification';
 
     	$emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template_name);
-    	
+//$emailer->setDebug(true);    	
     	// küldés smtp-vel
     	//$emailer->setSmtp();
 
@@ -391,17 +391,17 @@ class User extends SiteController {
     	$from_name = $settings['ceg']; // adatbázisból!
     	$to_email = $user_email;
     	$to_name = $user_name;
-    	$subject = 'Elfelejtett jelszó.'; // adatbázisból!
+    	$subject = 'Elfelejtett jelszó.';
     	$template_data = array(
 			'base_url' => BASE_URL,
-			'title' => 'Elfelejtett jelszó teszt',
+			'title' => 'Elfelejtett jelszó',
 			'user_name' => $user_name,
 			'new_password' => $new_password
     	);
     	$template_name = 'forgotten_password';
 
     	$emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template_name);
-    	
+//$emailer->setDebug(true);    	
     	// küldés smtp-vel
     	//$emailer->setSmtp();
 
