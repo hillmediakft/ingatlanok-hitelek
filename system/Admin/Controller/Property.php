@@ -1785,178 +1785,55 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
         // bejelentkezett user adatai (objektum!)
         $user = $auth->getUserDataById($user_id);
 
-
         $data = array();
         foreach ($id_array as $id) {
             $data[] = $this->property_model->getPropertyDetails($id);
         }
 
+        $photo_link = BASE_URL . UPLOADS . 'ingatlan_photo/';
+        $url_helper = DI::get('url_helper');
+        $str_helper = DI::get('str_helper');
+        $name = (empty($name)) ? 'érdeklődő' : $name;
 
-$photo_link = BASE_URL . UPLOADS . 'ingatlan_photo/';
-$url_helper = DI::get('url_helper');
-$str_helper = DI::get('str_helper');
-$name = (empty($name)) ? 'érdeklődő' : $name;
-
-
-$html_data = "";
-//$html_data .= "<table>\r\n";
-
+        $html_data = "";
         foreach ($data as $key => $value) {
 
             if (!empty($value['kepek'])) {
                 $kep_arr = json_decode($value['kepek']);
-                $img = "<img src=" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $kep_arr[0]) . " alt='' />";
+                $img = "<img src=" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $kep_arr[0]) . " alt='" . $value['ingatlan_nev_hu'] . "' />";
             } else {
-                $img = "<img src=" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg') . " alt='' />";
+                $img = "<img src=" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg') . " alt='" . $value['ingatlan_nev_hu'] . "' />";
             }
 
             $html_data .= "<tr>\r\n";
             $html_data .= "<td>" . $img . "</td>";
-            $html_data .= "<td>S-" . $value['ref_num'] . "</td>";
+            $html_data .= "<td><strong>S-" . $value['ref_num'] . "</strong></td>";
             $html_data .= "<td>" . $value['ingatlan_nev_hu'] . "</td>";
-            $html_data .= "<td><a style='color:blue;' href='" . BASE_URL . 'ingatlanok/adatlap/' . $value['id'] . '/' . $str_helper->stringToSlug($value['ingatlan_nev_hu']) . "' target='_blank'>Ingatlan megjelenítése.</a></td>";
+            $html_data .= "<td><a style='color:blue;' href='" . BASE_URL . 'ingatlanok/adatlap/' . $value['id'] . '/' . $str_helper->stringToSlug($value['ingatlan_nev_hu']) . "' target='_blank'>Megtekintés</a></td>";
             $html_data .= "</tr>\r\n";
         }
-//$html_data .= "</table>\r\n";
 
-// template-be kerülő változók
-$template_data = array(
-    'email' => $email,
-    'name' => $name,
-    'ref_name' => $user->first_name . ' ' . $user->last_name,
-    'ref_email' => $user->email,
-    'ref_phone' => $user->phone,
-    'html_data' => $html_data
-);
+        $html_data .= "<tr>\r\n";
+        $html_data .= "<td colspan='4'>&nbsp;</td>\r\n";
+        $html_data .= "</tr>\r\n";
 
+        $html_data .= "<tr>\r\n";
+        $html_data .= "<td colspan='4'><strong>Ingatlan referens:</strong> " . $user->first_name . ' ' . $user->last_name . "</td>\r\n";
+        $html_data .= "</tr>\r\n";
+        $html_data .= "<tr>\r\n";
+        $html_data .= "<td colspan='4'><strong>Telefon:</strong> " . $user->phone . "</td>\r\n";
+        $html_data .= "</tr>\r\n";
 
-/*
-ADATOK
-  'id' => string '428' (length=3)
-  'ref_id' => string '1' (length=1)
-  'ref_num' => string '9876' (length=4)
-  'ingatlan_nev_hu' => string 'teszt ingatlan 9876' (length=19)
-  'ingatlan_nev_en' => string 'teszt ingatlan 9876' (length=19)
-  'leiras_hu' => string '' (length=0)
-  'leiras_en' => string '' (length=0)
-  'status' => string '1' (length=1)
-  'kategoria' => string '1' (length=1)
-  'tipus' => string '1' (length=1)
-  'allapot' => null
-  'kiemeles' => string '1' (length=1)
-  'megye' => string '5' (length=1)
-  'varos' => string '88' (length=2)
-  'kerulet' => string '4' (length=1)
-  'utca' => string 'NĂĄdas utca' (length=11)
-  'hazszam' => string '' (length=0)
-  'emelet_ajto' => string '' (length=0)
-  'emelet' => null
-  'tetoter' => string '0' (length=1)
-  'iranyitoszam' => string '1234' (length=4)
-  'epulet_szintjei' => null
-  'utca_megjelenites' => string '1' (length=1)
-  'hazszam_megjelenites' => string '0' (length=1)
-  'terkep' => string '1' (length=1)
-  'ar_elado' => string '52000000' (length=8)
-  'ar_elado_eredeti' => string '52000000' (length=8)
-  'ar_kiado' => null
-  'ar_kiado_eredeti' => null
-  'alapterulet' => string '68' (length=2)
-  'telek_alapterulet' => null
-  'erkely_terulet' => null
-  'terasz_terulet' => null
-  'belmagassag' => null
-  'tajolas' => string '0' (length=1)
-  'szobaszam' => null
-  'felszobaszam' => null
-  'szoba_elrendezes' => null
-  'kozos_koltseg' => null
-  'rezsi' => null
-  'futes' => null
-  'parkolas' => null
-  'szerkezet' => null
-  'kilatas' => null
-  'lift' => string '0' (length=1)
-  'energetika' => null
-  'kert' => null
-  'haz_allapot_belul' => null
-  'haz_allapot_kivul' => null
-  'fenyviszony' => null
-  'furdo_wc' => null
-  'komfort' => null
-  'erkely' => string '0' (length=1)
-  'terasz' => string '0' (length=1)
-  'ext_butor' => string '0' (length=1)
-  'ext_medence' => string '0' (length=1)
-  'ext_szauna' => string '0' (length=1)
-  'ext_jacuzzi' => string '0' (length=1)
-  'ext_kandallo' => string '1' (length=1)
-  'ext_riaszto' => string '0' (length=1)
-  'ext_klima' => string '0' (length=1)
-  'ext_ontozorendszer' => string '0' (length=1)
-  'ext_automata_kapu' => string '0' (length=1)
-  'ext_elektromos_redony' => string '0' (length=1)
-  'ext_konditerem' => string '0' (length=1)
-  'ext_galeria' => string '0' (length=1)
-  'ext_furdoben_kad' => string '1' (length=1)
-  'ext_furdoben_zuhany' => string '0' (length=1)
-  'ext_masszazskad' => string '0' (length=1)
-  'ext_amerikaikonyha' => string '0' (length=1)
-  'ext_konyhaablak' => string '0' (length=1)
-  'ext_kamra' => string '0' (length=1)
-  'ext_panorama' => string '0' (length=1)
-  'ext_biztonsagi_ajto' => string '0' (length=1)
-  'ext_redony' => string '0' (length=1)
-  'ext_racs' => string '0' (length=1)
-  'ext_video_kaputelefon' => string '0' (length=1)
-  'ext_porta_szolgalat' => string '0' (length=1)
-  'ext_beepitett_szekreny' => string '0' (length=1)
-  'ext_tarolo_helyiseg' => string '0' (length=1)
-  'tulaj_nev' => string '' (length=0)
-  'tulaj_cim' => string '' (length=0)
-  'tulaj_tel' => string '' (length=0)
-  'tulaj_email' => string '' (length=0)
-  'tulaj_notes' => string '' (length=0)
-  'hozzaadas_datum' => string '1489922081' (length=10)
-  'modositas_datum' => string '1489922118' (length=10)
-  'latitude' => string '47.6091991' (length=10)
-  'longitude' => string '19.111947' (length=9)
-  'megtekintes' => string '0' (length=1)
-  'kepek' => null
-  'kepek_szama' => string '0' (length=1)
-  'docs' => null
-  'deleted' => string '0' (length=1)
-  'kat_nev_hu' => string 'LakĂĄs' (length=6)
-  'district_name' => string 'IV.' (length=3)
-  'city_name' => string 'Budapest' (length=8)
-  'county_name' => string 'Budapest' (length=8)
-  'all_leiras_hu' => null
-  'emelet_leiras_hu' => null
-  'energetika_leiras_hu' => null
-  'fenyviszony_leiras_hu' => null
-  'furdo_wc_leiras_hu' => null
-  'futes_leiras_hu' => null
-  'haz_allapot_belul_leiras_hu' => null
-  'haz_allapot_kivul_leiras_hu' => null
-  'kert_leiras_hu' => null
-  'kilatas_leiras_hu' => null
-  'parkolas_leiras_hu' => null
-  'szerkezet_leiras_hu' => null
-  'szoba_elrendezes_leiras_hu' => null
-  'first_name' => string 'varnagy' (length=7)
-  'last_name' => string 'Zsolt' (length=5)
+        // template-be kerülő változók
+        $template_data = array(
+            'email' => $email,
+            'name' => $name,
+            'ref_name' => $user->first_name . ' ' . $user->last_name,
+            'ref_email' => $user->email,
+            'ref_phone' => $user->phone,
+            'html_data' => $html_data
+        );
 
-*/
-
-
-
-
-
-
-/*
-var_dump($template_data);
-die;
-*/
 
         $to_email = $email;
         $to_name = '';
@@ -1967,7 +1844,7 @@ die;
 
         $emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template);
         $emailer->setArea('admin');
-$emailer->setDebug(true);
+//$emailer->setDebug(true);
 
         // true vagy false
         return $emailer->send();
