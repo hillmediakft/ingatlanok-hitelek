@@ -1837,7 +1837,7 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
 
         $to_email = $email;
         $to_name = '';
-        $subject = 'Érdeklődés';
+        $subject = 'Értesítés ingatlanokról';
         $template = 'ingatlanok_email';
         $from_email = $user->email;
         $from_name = $settings['ceg'];
