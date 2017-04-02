@@ -121,6 +121,7 @@ if ($count > 0) {
 
         // ingatlani adatainak lekérdezése
         $data['ingatlan'] = $this->ingatlanok_model->getProperty($id);
+
         // ha nem létező id-jű ingatlant akarunk megjeleníteni
         if (empty($data['ingatlan'])) {
             $this->response->redirect('error');
@@ -129,9 +130,21 @@ if ($count > 0) {
         $data['ingatlan']['ref_num'] = 'S-' . $data['ingatlan']['ref_num'];
         // ingatlanhoz tartozó képek
         $data['pictures'] = json_decode($data['ingatlan']['kepek']);
-        // ügynök adatai
-        $data['agent'] = $this->ingatlanok_model->get_agent($data['ingatlan']['ref_id']);
         
+        
+        // ha van a query stringben referensre vonatkozó adat
+        if ($this->request->has_query('referens')) {
+            $agent_id = $this->request->get_query('referens');
+        } else {
+            $agent_id = $data['ingatlan']['ref_id'];
+        }
+        // ügynök adatai
+        $data['agent'] = $this->ingatlanok_model->get_agent($agent_id);
+        if ($data['agent'] === false) {
+            $data['agent'] = $this->ingatlanok_model->get_agent($data['ingatlan']['ref_id']);
+        }
+
+
         // Árváltozás értesítés gomb állapotának beállításához kell (disable/enable)
         if (Auth::isUserLoggedIn()) {
             $user_id = Auth::getUser('id');
