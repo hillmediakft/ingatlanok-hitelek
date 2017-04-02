@@ -11,7 +11,7 @@ var Property = function () {
             src: $("#property"),
             onSuccess: function (grid) {
                 // execute some code after table records loaded
-                //console.log('onSuccess metodus');
+                // console.log('onSuccess metodus');
             },
             onError: function (grid) {
                 // execute some code on network or other general error  
@@ -57,18 +57,19 @@ var Property = function () {
                 // A php feldolgozónak küld a táblázatról információkat, azért hogy a szerver a megfelelő adatokat adhasson vissza pl. szűrésnél
                 "columnDefs": [
                     {"name": "checkbox", "searchable": false, "orderable": false, "targets": 0},
-                    {"name": "id", "searchable": true, "orderable": true, "targets": 1, "visible": false},
-                    {"name": "ref_num", "searchable": true, "orderable": true, "targets": 2},
-                    {"name": "kepek", "searchable": false, "orderable": false, "targets": 3},
-                    
-                    {"name": "tipus", "searchable": true, "orderable": true, "targets": 4},
-                    {"name": "kategoria", "searchable": true, "orderable": true, "targets": 5},
-                    {"name": "varos", "searchable": true, "orderable": true, "targets": 6},
-                    {"name": "alapterulet", "searchable": true, "orderable": true, "targets": 7},
-                    {"name": "megtekintes", "searchable": false, "orderable": false, "targets": 8},
-                    {"name": "ar", "searchable": false, "orderable": false, "targets": 9},
-                    {"name": "status", "searchable": true, "orderable": true, "targets": 10},
-                    {"name": "menu", "searchable": false, "orderable": false, "targets": 11}
+                    {"name": "notice", "searchable": false, "orderable": false, "targets": 1},
+                    {"name": "id", "searchable": true, "orderable": true, "targets": 2, "visible": false},
+                    {"name": "ref_num", "searchable": true, "orderable": true, "targets": 3},
+                    {"name": "kepek", "searchable": false, "orderable": false, "targets": 4},
+                    {"name": "ref_id", "searchable": true, "orderable": true, "targets": 5},
+                    {"name": "tipus", "searchable": true, "orderable": true, "targets": 6},
+                    {"name": "kategoria", "searchable": true, "orderable": true, "targets": 7},
+                    {"name": "varos", "searchable": true, "orderable": true, "targets": 8},
+                    {"name": "alapterulet", "searchable": true, "orderable": true, "targets": 9},
+                    {"name": "megtekintes", "searchable": false, "orderable": false, "targets": 10},
+                    {"name": "ar", "searchable": true, "orderable": false, "targets": 11},
+                    {"name": "status", "searchable": true, "orderable": true, "targets": 12},
+                    {"name": "menu", "searchable": false, "orderable": false, "targets": 13}
                 ],
                 
                 // ha a php feldolgozó asszociatív tömböt ad vissza adatként (pl.: 'name' => 'László', 'age' => '38', 'haircolor' => 'blonde' ...), akkor meg kell adni az egyes elem nevét!    
@@ -76,10 +77,11 @@ var Property = function () {
           
                 "columns": [
                     { "data": "checkbox" },
+                    { "data": "notice" },
                     { "data": "id" },
                     { "data": "ref_num" },
                     { "data": "kepek" },
-                    
+                    { "data": "ref_id" },
                     { "data": "tipus" },
                     { "data": "kategoria" },
                     { "data": "varos" },
@@ -94,6 +96,8 @@ var Property = function () {
                     [10, 20, 50, 100, 150],
                     [10, 20, 50, 100, 150] // change per page values here 
                 ],
+
+                //"autoWidth": false,
 
                 "pageLength": 50, // default record count per page
 
@@ -120,79 +124,49 @@ var Property = function () {
             
                 var confirm_str = '';
 
-                // email küldése ingatlanokról
-                if(action.val() == 'group_send_property'){
-                    
-                    $('#email_send_modal').modal('show');
+                if(action.val() == 'group_make_active'){
+                    confirm_str = "Biztosan végre akarja hajtani az aktiválását?";
+                }
+                else if(action.val() == 'group_make_inactive'){
+                    confirm_str = "Biztosan végre akarja hajtani az inaktiválást?";
+                }
+                else if(action.val() == 'group_delete'){
+                    confirm_str = "Biztosan törölni akarja a rekordot?";
+                }
+                else if(action.val() == 'group_make_highlight'){
+                    confirm_str = "Biztosan végre akarja hajtani a kiemelést?";
+                }
+                else if(action.val() == 'group_delete_highlight'){
+                    confirm_str = "Biztosan törölni akarja a kiemelést?";
+                }
+                // referens áthelyezésnél lesz ez az eset
+                else {
+                    confirm_str = "Biztosan végre akarja hajtani a műveletet?";
+                }
+                
+                bootbox.setDefaults({
+                    locale: "hu", 
+                });
+                bootbox.confirm(confirm_str, function(result) {
+                    if (result) {
 
-                    $('#ingatlan_adatok_form').on('submit', function(e){
-                        e.preventDefault();
-                        // email cím
-                        var email = $("input[name='email']").val();
-                        // név
-                        var name = $("input[name='name']").val();
-
-                        // adatok küldése
                         grid.setAjaxParam("customActionType", "group_action");
                         grid.setAjaxParam("customActionName", action.val());
-                    // email cím hozzáadása az adatokhoz
-                    grid.setAjaxParam("email", email);
                         grid.setAjaxParam("id", grid.getSelectedRows());
                         grid.getDataTable().ajax.reload();
                         grid.clearAjaxParams();
-
-                        // modal bezárása
-                        $('#email_send_modal').modal('hide');
-
-                    });
-
-
-                } else {
-
-                    if(action.val() == 'group_make_active'){
-                        confirm_str = "Biztosan végre akarja hajtani az aktiválását?";
-                    }
-                    else if(action.val() == 'group_make_inactive'){
-                        confirm_str = "Biztosan végre akarja hajtani az inaktiválást?";
-                    }
-                    else if(action.val() == 'group_delete'){
-                        confirm_str = "Biztosan törölni akarja a rekordot?";
-                    }
-                    else if(action.val() == 'group_make_highlight'){
-                        confirm_str = "Biztosan végre akarja hajtani a kiemelést?";
-                    }
-                    else if(action.val() == 'group_delete_highlight'){
-                        confirm_str = "Biztosan törölni akarja a kiemelést?";
-                    }
-                    // referens áthelyezésnél lesz ez az eset
-                    else {
-                        confirm_str = "Biztosan végre akarja hajtani a műveletet?";
-                    }
-                    
-                    bootbox.setDefaults({
-                        locale: "hu", 
-                    });
-                    bootbox.confirm(confirm_str, function(result) {
-                        if (result) {
-
-                            grid.setAjaxParam("customActionType", "group_action");
-                            grid.setAjaxParam("customActionName", action.val());
-                            grid.setAjaxParam("id", grid.getSelectedRows());
-                            grid.getDataTable().ajax.reload();
-                            grid.clearAjaxParams();
-                    
-                        }
-                    });             
                 
-                }
-
+                    }
+                });             
+            
             } else if (action.val() == "") {
                 App.alert({
                     type: 'danger',
                     //icon: 'warning',
                     message: 'Válasszon csoportműveletet!',
                     container: grid.getTableWrapper(),
-                    place: 'prepend'
+                    place: 'prepend',
+                    //closeInSeconds: 10 // auto close after defined seconds
                 });
             } else if (grid.getSelectedRowsCount() === 0) {
                 App.alert({
@@ -200,13 +174,13 @@ var Property = function () {
                     //icon: 'warning',
                     message: 'Nem jelölt ki semmit!',
                     container: grid.getTableWrapper(),
-                    place: 'prepend'
+                    place: 'prepend',
+                    //closeInSeconds: 10 // auto close after defined seconds
                 });
             }
         });
 
     };
-
 
 
 /*
@@ -402,7 +376,7 @@ var Property = function () {
         })
 
     };
-*/
+*/    
 
     var show_filter_div = function() {
 
@@ -410,6 +384,7 @@ var Property = function () {
             $('#filter_td').slideToggle();
         })
     };
+
 
 
     /**
@@ -497,46 +472,138 @@ var Property = function () {
         }); // ajax end
     };
 
-
     /**
-     *	A részletek megjelenítéséhez használt modal
-     *	AUTOMATIKUSAN ("HTML-elemmel" indul)
+     *
      */
-/*    var handleModal = function () {
-        $('#ajax_modal').on('hidden.bs.modal', function () {
-            $('#modal_container').html('');
+    var notice = function(){
+        // a kijelölt elemek id-jét tartalamzó tömb
+        var id_array = new Array();
+
+        // bejelölt checkboxokat tartalmazó objektum        
+        var checkboxes;
+
+        // összes notice_checkboxes törlése
+        var resetNoticeCheckboxes = function(){
+            var set = '#property .notice_checkboxes';
+            $(set).each(function () {
+                $(this).prop("checked", false);
+            });
+            $.uniform.update(set);
+        }
+
+
+        // modal megjelenítése
+        $("#show_email_modal").on('click', function(){
+            id_array = [];
+
+            // a kijelölt checkboxok            
+            checkboxes = $("input[name='notice']:checked");    
+            // bejárjuk a checkboxokat tartalmazó objektumot
+            $.each(checkboxes, function(index, val) {
+                //if( $(this).is(':checked') ){}
+                id_array.push($(this).val());
+            });
+
+            if (id_array.length == 0) {
+                App.alert({
+                    type: 'danger',
+                    //icon: 'warning',
+                    message: 'Jelöljön ki egy ingatlant!',
+                    container: ajax_message,
+                    place: 'append',
+                    close: true, // make alert closable
+                    reset: false, // close all previouse alerts first
+                    //focus: true, // auto scroll to the alert after shown
+                    closeInSeconds: 3 // auto close after defined seconds
+                });
+            } else {
+                // modal megjelenítése
+                $('#email_send_modal').modal('show');
+            }
+
+
         });
-    } */
 
-    /**
-     *	A részletek megjelenítéséhez használt modal
-     *	JAVASCRIPT INDÍTÓVAL és SAJÁT MEGOLDÁSSAL működik
-     */
-    /* 
-     var handleModal_2 = function() {
-     //elindítja a folyamatot ha ráklikkel a részletek gombra
-     $('.modal_trigger').on('click', function(e){
-     e.preventDefault();
-     var $id = $(this).attr('data-id');
-     
-     // AJAX kérés (a visszaadott html-t az ajax_modal elembe teszi (url, data, callback))
-     $("#ajax_modal").load('admin/property/view_property_ajax', {"id": $id}, function(response, status, xhr) {
-     if(status == 'success') {
-     //a modal elem megjelenítése
-     $("#ajax_modal").modal("show");
-     } else {
-     console.log('Hiba: ajax kérés nem sikerült!');
-     }
-     
-     // ha ráklikkel a módosít gombra
-     $('#job_update_button').on('click', function(){
-     //$('#ajax_modal').modal("hide");
-     window.location.href = 'admin/property/update/' + $id;
-     });
-     }); 
-     });	
-     }	
-     */
+        // form adatok küldése
+        $('#ingatlan_adatok_form').on('submit', function(e){
+            e.preventDefault();
+
+            // email cím
+            var email = $("input[name='email']").val();
+            // név
+            var name = $("input[name='name']").val();
+
+            // adatok küldése
+            $.ajax({
+                url: 'admin/property/sendemail',
+                type: 'POST',
+                dataType: 'json',
+                
+                data: {
+                    id_array: id_array, name: name, email: email
+                },
+            
+                beforeSend: function() {
+                    
+                    // modal bezárása
+                    $('#email_send_modal').modal('hide');
+
+                    App.blockUI({
+                        boxed: true,
+                        message: 'Feldolgozás...'
+                    });
+                },
+                complete: function(){
+                    App.unblockUI();
+                    // checkboxes reset
+                    resetNoticeCheckboxes();
+                    // form reset
+                    document.getElementById("ingatlan_adatok_form").reset();    
+                },
+                // itt kapjuk meg (és dolgozzuk fel) a feldolgozó php által visszadott adatot 
+                success: function(result){
+                    if(result.status == 'success'){
+                        App.alert({
+                            type: 'success',
+                            //icon: 'warning',
+                            message: result.message,
+                            container: ajax_message,
+                            place: 'append',
+                            close: true, // make alert closable
+                            reset: false, // close all previouse alerts first
+                            //focus: true, // auto scroll to the alert after shown
+                            closeInSeconds: 3 // auto close after defined seconds
+                        });
+                    }
+
+                    if(result.status == 'error'){
+                        App.alert({
+                            type: 'danger',
+                            //icon: 'warning',
+                            message: result.message,
+                            container: ajax_message,
+                            place: 'append',
+                            close: true, // make alert closable
+                            reset: false, // close all previouse alerts first
+                            //focus: true, // auto scroll to the alert after shown
+                            closeInSeconds: 3 // auto close after defined seconds
+                        }); 
+                    }
+            
+                },
+                error: function(result, status, e){
+                    console.log(e);
+                } 
+            });
+
+  
+
+
+        });
+
+    };
+
+
 
     return {
 //main function to initiate the module
@@ -557,6 +624,8 @@ var Property = function () {
             enableDistrict();
 
             cloneConfirm();
+
+            notice();
            
             vframework.changeStatus({
                 url: "admin/property/change_status"
