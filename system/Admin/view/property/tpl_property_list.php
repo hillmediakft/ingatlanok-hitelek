@@ -15,6 +15,7 @@
                             <a href="admin/property/insert" class="btn blue btn-sm"><i class="fa fa-plus"></i> Új ingatlan</a>
 
                             <button id="show_filter_td" class="btn btn-sm grey-cascade" title="Szűrési feltételek megjelenítése"><i class="fa fa-search"></i> Szűrési feltételek</button>
+                            <button id="show_email_modal" class="btn btn-sm grey-cascade" title="Értesítés küldése a kiválasztott ingatlanokról"><i class="fa fa-envelope"></i> Értesítés</button>
                             <!-- <a href="admin/property" class="btn blue-madison btn-sm"><i class="fa fa-repeat"></i> Szűrés törlése</a> -->
                             <!-- <button class="btn red btn-sm" name="delete_property_submit" value="submit" type="submit"><i class="fa fa-trash"></i> Csoportos törlés</button> -->
 
@@ -49,8 +50,6 @@
                                     <option value="group_make_highlight">Kiemelés</option>
                                     <option value="group_delete_highlight">Kiemelés törlése</option>
                                     <option value="group_delete">Töröl</option>
-<!-- Értesítés küldése ingatlanokról -->
-<option value="group_send_property">Értesítés ingatlanokról</option>
 
                                     <?php if ($is_superadmin) { ?>
                                         <optgroup label="Áthelyezés referenshez">
@@ -74,14 +73,11 @@
                                         <th width="1%">
                                             <input type="checkbox" class="group-checkable" data-set="#property .checkboxes"/>
                                         </th>
+                                        <th width="1%"><i class="fa fa-envelope-o"></i></th>
                                         <th width="1%" title="Az ingatlan azonosító száma">id</th>
-
                                         <th width="1%" title="Az ingatlan referencia száma">ref.szám</th>
-                                        
                                         <th width="1%">Kép</th>
-                                        <?php if($is_superadmin) { ?>
                                         <th width="1%">Referens</th>
-                                        <?php } ?>
                                         <th width="1%">Típus</th>
                                         <th width="1%">Kategória</th>
                                         <th>Város</th>
@@ -93,7 +89,7 @@
                                     </tr>
 
                                     <tr role="row" class="filter">
-                                        <td colspan="<?php echo ($is_superadmin === true) ? '13' : '12'; ?>" id="filter_td" style="display:none;">
+                                        <td colspan="14" id="filter_td" style="display:none;">
                                             
                                             <div class="portlet">
                                                 
