@@ -42,12 +42,7 @@ class Property extends AdminController {
         $data['ingatlan_kat_list'] = $this->property_model->list_query('ingatlan_kategoria');
 
         $view = new View();
-        
-        if (!$data['is_superadmin']) {
-            $view->add_links(array('datatable', 'select2', 'bootbox', 'vframework', 'property_list'));
-        } else {
-            $view->add_links(array('datatable', 'select2', 'bootbox', 'vframework', 'property_list_superadmin'));
-        }
+        $view->add_links(array('datatable', 'select2', 'bootbox', 'vframework', 'property_list'));
 // $view->debug(true);
         $view->render('property/tpl_property_list', $data);
     }
@@ -196,22 +191,6 @@ class Property extends AdminController {
                                 $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
                             }
                             break;
-
-                        case 'group_send_property':
-                            // az id-ket tartalmazó tömböt kapja paraméterként
-                            $email = trim($request_data['email']);
-                            $name = trim($request_data['name']);
-                            $result = $this->_sendEmail($request_data['id'], $email, $name);
-
-                            if ($result !== false) {
-                                $custom_action_status = 'OK';
-                                $custom_action_message = 'Üzenet elküldve a ' . $request_data['email'] . ' e-mail címre.';
-                            } else {
-                                $custom_action_status = 'ERROR';
-                                $custom_action_message = Message::show('E-mail küldés sikertelen!');
-                            }
-                            break;
-
                     }
                 
                 }
@@ -238,6 +217,9 @@ class Property extends AdminController {
 
             $num_helper = DI::get('num_helper');
 
+            $logged_in_user_id = Auth::getUser('id');
+            $superadmin = Auth::isSuperadmin();
+
             foreach ($result as $value) {
 
                 // id attribútum hozzáadása egy sorhoz 
@@ -247,13 +229,23 @@ class Property extends AdminController {
                 // csak a datatables 1.10.5 verzió felett
                 //$temp['DT_RowAttr'] = array('data-proba' => 'ertek_proba');
 
-            // 1. Checkbox oszlop    
-                $temp['checkbox'] = (1) ? '<input type="checkbox" class="checkboxes" name="ingatlan_id_' . $value['id'] . '" value="' . $value['id'] . '"/>' : '';
+                if (!$superadmin) {
+                    // ha a bejelentkezett user megegyezik az ingatlanhoz rendelt referenssel
+                    $visible = ($logged_in_user_id == $value['ref_id']) ? true : false;
+                } else {
+                    $visible = true;
+                }
 
-            // 2. id oszlop    
+            // 1. Checkbox oszlop
+                $temp['checkbox'] = ($visible) ? '<input type="checkbox" class="checkboxes" name="ingatlan_id_' . $value['id'] . '" value="' . $value['id'] . '"/>' : '';
+            
+            // 2. notice checkbox oszlop    
+                $temp['notice'] = '<input type="checkbox" class="notice_checkboxes" name="notice" value="' . $value['id'] . '"/>';
+
+            // 3. id oszlop    
                 $temp['id'] = $value['id'];
 
-            // 3. Referenci szám oszlop    
+            // 4. Referenci szám oszlop    
                 $temp['ref_num'] =  '<a href="' . $this->request->get_uri('site_url') . 'property/update/' . $value['id'] . '">#' . $value['ref_num'] . '</a><br>';
                 if ($value['kiemeles'] == 1) {
                     $temp['ref_num'] .= '<span class="label label-sm label-success">Kiemelt</span>';
@@ -262,7 +254,7 @@ class Property extends AdminController {
                     $temp['ref_num'] .= '<span class="label label-sm label-warning">Kiemelt</span>';
                 }
 
-            // 4. Képek oszlop    
+            // 5. Képek oszlop    
                 if (!empty($value['kepek'])) {
                     $photo_names = json_decode($value['kepek']);
                     //$photo_name = array_shift($photo_names);
@@ -273,35 +265,35 @@ class Property extends AdminController {
                     $temp['kepek'] = '<a href="' . $this->request->get_uri('site_url') . 'property/update/' . $value['id'] . '"><img src="' . ADMIN_ASSETS . 'img/placeholder_80x60.jpg" alt="" /></a>';
                 }
 
-            // 5. Referens oszlop    
+            // 6. Referens oszlop    
                 $temp['ref_id'] = $value['first_name'] . '<br>' . $value['last_name'];
                 
-            // 6. Típus oszlop    
+            // 7. Típus oszlop    
                 $temp['tipus'] = ($value['tipus'] == 1) ? 'eladó' : 'kiadó';
 
-            // 7. Kategória oszlop    
+            // 8. Kategória oszlop    
                 $temp['kategoria'] = $value['kat_nev_hu'];
                 
-            // 8. Város oszlop    
+            // 9. Város oszlop    
                 $kerulet = !empty($value['kerulet']) ? '<br>' . $value['kerulet'] . '. kerület' : '';
                 $temp['varos'] = $value['city_name'] . $kerulet . '<br>' . $value['utca'];
 
-            // 9. Alapterület oszlop    
+            // 10. Alapterület oszlop    
                 $temp['alapterulet'] = $value['alapterulet'];
 
         //$temp['szobaszam'] = $value['szobaszam'];
 
-            // 10. Megtekintés oszlop    
+            // 11. Megtekintés oszlop    
                 $temp['megtekintes'] = $value['megtekintes'];
 
-            // 11. Ár oszlop    
+            // 12. Ár oszlop    
                 $temp['ar'] = (!empty($value['ar_elado'])) ? $num_helper->niceNumber($value['ar_elado']) : $num_helper->niceNumber($value['ar_kiado']);
 
-            // 12. Status oszlop    
+            // 13. Status oszlop    
                 $temp['status'] = ($value['status'] == 1) ? '<span class="label label-sm label-success">Aktív</span>' : '<span class="label label-sm label-danger">Inaktív</span>';
 
 
-            //----- 13. MENU HTML -----------------
+            //----- 14. MENU HTML -----------------
 
                 $temp['menu'] = '           
                   <div class="actions">
@@ -313,37 +305,42 @@ class Property extends AdminController {
                       <ul class="dropdown-menu pull-right">
                     <li><a href="' . $this->request->get_uri('site_url') . 'property/details/' . $value['id'] . '"><i class="fa fa-eye"></i> Részletek</a></li>';
 
-                // update
-                // if (Auth::hasAccess('property.update')) {}    
-                    $temp['menu'] .= '<li><a href="' . $this->request->get_uri('site_url') . 'property/update/' . $value['id'] . '"><i class="fa fa-pencil"></i> Szerkeszt</a></li>';
+                    // csak akkor jelenik meg, ha a bejelentkezett user megegyezik az ingatlanhoz rendelt referenssel 
+                    if ($visible) {
+                    // update
+                        // if (Auth::hasAccess('property.update')) {}
+                        $temp['menu'] .= '<li><a href="' . $this->request->get_uri('site_url') . 'property/update/' . $value['id'] . '"><i class="fa fa-pencil"></i> Szerkeszt</a></li>';
 
-                // törlés
-                // if (Auth::hasAccess('property.delete')) { }
-                    $temp['menu'] .= '<li><a href="javascript:;" class="delete_item" data-id="' . $value['id'] . '"> <i class="fa fa-trash"></i> Töröl</a></li>';
-                    //$temp['menu'] .= '<li class="disabled-link"><a href="javascript:;" title="Nincs jogosultsága törölni" class="disable-target"><i class="fa fa-trash"></i> Töröl</a></li>';
+                    // törlés
+                    // if (Auth::hasAccess('property.delete')) { }
+                        $temp['menu'] .= '<li><a href="javascript:;" class="delete_item" data-id="' . $value['id'] . '"> <i class="fa fa-trash"></i> Töröl</a></li>';
+                        //$temp['menu'] .= '<li class="disabled-link"><a href="javascript:;" title="Nincs jogosultsága törölni" class="disable-target"><i class="fa fa-trash"></i> Töröl</a></li>';
                     
-// REKORD klónozása
-//$temp['menu'] .= '<li><a href="' . $this->request->get_uri('site_url') . 'property/clone/' . $value['id'] . '"> <i class="fa fa-trash"></i> Klónozás</a></li>';
-$temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $value['id'] . '"> <i class="fa fa-clone"></i> Klónozás</a></li>';
+                    // REKORD klónozása
+                        $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $value['id'] . '"> <i class="fa fa-clone"></i> Klónozás</a></li>';
+                        //$temp['menu'] .= '<li><a href="' . $this->request->get_uri('site_url') . 'property/clone/' . $value['id'] . '"> <i class="fa fa-trash"></i> Klónozás</a></li>';
+                        
+                    // kiemelés
+                        if (Auth::hasAccess('property.kiemeles')) {
+                            if ($value['kiemeles'] == 0) {
+                                $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_kiemeles" data-action="add_kiemeles"><i class="fa fa-plus-circle"></i> Kiemelés</a></li>';
+                            }
+                            if ($value['kiemeles'] > 0) {
+                                $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_kiemeles" data-action="delete_kiemeles"><i class="fa fa-minus-circle"></i> Kiemelés törlése</a></li>';
+                            }
+                        }
 
-                // kiemelés
-                if (Auth::hasAccess('property.kiemeles')) {
-                    if ($value['kiemeles'] == 0) {
-                        $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_kiemeles" data-action="add_kiemeles"><i class="fa fa-plus-circle"></i> Kiemelés</a></li>';
+                    // status
+                        if (Auth::hasAccess('property.change_status')) {
+                            if ($value['status'] == 0) {
+                                $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_status" data-action="make_active"><i class="fa fa-check"></i> Aktivál</a></li>';
+                            } else {
+                                $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_status" data-action="make_inactive"><i class="fa fa-ban"></i> Blokkol</a></li>';
+                            }
+                        }
+                    
                     }
-                    if ($value['kiemeles'] > 0) {
-                        $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_kiemeles" data-action="delete_kiemeles"><i class="fa fa-minus-circle"></i> Kiemelés törlése</a></li>';
-                    }
-                }
 
-                // status
-                if (Auth::hasAccess('property.change_status')) {
-                    if ($value['status'] == 0) {
-                        $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_status" data-action="make_active"><i class="fa fa-check"></i> Aktivál</a></li>';
-                    } else {
-                        $temp['menu'] .= '<li><a data-id="' . $value['id'] . '" href="javascript:;" class="change_status" data-action="make_inactive"><i class="fa fa-ban"></i> Blokkol</a></li>';
-                    }
-                }
                 
                 $temp['menu'] .= '</ul></div></div>';
 
@@ -1773,83 +1770,103 @@ $temp['menu'] .= '<li><a href="javascript:;" class="clone_item" data-id="' . $va
     /**
      * E-mail küldése ingatlanokról
      */
-    private function _sendEmail($id_array, $email, $name)
+    public function sendEmail()
     {
-        $this->loadModel('settings_model');
-        $settings = $this->settings_model->get_settings();
+        if ($this->request->is_ajax()) {
 
-        // auth objektum
-        $auth = DI::get('auth');
-        // bejelentkezett user id-je
-        $user_id = Auth::getUser('id');
-        // bejelentkezett user adatai (objektum!)
-        $user = $auth->getUserDataById($user_id);
+            $this->loadModel('settings_model');
+            $settings = $this->settings_model->get_settings();
 
-        $data = array();
-        foreach ($id_array as $id) {
-            $data[] = $this->property_model->getPropertyDetails($id);
-        }
+            $id_array = $this->request->get_post('id_array');
+            $email = $this->request->get_post('email');
+            $name = $this->request->get_post('name');
 
-        $photo_link = BASE_URL . UPLOADS . 'ingatlan_photo/';
-        $url_helper = DI::get('url_helper');
-        $str_helper = DI::get('str_helper');
-        $name = (empty($name)) ? 'érdeklődő' : $name;
+            // auth objektum
+            $auth = DI::get('auth');
+            // bejelentkezett user id-je
+            $user_id = Auth::getUser('id');
+            // bejelentkezett user adatai (objektum!)
+            $user = $auth->getUserDataById($user_id);
 
-        $html_data = "";
-        foreach ($data as $key => $value) {
+            $data = array();
+            foreach ($id_array as $id) {
+                $data[] = $this->property_model->getPropertyDetails($id);
+            }
 
-            if (!empty($value['kepek'])) {
-                $kep_arr = json_decode($value['kepek']);
-                $img = "<img src=" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $kep_arr[0]) . " alt='" . $value['ingatlan_nev_hu'] . "' />";
-            } else {
-                $img = "<img src=" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg') . " alt='" . $value['ingatlan_nev_hu'] . "' />";
+            $photo_link = BASE_URL . UPLOADS . 'ingatlan_photo/';
+            $url_helper = DI::get('url_helper');
+            $str_helper = DI::get('str_helper');
+            $name = (empty($name)) ? 'érdeklődő' : $name;
+
+            $html_data = "";
+            foreach ($data as $key => $value) {
+
+                if (!empty($value['kepek'])) {
+                    $kep_arr = json_decode($value['kepek']);
+                    $img = "<img src=" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $kep_arr[0]) . " alt='" . $value['ingatlan_nev_hu'] . "' />";
+                } else {
+                    $img = "<img src=" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg') . " alt='" . $value['ingatlan_nev_hu'] . "' />";
+                }
+
+                $html_data .= "<tr>\r\n";
+                $html_data .= "<td>" . $img . "</td>";
+                $html_data .= "<td><strong>S-" . $value['ref_num'] . "</strong></td>";
+                $html_data .= "<td>" . $value['ingatlan_nev_hu'] . "</td>";
+                $html_data .= "<td><a style='color:blue;' href='" . BASE_URL . 'ingatlanok/adatlap/' . $value['id'] . '/' . $str_helper->stringToSlug($value['ingatlan_nev_hu']) . '?referens=' . $user->id . "' target='_blank'>Megtekintés</a></td>";
+                $html_data .= "</tr>\r\n";
             }
 
             $html_data .= "<tr>\r\n";
-            $html_data .= "<td>" . $img . "</td>";
-            $html_data .= "<td><strong>S-" . $value['ref_num'] . "</strong></td>";
-            $html_data .= "<td>" . $value['ingatlan_nev_hu'] . "</td>";
-            $html_data .= "<td><a style='color:blue;' href='" . BASE_URL . 'ingatlanok/adatlap/' . $value['id'] . '/' . $str_helper->stringToSlug($value['ingatlan_nev_hu']) . "' target='_blank'>Megtekintés</a></td>";
+            $html_data .= "<td colspan='4'>&nbsp;</td>\r\n";
             $html_data .= "</tr>\r\n";
+
+            $html_data .= "<tr>\r\n";
+            $html_data .= "<td colspan='4'><strong>Ingatlan referens:</strong> " . $user->first_name . ' ' . $user->last_name . "</td>\r\n";
+            $html_data .= "</tr>\r\n";
+            $html_data .= "<tr>\r\n";
+            $html_data .= "<td colspan='4'><strong>Telefon:</strong> " . $user->phone . "</td>\r\n";
+            $html_data .= "</tr>\r\n";
+
+            // template-be kerülő változók
+            $template_data = array(
+                'email' => $email,
+                'name' => $name,
+                'ref_name' => $user->first_name . ' ' . $user->last_name,
+                'ref_email' => $user->email,
+                'ref_phone' => $user->phone,
+                'html_data' => $html_data
+            );
+
+
+            $to_email = $email;
+            $to_name = '';
+            $subject = 'Értesítés ingatlanokról';
+            $template = 'ingatlanok_email';
+            $from_email = $user->email;
+            $from_name = $settings['ceg'];
+
+            $emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template);
+            $emailer->setArea('admin');
+    //$emailer->setDebug(true);
+
+            // true vagy false
+            if ($emailer->send()) {
+                $this->response->json(array(
+                    'status' => 'success',
+                    'message' => 'Üzenet elküldve.'
+                    ));
+            } else {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'E-mail küldése sikertelen.'
+                    ));
+            }
+    
+        } else {
+            $this->response->redirect('admin/error');
         }
 
-        $html_data .= "<tr>\r\n";
-        $html_data .= "<td colspan='4'>&nbsp;</td>\r\n";
-        $html_data .= "</tr>\r\n";
-
-        $html_data .= "<tr>\r\n";
-        $html_data .= "<td colspan='4'><strong>Ingatlan referens:</strong> " . $user->first_name . ' ' . $user->last_name . "</td>\r\n";
-        $html_data .= "</tr>\r\n";
-        $html_data .= "<tr>\r\n";
-        $html_data .= "<td colspan='4'><strong>Telefon:</strong> " . $user->phone . "</td>\r\n";
-        $html_data .= "</tr>\r\n";
-
-        // template-be kerülő változók
-        $template_data = array(
-            'email' => $email,
-            'name' => $name,
-            'ref_name' => $user->first_name . ' ' . $user->last_name,
-            'ref_email' => $user->email,
-            'ref_phone' => $user->phone,
-            'html_data' => $html_data
-        );
-
-
-        $to_email = $email;
-        $to_name = '';
-        $subject = 'Értesítés ingatlanokról';
-        $template = 'ingatlanok_email';
-        $from_email = $user->email;
-        $from_name = $settings['ceg'];
-
-        $emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template);
-        $emailer->setArea('admin');
-//$emailer->setDebug(true);
-
-        // true vagy false
-        return $emailer->send();
     }
-
 
 
 }
