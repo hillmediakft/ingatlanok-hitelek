@@ -346,6 +346,7 @@ class Property_model extends AdminModel {
 //var_dump($request_data);die;        
         $this->query->set_columns('SQL_CALC_FOUND_ROWS 
             `ingatlanok`.`id`,
+            `ingatlanok`.`ref_id`,
             `ingatlanok`.`ref_num`,
             `ingatlanok`.`kepek`,
             `ingatlanok`.`kategoria`,
@@ -375,10 +376,12 @@ class Property_model extends AdminModel {
         $this->query->set_limit($display_length);
 
         // ha nem superadmin a bejelentkezett felhasználó, akkor csak a saját ingatlanja jelennek meg
+    /*    
         if (!Auth::isSuperadmin()) {
             $this->query->set_where('ingatlanok.ref_id', '=', Auth::getUser('id'));
         }
-        
+    */
+
         //$this->query->set_where('ingatlanok.deleted', '=', 0);
 
         //szűrés beállítások
