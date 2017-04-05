@@ -31,5 +31,38 @@ class Logs_model extends AdminModel {
         }
         return $this->query->select();
     }
+
+
+    /**
+     *  rekordok számának lekérdezése
+     *
+     *  @param  integer    $id (csak az ennél magyobb id-jű elemeket adja vissza)
+     *  @return integer
+     */
+    public function lastLogs($id = null)
+    {
+        $this->query->set_columns(array('id'));
+
+        if(!is_null($id)){
+            $this->query->set_where('id', '>', $id);
+        }
+
+        $result = $this->query->select();
+        return count($result);
+    }
+
+    /**
+     *  A legnagyon id-jű rekord id lekérdezése
+     *
+     *  @param  integer    $id (csak az ennél magyobb id-jű elemeket adja vissza)
+     *  @return integer
+     */
+    public function lastLogId()
+    {
+        $this->query->set_columns('MAX(`id`) AS `id`');
+        $result = $this->query->select();
+        return (int)$result[0]['id'];
+    }    
+
 }
 ?>
