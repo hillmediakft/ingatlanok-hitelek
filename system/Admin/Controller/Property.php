@@ -133,7 +133,6 @@ class Property extends AdminController {
                             if ($result !== false) {
                                 $custom_action_status = 'OK';
                                 $custom_action_message = $result . ' ingatlan törölve.';
-                                EventManager::trigger('delete_property', array('delete', $result . ' ingatlan törlése'));
                             } else {
                                 $custom_action_status = 'ERROR';
                                 $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
@@ -743,8 +742,6 @@ class Property extends AdminController {
             $result = $this->_delete($id_data);
 
             if ($result !== false) {
-                EventManager::trigger('delete_property', array('delete', $result . ' ingatlan törlése'));
-
                 $this->response->json(array(
                     "status" => 'success',
                     "message_success" => $result . 'ingatlan törölve.'
@@ -774,6 +771,8 @@ class Property extends AdminController {
         // a sikertelen törlések számát tárolja
         $fail_counter = 0;
 
+        $success_id_arr = array();
+
         // tömbösítjük, ha nem tömb az $id_data
         $id_data = (!is_array($id_data)) ? (array) $id_data : $id_data;
 
@@ -791,6 +790,7 @@ class Property extends AdminController {
             // ha a törlési sql parancsban nincs hiba
             if ($result !== false) {
                 if ($result > 0) {
+                    
                     //sikeres törlés
                     $file_helper = DI::get('file_helper');
 
@@ -819,16 +819,25 @@ class Property extends AdminController {
 
                     // sikeres törlés
                     $success_counter += $result;
+                    // hozzáadjuk az id-t törölt elemekhez                
+                    $success_id_arr[] = $id;
                 } else {
                     //sikertelen törlés (0 sor lett törölve)
                     $fail_counter++;
                 }
+                
+
             } else {
                 // ha a törlési sql parancsban hiba van
                 return false;
             }
         } // end foreach
 
+//log        
+if (!empty($success_id_arr)) {
+    EventManager::trigger('delete_property', array('delete', 'azonosító számú ingatlan törlése.', $success_id_arr));
+    EventManager::trigger('send_info_email', array('ref_num' => $success_id_arr, 'message' => 'azonosító számú ingatlan törölve.'));
+}
         return $success_counter + $fail_counter;
     }
 
@@ -1150,7 +1159,6 @@ class Property extends AdminController {
                             if ($update_real) {
                                 Message::set('success', 'A módosítások sikeresen elmentve!');
                                 EventManager::trigger('update_property', array('update', '#' . $id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan módosítása'));
-                            
 
                                 // ha módosították az árat (nem az eredeti árat)
                                 if ($ar_elado_modosult === true || $ar_kiado_modosult === true) {
@@ -1179,9 +1187,13 @@ class Property extends AdminController {
                                         $this->loadModel('settings_model');
                                         $price_change_data['settings'] = $this->settings_model->get_settings();
 
+                                        // E-mail küldése site user-ekenek
                                         EventManager::trigger('change_price', array($price_change_data));
                                     }
-                                    
+ 
+                                    EventManager::trigger('update_property', array('update', '#' . $id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan ára megváltozott'));
+                                    // E-mail küldése admin-oknak
+                                    EventManager::trigger('send_info_email', array('ref_num' => array($data['ref_num']), 'message' => 'referencia számú ingatlan ára módosult.'));
                                 }    
 
 
@@ -1222,6 +1234,7 @@ class Property extends AdminController {
                             }
 
                         EventManager::trigger('insert_property', array('insert', '#' . $last_id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan létrehozása'));
+                        EventManager::trigger('send_info_email', array('ref_num' => array($data['ref_num']), 'message' => 'referencia számú ingatlan létrehozva.'));
 
                         $this->response->json(array(
                             "status" => 'success',
@@ -1572,6 +1585,7 @@ class Property extends AdminController {
     private function _status_kiemeles_update($id_arr, $column, $data)
     {
         $success_counter = 0;
+        $success_id_arr = array();
 
         $id_arr = (!is_array($id_arr)) ? (array) $id_arr : $id_arr;
 
@@ -1582,11 +1596,28 @@ class Property extends AdminController {
             if ($result !== false) {
                 // ha az update sql parancsban nincs hiba
                 $success_counter += $result;
+                
+                if ($result > 0) {
+                    $success_id_arr[] = $id;
+                }
+
             } else {
                 // visszatér ha az update sql parancsban hiba van
                 return false;
             }
         }
+
+// log
+if (!empty($success_id_arr)) {
+    if ($data === 1 && $column == 'status') {
+        EventManager::trigger('change_property_status', array('active', 'azonosító számú ingatlan státusza aktív lett.', $success_id_arr));
+        EventManager::trigger('send_info_email', array('ref_num' => $success_id_arr, 'message' => 'azonosító számú ingatlan statusza aktív lett.'));
+    } elseif($data === 0 && $column == 'status') {
+        EventManager::trigger('change_property_status', array('inactive', 'azonosító számú ingatlan státusza inaktív lett.', $success_id_arr));
+        EventManager::trigger('send_info_email', array('ref_num' => $success_id_arr, 'message' => 'azonosító számú ingatlan statusza inaktív lett.'));
+    }
+}        
+
         // visszatér az update-ek számával
         return $success_counter;
     }
