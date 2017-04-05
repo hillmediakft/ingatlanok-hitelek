@@ -77,6 +77,16 @@
                                             } elseif ($log['action'] == 'delete') {
                                                 echo '<span class="badge badge-danger badge-sm">' . $log['action'] . '</span>';
                                             }
+
+                                            elseif ($log['action'] == 'active') {
+                                                echo '<span class="badge badge-warning badge-sm">' . $log['action'] . '</span>';
+                                            } elseif ($log['action'] == 'inactive') {
+                                                echo '<span class="badge badge-danger badge-sm">' . $log['action'] . '</span>';
+                                            }
+
+
+
+
                                             ?></td>
                                         <td><?php echo $log['message']; ?></td>
                                     </tr>
