@@ -318,6 +318,8 @@ class Auth {
         $user_data = array(
             'id' => $this->user->id,
             'name' => $this->user->name,
+            'first_name' => $this->user->first_name,
+            'last_name' => $this->user->last_name,
             'email' => $this->user->email,
             'role_id' => $this->user->role_id,
             'photo' => $this->user->photo,
@@ -404,6 +406,8 @@ class Auth {
         $user_data = array(
             'id' => $this->user->id,
             'name' => $this->user->name,
+            'first_name' => $this->user->first_name,
+            'last_name' => $this->user->last_name,
             'email' => $this->user->email,
             'role_id' => $this->user->role_id,
             'photo' => $this->user->photo,
