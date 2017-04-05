@@ -3,6 +3,7 @@ namespace System\Admin\Controller;
 use System\Core\AdminController;
 //use System\Libs\DI;
 //use System\Libs\Message;
+use System\Libs\Cookie;
 use System\Core\View;
 
 class Logs extends AdminController {
@@ -14,6 +15,8 @@ class Logs extends AdminController {
 
     public function index()
     {
+        Cookie::set('last_log_number', 0, -1);
+
         $data['title'] = 'Naplózás oldal';
         $data['description'] = 'Naplózás oldal description';
         // userek adatainak lekérdezése
