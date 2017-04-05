@@ -2,6 +2,7 @@
 namespace System\Libs;
 use System\Libs\DI;
 use System\Libs\Query;
+use System\Libs\Session;
 
 /**
  * Az adatbázis logs táblájába létrehoz egy új rekordot
