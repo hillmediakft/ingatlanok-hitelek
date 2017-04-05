@@ -1,4 +1,8 @@
-<?php use System\Libs\Auth; ?>
+<?php 
+use System\Libs\Auth;
+use System\Libs\Cookie;
+
+ ?>
 <!-- BEGIN SIDEBAR -->
 <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
 <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
@@ -394,6 +398,11 @@
             <a href="admin/logs" class="nav-link ">
                 <i class="fa fa-folder"></i>
                 <span class="title">Naplózás</span>
+                <?php 
+                $last_log_number = Cookie::get('last_log_number');
+                if ($last_log_number > 0) { ?>
+                    <span class="badge badge-danger badge-sm"><?php echo Cookie::get('last_log_number'); ?></span>
+                <?php } ?>
             </a>
         </li> 
 
