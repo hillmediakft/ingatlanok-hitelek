@@ -37,12 +37,33 @@ $config['events'] = array(
 		$log->index($type, $message);
 
 	},
-	'delete_property' => function($type, $message){
+	'delete_property' => function($type, $message, $id_arr){
+
+		$log = new LogIntoDb();
+		$log->addLog($type, $message, $id_arr);
+
+	},
+
+	'change_property_status' => function($type, $message, $id_arr){
+
+		$log = new LogIntoDb();
+		$log->changePropertyStatus($type, $message, $id_arr);
+
+	},
+
+
+	'active_property' => function($type, $message){
 
 		$log = new LogIntoDb();
 		$log->index($type, $message);
 
 	},
+	'inactive_property' => function($type, $message){
+
+		$log = new LogIntoDb();
+		$log->index($type, $message);
+
+	},	
 	'change_price' => function($price_change_data){
 
 		$connect = DI::get('connect');	
@@ -131,7 +152,7 @@ $config['events'] = array(
         // paraméterek: ($from_email, $from_name, $to_email, $to_name, $subject, $form_data, $template)
         $emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, 'ertesites_valtozasrol');
         $emailer->setArea('admin');
-    $emailer->setDebug(true);        
+//$emailer->setDebug(true);        
         $emailer->send();
 	},	 
 
