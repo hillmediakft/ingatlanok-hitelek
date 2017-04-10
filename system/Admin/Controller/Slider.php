@@ -85,7 +85,7 @@ class Slider extends AdminController {
         $data['title'] = 'Új slide oldal';
         $data['description'] = 'Új slide oldal description';
 
-        $view->add_links(array('ckeditor','bootstrap-fileupload', 'slider_insert'));
+        $view->add_links(array('ckeditor','bootstrap-fileinput', 'slider_insert'));
         $view->render('slider/tpl_slider_insert', $data);
     }
 
@@ -156,7 +156,7 @@ class Slider extends AdminController {
         $data['description'] = 'Slider szerkesztése description';
         $data['slider'] = $this->slider_model->oneSlide($id);
 
-        $view->add_links(array('bootbox', 'ckeditor', 'bootstrap-fileupload', 'slider_update'));
+        $view->add_links(array('bootbox', 'ckeditor', 'bootstrap-fileinput', 'slider_update'));
         $view->render('slider/tpl_slider_update', $data);
     }
 

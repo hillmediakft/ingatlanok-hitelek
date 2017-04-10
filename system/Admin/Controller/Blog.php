@@ -101,7 +101,7 @@ if($this->request->checkUploadError('upload_blog_picture')){
 		$data['description'] = 'Admin blog oldal description';	
 		$data['category_list'] = $this->blogcategory_model->selectCategory();
 		
-		$view->add_links(array('bootstrap-fileupload', 'ckeditor', 'vframework', 'blog_insert'));
+		$view->add_links(array('bootstrap-fileinput', 'ckeditor', 'vframework', 'blog_insert'));
 		$view->render('blog/tpl_blog_insert', $data);
 	}
     
@@ -180,7 +180,7 @@ if($this->request->checkUploadError('upload_blog_picture')){
 		$data['category_list'] = $this->blogcategory_model->selectCategory();
 		$data['blog'] = $this->blog_model->selectBlog($id);
 // $view->debug(true);		
-		$view->add_links(array('bootstrap-fileupload', 'ckeditor', 'vframework', 'blog_update'));
+		$view->add_links(array('bootstrap-fileinput', 'ckeditor', 'vframework', 'blog_update'));
 		$view->render('blog/tpl_blog_update', $data);
 	}  
 

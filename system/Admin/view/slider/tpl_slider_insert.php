@@ -50,14 +50,20 @@
                             <div class="col-md-12">						
 
                                 <!-- bootstrap file upload -->
-                                <div class="form-group">
-                                    <label class="control-label">Slide kép</label>
-                                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                                        <div class="fileupload-new thumbnail" style="width: 585px; height: 210px;"><img src="<?php echo ADMIN_IMAGE . 'slide_placeholder_585x210.jpg'; ?>" alt=""/></div>
-                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 585px; max-height: 210px; line-height: 20px;"></div>
+                                <label for="upload_slide_picture" class="control-label">Slide kép</label>
+                                <div class="form-group ">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail" style="width: 585px; height: 210px;">
+                                            <img src="<?php echo ADMIN_IMAGE . 'slide_placeholder_585x210.jpg'; ?>" alt=""/>
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
                                         <div>
-                                            <span class="btn default btn-file"><span class="fileupload-new">Kiválasztás</span><span class="fileupload-exists">Módosít</span><input id="uploadprofile" class="img" type="file" name="upload_slide_picture"></span>
-                                            <a href="#" class="btn btn-warning fileupload-exists" data-dismiss="fileupload">Töröl</a>
+                                            <span class="btn default btn-file">
+                                                <span class="fileinput-new">Kiválasztás</span>
+                                                <span class="fileinput-exists">Módosít</span>
+                                                <input id="uploadprofile" class="img" type="file" name="upload_slide_picture">
+                                            </span>
+                                            <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Töröl</a>
                                         </div>
                                     </div>
                                 </div>
