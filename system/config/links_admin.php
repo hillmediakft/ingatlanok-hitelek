@@ -10,6 +10,11 @@ $link['bootstrap-fileupload'] = array(
 	'js' => ADMIN_ASSETS . 'plugins/bootstrap-fileupload/bootstrap-fileupload.js'
 );
 
+$link['bootstrap-fileinput'] = array(
+	'css' => ADMIN_ASSETS . 'plugins/bootstrap-fileinput/bootstrap-fileinput.css',
+	'js' => ADMIN_ASSETS . 'plugins/bootstrap-fileinput/bootstrap-fileinput.js'
+);
+
 $link['bootstrap-editable'] = array(
 	'css' => ADMIN_ASSETS . 'plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css',
 	'js' => ADMIN_ASSETS . 'plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js'
