@@ -217,7 +217,7 @@ use System\Libs\Language as Lang;
                                             <input type="text" class="name" name="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?>" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')">
                                             <input type="email" class="email" name="email" placeholder="Email" required oninvalid="this.setCustomValidity('Adjon meg egy email címet!')" oninput="setCustomValidity('')">
                                             <input type="text" class="name" name="phone" placeholder="<?php echo Lang::get('kapcsolat_email_telefon'); ?>">
-                                            <textarea class="message" name="message" placeholder="<?php echo 'Érdeklődőm a ' . $ingatlan['ref_num'] . ' ref. sz. ingatlanról.'; ?>" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')"></textarea>
+                                            <textarea class="message" name="message" placeholder="" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')"><?php echo 'Érdeklődöm a ' . $ingatlan['ref_num'] . ' ref. sz. ingatlanról.'; ?></textarea>
 
                                             <input type="text" name="mezes_bodon" id="mezes_bodon">
 
