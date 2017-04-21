@@ -355,19 +355,15 @@ use System\Libs\Language as Lang;
                             }
                             ?>
 
-
-
-
                         </div>
-
 
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 clearfix ">
                             <p class="well well-sm">Ingatlan adatlap</p>
                             <p class="margin-bottom-20">
-                                <a id="generate_pdf" class="print-datasheet" href="ingatlanok/adatlap_nyomtatas/<?php echo $property_data['id']; ?>"><i class="fa fa-print"></i> Adatlap nyomtatás</a>
+                                <form style="display: inline;" id="adatlap_nyomtatas_form" method="POST" action="admin/adatlap/<?php echo $property_data['id']; ?>">
+                                    <a id="generate_pdf" class="print-datasheet"><i class="fa fa-print"></i> Adatlap nyomtatás</a>
+                                </form>
                             </p>
-
-
 
                         </div>
 

@@ -304,6 +304,14 @@ class Property extends AdminController {
                       <ul class="dropdown-menu pull-right">
                     <li><a href="' . $this->request->get_uri('site_url') . 'property/details/' . $value['id'] . '"><i class="fa fa-eye"></i> Részletek</a></li>';
 
+                    // adatlap nyomtatás form
+                    $temp['menu'] .= '<li>
+                                <a href="javascript:;" class="generate_pdf" data-id="' . $value['id'] . '"><i class="fa fa-print"></i> Adatlap nyomtatás</a>
+                                <form style="display: none;" id="generate_pdf_form_' . $value['id'] . '" method="POST" action="admin/adatlap/' . $value['id'] . '">
+                                </form>
+                        </li>';
+
+
                     // csak akkor jelenik meg, ha a bejelentkezett user megegyezik az ingatlanhoz rendelt referenssel 
                     if ($visible) {
                     // update
