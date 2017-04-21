@@ -420,6 +420,12 @@ class Property_model extends AdminModel {
             if (isset($request_data['tulaj_nev']) && !empty($request_data['tulaj_nev'])) {
                 $this->query->set_where('ingatlanok.tulaj_nev', 'LIKE', '%' . $request_data['tulaj_nev'] . '%');
             }
+            if (isset($request_data['any_string']) && !empty($request_data['any_string'])) {
+                $this->query->set_where('AND (');
+                $this->query->set_where('ingatlanok.leiras_hu', 'LIKE', '%' . $request_data['any_string'] . '%');
+                $this->query->set_where('ingatlanok.ingatlan_nev_hu', 'LIKE', '%' . $request_data['any_string'] . '%', 'or');
+                $this->query->set_where(')');
+            }
 
             /*             * ************************* ÁR ALAPJÁN KERESÉS **************************** */
 
@@ -576,6 +582,41 @@ class Property_model extends AdminModel {
         }
 
         return $id_array;
+    }
+
+
+    /**
+     *  Lekérdezi a referens adatokat a pdf generáláshoz
+     *  
+     *  @param integer 
+     *  @return array 
+     */
+    public function get_agent($id)
+    {
+        $this->query->set_table(array('users'));
+        $this->query->set_columns(array(
+            'users.id',
+            'users.first_name',
+            'users.last_name',
+            'users.phone',
+            'users.email',
+            'users.photo'
+        ));
+
+        // kivéve a fejlesztő usereket
+        $this->query->set_where('id', '!=', 1);
+        $this->query->set_where('id', '!=', 2);
+
+        // csak admin felhasználók!!
+        $this->query->set_where('provider_type', '=', 'admin');
+
+        $agents = $this->query->select();
+          // ha nincs a feltételeknek megfelelő referens
+          if (empty($agents)) {
+            return false;
+          }
+
+        return $agents[0];
     }
 
 }
