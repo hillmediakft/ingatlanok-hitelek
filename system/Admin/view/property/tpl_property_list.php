@@ -204,6 +204,13 @@
                                                             </div>
                                                         </div>
 
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label for="any_string" class="control-label">Ingatlan megnevezés/leírás</label>
+                                                                <input type="text" class="form-control form-filter input-sm" name="any_string" id="any_string">                            
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                     
                                                     <div class="row">
