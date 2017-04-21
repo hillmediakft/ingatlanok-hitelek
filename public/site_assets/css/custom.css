@@ -385,11 +385,12 @@ h3.section-title .lower-price {
 
 /* ** RÉSZLETES KERESÉS * */
 .search-page fieldset {
-    margin: 10px 15px 10px 15px;
+    margin: 10px 15px 5px 15px;
     background: #eee;
 }
 .search-page fieldset legend {
-    margin-bottom: 26px;
+    margin-bottom: 15px;
+    border-bottom: none;
 }
 
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
@@ -425,7 +426,7 @@ input.has-error {
 
 
 .extrak-list {
-    padding: 0;
+    padding: 26px 0px 0px 0px;
     list-style: none;
     margin: 0;
 }

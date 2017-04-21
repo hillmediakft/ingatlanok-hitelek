@@ -2000,7 +2000,8 @@ footer.footer .bottom-footer .copy {
     color: #000;
     display: block;
     width: 100%;
-    margin-bottom: 13px;
+    /*margin-bottom: 13px;*/
+    margin-bottom: 3px;
 }
 /* line 688, scss/_slider.scss */
 .main-filter .filter-form .item-label .label-descr {
@@ -2009,7 +2010,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 693, scss/_slider.scss */
 .main-filter .filter-form .ui-front {
-  margin-bottom: 21px;
+  margin-bottom: 15px;
 }
 /* line 695, scss/_slider.scss */
 .main-filter .filter-form .ui-front .filter-select {
