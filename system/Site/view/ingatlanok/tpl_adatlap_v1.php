@@ -35,7 +35,11 @@ use System\Libs\Language as Lang;
                         <?php
                         $district = (!is_null($ingatlan['district_name'])) ? $ingatlan['district_name'] . ' ' . Lang::get('adatlap_kerulet') : '';
                         ?>
-                        <h5><?php echo $ingatlan['city_name'] . ' ' . $district; ?></h5> 
+                        <h5><?php echo $ingatlan['city_name'] . ' ' . $district; ?></h5>
+
+                        <div style="padding: 10px 0px;">
+                            <?php echo Lang::get('kereso_ref_szam'); ?>: <span style="font-weight: 700; color:#000;"><?php echo 'S-' . $ingatlan['ref_num']; ?></span>
+                        </div>
                     </div>
 
                     <div class="col-sm-3">
@@ -213,13 +217,13 @@ use System\Libs\Language as Lang;
                                             <input type="text" class="name" name="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?>" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')">
                                             <input type="email" class="email" name="email" placeholder="Email" required oninvalid="this.setCustomValidity('Adjon meg egy email címet!')" oninput="setCustomValidity('')">
                                             <input type="text" class="name" name="phone" placeholder="<?php echo Lang::get('kapcsolat_email_telefon'); ?>">
-                                            <textarea class="message" name="message" placeholder="<?php echo Lang::get('kapcsolat_email_uzenet'); ?>" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')"></textarea>
+                                            <textarea class="message" name="message" placeholder="<?php echo 'Érdeklődőm a ' . $ingatlan['ref_num'] . ' ref. sz. ingatlanról.'; ?>" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')"></textarea>
 
                                             <input type="text" name="mezes_bodon" id="mezes_bodon">
 
                                             <input type="hidden" name="agent_name" value="<?php echo $agent['first_name'] . ' ' . $agent['last_name']; ?>">
                                             <input type="hidden" name="agent_email" value="<?php echo $agent['email']; ?>">
-                                            <input type="hidden" name="ref_num" value="<?php echo $ingatlan['ref_num']; ?>">
+                                            <input type="hidden" name="ref_num" value="<?php echo 'S-' . $ingatlan['ref_num']; ?>">
                                             <input type="hidden" name="url" value="<?php echo $this->request->get_uri('current_url'); ?>">
 
                                             <button type="submit" class="send-btn" id="submit-button"><?php echo Lang::get('kapcsolat_email_kuldes'); ?></button>
