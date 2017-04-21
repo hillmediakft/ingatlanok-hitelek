@@ -126,11 +126,9 @@ if ($count > 0) {
         if (empty($data['ingatlan'])) {
             $this->response->redirect('error');
         }
-        
-        $data['ingatlan']['ref_num'] = 'S-' . $data['ingatlan']['ref_num'];
+       
         // ingatlanhoz tartozó képek
         $data['pictures'] = json_decode($data['ingatlan']['kepek']);
-        
         
         // ha van a query stringben referensre vonatkozó adat
         if ($this->request->has_query('referens')) {
