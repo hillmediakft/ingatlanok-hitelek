@@ -328,6 +328,9 @@ class Application {
                 // ingatlan csv export	
                 $router->get('/report/property', 'report@property');
 
+                // pdf generálás
+                $router->post('/adatlap/:id', 'Adatlap@index');
+
                 // error	
                 $router->set404('error@index');
             });
