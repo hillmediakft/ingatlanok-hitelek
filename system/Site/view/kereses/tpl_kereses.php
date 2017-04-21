@@ -247,31 +247,25 @@ use System\Libs\Language as Lang;
                                                 </div>					
                                             </div>
 
+                                            <!-- EXTRÁK -->
+                                            <div class="col-sm-3">
+                                                <ul class="extrak-list">
+                                                    <li class="filter-item">
+                                                        <label><input type="checkbox" name="ext_butor" value="1"> <?php echo Lang::get('kereso_butor'); ?></label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <ul class="extrak-list">
+                                                    <li class="filter-item">
+                                                        <label><input type="checkbox" name="erkely" value="1"> <?php echo Lang::get('kereso_erkely'); ?></label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+
                                         </fieldset>
                                     </div>                                    
-
-                                    <div class="row">
-                                        <fieldset>
-                                            <legend><?php echo Lang::get('kereso_reszletes_extrak'); ?></legend>
-                                                
-                                                <div class="col-sm-3">
-                                                    <ul class="extrak-list">
-                                                        <li class="filter-item">
-                                                            <label><input type="checkbox" name="ext_butor" value="1"> <?php echo Lang::get('kereso_butor'); ?></label>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <ul class="extrak-list">
-                                                        <li class="filter-item">
-                                                            <label><input type="checkbox" name="erkely" value="1"> <?php echo Lang::get('kereso_erkely'); ?></label>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                        </fieldset>
-                                        
-                                    </div>
 
                                     <div class="row">
                                         <fieldset>
@@ -336,11 +330,11 @@ use System\Libs\Language as Lang;
                                     <div class="row">
 
                                         <div class="col-sm-2">
-                                            <button class="find-now-btn"><?php echo Lang::get('kereso_kereses'); ?></button>
+                                            <button class="find-now-btn" style="margin-top: 15px;"><?php echo Lang::get('kereso_kereses'); ?></button>
                                            <!-- <a href="#" class="visible-xs find-now-btn"><?php //echo Lang::get('kereso_kereses');       ?></a> -->
                                         </div>
                                         <div class="col-sm-2" style="text-align:center;">
-                                            <a id="reset_form" href="javascript:void(0);" class="simple-btn sm-button filled red" style="margin-top: 33px; width: 100%;"><?php echo Lang::get('kereso_reszletes_kereses_torles'); ?></a>
+                                            <a id="reset_form" href="javascript:void(0);" class="simple-btn sm-button filled red" style="margin-top: 15px; width: 100%;"><?php echo Lang::get('kereso_reszletes_kereses_torles'); ?></a>
                                         </div>
                                     </div>
 
