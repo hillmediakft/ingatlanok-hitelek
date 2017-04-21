@@ -603,6 +603,18 @@ var Property = function () {
 
     };
 
+    /**
+     * Adatalap nyomtatás
+     */
+    var adatlapNyomtatas = function () {
+
+        $('table#property').on('click', '.generate_pdf', function (e) {
+            e.preventDefault();
+            var id = $(this).attr('data-id'); // az elem id-je
+            $("#generate_pdf_form_" + id).submit();
+        });
+
+    };
 
 
     return {
@@ -622,10 +634,9 @@ var Property = function () {
             // handleModal();
             locationsInput();
             enableDistrict();
-
             cloneConfirm();
-
             notice();
+            adatlapNyomtatas();
            
             vframework.changeStatus({
                 url: "admin/property/change_status"
