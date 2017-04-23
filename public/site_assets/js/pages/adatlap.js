@@ -138,7 +138,28 @@ var Adatlap = function () {
             html: true
         });
     };
+	
+    /**
+     *	Telefonszám mutatása
+     */
+    var getPhoneNumber = function () {
 
+        var agentId = $('#agent_id').val();
+        $("#show_phone_number").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: 'getphonenumber',
+                data: 'id=' + agentId,
+                success: function (data) {
+                    $('#show_phone_number').html('<i class="fa fa-phone-square"></i> ' + data);
+
+
+                }
+            });
+        });	
+	}
+		
     /*
      * Google térkép objektumok
      */
@@ -200,6 +221,7 @@ var Adatlap = function () {
             //googleMapsInit();
             adatlapNyomtatas();
             initShare();
+			getPhoneNumber();
         },
 
     };

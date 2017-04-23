@@ -80,8 +80,11 @@ use System\Libs\Language as Lang;
                                     <h6><?php echo $agent['first_name'] . ' ' . $agent['last_name']; ?></h6>
                                     <div><?php echo $agent['title_' . LANG]; ?></div>
                                 </div>
-                                <div>Tel: <?php echo $agent['phone']; ?></div>
-                                <div class="label label-danger"><?php echo Lang::get('adatlap_hivjon_most_cimke'); ?></div>
+								<div class="label label-danger"><?php echo Lang::get('adatlap_hivjon_most_cimke'); ?></div>
+								<input type="hidden" name="agent_id" id="agent_id" value="<?php echo $agent['id']; ?>">
+                                <div><a class="simple-btn sm-button outlined red" id="show_phone_number"><i class="fa fa-phone-square"></i> <?php echo substr($agent['phone'], 0, -4) . '...'; ?></a></div>
+								<span id="phone_number_box"></span> 
+                                
                             </div>
                         </div>   
                     </div>

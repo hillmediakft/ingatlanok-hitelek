@@ -21055,3 +21055,6 @@ footer.footer .widget .property-listing li {
         display: none;
     }
 }
+
+a {
+cursor: pointer;
