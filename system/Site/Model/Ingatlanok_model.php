@@ -1694,7 +1694,26 @@ echo "</pre>";
 
         return $this->query->select();
     }
+	
+    /**
+     * 	Frissíti a cookie-t a nemrég megtekintett ingatlanokhoz
+     */
+    public function refresh_nemreg_megtekintett_cookie($id) {
+        $nemreg_megtekintett_array = json_decode(Cookie::get('nemreg_megtekintett'));
 
+        if (is_array($nemreg_megtekintett_array) && !in_array($id, $nemreg_megtekintett_array)) {
+            array_unshift($nemreg_megtekintett_array, $id);
+			if(count($nemreg_megtekintett_array) > 10) {
+				array_pop($nemreg_megtekintett_array);
+			}
+            $nemreg_megtekintett_json = json_encode($nemreg_megtekintett_array);
+            Cookie::set('nemreg_megtekintett', $nemreg_megtekintett_json);
+        } elseif ($nemreg_megtekintett_array == null) {
+            $nemreg_megtekintett_array[] = $id;
+            $nemreg_megtekintett_json = json_encode($nemreg_megtekintett_array);
+            Cookie::set('nemreg_megtekintett', $nemreg_megtekintett_json);
+        } 
+    }	
 
 }
 ?>

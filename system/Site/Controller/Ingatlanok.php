@@ -7,6 +7,7 @@ use System\Libs\Auth;
 use System\Libs\Config;
 use System\Libs\Session;
 use System\Libs\Paginator;
+use System\Libs\Cookie;
 
 class Ingatlanok extends SiteController {
 
@@ -112,6 +113,7 @@ if ($count > 0) {
     public function adatlap($id)
     {
         $id = (int)$id;
+
         $page_data = $this->ingatlanok_model->getPageData('ingatlanok');
         
         $data = $this->addGlobalData();
@@ -168,7 +170,10 @@ if ($count > 0) {
         $ar = ($data['ingatlan']['tipus'] == 1) ? $data['ingatlan']['ar_elado'] : $data['ingatlan']['ar_kiado'];
         // hasonló ingatlanok
         $data['hasonlo_ingatlan'] = $this->ingatlanok_model->hasonloIngatlanok($id, $data['ingatlan']['tipus'], $data['ingatlan']['kategoria'], $data['ingatlan']['varos'], $ar);
-
+		// nemrég megtekintett ingatlanok
+	
+        $data['nemreg_megtekintett_ingatlanok'] = $this->nemregMegtekintett();
+		$this->addToNemregMegtekintett($id);
         // Megtekintések számának növelése
         $this->ingatlanok_model->increase_no_of_clicks($id);
 
@@ -278,6 +283,26 @@ if ($count > 0) {
             $this->response->redirect('error');
         }
     }
+	
+	public function nemregMegtekintett() {
+	    $id_array = json_decode(Cookie::get('nemreg_megtekintett'));
+
+        if ($id_array) {
+            $result = $this->ingatlanok_model->get_favourite_properties_data($id_array);
+            return $result;
+        } else {
+            return array();
+        }
+	}
+	
+    /**
+     * 	hozzáadja az ingatlan id-t a kedvencek cookie-hoz  
+     */
+    public function addToNemregMegtekintett($id) {
+
+            $result = $this->ingatlanok_model->refresh_nemreg_megtekintett_cookie($id);
+
+    }	
 
 
 }
