@@ -73,7 +73,7 @@ class Application {
             
             $router->post('/ingatlanok/arvaltozasertesites', 'ingatlanok@arvaltozasErtesites'); // ajax
 			
-			$router->post('/getphonenumber', 'getphonenumber@index'); // ajax
+			$router->post('/getphonenumber', 'GetPhoneNumber@index'); // ajax
 
             $router->post('/user/login', 'user@login'); // ajax
             $router->get('/felhasznalo/kijelentkezes', 'user@logout');

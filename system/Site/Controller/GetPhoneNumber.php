@@ -8,7 +8,7 @@ class GetPhoneNumber extends SiteController {
 
     public function __construct() {
         parent::__construct();
-        $this->loadModel('getphonenumber_model');
+        $this->loadModel('GetPhoneNumber_model');
     }
 
 	/**
@@ -17,7 +17,7 @@ class GetPhoneNumber extends SiteController {
      */
     public function index() {
 		if ($this->request->is_ajax() && $this->request->has_post('id')) {
-			$phone_number = $this->getphonenumber_model->get_phone($this->request->get_post('id'));
+			$phone_number = $this->GetPhoneNumber_model->get_phone($this->request->get_post('id'));
             echo $phone_number[0]['phone'];
 		}
     }
