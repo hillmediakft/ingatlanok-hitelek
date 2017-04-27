@@ -59,7 +59,7 @@
                                             <span class="btn default btn-file">
                                                 <span class="fileinput-new">Kiválasztás</span>
                                                 <span class="fileinput-exists">Módosít</span>
-                                                <input id="uploadprofile" class="img" type="file" name="update_slide_picture">
+                                                <input id="uploadprofile" class="img" type="file" name="upload_blog_picture">
                                             </span>
                                             <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Töröl</a>
                                         </div>

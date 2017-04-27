@@ -119,13 +119,13 @@ if($this->request->checkUploadError('upload_blog_picture')){
 			// fájl feltöltési hiba ellenőrzése
 			if($this->request->checkUploadError('upload_blog_picture')){
 				Message::set('error', $this->request->getFilesError('upload_blog_picture'));
-				$this->response->redirect('admin/blog/insert');				
+				$this->response->redirect('admin/blog/update/' . $id);		
 			}
 			// kép feltöltése (ellenőrizzük, hogy van-e feltöltött kép)
 			if($this->request->hasFiles('upload_blog_picture')) {
 				$dest_image = $this->_uploadPicture($this->request->getFiles('upload_blog_picture'));
 				if($dest_image === false) {
-					$this->response->redirect('admin/blog/update');
+					$this->response->redirect('admin/blog/update/' . $id);
 				}
 			}
 
