@@ -200,11 +200,11 @@ use System\Libs\Language as Lang;
             <div class="col-sm-12">
                 <div class="subscribe-banner">
                     <div class="banner-text-block">
-                        <span class="banner-title inversed">Call to action cím</span>
-                        <p class="banner-text">Call to action szöveg .Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis iaculis mi...</p>
+                        <span class="banner-title inversed"><?php echo Lang::get('home_cta_title'); ?></span>
+                        <p class="banner-text"><?php echo Lang::get('home_cta_body'); ?></p>
                     </div>
                     <div class="subscribe-block">
-                        <a href="#" class="subscribe-btn">Tovább</a>
+                        <a href="<?php echo Lang::get('home_cta_link'); ?>" class="subscribe-btn"><?php echo Lang::get('altalanos_gomb'); ?></a>
                     </div>
                 </div>
             </div>

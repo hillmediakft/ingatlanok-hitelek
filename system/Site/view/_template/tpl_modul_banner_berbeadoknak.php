@@ -9,6 +9,6 @@ use System\Libs\Language as Lang;
     <div class="banner-entry">
         <span class="banner-title"><?php echo Lang::get('home_szolgaltatasok_3_cim'); ?></span>
         <span class="banner-sub"><?php echo Lang::get('home_szolgaltatasok_3_szoveg'); ?></span>
-        <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.berbeadoknak.index.' . LANG); ?>" class="learn-more">Tovább</a>
+        <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.berbeadoknak.index.' . LANG); ?>" class="learn-more"><?php echo Lang::get('altalanos_gomb'); ?></a>
     </div>
 </div>
