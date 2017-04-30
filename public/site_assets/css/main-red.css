@@ -10,50 +10,50 @@
 
 /*
 @font-face {
-  font-family: 'Lato';
-  src: url("../fonts/lato-regular/Lato_gdi.eot");
-  src: url("../fonts/lato-regular/Lato_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/lato-regular/Lato_gdi.woff") format("woff"), url("../fonts/lato-regular/Lato_gdi.ttf") format("truetype"), url("../fonts/lato-regular/Lato_gdi.svg#Lato") format("svg");
+  font-family: 'Source Sans Pro';
+  src: url("../fonts/Source Sans Pro-regular/Source Sans Pro_gdi.eot");
+  src: url("../fonts/Source Sans Pro-regular/Source Sans Pro_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/Source Sans Pro-regular/Source Sans Pro_gdi.woff") format("woff"), url("../fonts/Source Sans Pro-regular/Source Sans Pro_gdi.ttf") format("truetype"), url("../fonts/Source Sans Pro-regular/Source Sans Pro_gdi.svg#Source Sans Pro") format("svg");
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;
 }
 @font-face {
-  font-family: 'Lato-Bold';
-  src: url("../fonts/lato-bold/Lato-Bold_gdi.eot");
-  src: url("../fonts/lato-bold/Lato-Bold_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/lato-bold/Lato-Bold_gdi.woff") format("woff"), url("../fonts/lato-bold/Lato-Bold_gdi.ttf") format("truetype"), url("../fonts/lato-bold/Lato-Bold_gdi.svg#Lato-Bold") format("svg");
+  font-family: 'Source Sans Pro-Bold';
+  src: url("../fonts/Source Sans Pro-bold/Source Sans Pro-Bold_gdi.eot");
+  src: url("../fonts/Source Sans Pro-bold/Source Sans Pro-Bold_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/Source Sans Pro-bold/Source Sans Pro-Bold_gdi.woff") format("woff"), url("../fonts/Source Sans Pro-bold/Source Sans Pro-Bold_gdi.ttf") format("truetype"), url("../fonts/Source Sans Pro-bold/Source Sans Pro-Bold_gdi.svg#Source Sans Pro-Bold") format("svg");
   font-weight: 700;
   font-style: normal;
   font-stretch: normal;
 }
 @font-face {
-  font-family: 'Lato-Light';
-  src: url("../fonts/lato-light/Lato-Light_gdi.eot");
-  src: url("../fonts/lato-light/Lato-Light_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/lato-light/Lato-Light_gdi.woff") format("woff"), url("../fonts/lato-light/Lato-Light_gdi.ttf") format("truetype"), url("../fonts/lato-light/Lato-Light_gdi.svg#Lato-Light") format("svg");
+  font-family: 'Source Sans Pro-Light';
+  src: url("../fonts/Source Sans Pro-light/Source Sans Pro-Light_gdi.eot");
+  src: url("../fonts/Source Sans Pro-light/Source Sans Pro-Light_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/Source Sans Pro-light/Source Sans Pro-Light_gdi.woff") format("woff"), url("../fonts/Source Sans Pro-light/Source Sans Pro-Light_gdi.ttf") format("truetype"), url("../fonts/Source Sans Pro-light/Source Sans Pro-Light_gdi.svg#Source Sans Pro-Light") format("svg");
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
 }
 @font-face {
-  font-family: 'Lato-Italic';
-  src: url("../fonts/lato-italic/Lato-Italic_gdi.eot");
-  src: url("../fonts/lato-italic/Lato-Italic_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/lato-italic/Lato-Italic_gdi.woff") format("woff"), url("../fonts/lato-italic/Lato-Italic_gdi.ttf") format("truetype"), url("../fonts/lato-italic/Lato-Italic_gdi.svg#Lato-Italic") format("svg");
+  font-family: 'Source Sans Pro-Italic';
+  src: url("../fonts/Source Sans Pro-italic/Source Sans Pro-Italic_gdi.eot");
+  src: url("../fonts/Source Sans Pro-italic/Source Sans Pro-Italic_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/Source Sans Pro-italic/Source Sans Pro-Italic_gdi.woff") format("woff"), url("../fonts/Source Sans Pro-italic/Source Sans Pro-Italic_gdi.ttf") format("truetype"), url("../fonts/Source Sans Pro-italic/Source Sans Pro-Italic_gdi.svg#Source Sans Pro-Italic") format("svg");
   font-weight: 400;
   font-style: italic;
   font-stretch: normal;
   unicode-range: U+000D-25CA;
 }
 @font-face {
-  font-family: 'Lato-LightItalic';
-  src: url("../fonts/lato-lightitalic/Lato-LightItalic_gdi.eot");
-  src: url("../fonts/lato-lightitalic/Lato-LightItalic_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/lato-lightitalic/Lato-LightItalic_gdi.woff") format("woff"), url("../fonts/lato-lightitalic/Lato-LightItalic_gdi.ttf") format("truetype"), url("../fonts/lato-lightitalic/Lato-LightItalic_gdi.svg#Lato-LightItalic") format("svg");
+  font-family: 'Source Sans Pro-LightItalic';
+  src: url("../fonts/Source Sans Pro-lightitalic/Source Sans Pro-LightItalic_gdi.eot");
+  src: url("../fonts/Source Sans Pro-lightitalic/Source Sans Pro-LightItalic_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/Source Sans Pro-lightitalic/Source Sans Pro-LightItalic_gdi.woff") format("woff"), url("../fonts/Source Sans Pro-lightitalic/Source Sans Pro-LightItalic_gdi.ttf") format("truetype"), url("../fonts/Source Sans Pro-lightitalic/Source Sans Pro-LightItalic_gdi.svg#Source Sans Pro-LightItalic") format("svg");
   font-weight: 300;
   font-style: italic;
   font-stretch: normal;
 }
 @font-face {
-  font-family: 'Lato-Medium';
-  src: url("../fonts/lato-medium/Lato-Medium_gdi.eot");
-  src: url("../fonts/lato-medium/Lato-Medium_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/lato-medium/Lato-Medium_gdi.woff") format("woff"), url("../fonts/lato-medium/Lato-Medium_gdi.ttf") format("truetype"), url("../fonts/lato-medium/Lato-Medium_gdi.svg#Lato-Medium") format("svg");
+  font-family: 'Source Sans Pro-Medium';
+  src: url("../fonts/Source Sans Pro-medium/Source Sans Pro-Medium_gdi.eot");
+  src: url("../fonts/Source Sans Pro-medium/Source Sans Pro-Medium_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/Source Sans Pro-medium/Source Sans Pro-Medium_gdi.woff") format("woff"), url("../fonts/Source Sans Pro-medium/Source Sans Pro-Medium_gdi.ttf") format("truetype"), url("../fonts/Source Sans Pro-medium/Source Sans Pro-Medium_gdi.svg#Source Sans Pro-Medium") format("svg");
   font-weight: 500;
   font-style: normal;
   font-stretch: normal;
@@ -336,7 +336,7 @@ body, html {
   font-weight: normal;
   font-size: 13px;
   color: #808080;
-  font-family: "Lato", Arial, sans-serif;
+  font-family: "Source Sans Pro", Arial, sans-serif;
   margin: 0;
   padding-left: 15px;
   padding-top: 4px;
@@ -370,7 +370,7 @@ body, html {
 .extra-header .extra-item.currency .ui-state-default .ui-selectmenu-text {
   font-size: 13px;
   color: #808080;
-  font-family: "Lato", Arial, sans-serif;
+  font-family: "Source Sans Pro", Arial, sans-serif;
   padding-left: 15px;
 }
 /* line 241, scss/_header.scss */
@@ -445,7 +445,7 @@ header.header .contact .descr {
 }
 /* line 298, scss/_header.scss */
 header.header .contact .descr .box-title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #000;
   text-transform: uppercase;
   display: block;
@@ -775,7 +775,7 @@ header.header .h-cart-btn:hover {
   float: right;
   text-transform: uppercase;
   font-size: 16px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-decoration: none;
   padding: 0 24px;
 }
@@ -859,7 +859,7 @@ header.header .h-cart-btn:hover {
 /* line 307, scss/_nav.scss */
 .mobile-block .mobile-nav > .navigation-item > a {
   color: #fff;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-transform: uppercase;
   text-decoration: none;
   display: block;
@@ -930,7 +930,7 @@ header.header .h-cart-btn:hover {
   text-align: center;
   padding: 21px;
   color: #fff;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -964,7 +964,7 @@ footer.footer {
 footer.footer .widget .widget-title {
   font-size: 20px;
   color: #fff;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   display: block;
   margin-bottom: 26px;
 }
@@ -1238,14 +1238,14 @@ footer.footer .bottom-footer .copy {
 /* line 68, scss/_slider.scss */
 .home-banner .banner-content .banner-message .banner-entry span.entry-title {
   font-size: 36px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   margin-bottom: 11px;
   line-height: 37px;
 }
 /* line 74, scss/_slider.scss */
 .home-banner .banner-content .banner-message .banner-entry span.entry-message {
   font-size: 24px;
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   line-height: 26px;
 }
 /* line 81, scss/_slider.scss */
@@ -1308,7 +1308,7 @@ footer.footer .bottom-footer .copy {
   display: inline-block;
   color: #9e2828;
   background-color: #fff;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   text-transform: uppercase;
   padding: 10px 32px;
@@ -1347,7 +1347,7 @@ footer.footer .bottom-footer .copy {
 /* line 162, scss/_slider.scss */
 .banners-block .banner-text {
   color: #fff;
-  font-family: 'Lato-Light';
+  font-family: 'Source Sans Pro-Light';
   font-size: 22px;
 }
 /* line 166, scss/_slider.scss */
@@ -1468,7 +1468,7 @@ footer.footer .bottom-footer .copy {
 .banners-block.style-3 .overlay .banner-label {
   background-color: #9e2828;
   color: #fff;
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 30px;
   display: inline-block;
   padding-left: 8%;
@@ -1486,7 +1486,7 @@ footer.footer .bottom-footer .copy {
 /* line 266, scss/_slider.scss */
 .banners-block.style-3 .overlay .banner-title .year {
   color: #9e2828;
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 70px;
 }
 /* line 273, scss/_slider.scss */
@@ -1543,7 +1543,7 @@ footer.footer .bottom-footer .copy {
   display: block;
   font-size: 16px;
   color: #9e2828;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 316, scss/_slider.scss */
 .banners-block.style-4 .left-block .banner-bg .top-overlay {
@@ -1675,7 +1675,7 @@ footer.footer .bottom-footer .copy {
 /* line 427, scss/_slider.scss */
 .shop-front-banner .banner-entry .banner-title {
   font-size: 42px;
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   display: block;
   width: 100%;
   margin-bottom: 19px;
@@ -1687,14 +1687,14 @@ footer.footer .bottom-footer .copy {
 /* line 436, scss/_slider.scss */
 .shop-front-banner .banner-entry .middle-block .price-from {
   font-size: 24px;
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   float: left;
   margin-top: 17px;
 }
 /* line 441, scss/_slider.scss */
 .shop-front-banner .banner-entry .middle-block .price-from .price {
   font-size: 34px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #9e2828;
 }
 /* line 447, scss/_slider.scss */
@@ -1707,12 +1707,12 @@ footer.footer .bottom-footer .copy {
 /* line 452, scss/_slider.scss */
 .shop-front-banner .banner-entry .middle-block .discount-container .discount {
   font-size: 24px;
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
 }
 /* line 455, scss/_slider.scss */
 .shop-front-banner .banner-entry .middle-block .discount-container .discount .percent {
   font-size: 34px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #9e2828;
 }
 /* line 462, scss/_slider.scss */
@@ -1739,7 +1739,7 @@ footer.footer .bottom-footer .copy {
   background-color: #9e2828;
   text-transform: uppercase;
   font-size: 16px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   display: inline-block;
   padding: 11px 43px;
   text-decoration: none;
@@ -1789,12 +1789,12 @@ footer.footer .bottom-footer .copy {
 }
 /* line 520, scss/_slider.scss */
 .sm-construction-banner .banner-entry .left .descr .price {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 50px;
 }
 /* line 524, scss/_slider.scss */
 .sm-construction-banner .banner-entry .left .descr p.banner-text {
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 24px;
 }
 /* line 530, scss/_slider.scss */
@@ -1943,7 +1943,7 @@ footer.footer .bottom-footer .copy {
   padding: 22px 30px;
   display: inline-block;
   font-size: 22px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #fff;
 }
 /* line 654, scss/_slider.scss */
@@ -1985,7 +1985,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 681, scss/_slider.scss */
 .main-filter .filter-form .item-label {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   color: #333;
   display: block;
@@ -1995,7 +1995,7 @@ footer.footer .bottom-footer .copy {
 
 
 .search-page .main-filter .filter-form .item-label {
-    font-family: 'Lato-Bold', Arial, sans-serif;
+    font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
     font-size: 16px;
     color: #000;
     display: block;
@@ -2005,7 +2005,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 688, scss/_slider.scss */
 .main-filter .filter-form .item-label .label-descr {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #808080;
 }
 /* line 693, scss/_slider.scss */
@@ -2038,7 +2038,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 714, scss/_slider.scss */
 .main-filter .filter-form .ui-front .ui-selectmenu-button.ui-state-default .ui-selectmenu-text {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #808080;
   font-size: 14px;
   padding-top: 8px;
@@ -2078,7 +2078,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 749, scss/_slider.scss */
 .main-filter .filter-form .ui-front .ui-selectmenu-menu .ui-menu li.ui-menu-item {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #808080;
@@ -2279,7 +2279,7 @@ footer.footer .bottom-footer .copy {
 .big-construction-banner .banner-content .banner-message .descr .main-title {
   font-size: 120px;
   color: #fff;
-  font-family: 'Lato-Light';
+  font-family: 'Source Sans Pro-Light';
   display: block;
   line-height: 120px;
 }
@@ -2288,7 +2288,7 @@ footer.footer .bottom-footer .copy {
   margin-left: 187px;
   font-size: 50px;
   line-height: 50px;
-  font-family: 'Lato-Light';
+  font-family: 'Source Sans Pro-Light';
   color: #9e2828;
   display: block;
 }
@@ -2303,7 +2303,7 @@ footer.footer .bottom-footer .copy {
 .favorable-banner .favorable-content .main-title {
   font-size: 90px;
   color: #fff;
-  font-family: 'Lato-Light';
+  font-family: 'Source Sans Pro-Light';
   display: block;
   color: #9e2828;
   line-height: 95px;
@@ -2311,7 +2311,7 @@ footer.footer .bottom-footer .copy {
 /* line 946, scss/_slider.scss */
 .favorable-banner .favorable-content .sub-text {
   font-size: 36px;
-  font-family: 'Lato-Light';
+  font-family: 'Source Sans Pro-Light';
   display: block;
   color: #fff;
   line-height: 40px;
@@ -3091,7 +3091,7 @@ footer.footer .bottom-footer .copy {
 /* line 1586, scss/_slider.scss */
 .our-features-banner .single-feature .main-title {
   font-size: 20px;
-  font-family: "Lato", "Arial", "sans-serif";
+  font-family: "Source Sans Pro", "Arial", "sans-serif";
   text-transform: none;
   color: #000;
   display: block;
@@ -3143,14 +3143,14 @@ footer.footer .bottom-footer .copy {
 }
 /* line 1629, scss/_slider.scss */
 .single-object-banner .banner-entry > .top .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 50px;
   color: #fff;
   display: block;
 }
 /* line 1635, scss/_slider.scss */
 .single-object-banner .banner-entry > .top .sub-text {
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 24px;
   color: #fff;
   display: block;
@@ -3165,13 +3165,13 @@ footer.footer .bottom-footer .copy {
 }
 /* line 1648, scss/_slider.scss */
 .single-object-banner .banner-entry .bottom .small {
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 30px;
   color: #fff;
 }
 /* line 1652, scss/_slider.scss */
 .single-object-banner .banner-entry .bottom .small .price {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 1656, scss/_slider.scss */
 .single-object-banner .banner-entry .bottom:before {
@@ -3532,7 +3532,7 @@ footer.footer .bottom-footer .copy {
 .blog-posts-holder.interested-products div.item div.item-entry .item-title a,
 .interesting-offer.interested-products div.item div.item-entry .item-title a,
 .featured-products.interested-products div.item div.item-entry .item-title a {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-transform: none;
 }
 /* line 1818, scss/_slider.scss */
@@ -3557,7 +3557,7 @@ footer.footer .bottom-footer .copy {
 .blog-posts-holder.interested-products div.item div.item-entry .item-thumbnail .old-price,
 .interesting-offer.interested-products div.item div.item-entry .item-thumbnail .old-price,
 .featured-products.interested-products div.item div.item-entry .item-thumbnail .old-price {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   text-decoration: line-through;
   font-size: 16px;
   margin-right: 5px;
@@ -3571,7 +3571,7 @@ footer.footer .bottom-footer .copy {
 .blog-posts-holder.interested-products div.item div.item-entry .item-thumbnail .actual-price,
 .interesting-offer.interested-products div.item div.item-entry .item-thumbnail .actual-price,
 .featured-products.interested-products div.item div.item-entry .item-thumbnail .actual-price {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 22px;
   color: #9e2828;
 }
@@ -3602,7 +3602,7 @@ footer.footer .bottom-footer .copy {
   text-transform: uppercase;
   font-size: 16px;
   text-align: center;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   display: inline-block;
   padding: 7px 0;
   -webkit-transition: 0.2s linear;
@@ -3851,7 +3851,7 @@ footer.footer .bottom-footer .copy {
 .blog-posts-holder.best-agents li .item .name,
 .interesting-offer.best-agents li .item .name,
 .featured-products.best-agents li .item .name {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 20px;
   text-align: center;
   display: block;
@@ -4280,7 +4280,7 @@ footer.footer .bottom-footer .copy {
 .interesting-offer .carousel .item .item-entry .item-title,
 .featured-products .carousel .item .item-entry .item-title {
   text-transform: none;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
   margin-bottom: 11px;
@@ -4343,7 +4343,7 @@ footer.footer .bottom-footer .copy {
 .interesting-offer .carousel .item .item-entry .item-info .price,
 .featured-products .carousel .item .item-entry .item-info .price {
   text-transform: uppercase;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 20px;
   color: #9e2828;
   float: left;
@@ -4487,7 +4487,7 @@ footer.footer .bottom-footer .copy {
   padding: 8px 25px;
   background-color: #9e2828;
   color: #fff;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -4739,7 +4739,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 2379, scss/_slider.scss */
 .popular-countries.style-2 h2.block-title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 2383, scss/_slider.scss */
 .popular-countries.style-2 .carousel ul li .country-item {
@@ -4793,7 +4793,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 2418, scss/_slider.scss */
 .popular-countries.style-2 .carousel ul li .country-item .preview .overlay .country-name {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 20px;
   vertical-align: inherit;
 }
@@ -4804,7 +4804,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 2432, scss/_slider.scss */
 .popular-countries h2.block-title {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
 }
 /* line 2436, scss/_slider.scss */
 .popular-countries .carousel ul li .country-item {
@@ -4936,7 +4936,7 @@ footer.footer .bottom-footer .copy {
   bottom: 10px;
   right: 0;
   padding: 5px 12px 4px 15px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 2536, scss/_slider.scss */
 .featured-products .carousel .item .preview .overlay,
@@ -5014,7 +5014,7 @@ footer.footer .bottom-footer .copy {
 /* line 2585, scss/_slider.scss */
 .featured-products .carousel .item .top-block .item-title,
 .new-products .carousel .item .top-block .item-title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   margin-bottom: 13px;
   display: block;
@@ -5046,7 +5046,7 @@ footer.footer .bottom-footer .copy {
 /* line 2607, scss/_slider.scss */
 .featured-products .carousel .item .middle-block .new-price,
 .new-products .carousel .item .middle-block .new-price {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 22px;
   color: #9e2828;
 }
@@ -5062,7 +5062,7 @@ footer.footer .bottom-footer .copy {
   background-color: #9e2828;
   color: #fff;
   text-transform: uppercase;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   padding: 8px 18px;
   text-decoration: none;
@@ -5142,7 +5142,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 2681, scss/_slider.scss */
 .blog-posts-holder .carousel ul li .post-item .descr .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   margin-bottom: 10px;
   display: block;
@@ -5219,14 +5219,14 @@ footer.footer .bottom-footer .copy {
 }
 /* line 2750, scss/_slider.scss */
 .office-banner .banner-entry .banner-title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 36px;
   text-transform: uppercase;
   display: block;
 }
 /* line 2756, scss/_slider.scss */
 .office-banner .banner-entry .banner-sub-text {
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 30px;
 }
 
@@ -5449,7 +5449,7 @@ footer.footer .bottom-footer .copy {
 .banner-with-text .banner-entry .learn-more-btn {
   text-transform: uppercase;
   display: inline-block;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   background-color: #9e2828;
   padding: 9px 35px;
@@ -5528,13 +5528,13 @@ footer.footer .bottom-footer .copy {
 }
 /* line 3007, scss/_slider.scss */
 .banner-with-text.style-3 .banner-entry .descr .banner-small-text {
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 26px;
   display: block;
 }
 /* line 3012, scss/_slider.scss */
 .banner-with-text.style-3 .banner-entry .descr .banner-big-text {
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 100px;
   display: block;
   color: #9e2828;
@@ -5588,7 +5588,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 3057, scss/_slider.scss */
 .banner-with-text.style-4 .banner-entry .descr .banner-small-text {
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 26px;
   display: block;
   color: #9e2828;
@@ -5664,12 +5664,12 @@ footer.footer .bottom-footer .copy {
 /* line 3123, scss/_slider.scss */
 .cottage-banner .text-block .banner-title {
   font-size: 50px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   display: block;
 }
 /* line 3128, scss/_slider.scss */
 .cottage-banner .text-block .banner-text {
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 24px;
   display: block;
 }
@@ -5697,14 +5697,14 @@ footer.footer .bottom-footer .copy {
 /* line 3149, scss/_slider.scss */
 .single-agent-banner .single-agent-banner-entry .top .small {
   display: block;
-  font-family: 'Lato-LightItalic', Arial, sans-serif;
+  font-family: 'Source Sans Pro-LightItalic', Arial, sans-serif;
   font-size: 56px;
   letter-spacing: -2px;
 }
 /* line 3155, scss/_slider.scss */
 .single-agent-banner .single-agent-banner-entry .top .big {
   display: block;
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 140px;
   line-height: 120px;
   margin-top: -40px;
@@ -5753,7 +5753,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 3196, scss/_slider.scss */
 .subscribe-banner .banner-text-block .banner-title {
-  font-family: 'Lato';
+  font-family: 'Source Sans Pro';
   font-size: 28px;
   text-transform: uppercase;
   display: block;
@@ -5778,7 +5778,7 @@ footer.footer .bottom-footer .copy {
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 3220, scss/_slider.scss */
 .subscribe-banner .subscribe-block .subscribe-btn:hover {
@@ -5872,7 +5872,7 @@ footer.footer .bottom-footer .copy {
   text-align: left;
   font-size: 16px;
   text-transform: uppercase;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   margin-bottom: 5px;
 }
 /* line 3300, scss/_slider.scss */
@@ -5880,7 +5880,7 @@ footer.footer .bottom-footer .copy {
   display: block;
   text-align: left;
   color: #cec2c2;
-  font-family: 'Lato-Italic', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Italic', Arial, sans-serif;
   font-style: italic;
 }
 /* line 3310, scss/_slider.scss */
@@ -6584,7 +6584,7 @@ footer.footer .bottom-footer .copy {
 /* line 333, scss/_gallery.scss */
 .our-objects-gallery .item .item-entry .item-title {
   text-transform: uppercase;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
   margin-bottom: 11px;
@@ -6612,14 +6612,14 @@ footer.footer .bottom-footer .copy {
 /* line 355, scss/_gallery.scss */
 .our-objects-gallery .item .item-entry .item-info .price-holder {
   float: left;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #3a383b;
   padding-top: 10px;
 }
 /* line 360, scss/_gallery.scss */
 .our-objects-gallery .item .item-entry .item-info .price-holder .price {
   text-transform: uppercase;
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 20px;
   color: #9e2828;
 }
@@ -6728,7 +6728,7 @@ footer.footer .bottom-footer .copy {
 .main-isotope-gallerry-container .our-objects-gallery .gallery-element .preview .overlay-entry .title {
   display: block;
   text-align: center;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 20px;
   color: #fff;
   margin-bottom: 3px;
@@ -6737,7 +6737,7 @@ footer.footer .bottom-footer .copy {
 .main-isotope-gallerry-container .our-objects-gallery .gallery-element .preview .overlay-entry .date {
   display: block;
   text-align: center;
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 15px;
   color: #9e2828;
 }
@@ -7036,7 +7036,7 @@ footer.footer .bottom-footer .copy {
   color: #fff;
   text-transform: uppercase;
   font-size: 16px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-align: center;
   padding: 12px 0;
   padding-bottom: 13px;
@@ -7223,7 +7223,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 879, scss/_gallery.scss */
 .gallery-block .gallery-item a .gallery-item-title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   display: block;
   font-size: 16px;
   color: #3a383b;
@@ -7647,7 +7647,7 @@ footer.footer .bottom-footer .copy {
 }
 /* line 173, scss/_shortcodes.scss */
 .tabs .ui-tabs-nav .ui-state-default a {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 16px;
   color: #808080;
   padding: 16px 20px;
@@ -7673,7 +7673,7 @@ footer.footer .bottom-footer .copy {
   border-radius: 0;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 15px;
   color: #808080;
 }
@@ -7874,7 +7874,7 @@ table.simple-table.style-4 tbody tr:last-child td {
 /* line 396, scss/_shortcodes.scss */
 a.simple-btn {
   display: inline-block;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-decoration: none;
   margin-bottom: 15px;
 }
@@ -8143,7 +8143,7 @@ a.simple-btn.outlined.red:hover {
   right: 0;
   top: -24px;
   color: #9e2828;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 14px;
 }
 /* line 593, scss/_shortcodes.scss */
@@ -8207,7 +8207,7 @@ a.simple-btn.outlined.red:hover {
 }
 /* line 647, scss/_shortcodes.scss */
 .icon-box .heading .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 20px;
   color: #000;
   display: table-cell;
@@ -8292,7 +8292,7 @@ a.simple-btn.outlined.red:hover {
 }
 /* line 721, scss/_shortcodes.scss */
 .reviews-of-people .reviews-listing li .descr .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 20px;
   color: #000;
   display: block;
@@ -8579,7 +8579,7 @@ background-color: #353f45;
 .calendar .calendar-heading .title .active-calendar-year {
   font-size: 36px;
   color: #000;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-align: center;
 }
 /* line 905, scss/_shortcodes.scss */
@@ -8636,7 +8636,7 @@ background-color: #353f45;
 }
 /* line 945, scss/_shortcodes.scss */
 .calendar .calendar-month .month-entry thead tr th .week-end-name {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 14px;
   color: #000;
   text-transform: uppercase;
@@ -8669,7 +8669,7 @@ background-color: #353f45;
 /* line 979, scss/_shortcodes.scss */
 .calendar .calendar-month .month-entry tbody tr td .month-day.out {
   background-color: #fcfcfc;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 983, scss/_shortcodes.scss */
 .calendar .calendar-month .month-entry tbody tr td .month-day.evented:hover, .calendar .calendar-month .month-entry tbody tr td .month-day.current {
@@ -8777,7 +8777,7 @@ background-color: #353f45;
   background-color: #3a383b;
   color: #fff;
   display: inline-block;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 1071, scss/_shortcodes.scss */
 .objects-block .objects-block-filter .left-block .objects-count span {
@@ -8791,7 +8791,7 @@ background-color: #353f45;
 }
 /* line 1080, scss/_shortcodes.scss */
 .objects-block .objects-block-filter .right-block .item-label {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   color: #000;
   display: inline-block;
@@ -8835,7 +8835,7 @@ background-color: #353f45;
 }
 /* line 1114, scss/_shortcodes.scss */
 .objects-block .objects-block-filter .right-block > .ui-front .ui-selectmenu-button.ui-state-default .ui-selectmenu-text {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #808080;
   font-size: 14px;
   padding: 5px;
@@ -8876,7 +8876,7 @@ background-color: #353f45;
 }
 /* line 1150, scss/_shortcodes.scss */
 .objects-block .objects-block-filter .right-block > .ui-front .ui-selectmenu-menu .ui-menu li.ui-menu-item {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #808080;
@@ -9047,7 +9047,7 @@ background-color: #353f45;
 /* line 1295, scss/_shortcodes.scss */
 .objects-block .objects-entry .objects-listing .object-item .descr .object-title a {
   text-decoration: none;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   color: #000;
 }
@@ -9148,7 +9148,7 @@ background-color: #353f45;
 /* line 1377, scss/_shortcodes.scss */
 .objects-block .objects-entry .objects-listing .object-item .descr .object-thumbnail .price {
   float: right;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 18px;
   color: #fff;
   padding: 8px 0;
@@ -9160,7 +9160,7 @@ background-color: #353f45;
   background-color: #9e2828;
   color: #fff;
   text-transform: uppercase;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
   text-align: center;
@@ -9211,7 +9211,7 @@ background-color: #353f45;
 }
 /* line 1435, scss/_shortcodes.scss */
 .side-banner .banner-entry .banner-message {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   color: #9e2828;
   display: block;
@@ -9224,7 +9224,7 @@ background-color: #353f45;
   color: #fff;
   text-transform: uppercase;
   font-size: 16px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   padding: 11px 35px;
   text-decoration: none;
   -webkit-transition: 0.2s linear;
@@ -9262,7 +9262,7 @@ background-color: #353f45;
 }
 /* line 1476, scss/_shortcodes.scss */
 .latest-news-listing li .item .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   margin-bottom: 10px;
   display: block;
@@ -9311,7 +9311,7 @@ background-color: #353f45;
 .best-offers .heading .offers-title {
   color: #fff;
   font-size: 20px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 1521, scss/_shortcodes.scss */
 .best-offers .heading .view-all {
@@ -9431,7 +9431,7 @@ background-color: #353f45;
 /* line 1617, scss/_shortcodes.scss */
 .best-offers .offers-body .offers-listing .offer-item .descr .offer-title a {
   color: #000;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   line-height: 20px;
 }
 /* line 1621, scss/_shortcodes.scss */
@@ -9550,7 +9550,7 @@ background-color: #353f45;
 }
 /* line 1716, scss/_shortcodes.scss */
 .latest-blog-posts .item .descr .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   margin-bottom: 10px;
   display: block;
@@ -9624,7 +9624,7 @@ background-color: #353f45;
   left: 0;
   text-align: center;
   font-size: 20px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 1786, scss/_shortcodes.scss */
 .featured-categories.style-1 .single-category a .category-name:before, .featured-categories.style-1 .single-category a .category-name:after {
@@ -9922,7 +9922,7 @@ background-color: #353f45;
   background-color: #9e2828;
   color: #fff;
   font-size: 18px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-transform: uppercase;
   text-align: center;
   padding: 14px 0;
@@ -9962,7 +9962,7 @@ background-color: #353f45;
 }
 /* line 2062, scss/_shortcodes.scss */
 .pricing-container .single-pricing .heading .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #fff;
   font-size: 24px;
 }
@@ -10064,7 +10064,7 @@ background-color: #353f45;
 /* line 2147, scss/_shortcodes.scss */
 .parameters-block .parameters-listing li .left {
   float: left;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #000;
 }
 /* line 2152, scss/_shortcodes.scss */
@@ -10120,7 +10120,7 @@ background-color: #353f45;
 }
 /* line 2192, scss/_shortcodes.scss */
 .timeline-block .timeline-container .timeline-row .timeline-column .date .year {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 36px;
   color: #3a383b;
 }
@@ -10288,7 +10288,7 @@ background-color: #353f45;
 }
 /* line 2340, scss/_shortcodes.scss */
 .single-post .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   margin-bottom: 10px;
   display: block;
@@ -10385,7 +10385,7 @@ background-color: #353f45;
 /* line 2418, scss/_shortcodes.scss */
 .single-news .title,
 .single-blog-post .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   margin-bottom: 10px;
   display: block;
@@ -10529,7 +10529,7 @@ background-color: #353f45;
 }
 /* line 2524, scss/_shortcodes.scss */
 .main-sidebar .widget .heading .widget-title {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 22px;
   color: #000;
 }
@@ -10700,7 +10700,7 @@ background-color: #353f45;
   padding: 9px 45px;
   padding-bottom: 12px;
   background-color: #9e2828;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   color: #fff;
   text-decoration: none;
@@ -10769,7 +10769,7 @@ background-color: #353f45;
 }
 /* line 2697, scss/_shortcodes.scss */
 .main-sidebar .widget.popular-posts .widget-entry .popular-posts-widget .single-widget-post .descr .title, .main-sidebar .widget.latest-posts-style-2 .widget-entry .popular-posts-widget .single-widget-post .descr .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 14px;
   margin-bottom: 2px;
   display: block;
@@ -10802,7 +10802,7 @@ background-color: #353f45;
 /* line 2728, scss/_shortcodes.scss */
 .main-sidebar .widget.popular-posts .widget-entry .all-posts-btn, .main-sidebar .widget.latest-posts-style-2 .widget-entry .all-posts-btn {
   font-size: 16px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   display: block;
   margin-top: 33px;
   width: 100%;
@@ -10954,7 +10954,7 @@ background-color: #353f45;
 /* line 2852, scss/_shortcodes.scss */
 .main-sidebar .widget.featured-properties .widget-entry .single-prop .descr .title a, .main-sidebar .widget.featured-products .widget-entry .single-prop .descr .title a {
   color: #000;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 14px;
 }
 /* line 2856, scss/_shortcodes.scss */
@@ -10964,7 +10964,7 @@ background-color: #353f45;
 }
 /* line 2862, scss/_shortcodes.scss */
 .main-sidebar .widget.featured-properties .widget-entry .single-prop .descr .price, .main-sidebar .widget.featured-products .widget-entry .single-prop .descr .price {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   color: #9e2828;
 }
@@ -10984,7 +10984,7 @@ background-color: #353f45;
 }
 /* line 2881, scss/_shortcodes.scss */
 .main-sidebar .widget.featured-products .descr .title a {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 14px;
 }
 /* line 2886, scss/_shortcodes.scss */
@@ -11152,7 +11152,7 @@ background-color: #353f45;
 }
 /* line 3008, scss/_shortcodes.scss */
 .main-sidebar .widget.agents .widget-entry .wg-ag-carousel ul li .item .item-heading .descr .name {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
   color: #000;
@@ -11238,12 +11238,12 @@ background-color: #353f45;
   display: block;
   width: 100%;
   font-size: 22px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #fff;
 }
 /* line 3090, scss/_shortcodes.scss */
 .main-sidebar .widget.main-filter-widget .filter-form .item-label {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   color: #000;
   display: block;
@@ -11252,7 +11252,7 @@ background-color: #353f45;
 }
 /* line 3097, scss/_shortcodes.scss */
 .main-sidebar .widget.main-filter-widget .filter-form .item-label .label-descr {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #808080;
 }
 /* line 3102, scss/_shortcodes.scss */
@@ -11285,7 +11285,7 @@ background-color: #353f45;
 }
 /* line 3123, scss/_shortcodes.scss */
 .main-sidebar .widget.main-filter-widget .filter-form .ui-front .ui-selectmenu-button.ui-state-default .ui-selectmenu-text {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #808080;
   font-size: 14px;
   padding-top: 8px;
@@ -11325,7 +11325,7 @@ background-color: #353f45;
 }
 /* line 3158, scss/_shortcodes.scss */
 .main-sidebar .widget.main-filter-widget .filter-form .ui-front .ui-selectmenu-menu .ui-menu li.ui-menu-item {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #808080;
@@ -11473,7 +11473,7 @@ background-color: #353f45;
 /* line 3284, scss/_shortcodes.scss */
 .main-sidebar .widget.main-filter-widget .filter-form .find-now-btn {
   color: #fff;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   display: block;
   margin-top: 33px;
   width: 100%;
@@ -11531,7 +11531,7 @@ background-color: #353f45;
 /* line 3334, scss/_shortcodes.scss */
 .main-sidebar .widget.banner .banner-entry .banner-title {
   color: #fff;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 22px;
   text-transform: uppercase;
   display: block;
@@ -11539,7 +11539,7 @@ background-color: #353f45;
 }
 /* line 3342, scss/_shortcodes.scss */
 .main-sidebar .widget.banner .banner-entry .banner-sub {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   color: #eee;
   display: block;
@@ -11547,7 +11547,7 @@ background-color: #353f45;
 }
 /* line 3349, scss/_shortcodes.scss */
 .main-sidebar .widget.banner .banner-entry .learn-more {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   color: #fff;
   display: inline-block;
@@ -11585,7 +11585,7 @@ background-color: #353f45;
   padding: 6px;
   padding-right: 10px;
   padding-left: 30px;
-  font-family: 'Lato-Light', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Light', Arial, sans-serif;
   font-size: 30px;
   color: #fff;
 }
@@ -11598,19 +11598,19 @@ background-color: #353f45;
   color: #4c4d4e;
 }
 /* line 3396, scss/_shortcodes.scss */
-.main-sidebar .widget.mort-calculator .widget-entry {
+.main-sidebar .widget.mort-calcuSource Sans Pror .widget-entry {
   padding: 19px;
 }
 /* line 3399, scss/_shortcodes.scss */
-.main-sidebar .widget.mort-calculator .widget-entry .mortage-form .field-label {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+.main-sidebar .widget.mort-calcuSource Sans Pror .widget-entry .mortage-form .field-label {
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
   margin-bottom: 6px;
   color: #000;
 }
 /* line 3406, scss/_shortcodes.scss */
-.main-sidebar .widget.mort-calculator .widget-entry .mortage-form input[type="text"] {
+.main-sidebar .widget.mort-calcuSource Sans Pror .widget-entry .mortage-form input[type="text"] {
   display: block;
   width: 100%;
   height: 38px;
@@ -11619,7 +11619,7 @@ background-color: #353f45;
   padding-left: 14px;
 }
 /* line 3414, scss/_shortcodes.scss */
-.main-sidebar .widget.mort-calculator .widget-entry .mortage-form .send-btn {
+.main-sidebar .widget.mort-calcuSource Sans Pror .widget-entry .mortage-form .send-btn {
   width: 100%;
   display: block;
   background-color: #9e2828;
@@ -11637,7 +11637,7 @@ background-color: #353f45;
   transition: 0.5s linear;
 }
 /* line 3426, scss/_shortcodes.scss */
-.main-sidebar .widget.mort-calculator .widget-entry .mortage-form .send-btn:hover {
+.main-sidebar .widget.mort-calcuSource Sans Pror .widget-entry .mortage-form .send-btn:hover {
   -webkit-transform: scale(0.95);
   -moz-transform: scale(0.95);
   transform: scale(0.95);
@@ -11686,7 +11686,7 @@ background-color: #353f45;
 }
 /* line 3470, scss/_shortcodes.scss */
 .main-sidebar .widget.questions .widget-entry .questions-form .field-label {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
   margin-bottom: 6px;
@@ -11812,7 +11812,7 @@ background-color: #353f45;
   color: #fff;
   background-color: #9e2828;
   text-transform: uppercase;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-decoration: none;
 }
 /* line 3576, scss/_shortcodes.scss */
@@ -11824,7 +11824,7 @@ background-color: #353f45;
   padding-top: 14px;
   padding-bottom: 10px;
   color: #9e2828;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 14px;
   display: block;
   border-bottom: 1px dotted #e7e4e4;
@@ -11858,7 +11858,7 @@ background-color: #353f45;
 /* line 3610, scss/_shortcodes.scss */
 .news-sidebar .widget.latest-news .widget-entry .news-listing .news-item .descr .news-title {
   font-size: 15px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   display: block;
 }
 /* line 3614, scss/_shortcodes.scss */
@@ -11938,7 +11938,7 @@ background-color: #353f45;
 }
 /* line 3674, scss/_shortcodes.scss */
 .news-sidebar .widget.most-popular .tabs-side .ui-tabs-nav li.ui-state-default a {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 14px;
   color: #3a383b;
   padding: 7px 20px;
@@ -11994,7 +11994,7 @@ background-color: #353f45;
 /* line 3721, scss/_shortcodes.scss */
 .news-sidebar .widget.most-popular .news-listing .news-item .news-title {
   font-size: 15px;
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   display: block;
 }
 /* line 3725, scss/_shortcodes.scss */
@@ -12008,7 +12008,7 @@ background-color: #353f45;
 /* line 3732, scss/_shortcodes.scss */
 .news-sidebar .widget.most-popular .news-listing .news-item .views {
   color: #808080;
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 12px;
 }
 /* line 3736, scss/_shortcodes.scss */
@@ -12041,7 +12041,7 @@ background-color: #353f45;
 }
 /* line 3763, scss/_shortcodes.scss */
 .news-sidebar .widget.builders-actions .actions-listing .action-item .descr .action-title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   display: block;
   font-size: 16px;
   margin-bottom: 5px;
@@ -12197,7 +12197,7 @@ background-color: #353f45;
 }
 /* line 3895, scss/_shortcodes.scss */
 .rent-flat-sidebar .widget.rooms .item-label {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 14px;
   color: #000;
   display: block;
@@ -12206,7 +12206,7 @@ background-color: #353f45;
 }
 /* line 3902, scss/_shortcodes.scss */
 .rent-flat-sidebar .widget.rooms .item-label .label-descr {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #808080;
 }
 /* line 3907, scss/_shortcodes.scss */
@@ -12243,7 +12243,7 @@ background-color: #353f45;
 }
 /* line 3931, scss/_shortcodes.scss */
 .rent-flat-sidebar .widget.rooms .ui-front .ui-selectmenu-button.ui-state-default .ui-selectmenu-text {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #808080;
   font-size: 14px;
   padding-top: 8px;
@@ -12283,7 +12283,7 @@ background-color: #353f45;
 }
 /* line 3966, scss/_shortcodes.scss */
 .rent-flat-sidebar .widget.rooms .ui-front .ui-selectmenu-menu .ui-menu li.ui-menu-item {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #808080;
@@ -12487,7 +12487,7 @@ background-color: #353f45;
 /* line 4139, scss/_shortcodes.scss */
 .objects-block .object-item .item-entry .item-title {
   text-transform: uppercase;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
   margin-bottom: 11px;
@@ -12515,14 +12515,14 @@ background-color: #353f45;
 /* line 4161, scss/_shortcodes.scss */
 .objects-block .object-item .item-entry .item-info .price-holder {
   float: left;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #3a383b;
   padding-top: 10px;
 }
 /* line 4166, scss/_shortcodes.scss */
 .objects-block .object-item .item-entry .item-info .price-holder .price {
   text-transform: uppercase;
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 20px;
   color: #9e2828;
 }
@@ -12846,7 +12846,7 @@ background-color: #353f45;
 }
 /* line 4424, scss/_shortcodes.scss */
 .top-sellers-listing li .item .top-block .item-title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   margin-bottom: 13px;
   display: block;
@@ -12867,7 +12867,7 @@ background-color: #353f45;
 }
 /* line 4441, scss/_shortcodes.scss */
 .top-sellers-listing li .item .middle-block .new-price {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 22px;
   color: #9e2828;
 }
@@ -12881,7 +12881,7 @@ background-color: #353f45;
   background-color: #9e2828;
   color: #fff;
   text-transform: uppercase;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   padding: 8px 18px;
   text-decoration: none;
@@ -12944,7 +12944,7 @@ background-color: #353f45;
 /* line 4511, scss/_shortcodes.scss */
 .about-me .top .position {
   font-size: 18px;
-  font-family: 'Lato-Italic', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Italic', Arial, sans-serif;
   color: #9e2828;
 }
 /* line 4517, scss/_shortcodes.scss */
@@ -13182,7 +13182,7 @@ background-color: #353f45;
 }
 /* line 4702, scss/_shortcodes.scss */
 .services .service-item .service-name {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #3a383b;
   font-size: 20px;
   display: block;
@@ -13281,7 +13281,7 @@ background-color: #353f45;
 }
 /* line 4786, scss/_shortcodes.scss */
 .shop-top-banner .banner-entry .banner-descr {
-  font-family: 'Lato-Light';
+  font-family: 'Source Sans Pro-Light';
   font-size: 22px;
   color: #9e2828;
 }
@@ -13314,7 +13314,7 @@ background-color: #353f45;
 }
 /* line 4813, scss/_shortcodes.scss */
 .shop-middle-banner .banner-entry .banner-descr {
-  font-family: 'Lato-Light';
+  font-family: 'Source Sans Pro-Light';
   font-size: 22px;
   color: #9e2828;
 }
@@ -13456,7 +13456,7 @@ background-color: #353f45;
 }
 /* line 4923, scss/_shortcodes.scss */
 .sort-block.sh-filter-panel .pagination-block .block-title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #000;
   display: inline-block;
   font-size: 16px;
@@ -13527,13 +13527,13 @@ background-color: #353f45;
 }
 /* line 4982, scss/_shortcodes.scss */
 .sort-block .founded .value {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #9e2828;
   margin-right: 3px;
 }
 /* line 4988, scss/_shortcodes.scss */
 .sort-block .sort-label {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
   float: left;
@@ -13572,7 +13572,7 @@ background-color: #353f45;
 }
 /* line 5020, scss/_shortcodes.scss */
 .sort-block .select-container .ui-front .ui-selectmenu-button.ui-state-default .ui-selectmenu-text {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #808080;
   font-size: 14px;
   padding-top: 6px;
@@ -13612,7 +13612,7 @@ background-color: #353f45;
 }
 /* line 5055, scss/_shortcodes.scss */
 .sort-block .select-container .ui-front .ui-selectmenu-menu .ui-menu li.ui-menu-item {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #808080;
@@ -13684,7 +13684,7 @@ background-color: #353f45;
 }
 /* line 5113, scss/_shortcodes.scss */
 .idx-listing .idx-item .descr .heading .idx-title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 18px;
   float: left;
 }
@@ -13700,7 +13700,7 @@ background-color: #353f45;
 /* line 5125, scss/_shortcodes.scss */
 .idx-listing .idx-item .descr .heading .price {
   float: right;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 18px;
   color: #9e2828;
 }
@@ -13913,7 +13913,7 @@ background-color: #353f45;
 /* line 5290, scss/_shortcodes.scss */
 .our-team-container .our-team-item a .name {
   display: inline-block;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 20px;
   color: #000;
   margin-bottom: 20px;
@@ -13999,7 +13999,7 @@ background-color: #353f45;
 /* line 5357, scss/_shortcodes.scss */
 .services-block .service-item .heading a .title {
   color: #000;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 20px;
   display: block;
   text-align: center;
@@ -14090,7 +14090,7 @@ background-color: #353f45;
 }
 /* line 5431, scss/_shortcodes.scss */
 .soon-container .soon-entry .countdown-container .single-count .count-entry .item-name {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   display: block;
   font-size: 13px;
   text-transform: uppercase;
@@ -14165,7 +14165,7 @@ background-color: #353f45;
 /* line 5495, scss/_shortcodes.scss */
 .error-container .error-message {
   display: inline-block;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   padding: 20px 66px;
   font-size: 34px;
   text-transform: uppercase;
@@ -14512,7 +14512,7 @@ background-color: #353f45;
 .objects-block .shop-item .preview .sale-label {
   position: absolute;
   background-color: rgba(62, 199, 69, 0.85);
-  font-family: 'Lato-Medium', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Medium', Arial, sans-serif;
   text-transform: uppercase;
   top: 27px;
   right: -41px;
@@ -14545,7 +14545,7 @@ background-color: #353f45;
   -ms-transition: 0.15s linear;
   -o-transition: 0.15s linear;
   transition: 0.15s linear;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   right: 0;
   bottom: 10px;
@@ -14703,7 +14703,7 @@ background-color: #353f45;
 .objects-block .item .item-info .price,
 .objects-block .shop-item .item-info .price {
   text-transform: none;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 20px;
   color: #9e2828;
   float: left;
@@ -14761,7 +14761,7 @@ background-color: #353f45;
 .objects-block .item .item-entry .item-title,
 .objects-block .shop-item .item-entry .item-title {
   text-transform: none;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
   margin-bottom: 11px;
@@ -14795,7 +14795,7 @@ background-color: #353f45;
 }
 /* line 5964, scss/_shortcodes.scss */
 .objects-block .shop-item .top-block .item-title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   margin-bottom: 13px;
   display: block;
@@ -14822,7 +14822,7 @@ background-color: #353f45;
 }
 /* line 5986, scss/_shortcodes.scss */
 .objects-block .shop-item .middle-block .new-price {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 22px;
   color: #9e2828;
 }
@@ -14836,7 +14836,7 @@ background-color: #353f45;
   background-color: #9e2828;
   color: #fff;
   text-transform: uppercase;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   padding: 8px 18px;
   text-decoration: none;
@@ -14984,7 +14984,7 @@ background-color: #353f45;
 .detail-info-block .info-item .label-item,
 .features-info-block .info-item .label-item {
   float: left;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 15px;
   color: #000;
 }
@@ -15048,7 +15048,7 @@ background-color: #353f45;
 .main-contact-info-block .contact-info-listing li .item-label {
   float: left;
   color: #000;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 6162, scss/_shortcodes.scss */
 .main-contact-info-block .contact-info-listing li .item-value {
@@ -15185,7 +15185,7 @@ background-color: #353f45;
 }
 /* line 6270, scss/_shortcodes.scss */
 .blog-content.column-1 .single-blog-item .descr .title, .blog-content.column-2 .single-blog-item .descr .title, .blog-content.column-3 .single-blog-item .descr .title, .blog-content.full-width .single-blog-item .descr .title, .blog-content.masonry-posts .single-blog-item .descr .title {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 18px;
   margin-bottom: 12px;
   display: block;
@@ -15265,7 +15265,7 @@ background-color: #353f45;
 }
 /* line 6345, scss/_shortcodes.scss */
 .blog-content.masonry-posts .masonry-container .single-blog-item .heading .title-block .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   display: block;
 }
@@ -15436,7 +15436,7 @@ background-color: #353f45;
 /* line 6493, scss/_shortcodes.scss */
 .blog-content.masonry-posts .masonry-container .single-blog-item .audio-container .audio-player-entry .audio-wrap .track-info .track-author {
   font-size: 14px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 6501, scss/_shortcodes.scss */
 .blog-content.masonry-posts .masonry-container .single-blog-item .link-container {
@@ -15907,7 +15907,7 @@ background-color: #353f45;
 /* line 6914, scss/_shortcodes.scss */
 .blog-content.timeline .timeline-container .timeline-column .blog-post-item .post-entry .audio-container .audio-player-entry .audio-wrap .track-info .track-author {
   font-size: 14px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 6922, scss/_shortcodes.scss */
 .blog-content.timeline .timeline-container .timeline-column .blog-post-item .post-entry .link-container {
@@ -15958,7 +15958,7 @@ background-color: #353f45;
 }
 /* line 6960, scss/_shortcodes.scss */
 .blog-content.timeline .timeline-container .timeline-column .blog-post-item .post-entry .descr .title {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   margin-bottom: 12px;
   display: block;
@@ -15999,7 +15999,7 @@ background-color: #353f45;
 }
 /* line 6998, scss/_shortcodes.scss */
 .blog-single-post .blog-post-entry .title {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 30px;
   margin-bottom: 12px;
   display: block;
@@ -16074,7 +16074,7 @@ background-color: #353f45;
 }
 /* line 7052, scss/_shortcodes.scss */
 .blog-single-post .blog-post-entry .author-block .descr .name {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   margin-bottom: 10px;
   display: block;
@@ -16155,7 +16155,7 @@ background-color: #353f45;
 }
 /* line 7115, scss/_shortcodes.scss */
 .blog-single-post .blog-post-entry .comments-block .comments .single-comment .descr .name a {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   color: #000;
   text-decoration: none;
@@ -16176,7 +16176,7 @@ background-color: #353f45;
   position: absolute;
   right: 0;
   bottom: 6px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #9e2828;
   font-size: 16px;
   text-decoration: none;
@@ -16317,7 +16317,7 @@ background-color: #353f45;
 }
 /* line 7242, scss/_shortcodes.scss */
 .agency-container .agent-item .name {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 20px;
   display: block;
   color: #000;
@@ -16522,7 +16522,7 @@ background-color: #353f45;
 }
 /* line 7412, scss/_shortcodes.scss */
 .agent-single-item .top .middle .name {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 20px;
   display: block;
   color: #000;
@@ -16658,7 +16658,7 @@ background-color: #353f45;
 }
 /* line 7526, scss/_shortcodes.scss */
 .item-main-container .top-info .price-block .current-price {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #9e2828;
   font-size: 32px;
   display: block;
@@ -16715,7 +16715,7 @@ background-color: #353f45;
   padding: 8px 23px;
   background-color: #9e2828;
   color: #fff;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 16px;
   text-transform: uppercase;
   float: left;
@@ -16935,7 +16935,7 @@ p .dropcaps {
   color: #fff;
   text-align: center;
   font-size: 34px;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   margin-right: 12px;
 }
 /* line 23, scss/_tipography.scss */
@@ -16968,7 +16968,7 @@ p .dropcaps.orange {
 
 /* line 45, scss/_tipography.scss */
 .bld {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   font-size: 15px;
   color: #3a383b;
 }
@@ -17054,7 +17054,7 @@ h2.block-title {
   margin-bottom: 24px;
   font-size: 36px;
   color: #000;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-align: center;
 }
 /* line 131, scss/_tipography.scss */
@@ -17071,11 +17071,11 @@ h2.block-title.xs-marge {
 }
 /* line 140, scss/_tipography.scss */
 h2.block-title.inversed {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
 }
 /* line 143, scss/_tipography.scss */
 h2.block-title.regular {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
 }
 /* line 146, scss/_tipography.scss */
 h2.block-title.style-2 {
@@ -17162,7 +17162,7 @@ span.sub-title.left {
 
 /* line 217, scss/_tipography.scss */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #000;
   margin-bottom: 32px;
   margin-top: 24px;
@@ -17228,13 +17228,13 @@ h6 {
 
 /* line 262, scss/_tipography.scss */
 b {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #000;
 }
 
 /* line 266, scss/_tipography.scss */
 i {
-  font-family: 'Lato-Italic', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Italic', Arial, sans-serif;
 }
 /* line 268, scss/_tipography.scss */
 i.black {
@@ -17260,7 +17260,7 @@ blockquote {
   -moz-box-shadow: inset 0px 0px 0px 1px #e7e4e4;
   box-shadow: inset 0px 0px 0px 1px #e7e4e4;
   padding: 30px;
-  font-family: 'Lato-Italic', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Italic', Arial, sans-serif;
   padding-left: 80px;
   border-left: 0;
   margin-left: 6px;
@@ -17307,7 +17307,7 @@ blockquote:after {
 
 /* line 13, scss/_main.scss */
 body {
-  font-family: "Lato", Arial, sans-serif;
+  font-family: "Source Sans Pro", Arial, sans-serif;
   color: #808080;
   line-height: 1.35;
   font-size: 15px;
@@ -17345,7 +17345,7 @@ table.products-table {
 /* line 41, scss/_main.scss */
 table.products-table thead tr th {
   background-color: #eceae8;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #4c4d4e;
   font-size: 18px;
   text-transform: uppercase;
@@ -17358,7 +17358,7 @@ table.products-table thead tr th:first-child {
 }
 /* line 57, scss/_main.scss */
 table.products-table tbody tr td {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   color: #4c4d4e;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -17472,7 +17472,7 @@ table.products-table tbody tr td:nth-child(2) a:hover {
 /* line 144, scss/_main.scss */
 .total-block .total-entry .coupon-block .coupon-code {
   width: 230px;
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   line-height: 36px;
   border: 1px solid #e7e4e4;
   padding-left: 14px;
@@ -17498,7 +17498,7 @@ table.products-table tbody tr td:nth-child(2) a:hover {
 /* line 165, scss/_main.scss */
 .total-block .total-entry .coupon-block .apply-btn {
   background-color: #9e2828;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
   text-transform: uppercase;
 }
 /* line 169, scss/_main.scss */
@@ -17534,7 +17534,7 @@ table.products-table tbody tr td:nth-child(2) a:hover {
 .total-table tbody tr td:last-child {
   padding-right: 20px;
   text-align: right;
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 201, scss/_main.scss */
 .total-table tbody tr:first-child td {
@@ -17547,7 +17547,7 @@ table.products-table tbody tr td:nth-child(2) a:hover {
 }
 /* line 209, scss/_main.scss */
 .total-table tbody tr:last-child td:first-child {
-  font-family: 'Lato-Bold', Arial, sans-serif;
+  font-family: 'Source Sans Pro-Bold', Arial, sans-serif;
 }
 /* line 212, scss/_main.scss */
 .total-table tbody tr:last-child td:last-child {
