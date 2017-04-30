@@ -18,7 +18,7 @@ use System\Libs\Language as Lang;
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <h1><i class="fa fa-heart"></i> Kedvenc ingatlanok</h1>
+                <h1><i class="fa fa-heart"></i> <?php echo Lang::get('kedvencek_title'); ?></h1>
             </div>
             <div class="col-md-9 col-sm-8">
 
@@ -28,7 +28,7 @@ use System\Libs\Language as Lang;
 
                         <div class="notification-box info">
                             <div class="icon"><i class="fa fa-info"></i></div>
-                            <div class="descr"><span class="message">Ingatlan eltávolításához kattintson a kuka ikonra!</span></div>
+                            <div class="descr"><span class="message"><?php echo Lang::get('kedvencek_body'); ?></span></div>
                         </div>                         
                         <?php
                         foreach ($properties as $value) {
@@ -98,7 +98,7 @@ use System\Libs\Language as Lang;
                     <?php if (count($properties) == 0) : ?>
                         <div class="notification-box caution">
                             <div class="icon"><i class="fa fa-info"></i></div>
-                            <div class="descr"><span class="message">Jelenleg egyetlen ingatlant sem adott a kedvencekhez!!</span></div>
+                            <div class="descr"><span class="message"><?php echo Lang::get('kedvencek_warning'); ?></span></div>
                         </div>
                     <?php endif ?>
 
