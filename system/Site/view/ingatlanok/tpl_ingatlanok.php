@@ -81,13 +81,13 @@ if ($value == 'banner') { ?>
     <div class="item">
         <div class="banner-wrapper">
             <div class="banner-title">
-                <h3>Aliquam convallis et tortor nec bibendum</h3>
+                <h3><?php echo Lang::get('ingatlanok_hirdetes_title'); ?></h3>
             </div>
             <div class="banner-text">
-                Maecenas interdum lorem ac sapien ullamcorper congue. Curabitur suscipit est sed ante consectetur fermentum.
+                <?php echo Lang::get('ingatlanok_hirdetes_body'); ?>
             </div>
             <div>
-                <a href="#" class="simple-btn sm-button filled red">Phasellus</a>
+                <a href="<?php echo Lang::get('ingatlanok_hirdetes_link'); ?>" class="simple-btn sm-button filled red"><?php echo Lang::get('altalanos_gomb'); ?></a>
             </div>
         </div>
     </div>
