@@ -96,21 +96,28 @@ class User extends AdminController {
 	        else {
 	        // végrehajtás, ha nincs hiba 
 	            $user = array();
+
 	            $user['name'] = $this->request->get_post('name');
 	            $user['first_name'] = $this->request->get_post('first_name');
 	            $user['last_name'] = $this->request->get_post('last_name');
 	            $user['email'] = $this->request->get_post('email');
-	            $user['phone'] = ( !empty($this->request->get_post('phone')) ) ? $this->request->get_post('phone') : null;
 
-	            $user['title_hu'] = ( !empty($this->request->get_post('title_hu')) ) ? $this->request->get_post('title_hu') : null;
-	            $user['title_en'] = ( !empty($this->request->get_post('title_en')) ) ? $this->request->get_post('title_en') : null;
-	            $user['description_hu'] = ( !empty($this->request->get_post('description_hu')) ) ? $this->request->get_post('description_hu') : null;
-	            $user['description_en'] = ( !empty($this->request->get_post('description_en')) ) ? $this->request->get_post('description_en') : null;	            
+	            $t_user = $this->request->get_post('phone');
+	            $user['phone'] = ( !empty($t_user) ) ? $t_user : null;
+	            $t_title_hu = $this->request->get_post('title_hu');
+	            $user['title_hu'] = ( !empty($t_title_hu) ) ? $t_title_hu : null;
+	            $t_title_en = $this->request->get_post('title_en');
+	            $user['title_en'] = ( !empty($t_title_en) ) ? $t_title_en : null;
+	            $t_description_hu = $this->request->get_post('description_hu');
+	            $user['description_hu'] = ( !empty($t_description_hu) ) ? $t_description_hu : null;
+	            $t_description_en = $this->request->get_post('description_en');
+	            $user['description_en'] = ( !empty($t_description_en) ) ? $t_description_en : null;	            
 
-	            if (empty($this->request->get_post('img_url'))) {
+	            $t_img_url = $this->request->get_post('img_url');
+	            if (empty($t_img_url)) {
 	                $user['photo'] = Config::get('user.default_photo');
 	            } else {
-	                $path_parts = pathinfo($this->request->get_post('img_url'));
+	                $path_parts = pathinfo($t_img_url);
 	                $user['photo'] = $path_parts['filename'] . '.' . $path_parts['extension'];
 	            }
 
@@ -235,7 +242,9 @@ class User extends AdminController {
 	        ));
 	        
 	        // Jelszó ellenőrzés ha üres a password és az ellenőrző password mezö
-	        if (empty($this->request->get_post('password')) && empty($this->request->get_post('password_again'))) {
+	        $t_password = $this->request->get_post('password');
+	        $t_password_again = $this->request->get_post('password_again');
+	        if (empty($t_password) && empty($t_password_again)) {
 	            $password_empty = true;
 	        } else {
 	            $validate->add_rule('password', 'password', array(
@@ -304,7 +313,9 @@ class User extends AdminController {
 	            }
 
 	            //ha van feltöltve user kép
-	            if (!empty($this->request->get_post('img_url'))) {
+	            $_img_url = $this->request->get_post('img_url');
+	            
+	            if (!empty($_img_url)) {
 	                $path_parts = pathinfo($this->request->get_post('img_url'));
 	                $user['photo'] = $path_parts['filename'] . '.' . $path_parts['extension'];
 	            }
