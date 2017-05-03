@@ -23,6 +23,7 @@ class Num {
 
         if ($n >= 1000000) {
 			$n = round(($n / 1000000), 2);
+			$n = number_format($n, 1, ',', '');
 			if ($scale) {
 				$n .= '&nbsp;M';
 			}	
@@ -30,6 +31,7 @@ class Num {
         }
         elseif ($n > 1000) {
 			$n = round(($n / 1000), 0);
+			$n = number_format($n, 1, ',', '');
             if ($scale) {
 				$n .= '&nbsp;E';
 			}

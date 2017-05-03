@@ -522,6 +522,7 @@ class Property_model extends AdminModel {
             if ($order == "varos") {
                 // $order = array('city_name');
                 $this->query->set_orderby('city_name', $dir);
+                $this->query->set_orderby('district_name', 'asc');
             }
         // alapterület szerint rendezés    
             if ($order == "alapterulet") {

@@ -27,8 +27,6 @@ use System\Libs\Language as Lang;
 
                                     <!-- FELSŐ SOR -->
                                     <div class="row">
-                                        <fieldset>
-                                            <legend><?php echo Lang::get('kereso_reszletes_alapadatok'); ?></legend>
                                             <!-- ELADÓ/KIADÓ -->
                                             <div class="col-sm-2">
                                                 <span class="item-label"><?php echo Lang::get('kereso_elado'); ?>/<?php echo Lang::get('kereso_kiado'); ?></span>
@@ -92,15 +90,11 @@ use System\Libs\Language as Lang;
                                                     </select>
                                                 </div>					
                                             </div>                                            
-                                            
-                                        </fieldset>
                                     </div>
 
                                     <!-- ALSÓ SOR -->
                                     <div class="row">
-                                        <fieldset>
-                                            <legend><?php echo Lang::get('kereso_reszletes_ar_alapt_szoba'); ?></legend>
-                                            
+
                                             <!-- ÁR -->
                                             <div class="col-sm-3">
                                                 <span class="item-label"><?php echo Lang::get('kereso_ar'); ?></span>
@@ -143,14 +137,12 @@ use System\Libs\Language as Lang;
                                             </div>                                              
                                             
 	                                       
-                                        </fieldset>
+
                                     </div>
 
 
                                     <!-- JELLEMZŐK SOR -->
                                     <div class="row">
-                                        <fieldset>
-                                            <legend><?php echo Lang::get('kereso_reszletes_jellemzok'); ?></legend>
 
                                             <!-- FŰTÉS -->
                                             <div class="col-sm-3">
@@ -263,14 +255,10 @@ use System\Libs\Language as Lang;
                                                 </ul>
                                             </div>
 
-
-                                        </fieldset>
                                     </div>                                    
 
                                     <div class="row">
-                                        <fieldset>
-                                            <legend><?php echo Lang::get('kereso_reszletes_egyeb'); ?></legend>
-                                                
+
                                                 <!-- REFERENCIA SZÁM -->
                                                 <div class="col-sm-3">
                                                     <span class="item-label"><?php echo Lang::get('kereso_ref_szam'); ?></span>
@@ -322,7 +310,6 @@ use System\Libs\Language as Lang;
                                                 </div>
  -->
 
-                                        </fieldset>
                                     </div>
 
 

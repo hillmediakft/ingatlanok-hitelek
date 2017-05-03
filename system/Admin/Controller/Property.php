@@ -844,7 +844,7 @@ class Property extends AdminController {
 //log        
 if (!empty($success_id_arr)) {
     EventManager::trigger('delete_property', array('delete', 'azonosító számú ingatlan törlése.', $success_id_arr));
-    EventManager::trigger('send_info_email', array('ref_num' => $success_id_arr, 'message' => 'azonosító számú ingatlan törölve.'));
+    //EventManager::trigger('send_info_email', array('ref_num' => $success_id_arr, 'message' => 'azonosító számú ingatlan törölve.'));
 }
         return $success_counter + $fail_counter;
     }
@@ -1201,7 +1201,7 @@ if (!empty($success_id_arr)) {
  
                                     EventManager::trigger('update_property', array('update', '#' . $id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan ára megváltozott'));
                                     // E-mail küldése admin-oknak
-                                    EventManager::trigger('send_info_email', array('ref_num' => array($data['ref_num']), 'message' => 'referencia számú ingatlan ára módosult.'));
+                                    //EventManager::trigger('send_info_email', array('ref_num' => array($data['ref_num']), 'message' => 'referencia számú ingatlan ára módosult.'));
                                 }    
 
 
@@ -1242,7 +1242,7 @@ if (!empty($success_id_arr)) {
                             }
 
                         EventManager::trigger('insert_property', array('insert', '#' . $last_id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan létrehozása'));
-                        EventManager::trigger('send_info_email', array('ref_num' => array($data['ref_num']), 'message' => 'referencia számú ingatlan létrehozva.'));
+                        //EventManager::trigger('send_info_email', array('ref_num' => array($data['ref_num']), 'message' => 'referencia számú ingatlan létrehozva.'));
 
                         $this->response->json(array(
                             "status" => 'success',
@@ -1619,10 +1619,10 @@ if (!empty($success_id_arr)) {
 if (!empty($success_id_arr)) {
     if ($data === 1 && $column == 'status') {
         EventManager::trigger('change_property_status', array('active', 'azonosító számú ingatlan státusza aktív lett.', $success_id_arr));
-        EventManager::trigger('send_info_email', array('ref_num' => $success_id_arr, 'message' => 'azonosító számú ingatlan statusza aktív lett.'));
+        //EventManager::trigger('send_info_email', array('ref_num' => $success_id_arr, 'message' => 'azonosító számú ingatlan statusza aktív lett.'));
     } elseif($data === 0 && $column == 'status') {
         EventManager::trigger('change_property_status', array('inactive', 'azonosító számú ingatlan státusza inaktív lett.', $success_id_arr));
-        EventManager::trigger('send_info_email', array('ref_num' => $success_id_arr, 'message' => 'azonosító számú ingatlan statusza inaktív lett.'));
+        //EventManager::trigger('send_info_email', array('ref_num' => $success_id_arr, 'message' => 'azonosító számú ingatlan statusza inaktív lett.'));
     }
 }        
 

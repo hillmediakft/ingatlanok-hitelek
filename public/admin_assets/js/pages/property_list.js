@@ -25,7 +25,7 @@ var Property = function () {
 
                     // metronic specific
                         "metronicGroupActions": "_TOTAL_ sor kiválasztva: ",
-                        "metronicAjaxRequestGeneralError": "A kérés nem hajtható végre, ellenőrizze az internet kapcsolatot!",
+                        "metronicAjaxRequestGeneralError": "Hiba történt, a kérés nem hajtható végre!",
 
                     // data tables specific                
                     "decimal":        "",
@@ -109,7 +109,7 @@ var Property = function () {
                 //"ordering": false,
                 
                 "order": [
-                    [2, "desc"]
+                    [3, "desc"]
                 ] // set first column as a default sort by asc
             }
         });
