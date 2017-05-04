@@ -110,7 +110,8 @@ $config['ingatlan_photo'] = array(
     'y_ratio' => true, // ha true, akkor megtartja az eredeti képarányt, ha false, akkor a height érték lép életbe az átméretezésnél
     'upload_path' => UPLOADS . 'ingatlan_photo/',
     //'default_photo' => 'default.jpg',
-    'placeholder' => ADMIN_ASSETS . 'img/placeholder_323x242.jpg'
+    'placeholder' => ADMIN_ASSETS . 'img/placeholder_323x242.jpg',
+    'placeholder_thumb' => ADMIN_ASSETS . 'img/placeholder_80x60.jpg'
 );
 
 $config['documents'] = array(

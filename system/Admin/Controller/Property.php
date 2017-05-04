@@ -84,10 +84,6 @@ class Property extends AdminController {
         $view->render('property/tpl_property_details', $data);
     }
 
-    public function search() {
-        die('work in progress');
-    }
-
     /**
      *  (AJAX) Az ingatlanok listáját adja vissza és kezeli a csoportos művelteket is
      */
@@ -127,15 +123,22 @@ class Property extends AdminController {
                     switch ($request_data['customActionName']) {
 
                         case 'group_delete':
-                            // az id-ket tartalmazó tömböt kapja paraméterként
-                            $result = $this->_delete($request_data['id']);
 
-                            if ($result !== false) {
-                                $custom_action_status = 'OK';
-                                $custom_action_message = $result . ' ingatlan törölve.';
-                            } else {
+                            // ha nincs engedélye törölni
+                            if (!Auth::hasAccess('property.softdelete')) {
                                 $custom_action_status = 'ERROR';
-                                $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
+                                $custom_action_message = Message::show('Nincs engedélye a művelet végrehajtásához!');
+                            } else {
+                                // az id-ket tartalmazó tömböt kapja paraméterként
+                                $result = $this->_softdelete($request_data['id']);
+                                
+                                if ($result !== false) {
+                                    $custom_action_status = 'OK';
+                                    $custom_action_message = $result . ' ingatlan áthelyezve a lomtárba.';
+                                } else {
+                                    $custom_action_status = 'ERROR';
+                                    $custom_action_message = Message::show('Adatbázis lekérdezési hiba!');
+                                }
                             }
                             break;
 
@@ -743,7 +746,7 @@ class Property extends AdminController {
                 ));
             }
 
-            // a POST-ban kapott item_id tömb 
+            // a POST-ban kapott item_id (csoportos törlésnél tömb, egy elem törlésnél string) 
             $id_data = $this->request->get_post('item_id');
 
             // rekord törlése
@@ -752,7 +755,7 @@ class Property extends AdminController {
             if ($result !== false) {
                 $this->response->json(array(
                     "status" => 'success',
-                    "message_success" => $result . 'ingatlan törölve.'
+                    "message_success" => $result . ' ingatlan törölve.'
                 ));
             } else {
                 // ha a törlési sql parancsban hiba van
@@ -765,6 +768,139 @@ class Property extends AdminController {
         } else {
             $this->response->redirect('admin/error');
         }
+    }
+
+    /**
+     *  (AJAX) Ingatlan nem végleges törlése
+     */
+    public function softDelete()
+    {
+        if ($this->request->is_ajax()) {
+
+            if (!Auth::hasAccess('property.softdelete')) {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Nincs engedélye a művelet végrehajtásához!'
+                ));
+            }
+
+            // a POST-ban kapott item_id (csoportos törlésnél tömb, egy elem törlésnél string) 
+            $id_data = $this->request->get_post('item_id');
+
+            // update művelet végrehajtása
+            $result = $this->_softDelete($id_data);
+
+            if ($result !== false) {
+                $this->response->json(array(
+                    "status" => 'success',
+                    "message_success" => $result . 'ingatlan a áthelyezve a lomtárba.'
+                ));
+            } else {
+                // ha a törlési sql parancsban hiba van
+                $this->response->json(array(
+                    "status" => 'error',
+                    "message" => 'Adatbázis lekérdezési hiba!'
+                ));
+            }
+
+        } else {
+            $this->response->redirect('admin/error');
+        }
+
+    }
+
+    /**
+     * Törölt ingatlanok helyreállítása
+     */
+    public function cancel_delete()
+    {
+        if ($this->request->is_ajax()) {
+
+            if (!Auth::hasAccess('property.cancel_delete')) {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Nincs engedélye a művelet végrehajtásához!'
+                ));
+            }
+
+            // a POST-ban kapott item_id (csoportos törlésnél tömb, egy elem törlésnél string) 
+            $id_data = $this->request->get_post('item_id');
+
+            // a sikeres törlések számát tárolja
+            $success_counter = 0;
+            // törölt rekordok id-je
+            $success_id_arr = array();
+            // tömbösítjük, ha nem tömb az $id_data
+            $id_data = (!is_array($id_data)) ? (array) $id_data : $id_data;
+            
+            // bejárjuk az id-ket tartalmazó tömböt
+            foreach ($id_data as $id) {
+                $id = (int) $id;
+                // rekord deleted oszlop 0-re 
+                $result = $this->property_model->update($id, array('deleted' => 0));
+
+                // ha a törlési sql parancsban nincs hiba
+                if ($result !== false) {
+                    $success_counter += $result;
+                    $success_id_arr[] = $id;
+                } else {
+                    // ha a törlési sql parancsban hiba van
+                    $this->response->json(array(
+                        "status" => 'error',
+                        "message" => 'Adatbázis lekérdezési hiba!'
+                    ));
+                }
+            }    
+            
+            // ha nem volt hiba
+            $this->response->json(array(
+                "status" => 'success',
+                "message_success" => $success_counter . ' ingatlan helyreállítva.'
+            ));
+
+
+        } else {
+            $this->response->redirect('admin/error');
+        }
+
+    }
+
+    /**
+     * Rekord(ok) soft törlése (deleted oszlop = 1)
+     * @param array $id_data
+     * @return integer || false
+     */
+    private function _softDelete($id_data)
+    {
+        // a sikeres törlések számát tárolja
+        $success_counter = 0;
+        // törölt rekordok id-je
+        $success_id_arr = array();
+
+        // tömbösítjük, ha nem tömb az $id_data
+        $id_data = (!is_array($id_data)) ? (array) $id_data : $id_data;
+
+        foreach ($id_data as $id) {
+            $id = (int) $id;
+            // rekord deleted oszlop 1-re 
+            $result = $this->property_model->update($id, array('deleted' => 1));
+
+            // ha a törlési sql parancsban nincs hiba
+            if ($result !== false) {
+                $success_counter += $result;
+                $success_id_arr[] = $id;
+            } else {
+                // ha a törlési sql parancsban hiba van
+                return false;
+            }
+        }    
+
+        // log        
+        if (!empty($success_id_arr)) {
+            EventManager::trigger('delete_property', array('delete', 'azonosító számú ingatlan lomtárba helyezve.', $success_id_arr));
+        }
+        
+        return $success_counter;
     }
 
     /**
@@ -841,47 +977,30 @@ class Property extends AdminController {
             }
         } // end foreach
 
-//log        
-if (!empty($success_id_arr)) {
-    EventManager::trigger('delete_property', array('delete', 'azonosító számú ingatlan törlése.', $success_id_arr));
-    //EventManager::trigger('send_info_email', array('ref_num' => $success_id_arr, 'message' => 'azonosító számú ingatlan törölve.'));
-}
+        //log        
+        if (!empty($success_id_arr)) {
+            EventManager::trigger('delete_property', array('delete', 'azonosító számú ingatlan véglegesen törölve.', $success_id_arr));
+        }
+
         return $success_counter + $fail_counter;
     }
 
+
     /**
-     *  (AJAX) Lakás nem végleges törlése
+     * Törölt ingatlanokat tartalmazó oldal action-ja
      */
-    public function softDelete()
+    public function deleted_records()
     {
-        if ($this->request->is_ajax()) {
-            
-            if (!Auth::hasAccess('property.delete')) {
-                $this->response->json(array(
-                    'status' => 'error',
-                    'message' => 'Nincs engedélye a művelet végrehajtásához!'
-                ));
-            }
+        $data['title'] = 'Törölt ingatlanok oldal';
+        $data['description'] = 'Törölt ingatlanok oldal description';
+        $data['ingatlanok'] = $this->property_model->deletedPropertys();
 
-            $id = $this->request->get_post('item_id');
-
-            $result = $this->property_model->update($id, array('deleted' => 1));
-
-            if ($result !== false) {
-                $this->response->json(array(
-                    "status" => 'success',
-                    "message_success" => 'Ingatlan törölve.'
-                ));
-            } else {
-                $this->response->json(array(
-                    "status" => 'error',
-                    "message" => 'Adatbázis lekérdezési hiba!'
-                ));
-            }
-
-        } else {
-            $this->response->redirect('admin/error');
-        }
+        $view = new View();
+        //$view->debug(true);
+        $view->setHelper(array('url_helper', 'num_helper'));
+        $view->add_links(array('datatable', 'bootbox', 'vframework'));
+        $view->add_link('js', ADMIN_JS . 'pages/property_list_deleted.js');
+        $view->render('property/tpl_property_deleted_list', $data);
     }
 
     /**
@@ -899,8 +1018,7 @@ if (!empty($success_id_arr)) {
                 $update_real = false;
 
                 $data = $this->request->get_post(null, 'strip_danger_tags');
-//var_dump($data);
-                //echo json_encode($data);
+
                 // megvizsgáljuk, hogy a post adatok között van-e update_id
                 // update-nél a javasriptel hozzáadunk a post adatokhoz egy update_id elemet
                 if (isset($data['update_id'])) {

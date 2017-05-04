@@ -293,8 +293,16 @@ class Application {
                 $router->get('/property/update/:id', 'property@update', array('id'));
                 $router->get('/property/details/:id', 'property@details', array('id'));
                 $router->post('/property/getpropertylist', 'property@getPropertyList');
-                $router->post('/property/delete', 'property@delete');
-                $router->post('/property/softdelete', 'property@softdelete');
+                
+                    // nem végleges törlés
+                    $router->post('/property/softdelete', 'property@softdelete');
+                    // végleges törlés
+                    $router->post('/property/delete', 'property@delete');
+                    // törölt elemek oldal
+                    $router->get('/property/deleted_records', 'property@deleted_records');
+                    // soft deleted rekordok "visszaállítása" 
+                    $router->post('/property/cancel_delete', 'property@cancel_delete');
+                
                 $router->post('/property/county_city_list', 'property@county_city_list');
                 $router->post('/property/kerulet_utca_list', 'property@kerulet_utca_list');
                 $router->post('/property/insert_update', 'property@insert_update');

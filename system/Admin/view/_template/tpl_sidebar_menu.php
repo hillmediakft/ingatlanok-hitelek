@@ -51,12 +51,11 @@ use System\Libs\Cookie;
                         <span class="title">Ingatlan hozzáadása</span>
                     </a>
                 </li>
-                <!--
-                    <li class="nav-item <?php //$this->menu_active('property', 'search');   ?> ">
-                    <a href="admin/property/search" class="nav-link">
-                        <span class="title">Ingatlan keresése</span>
+                <li class="nav-item <?php $this->menu_active('property', 'deleted_records'); ?> ">
+                    <a href="admin/property/deleted_records" class="nav-link">
+                        <span class="title">Törölt ingatlanok</span>
                     </a>
-                </li> -->
+                </li>
             </ul>
         </li>
 

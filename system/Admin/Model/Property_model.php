@@ -108,6 +108,45 @@ class Property_model extends AdminModel {
     }
 
     /**
+     *  Törölt ingatlanokat adja vissza
+     */
+    public function deletedPropertys()
+    {
+// $this->query->debug(true);
+        $this->query->set_columns(
+            'ingatlanok.id, 
+            ingatlanok.ref_num,
+            ingatlanok.kepek,
+            ingatlanok.tipus,
+            ingatlanok.ar_elado,
+            ingatlanok.ar_kiado,
+            ingatlan_kategoria.kat_nev_hu AS kategoria,
+            users.first_name,
+            users.last_name,
+            district_list.district_name,
+            city_list.city_name'
+        );
+/*
+            ingatlanok.status,
+            ingatlanok.kiemeles,
+            ingatlanok.kategoria,
+            ingatlanok.alapterulet,
+            ingatlanok.szobaszam,
+*/
+
+        $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
+        $this->query->set_join('left', 'users', 'ingatlanok.ref_id', '=', 'users.id');
+        $this->query->set_join('left', 'district_list', 'ingatlanok.kerulet', '=', 'district_list.district_id');
+        $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
+
+        $this->query->set_where('deleted', '=', 1);
+        $this->query->set_orderby('id', 'asc');
+
+        return $this->query->select();
+    }
+
+
+    /**
      * 	Lekérdezi az ingatlanok összes adatát id alapján
      * 	
      * 	@param array 
@@ -374,6 +413,9 @@ class Property_model extends AdminModel {
 
         $this->query->set_offset($display_start);
         $this->query->set_limit($display_length);
+
+        // csak a nem törölt elemek 
+        $this->query->set_where('deleted', '=', 0);
 
         // ha nem superadmin a bejelentkezett felhasználó, akkor csak a saját ingatlanja jelennek meg
     /*    

@@ -648,9 +648,12 @@ var Property = function () {
                 title: "Ingatlanok listája"
             });
 
+            /**
+             * Egy elem törlése
+             */
             vframework.deleteItems({
                 table_id: "property",
-                url: "admin/property/delete",
+                url: "admin/property/softdelete",
                 confirm_message: "Biztosan törölni akarja az ingatlant?"
             });
 
