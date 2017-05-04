@@ -4,7 +4,7 @@ RewriteEngine on
 RewriteBase /
 
 # ÉLES KÖTNYEZETBEN EL KELL TÁVOLÍTANI AZ IF FELTÉTELT
-<IF "false">
+<IF false>
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
