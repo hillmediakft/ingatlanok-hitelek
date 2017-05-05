@@ -944,11 +944,13 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
         foreach ($agents as $key => &$agent) {
             if (isset($temp_arr[$agent['id']])) {
                 $agent['property'] = $temp_arr[$agent['id']];
-            } else {
-                $agent['property'] = 0;
+            }
+            else {
+                //$agent['property'] = 0;
+                // töröljük a tömbből azokat a referenseket, akiknek nincs ingatlanjuk 
+                unset($agents[$key]);
             }
         }
-
 
         /*
           // ügynökhöz tartozó ingatlanok ciklusban több lekérdezéssel (ez lassabb!)
