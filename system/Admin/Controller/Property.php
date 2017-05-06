@@ -1098,8 +1098,19 @@ class Property extends AdminController {
                       }
                      */
 
+                    // referens id  
+                    $data['ref_id'] = (int)$data['ref_id'];  
                     // referenciaszám
                     $data['ref_num'] = (int)$data['ref_num'];
+                    // status
+                    $data['status'] = (int)$data['status'];
+                    // kiemeles
+                    $data['kiemeles'] = empty($data['kiemeles']) ? null : (int)$data['kiemeles'];
+                    // tipus
+                    $data['tipus'] = (int)$data['tipus'];
+                    // kategoria
+                    $data['kategoria'] = (int)$data['kategoria'];
+
 
                     // num helper példányosítása
                     $num_helper = DI::get('num_helper');
@@ -1189,7 +1200,12 @@ class Property extends AdminController {
 
 
                     $data['hazszam'] = (isset($data['hazszam'])) ? $data['hazszam'] : null;
-                    $data['kerulet'] = (isset($data['kerulet'])) ? $data['kerulet'] : null;
+                    $data['megye'] = (isset($data['megye'])) ? (int)$data['megye'] : null;
+                    $data['varos'] = (isset($data['varos'])) ? (int)$data['varos'] : null;
+                    $data['kerulet'] = (isset($data['kerulet'])) ? (int)$data['kerulet'] : null;
+
+                    // alapterület
+                    $data['alapterulet'] = !empty($data['alapterulet']) ? (int)$data['alapterulet'] : null;
 
                     // telek alapterület
                     if (isset($data['telek_alapterulet'])) {
@@ -1262,7 +1278,6 @@ class Property extends AdminController {
                     foreach ($jellemzok2 as $jellemzo) {
                         $data[$jellemzo] = (isset($data[$jellemzo])) ? 1 : 0;
                     }
-
 
                     if ($update_marker) {
                 // UPDATE
