@@ -1105,7 +1105,7 @@ class Property extends AdminController {
                     // status
                     $data['status'] = (int)$data['status'];
                     // kiemeles
-                    $data['kiemeles'] = empty($data['kiemeles']) ? null : (int)$data['kiemeles'];
+                    $data['kiemeles'] = (int)$data['kiemeles'];
                     // tipus
                     $data['tipus'] = (int)$data['tipus'];
                     // kategoria
