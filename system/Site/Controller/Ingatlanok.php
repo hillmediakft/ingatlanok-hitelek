@@ -71,6 +71,12 @@ $banner_number = $pagine->getNumberOfPages($data['filtered_count'], $pagine->get
         $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
 
         $data['agents'] = $this->ingatlanok_model->get_agent();
+        // csak azok az ügynökök jelennek meg, akiknek van ingatlanjuk
+        foreach ($data['agents'] as $key => $value) {
+            if ($value['property'] == 0) {
+                unset($data['agents'][$key]);
+            }
+        }        
         shuffle($data['agents']);
 
 

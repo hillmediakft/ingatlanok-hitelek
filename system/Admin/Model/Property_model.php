@@ -646,6 +646,8 @@ class Property_model extends AdminModel {
             'users.photo'
         ));
 
+        $this->query->set_where('id', '=', $id);
+
         // kivéve a fejlesztő usereket
         $this->query->set_where('id', '!=', 1);
         $this->query->set_where('id', '!=', 2);

@@ -43,6 +43,12 @@ class Kereses extends SiteController {
         $data['kiemelt_ingatlanok'] = $this->ingatlanok_model->kiemelt_properties_query(4);
         // referens adatok lekérdezése
         $data['agents'] = $this->ingatlanok_model->get_agent();
+        // csak azok az ügynökök jelennek meg, akiknek van ingatlanjuk
+        foreach ($data['agents'] as $key => $value) {
+            if ($value['property'] == 0) {
+                unset($data['agents'][$key]);
+            }
+        }        
 // var_dump($data);die;
 
         $view = new View();

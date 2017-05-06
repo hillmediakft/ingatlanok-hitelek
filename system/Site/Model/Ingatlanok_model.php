@@ -946,9 +946,9 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
                 $agent['property'] = $temp_arr[$agent['id']];
             }
             else {
-                //$agent['property'] = 0;
+                $agent['property'] = 0;
                 // töröljük a tömbből azokat a referenseket, akiknek nincs ingatlanjuk 
-                unset($agents[$key]);
+                //unset($agents[$key]);
             }
         }
 
@@ -960,7 +960,13 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
           }
          */
 
-        return (!is_null($id)) ? $agents[0] : $agents;
+        // ha nincs a feltételeknek megfelelő referens
+        if (empty($agents)) {
+            return false;
+        } else {
+            return (!is_null($id)) ? $agents[0] : $agents;
+        }
+
     }
 
     /**
