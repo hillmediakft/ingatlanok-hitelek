@@ -1,5 +1,3 @@
-<!-- BEGIN CONTENT -->
-<div class="page-content-wrapper">
     <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
@@ -47,7 +45,7 @@
                                                 <td colspan="3">
                                                     Nyelvi kód kategória:  <?php echo '<strong>' . $key1 . '</strong>'; ?>
                                                 </td>
-                                            <tr>
+                                            </tr>
                                                 <?php foreach ($value1 as $value) { ?>			
                                                 <tr>
                                                     <td style="width:15%"><?php echo $value['code']; ?></td>
@@ -108,5 +106,3 @@
             </div> <!-- END COL-MD-12 -->
         </div> <!-- END ROW -->	
     </div> <!-- END PAGE CONTENT-->    
-</div> <!-- END PAGE CONTENT WRAPPER -->
-</div> <!-- END CONTAINER -->
