@@ -979,7 +979,7 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="portlet">
                                                 <div class="portlet-body">
                                                     <h4 class="block">Feltöltött képek:</h4>
@@ -991,8 +991,8 @@
                                                             $file_location = $this->getConfig('ingatlan_photo.upload_path');
                                                             foreach ($result_photos as $key => $value) {
                                                                 $counter = $key + 1;
-                                                                $file_path = $this->url_helper->thumbPath($file_location . $value);
-                                                                echo '<li id="elem_' . $counter . '" class="ui-state-default"><img class="img-thumbnail" src="' . $file_path . '" alt="" /><button style="position:absolute; top:20px; right:20px; z-index:2;" class="btn btn-xs btn-default" type="button" title="Kép törlése"><i class="glyphicon glyphicon-trash"></i></button></li>' . "\n\r";
+                                                                $file_path = $this->url_helper->thumbPath($file_location . $value, false, 'small');
+                                                                echo '<li id="elem_' . $counter . '" class="ui-state-default"><img class="img-thumbnail" style="width: 220px" src="' . $file_path . '" alt="" /><button style="position:absolute; top:20px; right:20px; z-index:2;" class="btn btn-xs btn-default" type="button" title="Kép törlése"><i class="glyphicon glyphicon-trash"></i></button></li>' . "\n\r";
                                                             }
                                                         }
                                                         ?>
@@ -1000,7 +1000,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-5">
                                             <!-- KÉPEK FELTÖLTÉSE -->
                                             <div class="portlet">
                                                 <div class="portlet-body">
