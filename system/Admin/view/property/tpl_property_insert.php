@@ -115,26 +115,18 @@
                                             </div>
                                         </div>
 
-                                        <!-- ÜGYLET TÍPUSA -->
+                                        <!-- KIEMELÉS -->
                                         <div class="form-group">
                                             <label for="kiemeles" class="control-label col-md-3">Kiemelés <span></span></label>
                                             <div class="col-md-9">
                                                 <select name="kiemeles" id="kiemeles" class="form-control input-small">
-                                                    <option value="0" selected>Nincs kiemelve</option>
-                                                    <?php if (Auth::getUser('role_id') == 1) : ?>
-                                                        <option value="1">Kiemelés</option>
-                                                    <?php endif; ?>
-
-                                                    <?php if (Auth::getUser('role_id') > 1) : ?>
-                                                        <option value="2">Kiemelés</option>
-                                                    <?php endif; ?>
+                                                    <option value="0">Nincs kiemelve</option>
+                                                    <option value="1">Kiemelés</option>
                                                 </select>
                                             </div>
                                         </div>
 
-
-
-                                        <!-- KIEMELÉS -->
+                                        <!-- TÍPUS -->
                                         <div class="form-group">
                                             <label for="tipus" class="control-label col-md-3 ">Megbízás típusa <small>(Eladó / kiadó)</small><span class="required">*</span></label>
                                             <div class="col-md-9">

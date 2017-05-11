@@ -121,12 +121,7 @@
                                         <div class="col-md-9">
                                             <select name="kiemeles" id="kiemeles" class="form-control input-small">
                                                 <option value="0" <?php echo ($content['kiemeles'] == 0) ? 'selected' : ''; ?>>Nincs kiemelve</option>
-                                                <?php if (Auth::getUser('role_id') == 1) : ?>  
-                                                    <option value="1" <?php echo ($content['tipus'] == 1) ? 'selected' : ''; ?>>Kiemelés</option>
-                                                <?php endif; ?>
-                                                <?php if (Auth::getUser('role_id') > 1) : ?>  
-                                                    <option value="2" <?php echo ($content['tipus'] == 2) ? 'selected' : ''; ?>>Kiemelés</option>
-                                                <?php endif; ?>
+                                                <option value="1" <?php echo ($content['kiemeles'] == 1) ? 'selected' : ''; ?>>Kiemelés</option>
                                             </select>
                                         </div>
                                     </div>
