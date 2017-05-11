@@ -1124,7 +1124,7 @@ class Property extends AdminController {
                     // típus eladó
                     if ($data['tipus'] == 1) {
 
-                        $data['ar_elado_eredeti'] = intval($num_helper->stringToNumber($data['ar_elado_eredeti']) * 1000000);
+                        $data['ar_elado_eredeti'] = intval($num_helper->stringToNumber($data['ar_elado_eredeti'], 2) * 1000000);
 
                         //insert és insert utáni upadate esetén
                         if (!$update_marker || ($update_marker && !$update_real)) {
@@ -1140,7 +1140,7 @@ class Property extends AdminController {
                             // ha volt új ár módosítás
                             elseif ($data['ar_elado'] != $data['ar_elado_hidden']) {
                                 //die('ar módositas történt');
-                                $data['ar_elado'] = intval($num_helper->stringToNumber($data['ar_elado']) * 1000000);
+                                $data['ar_elado'] = intval($num_helper->stringToNumber($data['ar_elado'], 2) * 1000000);
                                 $ar_elado_modosult = true;
                             }
                             // ha nem volt változás az új árban
