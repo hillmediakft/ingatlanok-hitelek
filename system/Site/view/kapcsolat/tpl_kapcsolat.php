@@ -51,7 +51,7 @@ use System\Libs\Language as Lang;
                                             <i class="fa fa-phone"></i>
                                         </div>
                                         <div class="descr">
-                                            <span><?php echo $settings['tel']; ?></span>
+                                            <span><?php echo $settings['tel']; ?></span><br>
                                             <span><?php echo $settings['mobil']; ?></span>
                                         </div>
                                     </div>
