@@ -110,7 +110,7 @@
                                         <div class="col-md-9">
                                             <select name="status" class="form-control input-small">
                                                 <option value="1" <?php echo ($content['status'] == 1) ? 'selected' : ''; ?>>Aktív</option>
-                                                <option value="0" <?php echo ($content['tipus'] == 0) ? 'selected' : ''; ?>>Inaktív</option>
+                                                <option value="0" <?php echo ($content['status'] == 0) ? 'selected' : ''; ?>>Inaktív</option>
                                             </select>
                                         </div>
                                     </div>
