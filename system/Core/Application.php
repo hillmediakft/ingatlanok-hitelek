@@ -96,7 +96,7 @@ class Application {
             $router->post('/kereses/savesearch', 'Kereses@saveSearch');
             $router->post('/adatlap/:id', 'Adatlap@index');
 
-			$router->get('error/nem-talalhato-az-ingatlan', 'error@nem_talalhato_az_ingatlan');
+			$router->get('ingatlanok/nem-talalhato-az-ingatlan', 'ingatlanok@nem_talalhato_az_ingatlan');
 			
             $router->set404('error@index');
 

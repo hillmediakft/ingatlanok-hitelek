@@ -24,7 +24,7 @@ use System\Libs\Config as Config
                     </div>
                     <span class="error-message"><span class="colored"><?php echo Lang::get('error_nem_talalhato_az_ingatlan_cim'); ?></span>
                     <span class="reason"><?php echo Lang::get('error_nem_talalhato_az_ingatlan_szoveg'); ?></span>
-                    <a class="home-btn" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.index.' . LANG);?>"><?php echo Lang::get('error_tovabb_az_ingatlanokhoz'); ?></a>
+                    <a class="home-btn" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.index.' . LANG);?>"><?php echo Lang::get('error_tovabb_az_ingatlanokhoz'); ?> <i class="fa fa-arrow-right"></i></a>
                 </div>
                 <div class="empty-space"></div>
             </div>

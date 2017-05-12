@@ -132,7 +132,7 @@ if ($count > 0) {
 
         // ha nem létező id-jű ingatlant akarunk megjeleníteni
         if (empty($data['ingatlan'])) {
-            $this->response->redirect('error/nem-tatalhato-az-ingatlan');
+            $this->response->redirect('ingatlanok/nem-talalhato-az-ingatlan');
         }
        
         // ingatlanhoz tartozó képek
@@ -308,6 +308,25 @@ if ($count > 0) {
 
             $result = $this->ingatlanok_model->refresh_nemreg_megtekintett_cookie($id);
 
+    }	
+	
+    public function nem_talalhato_az_ingatlan() {
+        
+        $page_data = $this->ingatlanok_model->getPageData('error');
+        
+        $data = $this->addGlobalData();
+        $data['title'] = $page_data['metatitle_' . $this->lang];
+        $data['description'] = $page_data['metadescription_' . $this->lang];
+        $data['keywords'] = $page_data['metakeywords_' . $this->lang];
+        
+        $view = new View();
+        $view->setHelper(array('url_helper'));
+		
+        //$view->setLazyRender();
+//$this->view->debug(true); 
+        $this->response->setHeader('HTTP/1.0', '404 Not Found');
+        $this->response->sendHeaders();
+        $view->render('error/nem_talalhato_az_ingatlan', $data);
     }	
 
 
