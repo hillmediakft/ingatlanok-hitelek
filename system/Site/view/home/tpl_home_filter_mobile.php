@@ -8,11 +8,11 @@ use System\Libs\Language as Lang;
     <div class="container">
 
         <div class="banner-content">
-            <a href="#search-form-mobile" class="simple-btn sm-button filled red" data-toggle="collapse">Keresés <i class="fa fa-arrow-down"></i></a>
+       <!--     <a href="#search-form-mobile" class="simple-btn sm-button filled red" data-toggle="collapse">Keresés <i class="fa fa-arrow-down"></i></a>
 
-            <div id="search-form-mobile" class="collapse">
+            <div id="search-form-mobile" class="collapse"> -->
 
-                <form class="filter-form" action="<?php echo (LANG != 'hu') ? LANG . '/' . Config::get('url.ingatlanok.index.' . LANG) : 'ingatlanok'; ?>">
+                <form class="filter-form mb20" action="<?php echo (LANG != 'hu') ? LANG . '/' . Config::get('url.ingatlanok.index.' . LANG) : 'ingatlanok'; ?>">
                     <div class="row">
                         <div class="col-sm-12">
 
@@ -110,7 +110,7 @@ use System\Libs\Language as Lang;
                     </div>
                 </form>
 
-            </div>
+   <!--         </div>  -->
         </div> <!-- banner content END -->
 
     </div>

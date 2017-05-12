@@ -96,6 +96,8 @@ class Application {
             $router->post('/kereses/savesearch', 'Kereses@saveSearch');
             $router->post('/adatlap/:id', 'Adatlap@index');
 
+			$router->get('error/nem-talalhato-az-ingatlan', 'error@nem_talalhato_az_ingatlan');
+			
             $router->set404('error@index');
 
 
@@ -149,6 +151,7 @@ class Application {
                 // keresés elmentése - AJAX
                 $router->post('/kereses/savesearch', 'Kereses@saveSearch');
 
+				$router->get('error/no-property-to-show', 'error@nem_talalhato_az_ingatlan');
 
             });
 

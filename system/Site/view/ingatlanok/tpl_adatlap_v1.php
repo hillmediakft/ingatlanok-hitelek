@@ -82,8 +82,12 @@ use System\Libs\Language as Lang;
                                 </div>
 								<div class="label label-danger"><?php echo Lang::get('adatlap_hivjon_most_cimke'); ?></div>
 								<input type="hidden" name="agent_id" id="agent_id" value="<?php echo $agent['id']; ?>">
-                                <div><a class="simple-btn sm-button outlined red" id="show_phone_number"><i class="fa fa-phone-square"></i> <?php echo substr($agent['phone'], 0, -4) . '...'; ?></a></div>
-								<span id="phone_number_box"></span> 
+                                <div>
+									<div id="phone_number_box">
+									<i class="fa fa-phone-square"></i> <?php echo substr($agent['phone'], 0, -4);?><a id="show_phone_number" class="simple-btn sm-button outlined red">Mutat</a>
+									</div>
+								</div>
+
                                 
                             </div>
                         </div>   

@@ -132,7 +132,7 @@ if ($count > 0) {
 
         // ha nem létező id-jű ingatlant akarunk megjeleníteni
         if (empty($data['ingatlan'])) {
-            $this->response->redirect('error');
+            $this->response->redirect('error/nem-tatalhato-az-ingatlan');
         }
        
         // ingatlanhoz tartozó képek

@@ -33,6 +33,8 @@ class Allas extends SiteController {
 
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper'));
+		
+		$view->add_link('js', SITE_JS . 'pages/allas.js');
 
         //$view->setLazyRender();
 //$this->view->debug(true); 
