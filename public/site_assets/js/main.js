@@ -63,8 +63,27 @@ function initControls() {
     }
 
     if ($('.select').length > 0) {
+	
+$.widget( 'app.selectmenu', $.ui.selectmenu, {
+    _drawButton: function() {
+        this._super();
+        
+        var selected = this.element
+                .find( '[selected]' )
+                .length,
+            placeholder = this.options.placeholder;
+        
+        if ( !selected && placeholder ) {
+            this.buttonText.text( placeholder );    
+        }
+    }
+});	
+	
+	
+	
         $('.select').selectmenu({
-            width: '100%'
+            width: '100%',
+			placeholder: valasszon
         });
     }
     if ($('.tabs').length > 0) {

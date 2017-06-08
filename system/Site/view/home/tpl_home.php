@@ -11,7 +11,7 @@ use System\Libs\Language as Lang;
 
 
 <!-- KERESÉS FORM MOBIL -->
-<div class="main-filter hidden-sm">
+<div class="main-filter hidden-sm hidden-md hidden-lg">
     <?php include($this->path('tpl_home_filter_mobile')); ?>
 </div>           
 

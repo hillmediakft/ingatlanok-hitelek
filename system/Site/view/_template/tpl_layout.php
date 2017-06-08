@@ -25,6 +25,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         <?php } ?> 	
 		
+		<?php if(LANG == 'hu') { ?>
+		<script>var valasszon = '-- válasszon --';</script>
+		<?php } ?>
+				<?php if(LANG == 'en') { ?>
+		<script>var valasszon = '-- choose --';</script>
+		<?php } ?>
+		
 		
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&amp;subset=latin-ext" rel="stylesheet">
