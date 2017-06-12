@@ -89,19 +89,20 @@ use System\Libs\Language as Lang;
                                 $photo_array = json_decode($value['kepek']);
                                 ?>
                                 <li>
+                                    
+                                  <a class="item-anchor" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' .  $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+
                                     <div class="item">
                                         <div class="preview">
                                             <?php $this->html_helper->showLowerPriceIcon($value); ?>
+                                                
+                                                <!-- <a href="<?php //echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' .  $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"></a> -->
 
                                             <?php if ($value['kepek']) { ?>
-                                                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' .  $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
                                                     <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
-                                                </a>
                                             <?php } ?>
                                             <?php if ($value['kepek'] == null) { ?>
-                                                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' .  $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
                                                     <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
-                                                </a>
                                             <?php } ?>
                                             <?php $this->html_helper->showHeartIcon($value); ?>
                                             <span class="price-box">
@@ -119,9 +120,11 @@ use System\Libs\Language as Lang;
                                                 <span class="value"><?php echo $value['alapterulet']; ?> m<sup>2</sup></span>
                                             </div>
                                         </div>
+                                        
                                         <div class="item-entry">
                                             <span class="item-title">
-                                                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' .  $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"><?php echo $value['ingatlan_nev_' . LANG]; ?></a>
+                                                <!-- <a href="<?php //echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' .  $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"><?php //echo $value['ingatlan_nev_' . LANG]; ?></a> -->
+                                                <?php echo $value['ingatlan_nev_' . LANG]; ?>
                                             </span>
                                             <p><?php
                                                 echo $value['city_name'];
@@ -132,6 +135,9 @@ use System\Libs\Language as Lang;
                                             </div>
                                         </div>
                                     </div>
+
+                                  </a>
+
                                 </li>
                             <?php } ?>
 

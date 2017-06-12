@@ -98,17 +98,19 @@ if ($value == 'banner') { ?>
                                 $photo_array = json_decode($value['kepek']);
                             ?>
                             <div class="col-lg-4 col-md-6">
+                                
+                              <a class="item-anchor" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+
                                 <div class="item">
                                     <div class="preview">
                                         <?php $this->html_helper->showLowerPriceIcon($value); ?>
 
-                                            <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+                                            <!-- <a href="<?php //echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"></a>                                         -->
                                             <?php if (!is_null($value['kepek'])) { ?>
                                                 <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
                                             <?php } else { ?>
                                                 <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
                                             <?php } ?>
-                                            </a>                                        
 
                                         <?php $this->html_helper->showHeartIcon($value); ?>
                                         <span class="price-box">
@@ -127,8 +129,11 @@ if ($value == 'banner') { ?>
                                             <span class="value"><?php echo $value['alapterulet']; ?> m<sup>2</sup></span>
                                         </div>
                                     </div>
+                                    
                                     <div class="item-entry">
-                                        <span class="item-title"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"><?php echo $value['ingatlan_nev_' . LANG]; ?></a></span>
+                                        <span class="item-title">
+                                            <?php echo $value['ingatlan_nev_' . LANG]; ?>
+                                        </span>
                                         <p><?php
                                             echo $value['city_name'];
                                             echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
@@ -138,6 +143,9 @@ if ($value == 'banner') { ?>
                                         </div>
                                     </div>
                                 </div>
+
+                              </a>
+
                             </div>
                             <?php } ?>
                         </div>
@@ -174,17 +182,19 @@ if ($value == 'banner') { ?>
                             $photo_array = json_decode($value['kepek']);
                         ?>
                         <div class="col-sm-12">
+                            
+                          <a class="item-anchor" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+
                             <div class="item">
                                 <div class="preview">
                                     <?php $this->html_helper->showLowerPriceIcon($value);?>
 
-                                    <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+                                    <!-- <a href="<?php //echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"></a>                                         -->
                                     <?php if (!is_null($value['kepek'])) { ?>
                                         <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
                                     <?php } else { ?>
                                         <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
                                     <?php } ?>
-                                    </a>                                        
 
                                 </div>
                                 <div class="thumbnail-container">
@@ -205,14 +215,20 @@ if ($value == 'banner') { ?>
                                         </span>
                                     </div>
                                 </div>
+                                
                                 <div class="item-entry">
-                                    <span class="item-title"><a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"><?php echo $value['ingatlan_nev_' . LANG]; ?></a></span>
+                                    <span class="item-title">
+                                        <?php echo $value['ingatlan_nev_' . LANG]; ?>
+                                    </span>
                                     <p class="item-text"><p><?php
                                         echo $value['city_name'];
                                         echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
                                         ?></p></p>
                                 </div>
                             </div>
+
+                          </a>
+
                         </div>       
                         <?php } ?>
                     </div>
