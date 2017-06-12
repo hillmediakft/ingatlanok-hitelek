@@ -666,3 +666,38 @@ margin-top: 10px;
 .mb20 {
 margin-bottom: 20px;
 }
+
+
+/* ingatlanok doboz szürke egyész felületén lehet kattintani */
+    .object-slider .carousel .item-anchor {
+        text-decoration: none;
+    }
+    .object-slider .carousel .item-anchor .item-title {
+        color: #000;
+    }
+    /*
+    .object-slider .carousel .item-anchor .item-title:hover {
+        color: #9e2828;
+    }
+    */
+    .object-slider .carousel .item-anchor .item-thumbnail,
+    .object-slider .carousel .item-anchor .item-entry p {
+        color: #808080;
+    }
+
+
+    .objects-block .item-anchor {
+        text-decoration: none;
+    }
+    .objects-block .item-anchor .item-title {
+        color: #000;
+    }
+    /*
+    .objects-block .item-anchor .item-title:hover {
+        color: #9e2828;
+    }
+    */
+    .objects-block .item-anchor .item-thumbnail,
+    .objects-block .item-anchor .item-entry p {
+        color: #808080;
+    }
