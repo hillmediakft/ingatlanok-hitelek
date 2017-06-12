@@ -273,7 +273,7 @@ class Datatables extends AdminController {
                 $id_name = $this->request->get_post('id_name');
 
                 $result = $this->datatables_model->delete($id, $table, $id_name);
-                if ($result == true) {
+                if ($result !== false) {
                     $this->response->json(array("status" => 'success', "message" => 'A törlés megtörtént!'));
                 } else {
                     $this->response->json(array("status" => 'error', "message" => 'Nem törölhető, mivel létezik ingatlan ezzel a jellemzővel!'));
