@@ -250,14 +250,14 @@
                                         <div class="col-md-3">
                                             <select name="tajolas" id="tajolas" class="form-control">
                                                 <option value="">-- válasszon --</option>
-                                                <option value="0" <?php echo ($content['tajolas'] == 0) ? 'selected' : ''; ?>>észak</option>
-                                                <option value="1" <?php echo ($content['tajolas'] == 1) ? 'selected' : ''; ?>>északkelet</option>
-                                                <option value="2" <?php echo ($content['tajolas'] == 2) ? 'selected' : ''; ?>>kelet</option>
-                                                <option value="3" <?php echo ($content['tajolas'] == 3) ? 'selected' : ''; ?>>délkelet</option>
-                                                <option value="4" <?php echo ($content['tajolas'] == 4) ? 'selected' : ''; ?>>dél</option>
-                                                <option value="5" <?php echo ($content['tajolas'] == 5) ? 'selected' : ''; ?>>délnyugat</option>
-                                                <option value="6" <?php echo ($content['tajolas'] == 6) ? 'selected' : ''; ?>>nyugat</option>
-                                                <option value="7" <?php echo ($content['tajolas'] == 7) ? 'selected' : ''; ?>>északnyugat</option>
+                                                <option value="0" <?php echo ($content['tajolas'] === 0) ? 'selected' : ''; ?>>észak</option>
+                                                <option value="1" <?php echo ($content['tajolas'] === 1) ? 'selected' : ''; ?>>északkelet</option>
+                                                <option value="2" <?php echo ($content['tajolas'] === 2) ? 'selected' : ''; ?>>kelet</option>
+                                                <option value="3" <?php echo ($content['tajolas'] === 3) ? 'selected' : ''; ?>>délkelet</option>
+                                                <option value="4" <?php echo ($content['tajolas'] === 4) ? 'selected' : ''; ?>>dél</option>
+                                                <option value="5" <?php echo ($content['tajolas'] === 5) ? 'selected' : ''; ?>>délnyugat</option>
+                                                <option value="6" <?php echo ($content['tajolas'] === 6) ? 'selected' : ''; ?>>nyugat</option>
+                                                <option value="7" <?php echo ($content['tajolas'] === 7) ? 'selected' : ''; ?>>északnyugat</option>
                                             </select>
                                         </div>
                                     </div>
