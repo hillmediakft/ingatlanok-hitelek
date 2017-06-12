@@ -41,7 +41,7 @@ class Translations extends AdminController {
 
                 $text_code = $this->request->get_post('name');
                 $id = $this->request->get_post('pk');
-                $text = $this->request->get_post('value');
+                $text = $this->request->get_post('value', 'strip_danger_tags');
 
                 $lang = substr($text_code, -2);
                 $column = $lang;
