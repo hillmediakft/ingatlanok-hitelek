@@ -35,7 +35,10 @@ use System\Libs\Language as Lang;
                         <?php
                         $district = (!is_null($ingatlan['district_name'])) ? $ingatlan['district_name'] . ' ' . Lang::get('adatlap_kerulet') : '';
                         ?>
-                        <h5><?php echo $ingatlan['city_name'] . ' ' . $district; ?></h5>
+                        <h5>
+                        <?php echo $ingatlan['city_name'] . ' ' . $district; ?>
+                        <?php echo !is_null($ingatlan['utca']) ? ', ' . $ingatlan['utca'] : ''; ?>    
+                        </h5>
 
                         <div style="padding: 10px 0px;">
                             <?php echo Lang::get('kereso_ref_szam'); ?>: <span style="font-weight: 700; color:#000;"><?php echo 'S-' . $ingatlan['ref_num']; ?></span>
@@ -481,10 +484,13 @@ use System\Libs\Language as Lang;
                                                                 <span class="item-title">
                                                                     <?php echo $value['ingatlan_nev_' . LANG]; ?>
                                                                 </span>
-                                                                <p><?php
+                                                                <p>
+                                                                <?php
                                                                     echo $value['city_name'];
                                                                     echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
-                                                                    ?></p>
+                                                                    echo !is_null($value['utca']) ? '<br>' . $value['utca'] : '';
+                                                                ?>
+                                                                </p>
 
                                                                 <div class="item-info">
                                                                 </div>
@@ -538,7 +544,7 @@ use System\Libs\Language as Lang;
                                                                         <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
                                                                     <?php } else { ?>
                                                                         <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
-                                                                <?php } ?>
+                                                                    <?php } ?>
 
                                                                     <?php $this->html_helper->showHeartIcon($value); ?>
 
@@ -564,10 +570,13 @@ use System\Libs\Language as Lang;
                                                                         
                                                                     <?php echo $value['ingatlan_nev_' . LANG]; ?>
                                                                 </span>
-                                                                <p><?php
+                                                                <p>
+                                                                <?php
                                                                     echo $value['city_name'];
                                                                     echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
-                                                                    ?></p>
+                                                                    echo !is_null($value['utca']) ? '<br>' . $value['utca'] : '';
+                                                                ?>
+                                                                </p>
 
                                                                 <div class="item-info">
                                                                 </div>

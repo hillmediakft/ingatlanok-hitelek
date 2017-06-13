@@ -126,10 +126,13 @@ use System\Libs\Language as Lang;
                                                 <!-- <a href="<?php //echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' .  $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"><?php //echo $value['ingatlan_nev_' . LANG]; ?></a> -->
                                                 <?php echo $value['ingatlan_nev_' . LANG]; ?>
                                             </span>
-                                            <p><?php
+                                            <p>
+                                            <?php
                                                 echo $value['city_name'];
                                                 echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
-                                                ?></p>
+                                                echo !is_null($value['utca']) ? '<br>' . $value['utca'] : '';
+                                            ?>
+                                            </p>
 
                                             <div class="item-info">
                                             </div>

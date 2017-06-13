@@ -134,10 +134,13 @@ if ($value == 'banner') { ?>
                                         <span class="item-title">
                                             <?php echo $value['ingatlan_nev_' . LANG]; ?>
                                         </span>
-                                        <p><?php
+                                        <p>
+                                        <?php
                                             echo $value['city_name'];
                                             echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
-                                            ?></p>
+                                            echo !is_null($value['utca']) ? '<br>' . $value['utca'] : '';
+                                        ?>
+                                        </p>
 
                                         <div class="item-info">
                                         </div>
@@ -220,10 +223,15 @@ if ($value == 'banner') { ?>
                                     <span class="item-title">
                                         <?php echo $value['ingatlan_nev_' . LANG]; ?>
                                     </span>
-                                    <p class="item-text"><p><?php
-                                        echo $value['city_name'];
-                                        echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
-                                        ?></p></p>
+                                    <p class="item-text">
+                                        <p>
+                                            <?php
+                                            echo $value['city_name'];
+                                            echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
+                                            echo !is_null($value['utca']) ? '<br>' . $value['utca'] : '';
+                                            ?>
+                                        </p>
+                                    </p>
                                 </div>
                             </div>
 
