@@ -70,6 +70,21 @@ use System\Libs\Language as Lang;
                                 <span class="title"><?php echo $ingatlan['alapterulet']; ?> m<sup>2</sup></span>
                             </div>
                         </div>
+
+
+                        <?php if (!is_null($ingatlan['emelet'])) { ?>
+                        <div class="icon-box">
+                            <div class="heading">
+                                <div class="icon">
+                                    <i class="fa fa-building"></i>
+                                </div>
+                                <?php $irasjel = (LANG == 'hu') ? '.' : 'th'; ?>
+                                <span class="title"><?php echo $ingatlan['emelet_leiras_' . LANG]; ?></span>
+                            </div>
+                        </div>
+                        <?php } ?>
+
+
                     </div> 
 
                     <div class="col-sm-4">

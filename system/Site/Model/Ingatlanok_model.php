@@ -119,6 +119,7 @@ class Ingatlanok_model extends SiteModel {
             'ingatlanok.*',
             'district_list.district_name',
             'city_list.city_name',
+            'ingatlan_emelet.*',
             'ingatlan_kategoria.*',
             'ingatlan_allapot.*',
             'ingatlan_futes.*',
@@ -137,6 +138,7 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
         $this->query->set_join('left', 'district_list', 'ingatlanok.kerulet', '=', 'district_list.district_id');
 
+        $this->query->set_join('left', 'ingatlan_emelet', 'ingatlanok.emelet', '=', 'ingatlan_emelet.emelet_id');
         $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
         $this->query->set_join('left', 'ingatlan_allapot', 'ingatlanok.allapot', '=', 'ingatlan_allapot.all_id');
         $this->query->set_join('left', 'ingatlan_futes', 'ingatlanok.futes', '=', 'ingatlan_futes.futes_id');
