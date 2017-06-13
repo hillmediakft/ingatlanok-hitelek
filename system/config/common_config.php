@@ -142,6 +142,7 @@ $config['extra'] = array(
     'ext_amerikaikonyha',
     'ext_konyhaablak',
     'ext_kamra',
+    'ext_pince',
     'ext_panorama',
     'ext_biztonsagi_ajto',
     'ext_redony',

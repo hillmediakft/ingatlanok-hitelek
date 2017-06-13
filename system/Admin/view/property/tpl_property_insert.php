@@ -627,6 +627,15 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="27" name="ext_pince"><label>Pince</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">

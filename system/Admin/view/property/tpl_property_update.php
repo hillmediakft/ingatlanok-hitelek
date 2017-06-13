@@ -659,6 +659,15 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" value="27" name="ext_pince" <?php echo ($content['ext_pince'] == 1) ? 'checked="checked"' : ''; ?>><label>Pince</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="checkbox">
