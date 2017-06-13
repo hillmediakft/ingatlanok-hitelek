@@ -138,7 +138,7 @@ if ($value == 'banner') { ?>
                                         <?php
                                             echo $value['city_name'];
                                             echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
-                                            echo !is_null($value['utca']) ? '<br>' . $value['utca'] : '';
+                                            echo (($value['utca_megjelenites'] == 1) && (!is_null($value['utca']))) ? '<br>' . $value['utca'] : '';
                                         ?>
                                         </p>
 
@@ -228,7 +228,7 @@ if ($value == 'banner') { ?>
                                             <?php
                                             echo $value['city_name'];
                                             echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
-                                            echo !is_null($value['utca']) ? '<br>' . $value['utca'] : '';
+                                            echo (($value['utca_megjelenites'] == 1) && (!is_null($value['utca']))) ? '<br>' . $value['utca'] : '';
                                             ?>
                                         </p>
                                     </p>

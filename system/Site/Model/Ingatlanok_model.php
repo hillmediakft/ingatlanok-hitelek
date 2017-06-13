@@ -40,6 +40,7 @@ class Ingatlanok_model extends SiteModel {
             'ingatlanok.kepek',
             'ingatlanok.varos',
             'ingatlanok.utca',
+            'ingatlanok.utca_megjelenites',
             'ingatlan_kategoria.*',
             'city_list.city_name'
         ));
@@ -82,6 +83,7 @@ class Ingatlanok_model extends SiteModel {
             'ingatlanok.kepek',
             'ingatlanok.varos',
             'ingatlanok.utca',
+            'ingatlanok.utca_megjelenites',
             'ingatlan_kategoria.*',
             'district_list.district_name',
             'city_list.city_name'
@@ -283,6 +285,7 @@ class Ingatlanok_model extends SiteModel {
           `ingatlanok`.`kepek`,
           `ingatlanok`.`varos`,
           `ingatlanok`.`utca`,
+          `ingatlanok`.`utca_megjelenites`,
           `ingatlan_kategoria`.*,
           `district_list`.`district_name`,
           `city_list`.`city_name`"
@@ -1011,6 +1014,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
             'ingatlanok.varos',
             'ingatlanok.kerulet',
             'ingatlanok.utca',
+            'ingatlanok.utca_megjelenites',
             'ingatlanok.kategoria',
             'ingatlanok.szobaszam',
             'ingatlanok.alapterulet',
