@@ -51,8 +51,8 @@
                                     <td><?php echo $page['id']; ?></td>
                                     <td><?php echo $page['title_hu']; ?></td>
                                     <td>
-                                        <?php echo BASE_URL . $page['friendlyurl_hu']; ?><br>
-                                        <?php echo BASE_URL . 'en/' . $page['friendlyurl_en']; ?>
+                                        <?php echo BASE_URL . 'marketing/' . $page['friendlyurl_hu']; ?><br>
+                                        <?php echo BASE_URL . 'en/marketing/' . $page['friendlyurl_en']; ?>
                                     </td>
                                     <td><?php echo date('Y-m-d H:i:s', (int) $page['creation_time']); ?></td>
                                     <?php if ($page['status'] == 1) { ?>
