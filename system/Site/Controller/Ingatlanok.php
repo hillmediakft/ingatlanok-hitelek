@@ -130,6 +130,9 @@ if ($count > 0) {
         // ingatlani adatainak lekérdezése
         $data['ingatlan'] = $this->ingatlanok_model->getProperty($id);
 
+        // ha az ingatlan kategória 1 akkor 225, egyébként 450
+        $data['ingatlan']['map_circle_size'] = ($data['ingatlan']['kategoria'] === '1') ? 225 : 450;
+
         // ha nem létező id-jű ingatlant akarunk megjeleníteni
         if (empty($data['ingatlan'])) {
             $this->response->redirect('ingatlanok/nem-talalhato-az-ingatlan');

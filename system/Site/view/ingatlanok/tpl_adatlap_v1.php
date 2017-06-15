@@ -5,6 +5,8 @@ use System\Libs\Language as Lang;
 ?>
 <div id="content" class="container-fluid">
 
+    <div id="map_circle_size_div" data-mapsize="<?php echo $ingatlan['map_circle_size']; ?>" style="display:none;"></div>
+
     <!-- BREADCRUMBS -->
     <div class="container">
         <div class="row">
@@ -38,6 +40,7 @@ use System\Libs\Language as Lang;
                         <h5>
                         <?php echo $ingatlan['city_name'] . ' ' . $district; ?>
                         <?php echo (($ingatlan['utca_megjelenites'] == 1) && (!is_null($ingatlan['utca']))) ? ', ' . $ingatlan['utca'] : ''; ?>    
+                        <?php echo (($ingatlan['hazszam_megjelenites'] == 1) && ($ingatlan['hazszam'] !== '')) ? '&nbsp;' . $ingatlan['hazszam'] . '.' : ''; ?>    
                         </h5>
 
                         <div style="padding: 10px 0px;">
@@ -78,7 +81,6 @@ use System\Libs\Language as Lang;
                                 <div class="icon">
                                     <i class="fa fa-building"></i>
                                 </div>
-                                <?php $irasjel = (LANG == 'hu') ? '.' : 'th'; ?>
                                 <span class="title"><?php echo $ingatlan['emelet_leiras_' . LANG]; ?></span>
                             </div>
                         </div>

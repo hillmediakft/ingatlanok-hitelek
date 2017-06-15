@@ -1192,6 +1192,7 @@ function galleryInit() {
 
 //initBannerMap1
 var map;
+var circle_size;
 function initBannerMap1() {
     if (!document.getElementById('map-banner-canvas'))
         return false;
@@ -1207,6 +1208,8 @@ function initBannerMap1() {
         };
 
         map = new google.maps.Map(document.getElementById('map-banner-canvas'), mapOptions);
+        // kör átmérője
+        circle_size = Number( $("#map_circle_size_div").attr('data-mapsize') );
 
         for (var i in locations) {
 
@@ -1222,7 +1225,7 @@ function initBannerMap1() {
             var circle = new google.maps.Circle({
                 map: map,
                 center: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                radius: 450,
+                radius: circle_size,
                 strokeColor: "#F0CA5C",
                 fillColor: "#F0CA5C"
             });
