@@ -212,7 +212,7 @@ use System\Libs\Language as Lang;
                                     </tr>
                                     <tr> 
                                         <td>Épület szintjei:</td>
-                                        <td><?php echo (isset($property_data['epulet_szintjei'])) ? $property_data['emelet_leiras_hu'] : 'n.a.'; ?>
+                                        <td><?php echo (isset($property_data['epulet_szintjei'])) ? $property_data['epulet_szintjei_leiras_hu'] : 'n.a.'; ?>
                                         </td>
                                     </tr>
 

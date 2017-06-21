@@ -196,7 +196,8 @@ use System\Libs\Language as Lang;
                         <div class="col-sm-12">
                             <form style="display: inline;" id="adatlap_nyomtatas_form" method="POST" action="adatlap/<?php echo $ingatlan['id']; ?>">
                                 <a style="text-align: center; width: 100%;" id="adatlap_nyomtatas" class="simple-btn sm-button outlined red"><i class="fa fa-print"></i> <?php echo Lang::get('adatlap_nyomtatas_gomb'); ?></a>
-                                <!-- <button id="adatlap_nyomtatas" type="submit" class="send-btn"><i class="fa fa-print"></i> <?php echo Lang::get('adatlap_nyomtatas_gomb'); ?></button> -->
+                                <input type="hidden" name="agent_id" value="<?php echo $agent['id']; ?>"/>
+                                <!-- <button id="adatlap_nyomtatas" type="submit" class="send-btn"><i class="fa fa-print"></i> <?php //echo Lang::get('adatlap_nyomtatas_gomb'); ?></button> -->
                             </form>
                         </div>
                         <div class="col-sm-12">

@@ -158,6 +158,20 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_where('deleted', '=', 0);
 
         $result = $this->query->select();
+        
+        // épület szintek lekérdezése
+        if (!empty($result)) {
+            $this->query->set_columns(array(
+                'ingatlan_emelet.*'
+            ));
+            $this->query->set_join('left', 'ingatlan_emelet', 'ingatlanok.epulet_szintjei', '=', 'ingatlan_emelet.emelet_id');
+            $this->query->set_where('ingatlanok.id', '=', $id);
+            //$this->query->set_where('status', '=', 1);
+            $epulet_szintek = $this->query->select();
+            $result[0]['epulet_szintjei_leiras_hu'] = $epulet_szintek[0]['emelet_leiras_hu'];
+            $result[0]['epulet_szintjei_leiras_en'] = $epulet_szintek[0]['emelet_leiras_en'];
+        }
+
         return (isset($result[0])) ? $result[0] : $result;
     }
 

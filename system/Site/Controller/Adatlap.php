@@ -11,7 +11,6 @@ class Adatlap extends SiteController {
     {
         parent::__construct();
         $this->loadModel('ingatlanok_model');
-        
     }
     
     /**
@@ -25,7 +24,7 @@ class Adatlap extends SiteController {
         $id = (int)$id;
         $data = $this->addGlobalData();
 
-        
+        $agent_id = $this->request->get_post('agent_id', 'integer');
         $ingatlan = $this->ingatlanok_model->getProperty($id);
 
         $photos = json_decode($ingatlan['kepek']);
@@ -55,12 +54,6 @@ class Adatlap extends SiteController {
             $lift = 'nincs';
         } else {
             $lift = 'van';
-        }
-
-        if ($ingatlan['ext_butor'] == 0) {
-            $butor = '+';
-        } else {
-            $butor = '-';
         }
 
         if ($ingatlan['allapot']) {
@@ -99,51 +92,100 @@ class Adatlap extends SiteController {
             $kert = 'n.a.';
         }
 
+        if ($ingatlan['ext_butor'] == 0) {
+            $butor = '+';
+        } else {
+            $butor = '-';
+        }
+
         $extrak = '';
-
-        if ($ingatlan['erkely']) {
-            $extrak .= 'erkély, ';
-        }
-
-        if ($ingatlan['terasz']) {
-            $extrak .= 'terasz, ';
-        }
 
         if ($ingatlan['ext_medence']) {
             $extrak .= 'medence, ';
         }
-
         if ($ingatlan['ext_szauna']) {
             $extrak .= 'szauna, ';
         }
-
         if ($ingatlan['ext_jacuzzi']) {
             $extrak .= 'jacuzzi, ';
         }
-
         if ($ingatlan['ext_kandallo']) {
             $extrak .= 'kandalló, ';
         }
-
         if ($ingatlan['ext_riaszto']) {
             $extrak .= 'riasztó, ';
         }
-
         if ($ingatlan['ext_klima']) {
             $extrak .= 'klíma, ';
         }
-
         if ($ingatlan['ext_ontozorendszer']) {
             $extrak .= 'öntözőrendszer, ';
         }
-
+        if ($ingatlan['ext_automata_kapu']) {
+            $extrak .= 'automata kapu, ';
+        }
         if ($ingatlan['ext_elektromos_redony']) {
             $extrak .= 'elektromos redőny, ';
         }
-
         if ($ingatlan['ext_konditerem']) {
             $extrak .= 'konditerem, ';
         }
+        if ($ingatlan['ext_galeria']) {
+            $extrak .= 'galéria, ';
+        }
+        if ($ingatlan['ext_furdoben_kad']) {
+            $extrak .= 'fürdőben kád, ';
+        }
+        if ($ingatlan['ext_furdoben_zuhany']) {
+            $extrak .= 'fürdőben zuhany, ';
+        }
+        if ($ingatlan['ext_masszazskad']) {
+            $extrak .= 'masszázskád, ';
+        }
+        if ($ingatlan['ext_amerikaikonyha']) {
+            $extrak .= 'amerikai konyha, ';
+        }
+        if ($ingatlan['ext_konyhaablak']) {
+            $extrak .= 'konyhaablak, ';
+        }        
+        if ($ingatlan['ext_kamra']) {
+            $extrak .= 'kamra, ';
+        }
+        if ($ingatlan['ext_pince']) {
+            $extrak .= 'pince, ';
+        }
+        if ($ingatlan['ext_panorama']) {
+            $extrak .= 'panoráma, ';
+        }
+        if ($ingatlan['ext_biztonsagi_ajto']) {
+            $extrak .= 'biztonsági ajtó, ';
+        }
+        if ($ingatlan['ext_redony']) {
+            $extrak .= 'redőny, ';
+        }
+        if ($ingatlan['ext_racs']) {
+            $extrak .= 'rács, ';
+        }
+        if ($ingatlan['ext_video_kaputelefon']) {
+            $extrak .= 'videó kaputelefon, ';
+        }
+        if ($ingatlan['ext_porta_szolgalat']) {
+            $extrak .= 'porta szolgálat, ';
+        }
+        if ($ingatlan['ext_beepitett_szekreny']) {
+            $extrak .= 'beépített szekrény, ';
+        }
+        if ($ingatlan['ext_tarolo_helyiseg']) {
+            $extrak .= 'tároló helyiség, ';
+        }
+
+        if ($ingatlan['erkely']) {
+            $extrak .= 'erkély, ';
+        }
+        if ($ingatlan['terasz']) {
+            $extrak .= 'terasz, ';
+        }
+
 
         $extrak = rtrim($extrak, ", ");
         
@@ -153,6 +195,17 @@ class Adatlap extends SiteController {
             $price = number_format($ingatlan['ar_kiado']) . ' Ft / ';
         }
 
+        if (!is_null($ingatlan['belmagassag'])) {
+            $belmagassag = $ingatlan['belmagassag'] . ' cm';
+        } else {
+            $belmagassag = 'n.a.';
+        }
+
+        if (!is_null($ingatlan['kozos_koltseg'])) {
+            $kozos_koltseg = $ingatlan['kozos_koltseg'] . ' Ft';
+        } else {
+            $kozos_koltseg = 'n.a.';
+        }
 
         //      define('FPDF_FONTPATH','/home/www/font');
 
@@ -193,7 +246,7 @@ class Adatlap extends SiteController {
         $pdf->Ln(5);
 
         $pdf->SetFont('arialb', '', 11);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun('Ref. szám: ' . $ingatlan['ref_num']), 0, 1, 'L', 0);
+        //$pdf->Cell(0, 5, $this->utf8_to_latin2_hun('Ref. szám: ' . $ingatlan['ref_num']), 0, 1, 'L', 0);
         $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($elado) . ' | ' . $this->utf8_to_latin2_hun($ingatlan['kat_nev_' . LANG]) . ' | ' . $price, 0, 1, 'L', 0);
         $pdf->Ln(2);
         $pdf->SetFont('arialb', '', 13);
@@ -230,18 +283,26 @@ class Adatlap extends SiteController {
         $pdf->Cell(30, 5, utf8_decode('Állapot:'), 0, 0, 'L', 0);
         $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['all_leiras_' . LANG]), 0, 1, 'L', 0);
 
+        $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Állapot kívűl:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['haz_allapot_kivul_leiras_' . LANG]), 0, 1, 'L', 0);
+
         $pdf->Cell(30, 5, utf8_decode('Terület:'), 0, 0, 'L', 0);
         $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['alapterulet']) . ' nm', 0, 1, 'L', 0);
 
+        $pdf->Cell(30, 5, utf8_decode('Belmagasság:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $belmagassag, 0, 1, 'L', 0);
+
+        $pdf->Cell(30, 5, utf8_decode('Közös költség:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $kozos_koltseg, 0, 1, 'L', 0);
 
 
         $pdf->Cell(30, 5, utf8_decode('Szobák száma:'), 0, 0, 'L', 0);
         $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['szobaszam']), 0, 1, 'L', 0);
         if (isset($ingatlan['emelet'])) {
             $pdf->Cell(30, 5, utf8_decode('Emelet:'), 0, 0, 'L', 0);
-            $pdf->Cell(0, 5, $ingatlan['emelet'], 0, 1, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['emelet_leiras_' . LANG]), 0, 1, 'L', 0);
             $pdf->Cell(30, 5, utf8_decode('Épület szintjei:'), 0, 0, 'L', 0);
-            $pdf->Cell(0, 5, $ingatlan['epulet_szintjei'], 0, 1, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['epulet_szintjei_leiras_' . LANG]), 0, 1, 'L', 0);
         }
 
         if (isset($ingatlan['ar_elado'])) {
@@ -297,8 +358,7 @@ class Adatlap extends SiteController {
 
 
 
-
-        $agent = $this->ingatlanok_model->get_agent($ingatlan['ref_id']);
+        $agent = $this->ingatlanok_model->get_agent($agent_id);
 
         $pdf->Ln(5);
 

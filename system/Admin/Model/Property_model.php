@@ -156,11 +156,12 @@ class Property_model extends AdminModel {
 // $this->query->debug(true);
         $this->query->set_columns(array(
             'ingatlanok.*',
-            'ingatlan_kategoria.kat_nev_hu',
+
             'district_list.district_name',
             'city_list.city_name',
             'county_list.county_name',
 
+            'ingatlan_kategoria.kat_nev_hu',
             'ingatlan_allapot.all_leiras_hu',
             'ingatlan_emelet.emelet_leiras_hu',
             'ingatlan_energetika.energetika_leiras_hu',
@@ -183,7 +184,6 @@ class Property_model extends AdminModel {
         $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
         $this->query->set_join('left', 'county_list', 'ingatlanok.megye', '=', 'county_list.county_id');
         $this->query->set_join('left', 'district_list', 'ingatlanok.kerulet', '=', 'district_list.district_id');
-        
         $this->query->set_join('left', 'ingatlan_allapot', 'ingatlanok.allapot', '=', 'ingatlan_allapot.all_id');
         $this->query->set_join('left', 'ingatlan_emelet', 'ingatlanok.emelet', '=', 'ingatlan_emelet.emelet_id');
         $this->query->set_join('left', 'ingatlan_energetika', 'ingatlanok.energetika', '=', 'ingatlan_energetika.energetika_id');
@@ -205,6 +205,20 @@ class Property_model extends AdminModel {
 
         //$this->query->set_where('status', '=', 1);
         $result = $this->query->select();
+
+        // épület szintek lekérdezése
+        if (!empty($result)) {
+            $this->query->set_columns(array(
+                'ingatlan_emelet.*'
+            ));
+            $this->query->set_join('left', 'ingatlan_emelet', 'ingatlanok.epulet_szintjei', '=', 'ingatlan_emelet.emelet_id');
+            $this->query->set_where('ingatlanok.id', '=', $id);
+            //$this->query->set_where('status', '=', 1);
+            $epulet_szintek = $this->query->select();
+            $result[0]['epulet_szintjei_leiras_hu'] = $epulet_szintek[0]['emelet_leiras_hu'];
+            $result[0]['epulet_szintjei_leiras_en'] = $epulet_szintek[0]['emelet_leiras_en'];
+        }
+
         return (empty($result)) ? $result : $result[0];
     }
 
