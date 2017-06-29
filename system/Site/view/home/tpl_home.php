@@ -13,8 +13,12 @@ use System\Libs\Language as Lang;
 <!-- KERESÉS FORM MOBIL -->
 <div class="main-filter hidden-sm hidden-md hidden-lg">
     <?php include($this->path('tpl_home_filter_mobile')); ?>
-</div>           
-
+</div> 
+<div class="nav-block">
+    <div class="col-sm-12">
+    <a style="float: none;" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.kereses.index.' . LANG); ?>" class="submit-nav hidden-sm hidden-md hidden-lg text-center"><i class="fa fa-search"></i> <?php echo Lang::get('menu_kereses'); ?></a>
+    </div>
+</div>
 
 
 <div id="content" class="container-fluid">
@@ -89,20 +93,19 @@ use System\Libs\Language as Lang;
                                 $photo_array = json_decode($value['kepek']);
                                 ?>
                                 <li>
-                                    
-                                  <a class="item-anchor" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' .  $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
-
                                     <div class="item">
                                         <div class="preview">
                                             <?php $this->html_helper->showLowerPriceIcon($value); ?>
-                                                
-                                                <!-- <a href="<?php //echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' .  $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"></a> -->
 
                                             <?php if ($value['kepek']) { ?>
+                                                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
                                                     <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                                </a>
                                             <?php } ?>
                                             <?php if ($value['kepek'] == null) { ?>
+                                                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
                                                     <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                                </a>
                                             <?php } ?>
                                             <?php $this->html_helper->showHeartIcon($value); ?>
                                             <span class="price-box">
@@ -120,27 +123,19 @@ use System\Libs\Language as Lang;
                                                 <span class="value"><?php echo $value['alapterulet']; ?> m<sup>2</sup></span>
                                             </div>
                                         </div>
-                                        
                                         <div class="item-entry">
                                             <span class="item-title">
-                                                <!-- <a href="<?php //echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' .  $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"><?php //echo $value['ingatlan_nev_' . LANG]; ?></a> -->
-                                                <?php echo $value['ingatlan_nev_' . LANG]; ?>
+                                                <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"><?php echo $value['ingatlan_nev_' . LANG]; ?></a>
                                             </span>
-                                            <p>
-                                            <?php
+                                            <p><?php
                                                 echo $value['city_name'];
                                                 echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
-                                                echo (($value['utca_megjelenites'] == 1) && (!is_null($value['utca']))) ? '<br>' . $value['utca'] : '';
-                                            ?>
-                                            </p>
+                                                ?></p>
 
                                             <div class="item-info">
                                             </div>
                                         </div>
                                     </div>
-
-                                  </a>
-
                                 </li>
                             <?php } ?>
 
