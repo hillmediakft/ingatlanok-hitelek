@@ -863,6 +863,7 @@ toastr['error'](data.response[0]);
      */  
     var mapGeocoding = function () {
 
+
         var map = new GMaps({
             div: '#gmap_geocoding',
             lat: 47.50,
@@ -990,6 +991,7 @@ toastr['error'](data.response[0]);
             enableEpuletSzintjei();
             setEpuletSzintjei();
             ckeditorInit();
+            mapGeocoding();
             showMap();
             streetAutocomplete();
             checkErkely();
