@@ -26,7 +26,7 @@
                                         <span class="contact-message"><?php echo Lang::get('kapcsolat_email_megjegyzes'); ?></span>
                                     </div>
                                 </div>
-                                <form action="<?php echo (LANG != 'hu') ? LANG . '/' : ''; ?>sendemail/init/contact" method="POST" id="contact-form-kapcsolat">
+                                <form action="<?php echo (LANG != 'hu') ? LANG . '/' : ''; ?>sendemail/init/allas" method="POST" id="contact-form-kapcsolat">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <input type="text" name="name" class="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?> *" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')">
@@ -38,9 +38,6 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <input type="tel" name="phone" class="phone" placeholder="<?php echo Lang::get('kapcsolat_email_telefon'); ?>">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="text" name="subject" class="email" placeholder="<?php echo Lang::get('kapcsolat_email_targy'); ?>">
                                         </div>
                                     </div>
                                     <input type="text" name="mezes_bodon" id="mezes_bodon">
