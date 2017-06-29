@@ -47,6 +47,22 @@ class SendEmail extends SiteController {
                     $this->from_email = $this->request->get_post('email');
                     $this->from_name = $this->request->get_post('name');
                 }
+                if ($template == "allas") {
+                    $this->to_email = $data['settings']['email'];
+                    $this->to_name = $data['settings']['ceg'];
+                    $this->subject = 'Állás érdeklődés';
+                    $this->template = $template;
+                    $this->from_email = $this->request->get_post('email');
+                    $this->from_name = $this->request->get_post('name');
+                }   
+                if ($template == "mennyit_er_az_ingatlanom") {
+                    $this->to_email = $data['settings']['email'];
+                    $this->to_name = $data['settings']['ceg'];
+                    $this->subject = 'Ingatlanbecslés';
+                    $this->template = $template;
+                    $this->from_email = $this->request->get_post('email');
+                    $this->from_name = $this->request->get_post('name');
+                }                
                 elseif ($template == "agent") {
                     $this->to_email = $this->request->get_post('agent_email');
                     $this->to_name = $this->request->get_post('agent_name');
