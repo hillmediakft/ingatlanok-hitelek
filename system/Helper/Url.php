@@ -1,11 +1,15 @@
-<?php 
+<?php
+
 namespace System\Helper;
+
+use System\Libs\DI;
+use System\Libs\Config;
+
 /**
-* Url és link helper
-*/
-class Url
-{
-	
+ * Url és link helper
+ */
+class Url {
+
     /**
      * Egy kép elérési útvonalából generál egy elérési útvonalat a bélyegképéhez
      * Minta: path/to/file/filename.jpg -> path/to/file/filename_thumb.jpg
@@ -15,8 +19,7 @@ class Url
      * @param   string  $suffix (fájl nevének utótagja)
      * @return  string  a bélyegkép elérési útvonala
      */
-    public function thumbPath($path, $dir = false, $suffix = 'thumb')
-    {
+    public function thumbPath($path, $dir = false, $suffix = 'thumb') {
         $path_parts = pathinfo($path);
         $dirname = (isset($path_parts['dirname'])) ? $path_parts['dirname'] : '';
         $filename = (isset($path_parts['filename'])) ? $path_parts['filename'] : '';
@@ -45,8 +48,7 @@ class Url
      * @param   string  $uri  a file elérési útvonala pl.: valami.hu/public/site_assets/css/style.css
      * @return  string  a fájl verzióval ellátott elérési útvonala
      */
-    public function autoVersion($uri)
-    {
+    public function autoVersion($uri) {
         if (substr($uri, 0, 1) == "/") {
             // relatív URI
             $fname = $_SERVER["DOCUMENT_ROOT"] . $uri;
@@ -67,8 +69,7 @@ class Url
      * @param string    $order_by   mi szerint rendezzen
      * @return string   az új URL rendezés infókkal
      */
-    public function add_order_to_url($order, $order_by)
-    {
+    public function add_order_to_url($order, $order_by) {
 
         if ((isset($_GET['order'])) && $_GET['order'] != '') {
 
@@ -114,22 +115,20 @@ class Url
         }
     }
 
-
     /**
      * URL-ben hozzáad a query stringhez elemeket 
      *
      * @param array     $data 
      * @return string   az új URL
      */
-    public function addToQueryString(array $data)
-    {
+    public function addToQueryString(array $data) {
         $request_uri = urldecode($_SERVER['REQUEST_URI']);
-        $request_uri = str_replace(BASE_PATH,'', trim($request_uri, '/'));
+        $request_uri = str_replace(BASE_PATH, '', trim($request_uri, '/'));
         $uri_parts = parse_url($request_uri);
         $uri_parts['path'] = (isset($uri_parts['path'])) ? $uri_parts['path'] : '';
         $uri_parts['query'] = (isset($uri_parts['query'])) ? $uri_parts['query'] : '';
 
-        if(!empty($uri_parts['query'])){
+        if (!empty($uri_parts['query'])) {
             parse_str($uri_parts['query'], $query_arr);
         } else {
             $query_arr = array();
@@ -143,7 +142,6 @@ class Url
         return $uri_parts['path'] . '?' . http_build_query($query_arr);
     }
 
-
     /**
      * Spamektől védett e-mail linket generál Javascripttel
      *
@@ -152,8 +150,7 @@ class Url
      * @param   mixed   $attributes: attribútumok
      * @return  string
      */
-    public function safe_mailto($email, $title = '', $attributes = '')
-    {
+    public function safe_mailto($email, $title = '', $attributes = '') {
         $title = (string) $title;
 
         if ($title == "") {
@@ -235,6 +232,54 @@ class Url
         $buffer = ob_get_contents();
         ob_end_clean();
         return $buffer;
+    }
+
+    /**
+     * Az adatlap oldalon az előző ingatlan URL-jének generálása
+     * 
+     * @param   int     $id az adatlapon megjelenített ingatlan id-je
+     * @param   array   $talalati_lista a találati listában szereplő ingatlanok tömbje
+     * @param   string  $lang nyelvi kód
+     * @return  string  a link
+     */
+    public function talalatiListaElozo($id, $lang, $talalati_lista) {
+
+        $str_helper = DI::get('str_helper');
+        $arr_helper = DI::get('arr_helper');
+        $request = DI::get('request');
+        $key = $arr_helper->getKeyByFieldValue($talalati_lista, 'id', $id);
+        $previous = $arr_helper->getAdjascentKey($key, $talalati_lista, -1);
+
+        if ($previous != false) {
+            $link = $request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $talalati_lista[$previous]['id'] . '/' . $str_helper->stringToSlug($talalati_lista[$previous]['ingatlan_nev_' . $lang]);
+        } else {
+
+            $link = "javascript:void();";
+        }
+        return $link;
+    }
+
+    /**
+     * Az adatlap oldalon az előző ingatlan URL-jének generálása
+     * 
+     * @param   int     $id az adatlapon megjelenített ingatlan id-je
+     * @param   array   $talalati_lista a találati listában szereplő ingatlanok tömbje
+     * @param   string  $lang nyelvi kód
+     * @return  string  a link
+     */
+    public function talalatiListaKovetkezo($id, $lang, $talalati_lista) {
+
+        $str_helper = DI::get('str_helper');
+        $arr_helper = DI::get('arr_helper');
+        $request = DI::get('request');
+        $key = $arr_helper->getKeyByFieldValue($talalati_lista, 'id', $id);
+        $next = $arr_helper->getAdjascentKey($key, $talalati_lista, +1);
+        if ($next == max(array_keys($talalati_lista))) {
+            $link = "javascript:void();";
+        } else {
+            $link = $request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $talalati_lista[$next]['id'] . '/' . $str_helper->stringToSlug($talalati_lista[$next]['ingatlan_nev_' . $lang]);
+        }
+        return $link;
     }
 
 }

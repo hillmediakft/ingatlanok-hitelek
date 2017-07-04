@@ -31,22 +31,19 @@ use System\Libs\Language as Lang; ?>
                                 <form action="<?php echo (LANG != 'hu') ? LANG . '/' : ''; ?>sendemail/init/mennyit_er_az_ingatlanom" method="POST" id="contact-form-kapcsolat">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <input type="text" name="name" class="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?> *" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')">
+                                            <input type="text" name="name" class="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?>">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="email" name="email" class="email" placeholder="Email *" required oninvalid="this.setCustomValidity('Adjon meg egy email címet!')" oninput="setCustomValidity('')">
+                                            <input type="email" name="email" class="email" placeholder="Email">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <input type="tel" name="phone" class="phone" placeholder="<?php echo Lang::get('kapcsolat_email_telefon'); ?>">
                                         </div>
-                                        <div class="col-sm-6">
-                                            <input type="text" name="subject" class="email" placeholder="<?php echo Lang::get('kapcsolat_email_targy'); ?>">
-                                        </div>
                                     </div>
                                     <input type="text" name="mezes_bodon" id="mezes_bodon">
-                                    <textarea name="message" class="message" placeholder="<?php echo Lang::get('kapcsolat_email_uzenet'); ?> *" required oninvalid="this.setCustomValidity('Töltse ki ezt a mezőt!')" oninput="setCustomValidity('')"></textarea>
+                                    <textarea name="message" class="message" placeholder="<?php echo Lang::get('kapcsolat_email_uzenet'); ?>"></textarea>
                                     <button id="submit-button" class="send-btn"><?php echo Lang::get('kapcsolat_email_kuldes'); ?></button>
                                 </form>
                             </div>

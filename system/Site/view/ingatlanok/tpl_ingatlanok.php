@@ -1,4 +1,5 @@
 <?php
+
 use System\Libs\Config;
 use System\Libs\Language as Lang;
 ?>
@@ -64,191 +65,191 @@ use System\Libs\Language as Lang;
                         <div class="empty-space-30"></div>
                     </div>
                 </div>
-  
-                <?php if ($data['filter_params']['view'] == 'grid') { ?>
-                 <!-- INGATALANOK LISTÁJA GRID -->
-                <div class="objects-block with-sidebar">
-                    <div class="property-list" id="equalheight-property-list">
+
+<?php if ($data['filter_params']['view'] == 'grid') { ?>
+                    <!-- INGATALANOK LISTÁJA GRID -->
+                    <div class="objects-block with-sidebar">
+                        <div class="property-list" id="equalheight-property-list">
+                            <div class="row">
+                                <?php
+                                foreach ($properties as $value) {
+                                    ?>
+
+
+                                    <?php if ($value == 'banner') { ?>
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="item">
+                                                <div class="banner-wrapper">
+                                                    <div class="banner-title">
+                                                        <h3><?php echo Lang::get('ingatlanok_hirdetes_title'); ?></h3>
+                                                    </div>
+                                                    <div class="banner-text">
+                                                        <?php echo Lang::get('ingatlanok_hirdetes_body'); ?>
+                                                    </div>
+                                                    <div>
+                                                        <a href="<?php echo Lang::get('ingatlanok_hirdetes_link'); ?>" class="simple-btn sm-button filled red"><?php echo Lang::get('altalanos_gomb'); ?></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php continue;
+                                    } ?>
+
+                                    <?php
+                                    $photo_array = json_decode($value['kepek']);
+                                    ?>
+                                    <div class="col-lg-4 col-md-6">
+
+                                        <a class="item-anchor" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+
+                                            <div class="item">
+                                                <div class="preview">
+        <?php $this->html_helper->showLowerPriceIcon($value); ?>
+
+                                                    <!-- <a href="<?php //echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"></a>                                         -->
+                                                    <?php if (!is_null($value['kepek'])) { ?>
+                                                        <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                                    <?php } else { ?>
+                                                        <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                                    <?php } ?>
+
+                                                        <?php $this->html_helper->showHeartIcon($value); ?>
+                                                    <span class="price-box">
+        <?php $this->html_helper->showPrice($value); ?>
+                                                    </span>
+                                                </div>
+                                                <div class="item-thumbnail">
+                                                    <div class="single-thumbnail">
+                                                        <span class="value"><?php echo $value['kat_nev_' . LANG]; ?></span>
+                                                    </div>
+                                                    <div class="single-thumbnail">
+
+                                                        <span class="value"><?php echo (!empty($value['szobaszam'])) ? $value['szobaszam'] . ' ' . mb_strtolower(Lang::get('jell_szobaszam'), 'UTF-8') : ''; ?></span>
+                                                    </div>
+                                                    <div class="single-thumbnail">
+                                                        <span class="value"><?php echo $value['alapterulet']; ?> m<sup>2</sup></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="item-entry">
+                                                    <span class="item-title">
+        <?php echo $value['ingatlan_nev_' . LANG]; ?>
+                                                    </span>
+                                                    <p>
+                                                        <?php
+                                                        echo $value['city_name'];
+                                                        echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
+                                                        echo (($value['utca_megjelenites'] == 1) && (!is_null($value['utca']))) ? '<br>' . $value['utca'] : '';
+                                                        ?>
+                                                    </p>
+
+                                                    <div class="item-info">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </a>
+
+                                    </div>
+    <?php } ?>
+                            </div>
+                        </div>
+                    </div>                    
+<?php } else { ?>
+                    <!-- INGATALANOK LISTÁJA LIST -->
+                    <div class="objects-block list-sidebar">    
                         <div class="row">
                             <?php
-                                foreach ($properties as $value) {
-                            ?>
-                            
+                            foreach ($properties as $value) {
+                                ?>
 
-<?php
-if ($value == 'banner') { ?>
-<div class="col-lg-4 col-md-6">
-    <div class="item">
-        <div class="banner-wrapper">
-            <div class="banner-title">
-                <h3><?php echo Lang::get('ingatlanok_hirdetes_title'); ?></h3>
-            </div>
-            <div class="banner-text">
-                <?php echo Lang::get('ingatlanok_hirdetes_body'); ?>
-            </div>
-            <div>
-                <a href="<?php echo Lang::get('ingatlanok_hirdetes_link'); ?>" class="simple-btn sm-button filled red"><?php echo Lang::get('altalanos_gomb'); ?></a>
-            </div>
-        </div>
-    </div>
-</div>
-<?php continue; } ?>
 
-                            <?php     
+
+                                <?php if ($value == 'banner') { ?>
+                                    <div class="col-sm-12">
+                                        <div class="banner-wrapper-list">
+                                            <div class="banner-title">
+                                                <h3><?php echo Lang::get('ingatlanok_hirdetes_title'); ?></h3>
+                                            </div>
+                                            <div class="banner-text">
+                                                <?php echo Lang::get('ingatlanok_hirdetes_body'); ?>
+                                            </div>
+                                            <div>
+                                                <a href="<?php echo Lang::get('ingatlanok_hirdetes_link'); ?>" class="simple-btn sm-button filled red"><?php echo Lang::get('altalanos_gomb'); ?></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php continue;
+                                } ?>
+
+                                <?php
                                 $photo_array = json_decode($value['kepek']);
-                            ?>
-                            <div class="col-lg-4 col-md-6">
-                                
-                              <a class="item-anchor" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+                                ?>
+                                <div class="col-sm-12">
 
-                                <div class="item">
-                                    <div class="preview">
-                                        <?php $this->html_helper->showLowerPriceIcon($value); ?>
+                                    <a class="item-anchor" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
+
+                                        <div class="item">
+                                            <div class="preview">
+        <?php $this->html_helper->showLowerPriceIcon($value); ?>
 
                                             <!-- <a href="<?php //echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"></a>                                         -->
-                                            <?php if (!is_null($value['kepek'])) { ?>
-                                                <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
-                                            <?php } else { ?>
-                                                <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
-                                            <?php } ?>
+                                                <?php if (!is_null($value['kepek'])) { ?>
+                                                    <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+                                                <?php } else { ?>
+                                                    <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
+        <?php } ?>
 
-                                        <?php $this->html_helper->showHeartIcon($value); ?>
-                                        <span class="price-box">
-                                            <?php $this->html_helper->showPrice($value); ?>
-                                        </span>
-                                    </div>
-                                    <div class="item-thumbnail">
-                                        <div class="single-thumbnail">
-                                            <span class="value"><?php echo $value['kat_nev_' . LANG]; ?></span>
+                                            </div>
+                                            <div class="thumbnail-container">
+                                                <div class="item-thumbnail">
+                                                    <div class="single-thumbnail">
+                                                        <span class="value"><?php echo $value['kat_nev_' . LANG]; ?></span>
+                                                    </div>
+                                                    <div class="single-thumbnail">
+                                                        <span class="value"><?php echo $value['szobaszam']; ?> szoba</span>
+                                                    </div>
+                                                    <div class="single-thumbnail">
+                                                        <span class="value"><?php echo $value['alapterulet']; ?> m<sup>2</sup></span>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <span class="price"> 
+        <?php $this->html_helper->showPrice($value); ?>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="item-entry">
+                                                <span class="item-title">
+        <?php echo $value['ingatlan_nev_' . LANG]; ?>
+                                                </span>
+                                                <p class="item-text">
+                                                <p>
+                                                    <?php
+                                                    echo $value['city_name'];
+                                                    echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
+                                                    echo (($value['utca_megjelenites'] == 1) && (!is_null($value['utca']))) ? '<br>' . $value['utca'] : '';
+                                                    ?>
+                                                </p>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="single-thumbnail">
 
-                                            <span class="value"><?php echo (!empty($value['szobaszam'])) ? $value['szobaszam'] . ' ' . mb_strtolower(Lang::get('jell_szobaszam'), 'UTF-8') : ''; ?></span>
-                                        </div>
-                                        <div class="single-thumbnail">
-                                            <span class="value"><?php echo $value['alapterulet']; ?> m<sup>2</sup></span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="item-entry">
-                                        <span class="item-title">
-                                            <?php echo $value['ingatlan_nev_' . LANG]; ?>
-                                        </span>
-                                        <p>
-                                        <?php
-                                            echo $value['city_name'];
-                                            echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
-                                            echo (($value['utca_megjelenites'] == 1) && (!is_null($value['utca']))) ? '<br>' . $value['utca'] : '';
-                                        ?>
-                                        </p>
+                                    </a>
 
-                                        <div class="item-info">
-                                        </div>
-                                    </div>
-                                </div>
-
-                              </a>
-
-                            </div>
-                            <?php } ?>
+                                </div>       
+    <?php } ?>
                         </div>
-                    </div>
-                </div>                    
-                <?php } else { ?>
-                <!-- INGATALANOK LISTÁJA LIST -->
-                <div class="objects-block list-sidebar">    
-                    <div class="row">
-                        <?php
-                        foreach ($properties as $value) {
-                        ?>
-
-
-
-<?php
-if ($value == 'banner') { ?>
-<div class="col-sm-12">
-    <div class="banner-wrapper-list">
-        <div class="banner-title">
-            <h3><?php echo Lang::get('ingatlanok_hirdetes_title'); ?></h3>
-        </div>
-        <div class="banner-text">
-            <?php echo Lang::get('ingatlanok_hirdetes_body'); ?>
-        </div>
-        <div>
-            <a href="<?php echo Lang::get('ingatlanok_hirdetes_link'); ?>" class="simple-btn sm-button filled red"><?php echo Lang::get('altalanos_gomb'); ?></a>
-        </div>
-    </div>
-</div>
-<?php continue; } ?>
-
-                        <?php 
-                            $photo_array = json_decode($value['kepek']);
-                        ?>
-                        <div class="col-sm-12">
-                            
-                          <a class="item-anchor" href="<?php echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>">
-
-                            <div class="item">
-                                <div class="preview">
-                                    <?php $this->html_helper->showLowerPriceIcon($value);?>
-
-                                    <!-- <a href="<?php //echo $this->request->get_uri('site_url') . Config::get('url.ingatlanok.adatlap.' . LANG) . '/' . $value['id'] . '/' . $this->str_helper->stringToSlug($value['ingatlan_nev_' . LANG]); ?>"></a>                                         -->
-                                    <?php if (!is_null($value['kepek'])) { ?>
-                                        <img src="<?php echo $this->url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $photo_array[0], false, 'small'); ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
-                                    <?php } else { ?>
-                                        <img src="<?php echo Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg'; ?>" alt="<?php echo $value['ingatlan_nev_' . LANG]; ?>">
-                                    <?php } ?>
-
-                                </div>
-                                <div class="thumbnail-container">
-                                    <div class="item-thumbnail">
-                                        <div class="single-thumbnail">
-                                            <span class="value"><?php echo $value['kat_nev_' . LANG]; ?></span>
-                                        </div>
-                                        <div class="single-thumbnail">
-                                            <span class="value"><?php echo $value['szobaszam']; ?> szoba</span>
-                                        </div>
-                                        <div class="single-thumbnail">
-                                            <span class="value"><?php echo $value['alapterulet']; ?> m<sup>2</sup></span>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <span class="price"> 
-                                            <?php $this->html_helper->showPrice($value);?>
-                                        </span>
-                                    </div>
-                                </div>
-                                
-                                <div class="item-entry">
-                                    <span class="item-title">
-                                        <?php echo $value['ingatlan_nev_' . LANG]; ?>
-                                    </span>
-                                    <p class="item-text">
-                                        <p>
-                                            <?php
-                                            echo $value['city_name'];
-                                            echo (isset($value['kerulet'])) ? ', ' . $value['kerulet'] . '. ' . Lang::get('adatlap_kerulet') : '';
-                                            echo (($value['utca_megjelenites'] == 1) && (!is_null($value['utca']))) ? '<br>' . $value['utca'] : '';
-                                            ?>
-                                        </p>
-                                    </p>
-                                </div>
-                            </div>
-
-                          </a>
-
-                        </div>       
-                        <?php } ?>
-                    </div>
-                </div>    
-                <?php } ?>
+                    </div>    
+<?php } ?>
 
                 <div class="objects-block width-sidebar">    
                     <!-- LAPOZÓ -->
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="objects-pagination left">
-                                <?php echo $data['pagine_links']; ?>
+<?php echo $data['pagine_links']; ?>
                             </div>
                         </div>
                     </div>
@@ -265,11 +266,11 @@ if ($value == 'banner') { ?>
             <div class="col-md-3 col-sm-4">
                 <aside class="sidebar main-sidebar">
                     <!-- KERESŐ DOBOZ -->
-                    <?php include($this->path('tpl_ingatlanok_filter')); ?>
+<?php include($this->path('tpl_ingatlanok_filter')); ?>
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <!-- <a id="save_search" href="javascript:void(0);" class="simple-btn lg-button outlined red" style="margin-top: 33px;"><?php //echo Lang::get('kereso_kereses_mentese_gomb'); ?></a> -->
+                            <!-- <a id="save_search" href="javascript:void(0);" class="simple-btn lg-button outlined red" style="margin-top: 33px;"><?php //echo Lang::get('kereso_kereses_mentese_gomb');  ?></a> -->
                             <button id="save_search" class="save_search_button"><?php echo Lang::get('kereso_kereses_mentese_gomb'); ?></button>
                         </div>
                     </div>
@@ -279,12 +280,12 @@ if ($value == 'banner') { ?>
                     <?php include($this->path('tpl_modul_hirek')); ?>
 
                     <?php include($this->path('tpl_modul_banner_mennyiterazingatlanom')); ?>
-                    <?php include($this->path('tpl_modul_banner_befektetoknek')); ?>
+<?php include($this->path('tpl_modul_banner_befektetoknek')); ?>
 
                     <!-- BANNER -->
                     <?php include($this->path('tpl_modul_banner_berbeadoknak')); ?>
                     <!-- REFERENSEK DOBOZ -->
-                    <?php //include($this->path('tpl_modul_referenscontact')); ?>
+<?php //include($this->path('tpl_modul_referenscontact'));  ?>
 
                 </aside>        
             </div> <!-- SIDEBAR END -->

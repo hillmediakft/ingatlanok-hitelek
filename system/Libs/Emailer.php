@@ -48,7 +48,7 @@ class Emailer {
     /**
      * Csatolmányok file-nevei
      */
-    private $attachments = array();
+    private $attachment = array();
 
     /**
      * Csatolmányok elérési útja
@@ -81,7 +81,7 @@ class Emailer {
      * @param  string   $template_data
      * @param  string   $template
      */
-    public function __construct($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template, $attachments = array())
+    public function __construct($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template, $attachment = array())
     {
         $this->from_name = $from_name;
         $this->from_email = $from_email;
@@ -90,7 +90,7 @@ class Emailer {
         $this->subject = $subject;
         $this->template = $template;
         $this->template_data = $template_data;
-        $this->attachments = $attachments;
+        $this->attachment = $attachment;
 
         $this->use_smtp = Config::get('email.server.use_smtp', false);
     }
@@ -163,10 +163,10 @@ class Emailer {
         $mail->Subject = $this->subject; // Tárgy megadása
         $mail->isHTML(true); // Set email format to HTML                                  
 
-        if (!empty($this->attachments)) {
-            foreach ($this->attachments as $value) {
-                $mail->addAttachment($this->attachments_path . $value);
-            }
+        if (!empty($this->attachment)) {
+            
+                $mail->addAttachment($this->attachment['tmp_name'], $this->attachment['name']);
+   
         }
 
 // levél tartalom beállítása

@@ -1,4 +1,5 @@
 <?php
+
 namespace System\Site\Controller;
 
 use System\Core\SiteController;
@@ -11,16 +12,14 @@ use System\Libs\Cookie;
 
 class Ingatlanok extends SiteController {
 
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
         $this->loadModel('ingatlanok_model');
     }
 
-    public function index()
-    {
+    public function index() {
         $page_data = $this->ingatlanok_model->getPageData('ingatlanok');
-        
+
         $data = $this->addGlobalData();
         $data['title'] = $page_data['metatitle_' . $this->lang];
         $data['description'] = $page_data['metadescription_' . $this->lang];
@@ -30,26 +29,41 @@ class Ingatlanok extends SiteController {
 // paginátor objektum létrehozása
         $pagine = new Paginator('p', $data['settings']['pagination']);
 // limit-el lekérdezett adatok szűréssel (paraméterek bekerülnek a 'ingatlan_filter' session elembe)
-
 // A LIMIT ÉS AZ OFFSET MÓDOSÍTÁSA A BANNER MIATT
 // a limitbő k ikell vonni egyet, mert az egyik elem a banner lesz
-$limit = ((int)$pagine->get_limit() - 1);
-$offset = $pagine->get_offset();
+        $limit = ((int) $pagine->get_limit() - 1);
+        $offset = $pagine->get_offset();
 // az aktuális oldal szamabol kivonunk 1-et, hogy megkapjuk, hogy mennyi elemmel kell csökkenteni az offset-et, hiszen az ez előtti oldalakon egyel kevesebb elem jelent meg
-$kimaradt_elem = $pagine->getPageId() - 1;
-$offset = ($offset > 0) ? ($offset - $kimaradt_elem) : $offset;
+        $kimaradt_elem = $pagine->getPageId() - 1;
+        $offset = ($offset > 0) ? ($offset - $kimaradt_elem) : $offset;
 
+        $data['properties_all'] = $this->ingatlanok_model->properties_filter_query(100, $offset, $this->request->get_query());
+        if(!empty($data['properties_all'])) {
+        foreach($data['properties_all'] as $key => $value) {
+            $list[] = array(
+                'id' => $value['id'],
+                'ingatlan_nev_' . LANG => $value['ingatlan_nev_' . LANG]); 
+        }
+        } else {
+            $list = array();
+        }
+        Session::set('talalati_lista', $list);
+        Session::set('talalati_lista_url', $this->request->get_uri('current_url'));
 
+        
+  //      Session::seet('ingatlan_pager') = 
+        
         $data['properties'] = $this->ingatlanok_model->properties_filter_query($limit, $offset, $this->request->get_query());
+ 
 // összes elem, ami a szűrési feltételnek megfelel (vagy a tábla összes rekordja, ha nincs szűrés)
         $data['filtered_count'] = $this->ingatlanok_model->properties_filter_count_query();
-        
+
 // meghatározzuk a bannerek nélküli oldalak számát (ennyi banner lesz)
-$banner_number = $pagine->getNumberOfPages($data['filtered_count'], $pagine->get_limit());
+        $banner_number = $pagine->getNumberOfPages($data['filtered_count'], $pagine->get_limit());
         // összes elem megadása a paginátor objektumnak
         // az összes rekord számát növelni kell a bekerülő bannerek számával
         $pagine->set_total($data['filtered_count'] + $banner_number);
-      
+
 // lapozó linkek visszadása (paraméter a path_full)
         $data['pagine_links'] = $pagine->page_links($this->request->get_uri('path_full'));
 
@@ -76,25 +90,25 @@ $banner_number = $pagine->getNumberOfPages($data['filtered_count'], $pagine->get
             if ($value['property'] == 0) {
                 unset($data['agents'][$key]);
             }
-        }        
+        }
         shuffle($data['agents']);
 
 
 
-/* *** BANNER  beszúrunk a tömbbe egy elemet **** */
+        /*         * ** BANNER  beszúrunk a tömbbe egy elemet **** */
 // elemek száma
-$count = count($data['properties']);
-if ($count > 0) {
-    // ha az elemek száma 1, vagy 2, akkor vagy a 2. vagy a 3. elem lesz 
-    if ($count < 3) {
-        array_splice($data['properties'], $count, 0, 'banner');
-    }
-    // ha az elemek száma több mint 3, akkor a 3. elem lesz
-    else {
-        array_splice($data['properties'], 2, 0, 'banner');
-    }
-}
-/* *** BANNER **** */
+        $count = count($data['properties']);
+        if ($count > 0) {
+            // ha az elemek száma 1, vagy 2, akkor vagy a 2. vagy a 3. elem lesz 
+            if ($count < 3) {
+                array_splice($data['properties'], $count, 0, 'banner');
+            }
+            // ha az elemek száma több mint 3, akkor a 3. elem lesz
+            else {
+                array_splice($data['properties'], 2, 0, 'banner');
+            }
+        }
+        /*         * ** BANNER **** */
 
 
 
@@ -116,16 +130,13 @@ if ($count > 0) {
      * Ingatlan adatlap
      * @param integer $id
      */
-    public function adatlap($id)
-    {
-        $id = (int)$id;
+    public function adatlap($id) {
+        $id = (int) $id;
 
         $page_data = $this->ingatlanok_model->getPageData('ingatlanok');
-        
+
         $data = $this->addGlobalData();
-        $data['title'] = $page_data['metatitle_' . $this->lang];
-        $data['description'] = $page_data['metadescription_' . $this->lang];
-        $data['keywords'] = $page_data['metakeywords_' . $this->lang];
+
 
         // ingatlani adatainak lekérdezése
         $data['ingatlan'] = $this->ingatlanok_model->getProperty($id);
@@ -137,10 +148,10 @@ if ($count > 0) {
         if (empty($data['ingatlan'])) {
             $this->response->redirect('ingatlanok/nem-talalhato-az-ingatlan');
         }
-       
+
         // ingatlanhoz tartozó képek
         $data['pictures'] = json_decode($data['ingatlan']['kepek']);
-        
+
         // ha van a query stringben referensre vonatkozó adat
         if ($this->request->has_query('referens')) {
             $agent_id = $this->request->get_query('referens');
@@ -157,10 +168,10 @@ if ($count > 0) {
         // Árváltozás értesítés gomb állapotának beállításához kell (disable/enable)
         if (Auth::isUserLoggedIn()) {
             $user_id = Auth::getUser('id');
-            
+
             $this->loadModel('arvaltozas_model');
 
-            $data['ertesites_arvaltozasrol'] = $this->arvaltozas_model->selectPriceChange((int)$user_id, (int)$data['ingatlan']['id']);
+            $data['ertesites_arvaltozasrol'] = $this->arvaltozas_model->selectPriceChange((int) $user_id, (int) $data['ingatlan']['id']);
         } else {
             $data['ertesites_arvaltozasrol'] = false;
         }
@@ -179,21 +190,29 @@ if ($count > 0) {
         $ar = ($data['ingatlan']['tipus'] == 1) ? $data['ingatlan']['ar_elado'] : $data['ingatlan']['ar_kiado'];
         // hasonló ingatlanok
         $data['hasonlo_ingatlan'] = $this->ingatlanok_model->hasonloIngatlanok($id, $data['ingatlan']['tipus'], $data['ingatlan']['kategoria'], $data['ingatlan']['varos'], $ar);
-		// nemrég megtekintett ingatlanok
-	
+        // nemrég megtekintett ingatlanok
+
         $data['nemreg_megtekintett_ingatlanok'] = $this->nemregMegtekintett();
-		$this->addToNemregMegtekintett($id);
+        $this->addToNemregMegtekintett($id);
         // Megtekintések számának növelése
         $this->ingatlanok_model->increase_no_of_clicks($id);
+
+        $kerulet = ($data['ingatlan']['kerulet']) ? $data['ingatlan']['kerulet'] . ' kerület, ' : '';
+        $tipus = ($data['ingatlan']['tipus'] == 1) ? 'eladó' : 'kiadó' . ', ';
+        $data['title'] = $data['ingatlan']['ingatlan_nev_' . $this->lang] . ', ' . $tipus . ', ' . $data['ingatlan']['city_name'] . ', ' . $kerulet . $data['ingatlan']['kat_nev_' . $this->lang] . ', ' . $data['ingatlan']['ar_elado'] . ' Ft';
+        $data['description'] = $data['ingatlan']['ingatlan_nev_' . $this->lang] . ', ' . $tipus . ', ' . $data['ingatlan']['city_name'] . ', ' . $kerulet . $data['ingatlan']['kat_nev_' . $this->lang] . ', ' . $data['ingatlan']['ar_elado'] . ' Ft';
+        $data['keywords'] = $tipus . ', ' . $data['ingatlan']['city_name'] . ', ' . $kerulet . $data['ingatlan']['kat_nev_' . $this->lang];
 
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'num_helper', 'html_helper'));
 //$this->view->debug(true); 
+        
+        
 
         $view->add_links(array('google-maps-site'));
         $view->add_link('js', SITE_JS . 'pages/kedvencek.js');
         $view->add_link('js', SITE_JS . 'pages/adatlap.js');
-        
+
         $view->render('ingatlanok/tpl_adatlap_v1', $data);
         //$view->render('ingatlanok/tpl_adatlap_v2', $data);
     }
@@ -201,16 +220,13 @@ if ($count > 0) {
     /**
      * Ügynök ingatlanjait jeleníti meg
      */
-    public function ertekesito($title, $id)
-    {
-        $id = (int)$id;
+    public function ertekesito($title, $id) {
+        $id = (int) $id;
 
         $page_data = $this->ingatlanok_model->getPageData('ertekesito');
-        
+
         $data = $this->addGlobalData();
-        $data['title'] = $page_data['metatitle_' . $this->lang];
-        $data['description'] = $page_data['metadescription_' . $this->lang];
-        $data['keywords'] = $page_data['metakeywords_' . $this->lang];
+
 
 
 
@@ -239,6 +255,10 @@ if ($count > 0) {
             $this->response->redirect('error');
         }
 
+        $data['title'] = $data['agent']['first_name'] . ' '  . $data['agent']['last_name'] .  ' ' . $page_data['metatitle_' . $this->lang];
+        $data['description'] = $data['agent']['first_name'] . ' '  . $data['agent']['last_name'] .  ' ' . $page_data['metatitle_' . $this->lang];
+        $data['keywords'] = $data['agent']['first_name'] . ' '  . $data['agent']['last_name'] .  ' ' . $page_data['metatitle_' . $this->lang];
+
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'html_helper'));
         $view->add_link('js', SITE_JS . 'pages/handle_search.js');
@@ -246,12 +266,11 @@ if ($count > 0) {
 //$this->view->debug(true); 
         $view->render('ingatlanok/tpl_ertekesito_ingatlanok', $data);
     }
-    
+
     /**
      * Hozzáad az arvaltozas tablahoz egy új rekordot, ha még nem létezik a megadott user-hez a megadott ingatlan id
      */
-    public function arvaltozasErtesites()
-    {
+    public function arvaltozasErtesites() {
         if ($this->request->is_ajax()) {
 
             if (Auth::isUserLoggedIn()) {
@@ -268,8 +287,7 @@ if ($count > 0) {
                         'status' => 'success',
                         'message' => 'Ön már aktiválta ezt a funkciót.'
                     ));
-                }
-                else {
+                } else {
                     // beírjuk az adatbázisba az új rekordot
                     $this->arvaltozas_model->insertPriceChange($user_id, $property_id);
                 }
@@ -278,7 +296,6 @@ if ($count > 0) {
                     'status' => 'success',
                     'message' => 'Értesítés árváltozásról funkció aktiválva.'
                 ));
-
             }
             // ha nincs bejelentkezve a felhasználó
             else {
@@ -287,14 +304,13 @@ if ($count > 0) {
                     'message' => 'A funkció használatához be kell jelentkeznie.'
                 ));
             }
-
         } else {
             $this->response->redirect('error');
         }
     }
-	
-	public function nemregMegtekintett() {
-	    $id_array = json_decode(Cookie::get('nemreg_megtekintett'));
+
+    public function nemregMegtekintett() {
+        $id_array = json_decode(Cookie::get('nemreg_megtekintett'));
 
         if ($id_array) {
             $result = $this->ingatlanok_model->get_favourite_properties_data($id_array);
@@ -302,36 +318,35 @@ if ($count > 0) {
         } else {
             return array();
         }
-	}
-	
+    }
+
     /**
      * 	hozzáadja az ingatlan id-t a kedvencek cookie-hoz  
      */
     public function addToNemregMegtekintett($id) {
 
-            $result = $this->ingatlanok_model->refresh_nemreg_megtekintett_cookie($id);
+        $result = $this->ingatlanok_model->refresh_nemreg_megtekintett_cookie($id);
+    }
 
-    }	
-	
     public function nem_talalhato_az_ingatlan() {
-        
+
         $page_data = $this->ingatlanok_model->getPageData('error');
-        
+
         $data = $this->addGlobalData();
         $data['title'] = $page_data['metatitle_' . $this->lang];
         $data['description'] = $page_data['metadescription_' . $this->lang];
         $data['keywords'] = $page_data['metakeywords_' . $this->lang];
-        
+
         $view = new View();
         $view->setHelper(array('url_helper'));
-		
+
         //$view->setLazyRender();
 //$this->view->debug(true); 
         $this->response->setHeader('HTTP/1.0', '404 Not Found');
         $this->response->sendHeaders();
         $view->render('error/nem_talalhato_az_ingatlan', $data);
-    }	
-
+    }
 
 }
+
 ?>
