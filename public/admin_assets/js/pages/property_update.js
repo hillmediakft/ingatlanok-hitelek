@@ -198,6 +198,59 @@ var updateProperty = function () {
         });
     };
 
+    /**
+     *	Feltöltött kép törlése gomb
+     */
+    var delete_alaprajz_trigger = function () {
+
+        $("#alaprajz_list li button").on("click", function () {
+            var li_element = $(this).closest('li');
+            var html_id = li_element.attr('id');
+            // kivesszük az id elől az elem_ stringet
+            $sort_id = html_id.replace(/elem_/, '');
+
+            //console.log(html_id);	
+            //console.log('törlendő elem száma: ' + $sort_id);	
+
+            $.ajax({
+                url: "admin/property/file_delete",
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    id: $('#data_update_ajax').attr('data-id'),
+                    sort_id: $sort_id,
+                    type: "alaprajzok" //a file_delete php metódusnak mondja meg, hogy képet, vagy doc-ot kell törölni
+                },
+                beforeSend: function () {
+                    App.blockUI({
+                        boxed: true,
+                        message: 'Feldolgozás...'
+                    });
+                },
+                complete: function () {
+                    App.unblockUI();
+                },
+                success: function (result) {
+                    if (result.status == 'success') {
+                        //töröljük a dom-ból ezt a lista elemet
+                        li_element.remove();
+
+                        //újraindexeljük a listaelemek id-it, hogy a php egyszerűen feldolgozhassa a változtatást
+                        $("#alaprajzok_list li").each(function (index) {
+                            index += 1;
+                            $(this).attr('id', 'elem_' + index);
+                        });
+                    } else {
+                        console.log('Kép törlési hiba a szerveren');
+                    }
+                },
+                error: function (result, status, e) {
+                    console.log(e);
+                }
+            });
+
+        });
+    };
 
     /**
      *	Feltöltött dokumentumok törlése gomb
@@ -274,13 +327,13 @@ var updateProperty = function () {
             rules: {
                 ref_id: {
                     required: true,
-                },                
+                },
                 ref_num: {
                     required: true,
                     number: true,
                     min: 1000,
                     max: 9999
-                },                
+                },
                 kategoria: {
                     required: true
                 },
@@ -314,17 +367,19 @@ var updateProperty = function () {
                 kerulet: {
                     required: true
                 },
-                utca: {
-                    required: true
-                },
+                /*            
+                 utca: {
+                 required: true
+                 }, 
+                 */
                 ingatlan_nev_hu: {
                     required: true
-                },                
-                /*
-                hazszam: {
-                    required: true
                 },
-                */
+                /*
+                 hazszam: {
+                 required: true
+                 },
+                 */
                 alapterulet: {
                     required: true,
                     number: true
@@ -334,7 +389,7 @@ var updateProperty = function () {
                 },
                 belmagassag: {
                     number: true
-                },                               
+                },
                 erkely_terulet: {
                     number: true
                 },
@@ -351,13 +406,13 @@ var updateProperty = function () {
                     email: true
                 },
                 /*
-                tulaj_nev: {
-                    required: true
-                },
-                tulaj_tel: {
-                    required: true
-                },
-                */
+                 tulaj_nev: {
+                 required: true
+                 },
+                 tulaj_tel: {
+                 required: true
+                 },
+                 */
 
             },
 
@@ -365,15 +420,15 @@ var updateProperty = function () {
             errorPlacement: function (error, element) { // render error placement for each input type
                 if (element.parent(".input-group").size() > 0) {
                     error.insertAfter(element.parent(".input-group"));
-                } else if (element.attr("data-error-container")) { 
+                } else if (element.attr("data-error-container")) {
                     error.appendTo(element.attr("data-error-container"));
-                } else if (element.parents('.radio-list').size() > 0) { 
+                } else if (element.parents('.radio-list').size() > 0) {
                     error.appendTo(element.parents('.radio-list').attr("data-error-container"));
-                } else if (element.parents('.radio-inline').size() > 0) { 
+                } else if (element.parents('.radio-inline').size() > 0) {
                     error.appendTo(element.parents('.radio-inline').attr("data-error-container"));
                 } else if (element.parents('.checkbox-list').size() > 0) {
                     error.appendTo(element.parents('.checkbox-list').attr("data-error-container"));
-                } else if (element.parents('.checkbox-inline').size() > 0) { 
+                } else if (element.parents('.checkbox-inline').size() > 0) {
                     error.appendTo(element.parents('.checkbox-inline').attr("data-error-container"));
                 } else {
                     error.insertAfter(element); // for other inputs, just perform default behavior
@@ -388,7 +443,7 @@ var updateProperty = function () {
                 //error1.show();
                 //App.scrollTo(error1, -200);
                 //error1.delay(4000).fadeOut('slow');
-toastr['error'](errors + ' mezőt nem megfelelően töltött ki!');
+                toastr['error'](errors + ' mezőt nem megfelelően töltött ki!');
                 //console.log(event);	
                 //console.log(validator);	
             },
@@ -445,7 +500,7 @@ toastr['error'](errors + ' mezőt nem megfelelően töltött ki!');
      *	(kartik-bootstrap-fileinput)
      */
     var handleFileUpload = function () {
-        //console.log('load_fileupload');
+        // console.log('load_kep upload');
         $("#input-4").fileinput({
             uploadUrl: "admin/property/file_upload_ajax", // server upload action
             uploadAsync: false,
@@ -486,23 +541,23 @@ toastr['error'](errors + ' mezőt nem megfelelően töltött ki!');
          */
 
         $("#input-4").on('filebatchuploadsuccess', function (event, data, previewId, index) {
-        /* 
-            var form2 = $('#upload_files_form');
-            var success2 = $('.alert-success', form2);
-            var success2_span = $('.alert-success > span', form2);
-            var error2 = $('.alert-danger', form2);
-            var error2_span = $('.alert-danger > span', form2);
-        */    
+            /* 
+             var form2 = $('#upload_files_form');
+             var success2 = $('.alert-success', form2);
+             var success2_span = $('.alert-success > span', form2);
+             var error2 = $('.alert-danger', form2);
+             var error2_span = $('.alert-danger > span', form2);
+             */
             var sortable_ul = $("#photo_list");
 
             if (data.response.status == 'success') {
                 //console.log('A feltöltés sikeres!');
-/*
-                success2_span.html('Kép feltöltése sikeres.');
-                success2.show();
-                success2.delay(3000).fadeOut('fast');
-*/
-toastr['success']('Kép feltöltése sikeres.');
+                /*
+                 success2_span.html('Kép feltöltése sikeres.');
+                 success2.show();
+                 success2.delay(3000).fadeOut('fast');
+                 */
+                toastr['success']('Kép feltöltése sikeres.');
 
                 // képek lekérdezése a listás megjelenítéshez
                 $.ajax({
@@ -522,12 +577,12 @@ toastr['success']('Kép feltöltése sikeres.');
                 });
 
             } else {
-/*                
-                error2_span.html(data.response[0]);
-                error2.show();
-                error2.delay(3000).fadeOut('fast');
-*/                
-toastr['error'](data.response[0]);
+                /*                
+                 error2_span.html(data.response[0]);
+                 error2.show();
+                 error2.delay(3000).fadeOut('fast');
+                 */
+                toastr['error'](data.response[0]);
 
             }
         });
@@ -548,6 +603,120 @@ toastr['error'](data.response[0]);
          
          
          $("#input-4").on('filereset', function(event) {
+         console.log("filereset");
+         });
+         */
+
+    }
+
+    /**
+     *	Alaprajz feltöltése
+     *	(kartik-bootstrap-fileinput)
+     */
+    var handleFloorPlanUpload = function () {
+       //  console.log('lalaprajz_upload');
+        $("#input-alaprajz").fileinput({
+            uploadUrl: "admin/property/floor_plan_upload_ajax", // server upload action
+            uploadAsync: false,
+            uploadExtraData: {id: $('#data_update_ajax').attr('data-id')},
+            showCaption: false,
+            showUpload: true,
+            language: "hu",
+            maxFileCount: 20,
+            maxFileSize: 3000,
+            allowedFileExtensions: ["jpg", "jpeg", "gif", "png", "bmp"],
+            allowedPreviewTypes: ['image'],
+            dropZoneEnabled: false
+                    //previewSettings: {image: {width: "auto", height: "90px"}},
+                    //dropZoneTitle: '',
+                    //showPreview: false,
+                    //showUploadedThumbs: true
+                    //allowedFileTypes: ["image", "video"]
+        });
+
+        $("#input-alaprajz").on('fileloaded', function (event, file, previewId, index, reader) {
+            console.log("alaprajz fileloaded");
+            $('.kv-file-upload').hide();
+        });
+        /*
+         
+         $("#input-alaprajz").on('fileimageloaded', function(event, previewId) {
+         console.log("fileimageloaded");
+         
+         });
+         
+         $("#input-alaprajz").on('filebatchuploadsuccess', function(event, data, previewId, index) {
+         //var form = data.form; var files = data.files; var extra = data.extra; var response = data.response; var reader = data.reader;
+         console.log('File batch upload success');
+         });	
+         $("#input-alaprajz").on('fileuploaded', function(event, data, previewId, index) {
+         $('.file-preview-success').remove();
+         });
+         */
+
+        $("#input-alaprajz").on('filebatchuploadsuccess', function (event, data, previewId, index) {
+            /* 
+             var form2 = $('#upload_files_form');
+             var success2 = $('.alert-success', form2);
+             var success2_span = $('.alert-success > span', form2);
+             var error2 = $('.alert-danger', form2);
+             var error2_span = $('.alert-danger > span', form2);
+             */
+            var alaprajzok = $("#alaprajz_list");
+
+            if (data.response.status == 'success') {
+                //console.log('A feltöltés sikeres!');
+                /*
+                 success2_span.html('Kép feltöltése sikeres.');
+                 success2.show();
+                 success2.delay(3000).fadeOut('fast');
+                 */
+                toastr['success']('Alaprajz feltöltése sikeres.');
+
+                // képek lekérdezése a listás megjelenítéshez
+                $.ajax({
+                    url: "admin/property/show_file_list",
+                    type: 'POST',
+                    //dataType: "json",
+                    data: {
+                        id: $('#data_update_ajax').attr('data-id'),
+                        type: 'alaprajzok'
+                    },
+                    success: function (result) {
+                        // html képek lista
+                        alaprajzok.html(result);
+                        //újra el kell indítani ezt a metódust
+                         delete_alaprajz_trigger();
+                    }
+                });
+
+            } else {
+                /*                
+                 error2_span.html(data.response[0]);
+                 error2.show();
+                 error2.delay(3000).fadeOut('fast');
+                 */
+                toastr['error'](data.response[0]);
+
+            }
+        });
+
+        $("#input-alaprajz").on('filebatchuploadcomplete', function (event, files, extra) {
+            //törli a file inputot
+            $('#input-alaprajz').fileinput('clear');
+        });
+        /*		
+         
+         $("#input-alaprajz").on('fileclear', function(event) {
+         console.log("fileclear");
+         });
+         
+         $("#input-alaprajz").on('filecleared', function(event) {
+         console.log("filecleared");
+         });	
+         
+         
+         $("#input-alaprajz").on('filereset', function(event) {
          console.log("filereset");
          });
          */
@@ -603,22 +772,22 @@ toastr['error'](data.response[0]);
         });
 
         $("#input-5").on('filebatchuploadsuccess', function (event, data, previewId, index) {
-/*            
-            var form2 = $('#upload_files_form');
-            var success2 = $('.alert-success', form2);
-            var success2_span = $('.alert-success > span', form2);
-            var error2 = $('.alert-danger', form2);
-            var error2_span = $('.alert-danger > span', form2);
-*/            
+            /*            
+             var form2 = $('#upload_files_form');
+             var success2 = $('.alert-success', form2);
+             var success2_span = $('.alert-success > span', form2);
+             var error2 = $('.alert-danger', form2);
+             var error2_span = $('.alert-danger > span', form2);
+             */
             var $dokumentumok = $("#dokumentumok");
 
             if (data.response.status == 'success') {
-/*
-                success2_span.html('File feltöltése sikeres.');
-                success2.show();
-                success2.delay(3000).fadeOut('fast');
-*/                
-toastr['success']('File feltöltése sikeres.');              
+                /*
+                 success2_span.html('File feltöltése sikeres.');
+                 success2.show();
+                 success2.delay(3000).fadeOut('fast');
+                 */
+                toastr['success']('File feltöltése sikeres.');
 
                 // dokumentumok lekérdezése a listás megjelenítéshez
                 $.ajax({
@@ -638,12 +807,12 @@ toastr['success']('File feltöltése sikeres.');
                 });
 
             } else {
-/*
-                error2_span.html(data.response[0]);
-                error2.show();
-                error2.delay(3000).fadeOut('fast');
-*/                
-toastr['error'](data.response[0]);
+                /*
+                 error2_span.html(data.response[0]);
+                 error2.show();
+                 error2.delay(3000).fadeOut('fast');
+                 */
+                toastr['error'](data.response[0]);
 
             }
         });
@@ -709,6 +878,62 @@ toastr['error'](data.response[0]);
         });
 
     }
+    
+     /**
+     *	Feltöltött alaprajzok sorrendjének módosítása
+     *	Egy elem helyének módosítása után elküldi a kiszolgálónak a módosított sorrendet
+     *	A kiszólgálón módosul a sorrend, és a pozitív válasz után...
+     *	a javascript a megváltoztatott sorrendű html lista elemek id-it "visszaindexeli" - 1,2,3,4 ... sorrendbe
+     */
+    var alaprajzOrder = function () {
+        $("#alaprajz_list").sortable({
+            items: "li",
+            distance: 10,
+            cursor: "move",
+            axis: "y",
+            revert: true,
+            opacity: 0.7,
+            tolerance: "pointer",
+            containment: "parent",
+            update: function (event, ui) {
+                // a sorok id-it felhasználva képez egy tömböt (id_neve[]=2&id_neve[]=1&id_neve[]=3&id_neve[]=4)
+                var $sort_str = $(this).sortable("serialize");
+                //console.log($sort_str);
+                $.ajax({
+                    url: "admin/property/alaprajz_sort",
+                    type: 'POST',
+                    dataType: "json",
+                    data: {
+                        id: $('#data_update_ajax').attr('data-id'),
+                        sort: $sort_str
+                    },
+                    beforeSend: function () {
+                        App.blockUI({
+                            boxed: true,
+                            message: 'Feldolgozás...'
+                        });
+                    },
+                    complete: function () {
+                        App.unblockUI();
+                    },
+                    success: function (result) {
+                        if (result.status == 'success') {
+                            //console.log('sorbarendezés sikeres');
+                            //újraindexeljük a listaelemek id-it, hogy a php egyszerűen feldolgozhassa a változtatást
+                            $("#alaprajz_list li").each(function (index) {
+                                index += 1;
+                                $(this).attr('id', 'elem_' + index);
+                            });
+                        } else {
+                            console.log('sorbarendezési hiba a szerveren');
+                        }
+                    }
+                });
+
+            }
+        });
+
+    }   
 
     /*
      * CKeditor inicializálása
@@ -788,12 +1013,12 @@ toastr['error'](data.response[0]);
 
                 } else {
                     // üzenet doboz megjelenítése
-/*                    
-                    var form1 = $('#upload_data_form');
-                    var error = $('.alert-danger', form1);
-                    var error_span = $('.alert-danger > span', form1);
-                    error_span.html('');
-*/
+                    /*                    
+                     var form1 = $('#upload_data_form');
+                     var error = $('.alert-danger', form1);
+                     var error_span = $('.alert-danger > span', form1);
+                     error_span.html('');
+                     */
 
                     // result tömb (hibaüzenetek) bejárása
                     $.each(result.error_messages, function (index, value) {
@@ -801,10 +1026,10 @@ toastr['error'](data.response[0]);
                         //error_span.append(value + "<br />");
                         toastr['error'](value);
                     });
-/*
-                    error.show();
-                    error.delay(10000).fadeOut('slow');
-*/
+                    /*
+                     error.show();
+                     error.delay(10000).fadeOut('slow');
+                     */
                     console.log('Hiba az adatok adatbáziba írásakor!');
                 }
             },
@@ -860,7 +1085,7 @@ toastr['error'](data.response[0]);
 
     /**
      * Geocoding
-     */  
+     */
     var mapGeocoding = function () {
 
 
@@ -938,39 +1163,39 @@ toastr['error'](data.response[0]);
     };
 
     var arcsokkentes = function () {
-       // az új ár beviteli mezők és e-mail küldés checkbox elrejtése
+        // az új ár beviteli mezők és e-mail küldés checkbox elrejtése
         //$('#arvaltozas').hide();
         //$('#email_kuldes_arvaltozasrol').hide();
-        
-       // az árváltozás aktiválása gombra kattintás után az új ár beviteli mező és e-mail küldés checkbox megjelenítése
-        /*
-        $('#arvaltozas_aktivalas').click(function () {
-            $('#arvaltozas').fadeIn('slow');
-            $('#email_kuldes_arvaltozasrol').fadeIn('slow');
-        })
-        */
 
-       // az új ár beírása után az email küldés checkbox módosítása
-       // ha í beírt érték nem nulla, akkor pipa, egyébként pipa eltávolítása
+        // az árváltozás aktiválása gombra kattintás után az új ár beviteli mező és e-mail küldés checkbox megjelenítése
         /*
-        $("input[name=ar_elado_uj]").change(function () {
-            if ($("input[name=ar_elado_uj]").val() != '0') {
-                $('input[name=email_kuldes_arvaltozasrol]').prop('checked', true).uniform();
-            } else {
-                $('input[name=email_kuldes_arvaltozasrol]').prop('checked', false).uniform();
-            }
-        })
-        */
+         $('#arvaltozas_aktivalas').click(function () {
+         $('#arvaltozas').fadeIn('slow');
+         $('#email_kuldes_arvaltozasrol').fadeIn('slow');
+         })
+         */
 
-       // az árváltozás deaktiválása gombra kattintás után az új ár beviteli mező és e-mail küldés checkbox eltüntetése, új ar_elado_uj mező értékének 0-ra //          // állítása
+        // az új ár beírása után az email küldés checkbox módosítása
+        // ha í beírt érték nem nulla, akkor pipa, egyébként pipa eltávolítása
         /*
-        $('#arvaltozas_deaktivalas').click(function () {
-            $('input[name=email_kuldes_arvaltozasrol]').prop('checked', false).uniform();
-            $('#email_kuldes_arvaltozasrol').fadeOut();
-            $("input[name=ar_elado_uj]").val('0');
-            $('#arvaltozas').fadeOut('slow');
-        })
-        */
+         $("input[name=ar_elado_uj]").change(function () {
+         if ($("input[name=ar_elado_uj]").val() != '0') {
+         $('input[name=email_kuldes_arvaltozasrol]').prop('checked', true).uniform();
+         } else {
+         $('input[name=email_kuldes_arvaltozasrol]').prop('checked', false).uniform();
+         }
+         })
+         */
+
+        // az árváltozás deaktiválása gombra kattintás után az új ár beviteli mező és e-mail küldés checkbox eltüntetése, új ar_elado_uj mező értékének 0-ra //          // állítása
+        /*
+         $('#arvaltozas_deaktivalas').click(function () {
+         $('input[name=email_kuldes_arvaltozasrol]').prop('checked', false).uniform();
+         $('#email_kuldes_arvaltozasrol').fadeOut();
+         $("input[name=ar_elado_uj]").val('0');
+         $('#arvaltozas').fadeOut('slow');
+         })
+         */
     };
 
     return {
@@ -981,10 +1206,13 @@ toastr['error'](data.response[0]);
             locationsInput();
             handleValidation1();
             itemOrder();
+            alaprajzOrder();
             send_form_trigger_update();
             delete_photo_trigger();
+            delete_alaprajz_trigger();
             delete_doc_trigger();
             handleFileUpload();
+            handleFloorPlanUpload();
             handleDocUpload();
             enableDisablePrices();
             enableDistrict();

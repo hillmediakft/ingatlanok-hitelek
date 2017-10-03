@@ -30,6 +30,9 @@
                                     <li>
                                         <a href="admin/report/property" id="export_property"><i class="fa fa-file-excel-o"></i> Export XLS </a>
                                     </li>
+                                     <li>
+                                        <a href="admin/report/remarketing-feed" id="export-remarketing-feed"><i class="fa fa-file-excel-o"></i> Export remarketing</a>
+                                    </li>                                   
                                 </ul>
                             </div>
 

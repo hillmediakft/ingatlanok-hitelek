@@ -160,24 +160,25 @@
     overflow: hidden;
 }
 .ingatlan-info-box .section-title {
-    margin: 10px 0 10px 0;
+    margin: 10px 0 7px 0;
 }
 .ingatlan-info-box h5 {
-    margin: 10px 0 10px 0;
+    margin: 7px 0 5px 0;
+    font-size: 16px;
 }
 .ingatlan-info-box h3.section-title .price {
     float: none;
 }
 .ingatlan-info-box .agent-box {
     display: table;
-    margin: 10px 10px 10px 0;
+    margin: 10px 10px 5px 0;
 }
 
 .ingatlan-info-box .agent-box .agent-image {
     display: table-cell;
 }
 .ingatlan-info-box .agent-box .agent-image img {
-    max-width: 120px;
+    max-width: 85px;
 }
 .ingatlan-info-box .agent-box .agent-details {
     display: table-cell;
@@ -186,7 +187,7 @@
 }
 .ingatlan-info-box .agent-box .agent-details .agent-name {
     display: block;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
 .ingatlan-info-box .agent-box .agent-details .agent-name h6{
     padding-bottom: 5px;
@@ -202,7 +203,7 @@
 }
 .ingatlan-info-box .icon-box .heading {
     display: table;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 }
 
 /* features elemek, amelyek nincsenek az ingatlamban */ 
@@ -659,45 +660,45 @@ footer.footer .bottom-footer .policies {
 }
 
 #show_phone_number {
-margin-top: 10px;
-
+    margin-top: 2px;
+    padding: 3px 10px;
 }
 
 .mb20 {
-margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 
 /* ingatlanok doboz szürke egyész felületén lehet kattintani */
-    .object-slider .carousel .item-anchor {
-        text-decoration: none;
-    }
-    .object-slider .carousel .item-anchor .item-title {
-        color: #000;
-    }
-    /*
-    .object-slider .carousel .item-anchor .item-title:hover {
-        color: #9e2828;
-    }
-    */
-    .object-slider .carousel .item-anchor .item-thumbnail,
-    .object-slider .carousel .item-anchor .item-entry p {
-        color: #808080;
-    }
+.object-slider .carousel .item-anchor {
+    text-decoration: none;
+}
+.object-slider .carousel .item-anchor .item-title {
+    color: #000;
+}
+/*
+.object-slider .carousel .item-anchor .item-title:hover {
+    color: #9e2828;
+}
+*/
+.object-slider .carousel .item-anchor .item-thumbnail,
+.object-slider .carousel .item-anchor .item-entry p {
+    color: #808080;
+}
 
 
-    .objects-block .item-anchor {
-        text-decoration: none;
-    }
-    .objects-block .item-anchor .item-title {
-        color: #000;
-    }
-    /*
-    .objects-block .item-anchor .item-title:hover {
-        color: #9e2828;
-    }
-    */
-    .objects-block .item-anchor .item-thumbnail,
-    .objects-block .item-anchor .item-entry p {
-        color: #808080;
-    }
+.objects-block .item-anchor {
+    text-decoration: none;
+}
+.objects-block .item-anchor .item-title {
+    color: #000;
+}
+/*
+.objects-block .item-anchor .item-title:hover {
+    color: #9e2828;
+}
+*/
+.objects-block .item-anchor .item-thumbnail,
+.objects-block .item-anchor .item-entry p {
+    color: #808080;
+}

@@ -151,6 +151,8 @@ class Ingatlanok extends SiteController {
 
         // ingatlanhoz tartozó képek
         $data['pictures'] = json_decode($data['ingatlan']['kepek']);
+        $data['floor_plans'] = json_decode($data['ingatlan']['alaprajzok']);
+
 
         // ha van a query stringben referensre vonatkozó adat
         if ($this->request->has_query('referens')) {

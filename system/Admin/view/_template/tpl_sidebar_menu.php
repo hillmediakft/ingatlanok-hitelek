@@ -58,6 +58,14 @@ use System\Libs\Cookie;
                 </li>
             </ul>
         </li>
+        
+        <!-- ELKÜLDÖTT INGATLAN AJÁNLÁSOK -->
+        <li class="nav-item <?php $this->menu_active('ingatlan_ajanlasok'); ?> ">
+            <a href="admin/ajanlasok" class="nav-link ">
+                <i class="fa fa-envelope"></i>
+                <span class="title">Elküldött ajánlások</span>
+            </a>
+        </li>    
 
         <!-- BLOG -->
         <li class="nav-item <?php $this->menu_active('blog'); ?> ">

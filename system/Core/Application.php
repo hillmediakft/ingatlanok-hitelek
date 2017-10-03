@@ -1,4 +1,5 @@
 <?php
+
 namespace System\Core;
 
 use System\Libs\DI;
@@ -70,21 +71,21 @@ class Application {
             $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
             $router->post('/kedvencek/delete_property_from_cookie', 'kedvencek@delete_property_from_cookie'); // ajax
             $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek');
-            
+
             $router->post('/ingatlanok/arvaltozasertesites', 'ingatlanok@arvaltozasErtesites'); // ajax
-			
-			$router->post('/getphonenumber', 'GetPhoneNumber@index'); // ajax
+
+            $router->post('/getphonenumber', 'GetPhoneNumber@index'); // ajax
 
             $router->post('/user/login', 'user@login'); // ajax
             $router->get('/felhasznalo/kijelentkezes', 'user@logout');
             $router->post('/user/register', 'user@register'); // ajax
             $router->post('/user/forgottpw', 'user@forgottpw'); // ajax
             $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
-            
+
             $router->post('/sendemail/init/:title', 'SendEmail@init', array('type'));
-            
-        // landing page    
-        $router->get('/marketing/:title', 'LandingPage@index', array('title'));
+
+            // landing page    
+            $router->get('/marketing/:title', 'LandingPage@index', array('title'));
 
             //mennyit-er-az-ingatlanom
             $router->get('/mennyit-er-az-ingatlanom', 'MennyitErAzIngatlanom@index');
@@ -96,8 +97,8 @@ class Application {
             $router->post('/kereses/savesearch', 'Kereses@saveSearch');
             $router->post('/adatlap/:id', 'Adatlap@index');
 
-			$router->get('ingatlanok/nem-talalhato-az-ingatlan', 'ingatlanok@nem_talalhato_az_ingatlan');
-			
+            $router->get('ingatlanok/nem-talalhato-az-ingatlan', 'ingatlanok@nem_talalhato_az_ingatlan');
+
             $router->set404('error@index');
 
 
@@ -106,8 +107,8 @@ class Application {
             $router->mount('/en', function() use ($router) {
                 $router->get('/', 'home@index');
                 $router->get('/real-estates', 'ingatlanok@index');
-                $router->get('/real-estates/data-sheet/:id/:title', 'ingatlanok@adatlap');                
-                $router->get('/real-estates/agent/:title/:id', 'ingatlanok@ertekesito');                
+                $router->get('/real-estates/data-sheet/:id/:title', 'ingatlanok@adatlap');
+                $router->get('/real-estates/agent/:title/:id', 'ingatlanok@ertekesito');
                 $router->get('/agents', 'ingatlanErtekesitoink@index');
                 $router->get('/about-us', 'rolunk@index');
                 $router->get('/contact', 'kapcsolat@index');
@@ -117,18 +118,18 @@ class Application {
                 $router->get('/news/category/:id', 'hirek@kategoria', array('id'));
                 $router->get('/news/:title/:id', 'hirek@reszletek', array('title', 'id'));
                 $router->get('/search', 'kereses@index');
-                
+
                 $router->get('/profile', 'Profile@index');
                 $router->post('/profile/deletefollowed', 'Profile@deleteFollowed'); // ajax
                 $router->post('/profile/change_userdata', 'Profile@changeUserdata'); // ajax
                 $router->post('/profile/change_password', 'Profile@changePassword'); // ajax                
                 $router->post('/profile/deletesavedsearch', 'Profile@deleteSavedSearch'); // ajax                
-                    
+
                 $router->get('/favourites', 'kedvencek@index');
                 $router->post('/kedvencek/add_property_to_cookie', 'kedvencek@add_property_to_cookie'); // ajax
                 $router->post('/kedvencek/delete_property_from_cookie', 'kedvencek@delete_property_from_cookie'); // ajax
                 $router->post('/ajaxrequest/kedvencek', 'AjaxRequest@kedvencek'); // ajax
-                
+
                 $router->post('/ingatlanok/arvaltozasertesites', 'Ingatlanok@arvaltozasErtesites'); // ajax
 
                 $router->get('/user/logout', 'user@logout');
@@ -138,24 +139,20 @@ class Application {
                 $router->get('/felhasznalo/ellenorzes/:id/:hash', 'user@verify', array('id', 'activation_hash')); // ajax
 
                 $router->post('/sendemail/init/:title', 'SendEmail@init', array('type')); //ajax
-
-            // landing page    
-            $router->get('/marketing/:title', 'LandingPage@index', array('title'));
+                // landing page    
+                $router->get('/marketing/:title', 'LandingPage@index', array('title'));
 
                 //mennyit-er-az-ingatlanom
-                $router->get('/my-property-is-worth', 'MennyitErAzIngatlanom@index');
+                $router->get('/how-much-is-my-property-worth', 'MennyitErAzIngatlanom@index');
                 // befektetoknek
                 $router->get('/investors', 'Befektetoknek@index');
                 // berbeadoknak
-                $router->get('/boat-owners', 'Berbeadoknak@index');
+                $router->get('/how-to-let-out', 'Berbeadoknak@index');
                 // keresés elmentése - AJAX
                 $router->post('/kereses/savesearch', 'Kereses@saveSearch');
 
-				$router->get('error/no-property-to-show', 'error@nem_talalhato_az_ingatlan');
-
+                $router->get('error/no-property-to-show', 'error@nem_talalhato_az_ingatlan');
             });
-
-            
         }
         /*         * ************************************************** */
         /*         * **************** ADMIN *************************** */
@@ -163,7 +160,7 @@ class Application {
 
             $router->mount('/admin', function() use ($router) {
 
-                $router->before('GET|POST', '/?((?!login).)*', function() {
+                $router->before('GET|POST', '/?((?!login|cron).)*', function() {
                     if (!Auth::check()) {
                         $response = DI::get('response');
                         $response->redirect('admin/login');
@@ -185,7 +182,6 @@ class Application {
                 // content	
                 //$router->get('/content', 'content@index');
                 //$router->match('GET|POST', '/content/edit/:id', 'content@edit', array('id'));
-
                 // user	
                 $router->get('/user', 'user@index');
                 $router->match('GET|POST', '/user/insert', 'user@insert');
@@ -229,6 +225,10 @@ class Application {
 
                 // file manager	
                 $router->get('/filemanager', 'FileManager@index');
+
+                // elküldött ingatlan ajánlások	
+                $router->get('/ajanlasok', 'Ingatlan_ajanlasok@index');
+                $router->post('/ajanlasok/showAjanlas', 'Ingatlan_ajanlasok@showAjanlas');
 
                 // settings	
                 $router->match('GET|POST', '/settings', 'settings@index');
@@ -296,50 +296,56 @@ class Application {
                 $router->get('/property/update/:id', 'property@update', array('id'));
                 $router->get('/property/details/:id', 'property@details', array('id'));
                 $router->post('/property/getpropertylist', 'property@getPropertyList');
-                
-                    // nem végleges törlés
-                    $router->post('/property/softdelete', 'property@softdelete');
-                    // végleges törlés
-                    $router->post('/property/delete', 'property@delete');
-                    // törölt elemek oldal
-                    $router->get('/property/deleted_records', 'property@deleted_records');
-                    // soft deleted rekordok "visszaállítása" 
-                    $router->post('/property/cancel_delete', 'property@cancel_delete');
-                
+
+                // nem végleges törlés
+                $router->post('/property/softdelete', 'property@softdelete');
+                // végleges törlés
+                $router->post('/property/delete', 'property@delete');
+                // törölt elemek oldal
+                $router->get('/property/deleted_records', 'property@deleted_records');
+                // soft deleted rekordok "visszaállítása" 
+                $router->post('/property/cancel_delete', 'property@cancel_delete');
+
                 $router->post('/property/county_city_list', 'property@county_city_list');
                 $router->post('/property/kerulet_utca_list', 'property@kerulet_utca_list');
                 $router->post('/property/insert_update', 'property@insert_update');
                 $router->get('/property/street_list', 'property@street_list');
                 $router->post('/property/file_upload_ajax', 'property@file_upload_ajax');
+                $router->post('/property/floor_plan_upload_ajax', 'property@floor_plan_upload_ajax');
                 $router->post('/property/doc_upload_ajax', 'property@doc_upload_ajax');
                 $router->post('/property/show_file_list', 'property@show_file_list');
                 $router->post('/property/file_delete', 'property@file_delete');
                 $router->post('/property/change_kiemeles', 'property@change_kiemeles');
                 $router->post('/property/change_status', 'property@change_status');
                 $router->post('/property/photo_sort', 'property@photo_sort');
+                $router->post('/property/alaprajz_sort', 'property@alaprajz_sort');
                 $router->post('/property/cloning', 'property@cloning');
                 $router->post('/property/sendemail', 'property@sendEmail'); //ajax
 
                 $router->get('/property/download/:filename', 'property@download', array('file'));
 
-            // landing page    
-            $router->get('/landingpage', 'LandingPage@index');
-            $router->match('GET|POST', '/landingpage/insert', 'LandingPage@insert');
-            $router->match('GET|POST', '/landingpage/update/:id', 'LandingPage@update');
+                // landing page    
+                $router->get('/landingpage', 'LandingPage@index');
+                $router->match('GET|POST', '/landingpage/insert', 'LandingPage@insert');
+                $router->match('GET|POST', '/landingpage/update/:id', 'LandingPage@update');
 
                 $router->post('/user/deleteimage', 'User@deleteImage');
-                
+
 
                 $router->get('/pop_up_windows', 'Pop_up_windows@index');
                 $router->match('GET|POST', '/pop_up_windows/insert', 'Pop_up_windows@insert');
                 $router->match('GET|POST', '/pop_up_windows/update/:id', 'Pop_up_windows@update');
                 $router->get('/pop_up_windows/delete/:id', 'Pop_up_windows@delete');
-                
+
                 // log lista oldal
                 $router->get('/logs', 'Logs@index');
 
+                // cron jobs
+                $router->get('/cron/send_log_email', 'Cron@sendlogEmail');
+
                 // ingatlan csv export	
                 $router->get('/report/property', 'report@property');
+                $router->get('/report/remarketing-feed', 'report@remarketing_feed');
 
                 // pdf generálás
                 $router->post('/adatlap/:id', 'Adatlap@index');

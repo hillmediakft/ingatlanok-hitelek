@@ -25,6 +25,8 @@ class Num {
         }
 
         if ($n >= 1000000) {
+            // a php_ini-ben a precision értéke (tizedesjegyek száma) problémát okozhat a round() működésében. precision: 16 esetében nem kerekít 2 tizedesre. Megoldás: A.: precision alacsonyabbra állítása: ini_set("precision", 14) B: number_format alkalmazása, mivel erre nincs hatással a precision értéke 
+            ini_set("precision", 14);
 			$n = round(($n / 1000000), 2);
 
 			$x = number_format($n, 1);

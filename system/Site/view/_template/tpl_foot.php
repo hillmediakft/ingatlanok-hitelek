@@ -106,13 +106,13 @@ use System\Libs\Language as Lang;
             <div class="bottom-footer">
                 <div class="col-sm-6">
                     <div class="copy">
-                        <span>© <?php echo date('Y') . ' ' . $settings['ceg']; ?> – <?php echo Lang::get('footer_jog'); ?> | <a href="http://www.onlinemarketingguru.hu/weboldal-keszites.html"><?php echo Lang::get('footer_weboldal_keszites'); ?></a>
+                        <span>© <?php echo date('Y') . ' ' . $settings['ceg']; ?> – <?php echo Lang::get('footer_jog'); ?> | <a href="http://www.onlinemarketingguru.hu/weboldal-keszites.html" target="_blank"><?php echo Lang::get('footer_weboldal_keszites'); ?></a>
                         </span>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="policies">
-                        <span><a href="/uploads/files/adatvedelemi-szabalyzat.pdf"><?php echo Lang::get('footer_adatvedelem'); ?></a> | <a href="/uploads/files/penzkezelesi-szabalyzat.pdf"><?php echo Lang::get('footer_penzkezeles'); ?></a></span>
+                        <span><a href="/uploads/files/adatvedelmi-szabalyzat.pdf" target="_blank"><?php echo Lang::get('footer_adatvedelem'); ?></a> | <a href="/uploads/files/penzkezelesi-szabalyzat.pdf" target="_blank"><?php echo Lang::get('footer_penzkezeles'); ?></a></span>
                     </div>
                 </div>
             </div>

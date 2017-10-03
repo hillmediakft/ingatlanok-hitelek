@@ -1,5 +1,7 @@
 <?php
+
 namespace System\Libs;
+
 use System\Libs\Config;
 
 /**
@@ -81,8 +83,7 @@ class Emailer {
      * @param  string   $template_data
      * @param  string   $template
      */
-    public function __construct($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template, $attachment = array())
-    {
+    public function __construct($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template, $attachment = array()) {
         $this->from_name = $from_name;
         $this->from_email = $from_email;
         $this->to_email = $to_email;
@@ -99,17 +100,15 @@ class Emailer {
      * use_smtp tulajdonság értékének beállítása
      * @param bool
      */
-    public function setSmtp($use_smtp = true)
-    {
-        $this->use_smtp = (bool)$use_smtp;
+    public function setSmtp($use_smtp = true) {
+        $this->use_smtp = (bool) $use_smtp;
     }
 
     /**
      * Area tulajdonság értékének beállítása (site vagy admin, ahonnan betölti a template-et)
      * @param bool
      */
-    public function setArea($area)
-    {
+    public function setArea($area) {
         $this->area = $area;
     }
 
@@ -117,8 +116,7 @@ class Emailer {
      * Debug tulajdonság értékének beállítása (ha true ... akkor echo template)
      * @param bool
      */
-    public function setDebug($debug)
-    {
+    public function setDebug($debug) {
         $this->debug = $debug;
     }
 
@@ -127,8 +125,7 @@ class Emailer {
      *
      * @return bool
      */
-    public function send()
-    {
+    public function send() {
         //include(LIBS . '/PHPMailer/PHPMailerAutoload.php');
         $mail = new \PHPMailer;
 
@@ -150,10 +147,9 @@ class Emailer {
             $mail->SMTPSecure = Config::get('email.server.smtp_encryption');
             //Set TCP port to connect to 
             $mail->Port = Config::get('email.server.smtp_port');
-        } 
-        else {
-            $mail->isMail(); // küldés a php mail metódusával
-            // $mail->isSendmail(); // küldés sendmail-al
+        } else {
+           // $mail->isMail(); // küldés a php mail metódusával
+           $mail->isSendmail(); // küldés sendmail-al
         }
 
         $mail->CharSet = 'UTF-8'; //karakterkódolás beállítása
@@ -164,23 +160,26 @@ class Emailer {
         $mail->isHTML(true); // Set email format to HTML                                  
 
         if (!empty($this->attachment)) {
-            
-                $mail->addAttachment($this->attachment['tmp_name'], $this->attachment['name']);
-   
+
+            $mail->addAttachment($this->attachment['tmp_name'], $this->attachment['name']);
         }
 
 // levél tartalom beállítása
         $mail->Body = $this->_load_template_with_data($this->template, $this->template_data);
         //$mail->AltBody = '';
 
-if ($this->debug) {
-    echo $this->_load_template_with_data($this->template, $this->template_data);
-    return false;
-}
-
-        $mail->addAddress($this->to_email, $this->to_name);     // Add a recipient (Name is optional)
-        // $mail->addAddress($admin_email);
-
+        if ($this->debug) {
+            echo $this->_load_template_with_data($this->template, $this->template_data);
+            return false;
+        }
+        if (is_array($this->to_email)) {
+            foreach ($this->to_email as $email) {
+                $mail->addAddress($email, '');
+            }
+        } else {
+            $mail->addAddress($this->to_email, $this->to_name);     // Add a recipient (Name is optional)
+            // $mail->addAddress($admin_email);
+        }
 // final sending and check
         if ($mail->send()) {
             $mail->clearAddresses();
@@ -197,11 +196,16 @@ if ($this->debug) {
      *
      * @return 
      */
-    public function sendSimple()
-    {
+    public function sendSimple() {
         //include(LIBS . '/simplemail_class.php');    
         $mail = new SimpleMail();
-        $mail->setTo($this->to_email, $this->to_name);
+        if (is_array($this->to_email)) {
+            foreach ($this->to_email as $email) {
+                $mail->setTo($email, '');
+            }
+        } else {
+            $mail->setTo($this->to_email, $this->to_name);
+        }
         $mail->setSubject($this->subject);
         $mail->setFrom($this->from_email, $this->from_name);
         $mail->addMailHeader('Reply-To', $this->from_email, $this->from_name);
@@ -229,8 +233,7 @@ if ($this->debug) {
      * @param array $template_data
      * @return string 
      */
-    private function _load_template_with_data($template, $template_data)
-    {
+    private function _load_template_with_data($template, $template_data) {
         $body = file_get_contents('system/' . ucfirst($this->area) . '/view/email/tpl_' . $template . '.php');
         foreach ($template_data as $key => $value) {
             $body = str_replace('{' . $key . '}', $value, $body);
@@ -239,4 +242,5 @@ if ($this->debug) {
     }
 
 }
+
 ?>

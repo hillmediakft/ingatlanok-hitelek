@@ -160,7 +160,7 @@ var countDown = function () {
 
 var initSticky = function () {
     var viewportWidth = $(window).width();
-        if (viewportWidth > 992) {
+        if (viewportWidth > 1024) {
             $("#sticker").sticky({topSpacing: -20});
         }
 };

@@ -20,6 +20,7 @@ use System\Libs\Language as Lang;
             <div class="row">
 
                 <div class="col-sm-12 col-md-9"> 
+				<h1><?php echo Lang::get('menu_ertekesitoink'); ?></h1>
                     <div id="agents-equalheights">
                         <?php foreach ($agents as $agent) : ?>
                             <div class="col-md-4 col-sm-12">

@@ -152,7 +152,7 @@ var Adatlap = function () {
                 url: 'getphonenumber',
                 data: 'id=' + agentId,
                 success: function (data) {
-                    $('#phone_number_box').html('<a class="simple-btn sm-button outlined green" style="margin-top: 10px;" href="tel:' + data + '">' + data + '</ä>');
+                    $('#phone_number_box').html('<a class="simple-btn sm-button filled green" style="margin-top: 10px;" href="tel:' + data + '">' + data + '</ä>');
 
 
                 }

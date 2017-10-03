@@ -32,7 +32,8 @@ use System\Libs\Language as Lang;
                                                 <span class="item-label"><?php echo Lang::get('kereso_elado'); ?>/<?php echo Lang::get('kereso_kiado'); ?></span>
                                                 <div id="tipus_select_div" class="ui-front">
                                                     <select name="tipus" id="tipus_select" data-icon="false" class="select filter-select">
-                                                        <option <?php echo (isset($filter_params['tipus']) && $filter_params['tipus'] == 1) ? 'selected' : ''; ?> value="1"><?php echo Lang::get('kereso_elado'); ?></option>
+                                                        <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
+														<option <?php echo (isset($filter_params['tipus']) && $filter_params['tipus'] == 1) ? 'selected' : ''; ?> value="1"><?php echo Lang::get('kereso_elado'); ?></option>
                                                         <option <?php echo (isset($filter_params['tipus']) && $filter_params['tipus'] == 2) ? 'selected' : ''; ?> value="2"><?php echo Lang::get('kereso_kiado'); ?></option>
                                                     </select>
                                                 </div>

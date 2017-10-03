@@ -89,13 +89,13 @@ $config['url'] = array(
     'berbeadoknak' => array(
         'index' => array(
             'hu' => 'berbeadoknak',
-            'en' => 'boat-owners'
+            'en' => 'how-to-let-out'
             )
     ),
     'mennyit-er-az-ingatlanom' => array(
         'index' => array(
             'hu' => 'mennyit-er-az-ingatlanom',
-            'en' => 'my-property-is-worth'
+            'en' => 'how-much-is-my-property-worth'
             )
     ),         
 

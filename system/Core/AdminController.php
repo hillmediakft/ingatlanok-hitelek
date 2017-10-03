@@ -17,6 +17,9 @@ class AdminController extends Controller {
            	} 
         }
         */
+		        // settings betöltése és hozzárendelése a controllereken belül elérhető a global_data változóhoz
+        $this->loadModel('settings_model');
+        $this->global_data['settings'] = $this->settings_model->get_settings();
      
     }
 }

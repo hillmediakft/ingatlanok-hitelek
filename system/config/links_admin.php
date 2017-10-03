@@ -211,5 +211,8 @@ $link['document_category'] = array('js' => ADMIN_JS . 'pages/document_category.j
 $link['document_category_insert'] = array('js' => ADMIN_JS . 'pages/document_category_insert.js');
 $link['document_category_update'] = array('js' => ADMIN_JS . 'pages/document_category_update.js');
 
+// ajánlások
+$link['ajanlasok'] = array('js' => ADMIN_JS . 'pages/ajanlasok.js');
+
 return $link;
 ?>

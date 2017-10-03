@@ -66,7 +66,7 @@ class Ingatlanok_model extends SiteModel {
      * 	@param array 
      */
     public function get_favourite_properties_data($id_array) {
-// $this->query->debug(true);
+		$this->query->debug(false);
         $this->query->set_columns(array(
             'ingatlanok.id',
             'ingatlanok.ref_num',
@@ -94,14 +94,19 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_join('left', 'district_list', 'ingatlanok.kerulet', '=', 'district_list.district_id');
         if (is_array($id_array)) {
             foreach ($id_array as $value) {
-                $this->query->set_where('id', '=', $value, 'or');
+				$this->query->set_where('OR (');
+                $this->query->set_where('id', '=', $value);
+				$this->query->set_where('status', '=', 1);
+				$this->query->set_where('deleted', '=', 0);  
+				$this->query->set_where(')');
             }
         } else {
             $this->query->set_where('id', '=', $id_array);
+			$this->query->set_where('status', '=', 1);
+			$this->query->set_where('deleted', '=', 0);
         }
         
-        $this->query->set_where('status', '=', 1);
-        $this->query->set_where('deleted', '=', 0);        
+              
 
         $this->query->set_orderby('ingatlanok.id', 'DESC');
 
@@ -587,6 +592,9 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
     public function list_query($table) {
         $this->query->set_table(array($table));
         $this->query->set_columns('*');
+        if($table == 'ingatlan_allapot') {
+            $this->query->set_orderby('all_order', 'ASC');
+        }
         return $this->query->select();
     }
 
@@ -709,7 +717,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
           }
           $this->query->set_where('ingatlanok.tipus', '=', $tipus);
          */
-
+        $this->query->set_where('status', '=', 1);
         $result = $this->query->select();
 
         $temp = array();
@@ -777,6 +785,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
             $this->query->set_table(array('ingatlanok'));
             $this->query->set_columns(array('id'));
             $this->query->set_where('kerulet', '=', $result[$key]['district_id']);
+            $this->query->set_where('status', '=', 1);
             $result2 = $this->query->select();
 
             $district_id = $result[$key]['district_id'];

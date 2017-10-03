@@ -250,14 +250,14 @@
                                         <div class="col-md-3">
                                             <select name="tajolas" id="tajolas" class="form-control">
                                                 <option value="">-- válasszon --</option>
-                                                <option value="0" <?php echo ($content['tajolas'] === 0) ? 'selected' : ''; ?>>észak</option>
-                                                <option value="1" <?php echo ($content['tajolas'] === 1) ? 'selected' : ''; ?>>északkelet</option>
-                                                <option value="2" <?php echo ($content['tajolas'] === 2) ? 'selected' : ''; ?>>kelet</option>
-                                                <option value="3" <?php echo ($content['tajolas'] === 3) ? 'selected' : ''; ?>>délkelet</option>
-                                                <option value="4" <?php echo ($content['tajolas'] === 4) ? 'selected' : ''; ?>>dél</option>
-                                                <option value="5" <?php echo ($content['tajolas'] === 5) ? 'selected' : ''; ?>>délnyugat</option>
-                                                <option value="6" <?php echo ($content['tajolas'] === 6) ? 'selected' : ''; ?>>nyugat</option>
-                                                <option value="7" <?php echo ($content['tajolas'] === 7) ? 'selected' : ''; ?>>északnyugat</option>
+                                                <option value="0" <?php echo ($content['tajolas'] == 0) ? 'selected' : ''; ?>>észak</option>
+                                                <option value="1" <?php echo ($content['tajolas'] == 1) ? 'selected' : ''; ?>>északkelet</option>
+                                                <option value="2" <?php echo ($content['tajolas'] == 2) ? 'selected' : ''; ?>>kelet</option>
+                                                <option value="3" <?php echo ($content['tajolas'] == 3) ? 'selected' : ''; ?>>délkelet</option>
+                                                <option value="4" <?php echo ($content['tajolas'] == 4) ? 'selected' : ''; ?>>dél</option>
+                                                <option value="5" <?php echo ($content['tajolas'] == 5) ? 'selected' : ''; ?>>délnyugat</option>
+                                                <option value="6" <?php echo ($content['tajolas'] == 6) ? 'selected' : ''; ?>>nyugat</option>
+                                                <option value="7" <?php echo ($content['tajolas'] == 7) ? 'selected' : ''; ?>>északnyugat</option>
                                             </select>
                                         </div>
                                     </div>
@@ -1017,6 +1017,52 @@
                                 </div>
                             </div>
 
+                            <!-- ALAPRAJZOK -->
+                            <div class="portlet light bg-inverse">
+                                <div class="portlet-title">
+                                    <div class="caption font-green-sharp">
+                                        <i class="icon-share font-green-sharp"></i>
+                                        <span class="caption-subject bold uppercase"> Alaprajzok feltöltése</span>
+                                    </div>
+
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="portlet">
+                                                <div class="portlet-body">
+                                                    <h4 class="block">Feltöltött alaprajzok:</h4>
+                                                    <ul id="alaprajz_list">
+                                                        <?php
+                                                        $result_photos = json_decode($content['alaprajzok']);
+                                                        if (!empty($result_photos)) {
+                                                            $counter = 0;
+                                                            $file_location = $this->getConfig('ingatlan_photo_floor_plan.upload_path');
+                                                            foreach ($result_photos as $key => $value) {
+                                                                $counter = $key + 1;
+                                                                $file_path = $this->url_helper->thumbPath($file_location . $value, false, 'small');
+                                                                echo '<li id="elem_' . $counter . '" class="ui-state-default"><img class="img-thumbnail" style="width: 220px" src="' . $file_path . '" alt="" /><button style="position:absolute; top:20px; right:20px; z-index:2;" class="btn btn-xs btn-default" type="button" title="Kép törlése"><i class="glyphicon glyphicon-trash"></i></button></li>' . "\n\r";
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <!-- KÉPEK FELTÖLTÉSE -->
+                                            <div class="portlet">
+                                                <div class="portlet-body">
+                                                    <h4 class="block">Alaprajz hozzáadása:</h4>
+                                                    <input type="file" name="new_file[]" multiple="true" id="input-alaprajz" />
+                                                </div>
+                                            </div>		
+                                        </div>
+                                    </div> <!-- row END -->		
+                                </div>
+                            </div>                            
+                            
+                            
                             <!-- DOKUMENTUMOK -->
                             <div class="portlet light bg-inverse">
                                 <div class="portlet-title">

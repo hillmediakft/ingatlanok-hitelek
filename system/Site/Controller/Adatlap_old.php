@@ -1,22 +1,18 @@
 <?php
-namespace System\Admin\Controller;
 
-use System\Core\AdminController;
+namespace System\Site\Controller;
+
+use System\Core\SiteController;
 use System\Libs\Config;
-use System\Helper\Str;
 use System\Libs\Language as Lang;
-use System\Libs\DI;
 
+class Adatlap extends SiteController {
 
-class Adatlap extends AdminController {
-
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
-        $this->loadModel('property_model');
-		$this->str_helper = DI::get('str_helper');
+        $this->loadModel('ingatlanok_model');
     }
-    
+
     /**
      * Ingatlan adatlap pdf generálása és küldése a böngészőnek
      *  
@@ -29,20 +25,18 @@ class Adatlap extends AdminController {
 
         $agent_id = $this->request->get_post('agent_id', 'integer');
 
-        $agent = $this->property_model->get_agent($agent_id);
-        $ingatlan = $this->property_model->getPropertyDetails($id);
+        $agent = $this->ingatlanok_model->get_agent($agent_id);
+        $ingatlan = $this->ingatlanok_model->getProperty($id);
 
-        $all_photos = json_decode($ingatlan['kepek']);
-        $photos = array_slice($all_photos, 0, 2);
-        $photos2 = array_slice($all_photos, 0, 8);
-
+        $photos = json_decode($ingatlan['kepek']);
+        $photos = array_slice($photos, 0, 3);
 
         $ingatlan['leiras_' . LANG] = strip_tags($ingatlan['leiras_' . LANG]);
 
         if ($ingatlan['tipus'] == 1) {
-            $elado = 'eladó';
+            $elado = Lang::get('kereso_elado');
         } else {
-            $elado = 'kiadó';
+            $elado = Lang::get('kereso_kiado');
         }
 
         if ($ingatlan['kerulet'] == NULL) {
@@ -236,7 +230,7 @@ class Adatlap extends AdminController {
         foreach ($photos as $value) {
 
             $pdf->Image(Config::get('ingatlan_photo.upload_path') . '/' . $value, 120, $i, 80);
-            $i = $i + 62;
+            $i = $i + 65;
         }
         /*
          * Névjegykártya
@@ -289,227 +283,130 @@ class Adatlap extends AdminController {
         $pdf->MultiCell(0, 8, $this->utf8_to_latin2_hun($ingatlan['ingatlan_nev_' . LANG]), 0, 'C', 0);
         $pdf->Ln(2);
         $pdf->SetFont('arialb', '', 11);
-        $pdf->SetFillColor(220, 220, 220);
-        $pdf->SetXY(10, 58);
         //$pdf->Cell(0, 5, $this->utf8_to_latin2_hun('Ref. szám: ' . $ingatlan['ref_num']), 0, 1, 'L', 0);
-        $pdf->Cell(105, 5, $this->utf8_to_latin2_hun($elado) . ' | ' . $this->utf8_to_latin2_hun($ingatlan['kat_nev_' . LANG]) . ' | ' . $price, 0, 1, 'L', true);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($elado) . ' | ' . $this->utf8_to_latin2_hun($ingatlan['kat_nev_' . LANG]) . ' | ' . $price, 0, 1, 'L', 0);
         $pdf->Ln(2);
 
         $pdf->Ln(5);
         $pdf->SetFont('arial', '', 8);
-        $pdf->MultiCell(90, 4, $this->str_helper->substrWord($this->utf8_to_latin2_hun($ingatlan['leiras_' . LANG]), 1400), 0, 'L', 0);
+        $pdf->MultiCell(90, 4, $this->utf8_to_latin2_hun($ingatlan['leiras_' . LANG]), 0, 'L', 0);
 
         $pdf->Ln(5);
 
-        /*
-         * ************ADATOK *******************
-         */
-        $pdf->SetXY(10, 185);
         $pdf->SetFont('arial', 'B', 9);
-        $pdf->SetFillColor(220, 220, 220);
-        $pdf->Cell(90, 5, utf8_decode('Adatok:'), 0, 1, 'L', true);
-        $pdf->SetFont('arial', '', 8);
+        $pdf->Cell(0, 6, utf8_decode('Adatok:'), 0, 1, 'L', 0);
+        $pdf->SetFont('arial', '', 9);
+        
+        $pdf->Cell(30, 5, utf8_decode('Ref. szám:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['ref_num']), 0, 1, 'L', 0);
 
-        $pdf->Cell(30, 4, utf8_decode('Ref. szám:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($ingatlan['ref_num']), 0, 1, 'L', 0);
-
-        $pdf->Cell(30, 4, utf8_decode('Elhelyezkedés:'), 0, 0, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Elhelyezkedés:'), 0, 0, 'L', 0);
 
         if (isset($ingatlan['kerulet']) && ($ingatlan['utca_megjelenites'] == 1)) {
-            $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name']) . ' ' . $kerulet . '. ' . $this->utf8_to_latin2_hun('kerület') . ' ' . $this->utf8_to_latin2_hun($utca)), 0, 1, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name']) . ' ' . $kerulet . '. ' . $this->utf8_to_latin2_hun('kerület') . ' ' . $this->utf8_to_latin2_hun($utca)), 0, 1, 'L', 0);
         } elseif (isset($ingatlan['kerulet']) && $ingatlan['utca_megjelenites'] == null) {
-            $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name'])) . ' ' . $kerulet . '. ' . $this->utf8_to_latin2_hun('kerület'), 0, 1, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name'])) . ' ' . $kerulet . '. ' . $this->utf8_to_latin2_hun('kerület'), 0, 1, 'L', 0);
         } elseif (!isset($ingatlan['kerulet']) && ($ingatlan['utca_megjelenites'] == 1)) {
-            $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name']) . ', ' . $this->utf8_to_latin2_hun($utca)), 0, 1, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name']) . ', ' . $this->utf8_to_latin2_hun($utca)), 0, 1, 'L', 0);
         } elseif (!isset($ingatlan['kerulet']) && !isset($ingatlan['utca_megjelenites'])) {
-            $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name'])), 0, 1, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name'])), 0, 1, 'L', 0);
         } else {
-            $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name'])), 0, 1, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($this->utf8_to_latin2_hun($ingatlan['city_name'])), 0, 1, 'L', 0);
         }
 
-        $pdf->Cell(30, 4, utf8_decode('Megbízás típusa:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($elado), 0, 1, 'L', 0);
-        $pdf->Cell(30, 4, utf8_decode('Ingatlan típusa:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($ingatlan['kat_nev_' . LANG]), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Megbízás típusa:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($elado), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Ingatlan típusa:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['kat_nev_' . LANG]), 0, 1, 'L', 0);
 
-        $pdf->Cell(30, 4, utf8_decode('Állapot:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($ingatlan['all_leiras_' . LANG]), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Állapot:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['all_leiras_' . LANG]), 0, 1, 'L', 0);
 
-        $pdf->Cell(30, 4, $this->utf8_to_latin2_hun('Állapot kívűl:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($ingatlan['haz_allapot_kivul_leiras_' . LANG]), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Állapot kívűl:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['haz_allapot_kivul_leiras_' . LANG]), 0, 1, 'L', 0);
 
-        $pdf->Cell(30, 4, utf8_decode('Terület:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($ingatlan['alapterulet']) . ' nm', 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Terület:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['alapterulet']) . ' nm', 0, 1, 'L', 0);
 
-        $pdf->Cell(30, 4, utf8_decode('Belmagasság:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $belmagassag, 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Belmagasság:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $belmagassag, 0, 1, 'L', 0);
 
-        $pdf->Cell(30, 4, utf8_decode('Közös költség:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $kozos_koltseg, 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Közös költség:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $kozos_koltseg, 0, 1, 'L', 0);
 
 
-        $pdf->Cell(30, 4, utf8_decode('Szobák száma:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($ingatlan['szobaszam']), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Szobák száma:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['szobaszam']), 0, 1, 'L', 0);
         if (isset($ingatlan['emelet'])) {
-            $pdf->Cell(30, 4, utf8_decode('Emelet:'), 0, 0, 'L', 0);
-            $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($ingatlan['emelet_leiras_' . LANG]), 0, 1, 'L', 0);
-            $pdf->Cell(30, 4, utf8_decode('Épület szintjei:'), 0, 0, 'L', 0);
-            $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($ingatlan['epulet_szintjei_leiras_' . LANG]), 0, 1, 'L', 0);
+            $pdf->Cell(30, 5, utf8_decode('Emelet:'), 0, 0, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['emelet_leiras_' . LANG]), 0, 1, 'L', 0);
+            $pdf->Cell(30, 5, utf8_decode('Épület szintjei:'), 0, 0, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($ingatlan['epulet_szintjei_leiras_' . LANG]), 0, 1, 'L', 0);
         }
 
         if (isset($ingatlan['ar_elado'])) {
-            $pdf->Cell(30, 4, utf8_decode('Ár:'), 0, 0, 'L', 0);
-            $pdf->Cell(0, 4, $this->utf8_to_latin2_hun(number_format($ingatlan['ar_elado'], 0, ',', '.')) . ' Ft', 0, 1, 'L', 0);
+            $pdf->Cell(30, 5, utf8_decode('Ár:'), 0, 0, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun(number_format($ingatlan['ar_elado'], 0, ',', '.')) . ' Ft', 0, 1, 'L', 0);
         } elseif (isset($ingatlan['ar_kiado'])) {
-            $pdf->Cell(30, 4, utf8_decode('Bérleti díj:'), 0, 0, 'L', 0);
-            $pdf->Cell(0, 4, $this->utf8_to_latin2_hun(number_format($ingatlan['ar_kiado'], 0, ',', '.')) . ' Ft', 0, 1, 'L', 0);
+            $pdf->Cell(30, 5, utf8_decode('Bérleti díj:'), 0, 0, 'L', 0);
+            $pdf->Cell(0, 5, $this->utf8_to_latin2_hun(number_format($ingatlan['ar_kiado'], 0, ',', '.')) . ' Ft', 0, 1, 'L', 0);
         }
 
 
         $pdf->Ln(5);
 
-        /*
-         * ******************** JELLEMZŐK *************************
-         */
-        $pdf->SetXY(110, 185);
+
         $pdf->SetFont('arialb', '', 9);
-        $pdf->SetFillColor(220, 220, 220);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun('Jellemzők:'), 0, 2, 'L', true);
-        $pdf->SetFont('arial', '', 8);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun('Jellemzők:'), 0, 1, 'L', 0);
+        $pdf->SetFont('arial', '', 9);
 
         /*         * ************ JELLEMZŐK ************** */
-        $pdf->SetXY(110, 190);
-        $pdf->Cell(30, 4, $this->utf8_to_latin2_hun('Fűtés:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($futes), 0, 0, 'L', 0);
+        $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Fűtés:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($futes), 0, 1, 'L', 0);
 
-        $pdf->SetXY(110, 194);
-        $pdf->Cell(30, 4, utf8_decode('Kilátás:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($kilatas), 0, 0, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Kilátás:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($kilatas), 0, 1, 'L', 0);
 
-        $pdf->SetXY(110, 198);
-        $pdf->Cell(30, 4, utf8_decode('Bútorozott:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($butor), 0, 0, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Bútorozott:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($butor), 0, 1, 'L', 0);
 
-        $pdf->SetXY(110, 202);
-        $pdf->Cell(30, 4, utf8_decode('Parkolás:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($parkolas), 0, 0, 'L', 0);
-
-        $pdf->SetXY(110, 206);
-        $pdf->Cell(30, 4, $this->utf8_to_latin2_hun('Lift:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($lift), 0, 0, 'L', 0);
-
-        $pdf->SetXY(110, 210);
-        $pdf->Cell(30, 4, $this->utf8_to_latin2_hun('Energetikai tan.:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($energetika), 0, 0, 'L', 0);
-
-        $pdf->SetXY(110, 214);
-        $pdf->Cell(30, 4, $this->utf8_to_latin2_hun('Kert:'), 0, 0, 'L', 0);
-        $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($kert), 0, 2, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Parkolás:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($parkolas), 0, 1, 'L', 0);
 
 
-        $pdf->SetFont('arialb', '', 9);
+        $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Lift:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($lift), 0, 1, 'L', 0);
 
+        $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Energetikai tan.:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($energetika), 0, 1, 'L', 0);
 
-        /*
-         * **************EXTRÁK *********************
-         */
-        $pdf->SetXY(110, 220);
-        $pdf->SetFillColor(220, 220, 220);
-        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun('Extrák:'), 0, 2, 'L', true);
-        $pdf->SetFont('arial', '', 8);
-        $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun($extrak), 0, 'L', 0);
+        $pdf->Cell(30, 5, $this->utf8_to_latin2_hun('Kert:'), 0, 0, 'L', 0);
+        $pdf->Cell(0, 5, $this->utf8_to_latin2_hun($kert), 0, 1, 'L', 0);
 
-
-
-        $pdf->SetXY(10, 245);
         $pdf->Ln(5);
-        /*
-         * ****************** INGATLAN REFERENS KAPCSOLAT
-         */
+
 
         $pdf->SetFont('arialb', '', 9);
-        $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('További információért keresse ingatlan referensünket:'), 0, 'C', 0);
-        $pdf->SetFont('arial', '', 8);
-        $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun($agent['first_name']) . ' ' . $this->utf8_to_latin2_hun($agent['last_name']) . $this->utf8_to_latin2_hun(' | Tel: ') . $this->utf8_to_latin2_hun($agent['phone']) . $this->utf8_to_latin2_hun(' | E-mail: ' . $this->utf8_to_latin2_hun($agent['email'])), 0, 'C', 0);
-
-        $pdf->Ln(2);
-        $pdf->SetFont('arialb', '', 10);
-        $pdf->Cell(0, 6, $this->utf8_to_latin2_hun('TOVÁBBI KÉPEK A KÖVETKEZŐ OLDALON!'), 0, 2, 'C', 0);
 
 
-        /*
-         * ************** MÁSODIK OLDAL *********************
-         */
-        $pdf->AddPage();
-        // link, x, y, width
- /*       $pdf->Image('public/site_assets/images/logo_pdf.png', 10, 10, 35);
+
+
+        $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('Extrák:'), 0, 'L', 0);
+        $pdf->SetFont('arial', '', 9);
+        $pdf->MultiCell(100, 5, $this->utf8_to_latin2_hun($extrak), 0, 'L', 0);
+
+
+
+
+        $pdf->Ln(5);
+
+
         $pdf->SetFont('arialb', '', 9);
-        $pdf->Cell(0, 43, $this->utf8_to_latin2_hun('Ingatlan - hitel - befektetés'), 0, 0, 'L', 0);
+        $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('További információért keresse ingatlan referensünket:'), 0, 'L', 0);
+        $pdf->SetFont('arial', '', 9);
+        $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun($agent['first_name']) . ' ' . $this->utf8_to_latin2_hun($agent['last_name']) . $this->utf8_to_latin2_hun(' | Tel: ') . $this->utf8_to_latin2_hun($agent['phone']), 0, 'L', 0);
+        $pdf->MultiCell(0, 5, $this->utf8_to_latin2_hun('E-mail: ' . $this->utf8_to_latin2_hun($agent['email'])), 0, 'L', 0);
 
-*/
-
-
-        /*
-         * Névjegykártya
-         */
-        // névjegykártya keret
- /*       $pdf->Image('public/site_assets/images/border.png', 134, 7, 67);
-        $pdf->SetXY(135, 14);
-        $pdf->SetDrawColor(200, 200, 200);
-
-        $pdf->SetFont('arial', '', 6);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('1095 Budapest, Bakáts u. 1.'), 0, 2, 'L', 0);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('Tel: 06-1-215-1490'), 0, 2, 'L', 0);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('Mobil: ') . $this->utf8_to_latin2_hun($agent['phone']), 0, 2, 'L', 0);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('E-mail: ' . $this->utf8_to_latin2_hun($agent['email'])), 0, 2, 'L', 0);
-        $pdf->SetXY(175, 14);
-        $pdf->SetFont('arial', '', 7);
-        $pdf->Cell(0, 3, '', 0, 2, 'L', 0);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun($agent['first_name']) . ' ' . $this->utf8_to_latin2_hun($agent['last_name']), 0, 2, 'L', 0);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('Ingatlan tanácsadó'), 0, 2, 'L', 0);
-        $pdf->SetXY(135, 28);
-        $pdf->SetFillColor(158, 40, 40);
-        $pdf->SetTextColor(255, 255, 255);
-        $pdf->Cell(0, 5, 'https://ingatlanok-hitelek.hu', 0, 2, 'C', 1);
-
-        $pdf->SetXY(10, 35);
-        $pdf->SetFillColor(230, 230, 230);
-
-        $pdf->Cell(0, 1, '', 0, 2, 'L', true);
-        $pdf->Ln(5); */
-
-        /*         * ***** képek megjelenítése ******** */
-        $pdf->SetTextColor(0, 0, 0);
-        $x = 10;
-        $y = 15;
-        $k = 1;
-        foreach ($photos2 as $value) {
-            if ($k % 2 == 0) {
-
-                    $x = 100;
-                   
-
-           //      $pdf->Cell(0, 5, 'k: ' . $k . ' x= ' . $x . ' y= ' . $y, 0, 2, 'L', 0);
-                
-                $pdf->Image(Config::get('ingatlan_photo.upload_path') . '/' . $value, $x, $y, 80);
-                 $y = $y + 65;
-            } else {
-                $x = 10;
-                 
-      //        $pdf->Cell(0, 5, 'k: ' . $k . ' x= ' . $x . ' y= ' . $y, 0, 2, 'L', 0);
-                
-                $pdf->Image(Config::get('ingatlan_photo.upload_path') . '/' . $value, $x, $y, 80);
-
-            }
-
-            $k = $k+1;
-        }
-
-
-
-
-
-        /*         * ************* MÁSODIK OLDAL VÉGE ********* */
 
         $pdf->Output('adatlap_' . $id . '.pdf', 'D');
         exit();
@@ -523,6 +420,8 @@ class Adatlap extends AdminController {
         // U+00A0       \xc2\xa0    &#xA0;      NO-BREAK SPACE
         // \x20 space karakter
         // U+00C2   Â   \xc3\x82    &#xC2;  Â   LATIN CAPITAL LETTER A WITH CIRCUMFLEX        
-    }  
+    }
+
 }
+
 ?>

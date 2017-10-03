@@ -69,7 +69,7 @@ class Auth {
     protected $password_colname;
 
     // munkamenet lejárati ideje
-    private static $session_expire_time = 7200;
+    private static $session_expire_time = 72000000;
     // a bejelentkezés állapotát tároló kulcs a session-ben
     private static $logged_in = 'user_logged_in';
     // admin vagy site

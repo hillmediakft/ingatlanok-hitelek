@@ -88,8 +88,8 @@ $config['clientphoto'] = array(
 );
 
 $config['session'] = array(
-    'expire_time_admin' => 3600,
-    'expire_time_site' => 3600
+    'expire_time_admin' => 3000000000,
+    'expire_time_site' => 300600
         // 'last_activity_name_admin' => 'user_last_activity', // A $_SESSION['last_activity'] elem fogja tárolni az utolsó aktivitás idejét
         // 'last_activity_name_site' => 'user_site_last_activity' // A $_SESSION['last_activity'] elem fogja tárolni az utolsó aktivitás idejét
 );
@@ -109,6 +109,20 @@ $config['ingatlan_photo'] = array(
     'small_height' => 300,
     'y_ratio' => true, // ha true, akkor megtartja az eredeti képarányt, ha false, akkor a height érték lép életbe az átméretezésnél
     'upload_path' => UPLOADS . 'ingatlan_photo/',
+    //'default_photo' => 'default.jpg',
+    'placeholder' => ADMIN_ASSETS . 'img/placeholder_323x242.jpg',
+    'placeholder_thumb' => ADMIN_ASSETS . 'img/placeholder_80x60.jpg'
+);
+
+$config['ingatlan_photo_floor_plan'] = array(
+    'width' => 800,
+    'height' => 600, //csak akkor van hatása, ha az y_ratio false
+    'thumb_width' => 80,
+    'thumb_height' => 60,
+    'small_width' => 400,
+    'small_height' => 300,
+    'y_ratio' => true, // ha true, akkor megtartja az eredeti képarányt, ha false, akkor a height érték lép életbe az átméretezésnél
+    'upload_path' => UPLOADS . 'ingatlan_photo_floor_plan/',
     //'default_photo' => 'default.jpg',
     'placeholder' => ADMIN_ASSETS . 'img/placeholder_323x242.jpg',
     'placeholder_thumb' => ADMIN_ASSETS . 'img/placeholder_80x60.jpg'

@@ -310,9 +310,9 @@ var InsertProperty = function () {
                     required: true,
 					number: true
                 },
-                utca: {
+  /*              utca: {
                     required: true
-                },
+                }, */
                 ingatlan_nev_hu: {
                     required: true
                 },

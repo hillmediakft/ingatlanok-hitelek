@@ -24,7 +24,9 @@ class Report_model extends AdminModel {
         $this->query->set_table(array('ingatlanok'));
         $this->query->set_columns(array(
             'ingatlanok.id',
+            'ingatlanok.ingatlan_nev_hu',
             'ingatlanok.kategoria',
+			'ingatlanok.kerulet',
             'ingatlanok.status',
             'ingatlanok.kiemeles',
             'ingatlanok.tipus',
@@ -35,6 +37,7 @@ class Report_model extends AdminModel {
             'ingatlanok.szobaszam',
             'ingatlan_kategoria.kat_nev_hu',
             'ingatlanok.megtekintes',
+            'ingatlanok.kepek',
             'users.first_name',
             'users.last_name',
             'district_list.district_name',

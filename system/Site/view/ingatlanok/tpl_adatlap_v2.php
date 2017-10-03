@@ -30,7 +30,7 @@ use System\Libs\Language as Lang;
 
                     <div class="ingatlan-info-box" id="sticker">
 
-                        <div class="col-sm-5">
+                        <div class="col-sm-5 col-xs-5">
                             <h3 class="section-title"><?php echo $ingatlan['ingatlan_nev_' . LANG]; ?></h3>
                             <?php
                             $district = (!is_null($ingatlan['district_name'])) ? $ingatlan['district_name'] . ' ' . Lang::get('adatlap_kerulet') : '';
@@ -38,7 +38,7 @@ use System\Libs\Language as Lang;
                             <h5><?php echo $ingatlan['city_name'] . ' ' . $district; ?></h5> 
                         </div>
 
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-xs-3">
                             <h3 class="section-title">
                                 <span class="price">
                                     <span class="value">
@@ -65,7 +65,7 @@ use System\Libs\Language as Lang;
                             </div>
                         </div> 
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-4 col-xs-4">
                             <div class="agent-box">
                                 <div class="agent-image">
                                     <img class="img-thumbnail" src="<?php echo Config::get('user.upload_path') . $agent['photo']; ?>">
@@ -177,7 +177,7 @@ use System\Libs\Language as Lang;
                                 <div class="column-2">
                                     <div class="info-item">
                                         <span class="label-item"><?php echo Lang::get('jell_tipus'); ?>:</span>
-                                        <span class="value"><?php echo ($ingatlan['tipus'] = 1) ? Lang::get('jell_elado') : Lang::get('jell_kiado'); ?></span>
+                                        <span class="value"><?php echo ($ingatlan['tipus'] == 1) ? Lang::get('jell_elado') : Lang::get('jell_kiado'); ?></span>
                                     </div>
                                 </div>
 

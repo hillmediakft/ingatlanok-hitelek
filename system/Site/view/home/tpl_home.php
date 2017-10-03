@@ -39,8 +39,10 @@ use System\Libs\Language as Lang;
                                     </a>	
                                 </div>
                             </div>
-                            <span class="main-title"><?php echo Lang::get('home_szolgaltatasok_1_cim'); ?></span>
-                            <span class="featured-sub-title colored"><?php echo Lang::get('home_szolgaltatasok_1_szoveg'); ?></span>
+							<a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.mennyit-er-az-ingatlanom.index.' . LANG); ?>">
+								<span class="main-title"><?php echo Lang::get('home_szolgaltatasok_1_cim'); ?></span>
+								<span class="featured-sub-title colored"><?php echo Lang::get('home_szolgaltatasok_1_szoveg'); ?></span>
+							</a>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -52,8 +54,10 @@ use System\Libs\Language as Lang;
                                     </a>	
                                 </div>
                             </div>
-                            <span class="main-title"><?php echo Lang::get('home_szolgaltatasok_2_cim'); ?></span>
-                            <span class="featured-sub-title colored"><?php echo Lang::get('home_szolgaltatasok_2_szoveg'); ?></span>
+							<a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.befektetoknek.index.' . LANG); ?>">
+								<span class="main-title"><?php echo Lang::get('home_szolgaltatasok_2_cim'); ?></span>
+								<span class="featured-sub-title colored"><?php echo Lang::get('home_szolgaltatasok_2_szoveg'); ?></span>
+							</a>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -65,8 +69,10 @@ use System\Libs\Language as Lang;
                                     </a>	
                                 </div>
                             </div>
-                            <span class="main-title"><?php echo Lang::get('home_szolgaltatasok_3_cim'); ?></span>
-                            <span class="featured-sub-title colored"><?php echo Lang::get('home_szolgaltatasok_3_szoveg'); ?></span>
+							<a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.berbeadoknak.index.' . LANG); ?>">
+								<span class="main-title"><?php echo Lang::get('home_szolgaltatasok_3_cim'); ?></span>
+								<span class="featured-sub-title colored"><?php echo Lang::get('home_szolgaltatasok_3_szoveg'); ?></span>
+							</a>
                         </div>
                     </div>
                 </div>

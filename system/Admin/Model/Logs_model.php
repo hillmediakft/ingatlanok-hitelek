@@ -1,13 +1,14 @@
 <?php
+
 namespace System\Admin\Model;
+
 use System\Core\AdminModel;
 
 class Logs_model extends AdminModel {
 
     protected $table = 'logs';
 
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
     }
 
@@ -17,21 +18,19 @@ class Logs_model extends AdminModel {
      *  @param  string|integer    $user_id (csak ennek a felhasználónak az adatait adja vissza)
      *  @return array|false
      */
-    public function get_logs($user_id = null)
-    {
+    public function get_logs($user_id = null) {
         $this->query->set_columns(array(
             'logs.*',
             'users.first_name',
             'users.last_name',
-            ));
+        ));
 
         $this->query->set_join('left', 'users', 'users.id', '=', 'logs.user_id');
-        if(!is_null($user_id)){
+        if (!is_null($user_id)) {
             $this->query->set_where('user_id', '=', $user_id);
         }
         return $this->query->select();
     }
-
 
     /**
      *  rekordok számának lekérdezése
@@ -39,11 +38,10 @@ class Logs_model extends AdminModel {
      *  @param  integer    $id (csak az ennél magyobb id-jű elemeket adja vissza)
      *  @return integer
      */
-    public function lastLogs($id = null)
-    {
+    public function lastLogs($id = null) {
         $this->query->set_columns(array('id'));
 
-        if(!is_null($id)){
+        if (!is_null($id)) {
             $this->query->set_where('id', '>', $id);
         }
 
@@ -57,12 +55,34 @@ class Logs_model extends AdminModel {
      *  @param  integer    $id (csak az ennél magyobb id-jű elemeket adja vissza)
      *  @return integer
      */
-    public function lastLogId()
-    {
+    public function lastLogId() {
         $this->query->set_columns('MAX(`id`) AS `id`');
         $result = $this->query->select();
-        return (int)$result[0]['id'];
-    }    
+        return (int) $result[0]['id'];
+    }
+
+    /**
+     *  Felhasználók adatainak lekérdezése
+     *
+     *  @param  string|integer    $user_id (csak ennek a felhasználónak az adatait adja vissza)
+     *  @return array|false
+     */
+    public function getDailyLogs($user_id = null) {
+        $time_in_past = date('Y-m-d h:i:s', time() - (60 * 60 * 24));
+
+
+        $this->query->set_columns(array(
+            'logs.*',
+            'users.first_name',
+            'users.last_name',
+        ));
+
+        $this->query->set_join('left', 'users', 'users.id', '=', 'logs.user_id');
+        $this->query->set_where('date', '>', $time_in_past);
+        $result = $this->query->select();
+        return $result;
+    }
 
 }
+
 ?>
