@@ -1,9 +1,11 @@
 var Hirek = function () {
 
     var equalHeights = function () {
-        setTimeout(function () {
-            $('#equalheight div.descr').equalHeights();
-        }, 200);
+        if($(window).width() > 767) {
+			setTimeout(function () {
+				$('#equalheight div.descr').equalHeights();
+			}, 200);
+		}
     }
 
     return {

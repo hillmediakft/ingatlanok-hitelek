@@ -47,7 +47,7 @@ class Ingatlanok_model extends SiteModel {
 
         $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
         $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
-        
+
         $this->query->set_where('ingatlanok.kiemeles', '=', 1);
         $this->query->set_where('status', '=', 1);
         $this->query->set_where('deleted', '=', 0);
@@ -66,7 +66,7 @@ class Ingatlanok_model extends SiteModel {
      * 	@param array 
      */
     public function get_favourite_properties_data($id_array) {
-		$this->query->debug(false);
+        $this->query->debug(false);
         $this->query->set_columns(array(
             'ingatlanok.id',
             'ingatlanok.ref_num',
@@ -94,19 +94,19 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_join('left', 'district_list', 'ingatlanok.kerulet', '=', 'district_list.district_id');
         if (is_array($id_array)) {
             foreach ($id_array as $value) {
-				$this->query->set_where('OR (');
+                $this->query->set_where('OR (');
                 $this->query->set_where('id', '=', $value);
-				$this->query->set_where('status', '=', 1);
-				$this->query->set_where('deleted', '=', 0);  
-				$this->query->set_where(')');
+                $this->query->set_where('status', '=', 1);
+                $this->query->set_where('deleted', '=', 0);
+                $this->query->set_where(')');
             }
         } else {
             $this->query->set_where('id', '=', $id_array);
-			$this->query->set_where('status', '=', 1);
-			$this->query->set_where('deleted', '=', 0);
+            $this->query->set_where('status', '=', 1);
+            $this->query->set_where('deleted', '=', 0);
         }
-        
-              
+
+
 
         $this->query->set_orderby('ingatlanok.id', 'DESC');
 
@@ -163,7 +163,7 @@ class Ingatlanok_model extends SiteModel {
         $this->query->set_where('deleted', '=', 0);
 
         $result = $this->query->select();
-        
+
         // épület szintek lekérdezése
         if (!empty($result)) {
             $this->query->set_columns(array(
@@ -187,11 +187,10 @@ class Ingatlanok_model extends SiteModel {
      * @param integer $offset
      * @param array $params - a lekérdezéshez szükséges paramétereket tartalmazza
      */
-    public function properties_filter_query($limit = null, $offset = null, $params)
-    {
-/* SORREND MEGADÁSA HA NINCS A QUERY STRINGBEN */        
+    public function properties_filter_query($limit = null, $offset = null, $params) {
+        /* SORREND MEGADÁSA HA NINCS A QUERY STRINGBEN */
         // ha nincs a query stringben sorrendre vonatkozó paraméter    
-        if ( (!isset($params['order']) && !isset($params['order_by'])) ) {
+        if ((!isset($params['order']) && !isset($params['order_by']))) {
 
             // sorrendre vonatkozó információt a session-ből veszi, ha nincs a query stringben, de van a session-ben
             if (Session::has('ingatlan_filter.order')) {
@@ -212,9 +211,9 @@ class Ingatlanok_model extends SiteModel {
                 $params['order_by'] = 'datum';
             }
         }
-/* SORREND MEGADÁSA HA NINCS A QUERY STRINGBEN VÉGE */        
+        /* SORREND MEGADÁSA HA NINCS A QUERY STRINGBEN VÉGE */
 
-/* MEGJELENÍTÉS MEGADÁSA HA NINCS A QUERY STRINGBEN */ 
+        /* MEGJELENÍTÉS MEGADÁSA HA NINCS A QUERY STRINGBEN */
         if (!isset($params['view'])) {
             // megjelenítésre vonatkozó információt a session-ből veszi, ha nincs a query stringben, de van a session-ben
             if (Session::has('ingatlan_filter.view')) {
@@ -228,7 +227,7 @@ class Ingatlanok_model extends SiteModel {
                 $params['view'] = 'grid';
             }
         }
-/* MEGJELENÍTÉS MEGADÁSA HA NINCS A QUERY STRINGBEN VÉGE */        
+        /* MEGJELENÍTÉS MEGADÁSA HA NINCS A QUERY STRINGBEN VÉGE */
 
 
         // berakjuk az új keresési paramétereket a session-be    
@@ -328,12 +327,12 @@ class Ingatlanok_model extends SiteModel {
 
         /*         * ** ÉRTÉKESÍTŐ SZERINT **** */
         if (isset($params['ref_id']) && $params['ref_id'] !== '') {
-            $this->query->set_where('ref_id', '=', (int)$params['ref_id']);
+            $this->query->set_where('ref_id', '=', (int) $params['ref_id']);
         }
 
         /*         * ** TÍPUS SZERINT **** */
         if (isset($params['tipus']) && !empty($params['tipus'])) {
-            $this->query->set_where('tipus', '=', (int)$params['tipus']);
+            $this->query->set_where('tipus', '=', (int) $params['tipus']);
         }
 
         /*         * ** KATEGÓRIA SZERINT **** */
@@ -484,7 +483,7 @@ class Ingatlanok_model extends SiteModel {
             $this->query->set_where('szobaszam', 'between', array($params['min_szobaszam'], $params['max_szobaszam']));
         }
 
-/** JELLEMZŐK **/
+        /** JELLEMZŐK * */
         // állapot
         if ((isset($params['allapot']) && !empty($params['allapot']))) {
             $this->query->set_where('allapot', '=', $params['allapot']);
@@ -495,7 +494,7 @@ class Ingatlanok_model extends SiteModel {
             $this->query->set_where('futes', '=', $params['futes']);
         }
 
-/** EXTRÁK **/
+        /** EXTRÁK * */
         // Bútorozott
         if ((isset($params['ext_butor']) && ($params['ext_butor'] == 1))) {
             $this->query->set_where('ext_butor', '=', 1);
@@ -505,41 +504,41 @@ class Ingatlanok_model extends SiteModel {
             $this->query->set_where('erkely', '=', 1);
         }
 
-/** EGYÉB KERESÉS **/
+        /** EGYÉB KERESÉS * */
         // Referencia szám
         if (isset($params['ref_num']) && $params['ref_num'] !== '') {
             $params['ref_num'] = intval(preg_replace('~\D~', '', $params['ref_num']));
-            $this->query->set_where('ref_num', '=', (int)$params['ref_num']);
+            $this->query->set_where('ref_num', '=', (int) $params['ref_num']);
         }
 
 // Szabad szavas kereső mező
-if (isset($params['free_word']) && $params['free_word'] !== '') {
-    //$this->query->set_where('ingatlan_nev_hu', 'LIKE', '%' . $params['free_word'] . '%');
-    //$this->query->set_where('ingatlan_nev_en', 'LIKE', '%' . $params['free_word'] . '%', 'or');
-    $this->query->set_where('AND (');
-    $this->query->set_where('leiras_hu', 'LIKE', '%' . $params['free_word'] . '%');
-    $this->query->set_where('leiras_en', 'LIKE', '%' . $params['free_word'] . '%', 'or');
-    $this->query->set_where('utca', 'LIKE', '%' . $params['free_word'] . '%', 'or');
-    $this->query->set_where(')');
-}        
+        if (isset($params['free_word']) && $params['free_word'] !== '') {
+            //$this->query->set_where('ingatlan_nev_hu', 'LIKE', '%' . $params['free_word'] . '%');
+            //$this->query->set_where('ingatlan_nev_en', 'LIKE', '%' . $params['free_word'] . '%', 'or');
+            $this->query->set_where('AND (');
+            $this->query->set_where('leiras_hu', 'LIKE', '%' . $params['free_word'] . '%');
+            $this->query->set_where('leiras_en', 'LIKE', '%' . $params['free_word'] . '%', 'or');
+            $this->query->set_where('utca', 'LIKE', '%' . $params['free_word'] . '%', 'or');
+            $this->query->set_where(')');
+        }
 
 
-/*
-        // Ingatlan név hu
-        if (isset($params['ingatlan_nev_hu']) && $params['ingatlan_nev_hu'] !== '') {
-            $this->query->set_where('ingatlan_nev_hu', 'LIKE', '%' . $params['ingatlan_nev_hu'] . '%');
-        }
-        // Ingatlan név en
-        if (isset($params['ingatlan_nev_en']) && $params['ingatlan_nev_en'] !== '') {
-            $this->query->set_where('ingatlan_nev_en', 'LIKE', '%' . $params['ingatlan_nev_en'] . '%');
-        }
-        // Utca
-        if (isset($params['utca']) && $params['utca'] !== '') {
-            $this->query->set_where('utca', 'LIKE', '%' . $params['utca'] . '%');
-        }
- */ 
+        /*
+          // Ingatlan név hu
+          if (isset($params['ingatlan_nev_hu']) && $params['ingatlan_nev_hu'] !== '') {
+          $this->query->set_where('ingatlan_nev_hu', 'LIKE', '%' . $params['ingatlan_nev_hu'] . '%');
+          }
+          // Ingatlan név en
+          if (isset($params['ingatlan_nev_en']) && $params['ingatlan_nev_en'] !== '') {
+          $this->query->set_where('ingatlan_nev_en', 'LIKE', '%' . $params['ingatlan_nev_en'] . '%');
+          }
+          // Utca
+          if (isset($params['utca']) && $params['utca'] !== '') {
+          $this->query->set_where('utca', 'LIKE', '%' . $params['utca'] . '%');
+          }
+         */
 
-/** SORREND **/
+        /** SORREND * */
         // ár szerint
         if (isset($params['order']) && !empty($params['order']) && isset($params['order_by']) && $params['order_by'] == 'ar') {
             if (isset($params['tipus']) && $params['tipus'] == 1) {
@@ -592,7 +591,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
     public function list_query($table) {
         $this->query->set_table(array($table));
         $this->query->set_columns('*');
-        if($table == 'ingatlan_allapot') {
+        if ($table == 'ingatlan_allapot') {
             $this->query->set_orderby('all_order', 'ASC');
         }
         return $this->query->select();
@@ -603,8 +602,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
      *  
      *  @param integer  $id   egy város id-je
      */
-    public function selectCityName($id)
-    {
+    public function selectCityName($id) {
         $this->query->set_table(array('city_list'));
         $this->query->set_columns(array('city_name'));
         $this->query->set_where('city_id', '=', $id);
@@ -617,18 +615,16 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
      *  
      *  @param integer  $id   egy város id-je
      */
-    public function selectCategoryName($id)
-    {
+    public function selectCategoryName($id) {
         $this->query->set_table(array('ingatlan_kategoria'));
         $this->query->set_columns('kat_nev_' . LANG);
         $this->query->set_where('kat_id', '=', $id);
         $result = $this->query->select();
-        if(empty($result)) {
+        if (empty($result)) {
             return '';
         } else {
             return $result[0]['kat_nev_' . LANG];
         }
-
     }
 
     /**
@@ -717,7 +713,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
           }
           $this->query->set_where('ingatlanok.tipus', '=', $tipus);
          */
-        $this->query->set_where('status', '=', 1);
+        $this->query->set_where('deleted', '=', 0);
         $result = $this->query->select();
 
         $temp = array();
@@ -730,6 +726,10 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
                 $temp[$value['city_name']]['id'] = $value['city_id'];
             }
         }
+
+        $arr_helper = DI::get('arr_helper');
+
+        $temp = $arr_helper->sort_multiarray_by_key($temp);
 
         // option lista előállítása a temp tömb felhasználásával
         foreach ($temp as $city_name => $value) {
@@ -923,8 +923,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
      *  @param integer 
      * 	@return array 
      */
-    public function get_agent($id = null)
-    {
+    public function get_agent($id = null) {
         $this->query->set_table(array('users'));
         $this->query->set_columns(array(
             'users.id',
@@ -949,14 +948,14 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
         $this->query->set_where('provider_type', '=', 'admin');
 
         $agents = $this->query->select();
-          // ha nincs a feltételeknek megfelelő referens
-          if (empty($agents)) {
+        // ha nincs a feltételeknek megfelelő referens
+        if (empty($agents)) {
             return false;
-          }
+        }
 
         // ügynökhöz tartozó ingatlanok egy lekérdezéssel (ez gyorsabb!)
         $this->query->set_columns('ref_id');
-        
+
         $this->query->set_where('status', '=', 1);
         $this->query->set_where('deleted', '=', 0);
 
@@ -975,8 +974,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
         foreach ($agents as $key => &$agent) {
             if (isset($temp_arr[$agent['id']])) {
                 $agent['property'] = $temp_arr[$agent['id']];
-            }
-            else {
+            } else {
                 $agent['property'] = 0;
                 // töröljük a tömbből azokat a referenseket, akiknek nincs ingatlanjuk 
                 //unset($agents[$key]);
@@ -997,7 +995,6 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
         } else {
             return (!is_null($id)) ? $agents[0] : $agents;
         }
-
     }
 
     /**
@@ -1022,8 +1019,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
      * @param string    $ar
      * @return array || false 
      */
-    public function hasonloIngatlanok($ingatlan_id, $ingatlan_tipus, $kategoria, $varos, $ar)
-    {
+    public function hasonloIngatlanok($ingatlan_id, $ingatlan_tipus, $kategoria, $varos, $ar) {
         $min_ar = intval($ar - ($ar * 0.1));
         $max_ar = intval($ar + ($ar * 0.1));
         $price_string = ($ingatlan_tipus == 1) ? 'ar_elado' : 'ar_kiado';
@@ -1046,19 +1042,19 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
             'ingatlanok.kepek',
             'ingatlan_kategoria.*',
             'city_list.city_name'
-            ));
+        ));
 
         $this->query->set_join('left', 'ingatlan_kategoria', 'ingatlanok.kategoria', '=', 'ingatlan_kategoria.kat_id');
         $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
         $this->query->set_where('status', '=', 1);
         $this->query->set_where('deleted', '=', 0);
-        $this->query->set_where('tipus', '=', (int)$ingatlan_tipus);
-        $this->query->set_where('kategoria', '=', (int)$kategoria);
-        $this->query->set_where('varos', '=', (int)$varos);
+        $this->query->set_where('tipus', '=', (int) $ingatlan_tipus);
+        $this->query->set_where('kategoria', '=', (int) $kategoria);
+        $this->query->set_where('varos', '=', (int) $varos);
         $this->query->set_where('AND (');
         $this->query->set_where($price_string, 'between', array($min_ar, $max_ar));
         $this->query->set_where(')');
-        $this->query->set_where('ingatlanok.id', '!=', (int)$ingatlan_id, 'and');
+        $this->query->set_where('ingatlanok.id', '!=', (int) $ingatlan_id, 'and');
 
 //$this->query->debug();
         $result = $this->query->select();
@@ -1076,8 +1072,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
      * @param integer $id    ingatlan id
      * @return void
      */
-    public function increase_no_of_clicks($id)
-    {
+    public function increase_no_of_clicks($id) {
         $this->query->set_where('id', '=', $id);
         // a második aparaméter a 'fix' attributum
         $this->query->update(array(), array('megtekintes' => 'megtekintes+1'));
@@ -1386,8 +1381,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
      * 	A paraméter megadja, hogy melyik megyében lévő városokat adja vissza 		
      * 	@param integer	$id 	egy megye id-je (county_id)
      */
-    public function city_list_grouped_by_county()
-    {
+    public function city_list_grouped_by_county() {
         $this->query->set_table(array('city_list'));
         $this->query->set_columns('*');
 
@@ -1409,8 +1403,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
      * 	A paraméter megadja, hogy melyik megyében lévő városokat adja vissza 		
      * 	@param integer	$id 	egy megye id-je (county_id)
      */
-    public function get_filter_params($filter)
-    {
+    public function get_filter_params($filter) {
         $filter_with_names = array();
 
         if (isset($filter['tipus']) && $filter['tipus'] == 1) {
@@ -1516,20 +1509,20 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
         if (isset($filter['ref_id']) && $filter['ref_id'] !== '') {
             $filter_with_names['ref_id'] = $filter['ref_id'];
         }
-        
+
         if (isset($filter['free_word']) && $filter['free_word'] !== '') {
             $filter_with_names['free_word'] = $filter['free_word'];
         }
 
-/*
-        if (isset($filter['utca']) && $filter['utca'] !== '') {
-            $filter_with_names['utca'] = $filter['utca'];
-        }
+        /*
+          if (isset($filter['utca']) && $filter['utca'] !== '') {
+          $filter_with_names['utca'] = $filter['utca'];
+          }
 
-        if (isset($filter['ingatlan_nev_' . LANG]) && $filter['ingatlan_nev_' . LANG] !== '') {
-            $filter_with_names['ingatlan_nev_' . LANG] = $filter['ingatlan_nev_' . LANG];
-        }
-*/        
+          if (isset($filter['ingatlan_nev_' . LANG]) && $filter['ingatlan_nev_' . LANG] !== '') {
+          $filter_with_names['ingatlan_nev_' . LANG] = $filter['ingatlan_nev_' . LANG];
+          }
+         */
 
 
         if (isset($filter['view'])) {
@@ -1597,15 +1590,13 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
         }
     }
 
-
     /**
      * A felhasználó által árváltozás értesítésre kijelölt ingatlanok adatait adja vissza
      *
      * @param integer $user_id
      * @return array
      */
-    public function followedByProperty($user_id)
-    {
+    public function followedByProperty($user_id) {
         // user-hez tartozó ingatlan id-k lekérdezése az arvaltozas tablabol    
         $this->query->set_table('arvaltozas');
         $this->query->set_columns('property_id');
@@ -1613,7 +1604,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
         $temp = $this->query->select();
         $id_array = array();
 
-        if(!empty($temp)) {
+        if (!empty($temp)) {
             foreach ($temp as $value) {
                 $id_array[] = $value['property_id'];
             }
@@ -1654,7 +1645,7 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
 
         return $this->query->select();
     }
-	
+
     /**
      * 	Frissíti a cookie-t a nemrég megtekintett ingatlanokhoz
      */
@@ -1663,17 +1654,18 @@ if (isset($params['free_word']) && $params['free_word'] !== '') {
 
         if (is_array($nemreg_megtekintett_array) && !in_array($id, $nemreg_megtekintett_array)) {
             array_unshift($nemreg_megtekintett_array, $id);
-			if(count($nemreg_megtekintett_array) > 10) {
-				array_pop($nemreg_megtekintett_array);
-			}
+            if (count($nemreg_megtekintett_array) > 10) {
+                array_pop($nemreg_megtekintett_array);
+            }
             $nemreg_megtekintett_json = json_encode($nemreg_megtekintett_array);
             Cookie::set('nemreg_megtekintett', $nemreg_megtekintett_json);
         } elseif ($nemreg_megtekintett_array == null) {
             $nemreg_megtekintett_array[] = $id;
             $nemreg_megtekintett_json = json_encode($nemreg_megtekintett_array);
             Cookie::set('nemreg_megtekintett', $nemreg_megtekintett_json);
-        } 
-    }	
+        }
+    }
 
 }
+
 ?>

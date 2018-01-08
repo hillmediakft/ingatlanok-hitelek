@@ -49,15 +49,20 @@ class Url {
      * @return  string  a fájl verzióval ellátott elérési útvonala
      */
     public function autoVersion($uri) {
-        if (substr($uri, 0, 1) == "/") {
-            // relatív URI
-            $fname = $_SERVER["DOCUMENT_ROOT"] . $uri;
-        } else {
-            // abszolút URI
-            $fname = $uri;
-        }
-        $ftime = filemtime($fname);
-        return $uri . '?v=' . $ftime;
+        //ha külső forrásra mutat a link
+		if(strpos($uri,'http') !== false) {
+			return $uri;
+		} else {
+			if (substr($uri, 0, 1) == "/") {
+				// relatív URI
+				$fname = $_SERVER["DOCUMENT_ROOT"] . $uri;
+			} else {
+				// abszolút URI
+				$fname = $uri;
+			}
+			$ftime = filemtime($fname);
+			return $uri . '?v=' . $ftime;
+		}
     }
 
     /**

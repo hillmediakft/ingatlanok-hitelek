@@ -988,6 +988,41 @@
                                     </div> <!-- row END -->
                                 </div>
                             </div>
+                            
+                            
+                             <!-- ALAPRAJZOK -->
+                            <div class="portlet light bg-inverse">
+                                <div class="portlet-title">
+                                    <div class="caption font-green-sharp">
+                                        <i class="icon-share font-green-sharp"></i>
+                                        <span class="caption-subject bold uppercase"> Alaprajzok feltöltése</span>
+                                    </div>
+
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="portlet">
+                                                <div class="portlet-body">
+                                                    <h4 class="block">Feltöltött alaprajzok:</h4>
+                                                    <ul id="alaprajz_list">
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <!-- KÉPEK FELTÖLTÉSE -->
+                                            <div class="portlet">
+                                                <div class="portlet-body">
+                                                    <h4 class="block">Alaprajz hozzáadása:</h4>
+                                                    <input type="file" name="new_file[]" multiple="true" id="input-alaprajz" />
+                                                </div>
+                                            </div>		
+                                        </div>
+                                    </div> <!-- row END -->		
+                                </div>
+                            </div>                            
+                            
                             <!-- DOKUMENTUMOK -->
                             <div class="portlet light bg-inverse">
                                 <div class="portlet-title">

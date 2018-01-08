@@ -1254,7 +1254,7 @@ class Property extends AdminController {
 
                             if ($update_real) {
                                 Message::set('success', 'A módosítások sikeresen elmentve!');
-                                EventManager::trigger('update_property', array('update', '#' . $id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan módosítása'));
+
 
                                 // ha módosították az árat (nem az eredeti árat)
                                 if ($ar_elado_modosult === true || $ar_kiado_modosult === true) {
@@ -1290,6 +1290,8 @@ class Property extends AdminController {
                                     EventManager::trigger('update_property', array('update', '#' . $id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan ára megváltozott'));
                                     // E-mail küldése admin-oknak
                                     //EventManager::trigger('send_info_email', array('ref_num' => array($data['ref_num']), 'message' => 'referencia számú ingatlan ára módosult.'));
+                                } else {
+                                    EventManager::trigger('update_property', array('update', '#' . $id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan módosítása'));
                                 }
                             } else {
                                 Message::set('success', 'Ingatlan adatai elmentve.');

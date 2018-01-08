@@ -71,7 +71,8 @@ class Logs_model extends AdminModel {
         $time_in_past = date('Y-m-d h:i:s', time() - (60 * 60 * 24));
 
 
-        $this->query->set_columns(array(
+        $this->query->debug(false);
+		$this->query->set_columns(array(
             'logs.*',
             'users.first_name',
             'users.last_name',
@@ -80,7 +81,7 @@ class Logs_model extends AdminModel {
         $this->query->set_join('left', 'users', 'users.id', '=', 'logs.user_id');
         $this->query->set_where('date', '>', $time_in_past);
         $result = $this->query->select();
-        return $result;
+		return $result;
     }
 
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace System\Admin\Controller;
 
 use System\Core\AdminController;
@@ -7,16 +8,14 @@ use System\Helper\Str;
 use System\Libs\Language as Lang;
 use System\Libs\DI;
 
-
 class Adatlap extends AdminController {
 
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
         $this->loadModel('property_model');
-		$this->str_helper = DI::get('str_helper');
+        $this->str_helper = DI::get('str_helper');
     }
-    
+
     /**
      * Ingatlan adatlap pdf generálása és küldése a böngészőnek
      *  
@@ -31,7 +30,7 @@ class Adatlap extends AdminController {
 
         $agent = $this->property_model->get_agent($agent_id);
         $ingatlan = $this->property_model->getPropertyDetails($id);
-
+        $alaprajzok = json_decode($ingatlan['alaprajzok']);
         $all_photos = json_decode($ingatlan['kepek']);
         $photos = array_slice($all_photos, 0, 2);
         $photos2 = array_slice($all_photos, 0, 8);
@@ -442,41 +441,41 @@ class Adatlap extends AdminController {
          */
         $pdf->AddPage();
         // link, x, y, width
- /*       $pdf->Image('public/site_assets/images/logo_pdf.png', 10, 10, 35);
-        $pdf->SetFont('arialb', '', 9);
-        $pdf->Cell(0, 43, $this->utf8_to_latin2_hun('Ingatlan - hitel - befektetés'), 0, 0, 'L', 0);
+        /*       $pdf->Image('public/site_assets/images/logo_pdf.png', 10, 10, 35);
+          $pdf->SetFont('arialb', '', 9);
+          $pdf->Cell(0, 43, $this->utf8_to_latin2_hun('Ingatlan - hitel - befektetés'), 0, 0, 'L', 0);
 
-*/
+         */
 
 
         /*
          * Névjegykártya
          */
         // névjegykártya keret
- /*       $pdf->Image('public/site_assets/images/border.png', 134, 7, 67);
-        $pdf->SetXY(135, 14);
-        $pdf->SetDrawColor(200, 200, 200);
+        /*       $pdf->Image('public/site_assets/images/border.png', 134, 7, 67);
+          $pdf->SetXY(135, 14);
+          $pdf->SetDrawColor(200, 200, 200);
 
-        $pdf->SetFont('arial', '', 6);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('1095 Budapest, Bakáts u. 1.'), 0, 2, 'L', 0);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('Tel: 06-1-215-1490'), 0, 2, 'L', 0);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('Mobil: ') . $this->utf8_to_latin2_hun($agent['phone']), 0, 2, 'L', 0);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('E-mail: ' . $this->utf8_to_latin2_hun($agent['email'])), 0, 2, 'L', 0);
-        $pdf->SetXY(175, 14);
-        $pdf->SetFont('arial', '', 7);
-        $pdf->Cell(0, 3, '', 0, 2, 'L', 0);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun($agent['first_name']) . ' ' . $this->utf8_to_latin2_hun($agent['last_name']), 0, 2, 'L', 0);
-        $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('Ingatlan tanácsadó'), 0, 2, 'L', 0);
-        $pdf->SetXY(135, 28);
-        $pdf->SetFillColor(158, 40, 40);
-        $pdf->SetTextColor(255, 255, 255);
-        $pdf->Cell(0, 5, 'https://ingatlanok-hitelek.hu', 0, 2, 'C', 1);
+          $pdf->SetFont('arial', '', 6);
+          $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('1095 Budapest, Bakáts u. 1.'), 0, 2, 'L', 0);
+          $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('Tel: 06-1-215-1490'), 0, 2, 'L', 0);
+          $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('Mobil: ') . $this->utf8_to_latin2_hun($agent['phone']), 0, 2, 'L', 0);
+          $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('E-mail: ' . $this->utf8_to_latin2_hun($agent['email'])), 0, 2, 'L', 0);
+          $pdf->SetXY(175, 14);
+          $pdf->SetFont('arial', '', 7);
+          $pdf->Cell(0, 3, '', 0, 2, 'L', 0);
+          $pdf->Cell(0, 3, $this->utf8_to_latin2_hun($agent['first_name']) . ' ' . $this->utf8_to_latin2_hun($agent['last_name']), 0, 2, 'L', 0);
+          $pdf->Cell(0, 3, $this->utf8_to_latin2_hun('Ingatlan tanácsadó'), 0, 2, 'L', 0);
+          $pdf->SetXY(135, 28);
+          $pdf->SetFillColor(158, 40, 40);
+          $pdf->SetTextColor(255, 255, 255);
+          $pdf->Cell(0, 5, 'https://ingatlanok-hitelek.hu', 0, 2, 'C', 1);
 
-        $pdf->SetXY(10, 35);
-        $pdf->SetFillColor(230, 230, 230);
+          $pdf->SetXY(10, 35);
+          $pdf->SetFillColor(230, 230, 230);
 
-        $pdf->Cell(0, 1, '', 0, 2, 'L', true);
-        $pdf->Ln(5); */
+          $pdf->Cell(0, 1, '', 0, 2, 'L', true);
+          $pdf->Ln(5); */
 
         /*         * ***** képek megjelenítése ******** */
         $pdf->SetTextColor(0, 0, 0);
@@ -486,23 +485,22 @@ class Adatlap extends AdminController {
         foreach ($photos2 as $value) {
             if ($k % 2 == 0) {
 
-                    $x = 100;
-                   
+                $x = 100;
 
-           //      $pdf->Cell(0, 5, 'k: ' . $k . ' x= ' . $x . ' y= ' . $y, 0, 2, 'L', 0);
-                
+
+                //      $pdf->Cell(0, 5, 'k: ' . $k . ' x= ' . $x . ' y= ' . $y, 0, 2, 'L', 0);
+
                 $pdf->Image(Config::get('ingatlan_photo.upload_path') . '/' . $value, $x, $y, 80);
-                 $y = $y + 65;
+                $y = $y + 65;
             } else {
                 $x = 10;
-                 
-      //        $pdf->Cell(0, 5, 'k: ' . $k . ' x= ' . $x . ' y= ' . $y, 0, 2, 'L', 0);
-                
-                $pdf->Image(Config::get('ingatlan_photo.upload_path') . '/' . $value, $x, $y, 80);
 
+                //        $pdf->Cell(0, 5, 'k: ' . $k . ' x= ' . $x . ' y= ' . $y, 0, 2, 'L', 0);
+
+                $pdf->Image(Config::get('ingatlan_photo.upload_path') . '/' . $value, $x, $y, 80);
             }
 
-            $k = $k+1;
+            $k = $k + 1;
         }
 
 
@@ -510,6 +508,55 @@ class Adatlap extends AdminController {
 
 
         /*         * ************* MÁSODIK OLDAL VÉGE ********* */
+
+
+        /*
+         * ************** Harmadik OLDAL *********************
+         */
+        if (!empty($alaprajzok)) {
+            $pdf->AddPage();
+
+            $pdf->SetTextColor(0, 0, 0);
+
+
+            $x = 10;
+            $y = 15;
+            $max = (count($alaprajzok) <= 3) ? count($alaprajzok) : 3;
+            for ($k = 1; $k <= $max; $k++) {
+                //      $pdf->Cell(0, 5, 'k: ' . $k . ' x= ' . $x . ' y= ' . $y, 0, 2, 'L', 0);
+
+                $pdf->Image(Config::get('ingatlan_photo_floor_plan.upload_path') . '/' . $alaprajzok[$k - 1], $x, $y, 110);
+                $y = $y + 90;
+            }
+
+            /* alaprajzok megjelenítése két oszlopban */
+            /*
+              $x = 10;
+              $y = 15;
+              $k = 1;
+              foreach ($alaprajzok as $value) {
+              if ($k % 2 == 0) {
+
+              $x = 100;
+
+
+              //      $pdf->Cell(0, 5, 'k: ' . $k . ' x= ' . $x . ' y= ' . $y, 0, 2, 'L', 0);
+
+              $pdf->Image(Config::get('ingatlan_photo_floor_plan.upload_path') . '/' . $value, $x, $y, 80);
+              $y = $y + 65;
+              } else {
+              $x = 10;
+
+              //        $pdf->Cell(0, 5, 'k: ' . $k . ' x= ' . $x . ' y= ' . $y, 0, 2, 'L', 0);
+
+              $pdf->Image(Config::get('ingatlan_photo_floor_plan.upload_path') . '/' . $value, $x, $y, 80);
+              }
+
+              $k = $k + 1;
+              } */
+        }
+        /*         * ************* HARMADIK OLDAL VÉGE ********* */
+
 
         $pdf->Output('adatlap_' . $id . '.pdf', 'D');
         exit();
@@ -523,6 +570,8 @@ class Adatlap extends AdminController {
         // U+00A0       \xc2\xa0    &#xA0;      NO-BREAK SPACE
         // \x20 space karakter
         // U+00C2   Â   \xc3\x82    &#xC2;  Â   LATIN CAPITAL LETTER A WITH CIRCUMFLEX        
-    }  
+    }
+
 }
+
 ?>

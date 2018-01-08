@@ -42,10 +42,11 @@ class Blog extends AdminController {
 		if( $this->request->is_post() ){
 
 			// kép feltöltési hiba vizsgálata
+                    /*
 			if($this->request->checkUploadError('upload_blog_picture')){
 				Message::set('error', $this->request->getFilesError('upload_blog_picture'));
 				$this->response->redirect('admin/blog/insert');				
-			}
+			} */
 /*			
 if($this->request->checkUploadError('upload_blog_picture')){
 	foreach ($this->request->getFileError('upload_blog_picture') as $filename => $error_msg) {
@@ -61,10 +62,13 @@ if($this->request->checkUploadError('upload_blog_picture')){
 				if ($dest_image === false) {
 					$this->response->redirect('admin/blog/insert');
 				}
-			} else {
-				Message::set('error', 'uploaded_missing');
-				$this->response->redirect('admin/blog/insert');
-			}
+			} 
+                   
+                        else {
+			//	Message::set('error', 'uploaded_missing');
+			//	$this->response->redirect('admin/blog/insert');
+                            $dest_image = 'placeholder';
+			} 
 
 
 			// az adatbázisba kerülő adatok

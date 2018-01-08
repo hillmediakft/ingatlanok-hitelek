@@ -11,37 +11,44 @@ CKEDITOR.addTemplates("default",
 			                      
         {
         title:"Szöveg dobozban",
-	image:"szoveg_dobozban.jpg",
+	image:"szoveg_doboz.jpg",
 	description:"Szöveg dobozban",
 	html: '<div class="well">Nullam tincidunt gravida erat, vel faucibus ligula luctus a.&nbsp;</div>'
         },
         
         {
         title:"Kiemelt szöveg",
-	image:"szoveg_kiemeles.jpg",
+	image:"szoveg_kiemelese.jpg",
 	description:"Szöveg kiemelése nagyobb méretben",
 	html: '<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p></blockquote>'
         },        
 
 {
         title:"Lista elem",
-	image:"list.jpg",
+	image:"lista.jpg",
 	description:"Pipával ellátott lista",
-	html: '<ul><li><i class="fa fa-check"></i>&nbsp;Lorem ipsus lures</li><li><i class="fa fa-check"></i>&nbsp;Lorem ipsus lures</li><li><i class="fa fa-check"></i>&nbsp;Lorem ipsus lures</li><li><i class="fa fa-check"></i>&nbsp;Lorem ipsus lures</li><li><i class="fa fa-check"></i>&nbsp;Lorem ipsus lures</li><li><i class="fa fa-check"></i>&nbsp;Lorem ipsus lures</li></ul>'
+	html: '<ul listing style-1><li>Lorem ipsus lures</li><li>Lorem ipsus lures</li><li>Lorem ipsus lures</li><li>Lorem ipsus lures</li><li>Lorem ipsus lures</li><li>Lorem ipsus lures</li></ul>'
         },          
 
 {
         title:"Gomb linkkel",
-	image:"gomb_link.jpg",
+	image:"gomb_linkkel.jpg",
 	description:"Linket tartalmazó további részletek gomb",
-	html: '<div class="margin-top-20 margin-bottom-20"><a href="#" class="btn btn-primary" target="_self">További részletek&nbsp;<i class="fa fa-arrow-right"></i></a></div>'
+	html: '<a class="simple-btn sm-button filled red" href="#">Tovább</a>'
         },          
        
 {
         title:"Link",
-	image:"link_arrow.jpg",
+	image:"arrow_link.jpg",
 	description:"Egyszerű link nyíllal",
-	html: '<p class="margin-bottom-15 margin-top-20"><a href="#"><i class="fa fa-arrow-right"></i> További információ</a></p>'
-        }         
+	html: '<p class="outbound-link><a href="#">További információ <i class="fa fa-arrow-right"></i></a></p>'
+        },
+{
+        title:"Kép középen",
+	image:"image-center.jpg",
+	description:"Középre rendezett kép",
+	html: '<img class="center-block" alt="" src="/public/admin_assets/img/placeholder-400x300.png">'
+        }          
 		]
 });
+

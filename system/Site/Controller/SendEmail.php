@@ -90,7 +90,14 @@ class SendEmail extends SiteController {
                     $this->template = $template;
                     $this->from_email = $this->request->get_post('email');
                     $this->from_name = $this->request->get_post('name');
-                } else {
+                } elseif ($template == "on_hirdetese") {
+                    $this->to_email = $data['settings']['email'];
+                    $this->to_name = $data['settings']['ceg'];
+                    $this->subject = 'Hirdetni szeretnék';
+                    $this->template = $template;
+                    $this->from_email = $this->request->get_post('email');
+                    $this->from_name = $this->request->get_post('name');
+                }else {
                     exit;
                 }
                 $this->send();

@@ -702,3 +702,15 @@ footer.footer .bottom-footer .policies {
 .objects-block .item-anchor .item-entry p {
     color: #808080;
 }
+
+/* *********** SZÖVEG MÉRETEK ***** */
+p.text-16 {
+    font-size: 16px;
+}
+p.outbound-link {
+    color: #9e2828; 
+}
+
+hr {
+    border-top: 3px solid #eee;
+}

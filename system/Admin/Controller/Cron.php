@@ -39,6 +39,8 @@ class Cron extends AdminController {
      */
 
     public function sendLogEmail() {
+	
+		$html_data = "";
 
         $this->loadModel('logs_model');
         $this->loadModel('settings_model');
@@ -46,9 +48,18 @@ class Cron extends AdminController {
         $this->loadModel('property_model');
 
         $daily_logs = $this->logs_model->getDailyLogs();
+		if(!empty($daily_logs)) {
+		foreach($daily_logs as $key => $value) {
+			unset($value['id']);
+			unset($value['date']);
+			$temp[] = $value;
+		}
+
+		$unique = array_map('unserialize', array_unique(array_map('serialize', $temp)));
+		
         $data = array();
         // módosított ingatlanok tömbjének előállítása
-        foreach ($daily_logs as $key => $log) {
+        foreach ($unique as $key => $log) {
             //ingatlan id kinyerése a log üzenetből
             $result = explode('/', $log['message']);
             $id = substr($result[0], 1);
@@ -68,7 +79,6 @@ class Cron extends AdminController {
         $url_helper = DI::get('url_helper');
         $str_helper = DI::get('str_helper');
 
-        $html_data = "";
         $html_data .= "<tr style='background: #eee;'>\r\n";
         $html_data .= "<td></td>";
         $html_data .= "<td style='padding: 4px;'><strong>Ingatlan</strong></td>";
@@ -90,7 +100,9 @@ class Cron extends AdminController {
             $html_data .= "<td><a style='color:blue;' href='" . BASE_URL . 'ingatlanok/adatlap/' . $value['id'] . '/' . $str_helper->stringToSlug($value['ingatlan_nev_hu']) . "' target='_blank'>link-></a></td>";
             $html_data .= "</tr>\r\n";
         }
-
+} else {
+		 $html_data .= "<p>Az ingatlan adatbázisban nem történt módosítás.</p>";	
+}
         // template-be kerülő változók
         $template_data = array(
             'html_data' => $html_data,

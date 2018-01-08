@@ -2,6 +2,8 @@
 
 namespace System\Helper;
 
+use System\Libs\DI;
+
 /**
  * Array helper
  */
@@ -98,6 +100,22 @@ class Arr {
         // returns false if no result found
         return ($newindex >= 0 && $newindex < sizeof($hash)) ? $keys[$newindex] : false;
     }
+    
+    /**
+     * Multidimenziós tömb sorba rendezése key alapján ékeztes karakterekkel  
+     * @param   array       tömb
+     * @return   array     sorba rendezett tömb   
+     */    
+    public function sort_multiarray_by_key($array) {
+        $str_helper = DI::get('str_helper');
+    
+        $newarray = array();
+        foreach ($array as $key => $value) {
+            $newarray[] = $str_helper->stringToSlug($key);
+        }
+        array_multisort($newarray, SORT_ASC, $array);
+        return $array;
+    }    
 
 }
 

@@ -93,6 +93,8 @@ class Application {
             $router->get('/befektetoknek', 'Befektetoknek@index');
             // berbeadoknak
             $router->get('/berbeadoknak', 'Berbeadoknak@index');
+            // Az ön hirdetése
+            $router->get('/on-hirdetese', 'OnHirdetese@index');
             // keresés elmentése - AJAX
             $router->post('/kereses/savesearch', 'Kereses@saveSearch');
             $router->post('/adatlap/:id', 'Adatlap@index');
