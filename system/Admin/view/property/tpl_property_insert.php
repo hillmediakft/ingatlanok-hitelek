@@ -794,6 +794,22 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <!-- FÖLDRAJZI SZÉLESSÉG -->
+                                                    <div class="form-group">
+                                                        <label for="latitude" class="control-label">Földrajzi szélesség</label>
+                                                        <input type="text" name="latitude" id="latitude" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!-- FÖLDRAJZI HOSSZÚSÁG -->
+                                                    <div class="form-group">
+                                                        <label for="longitude" class="control-label">Földrajzi hosszúság</label>
+                                                        <input type="text" name="longitude" id="longitude" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>                                            
 
                                             <!-- CHECKBOX-OK -->
                                             <div class="form-group">
@@ -815,7 +831,12 @@
 
                                         <div class="col-md-6">
                                             <!-- BEGIN GEOCODING PORTLET-->
-                                            <div class="note note-info"><small>A megye és város kiválasztása, valamint az utca, irónyítószám és házszám megadása után ellenőrizheti, hogy az ingatlan a megfelelő pozícióban jelenik-e meg a Google térképen.</small></div>
+                                            <div class="note note-info">
+                                                <small>A megye és város kiválasztása, valamint az utca, irónyítószám és házszám megadása után ellenőrizheti, hogy az ingatlan a megfelelő pozícióban jelenik-e meg a Google térképen.
+                                                    <br /><br />
+                                                    A földrajzi szélesség és földrajzi hosszúság mezők automatikusan megkapják a térképen megjelenített hely koordinátáit!
+                                                </small>
+                                            </div>
                                             <div class="portlet light portlet-fit bordered">
                                                 <div class="portlet-title">
                                                     <div class="caption">

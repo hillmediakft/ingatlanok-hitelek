@@ -1114,9 +1114,15 @@ var updateProperty = function () {
                         lat: latlng.lat(),
                         lng: latlng.lng()
                     });
+                    
+                    $('#latitude').val(latlng.lat());
+                    $('#longitude').val(latlng.lng());
+                    
                     App.scrollTo($('#gmap_geocoding'));
 
                 } else {
+                    $('#latitude').val('');
+                    $('#longitude').val('');
                     $('#address_message').html('<div class="note note-danger note-bordered">Nem állapítható meg cím! Ellenőrizza a cím adatokat!</div>');
                 }
             }

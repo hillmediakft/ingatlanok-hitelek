@@ -10,7 +10,7 @@ use System\Libs\Config;
 use System\Libs\Message;
 use System\Libs\DI;
 use System\Libs\EventManager;
-use System\Libs\Geocoder;
+//use System\Libs\Geocoder;
 use System\Libs\Uploader;
 use System\Libs\Emailer;
 use System\Libs\Language as Lang;
@@ -1179,10 +1179,10 @@ class Property extends AdminController {
                         $data['epulet_szintjei'] = ($data['epulet_szintjei'] !== '') ? $data['epulet_szintjei'] : null;
                     }
 
-                    //geolocation
+                //geolocation
+                    /*
                     // lekérdezzük a város nevét az id-je alapján
                     $city_name = $this->property_model->getCityName($data['varos']);
-                    //$address = $iranyitoszam . ' ' . $varos . ' ' . $utca . ' ' . $hazszam . ' ' . $kerulet . ' kerulet';
                     $address = $data['iranyitoszam'] . ' ' . $city_name . ' ' . $data['utca'] . ' ' . $data['hazszam'];
                     $loc = Geocoder::getLocation($address);
                     if ($loc) {
@@ -1192,7 +1192,11 @@ class Property extends AdminController {
                         $data['latitude'] = 0;
                         $data['longitude'] = 0;
                     }
-
+                    */
+                    $data['latitude'] = (!empty($data['latitude'])) ? $data['latitude'] : null;
+                    $data['longitude'] = (!empty($data['longitude'])) ? $data['longitude'] : null;
+                                        
+                    
                     $data['utca_megjelenites'] = (isset($data['utca_megjelenites'])) ? 1 : 0;
                     $data['hazszam_megjelenites'] = (isset($data['hazszam_megjelenites'])) ? 1 : 0;
                     $data['terkep'] = (isset($data['terkep'])) ? 1 : 0;
