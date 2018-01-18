@@ -123,8 +123,12 @@ use System\Libs\Language as Lang;
                                                         <span class="value"><?php echo $value['kat_nev_' . LANG]; ?></span>
                                                     </div>
                                                     <div class="single-thumbnail">
-
-                                                        <span class="value"><?php echo (!empty($value['szobaszam'])) ? $value['szobaszam'] . ' ' . mb_strtolower(Lang::get('jell_szobaszam'), 'UTF-8') : ''; ?></span>
+                                                        <span class="value">
+                                                        <?php
+                                                            $felszobaszam = (!empty($value['felszobaszam'])) ? '+ ' . $value['felszobaszam'] . ' ' : '';
+                                                            echo (!empty($value['szobaszam'])) ? $value['szobaszam'] . ' ' . $felszobaszam . mb_strtolower(Lang::get('jell_szobaszam'), 'UTF-8') : ''; 
+                                                        ?>                                                        
+                                                        </span>
                                                     </div>
                                                     <div class="single-thumbnail">
                                                         <span class="value"><?php echo $value['alapterulet']; ?> m<sup>2</sup></span>
@@ -207,7 +211,12 @@ use System\Libs\Language as Lang;
                                                         <span class="value"><?php echo $value['kat_nev_' . LANG]; ?></span>
                                                     </div>
                                                     <div class="single-thumbnail">
-                                                        <span class="value"><?php echo $value['szobaszam']; ?> szoba</span>
+                                                        <span class="value">
+                                                        <?php
+                                                            $felszobaszam = (!empty($value['felszobaszam'])) ? '+ ' . $value['felszobaszam'] . ' ' : '';
+                                                            echo (!empty($value['szobaszam'])) ? $value['szobaszam'] . ' ' . $felszobaszam . mb_strtolower(Lang::get('jell_szobaszam'), 'UTF-8') : ''; 
+                                                        ?>
+                                                        </span>
                                                     </div>
                                                     <div class="single-thumbnail">
                                                         <span class="value"><?php echo $value['alapterulet']; ?> m<sup>2</sup></span>

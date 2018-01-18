@@ -143,7 +143,7 @@ class Ingatlanok extends SiteController {
 		        if (empty($data['ingatlan'])) {
             $this->response->redirect('ingatlanok/nem-talalhato-az-ingatlan');
         }
-
+        
         // ha az ingatlan kategória 1 akkor 225, egyébként 450
         $data['ingatlan']['map_circle_size'] = ($data['ingatlan']['kategoria'] === '1') ? 225 : 450;
 
@@ -210,8 +210,7 @@ class Ingatlanok extends SiteController {
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'num_helper', 'html_helper'));
 //$this->view->debug(true); 
-        
-        
+                
 
         $view->add_links(array('google-maps-site'));
         $view->add_link('js', SITE_JS . 'pages/kedvencek.js');

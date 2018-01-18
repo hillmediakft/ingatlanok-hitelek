@@ -33,7 +33,7 @@ class Home extends SiteController {
         
         // kiemelt ingatlanok
         $data['all_properties'] = $this->ingatlanok_model->kiemelt_properties_query(10);
-		
+
         // ingatlan értékesítők
         $data['agents'] = $this->ingatlanok_model->get_agent();
         // csak azok az ügynökök jelennek meg, akiknek van ingatlanjuk

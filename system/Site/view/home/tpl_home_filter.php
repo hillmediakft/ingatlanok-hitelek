@@ -18,6 +18,7 @@ use System\Libs\Language as Lang;
                                 <span class="item-label"><?php echo Lang::get('kereso_elado'); ?>/<?php echo Lang::get('kereso_kiado'); ?></span>
                                 <div id="tipus_select_div" class="ui-front">
                                     <select name="tipus" id="tipus_select" data-icon="false" class="select filter-select">
+                                        <option <?php echo (!isset($filter_params['tipus']) || (isset($filter_params['tipus']) && $filter_params['tipus'] == '')) ? 'selected' : ''; ?> value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                                         <option <?php echo (isset($filter_params['tipus']) && $filter_params['tipus'] == 1) ? 'selected' : ''; ?> value="1"><?php echo Lang::get('kereso_elado'); ?></option>
                                         <option <?php echo (isset($filter_params['tipus']) && $filter_params['tipus'] == 2) ? 'selected' : ''; ?> value="2"><?php echo Lang::get('kereso_kiado'); ?></option>
                                     </select>
@@ -29,6 +30,7 @@ use System\Libs\Language as Lang;
                                 <span class="item-label"><?php echo Lang::get('kereso_varos'); ?></span>
                                 <div id="varos_select_div" class="ui-front">
                                     <select name="varos" id="varos_select" data-icon="false" class="select filter-select">
+                                        <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                                         <?php echo $city_list; ?>
                                     </select>
                                 </div>
@@ -52,6 +54,7 @@ use System\Libs\Language as Lang;
                                 <span class="item-label"><?php echo Lang::get('kereso_kategoria'); ?></span>
                                 <div id="category_select_div" class="ui-front">
                                     <select name="kategoria" id="category_select" data-icon="false" class="select filter-select">
+                                        <option value="">-- <?php echo Lang::get('kereso_mindegy'); ?> --</option>
                                         <?php foreach ($category_list as $value) : ?>
                                             <option value="<?php echo $value['kat_id']; ?>" <?php echo ($selected_kategoria == $value['kat_id']) ? 'selected' : ''; ?>><?php echo $value['kat_nev_' . LANG]; ?></option>
                                         <?php endforeach ?>
