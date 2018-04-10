@@ -238,7 +238,8 @@ class Ingatlanok_model extends SiteModel {
         $num_helper = DI::get('num_helper');
 
         // Ár mezők adatit alakítjuk át
-        if (isset($params['tipus']) && $params['tipus'] == 1) {
+        // ha a típus 1, vagy nincs tipus
+        if ( (isset($params['tipus']) && $params['tipus'] == 1) || (!isset($params['tipus']) || empty($params['tipus'])) ) {
 
             if ((isset($params['min_ar']) && ($params['min_ar']) !== '')) {
                 $params['min_ar'] = intval($num_helper->stringToNumber($params['min_ar']) * 1000000);
@@ -427,6 +428,13 @@ class Ingatlanok_model extends SiteModel {
                 // $this->query->set_where('ar_kiado', '>=', $params['min_ar']);
                 // $this->query->set_where('ar_kiado', '<=', $params['max_ar']);
             }
+            // ha nincs tipus
+            else {
+                $this->query->set_where('AND (');
+                $this->query->set_where('ar_elado', 'between', array($params['min_ar'], $params['max_ar']));
+                $this->query->set_where(')');
+            }
+            
         }
 
 
