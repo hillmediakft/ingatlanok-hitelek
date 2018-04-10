@@ -134,11 +134,14 @@ var handleSearch = function () {
         $( "#tipus_select" ).selectmenu({
 			change: function( event, ui ) {
 				if (ui.item.value == 1) {
+                    $('#ar_mertek').text('M Ft');
+                }
+                else if (ui.item.value == 2) {
+                    $('#ar_mertek').text(ezer + ' Ft');
+                }
+                else {
 					$('#ar_mertek').text('M Ft');
-				}
-				else if (ui.item.value == 2) {
-					$('#ar_mertek').text(ezer + ' Ft');
-				}
+                }
 			}
         });
     // mobil
@@ -150,6 +153,9 @@ var handleSearch = function () {
 				else if (ui.item.value == 2) {
 					$('#ar_mertek_mobile').text(ezer + ' Ft');
 				}
+                else {
+                    $('#ar_mertek_mobile').text('M Ft');
+                }
 			}
         }); 
 
