@@ -104,7 +104,7 @@ use System\Libs\Language as Lang;
                             <input name="min_ar" type="text" class="form-control" placeholder="min." value="<?php echo (isset($filter_params['min_ar'])) ? $filter_params['min_ar'] : ''; ?>">
                             <div class="input-group-addon input-group-addon-hypen">-</div>
                             <input name="max_ar" type="text" class="form-control" placeholder="max." value="<?php echo (isset($filter_params['max_ar'])) ? $filter_params['max_ar'] : ''; ?>">
-                            <div class="input-group-addon" id="ar_min_mertek">M Ft</div>
+                            <div class="input-group-addon" id="ar_mertek">M Ft</div>
                         </div>
                     </div>
                 </div>
