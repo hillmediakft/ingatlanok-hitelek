@@ -1179,24 +1179,24 @@ class Property extends AdminController {
                         $data['epulet_szintjei'] = ($data['epulet_szintjei'] !== '') ? $data['epulet_szintjei'] : null;
                     }
 
-                //geolocation
+                    //geolocation
                     /*
-                    // lekérdezzük a város nevét az id-je alapján
-                    $city_name = $this->property_model->getCityName($data['varos']);
-                    $address = $data['iranyitoszam'] . ' ' . $city_name . ' ' . $data['utca'] . ' ' . $data['hazszam'];
-                    $loc = Geocoder::getLocation($address);
-                    if ($loc) {
-                        $data['latitude'] = $loc['lat'];
-                        $data['longitude'] = $loc['lng'];
-                    } else {
-                        $data['latitude'] = 0;
-                        $data['longitude'] = 0;
-                    }
-                    */
+                      // lekérdezzük a város nevét az id-je alapján
+                      $city_name = $this->property_model->getCityName($data['varos']);
+                      $address = $data['iranyitoszam'] . ' ' . $city_name . ' ' . $data['utca'] . ' ' . $data['hazszam'];
+                      $loc = Geocoder::getLocation($address);
+                      if ($loc) {
+                      $data['latitude'] = $loc['lat'];
+                      $data['longitude'] = $loc['lng'];
+                      } else {
+                      $data['latitude'] = 0;
+                      $data['longitude'] = 0;
+                      }
+                     */
                     $data['latitude'] = (!empty($data['latitude'])) ? $data['latitude'] : null;
                     $data['longitude'] = (!empty($data['longitude'])) ? $data['longitude'] : null;
-                                        
-                    
+
+
                     $data['utca_megjelenites'] = (isset($data['utca_megjelenites'])) ? 1 : 0;
                     $data['hazszam_megjelenites'] = (isset($data['hazszam_megjelenites'])) ? 1 : 0;
                     $data['terkep'] = (isset($data['terkep'])) ? 1 : 0;
@@ -2040,6 +2040,7 @@ class Property extends AdminController {
             $id_array = $this->request->get_post('id_array');
             $email = $this->request->get_post('email');
             $name = $this->request->get_post('name');
+            $message = $this->request->get_post('message');
 
             // auth objektum
             $auth = DI::get('auth');
@@ -2091,6 +2092,7 @@ class Property extends AdminController {
             $template_data = array(
                 'email' => $email,
                 'name' => $name,
+                'message' => $message,
                 'ref_name' => $user->first_name . ' ' . $user->last_name,
                 'ref_email' => $user->email,
                 'ref_phone' => $user->phone,

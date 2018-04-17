@@ -310,6 +310,9 @@
                             <br>
                             <label for="email" class="control-label">E-mail cím</label>
                             <input type="email" name="email" class="form-control input-xlarge" required />
+                            <br>
+                            <label for="message" class="control-label">Személyre szabott üzenet</label>
+                            <textarea name="message" class="form-control input-xlarge"></textarea>
                         </div>
                 </div>
                 <div class="modal-footer">

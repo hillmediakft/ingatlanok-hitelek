@@ -147,9 +147,10 @@ class Emailer {
             $mail->SMTPSecure = Config::get('email.server.smtp_encryption');
             //Set TCP port to connect to 
             $mail->Port = Config::get('email.server.smtp_port');
+			$mail->AuthType = 'LOGIN'; 
         } else {
-           // $mail->isMail(); // küldés a php mail metódusával
-           $mail->isSendmail(); // küldés sendmail-al
+            $mail->isMail(); // küldés a php mail metódusával
+            // $mail->isSendmail(); // küldés sendmail-al
         }
 
         $mail->CharSet = 'UTF-8'; //karakterkódolás beállítása

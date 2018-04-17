@@ -23,8 +23,8 @@ var Blog_insert = function () {
 	};
 
     var ckeditorInit = function () {
-        CKEDITOR.replace('blog_body_hu', {customConfig: 'config_custom3.js?v=201711281'});
-        CKEDITOR.replace('blog_body_en', {customConfig: 'config_custom3.js?v=201711281'});
+        CKEDITOR.replace('blog_body_hu', {customConfig: 'config_max1.js?v=20180118'});
+        CKEDITOR.replace('blog_body_en', {customConfig: 'config_max1.js.js?v=20180118'});
     };
 
     return {

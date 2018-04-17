@@ -15,8 +15,9 @@ class LandingPage extends SiteController {
     public function index($url)
     {
         $page_data = $this->LandingPage_model->getLandingPageData($url);
+		
         
-        if ($page_data === false) {
+        if ($page_data === false OR $page_data['status'] == 0) {
             $this->response->redirect('error');
         }
 
@@ -28,6 +29,10 @@ class LandingPage extends SiteController {
         
         $data['page_title'] = $page_data['title_' . $this->lang];
         $data['body'] = $page_data['body_' . $this->lang];
+		
+		$data['insert_form'] = $page_data['insert_form'];
+		
+        		
         
         // szűrési paramétereket tartalmazó tömb
         //$data['filter_params'] = $this->ingatlanok_model->get_filter_params(Session::get('ingatlan_filter'));
@@ -44,6 +49,8 @@ class LandingPage extends SiteController {
 
         $view = new View();
         $view->setHelper(array('url_helper', 'str_helper', 'html_helper'));
+		
+		$view->add_link('js', SITE_JS . 'pages/landing_page.js');
 
         //$view->setLazyRender();
 //$this->view->debug(true);

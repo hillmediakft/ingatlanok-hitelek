@@ -45,6 +45,14 @@
                                 <option value="0" <?php echo ($page['status'] == 0) ? 'selected' : ''; ?>>Inaktív</option>
                             </select>
                         </div>
+						
+                        <div class="form-group">
+                            <label for="insert_form">Kapcsolatfelvételi űrlap beillesztése</label>
+                            <select name='insert_form' class="form-control input-small">
+                                <option value="1" <?php echo ($page['insert_form'] == 1) ? 'selected' : ''; ?>>Igen</option>
+                                <option value="0" <?php echo ($page['insert_form'] == 0) ? 'selected' : ''; ?>>Nem</option>
+                            </select>
+                        </div>						
 
                         <div class="form-group">
                             <label for="page_title_hu">Kampány (a kampányra vonatkozó elnevezés - pl.: 2017 áprilisi kampány: budapesti luxus ingatlanok</label>   

@@ -532,6 +532,8 @@ var Property = function () {
             var email = $("input[name='email']").val();
             // név
             var name = $("input[name='name']").val();
+            // név
+            var message = $("textarea[name='message']").val();
 
             // adatok küldése
             $.ajax({
@@ -540,7 +542,10 @@ var Property = function () {
                 dataType: 'json',
                 
                 data: {
-                    id_array: id_array, name: name, email: email
+                    id_array: id_array, 
+                    name: name, 
+                    email: email, 
+                    message: message
                 },
             
                 beforeSend: function() {

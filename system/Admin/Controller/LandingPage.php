@@ -38,6 +38,8 @@ class LandingPage extends AdminController {
         if ($this->request->is_post()) {
 
             $data['status'] = $this->request->get_post('status', 'integer');
+			
+			$data['insert_form'] = $this->request->get_post('insert_form', 'integer');			
 
             $data['title_hu'] = $this->request->get_post('page_title_hu');
 
@@ -88,6 +90,8 @@ class LandingPage extends AdminController {
         if ($this->request->is_post()) {
 
             $data['status'] = $this->request->get_post('status', 'integer');
+			
+			$data['insert_form'] = $this->request->get_post('insert_form', 'integer');
 
             $data['title_hu'] = $this->request->get_post('page_title_hu');
 

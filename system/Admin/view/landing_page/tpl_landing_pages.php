@@ -56,10 +56,10 @@
                                     </td>
                                     <td><?php echo date('Y-m-d H:i:s', (int) $page['creation_time']); ?></td>
                                     <?php if ($page['status'] == 1) { ?>
-                                        <td><span class="label label-sm label-success"><?php echo 'Aktív'; ?></span></td>
+                                        <td><span class="label label-sm label-success"><?php echo 'Aktív'; ?></span> <?php if ($page['insert_form'] == 1) { ?><span class="label label-sm label-success"><?php echo 'Űrlap'; ?></span>  <?php } ?></td>
                                     <?php } ?>
                                     <?php if ($page['status'] == 0) { ?>
-                                        <td><span class="label label-sm label-danger"><?php echo 'Inaktív'; ?></span></td>
+                                        <td><span class="label label-sm label-danger"><?php echo 'Inaktív'; ?></span> <?php if ($page['insert_form'] == 1) { ?><span class="label label-sm label-success"><?php echo 'Űrlap'; ?></span>  <?php } ?></td>
                                     <?php } ?>
                                     <td>									
                                         <a class="btn btn-sm grey-steel" href="admin/landingpage/update/<?php echo $page['id']; ?>"><i class="fa fa-pencil"></i></a>

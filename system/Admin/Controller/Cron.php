@@ -39,8 +39,8 @@ class Cron extends AdminController {
      */
 
     public function sendLogEmail() {
-	
-		$html_data = "";
+
+        $html_data = "";
 
         $this->loadModel('logs_model');
         $this->loadModel('settings_model');
@@ -48,61 +48,66 @@ class Cron extends AdminController {
         $this->loadModel('property_model');
 
         $daily_logs = $this->logs_model->getDailyLogs();
-		if(!empty($daily_logs)) {
-		foreach($daily_logs as $key => $value) {
-			unset($value['id']);
-			unset($value['date']);
-			$temp[] = $value;
-		}
-
-		$unique = array_map('unserialize', array_unique(array_map('serialize', $temp)));
-		
-        $data = array();
-        // módosított ingatlanok tömbjének előállítása
-        foreach ($unique as $key => $log) {
-            //ingatlan id kinyerése a log üzenetből
-            $result = explode('/', $log['message']);
-            $id = substr($result[0], 1);
-            $data[] = $this->property_model->getPropertyDetails($id);
-            $data[$key]['message'] = $log['message'];
-            $data[$key]['referens'] = $log['first_name'] . ' ' . $log['last_name'];
-            
-            $ingatlan = $this->property_model->getPropertyDetails($id);
-            $data[$key]['kerulet'] = ($ingatlan['kerulet']) ? $ingatlan['kerulet'] . ' ker.' : '';
-            $data[$key]['utca'] = $ingatlan['utca'];
-            $data[$key]['alapterulet'] = $ingatlan['alapterulet'] . ' nm';
-            $data[$key]['ar'] = $this->showPrice($ingatlan);
-     
-        }
-
-        $photo_link = BASE_URL . UPLOADS . 'ingatlan_photo/';
-        $url_helper = DI::get('url_helper');
-        $str_helper = DI::get('str_helper');
-
-        $html_data .= "<tr style='background: #eee;'>\r\n";
-        $html_data .= "<td></td>";
-        $html_data .= "<td style='padding: 4px;'><strong>Ingatlan</strong></td>";
-        $html_data .= "<td style='padding: 4px;'><strong>Ref.sz. | módosítás | referens</strong></td>";
-        $html_data .= "<td style='padding: 4px;'><strong>Link</strong></td>";
-        $html_data .= "</tr>\r\n";
-        foreach ($data as $key => $value) {
-            if (!empty($value['kepek'])) {
-                $kep_arr = json_decode($value['kepek']);
-                $img = "<img src='" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $kep_arr[0]) . "' />";
-            } else {
-                $img = "<img src='" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg') . "' />";
+        if (!empty($daily_logs)) {
+            foreach ($daily_logs as $key => $value) {
+                unset($value['id']);
+                unset($value['date']);
+                $temp[] = $value;
             }
 
-            $html_data .= "<tr>\r\n";
-            $html_data .= "<td>" . $img . "</td>";
-            $html_data .= "<td>" . $value['kerulet'] . ", " . $value['utca'] . ", " . $value['alapterulet'] . ", " . $value['ar'] . "</td>";
-            $html_data .= "<td>" . $value['message'] . " | " . $value['referens'] . "</td>";
-            $html_data .= "<td><a style='color:blue;' href='" . BASE_URL . 'ingatlanok/adatlap/' . $value['id'] . '/' . $str_helper->stringToSlug($value['ingatlan_nev_hu']) . "' target='_blank'>link-></a></td>";
+            $unique = array_map('unserialize', array_unique(array_map('serialize', $temp)));
+
+            $data = array();
+            // módosított ingatlanok tömbjének előállítása
+            foreach ($unique as $key => $log) {
+                //ingatlan id kinyerése a log üzenetből
+                $result = explode('/', $log['message']);
+                $id = substr($result[0], 1);
+                $data[] = $this->property_model->getPropertyDetails($id);
+                $data[$key]['message'] = $log['message'];
+                $data[$key]['referens'] = $log['first_name'] . ' ' . $log['last_name'];
+
+                $ingatlan = $this->property_model->getPropertyDetails($id);
+                $data[$key]['kerulet'] = ($ingatlan['kerulet']) ? $ingatlan['kerulet'] . ' ker.' : '';
+                $data[$key]['utca'] = $ingatlan['utca'];
+                $data[$key]['alapterulet'] = $ingatlan['alapterulet'] . ' nm';
+                $data[$key]['ar'] = $this->showPrice($ingatlan);
+            }
+            
+
+            $photo_link = BASE_URL . UPLOADS . 'ingatlan_photo/';
+            $url_helper = DI::get('url_helper');
+            $str_helper = DI::get('str_helper');
+
+            $html_data .= "<tr style='background: #eee;'>\r\n";
+            $html_data .= "<td></td>";
+            $html_data .= "<td style='padding: 4px;'><strong>Ingatlan</strong></td>";
+            $html_data .= "<td style='padding: 4px;'><strong>Ref.sz. | módosítás | referens</strong></td>";
+            $html_data .= "<td style='padding: 4px;'><strong>Link</strong></td>";
             $html_data .= "</tr>\r\n";
+            foreach ($data as $key => $value) {
+
+                if (isset($value['id'])) {
+                    if (!empty($value['kepek'])) {
+                        $kep_arr = json_decode($value['kepek']);
+                        $img = "<img src='" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . $kep_arr[0]) . "' />";
+                    } else {
+                        $img = "<img src='" . BASE_URL . $url_helper->thumbPath(Config::get('ingatlan_photo.upload_path') . 'placeholder.jpg') . "' />";
+                    }
+
+                    $html_data .= "<tr>\r\n";
+                    $html_data .= "<td>" . $img . "</td>";
+                    $html_data .= "<td>" . $value['kerulet'] . ", " . $value['utca'] . ", " . $value['alapterulet'] . ", " . $value['ar'] . "</td>";
+                    $html_data .= "<td>" . $value['message'] . " | " . $value['referens'] . "</td>";
+                    $html_data .= "<td><a style='color:blue;' href='" . BASE_URL . 'ingatlanok/adatlap/' . $value['id'] . '/' . $str_helper->stringToSlug($value['ingatlan_nev_hu']) . "' target='_blank'>link-></a></td>";
+                    $html_data .= "</tr>\r\n";
+                } else {
+                    $html_data .= '';
+                }
+            }
+        } else {
+            $html_data .= "<p>Az ingatlan adatbázisban nem történt módosítás.</p>";
         }
-} else {
-		 $html_data .= "<p>Az ingatlan adatbázisban nem történt módosítás.</p>";	
-}
         // template-be kerülő változók
         $template_data = array(
             'html_data' => $html_data,
@@ -113,10 +118,12 @@ class Cron extends AdminController {
         // ingatlan üzletkötők email címének betöltése tömbbe
         $this->loadModel('user_model');
         $users = $this->user_model->selectUser();
+     //   $to_email = 'vucuka@gmail.com';
+        
         $to_email = array();
         foreach ($users as $user) {
             $to_email[] = $user['email'];
-        }
+        } 
 
         $to_name = '';
         $subject = 'Napi értesítés ingatlan módosításokról';
@@ -130,7 +137,7 @@ class Cron extends AdminController {
         // true vagy false
         $emailer->send();
     }
-    
+
     /**
      * Ingatlan árának megjelenítése
      * Amennyiben csökkent az ár, a régi ár lehúzva és feketén jelenik meg
@@ -156,7 +163,7 @@ class Cron extends AdminController {
             }
         }
         return $price;
-    }    
+    }
 
 }
 

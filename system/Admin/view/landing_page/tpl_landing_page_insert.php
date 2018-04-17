@@ -44,6 +44,14 @@
                                 <option value="1">Aktív</option>
                             </select>
                         </div>
+						
+                        <div class="form-group">
+                            <label for="insert_form">Kapcsolatfelvételi űrlap beillesztése</label>
+                            <select name="insert_form" class="form-control input-small">
+                                <option value="0">Nem</option>
+                                <option value="1">Igen</option>
+                            </select>
+                        </div>						
                         
                         <div class="form-group">
                             <label for="page_title_hu">Kampány (a kampányra vonatkozó elnevezés - pl.: 2017 áprilisi kampány: budapesti luxus ingatlanok</label>   

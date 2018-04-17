@@ -724,6 +724,7 @@ class Ingatlanok_model extends SiteModel {
           }
           $this->query->set_where('ingatlanok.tipus', '=', $tipus);
          */
+		$this->query->set_where('status', '=', 1); 
         $this->query->set_where('deleted', '=', 0);
         $result = $this->query->select();
 
@@ -797,6 +798,7 @@ class Ingatlanok_model extends SiteModel {
             $this->query->set_columns(array('id'));
             $this->query->set_where('kerulet', '=', $result[$key]['district_id']);
             $this->query->set_where('status', '=', 1);
+			$this->query->set_where('deleted', '=', 0);
             $result2 = $this->query->select();
 
             $district_id = $result[$key]['district_id'];

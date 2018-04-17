@@ -22,7 +22,7 @@
                                         <tr>
                                             <td>
                                                 <p style="color: #666; font-size: 18px; font-weight: 700">Tisztelt {name}!</p>
-                                                <p>Az ön által megadott paraméterek alapján az alábbi ingatlanokat ajánlom.</p>
+                                                <p>{message}</p>
                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                     <tbody>
                                                         <tr>
