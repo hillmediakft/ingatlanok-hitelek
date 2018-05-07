@@ -100,6 +100,13 @@ class Application {
             $router->post('/adatlap/:id', 'Adatlap@index');
 
             $router->get('ingatlanok/nem-talalhato-az-ingatlan', 'ingatlanok@nem_talalhato_az_ingatlan');
+            
+            // ingyenes elemzés oldal
+            $router->get('/ingyenes-elemzes', 'Ingyenes_elemzes@index');
+
+
+            // xml convert
+            $router->get('/xmlconvert', 'XmlConvert@index');
 
             $router->set404('error@index');
 
