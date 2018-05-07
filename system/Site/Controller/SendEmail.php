@@ -1,7 +1,5 @@
 <?php
-
 namespace System\Site\Controller;
-
 use System\Core\SiteController;
 use System\Libs\Emailer;
 use System\Libs\Language as Lang;
@@ -30,7 +28,8 @@ class SendEmail extends SiteController {
      *
      * @param string $template
      */
-    public function init($template) {
+    public function init($template)
+    {
         if ($this->request->is_ajax() && $this->request->get_post('name') !== '') {
 
             $data = $this->addGlobalData();
@@ -97,7 +96,15 @@ class SendEmail extends SiteController {
                     $this->template = $template;
                     $this->from_email = $this->request->get_post('email');
                     $this->from_name = $this->request->get_post('name');
-                }else {
+
+                } elseif ($template == "ingyenes_elemzes") {
+                    $this->to_email = $data['settings']['email'];
+                    $this->to_name = $data['settings']['ceg'];
+                    $this->subject = 'Ingyenes elemzést kérek';
+                    $this->template = $template;
+                    $this->from_email = $this->request->get_post('email');
+                    $this->from_name = $this->request->get_post('name');
+                } else {
                     exit;
                 }
                 $this->send();
@@ -110,9 +117,23 @@ class SendEmail extends SiteController {
     /**
      * Email küldése
      */
-    public function send() {
+    public function send()
+    {   
         // paraméterek: ($from_email, $from_name, $to_email, $to_name, $subject, $form_data, $template)
         $emailer = new Emailer($this->from_email, $this->from_name, $this->to_email, $this->to_name, $this->subject, $this->request->get_post(), $this->template, $this->attachment);
+
+        // SMTP beallitasok visszaadása (ami a global_data-ban már szerepel)
+        $global_data = $this->addGlobalData();
+        // SMTP beállítások a settings táblából
+        
+        $emailer->setSmtpSettings(array(
+            'smtp_host' => $global_data['settings']['smtp_host'],
+            'smtp_username' => $global_data['settings']['smtp_username'],
+            'smtp_password' => $global_data['settings']['smtp_password'],
+            'smtp_port' => $global_data['settings']['smtp_port'],
+            'smtp_encryption' => $global_data['settings']['smtp_encryption']
+        ));
+
         if ($emailer->send()) {
             $this->response->json(array(
                 'status' => 'success',
@@ -129,5 +150,4 @@ class SendEmail extends SiteController {
     }
 
 }
-
 ?>
