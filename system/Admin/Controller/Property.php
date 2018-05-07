@@ -2108,7 +2108,17 @@ class Property extends AdminController {
             $from_name = $settings['ceg'];
 
             $emailer = new Emailer($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template);
+            
             $emailer->setArea('admin');
+
+            $emailer->setSmtpSettings(array(
+                'smtp_host' => $settings['smtp_host'],
+                'smtp_username' => $settings['smtp_username'],
+                'smtp_password' => $settings['smtp_password'],
+                'smtp_port' => $settings['smtp_port'],
+                'smtp_encryption' => $settings['smtp_encryption']
+            ));
+
             //$emailer->setDebug(true);
             // true vagy false
             if ($emailer->send()) {
