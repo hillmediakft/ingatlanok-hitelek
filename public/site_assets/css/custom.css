@@ -714,3 +714,84 @@ p.outbound-link {
 hr {
     border-top: 3px solid #eee;
 }
+
+
+/* INGYENES ELEMZES OLDAL */
+
+    .ingy-elem-box {
+        padding:0;
+        margin:0;
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        position: relative;
+    }
+
+    .ingy-elem-image {
+        position:absolute;
+        width:100%;
+        height:100%;
+    }
+
+    .ingy-elem-image img {
+        position: fixed;
+        width:100%;
+        opacity: 0.4;
+    }
+
+    .ingy-elem-box h1 {
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .ingy-elem-box p {
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .ingy-elem-box p.lead {
+        color: #fff;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+/*
+    .ingy-elem-image .ingy-elem-image-background {
+        width:100%;
+        height:100%;
+        background-color: #000;
+        /*position:absolute;*/
+/*    
+    } 
+*/
+/*
+    .ingy-elem-image .ingy-elem-image-overlay {
+        width:100%;
+        height:100%;
+        background-color: rgb(0, 0, 0, 0.5);
+        position:absolute;
+    }
+*/
+    .ingy-elem-box .btn{
+        margin:40px 0px;
+        font-size: 16px;
+        color: #fff;
+        display: inline-block;
+        background: #9e2828;
+        padding: 10px 35px;
+        text-decoration: none;
+    } 
+    .ingy-elem-box .btn:hover{
+        opacity: 0.8;
+    }
+
+    .ingy-elem-box .ingy-elem-logo {
+        text-align: center;
+        padding: 20px 0px 80px 0px;
+    }
+    .ingy-elem-box .ingy-elem-logo img{
+        position: relative;
+    }
