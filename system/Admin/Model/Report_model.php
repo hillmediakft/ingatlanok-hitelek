@@ -51,6 +51,9 @@ class Report_model extends AdminModel {
         $this->query->set_join('left', 'city_list', 'ingatlanok.varos', '=', 'city_list.city_id');
         $this->query->set_join('left', 'ingatlan_allapot', 'ingatlanok.allapot', '=', 'ingatlan_allapot.all_id');
 
+        // csak ami nincs törölve
+        $this->query->set_where('deleted', '=', 0);
+
         if (Session::get('user_role_id') != 1) {
             $this->query->set_where('ref_id', '=', Session::get('user_id'));
         }
