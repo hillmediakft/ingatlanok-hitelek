@@ -5,7 +5,7 @@ namespace System\Libs;
 use System\Libs\Config;
 
 /**
- * 	Emailer class v1.1
+ * 	Emailer class v1.2
  *
  * 	Használat (példa):
  * 		 
@@ -63,6 +63,18 @@ class Emailer {
     private $use_smtp = false;
 
     /**
+     * SMTP beállítások
+     */
+    private $smtp = array(
+        'smtp_host' => null,
+        'smtp_auth' => null,
+        'smtp_username' => null,
+        'smtp_password' => null,
+        'smtp_port' => null,
+        'smtp_encryption' => null
+    );
+
+    /**
      * site vagy admin
      */
     private $area = 'Site';
@@ -83,7 +95,8 @@ class Emailer {
      * @param  string   $template_data
      * @param  string   $template
      */
-    public function __construct($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template, $attachment = array()) {
+    public function __construct($from_email, $from_name, $to_email, $to_name, $subject, $template_data, $template, $attachment = array())
+    {
         $this->from_name = $from_name;
         $this->from_email = $from_email;
         $this->to_email = $to_email;
@@ -102,6 +115,14 @@ class Emailer {
      */
     public function setSmtp($use_smtp = true) {
         $this->use_smtp = (bool) $use_smtp;
+    }
+
+    /**
+     * SMTP beállítások adhatók meg
+     * @param array
+     */
+    public function setSmtpSettings($smtp_settings) {
+        $this->smtp = $smtp_settings;
     }
 
     /**
@@ -130,23 +151,33 @@ class Emailer {
         $mail = new \PHPMailer;
 
         if ($this->use_smtp) {
+
             //Set PHPMailer to use SMTP.
             $mail->isSMTP();
+
             //Enable SMTP debugging. 
             $mail->SMTPDebug = Config::get('email.server.phpmailer_debug_mode');
             //Set SMTP host name                          
-            $mail->Host = Config::get('email.server.smtp_host');
+            $mail->Host = (!empty($this->smtp['smtp_host'])) ? $this->smtp['smtp_host'] : Config::get('email.server.smtp_host');
             //Set this to true if SMTP host requires authentication to send email
-            $mail->SMTPAuth = Config::get('email.server.smtp_auth');
+            $mail->SMTPAuth = (!empty($this->smtp['smtp_auth'])) ? $this->smtp['smtp_auth'] : Config::get('email.server.smtp_auth');
 // SMTP connection will not close after each email sent, reduces SMTP overhead
 // $mail->SMTPKeepAlive = true;
             //Provide username and password     
-            $mail->Username = Config::get('email.server.smtp_username');
-            $mail->Password = Config::get('email.server.smtp_password');
+            $mail->Username = (!empty($this->smtp['smtp_username'])) ? $this->smtp['smtp_username'] : Config::get('email.server.smtp_username');
+            $mail->Password = (!empty($this->smtp['smtp_password'])) ? $this->smtp['smtp_password'] : Config::get('email.server.smtp_password');
+            
             //If SMTP requires TLS encryption then set it
-            $mail->SMTPSecure = Config::get('email.server.smtp_encryption');
+            //$mail->SMTPSecure = (!empty($this->smtp['smtp_encryption'])) ? $this->smtp['smtp_encryption'] : Config::get('email.server.smtp_encryption');
+            if(is_null($this->smtp['smtp_encryption'])) {
+                $mail->SMTPSecure = Config::get('email.server.smtp_encryption');
+            }
+            elseif ($this->smtp['smtp_encryption'] !== "") {
+                $mail->SMTPSecure = $this->smtp['smtp_encryption'];
+            } 
+                     
             //Set TCP port to connect to 
-            $mail->Port = Config::get('email.server.smtp_port');
+            $mail->Port = (!empty($this->smtp['smtp_port'])) ? $this->smtp['smtp_port'] : Config::get('email.server.smtp_port');
 			$mail->AuthType = 'LOGIN'; 
         } else {
             $mail->isMail(); // küldés a php mail metódusával
@@ -181,6 +212,7 @@ class Emailer {
             $mail->addAddress($this->to_email, $this->to_name);     // Add a recipient (Name is optional)
             // $mail->addAddress($admin_email);
         }
+
 // final sending and check
         if ($mail->send()) {
             $mail->clearAddresses();
@@ -243,5 +275,4 @@ class Emailer {
     }
 
 }
-
 ?>
