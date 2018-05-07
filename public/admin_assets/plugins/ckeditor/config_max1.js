@@ -57,7 +57,7 @@ CKEDITOR.editorConfig = function (config) {
     // nem távolítja el az üres span tag-eket
     CKEDITOR.dtd.$removeEmpty['span'] = false;
 
-    config.contentsCss = ['/public/site_assets/css/bootstrap.min.css', '/public/site_assets/css/main-red.css', '/public/admin_assets/plugins/ckeditor/no-background.css'];
+    config.contentsCss = ['/public/site_assets/css/bootstrap.min.css', '/public/site_assets/css/main-red.css', '/public/site_assets/css/custom.css', '/public/admin_assets/plugins/ckeditor/no-background.css'];
 
     //kcfinder		
     config.filebrowserBrowseUrl = 'public/admin_assets/plugins/kcfinder/browse.php?type=files';
