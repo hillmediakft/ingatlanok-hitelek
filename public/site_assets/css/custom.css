@@ -728,15 +728,22 @@ hr {
     }
 
     .ingy-elem-image {
+        width:100%;
+        height:auto;
+        background-color: #000;
         position:absolute;
-        width:100%;
-        height:100%;
     }
-
     .ingy-elem-image img {
-        position: fixed;
         width:100%;
-        opacity: 0.4;
+        display:block;
+        opacity:0.5;
+        /*position:fixed;*/
+    }
+    .ingy-elem-image .ingy-elem-image-gradient {
+        height:50px;
+        background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1));
+        position:relative;
+        top:-50px;
     }
 
     .ingy-elem-box h1 {
@@ -745,43 +752,25 @@ hr {
         font-weight: bold;
         text-transform: uppercase;
     }
-
     .ingy-elem-box p {
         color: #fff;
         font-size: 16px;
         font-weight: bold;
     }
-
     .ingy-elem-box p.lead {
         color: #fff;
         font-size: 22px;
         font-weight: bold;
     }
 
-/*
-    .ingy-elem-image .ingy-elem-image-background {
-        width:100%;
-        height:100%;
-        background-color: #000;
-        /*position:absolute;*/
-/*    
-    } 
-*/
-/*
-    .ingy-elem-image .ingy-elem-image-overlay {
-        width:100%;
-        height:100%;
-        background-color: rgb(0, 0, 0, 0.5);
-        position:absolute;
-    }
-*/
     .ingy-elem-box .btn{
         margin:40px 0px;
-        font-size: 16px;
+        font-size: 20px;
+        font-weight: bold;
         color: #fff;
         display: inline-block;
         background: #9e2828;
-        padding: 10px 35px;
+        padding: 15px 30px;
         text-decoration: none;
     } 
     .ingy-elem-box .btn:hover{
