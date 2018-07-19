@@ -349,6 +349,13 @@ class Adatlap extends AdminController {
 
         $pdf->Cell(30, 4, utf8_decode('Szobák száma:'), 0, 0, 'L', 0);
         $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($ingatlan['szobaszam']), 0, 1, 'L', 0);
+        
+        // ha vannak félszobák        
+        if (isset($ingatlan['felszobaszam'])) {
+            $pdf->Cell(30, 4, utf8_decode('Félszobák száma:'), 0, 0, 'L', 0);
+            $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($ingatlan['felszobaszam']), 0, 1, 'L', 0);
+        }
+
         if (isset($ingatlan['emelet'])) {
             $pdf->Cell(30, 4, utf8_decode('Emelet:'), 0, 0, 'L', 0);
             $pdf->Cell(0, 4, $this->utf8_to_latin2_hun($ingatlan['emelet_leiras_' . LANG]), 0, 1, 'L', 0);
