@@ -31,8 +31,11 @@ class LogIntoDb {
           ));
          */
 
+        $user_id = Session::get('user_data.id');
+
         $data = array(
-            'user_id' => Session::get('user_data.id'),
+            //'user_id' => !empty($user_id) ? $user_id : 0,
+            'user_id' => 0,
             'action' => $type,
             'message' => $message,
             'date' => date("Y-m-d H:i:s")

@@ -67,6 +67,26 @@ class User_model extends AdminModel {
     }
 
     /**
+     *  Felhasználók adatainak lekérdezése (minimális adatok és nincs benne a 2-es idjű developer)
+     *
+     *  @return array|false
+     */
+    public function getUsersMinData()
+    {
+        $this->query->set_columns(array(
+            'users.id',
+            'users.name',
+            'users.first_name',
+            'users.last_name'
+        ));
+        
+        $this->query->set_where('users.provider_type', '=', 'admin');
+        $this->query->set_where('users.id', '!=', 2); // developert nem adja vissza
+
+        return $this->query->select();
+    }
+
+    /**
      * ellenőrzés, hogy létezik-e már ilyen felhasználói név az adatbázisban
      */
     public function checkUsername($username)

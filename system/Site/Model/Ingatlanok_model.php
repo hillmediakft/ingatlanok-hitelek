@@ -17,6 +17,79 @@ class Ingatlanok_model extends SiteModel {
     }
 
     /**
+     * INSERT a külső forrásból jövő ingatlanokhoz 
+     */
+    public function insert($data) {
+        return $this->query->insert($data);
+    }
+
+    /**
+     * UPDATE a külső forrásból jövő ingatlanokhoz
+     */
+    public function update($id, $data) {
+        $this->query->set_where('id', '=', $id);
+        return $this->query->update($data);
+    }
+
+    /**
+     * Külső forrásból származó ingatlan azonosítók lekérdezése
+     */
+    public function getOutherProperties()
+    {
+        $this->query->set_columns('outer_reference_number');
+        $this->query->set_where('outer_reference_number', '!=', null);
+        $result = $this->query->select();
+        $temp =  array();
+        foreach ($result as $key => $value) {
+            $temp[] = $value['outer_reference_number'];
+        }
+        return $temp;
+    }
+
+
+    /**
+     * Az ingatlanhoz tartozó file-ok nevének lekérdezése
+     * A második paraméterben megadhatjuk, hogy csak a képeket, vagy a dokumentumokat akarjuk megkapni
+     * Ha nincs második paraméter, akkor visszad egy asszociatív tömböt, amiben megtalálható egy 'kepek' és egy 'docs' tömb
+     *
+     * @param integer $id
+     * @param string $type (értéke: 'kepek' vagy 'docs')
+     * @return array 
+     */
+    public function getFilenames($id, $type = null) {
+        $this->query->set_columns(array('kepek', 'alaprajzok', 'docs'));
+        $this->query->set_where('id', '=', $id);
+        $result = $this->query->select();
+
+        $photos_arr = array();
+        $alaprajzok_arr = array();
+        $docs_arr = array();
+
+        if (!empty($result[0]['kepek'])) {
+            //képek nevét tartalmazó tömb
+            $photos_arr = json_decode($result[0]['kepek']);
+        }
+        if (!empty($result[0]['alaprajzok'])) {
+            //alaprajzok nevét tartalmazó tömb
+            $alaprajzok_arr = json_decode($result[0]['alaprajzok']);
+        }
+        if (!empty($result[0]['docs'])) {
+            //dokumentumok nevét tartalmazó tömb
+            $docs_arr = json_decode($result[0]['docs']);
+        }
+
+        if ($type == 'kepek') {
+            return $photos_arr;
+        } elseif ($type == 'alaprajzok') {
+            return $alaprajzok_arr;
+        } elseif ($type == 'docs') {
+            return $docs_arr;
+        } else {
+            return array('kepek' => $photos_arr, 'alaprajzok' => $alaprajzok_arr, 'docs' => $docs_arr);
+        }
+    }
+
+    /**
      * 	Lekérdezi az ingatlanok táblából a kiemelet ingatlanokat
      * 	
      * 	@param array 
@@ -402,6 +475,10 @@ class Ingatlanok_model extends SiteModel {
             } elseif (isset($params['tipus']) && $params['tipus'] == 2) {
                 $this->query->set_where('ar_kiado', '>=', $params['min_ar']);
             }
+            // ha nincs típus
+            else {
+                $this->query->set_where('ar_elado', '>=', $params['min_ar']);
+            }
         }
 
         // csak maximum ár van megadva
@@ -410,6 +487,10 @@ class Ingatlanok_model extends SiteModel {
                 $this->query->set_where('ar_elado', '<=', $params['max_ar']);
             } elseif (isset($params['tipus']) && $params['tipus'] == 2) {
                 $this->query->set_where('ar_kiado', '<=', $params['max_ar']);
+            }
+            // ha nincs tipus
+            else {
+                $this->query->set_where('ar_elado', '<=', $params['max_ar']);
             }
         }
 
