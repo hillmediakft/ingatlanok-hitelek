@@ -54,7 +54,8 @@ use System\Libs\Language as Lang;
                                     </tr>
                                     <tr>
                                         <td>Rögzítés / módosítás dátuma:</td>
-                                        <td><?php echo date('Y-m-d H:i', $property_data['hozzaadas_datum']) . ' / ' . date('Y-m-d H:i', $property_data['modositas_datum']); ?></td>
+                                        <?php $modositas_datuma = is_null($property_data['modositas_datum']) ? ' / -' : ' / ' . date('Y-m-d H:i', $property_data['modositas_datum']); ?>
+                                        <td><?php echo date('Y-m-d H:i', $property_data['hozzaadas_datum']) . $modositas_datuma; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Referens:</td>
