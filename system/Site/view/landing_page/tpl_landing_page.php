@@ -32,7 +32,7 @@
                                         <span class="contact-message"><?php echo Lang::get('kapcsolat_email_megjegyzes'); ?></span>
                                     </div>
                                 </div>
-                                <form action="<?php echo (LANG != 'hu') ? LANG . '/' : ''; ?>sendemail/init/mennyit_er_az_ingatlanom" method="POST" id="contact-form-kapcsolat">
+                                <form action="<?php echo (LANG != 'hu') ? LANG . '/' : ''; ?>sendemail/init/landing_page" method="POST" id="contact-form-kapcsolat">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <input type="text" name="name" class="name" placeholder="<?php echo Lang::get('kapcsolat_email_nev'); ?>" required>
@@ -47,6 +47,7 @@
                                         </div>
                                     </div>
                                     <input type="text" name="mezes_bodon" id="mezes_bodon">
+                                    <input type="hidden" name="friendlyurl" value="<?php echo $friendlyurl; ?>">
                                     <textarea name="message" class="message" placeholder="<?php echo Lang::get('kapcsolat_email_uzenet'); ?>" required></textarea>
                                     <button id="submit-button" class="send-btn"><?php echo Lang::get('kapcsolat_email_kuldes'); ?></button>
                                 </form>
