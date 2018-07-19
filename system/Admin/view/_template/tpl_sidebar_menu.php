@@ -101,6 +101,19 @@ use System\Libs\Cookie;
                 <span class="arrow "></span>
             </a>
             <ul class="sub-menu">
+
+                <li class="nav-item <?php $this->menu_active('datatables', 'cities'); ?>">
+                    <a href="admin/datatables/cities" class="nav-link">
+                        <span class="title">Városok</span>
+                    </a>
+                </li>
+
+                <li class="nav-item <?php $this->menu_active('datatables', 'districts'); ?>">
+                    <a href="admin/datatables/districts" class="nav-link">
+                        <span class="title">Budapest - kerületek</span>
+                    </a>
+                </li>
+
                 <li class="nav-item <?php $this->menu_active('datatables', 'ingatlan_kategoria'); ?>">
                     <a href="admin/datatables/ingatlan_kategoria" class="nav-link">
                         <span class="title">Kategória</span>

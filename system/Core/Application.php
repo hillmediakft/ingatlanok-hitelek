@@ -267,6 +267,15 @@ class Application {
                 $router->post('/blog/change_status', 'blog@change_status');
 
                 //datatables
+                    // városok
+                    $router->get('/datatables/cities', 'datatables@cities');
+                    $router->post('/datatables/city_insert_update', 'datatables@city_insert_update');
+                    $router->post('/datatables/city_delete', 'datatables@city_delete');
+                    // Budapest kerületek
+                    $router->get('/datatables/districts', 'datatables@districts');
+                    $router->post('/datatables/district_insert_update', 'datatables@district_insert_update');
+                    $router->post('/datatables/district_delete', 'datatables@district_delete');
+                    
                 $router->get('/datatables/ingatlan_kategoria', 'datatables@ingatlan_kategoria');
                 $router->get('/datatables/ingatlan_allapot', 'datatables@ingatlan_allapot');
                 $router->get('/datatables/ingatlan_futes', 'datatables@ingatlan_futes');

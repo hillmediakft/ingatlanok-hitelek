@@ -341,5 +341,341 @@ class Datatables extends AdminController {
         }
     }    
 
+
+/*---------- VÁROSOK LISTA -------------------- */
+
+
+    /**
+     * Városok lista oldal
+     */ 
+    public function cities()
+    {
+        // Auth::hasAccess('datatables.city', $this->request->get_httpreferer());
+        
+        $data['title'] = 'Város hozzáadása oldal';
+        $data['description'] = 'Város hozzáadása oldal description';
+
+        // Város model betöltése
+        $this->loadModel('city_list_model');
+        $this->loadModel('county_list_model');
+        $this->loadModel('district_list_model');
+        $this->loadModel('user_model');
+
+        $data['agents'] = $this->user_model->getUsersMinData();
+        $data['cities'] = $this->city_list_model->findCity();
+        $data['districts'] = $this->district_list_model->findDistrict();
+        $counties = $this->county_list_model->findCounty();
+        $data['counties'] = json_encode($counties);
+//var_dump($data);die;
+        $view = new View();
+
+        $view->add_links(array('datatable', 'bootbox', 'vframework'));
+        $view->add_link('js', ADMIN_JS . 'pages/city_list.js');
+        $view->render('datatables/tpl_city', $data);
+    }
+
+    /**
+     * Város hozzáadása és módosítása (AJAX)
+     */
+    public function city_insert_update()
+    {
+        if ($this->request->is_ajax()) {
+            // az id értéke lehet null is!
+            $id = $this->request->get_post('id', 'integer');
+            // megye id 
+            $county_id = $this->request->get_post('county_id', 'integer');
+            // referens id
+            $agent_id = $this->request->get_post('agent_id', 'integer');
+
+            // új városnév 
+            $new_name = $this->request->get_post('city_name');
+            if ($new_name === '') {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Nem lehet üres a város név mező!'
+                ));
+            }
+
+        // városok lekérdezése (annak ellenőrzéséhez, hogy már létezik-e ilyen)
+            $this->loadModel('city_list_model');
+            // lekérdezzük a városokat
+            $existing_city = $this->city_list_model->findCity();
+            // bejárjuk a város neveket és összehasonlítjuk az új névvel (kisbetűssé alakítjuk, hogy ne számítson a nagybetű-kisbetű eltérés)
+            foreach($existing_city as $value) {
+                
+                if (
+                    // insert eset  
+                    (is_null($id) && strtolower($new_name) == strtolower($value['city_name'])) ||
+                    // update eset
+                    (!is_null($id) && $id != $value['city_id'] && strtolower($new_name) == strtolower($value['city_name']))
+                ) {
+                    $this->response->json(array(
+                        'status' => 'error',
+                        'message' => 'Már létezik ' . $value['city_name'] . ' nevű város!'
+                    ));
+                }   
+            } 
+
+        //insert (ha az $id értéke null)
+            if (is_null($id)) {
+
+                // város létrehozása a city_list táblába
+                $last_insert_id = $this->city_list_model->insert(
+                    array(
+                        'city_name' => $new_name,
+                        'county_id' => $county_id,
+                        'agent_id' => $agent_id
+                    )
+                );
+                                
+                if ($last_insert_id !== false) {
+                    
+                    $this->response->json(array(
+                        'status' => 'success',
+                        'message' => 'Város hozzáadva.',
+                        'inserted_id' => $last_insert_id
+                    ));
+                } else { 
+                    $this->response->json(array(
+                        'status' => 'error',
+                        'message' => 'Adatbázis lekérdezési hiba!'
+                    ));
+                }
+            }
+        // update
+            else {
+
+                $this->city_list_model->update($id,
+                    array(
+                        'city_name' => $new_name,
+                        'county_id' => $county_id,
+                        'agent_id' => $agent_id
+                    )                    
+                );
+
+                $this->response->json(array(
+                    'status' => 'success',
+                    'message' => 'Város módosítva.'
+                ));
+
+            }
+        }
+    }
+
+    /**
+     *  Város törlése (AJAX)
+     */
+    public function city_delete()
+    {
+        if($this->request->is_ajax()){
+
+/*
+            if(!Auth::hasAccess('datatables.city_delete')){
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Nincs engedélye a művelet végrehajtásához!'
+                    ));
+            }
+*/
+                
+            // city_list model betöltése
+            $this->loadModel('city_list_model');
+            
+            $id = $this->request->get_post('item_id', 'integer');
+
+            // itt megnézzük, hogy törölhető-e a város (ha van hozzárendelve ingtalan, akkor nem)
+            if ( !$this->city_list_model->isDeletable($id) ) {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'A város nem törölhető, mert van ingatlan hozzárendelve.'
+                ));
+            }
+
+            // város törlése
+            $result = $this->city_list_model->delete($id);
+            
+            if($result !== false) {
+                $this->response->json(array(
+                    'status' => 'success',
+                    'message' => 'Város törölve.'
+                    ));
+            }
+            else {
+                // ha a törlési sql parancsban hiba van
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Adatbázis lekérdezési hiba!',                  
+                    ));
+            }
+
+        } else {
+            $this->response->redirect('admin/error');
+        }
+    }
+
+
+/*---------- BUDAPEST KERÜLETEK LISTA -------------------- */
+
+
+    /**
+     * Budapest kerületek lista oldal
+     */ 
+    public function districts()
+    {
+        // Auth::hasAccess('datatables.city', $this->request->get_httpreferer());
+        
+        $data['title'] = 'Referens kerülethez rendelése hozzáadása oldal';
+        $data['description'] = 'Referens kerülethez rendelése oldal description';
+
+        $this->loadModel('district_list_model');
+        $this->loadModel('user_model');
+
+        $data['agents'] = $this->user_model->getUsersMinData();
+        $data['districts'] = $this->district_list_model->findDistrict();
+//var_dump($data);die;
+        $view = new View();
+
+        $view->add_links(array('datatable', 'bootbox', 'vframework'));
+        $view->add_link('js', ADMIN_JS . 'pages/district_list.js');
+        $view->render('datatables/tpl_district', $data);
+    }
+
+    /**
+     * Kerület hozzáadása és módosítása (AJAX)
+     */
+    public function district_insert_update()
+    {
+        if ($this->request->is_ajax()) {
+            // az id értéke lehet null is!
+            $id = $this->request->get_post('id', 'integer');
+
+            // referens id
+            $agent_id = $this->request->get_post('agent_id', 'integer');
+
+            // új kerület név 
+            $new_name = $this->request->get_post('district_name');
+            if ($new_name === '') {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Nem lehet üres a kerület név mező!'
+                ));
+            }
+
+        // Kerületek lekérdezése (annak ellenőrzéséhez, hogy már létezik-e ilyen)
+            $this->loadModel('district_list_model');
+            // lekérdezzük a városokat
+            $existing_districts = $this->district_list_model->findDistrict();
+            // bejárjuk a kerület neveket és összehasonlítjuk az új névvel (kisbetűssé alakítjuk, hogy ne számítson a nagybetű-kisbetű eltérés)
+            foreach($existing_districts as $value) {
+                
+                if (
+                    // insert eset  
+                    (is_null($id) && strtolower($new_name) == strtolower($value['district_name'])) ||
+                    // update eset
+                    (!is_null($id) && $id != $value['district_id'] && strtolower($new_name) == strtolower($value['district_name']))
+                ) {
+                    $this->response->json(array(
+                        'status' => 'error',
+                        'message' => 'Már létezik ' . $value['district_name'] . ' nevű kerület!'
+                    ));
+                }   
+            } 
+
+        //insert (ha az $id értéke null)
+            if (is_null($id)) {
+
+                // kerület létrehozása a district_list táblába
+                $last_insert_id = $this->district_list_model->insert(
+                    array(
+                        'district_name' => $new_name,
+                        'agent_id' => $agent_id
+                    )
+                );
+                                
+                if ($last_insert_id !== false) {
+                    
+                    $this->response->json(array(
+                        'status' => 'success',
+                        'message' => 'Kerület hozzáadva.',
+                        'inserted_id' => $last_insert_id
+                    ));
+                } else { 
+                    $this->response->json(array(
+                        'status' => 'error',
+                        'message' => 'Adatbázis lekérdezési hiba!'
+                    ));
+                }
+            }
+        // update
+            else {
+
+                $this->district_list_model->update($id,
+                    array(
+                        'district_name' => $new_name,
+                        'agent_id' => $agent_id
+                    )                    
+                );
+
+                $this->response->json(array(
+                    'status' => 'success',
+                    'message' => 'Kerület módosítva.'
+                ));
+
+            }
+        }
+    }
+
+    /**
+     *  Kerület törlése (AJAX)
+     */
+    public function district_delete()
+    {
+        if($this->request->is_ajax()){
+
+/*
+            if(!Auth::hasAccess('datatables.city_delete')){
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Nincs engedélye a művelet végrehajtásához!'
+                    ));
+            }
+*/
+                
+            // district_list model betöltése
+            $this->loadModel('district_list_model');
+            
+            $id = $this->request->get_post('item_id', 'integer');
+
+            // itt megnézzük, hogy törölhető-e a kerület (ha van hozzárendelve ingtalan, akkor nem)
+            if ( !$this->district_list_model->isDeletable($id) ) {
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'A kerület nem törölhető, mert van ingatlan hozzárendelve.'
+                ));
+            }
+
+            // kerület törlése
+            $result = $this->district_list_model->delete($id);
+            
+            if($result !== false) {
+                $this->response->json(array(
+                    'status' => 'success',
+                    'message' => 'Kerület törölve.'
+                    ));
+            }
+            else {
+                // ha a törlési sql parancsban hiba van
+                $this->response->json(array(
+                    'status' => 'error',
+                    'message' => 'Adatbázis lekérdezési hiba!',                  
+                    ));
+            }
+
+        } else {
+            $this->response->redirect('admin/error');
+        }
+    }
+
+
 }
 ?>
