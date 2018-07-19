@@ -627,5 +627,13 @@ class Uploader
 		$this->handle->clean();
 	}
 
+	/**
+	 * Log visszaadása
+	 */
+	public function getLog()
+	{
+		return $this->handle->log;
+	}
+
 }
 ?>
