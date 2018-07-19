@@ -37,6 +37,9 @@
                                                                             <td style="min-width: 120px; font-weight: bold;">Irányítószám:</td><td>{iranyitoszam}</td>
                                                                         </tr>
                                                                         <tr>
+                                                                            <td style="min-width: 120px; font-weight: bold;">Utca:</td><td>{utca}</td>
+                                                                        </tr>                                                                        
+                                                                        <tr>
                                                                             <td style="min-width: 120px; font-weight: bold;">Alapterület:</td><td>{alapterulet}</td>
                                                                         </tr>
                                                                         <tr>
@@ -44,6 +47,9 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td style="min-width: 120px; font-weight: bold;">Állapot:</td><td>{ingatlan_allapot}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="min-width: 120px; font-weight: bold;">Megjegyzés:</td><td>{note}</td>
                                                                         </tr>
 
                                                                         <tr><td style="width: 120px;"></td><td>&nbsp;</td></tr>                                                                       

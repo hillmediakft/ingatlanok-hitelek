@@ -1,7 +1,25 @@
 <?php echo $body; ?>
 
+<!-- 
+<div class="ingy-elem-box">
+	<div class="ingy-elem-image">
+		<img alt="" src="/uploads/images/lo_3.jpg" />
+		<div class="ingy-elem-image-gradient"></div>
+	</div>
+	<div class="ingy-elem-logo"><img alt="" src="public/site_assets/images/logo.png" width="150" /></div>
 
- 
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h1>Mennyit ér a lakásom / házam?</h1>
+				<p class="lead">Kérje ingyenes piaci elemzésünket- valódi eladási árakkal kalkulálva.</p>
+				<p>Eladáson gondolkodik? Bizza ránk otthona értékének megállapítását, hogy segítsünk eldönteni, itt van-e az ideje az értékesítésnek?</p>
+				<button class="btn" id="show_modal_button" type="button">Kérem az ingyenes elemzést</button>
+			</div>
+		</div>
+	</div>
+</div>
+ -->
 
 
 
@@ -51,6 +69,12 @@
 					<input type="text" name="iranyitoszam" class="form-control input-xlarge" />
 				</div>
 
+				<!-- Utca név -->
+				<div class="form-group">
+					<label for="utca" class="control-label">Utca név</label>
+					<input type="text" name="utca" class="form-control input-xlarge" />
+				</div>
+
 				<!-- Alapterület -->
 				<div class="form-group">
 					<label for="alapterulet" class="control-label">Alapterület</label>
@@ -86,6 +110,12 @@
 					</select>					
 				</div>
 
+				<!-- Megjegyzés -->
+				<div class="form-group">
+					<label for="note" class="control-label">Megjegyzés</label>
+					<textarea name="note" class="form-control input-xlarge"></textarea>
+				</div>
+
 				<hr style="border-width: 1px;">
 				<p style="font-size: 16px;">
 					Kinek küldjük az elemzést?
@@ -104,6 +134,19 @@
 					<label for="phone" class="control-label">Telefon</label>
 					<input type="text" name="phone" class="form-control input-xlarge" />
 				</div>
+
+				<!-- Adatvédelmi szabályzat elfogadása -->
+				  <div class="form-group row">
+				    <div class="col-sm-12">
+				      <div class="form-check">
+				        <input class="form-check-input" type="checkbox" name="terms">
+				        <label class="form-check-label" for="terms" id="terms_label">
+				          Az adatvédelmi szabályzatot elfogadom
+				        </label>
+				      </div>
+				    </div>
+				    <div class="col-sm-12"><a href="http://ingatlanok-hitelek.hu/uploads/files/adatvedelmi-szabalyzat.pdf" target="_blank" title="Adatvédelmi szabályzat">Adatvédelmi szabályzat</a></div>
+				  </div>
 
 			</form>	
     <!-- <p> Lorem ipsum dolor sit amet!</p>  -->

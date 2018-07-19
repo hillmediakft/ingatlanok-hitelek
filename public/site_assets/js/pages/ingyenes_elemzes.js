@@ -63,6 +63,9 @@ var Ingyenes_elemzes = function () {
                     iranyitoszam: {
                         required: true
                     },
+                    utca: {
+                        required: true
+                    },
                     alapterulet: {
                         required: true
                     },
@@ -75,17 +78,25 @@ var Ingyenes_elemzes = function () {
                     email: {
                         required: true,
                         email: true
+                    },
+                    terms: {
+                        required: true
+                    },                    
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("name") == "terms") {
+                        error.insertAfter("#terms_label");
+                    } else {
+                        error.insertAfter(element);
                     }
                 },
                 // az invalidHandler akkor aktiválódik, ha elküldjük a formot és hiba van
                 invalidHandler: function (event, validator) { //display error alert on form submit              
                     var errors = validator.numberOfInvalids();
-                    console.log(errors + ' hiba a formban');    
                 },
                 highlight: function (element) { // hightlight error inputs
                     $(element).closest('.form-group').addClass('has-error'); // set error class to the control group                   
                 },
-
                 unhighlight: function (element) { // revert the change done by hightlight
                     $(element).closest('.form-group').removeClass('has-error'); // set error class to the control group                   
                 },
