@@ -68,7 +68,7 @@ class Logs_model extends AdminModel {
      *  @return array|false
      */
     public function getDailyLogs($user_id = null) {
-        $time_in_past = date('Y-m-d h:i:s', time() - (60 * 60 * 24));
+        $time_in_past = date('Y-m-d H:i:s', time() - (60 * 60 * 24));
 
 
         $this->query->debug(false);
