@@ -1,6 +1,6 @@
 <?php
-
-use System\Libs\Auth; ?>
+use System\Libs\Auth;
+?>
 <!DOCTYPE html>
 <html lang="<?php echo LANG; ?>">
     <!--<![endif]-->
@@ -12,6 +12,16 @@ use System\Libs\Auth; ?>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta name="description" content="<?php echo $description; ?>" />
         <meta name="keywords" content="<?php echo $keywords; ?>" />
+        
+        <!-- facebook megosztashoz meta adatok -->
+        <meta property="og:title" content="<?php echo $title; ?>" />
+        <meta property="og:type" content="property" />
+        <meta property="og:url" content="<?php echo $this->request->get_uri('current_url'); ?>" />
+        <?php if (isset($share_image_path)) { ?>
+        <meta property="og:image" content="<?php echo $share_image_path; ?>" />
+        <?php } ?>
+
+
         <base href="<?php echo BASE_URL; ?>">
 		
 	        <?php if (ENV == "production") { ?>
