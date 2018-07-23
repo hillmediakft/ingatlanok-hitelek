@@ -154,7 +154,9 @@ class Ingatlanok extends SiteController {
         $data['pictures'] = json_decode($data['ingatlan']['kepek']);
         $data['floor_plans'] = json_decode($data['ingatlan']['alaprajzok']);
 
-
+        // facebook megosztási kép elérési útja (a head-be)
+        $share_image_path = isset($data['pictures'][0]) ? $data['pictures'][0] : 'placeholder.jpg';    
+        $data['share_image_path'] = BASE_URL . Config::get('ingatlan_photo.upload_path') . $share_image_path;
 
         // ha van a query stringben referensre vonatkozó adat
         if ($this->request->has_query('referens')) {
