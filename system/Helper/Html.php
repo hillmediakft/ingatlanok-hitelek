@@ -86,7 +86,8 @@ class Html {
     public function socialMediaShare($image, $title) {
         $html = '';
 
-        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; // a megjelenített URL
+        $request_scheme = isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'https';
+        $url = $request_scheme . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; // a megjelenített URL
         $html .= "<div id='social-share-icons'>";
         $html .= "<a href='https://www.facebook.com/sharer.php?u=$url' target='_blank' class='share_facebook'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x'></i></span></a>";
         $html .= "<a href='http://pinterest.com/pin/create/button/?url=$url/&amp;media=$image&amp;description=$title' target='_blank' class='share_pinterest'><span class='fa-stack fa-lg'><i class='fa fa-square-o fa-stack-2x'></i><i class='fa fa-pinterest fa-stack-1x'></i></span></a>";
