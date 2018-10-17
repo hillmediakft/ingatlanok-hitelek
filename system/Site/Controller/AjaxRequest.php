@@ -17,7 +17,7 @@ class AjaxRequest extends SiteController {
     }
 
     public function kedvencek() {
-        if (!Auth::check()) {
+        if (!Auth::isUserLoggedIn()) {
             $this->response->json(array(
                 "status" => 'error',
                 "title" => 'Be kell jelentkeznie!',
@@ -26,7 +26,7 @@ class AjaxRequest extends SiteController {
         } else {
             
             $this->response->json(array(
-                "redirect" => (LANG == 'hu') ? 'profilom/kedvencek' : LANG . '/profile/favourites'
+                "redirect" => (LANG == 'hu') ? 'kedvencek' : LANG . '/favourites'
             ));
 
         }

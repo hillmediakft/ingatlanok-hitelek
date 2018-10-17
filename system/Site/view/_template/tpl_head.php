@@ -43,7 +43,7 @@ include($this->path('tpl_forgottenpw_modal'));
         <div class="right-part">
             <div class="extra-item login">
                 <span class="event-entry">
-                    <a href="<?php echo $this->request->get_uri('site_url') . Config::get('url.kedvencek.index.' . LANG); ?>" id="kedvencek"><i class="fa fa-heart"></i><span class="kedvencek-szoveg"><?php echo Lang::get('header_top_kedvencek'); ?></span>
+                    <a href="javascript:void(0);" id="kedvencek"><i class="fa fa-heart"></i><span class="kedvencek-szoveg"><?php echo Lang::get('header_top_kedvencek'); ?></span>
                     <?php echo '<span class="badge badge-danger">' . count(json_decode(Cookie::get('kedvencek'))) . '</span>';?>
                     </a>
                 </span>

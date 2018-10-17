@@ -4,6 +4,7 @@ namespace System\Site\Controller;
 
 use System\Core\SiteController;
 use System\Core\View;
+use System\Libs\Auth;
 use System\Libs\Config;
 use System\Libs\Cookie;
 use System\Libs\Session;
@@ -17,7 +18,12 @@ class Kedvencek extends SiteController {
         $this->loadModel('ingatlanok_model');
     }
 
-    public function index() {
+    public function index()
+    {
+        if (!Auth::isUserLoggedIn()) {
+            $this->response->redirect();
+        }
+
         $page_data = $this->ingatlanok_model->getPageData('kedvencek');
 
         $data = $this->addGlobalData();
