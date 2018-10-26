@@ -382,10 +382,10 @@ var InsertProperty = function () {
                     required: true,
                 },
                 ref_num: {
-                    required: true,
-                    number: true,
-                    min: 1000,
-                    max: 9999
+                    required: true
+                    //number: true,
+                    //min: 1000,
+                    //max: 9999
                 },
                 kategoria: {
                     required: true
