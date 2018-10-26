@@ -36,12 +36,13 @@ class Ingatlanok_model extends SiteModel {
      */
     public function getOutherProperties()
     {
-        $this->query->set_columns('outer_reference_number');
-        $this->query->set_where('outer_reference_number', '!=', null);
+        $column_name = 'outer_reference_number';
+        $this->query->set_columns($column_name);
+        $this->query->set_where($column_name, '!=', null);
         $result = $this->query->select();
         $temp =  array();
         foreach ($result as $key => $value) {
-            $temp[] = $value['outer_reference_number'];
+            $temp[] = $value[$column_name];
         }
         return $temp;
     }
