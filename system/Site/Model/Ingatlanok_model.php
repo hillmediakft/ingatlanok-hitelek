@@ -49,6 +49,16 @@ class Ingatlanok_model extends SiteModel {
 
 
     /**
+     * Az ingatlan_kategoria táblát kérdezi le az XML konvertált ingatlan címek összerakásához
+     */
+    public function getCategoryNames()
+    {
+        $this->query->set_table('ingatlan_kategoria');
+        return $this->query->select();
+    }
+
+
+    /**
      * Az ingatlanhoz tartozó file-ok nevének lekérdezése
      * A második paraméterben megadhatjuk, hogy csak a képeket, vagy a dokumentumokat akarjuk megkapni
      * Ha nincs második paraméter, akkor visszad egy asszociatív tömböt, amiben megtalálható egy 'kepek' és egy 'docs' tömb
