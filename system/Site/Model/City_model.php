@@ -26,6 +26,15 @@ class City_model extends SiteModel {
     }
 
     /**
+     *  Lekérdezi a megyék nevét és id-jét a city_list táblából
+     */
+    public function countyList()
+    {
+        $this->query->set_table('county_list');
+        return $this->query->select();
+    }
+
+    /**
      *  Lekérdezi a kerület adatokat
      */
     public function districtList()
