@@ -451,6 +451,16 @@ class XmlConvert extends SiteController
 	function __construct()
 	{
         parent::__construct();
+
+        // biztoonsági kulcs használata annak érdekében, hogy böngőszőből ne lehessen 
+        // egyszerűen futtatni a corn kontrollert, csak a biztonsági kulcs ismeretebében fusson 
+        /*
+        $cron_key = $this->request->get_query('key');
+        if ($cron_key != 'DH7AVdT0uGeN-WfZLkgfutDfDeYrqELjjTZrnulm3RY') {
+            die('No permission!');
+        }
+        */
+
         $this->loadModel('ingatlanok_model');
         $this->loadModel('city_model');
 	}
@@ -567,6 +577,13 @@ class XmlConvert extends SiteController
 		$counties = array();
 		// városok nevét és egy altömbben a város és a megye kódját tartalmazó tömb 
 		$cities = array();
+
+
+        // Megye lista a rövid címhez
+        $title_county_names_array = $this->city_model->countyList();
+        // Kategória lista a rövid címhez
+        $title_categories_array = $this->ingatlanok_model->getCategoryNames();
+
 
 		// bejárjuk az objektumot
 		foreach ($xml->region as $region) {
@@ -734,13 +751,13 @@ $i = 0; // DEBUG elem
             // külső referencia szám
             $data['outer_reference_number'] = $property->{'reference-number'}->__toString();
 
-            //$data['ref_id'] = 1; // referens id
-            $data['ref_num'] = null; // referenciaszám
-            $data['ingatlan_nev_hu'] = $property->description->__toString();
-            // az angol nyelvü ingatlan megnevezés, a magyar lesz az angolnál is
-            $data['ingatlan_nev_en'] = $data['ingatlan_nev_hu'];
+            //$data['ref_id'] = 1; // referens id a városok tömben fog szerepelni!!
+            $data['ref_num'] = $data['outer_reference_number']; // referenciaszám
 
+            // Leírás
             $data['leiras_hu'] = $property->description_long->__toString();
+            
+            // Status
             $data['status'] = 1;
 
             // ingatlan típus (eladó / kiadó)
@@ -770,6 +787,9 @@ $i = 0; // DEBUG elem
                 }
             }
 
+            // Rövid cím összerakásához szükséges változó
+            $title_city = '';
+            $title_district = '';
 
             // VÁROS és KERÜLET illetve REFERENS id meghatározása
             $city_code = $property->city->__toString();
@@ -777,9 +797,13 @@ $i = 0; // DEBUG elem
                 // ha szerepel a  város a saját rendszerben
                 if(!is_null($this->cities[$city_code]['own_city_key'])){
                     $data['varos'] = (int)$this->cities[$city_code]['own_city_key'];
+                    // Város neve a címhez
+                    $title_city = $this->cities[$city_code]['city_name'];
                     // ha van kerület
                     if (!is_null($this->cities[$city_code]['district'])) {
                         $data['kerulet'] = (int)$this->cities[$city_code]['district'];
+                        // Kerület nave a címhez
+                        $title_district = $this->cities[$city_code]['district'];
                     }
 
                     // Referens id meghatározása
@@ -829,15 +853,15 @@ $i = 0; // DEBUG elem
                 $data['ar_kiado'] = $price;
             }
 
-            // alapterület
-            $data['alapterulet'] = (int)$property->size->__toString();
-            // telek alapterület
+            // alapterület (kerekítve!)
+            $data['alapterulet'] = (int)round($property->size->__toString(), 0, PHP_ROUND_HALF_UP);
+            // telek alapterület (kerekítve!)
             if (isset($property->{'plot-size'})) {
-                $data['telek_alapterulet'] = (int)$property->{'plot-size'}->__toString();
+                $data['telek_alapterulet'] = (int)round($property->{'plot-size'}->__toString(), 0, PHP_ROUND_HALF_UP);
             }
-            // ha létezik erkély terület
+            // ha létezik erkély terület (kerekítve!)
             if (isset($property->{'total-balcon-size'})) {
-                $data['erkely_terulet'] = (int)$property->{'total-balcon-size'}->__toString();
+                $data['erkely_terulet'] = (int)round($property->{'total-balcon-size'}->__toString(), 0, PHP_ROUND_HALF_UP);
             }
             
             $data['terasz_terulet'] = null;
@@ -851,7 +875,7 @@ $i = 0; // DEBUG elem
 
             // tájolás
             if (isset($property->siting)) {
-                $siting = (int)$property->siting->__toString();
+                $siting = $property->siting->__toString();
                 foreach ($this->options_paired['siting'] as $key => $value) {
                     if ($key == $siting) {
                         $data['tajolas'] = $value;
@@ -863,10 +887,12 @@ $i = 0; // DEBUG elem
             if (isset($property->rooms)) {
                 $data['szobaszam'] = (int)$property->rooms->__toString();
             }
-            // félszoba szám
+            // félszoba szám (ez nem kell, mert nem szerepel a dh specifikációk pdf-ben)
+            /*
             if (isset($property->{'half-rooms'})) {
                 $data['felszobaszam'] = (int)$property->{'half-rooms'};
             }
+            */
 
             $data['szoba_elrendezes'] = null;
             $data['kozos_koltseg'] = null;
@@ -965,6 +991,35 @@ $i = 0; // DEBUG elem
             // terasz
             $data['terasz'] = 0;
 
+
+
+// Rövid cím összeállítása ($title_type, $title_category, $title_county, $title_city, $title_district, $title_street)
+// Típus (eladó/kiadó)
+$title_type = ($data['tipus'] == 1) ? 'Eladó' : 'Kiadó';
+// Kategória neve
+foreach ($title_categories_array as $key => $value) {
+    if ($value['kat_id'] == $data['kategoria']) {
+        $title_category = $value['kat_nev_hu'];
+    }
+}
+// Megye neve
+foreach ($title_county_names_array as $key => $value) {
+    if ($value['county_id'] = $data['megye']) {
+        $title_county = $value['county_name'];
+    }
+}
+// Utca neve a címbe
+$title_street = $data['utca'];
+
+
+$short_title = $title_type . ',' . $title_category . ',' . $title_county . ',' . $title_city . ',' . $title_district . ',' . $title_street;
+var_dump($short_title);die;
+//$data['ingatlan_nev_hu'] = $property->description->__toString();
+$data['ingatlan_nev_hu'] = $short_title;
+// az angol nyelvü ingatlan megnevezés, a magyar lesz az angolnál is
+$data['ingatlan_nev_en'] = $data['ingatlan_nev_hu'];
+
+
             // kép linkek
             if (isset($property->images)) {
                 foreach ($property->images->image as $image) {
@@ -1011,17 +1066,24 @@ $i = 0; // DEBUG elem
             // tömbök ürítése
             $data = array();
             $photos = array();
-
+            // Változók ürítése
+            $title_type = '';
+            $title_category = '';
+            $title_county = '';
+            $title_city = ''; 
+            $title_district = '';
+            $title_street = '';
 
 // DEBUG
 $i++;
-if ($i > 1) {
+if ($i > 2) {
     break;
 }
-/*
-*/
+
         }
-die('Muvelet kesz! - ' . $i);
+
+$this->response->redirect('ingatlanok');        
+//die('Muvelet kesz! - ' . $i);
 
 	}
 
