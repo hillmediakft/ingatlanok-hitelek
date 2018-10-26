@@ -507,7 +507,7 @@ class Property extends AdminController {
             // ezeknek a mezőknek integer típusú értéket kell kapniuk + a configból az extrákat tartalamazó mezők
             $integer_items = array(
                 'ref_id',
-                'ref_num',
+                //'ref_num',
                 'status',
                 'kategoria',
                 'tipus',
@@ -1058,7 +1058,7 @@ class Property extends AdminController {
                     // referens id  
                     $data['ref_id'] = (int) $data['ref_id'];
                     // referenciaszám
-                    $data['ref_num'] = (int) $data['ref_num'];
+                    $data['ref_num'] = $data['ref_num'];
                     // status
                     $data['status'] = (int) $data['status'];
                     // kiemeles
