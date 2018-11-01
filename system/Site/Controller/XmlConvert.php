@@ -42,7 +42,7 @@ class XmlConvert extends SiteController
 	private $options = array();
 
 	// xml behívás után az ingatlanok adatait tartalamazza
-	private $properties = array();
+	//private $properties = array();
 
     // ha nincs a városhoz, kerülethez referens rendelve ez a referens lesz hozzárendelve
     private $default_agent_id = 57;
@@ -57,10 +57,10 @@ class XmlConvert extends SiteController
      * @var array
      */
     private $regions_paired = array(
-        'LCN0000000000RG' => 1, // Bács-Kiskun
-        'LCN0000000000RI' => 2, // Baranya
-        'LCN0000000000RH' => 3, // Békés
-        'LCN0000000000RJ' => 4, // Borsod-Abaúj-Zemplén
+        //'LCN0000000000RG' => 1, // Bács-Kiskun
+        //'LCN0000000000RI' => 2, // Baranya
+        //'LCN0000000000RH' => 3, // Békés
+        //'LCN0000000000RJ' => 4, // Borsod-Abaúj-Zemplén
         'LCN000000000B9L' => 5, // Budapest
         // 'LCN0000000000RL' => 6, // Csongrád
         // 'LCN0000000000RM' => 7, // Fejér
@@ -131,29 +131,29 @@ class XmlConvert extends SiteController
             "SPV0000000001L2" => 2, // Jó - (Jó)
             "SPV0000000001L3" => 1, // Nagyon jó - (kiváló)
             "SPV0000000001L4" => 1, // Nagyon jó - (kiváló)
-            "SPV0000000001L5" => 4  // újépítésű - (újszerű)
+            "SPV0000000001L5" => 9  // újépítésű - (új)
         ),
     
         // ingatlan_allapot_belul tábla
         "building-condition-in" => array(
             //"SPV0000000001KZ" => "1 - Lakhatatlan",
-            "SPV0000000001L0" => 1, //2 - Felújítandó
-            "SPV0000000001L1" => 2, //3 - Lakható - (átlagos)
-            "SPV0000000001L2" => 3, //4 - Jó - (felújított)
-            "SPV0000000001L3" => 3, //5 - Nagyon jó - (felújított)
-            "SPV0000000001L4" => 3, //Nagyon jó - (felújított)
-            "SPV0000000001L5" => 3, //újépítésű - (felújított)
+            "SPV0000000001L0" => 1, // Felújítandó - (felújítandó)
+            "SPV0000000001L1" => 2, // Lakható - (átlagos)
+            "SPV0000000001L2" => 2, // Jó - (átlagos)
+            "SPV0000000001L3" => 2, // Nagyon jó - (átlagos)
+            "SPV0000000001L4" => 2, // Nagyon jó - (átlagos)
+            "SPV0000000001L5" => 2, // újépítésű - (átlagos)
         ),
     
         // ingatlan_allapot_kivul tábla
         "building-condition-out" => array(
-            "SPV0000000001KZ" => 8, //1 - Lakhatatlan
-            "SPV0000000001L0" => 7, //2 - Felújítandó
-            "SPV0000000001L1" => 6, //3 - Lakható - (közepes)
-            "SPV0000000001L2" => 4, //4 - Jó
-            "SPV0000000001L3" => 1, //5 - Nagyon jó - (kiváló)
-            "SPV0000000001L4" => 1, //Nagyon jó - (kiváló)
-            "SPV0000000001L5" => 3, //újépítésű - (újszerű)
+            "SPV0000000001KZ" => 8, // Lakhatatlan - (bontandó)
+            "SPV0000000001L0" => 7, // Felújítandó - (felújítandó)
+            "SPV0000000001L1" => 6, // Lakható - (közepes)
+            "SPV0000000001L2" => 4, // Jó - (jó)
+            "SPV0000000001L3" => 1, // Nagyon jó - (kiváló)
+            "SPV0000000001L4" => 1, // Nagyon jó - (kiváló)
+            "SPV0000000001L5" => 2, // újépítésű - (új)
         ),
 
         // ingatlan_kilatas tábla
@@ -461,6 +461,7 @@ class XmlConvert extends SiteController
             die('No permission!');
         }
         */
+        
 
         $this->loadModel('ingatlanok_model');
         $this->loadModel('city_model');
@@ -573,11 +574,11 @@ class XmlConvert extends SiteController
 	 */
 	private function dh_regions($own_cities, $own_districts)
 	{
-        $dir = getcwd();
-        $content = $this->getFromWeb($dir . '/_TEMP/xml_convert/regions.xml');
+        //$dir = getcwd();
+        //$content = $this->getFromWeb($dir . '/_TEMP/xml_convert/regions.xml');
 
-        //$content = $this->getFromWeb($this->dh_links['regions'], $this->dh_username, $this->dh_password);
-        //$xml = simplexml_load_string($content);
+        $content = $this->getFromWeb($this->dh_links['regions'], $this->dh_username, $this->dh_password);
+        $xml = simplexml_load_string($content);
 		$xml = new \SimpleXMLElement($content);
 
 		// megyék kódját és nevét tartalmazó tömb
