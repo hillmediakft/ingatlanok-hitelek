@@ -47,6 +47,7 @@ class XmlConvert extends SiteController
     // ha nincs a városhoz, kerülethez referens rendelve ez a referens lesz hozzárendelve
     private $default_agent_id = 57;
 
+
 // -------------------------------------
 
     /**
@@ -56,10 +57,10 @@ class XmlConvert extends SiteController
      * @var array
      */
     private $regions_paired = array(
-        // 'LCN0000000000RG' => 1, // Bács-Kiskun
-        // 'LCN0000000000RI' => 2, // Baranya
-        // 'LCN0000000000RH' => 3, // Békés
-        // 'LCN0000000000RJ' => 4, // Borsod-Abaúj-Zemplén
+        'LCN0000000000RG' => 1, // Bács-Kiskun
+        'LCN0000000000RI' => 2, // Baranya
+        'LCN0000000000RH' => 3, // Békés
+        'LCN0000000000RJ' => 4, // Borsod-Abaúj-Zemplén
         'LCN000000000B9L' => 5, // Budapest
         // 'LCN0000000000RL' => 6, // Csongrád
         // 'LCN0000000000RM' => 7, // Fejér
@@ -122,15 +123,15 @@ class XmlConvert extends SiteController
     
         // ingatlan_allapot tábla
         "property-condition" => array(
-            "SPV00000009L8V9" => 9, //új
-            "SPV0000000001KZ" => 8, //1 - Lakhatatlan - (bontandó)
-            "SPV00000009L8VA" => 6, //használt - (közepes)
-            "SPV0000000001L0" => 7, //2 - Felújítandó
-            "SPV0000000001L1" => 6, //3 - Lakható - (közepes)
-            "SPV0000000001L2" => 2, //4 - Jó
-            "SPV0000000001L3" => 1, //5 - Nagyon jó - (kiváló)
-            "SPV0000000001L4" => 1, //Nagyon jó - (kiváló)
-            "SPV0000000001L5" => 4 //újépítésű - (újszerű)
+            "SPV00000009L8V9" => 9, // Új - (új)
+            "SPV0000000001KZ" => 8, // Lakhatatlan - (bontandó)
+            "SPV00000009L8VA" => 6, // használt - (közepes) ???
+            "SPV0000000001L0" => 7, // Felújítandó - (Felújítandó)
+            "SPV0000000001L1" => 6, // Lakható - (közepes) ???
+            "SPV0000000001L2" => 2, // Jó - (Jó)
+            "SPV0000000001L3" => 1, // Nagyon jó - (kiváló)
+            "SPV0000000001L4" => 1, // Nagyon jó - (kiváló)
+            "SPV0000000001L5" => 4  // újépítésű - (újszerű)
         ),
     
         // ingatlan_allapot_belul tábla
@@ -452,8 +453,8 @@ class XmlConvert extends SiteController
 	{
         parent::__construct();
 
-        // biztoonsági kulcs használata annak érdekében, hogy böngőszőből ne lehessen 
-        // egyszerűen futtatni a corn kontrollert, csak a biztonsági kulcs ismeretebében fusson 
+        // biztonsági kulcs használata annak érdekében, hogy böngőszőből ne lehessen 
+        // egyszerűen futtatni az xmlconvert kontrollert, csak a biztonsági kulcs ismeretebében fusson 
         /*
         $cron_key = $this->request->get_query('key');
         if ($cron_key != 'DH7AVdT0uGeN-WfZLkgfutDfDeYrqELjjTZrnulm3RY') {
@@ -470,6 +471,12 @@ class XmlConvert extends SiteController
 	 */
 	public function index()
 	{
+        /*
+        if ($this->request->has_query('item')) {
+            $this->oneitem = $this->request->get_query('item');
+        }
+        */
+
         // Ingatlanok a DunaHouse oldalról
         $this->dunahouse();
 	}
@@ -578,13 +585,6 @@ class XmlConvert extends SiteController
 		// városok nevét és egy altömbben a város és a megye kódját tartalmazó tömb 
 		$cities = array();
 
-
-        // Megye lista a rövid címhez
-        $title_county_names_array = $this->city_model->countyList();
-        // Kategória lista a rövid címhez
-        $title_categories_array = $this->ingatlanok_model->getCategoryNames();
-
-
 		// bejárjuk az objektumot
 		foreach ($xml->region as $region) {
 
@@ -679,20 +679,30 @@ class XmlConvert extends SiteController
         // num helper példányosítása
         $num_helper = DI::get('num_helper');
 
+        // Megye lista a rövid címhez
+        $title_county_names_array = $this->city_model->countyList();
+        // Kategória lista a rövid címhez
+        $title_categories_array = $this->ingatlanok_model->getCategoryNames();
+
+
 $i = 0; // DEBUG elem
 
         // ingatlan adatok bejárása
         foreach ($xml->property as $property) {
         
             $data = array();
-            
+
+
+
+                //////////////////////////////////////////////////////////////////
+                // Nem megfelelő ingatlanok átugrása és kategória meghatározása //
+                //////////////////////////////////////////////////////////////////
 
                 // Ha szerepel a saját adatbázisban az ingatlan
                 $outer_reference_number = $property->{'reference-number'}->__toString();
                 if (in_array($outer_reference_number, $outer_properties_ref_nums)) {
                     continue;
                 }
-
                 // megye
                 $county_code = $property->county->__toString();
                 // $this->regions_paired tömbben lévő elemek engedélyezettek
@@ -700,7 +710,7 @@ $i = 0; // DEBUG elem
                     continue;
                 }
 
-                // Ha az ár elemnek nincs currency attribútuma és az ár nem HUF-bnn van megadva
+                // Ha az ár elemnek nincs currency attribútuma és az ár nem HUF-ban van megadva
                 if (!isset($property->price['currency']) || $property->price['currency'] != "CUR00000000015F") {
                     continue;
                 }
@@ -746,12 +756,17 @@ $i = 0; // DEBUG elem
                 }
 
         
-        // ingatlan adatok behelyezése a $data tömbbe (a kategória már megvan)
-              
+
+
+            ////////////////////////////////////////////////////////////////////////
+            //Ingatlan adatok behelyezése a $data tömbbe (a kategória már megvan) //
+            ////////////////////////////////////////////////////////////////////////
+                  
             // külső referencia szám
             $data['outer_reference_number'] = $property->{'reference-number'}->__toString();
 
-            //$data['ref_id'] = 1; // referens id a városok tömben fog szerepelni!!
+            //$data['ref_id'] = 1; // a referens id a városok tömben fog szerepelni!!
+            
             $data['ref_num'] = $data['outer_reference_number']; // referenciaszám
 
             // Leírás
@@ -791,7 +806,10 @@ $i = 0; // DEBUG elem
             $title_city = '';
             $title_district = '';
 
-            // VÁROS és KERÜLET illetve REFERENS id meghatározása
+
+            ////////////////////////////////////////////////////////
+            // VÁROS és KERÜLET illetve REFERENS id meghatározása //
+            ////////////////////////////////////////////////////////
             $city_code = $property->city->__toString();
             if (array_key_exists($city_code, $this->cities)) {
                 // ha szerepel a  város a saját rendszerben
@@ -859,11 +877,18 @@ $i = 0; // DEBUG elem
             if (isset($property->{'plot-size'})) {
                 $data['telek_alapterulet'] = (int)round($property->{'plot-size'}->__toString(), 0, PHP_ROUND_HALF_UP);
             }
-            // ha létezik erkély terület (kerekítve!)
+
+
+            // Erkély
+            //$data['erkely'] = isset($property->balconies) ? 1 : 0;
+            // ha létezik "összes" erkély terület (kerekítve!)
             if (isset($property->{'total-balcon-size'})) {
                 $data['erkely_terulet'] = (int)round($property->{'total-balcon-size'}->__toString(), 0, PHP_ROUND_HALF_UP);
+                $data['erkely'] = 1;
             }
             
+            // terasz
+            $data['terasz'] = 0;
             $data['terasz_terulet'] = null;
 
             // belmagasság
@@ -894,8 +919,15 @@ $i = 0; // DEBUG elem
             }
             */
 
+            // Szoba elrendezés
             $data['szoba_elrendezes'] = null;
-            $data['kozos_koltseg'] = null;
+            
+            // Közös költség
+            if (isset($property->{'common-expense-in-huf'})) {
+                $data['kozos_koltseg'] = (int)$property->{'common-expense-in-huf'}->__toString();
+            }
+
+            // Rezsi
             $data['rezsi'] = null;
            
             // fűtés
@@ -908,7 +940,7 @@ $i = 0; // DEBUG elem
                 }
             }
 
-            // parkolás
+            // Parkolás
             if (isset($property->{'parking-type'})) {
                 $parking_type = $property->{'parking-type'}->__toString();
                 foreach ($this->options_paired['parking-type'] as $key => $value) {
@@ -950,6 +982,7 @@ $i = 0; // DEBUG elem
 
             // energetika
             $data['energetika'] = null;
+            
             // kert
             $data['kert'] = null;
 
@@ -986,39 +1019,50 @@ $i = 0; // DEBUG elem
             $data['furdo_wc'] = null;
             $data['komfort'] = null;
 
-            // erkély
-            $data['erkely'] = isset($property->balconies) ? 1 : 0;
-            // terasz
-            $data['terasz'] = 0;
+
+
+            ////////////////////////////
+            //Rövid cím összeállítása //
+            ////////////////////////////
+
+            // Rövid cím összeállítása ($title_type, $title_category, $title_county, $title_city, $title_district, $title_street)
+            // Típus (eladó/kiadó)
+            $title_type = ($data['tipus'] == 1) ? 'Eladó' : 'Kiadó';
+            // Kategória neve
+            foreach ($title_categories_array as $key => $value) {
+                if ($value['kat_id'] == $data['kategoria']) {
+                    $title_category = $value['kat_nev_hu'];
+                }
+            }
+
+            // Megye neve
+            foreach ($title_county_names_array as $key => $value) {
+                if ($value['county_id'] == $data['megye']) {
+                    $title_county = $value['county_name'];
+                }
+            }
+            // Utca neve a címbe
+            $title_street = $data['utca'];
+
+            $short_title = $title_type . ' ' . $title_category . ', ' . $title_county . ', ';
+            // Ha a megye Budapest, akkor nem kell város a rövid címbe
+            if ($title_county == 'Budapest') {
+                $short_title .= $title_district . '. kerület, ' . $title_street;
+            } else {
+                $short_title .= $title_city . ', ' . $title_street;
+
+            }
+
+            //$data['ingatlan_nev_hu'] = $property->description->__toString();
+            $data['ingatlan_nev_hu'] = $short_title;
+            // az angol nyelvü ingatlan megnevezés, a magyar lesz az angolnál is
+            $data['ingatlan_nev_en'] = $data['ingatlan_nev_hu'];
 
 
 
-// Rövid cím összeállítása ($title_type, $title_category, $title_county, $title_city, $title_district, $title_street)
-// Típus (eladó/kiadó)
-$title_type = ($data['tipus'] == 1) ? 'Eladó' : 'Kiadó';
-// Kategória neve
-foreach ($title_categories_array as $key => $value) {
-    if ($value['kat_id'] == $data['kategoria']) {
-        $title_category = $value['kat_nev_hu'];
-    }
-}
-// Megye neve
-foreach ($title_county_names_array as $key => $value) {
-    if ($value['county_id'] = $data['megye']) {
-        $title_county = $value['county_name'];
-    }
-}
-// Utca neve a címbe
-$title_street = $data['utca'];
-
-
-$short_title = $title_type . ',' . $title_category . ',' . $title_county . ',' . $title_city . ',' . $title_district . ',' . $title_street;
-var_dump($short_title);die;
-//$data['ingatlan_nev_hu'] = $property->description->__toString();
-$data['ingatlan_nev_hu'] = $short_title;
-// az angol nyelvü ingatlan megnevezés, a magyar lesz az angolnál is
-$data['ingatlan_nev_en'] = $data['ingatlan_nev_hu'];
-
+            ///////////////////////
+            //Képek feldolgozása //
+            ///////////////////////
 
             // kép linkek
             if (isset($property->images)) {
@@ -1060,7 +1104,7 @@ $data['ingatlan_nev_en'] = $data['ingatlan_nev_hu'];
                 $this->makePhotos($last_id, $photos);
             }
 
-
+            // Elem hozzáadása esemény
             EventManager::trigger('insert_property', array('insert', '#' . $last_id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan létrehozása a dunahouse oldalról'));
 
             // tömbök ürítése
@@ -1074,16 +1118,22 @@ $data['ingatlan_nev_en'] = $data['ingatlan_nev_hu'];
             $title_district = '';
             $title_street = '';
 
+
+
+
 // DEBUG
+
+
 $i++;
 if ($i > 2) {
     break;
 }
 
+
         }
 
-$this->response->redirect('ingatlanok');        
-//die('Muvelet kesz! - ' . $i);
+//$this->response->redirect('ingatlanok');        
+die(' Muvelet kesz! - ' . $i);
 
 	}
 
