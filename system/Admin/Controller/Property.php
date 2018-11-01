@@ -889,6 +889,7 @@ class Property extends AdminController {
             // filenevek lekérdezése
             $files_arr = $this->property_model->getFilenames($id);
             $photos_arr = $files_arr['kepek'];
+            $alaprajzok_arr = $files_arr['alaprajzok'];
             $docs_arr = $files_arr['docs'];
 
             //lakás törlése 
@@ -915,6 +916,22 @@ class Property extends AdminController {
                             $file_helper->delete(array($normal_path, $thumb_path, $small_path));
                         }
                     }
+
+                    //ha az adatbázisban léteznek alaprajz képek
+                    if (!empty($alaprajzok_arr)) {
+
+                        $url_helper = DI::get('url_helper');
+                        $floor_plan_photo_path = Config::get('ingatlan_photo_floor_plan.upload_path');
+                        // alaprajz képek törlése
+                        foreach ($alaprajzok_arr as $filename) {
+                            $normal_path = $floor_plan_photo_path . $filename;
+                            $thumb_path = $url_helper->thumbPath($floor_plan_photo_path . $filename);
+                            $small_path = $url_helper->thumbPath($floor_plan_photo_path . $filename, false, 'small');
+                            // képek törlése
+                            $file_helper->delete(array($normal_path, $thumb_path, $small_path));
+                        }
+                    }
+
                     // ha az adatbázisban léteznek dokumentumok
                     if (!empty($docs_arr)) {
                         $docs_path = Config::get('ingatlan_doc.upload_path');
