@@ -672,10 +672,10 @@ class XmlConvert extends SiteController
 	{
         set_time_limit(0);
 
-        $dir = getcwd();
-        $content = $this->getFromWeb($dir . '/_TEMP/xml_convert/properties.xml');
+        //$dir = getcwd();
+        //$content = $this->getFromWeb($dir . '/_TEMP/xml_convert/properties.xml');
 
-		//$content = $this->getFromWeb($this->dh_links['properties'], $this->dh_username, $this->dh_password);
+		$content = $this->getFromWeb($this->dh_links['properties'], $this->dh_username, $this->dh_password);
 		$xml = new \SimpleXMLElement($content);
         // num helper példányosítása
         $num_helper = DI::get('num_helper');
