@@ -65,7 +65,7 @@ class XmlConvert extends SiteController
         // 'LCN0000000000RL' => 6, // Csongrád
         // 'LCN0000000000RM' => 7, // Fejér
         // 'LCN0000000000RN' => 8, // Győr-Moson-Sopron
-        // 'LCN0000000000RO' => 9, // Hajdú-Bihar
+        'LCN0000000000RO' => 9, // Hajdú-Bihar
         // 'LCN0000000000RP' => 10, // Heves
         // 'LCN0000000000RQ' => 11, // Jász-Nagykun-Szolnok
         // 'LCN0000000000RR' => 12, // Komárom-Esztergom
@@ -288,19 +288,19 @@ class XmlConvert extends SiteController
 
         // ingatlan_futes tábla
         "heating" => array(
-            "SPV000000000CDK" => 1, //gáz (cirkó)
-            "SPV0000000001LA" => 2, //gáz (konvektor)
-            "SPV0000000001LB" => 7, //gáz (héra)
-            "SPV0000000001LC" => 11, //gáz + napkollektor
-            "SPV000000000CDO" => 11, //gázkazán
-            "SPV0000000001LF" => 8, //elektromos
-            "SPV000000000CDN" => 11, //egyéb kazán
-            "SPV000000000CDM" => 11 , //egyéb
-            "SPV0000000001LE" => 6, //távfűtés
-            "SPV0000000001LD" => 4, //házközponti
-            "SPV000000000CDL" => 3, //házközponti egyedi méréssel
-            "SPV000000000FLM" => 11, //geotermikus
-            "SPV000000000TLY" => 5 //távfűtés egyedi mérővel
+            "SPV000000000CDK" => 1, //gáz cirkó - (cirkó)
+            "SPV0000000001LA" => 2, //gáz konvektor - (konvektor)
+            "SPV0000000001LB" => 7, //gáz héra (héra)
+            "SPV0000000001LC" => 11, //gáz + napkollektor - (egyéb)
+            "SPV000000000CDO" => 11, //gázkazán - (egyéb)
+            "SPV0000000001LF" => 8, //elektromos - (elektromos)
+            "SPV000000000CDN" => 11, //egyéb kazán - (egyéb)
+            "SPV000000000CDM" => 11 , //egyéb - (egyéb)
+            "SPV0000000001LE" => 6, //távfűtés - (távfűtés)
+            "SPV0000000001LD" => 4, //házközponti - (házközponti)
+            "SPV000000000CDL" => 3, //házközponti egyedi méréssel - (házközponti egyedi méréssel)
+            "SPV000000000FLM" => 11, //geotermikus - (egyéb)
+            "SPV000000000TLY" => 5 //távfűtés egyedi mérővel - (távfűtés egyedi mérővel)
         ),
 
 /*
@@ -672,10 +672,10 @@ class XmlConvert extends SiteController
 	{
         set_time_limit(0);
 
-        //$dir = getcwd();
-        //$content = $this->getFromWeb($dir . '/_TEMP/xml_convert/properties.xml');
+        $dir = getcwd();
+        $content = $this->getFromWeb($dir . '/_TEMP/xml_convert/properties.xml');
 
-		$content = $this->getFromWeb($this->dh_links['properties'], $this->dh_username, $this->dh_password);
+		//$content = $this->getFromWeb($this->dh_links['properties'], $this->dh_username, $this->dh_password);
 		$xml = new \SimpleXMLElement($content);
         // num helper példányosítása
         $num_helper = DI::get('num_helper');
@@ -692,7 +692,6 @@ $i = 0; // DEBUG elem
         foreach ($xml->property as $property) {
         
             $data = array();
-
 
 
                 //////////////////////////////////////////////////////////////////
@@ -776,7 +775,10 @@ $i = 0; // DEBUG elem
             // Status
             $data['status'] = 1;
 
-            // ingatlan típus (eladó / kiadó)
+
+            ////////////////////////////////////
+            // ingatlan típus (eladó / kiadó) //
+            ////////////////////////////////////
             $agreement_type = $property->{'agreement-type'}->__toString();
             foreach ($this->options_paired['agreement-type'] as $key => $value) {
                 if ($key == $agreement_type) {
@@ -784,7 +786,10 @@ $i = 0; // DEBUG elem
                 }
             }
 
-            // ingatlan állapot
+
+            //////////////////////
+            // ingatlan állapot //
+            //////////////////////
             if (isset($property->{'property-condition'})) {
                 $property_condition = $property->{'property-condition'}->__toString();
                 foreach ($this->options_paired['property-condition'] as $key => $value) {
@@ -794,16 +799,25 @@ $i = 0; // DEBUG elem
                 }
             }
 
+
+            /////////////
+            //Kiemelés //
+            /////////////
             $data['kiemeles'] = 0;
             
-            // megye 
+
+            ////////////
+            // Megye  //
+            ////////////
             foreach ($this->regions_paired as $key => $value) {
                 if ($county_code == $key) {
                     $data['megye'] = $value;
                 }
             }
 
-            // Rövid cím összerakásához szükséges változó
+
+
+            // Rövid cím összerakásához szükséges változók
             $title_city = '';
             $title_district = '';
 
@@ -811,6 +825,7 @@ $i = 0; // DEBUG elem
             ////////////////////////////////////////////////////////
             // VÁROS és KERÜLET illetve REFERENS id meghatározása //
             ////////////////////////////////////////////////////////
+
             $city_code = $property->city->__toString();
             if (array_key_exists($city_code, $this->cities)) {
                 // ha szerepel a  város a saját rendszerben
@@ -837,11 +852,27 @@ $i = 0; // DEBUG elem
             }
 
 
+            //////////
+            // Utca //
+            //////////
             $data['utca'] = $property->street->__toString();
+            
+
+            /////////////
+            // Házszám //
+            /////////////
             $data['hazszam'] = null;
+            
+
+            /////////////////
+            // Emelet_ajtó //
+            /////////////////
             $data['emelet_ajto'] = null;
             
-            // ha van megadva emelet            
+
+            ////////////////////////
+            // Emelet             //
+            ////////////////////////
             if (isset($property->floor)) {
                 $floor = $property->floor->__toString();
 
@@ -854,14 +885,24 @@ $i = 0; // DEBUG elem
                 }
             }
 
-            $data['tetoter'] = null;
+
+
+            
+            //////////////////
+            // Irányítószám //
+            //////////////////
             $data['iranyitoszam'] = $property->{'postal-code'}->__toString();
+            
+            $data['tetoter'] = null;
             $data['epulet_szintjei'] = null;
             $data['utca_megjelenites'] = 0;
             $data['hazszam_megjelenites'] = 0;
             $data['terkep'] = 0;
             
-            // ÁR - eladó vagy kiadó
+
+            ///////////////////////////
+            // ÁR - eladó vagy kiadó //
+            ///////////////////////////
             $price = (int)$property->price->__toString();
             if ($data['tipus'] == 1) {
                 $data['ar_elado_eredeti'] = $price;
@@ -872,34 +913,91 @@ $i = 0; // DEBUG elem
                 $data['ar_kiado'] = $price;
             }
 
-            // alapterület (kerekítve!)
+            //////////////////////////////
+            // Alapterület (kerekítve!) //
+            //////////////////////////////
             $data['alapterulet'] = (int)round($property->size->__toString(), 0, PHP_ROUND_HALF_UP);
-            // telek alapterület (kerekítve!)
+            
+
+            ////////////////////////////////////
+            // Telek alapterület (kerekítve!) //
+            ////////////////////////////////////
             if (isset($property->{'plot-size'})) {
                 $data['telek_alapterulet'] = (int)round($property->{'plot-size'}->__toString(), 0, PHP_ROUND_HALF_UP);
             }
 
 
-            // Erkély
-            //$data['erkely'] = isset($property->balconies) ? 1 : 0;
-            // ha létezik "összes" erkély terület (kerekítve!)
-            if (isset($property->{'total-balcon-size'})) {
-                $data['erkely_terulet'] = (int)round($property->{'total-balcon-size'}->__toString(), 0, PHP_ROUND_HALF_UP);
-                $data['erkely'] = 1;
-            }
-            
-            // terasz
+            //////////////////////
+            // Erkély és Terasz //
+            //////////////////////
+
+            $data['erkely'] = 0;
             $data['terasz'] = 0;
             $data['terasz_terulet'] = null;
+            $data['erkely_terulet'] = null;
 
-            // belmagasság
+            // Ha van premises-list elem (ez tartalmazza az erkély és terasz méreteket)
+            if (isset($property->{'premises-list'})) {
+
+                $temp_erkely_terasz = array();
+
+                foreach ($property->{'premises-list'}->{'premises'} as $premise) {
+                    
+                    $premises_type = $premise->{'premises-type'}->__toString();
+                    $premises_size = $premise->{'size'}->__toString();
+
+                    // Ha az elem: erkély vagy nyitott terasz vagy fedett terasz
+                    if (
+                        //erkély
+                        $premises_type == 'SPV0000000001R5' ||
+                        // fedett terasz
+                        $premises_type == 'SPV0000000P66H2' ||
+                        // nyitott terasz
+                        $premises_type == 'SPV0000000P66H3'
+                    ) {
+                        if (array_key_exists($premises_type, $temp_erkely_terasz)) {
+                            $temp_erkely_terasz[$premises_type] = $temp_erkely_terasz[$premises_type] + $premises_size;
+                        } else {
+                            $temp_erkely_terasz[$premises_type] = $premises_size;
+                        }
+                    }
+
+                }
+
+                // Erkely
+                if (array_key_exists('SPV0000000001R5', $temp_erkely_terasz)) {
+                    $data['erkely'] = 1;
+                    $data['erkely_terulet'] = (int)round($temp_erkely_terasz['SPV0000000001R5'], 0, PHP_ROUND_HALF_UP);
+                }
+                // Fedett terasz
+                if (array_key_exists('SPV0000000P66H2', $temp_erkely_terasz)) {
+                   $data['terasz_terulet'] += (int)round($temp_erkely_terasz['SPV0000000P66H2'], 0, PHP_ROUND_HALF_UP);
+                }
+                // Nyitott terasz
+                if (array_key_exists('SPV0000000P66H3', $temp_erkely_terasz)) {
+                    $data['terasz_terulet'] += (int)round($temp_erkely_terasz['SPV0000000P66H3'], 0, PHP_ROUND_HALF_UP);
+                }
+
+                if (isset($data['terasz_terulet']) && $data['terasz_terulet'] > 0) {
+                    $data['terasz'] = 1;
+                }
+
+            }
+
+
+            /////////////////
+            // Belmagasság //
+            /////////////////
             if (isset($property->stud)) {
                 $data['belmagassag'] = intval($num_helper->stringToNumber($property->stud) * 100);
             } else {
                 $data['belmagassag'] = null;
             }
 
-            // tájolás
+
+            /////////////
+            // Tájolás //
+            /////////////
             if (isset($property->siting)) {
                 $siting = $property->siting->__toString();
                 foreach ($this->options_paired['siting'] as $key => $value) {
@@ -909,7 +1007,10 @@ $i = 0; // DEBUG elem
                 }
             }
 
-            // szobaszám
+
+            ///////////////
+            // szobaszám //
+            ///////////////
             if (isset($property->rooms)) {
                 $data['szobaszam'] = (int)$property->rooms->__toString();
             }
@@ -920,18 +1021,30 @@ $i = 0; // DEBUG elem
             }
             */
 
-            // Szoba elrendezés
+
+            //////////////////////
+            // Szoba elrendezés //
+            //////////////////////
             $data['szoba_elrendezes'] = null;
             
-            // Közös költség
+
+            ///////////////////
+            // Közös költség //
+            ///////////////////
             if (isset($property->{'common-expense-in-huf'})) {
                 $data['kozos_koltseg'] = (int)$property->{'common-expense-in-huf'}->__toString();
             }
 
-            // Rezsi
+
+            ///////////
+            // Rezsi //
+            ///////////
             $data['rezsi'] = null;
            
-            // fűtés
+
+            ///////////
+            // fűtés //
+            ///////////
             if (isset($property->heating)) {
                 $heating = $property->heating->__toString();
                 foreach ($this->options_paired['heating'] as $key => $value) {
@@ -941,7 +1054,10 @@ $i = 0; // DEBUG elem
                 }
             }
 
-            // Parkolás
+
+            //////////////
+            // Parkolás //
+            //////////////
             if (isset($property->{'parking-type'})) {
                 $parking_type = $property->{'parking-type'}->__toString();
                 foreach ($this->options_paired['parking-type'] as $key => $value) {
@@ -951,7 +1067,10 @@ $i = 0; // DEBUG elem
                 }
             }
             
-            // ingatlan szerkezet
+
+            ////////////////////////
+            // ingatlan szerkezet //
+            ////////////////////////
             if (isset($property->{'building-structure'})) {
                 $building_structure = $property->{'building-structure'}->__toString();
                 foreach ($this->options_paired['building-structure'] as $key => $value) {
@@ -961,7 +1080,10 @@ $i = 0; // DEBUG elem
                 }
             }
             
-            // kilátás
+
+            /////////////
+            // kilátás //
+            /////////////
             if (isset($property->facing)) {
                 $facing = $property->facing->__toString();
                 foreach ($this->options_paired['facing'] as $key => $value) {
@@ -971,7 +1093,10 @@ $i = 0; // DEBUG elem
                 }
             }
             
-            // lift
+
+            //////////
+            // lift //
+            //////////
             if (isset($property->lift)) {
                 $lift = $property->lift->__toString();
                 foreach ($this->options_paired['lift'] as $key => $value) {
@@ -981,13 +1106,22 @@ $i = 0; // DEBUG elem
                 }
             }
 
-            // energetika
+
+            ////////////////
+            // energetika //
+            ////////////////
             $data['energetika'] = null;
             
-            // kert
+
+            //////////
+            // kert //
+            //////////
             $data['kert'] = null;
 
-            // ingatlan állapot kívűl
+
+            ////////////////////////////
+            // ingatlan állapot kívűl //
+            ////////////////////////////
             if (isset($property->{'building-condition-out'})) {
                 $building_condition_out = $property->{'building-condition-out'}->__toString();
                 foreach ($this->options_paired['building-condition-out'] as $key => $value) {
@@ -997,7 +1131,10 @@ $i = 0; // DEBUG elem
                 }
             }
 
-            // ingatlan állapot belül
+
+            ////////////////////////////
+            // ingatlan állapot belül //
+            ////////////////////////////
             if (isset($property->{'building-condition-in'})) {
                 $building_condition_in = $property->{'building-condition-in'}->__toString();
                 foreach ($this->options_paired['building-condition-in'] as $key => $value) {
@@ -1007,7 +1144,10 @@ $i = 0; // DEBUG elem
                 }
             }
 
-            // fényviszonyok
+
+            ///////////////////
+            // fényviszonyok //
+            ///////////////////
             if (isset($property->brightness)) {
                 $brightness = $property->brightness->__toString();
                 foreach ($this->options_paired['brightness'] as $key => $value) {
@@ -1100,12 +1240,17 @@ $i = 0; // DEBUG elem
             }
 
 
-            // Képek létrehozása
+            ///////////////////////
+            // Képek létrehozása //
+            ///////////////////////
             if (!empty($photos)) {
                 $this->makePhotos($last_id, $photos);
             }
 
-            // Elem hozzáadása esemény
+
+            /////////////////////////////
+            // Elem hozzáadása esemény //
+            /////////////////////////////
             EventManager::trigger('insert_property', array('insert', '#' . $last_id . ' / ' . $data['ref_num'] . ' - referencia számú ingatlan létrehozása a dunahouse oldalról'));
 
             // tömbök ürítése
@@ -1133,8 +1278,8 @@ if ($i > 2) {
 
         }
 
-//$this->response->redirect('ingatlanok');        
-die(' Muvelet kesz! - ' . $i);
+$this->response->redirect('ingatlanok');        
+//die(' Muvelet kesz! - ' . $i);
 
 	}
 
