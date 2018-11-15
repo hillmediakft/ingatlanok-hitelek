@@ -430,7 +430,6 @@ class XmlConvert extends SiteController
             "SPV0000005GSX1T" => "újszerű"
         ),
 
-/*
         "hirdetheto" => array(
             "SPV0000008GPHZ1" => "Mindenhol hirdethető",
             "SPV0000008GPHZ2" => "Csak adatbázis",
@@ -438,7 +437,7 @@ class XmlConvert extends SiteController
             "SPV0000008GPHZ4" => "Az ingatlan.com kivételével hirdethető",
             "SPV0000008GPHZ5" => "Csak adabázis, DH + PRIME"
         )
-*/
+
     );
 
     /**
@@ -698,11 +697,28 @@ $i = 0; // DEBUG elem
                 // Nem megfelelő ingatlanok átugrása és kategória meghatározása //
                 //////////////////////////////////////////////////////////////////
 
+                // Hirdethető ingatlan (?)
+                // "SPV0000008GPHZ1" => "Mindenhol hirdethető",
+                // "SPV0000008GPHZ2" => "Csak adatbázis",
+                // "SPV0000008GPHZ3" => "Csak az ingatlan.com-on hirdethető",
+                // "SPV0000008GPHZ4" => "Az ingatlan.com kivételével hirdethető",
+                // "SPV0000008GPHZ5" => "Csak adabázis, DH + PRIME"
+                if (!isset($property->hirdetheto)) {
+                    continue;
+                } else {
+                    $hirdetheto = $property->hirdetheto->__toString();
+                    // Csak az ingatlan.com-on hirdethető
+                    if ($hirdetheto == 'SPV0000008GPHZ3') {
+                        continue;
+                    }
+                }
+
                 // Ha szerepel a saját adatbázisban az ingatlan
                 $outer_reference_number = $property->{'reference-number'}->__toString();
                 if (in_array($outer_reference_number, $outer_properties_ref_nums)) {
                     continue;
                 }
+
                 // megye
                 $county_code = $property->county->__toString();
                 // $this->regions_paired tömbben lévő elemek engedélyezettek
@@ -886,6 +902,12 @@ $i = 0; // DEBUG elem
             }
 
 
+            /////////////////////
+            // Épület szintjei //
+            /////////////////////
+            if (isset($property->{'inner-floors'})) {
+                $data['epulet_szintjei'] = (int)$property->{'inner-floors'}->__toString();
+            }
 
             
             //////////////////
@@ -894,7 +916,6 @@ $i = 0; // DEBUG elem
             $data['iranyitoszam'] = $property->{'postal-code'}->__toString();
             
             $data['tetoter'] = null;
-            $data['epulet_szintjei'] = null;
             $data['utca_megjelenites'] = 0;
             $data['hazszam_megjelenites'] = 0;
             $data['terkep'] = 0;
