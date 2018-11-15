@@ -726,8 +726,8 @@ $i = 0; // DEBUG elem
                     continue;
                 }
 
-                // Ha az ár elemnek nincs currency attribútuma és az ár nem HUF-ban van megadva
-                if (!isset($property->price['currency']) || $property->price['currency'] != "CUR00000000015F") {
+                // Ha nem kétezik ár elem, illetve ha az ár elemnek nincs currency attribútuma és az ár nem HUF-ban van megadva
+                if (!isset($property->price) || !isset($property->price['currency']) || $property->price['currency'] != "CUR00000000015F") {
                     continue;
                 }
 
