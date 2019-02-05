@@ -31,7 +31,6 @@ class XmlConvert extends SiteController
 	private $dh_username = 'ZANY9Y';
 	private $dh_password = '5b608b8224';
 
-
 	// xml behívás után a megyéket tartalamazza
 	private $counties = array();
 
@@ -65,7 +64,7 @@ class XmlConvert extends SiteController
         // 'LCN0000000000RL' => 6, // Csongrád
         // 'LCN0000000000RM' => 7, // Fejér
         // 'LCN0000000000RN' => 8, // Győr-Moson-Sopron
-        'LCN0000000000RO' => 9, // Hajdú-Bihar
+        // 'LCN0000000000RO' => 9, // Hajdú-Bihar
         // 'LCN0000000000RP' => 10, // Heves
         // 'LCN0000000000RQ' => 11, // Jász-Nagykun-Szolnok
         // 'LCN0000000000RR' => 12, // Komárom-Esztergom
@@ -671,8 +670,10 @@ class XmlConvert extends SiteController
 	{
         set_time_limit(0);
 
-        //$dir = getcwd();
-        //$content = $this->getFromWeb($dir . '/_TEMP/xml_convert/properties.xml');
+            // Helyi xml file-al teszt
+            //$dir = getcwd();
+            //$content = $this->getFromWeb($dir . '/_TEMP/xml_convert/properties_teszt.xml');
+
 
 		$content = $this->getFromWeb($this->dh_links['properties'], $this->dh_username, $this->dh_password);
 		$xml = new \SimpleXMLElement($content);
@@ -683,6 +684,12 @@ class XmlConvert extends SiteController
         $title_county_names_array = $this->city_model->countyList();
         // Kategória lista a rövid címhez
         $title_categories_array = $this->ingatlanok_model->getCategoryNames();
+
+
+        // A lekérdezéskor minden aktív dunahouse-os ingatlan referencia száma
+        // Ezzel vetjük össze a saját rendszerben lévő inagatlanok referencia számait
+        // Amelyik ingatlan a saját rendszerben benne van, de ebben a tömbben nincs azt töröljük a saját rendszerből
+        $dh_active_property_ref_nums = array();
 
 
 $i = 0; // DEBUG elem
@@ -703,6 +710,7 @@ $i = 0; // DEBUG elem
                 // "SPV0000008GPHZ3" => "Csak az ingatlan.com-on hirdethető",
                 // "SPV0000008GPHZ4" => "Az ingatlan.com kivételével hirdethető",
                 // "SPV0000008GPHZ5" => "Csak adabázis, DH + PRIME"
+                /*
                 if (!isset($property->hirdetheto)) {
                     continue;
                 } else {
@@ -712,9 +720,15 @@ $i = 0; // DEBUG elem
                         continue;
                     }
                 }
+                */
 
-                // Ha szerepel a saját adatbázisban az ingatlan
+                /////////////////////
+                // Referencia szám //
+                /////////////////////
                 $outer_reference_number = $property->{'reference-number'}->__toString();
+                // feltöltjük a külső aktív referencia szám tömböt (a törölt ingatlanokhoz kell)
+                $dh_active_property_ref_nums[] = $outer_reference_number; 
+                // Ha szerepel a saját adatbázisban az ingatlan
                 if (in_array($outer_reference_number, $outer_properties_ref_nums)) {
                     continue;
                 }
@@ -1292,15 +1306,34 @@ $i = 0; // DEBUG elem
 
 
 $i++;
-if ($i > 2) {
+if ($i > 39) {
     break;
 }
 
 
         }
 
-$this->response->redirect('ingatlanok');        
-//die(' Muvelet kesz! - ' . $i);
+
+        /////////////////////////////////////////////////////////////////
+        // A DH adatbázisból törölt elemek törlése a saját rendszerből //
+        /////////////////////////////////////////////////////////////////
+
+        // Csak azoknak az ingatlanoknak a külső azonosítói, amiket törölni kell a saját rendszerből
+        $need_delete_temp = array();
+        // A saját adatbázisban szereplő referencia számok tömbjének bejárása
+        foreach ($outer_properties_ref_nums as $ref_num) {
+            // Ha nincs a DH-án az aktív elemek között (akkor töröljük a saját rendszerből is)
+            if (!in_array($ref_num, $dh_active_property_ref_nums)) {
+                $need_delete_temp[] = $ref_num;
+            }
+            // Rekodok törlése
+            $this->_delete($need_delete_temp);
+        }
+
+
+
+//$this->response->redirect('ingatlanok');        
+die(' Muvelet kesz! - ' . $i);
 
 	}
 
@@ -1380,9 +1413,15 @@ $this->response->redirect('ingatlanok');
             $width = Config::get('ingatlan_photo.width', 800);
             $height = Config::get('ingatlan_photo.height', 600);
 
+            // Ne fordítsa el a képet 'automatikusan' az EXIF adat alapján
+            $imageobject->autoRotate(false);
+            // Csak kép engedélyezett
             $imageobject->allowed(array('image/*'));
+            // Méretre vágás, kitöltés
             $imageobject->cropFillToSize($width, $height, '#fff');
             //       $imageobject->cropToSize($width, $height);
+
+            // Kép mentés
             $imageobject->save($upload_path, $newfilename);
 
             // A kép neve bekerül a $new_filenames vagy $new_gp_filenames (alaprajz) tömbbe
@@ -1405,6 +1444,7 @@ $this->response->redirect('ingatlanok');
                 $new_small_filename = $newfilename . '_small';
                 $small_width = Config::get('ingatlan_photo.small_width', 400);
                 $small_height = Config::get('ingatlan_photo.small_height', 300);
+                $imageobject->autoRotate(false);
                 $imageobject->cropFillToSize($small_width, $small_height);
                 $imageobject->save($upload_path, $new_small_filename);
 
@@ -1412,6 +1452,7 @@ $this->response->redirect('ingatlanok');
                 $new_thumb_filename = $newfilename . '_thumb';
                 $thumb_width = Config::get('ingatlan_photo.thumb_width', 80);
                 $thumb_height = Config::get('ingatlan_photo.thumb_height', 60);
+                $imageobject->autoRotate(false);
                 $imageobject->cropFillToSize($thumb_width, $thumb_height);
                 $imageobject->save($upload_path, $new_thumb_filename);
             }
@@ -1447,6 +1488,100 @@ $this->response->redirect('ingatlanok');
         } else {
             return false;
         }
+    }
+
+
+    /**
+     * Rekord(ok) törlése
+     * @param array $outer_reference_numbers
+     * @return integer || false
+     */
+    private function _delete($outer_reference_numbers) {
+        // a sikeres törlések számát tárolja
+        $success_counter = 0;
+        // a sikertelen törlések számát tárolja
+        $fail_counter = 0;
+
+        $success_id_arr = array();
+
+        foreach ($outer_reference_numbers as $id) {
+
+            // Az $id itt a külső referencia szám
+
+            // filenevek lekérdezése
+            $files_arr = $this->ingatlanok_model->getOuterPropertyFilenames($id);
+            $photos_arr = $files_arr['kepek'];
+            $alaprajzok_arr = $files_arr['alaprajzok'];
+            $docs_arr = $files_arr['docs'];
+
+            // ingatlan törlése az adatbázisból 
+            $result = $this->ingatlanok_model->delete($id);
+
+            // ha a törlési sql parancsban nincs hiba
+            if ($result !== false) {
+                if ($result > 0) {
+
+                    //sikeres törlés
+                    $file_helper = DI::get('file_helper');
+
+                    //ha az adatbázisban léteznek képek
+                    if (!empty($photos_arr)) {
+
+                        $url_helper = DI::get('url_helper');
+                        $photo_path = Config::get('ingatlan_photo.upload_path');
+                        //képek törlése
+                        foreach ($photos_arr as $filename) {
+                            $normal_path = $photo_path . $filename;
+                            $thumb_path = $url_helper->thumbPath($photo_path . $filename);
+                            $small_path = $url_helper->thumbPath($photo_path . $filename, false, 'small');
+                            // képek törlése
+                            $file_helper->delete(array($normal_path, $thumb_path, $small_path));
+                        }
+                    }
+
+                    //ha az adatbázisban léteznek alaprajz képek
+                    if (!empty($alaprajzok_arr)) {
+
+                        $url_helper = DI::get('url_helper');
+                        $floor_plan_photo_path = Config::get('ingatlan_photo_floor_plan.upload_path');
+                        // alaprajz képek törlése
+                        foreach ($alaprajzok_arr as $filename) {
+                            $normal_path = $floor_plan_photo_path . $filename;
+                            $thumb_path = $url_helper->thumbPath($floor_plan_photo_path . $filename);
+                            $small_path = $url_helper->thumbPath($floor_plan_photo_path . $filename, false, 'small');
+                            // képek törlése
+                            $file_helper->delete(array($normal_path, $thumb_path, $small_path));
+                        }
+                    }
+
+                    // ha az adatbázisban léteznek dokumentumok
+                    if (!empty($docs_arr)) {
+                        $docs_path = Config::get('ingatlan_doc.upload_path');
+                        //dokumentumok törlése
+                        foreach ($docs_arr as $filename) {
+                            $file_helper->delete($docs_path . $filename);
+                        }
+                    }
+
+                    // sikeres törlés
+                    $success_counter += $result;
+                    // hozzáadjuk az id-t törölt elemekhez                
+                    $success_id_arr[] = $id;
+                } else {
+                    //sikertelen törlés (0 sor lett törölve)
+                    $fail_counter++;
+                }
+            } else {
+                // ha a törlési sql parancsban hiba van
+                return false;
+            }
+        } // end foreach
+        //log        
+        if (!empty($success_id_arr)) {
+            EventManager::trigger('delete_property', array('delete', 'külső referencia számú ingatlan véglegesen törölve.', $success_id_arr));
+        }
+
+        return $success_counter + $fail_counter;
     }
 
 }

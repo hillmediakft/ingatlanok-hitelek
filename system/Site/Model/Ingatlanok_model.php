@@ -32,6 +32,14 @@ class Ingatlanok_model extends SiteModel {
     }
 
     /**
+     * DELETE (külső referencia számú elemek törlése)
+     */
+    public function delete($outer_reference_number) {
+        $this->query->set_where('outer_reference_number', '=', $outer_reference_number);
+        return $this->query->delete();
+    }
+
+    /**
      * Külső forrásból származó ingatlan azonosítók lekérdezése
      */
     public function getOutherProperties()
@@ -70,6 +78,48 @@ class Ingatlanok_model extends SiteModel {
     public function getFilenames($id, $type = null) {
         $this->query->set_columns(array('kepek', 'alaprajzok', 'docs'));
         $this->query->set_where('id', '=', $id);
+        $result = $this->query->select();
+
+        $photos_arr = array();
+        $alaprajzok_arr = array();
+        $docs_arr = array();
+
+        if (!empty($result[0]['kepek'])) {
+            //képek nevét tartalmazó tömb
+            $photos_arr = json_decode($result[0]['kepek']);
+        }
+        if (!empty($result[0]['alaprajzok'])) {
+            //alaprajzok nevét tartalmazó tömb
+            $alaprajzok_arr = json_decode($result[0]['alaprajzok']);
+        }
+        if (!empty($result[0]['docs'])) {
+            //dokumentumok nevét tartalmazó tömb
+            $docs_arr = json_decode($result[0]['docs']);
+        }
+
+        if ($type == 'kepek') {
+            return $photos_arr;
+        } elseif ($type == 'alaprajzok') {
+            return $alaprajzok_arr;
+        } elseif ($type == 'docs') {
+            return $docs_arr;
+        } else {
+            return array('kepek' => $photos_arr, 'alaprajzok' => $alaprajzok_arr, 'docs' => $docs_arr);
+        }
+    }
+
+    /**
+     * Az külső forrásból származó ingatlanhoz tartozó file-ok nevének lekérdezése
+     * A második paraméterben megadhatjuk, hogy csak a képeket, vagy a dokumentumokat akarjuk megkapni
+     * Ha nincs második paraméter, akkor visszad egy asszociatív tömböt, amiben megtalálható egy 'kepek' és egy 'docs' tömb
+     *
+     * @param integer $outer_reference_number
+     * @param string $type (értéke: 'kepek' vagy 'docs')
+     * @return array 
+     */
+    public function getOuterPropertyFilenames($outer_reference_number, $type = null) {
+        $this->query->set_columns(array('kepek', 'alaprajzok', 'docs'));
+        $this->query->set_where('outer_reference_number', '=', $outer_reference_number);
         $result = $this->query->select();
 
         $photos_arr = array();

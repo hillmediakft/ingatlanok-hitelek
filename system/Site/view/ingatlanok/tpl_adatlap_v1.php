@@ -85,7 +85,7 @@ use System\Libs\Language as Lang;
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div style="padding: 0px 0px;">
+                            <div style="padding: 0px 0px; clear:both;">
                                 <?php echo Lang::get('kereso_ref_szam'); ?>: <span style="font-weight: 700; color:#000;"><?php echo 'S-' . $ingatlan['ref_num']; ?></span>
                             </div>
                         </div> 

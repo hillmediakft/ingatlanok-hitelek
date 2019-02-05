@@ -311,11 +311,20 @@ class Uploader
 	}
 
 	/**
+	 * Kép automatikus elforgatása
+	 * @param bool $param
+	 */
+	public function autoRotate($param)
+	{
+		$this->handle->image_auto_rotate = $param;
+	}
+
+	/**
 	 * Kép elforgatása
 	 * Lehetséges értékek 90, 180 és 270
 	 * @param integer $angle
 	 */
-	public function rotate(int $angle)
+	public function rotate($angle)
 	{
 		// if ($angle == 90 || $angle == 180 || $angle == 270) {}
 		$this->handle->image_rotate = $angle;
@@ -566,12 +575,12 @@ class Uploader
 
 			case 'width':
 				$property_image .= 'x';
-				return $this->handle->$property;
+				return $this->handle->$property_image;
 				break;
 
 			case 'height':
 				$property_image .= 'y';
-				return $this->handle->$property;
+				return $this->handle->$property_image;
 				break;
 
 			case 'type':
